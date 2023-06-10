@@ -18,7 +18,7 @@
             <img src="" alt=""><!-- logo -->
             <div><!-- texts -->
                 <p>Welcome back to</p>
-                <h2>SiPa</h2>
+                <h2>SiPa Siguradong Pagpipilian</h2>
                 <p>Find out your top contraceptive methods.</p>
             </div>
         </div>
