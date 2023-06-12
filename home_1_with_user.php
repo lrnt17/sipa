@@ -1,10 +1,6 @@
 <?php 
     include("connect.php"); 
-<<<<<<< HEAD
     //Testing 123
-=======
-    //Testing
->>>>>>> 85a723fa38235a6f59ff026a8c9f7d1ce95f6815
 
 ?>
 
