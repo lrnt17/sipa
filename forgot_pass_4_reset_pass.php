@@ -39,6 +39,14 @@
             }
         }
     </script>
+    <style>
+   .skiptranslate iframe  {
+    visibility: hidden !important;
+    } 
+    body{
+    top:0!important;
+    }
+    </style>
 </head>
 <body>
     <div class="parent">
