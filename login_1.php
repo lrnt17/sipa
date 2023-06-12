@@ -7,6 +7,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign in | SiPa</title>
+<style>
+   .skiptranslate iframe  {
+    visibility: hidden !important;
+    } 
+    body{
+    top:0!important;
+    }
+ </style>
 </head>
 <body>
 
