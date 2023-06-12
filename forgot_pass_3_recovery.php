@@ -1,3 +1,10 @@
+<?php 
+
+    include("connect.php"); 
+
+    $_SESSION["pnum"] = $_SESSION["pnum"];
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,9 +29,9 @@
         <!-- 2nd child div -->
         <div class="child">
             <h1>Password Recovery?</h1>
-            <p id="sub">An SMS message with verification code was just sent to 09** *** 678</p>
+            <p id="sub">An SMS message with verification code was just sent to your number</p>
 
-            <form action="reset_pass.php" method="post">
+            <form action="forgot_pass_4_reset_pass.php" method="post">
                 <div class="form">
                     <input type="text" name="code" id="code" required>
                     <label for="code">Verification code</label>
@@ -33,7 +40,7 @@
                 <a href="#.php" id="cancel">Back to Forget Password</a>
             </form>
 
-            <p id="didnt_recieve_email">Didn't recieve the verification code? <a href="#.php"><u>Resend</u></a></p>
+            <p id="didnt_recieve_email">Didn't recieve the verification code? <a href="forgot_pass_2_send.php"><u>Resend</u></a></p>
             
             <!-- language -->
             <span>
@@ -43,15 +50,6 @@
                 </script>
                 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
             </span>
-            <!--<div class="dropdown">
-                <form action="#">
-                    <label for="cars">Language: </label>
-                    <select id="language">
-                        <option value="1" selected="selected">English</option>
-                        <option value="2">Tagalog</option>
-                    </select>
-                </form>
-            </div>-->
             <a href="">Privacy Policy</a>
             <a href="">Terms of Use</a>
         </div>

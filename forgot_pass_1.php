@@ -1,3 +1,5 @@
+<?php include("connect.php"); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,14 +25,14 @@
         <div class="child">
             <div id="reg_block">
                 <h1>Forgot Password?</h1>
-                <p id="sub">Enter your phone number and we’ll send you a code to reset your password <br><br>
+                <p id="sub">Enter your phone number and we will send you a code to reset your password <br><br>
                 You will recieve instructions for resetting your password.</p>
-                <form action="#.php" method="post">
+                <form action="forgot_pass_1.php" method="post">
                     <div class="form">
-                        <input type="number" name="pnum" id="pnum" required>
-                        <label for="email">Phone number</label>
+                        <input type="text" name="pnum" id="pnum" required>
+                        <label for="pnum">Phone number</label>
                     </div>
-                    <input type="submit" value="Send" name="submit">
+                    <input type="submit" value="Send code" name="submit">
                     <a href="#.php" id="cancel">Cancel</a>
                 </form>
             </div>
@@ -58,3 +60,13 @@
     </div>
 </body>
 </html>
+
+<?php 
+    if (isset($_POST["submit"])) {
+        $_SESSION["pnum"] = $_POST['pnum'];
+
+    echo "<script>
+            window.location.href='forgot_pass_2_send.php';
+            </script>";
+    }
+?>

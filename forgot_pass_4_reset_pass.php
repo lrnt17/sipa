@@ -1,3 +1,26 @@
+<?php 
+
+    include("connect.php");
+
+    $_SESSION["pnum"] = $_SESSION["pnum"];
+
+    if (isset($_POST["verify"]))
+    {
+        $verification_code = $_POST["code"];
+
+        // mark email as verified
+        $sql = "UPDATE verification_codes SET pnum_verified_at = NOW() WHERE user_pnum = '" . $_SESSION["pnum"] . "' AND verification_code = '" . $verification_code . "'";
+        $result  = mysqli_query($conn, $sql);
+
+        if (mysqli_affected_rows($conn) == 0)
+        {
+            echo "<script>
+                    alert('Your validation code is invalid. Please try again.');
+                    window.location.href='forgot_pass_3_recovery.php';
+                </script>";
+        }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,7 +59,7 @@
             <p>Your password must be different to previous used password.</p>
             <p>Strong password includes numbers, letters, and <br>
                 punctuation marks.</p>
-            <form action="reset_pass_successful.php" method="post" onsubmit="return check(event);">
+            <form action="forgot_pass_5_reset_success.php" method="post" onsubmit="return check(event);">
                 <div class="form">
                     <input type="password" name="new_pass" id="new_pass" required>
                     <label for="new_pass">New password</label>
@@ -71,3 +94,7 @@
     </div>
 </body>
 </html>
+
+<?php 
+    }
+?>
