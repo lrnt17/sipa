@@ -26,12 +26,17 @@
     <style>
         body {
             margin: 0;
+            top:0!important;
         }
 
         #map {
             height: 446px;
             width: 832px;
         }
+        .skiptranslate iframe  {
+        visibility: hidden !important;
+        } 
+   
     </style>
     <script src="script.js" defer></script>
 </head>
