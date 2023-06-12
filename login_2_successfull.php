@@ -16,7 +16,7 @@
             $sql1 = "SELECT * FROM users WHERE access_code = '$code' and user_password = '$pass_encrypted'";
             $result1 = mysqli_query($conn,$sql1);
             echo '<script>
-                        window.location.href="home_1.php"; 
+                        window.location.href="home_1_with_user.php"; 
                     </script>';
         }
     }
