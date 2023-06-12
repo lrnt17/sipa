@@ -9,6 +9,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SiPa | Registration</title>
+<style>
+   .skiptranslate iframe  {
+    visibility: hidden !important;
+    } 
+    body{
+    top:0!important;
+    }
+</style>
 </head>
 <body>
     
@@ -90,9 +98,17 @@
             <span>
                 <div class="translate" id="google_translate_element"></div>
                 <script type="text/javascript">
-                    function googleTranslateElementInit() {  new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');}
-                </script>
-                <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+                        function googleTranslateElementInit() {
+                        new google.translate.TranslateElement({
+                            pageLanguage: 'en',
+                            includedLanguages: 'en,tl',
+                            layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                            autoDisplay: false,
+                            multilanguagePage: true
+                        }, 'google_translate_element');
+                        }
+                    </script>
+                    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
             </span>
             <a href="">Privacy Policy</a>
             <a href="">Terms of Use</a>
