@@ -37,7 +37,7 @@ body{
         <!-- 2nd child div -->
         <div class="child">
             <h1>Password Recovery?</h1>
-            <p id="sub">An SMS message with verification code was just sent to your number</p>
+            <p id="sub">An SMS message with a verification code was just sent to your number</p>
 
             <form action="forgot_pass_4_reset_pass.php" method="post">
                 <div class="form">
@@ -48,7 +48,7 @@ body{
                 <a href="#.php" id="cancel">Back to Forget Password</a>
             </form>
 
-            <p id="didnt_recieve_email">Didn't recieve the verification code? <a href="forgot_pass_2_send.php"><u>Resend</u></a></p>
+            <p id="didnt_recieve_email">Didn't receive the verification code? <a href="forgot_pass_2_send.php"><u>Resend</u></a></p>
             
             <!-- language -->
             <span>
