@@ -9,8 +9,8 @@
     <title>Sign in | SiPa</title>
 
 <style>
-   .skiptranslate iframe  {
-    visibility: hidden !important;
+    .skiptranslate iframe  {
+        visibility: hidden !important;
     } 
 
     body{
@@ -28,11 +28,10 @@
     }
     
     .container{
-        
+        width:100%;
     }
 
     .text{
-        margin-top: 80px;
         padding-left: 70px;
     }
 
@@ -45,7 +44,7 @@
         font-size: 50px;
         color:#FFFFFF;
         font-weight: 300;
-        margin-top: -50px;
+        margin-top: 25px;
     }
 
     .header-text2{
@@ -203,6 +202,120 @@
         text-align: center;
         color: #575757;
         width:100%;
+    }
+
+    @media (max-width: 1350px) {
+
+        .header-text2{
+        font-size: 40px;
+        }
+
+        .header-text{
+        font-size: 40px;
+        }
+
+        .info-text{
+            font-size: 15px;
+        }
+
+        .container-box{
+        margin-top: -112px;
+        }
+
+        .doctor{
+        padding: 0px 125px ;
+        }
+    }
+
+    @media (max-width: 1225px) {
+
+        .header-text2{
+            text-align: center;
+            font-size: 35px;
+            margin-top: -37px;
+        }
+
+        .header-text{
+            margin-top: 0px;
+            text-align: center;
+            font-size: 30px;
+        }
+
+        .info-text{
+            text-align: center;
+            font-size: 12px;
+            margin-top: -30px;
+            padding-right: 0px;
+        }
+
+        .container-box{
+            position: absolute;
+            top: 50%;
+            right: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            transform: translate(50%, -8%);
+            padding-right: 0px;
+        }
+
+        .doctor{
+            display:none;
+        }
+        .text{
+            padding-left: 0px;
+        }
+
+        .sign-in{
+            width: 390px;
+            min-height: auto;
+        }
+
+        .container-box .sign-in .form input{
+            height: 90%;
+            padding: 10px 17px;
+            font-size: 1rem;
+        }
+
+        .container-box .sign-in .log-btn{
+            width: 100%;
+            padding: 10px 17px;
+            font-size: 1rem;
+        }
+
+        label{
+            font-size: 15px;
+        }
+
+        h1{
+            text-align:center;
+            font-size: 25px;
+        }
+
+        .checkbox-text{
+            font-size: 13px;
+        }
+
+        .text-dha{
+            font-size: 13px;
+        }
+
+        .text-visit{
+            font-size: 13px;
+        }
+
+        a {
+            font-size: 13px;
+            margin-right: 50px;
+        }
+
+        .translate {
+            padding-top: 25px;
+            float: right;
+            z-index: -1;
+        }
+
+        .links{
+            padding-top: 25px;
+        }
     }
 
 </style>
