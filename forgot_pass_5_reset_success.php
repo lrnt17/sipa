@@ -1,6 +1,6 @@
 <?php 
     include("connect.php");
-
+    session_start();
     $pnum=$_SESSION["pnum"];
     $new_pass = $_POST["con_pass"];
     $sql=("UPDATE users set user_password = '$new_pass' where user_pnum = '$pnum'");

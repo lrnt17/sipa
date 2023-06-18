@@ -1,5 +1,6 @@
 <?php 
     include("connect.php");
+    session_start();
     $code = $_POST['code'];
     $pass = $_POST['pass'];
 

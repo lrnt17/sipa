@@ -2,6 +2,7 @@
 
     // connect with database
     include("connect.php");
+    session_start();
 
     function generateAccessCode($length = 6) {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyz';

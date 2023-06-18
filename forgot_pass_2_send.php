@@ -1,6 +1,7 @@
 <?php 
 
     include("connect.php");
+    session_start();
     $_SESSION["pnum"] = $_SESSION['pnum'];
     $pnum = $_SESSION["pnum"];
 
@@ -11,7 +12,7 @@
         'apikey' => 'c17f81a2eb07d0ad839118cad67d2c55', //Your API KEY
         'number' => $pnum,
         'message' => 'To change password, use this key for confirmation: ' . $verification_code,
-        'sendername' => 'SEMAPHORE'
+        'sendername' => 'SiPa'
     );
     curl_setopt( $ch, CURLOPT_URL,'https://semaphore.co/api/v4/messages' );
     curl_setopt( $ch, CURLOPT_POST, 1 );

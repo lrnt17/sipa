@@ -1,4 +1,7 @@
-<?php include("connect.php"); ?>
+<?php 
+    include("connect.php");
+    require('functions.php');
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -28,7 +31,8 @@
             <!-- signing in -->
             <div>
                 <h1>Sign in</h1>
-                <form action="login_2_successfull.php" method="post">
+                <!--<form action="login_2_successfull.php" method="post">-->
+                <form onsubmit="login.submit(event)" method="post">
                     <div class="form">
                         <input type="text" name="code" id="code" required>
                         <label for="code">Access Code</label>
@@ -38,10 +42,13 @@
                         <i class="fas fa-eye" id="togglePassword"></i>
                         <label for="pass">Password</label>
                     </div>
-                    <input type="submit" value="Sign in" name="login">
-                    <input type="checkbox" name="" id="">Keep me logged in
-                    <a href="forgotpass_1.php" id="forgotpass">Forgot password?</a>
+                    <!--<input type="submit" value="Sign in" name="login">-->
+                    <button class="class_60"  >
+					    Login
+				    </button>
+                    <!--<input type="checkbox" name="" id="">Keep me logged in-->
                 </form>
+                <a href="forgot_pass_1.php" id="forgotpass">Forgot password?</a>
                 <p id="dont_have_account">---------- Don't have an account? -------------</p>
                 <p>Visit the nearest health facility in your area</p>
                 
@@ -89,5 +96,47 @@
             <a href="">Terms of Use</a>
         </div>
     </div>
+
+    <script>
+        var login = {
+
+            submit: function(e){
+                e.preventDefault();
+                let inputs = e.currentTarget.querySelectorAll("input");
+                let form = new FormData();
+
+                for (var i = inputs.length - 1; i >= 0; i--) {
+                    form.append(inputs[i].name, inputs[i].value);
+                }
+                
+                form.append('data_type', 'login');
+                
+                var ajax = new XMLHttpRequest();
+
+                ajax.addEventListener('readystatechange',function(){
+
+                    if(ajax.readyState == 4)
+                    {
+                        if(ajax.status == 200){
+
+                            //ganto daw iconvert si JSON back to javascript
+                            let obj = JSON.parse(ajax.responseText);
+                            alert(obj.message); //nasa ajax.php yung .message
+
+                            if(obj.success)//nasa ajax.php yung .sucess
+                                window.location.href = "home_1_with_user.php";
+                        }else{
+                            alert("Please check your internet connection");
+                        }
+                    }
+                });
+
+                ajax.open('post','ajax.php', true);
+                ajax.send(form);
+            },
+
+
+        };
+    </script>
 </body>
 </html>

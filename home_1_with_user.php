@@ -1,6 +1,24 @@
 <?php 
-    include("connect.php"); 
-    //Testing 123
+    include("connect.php");
+    require('functions.php');
+    
+    /*$code = $_SESSION["code"];
+
+    $sql = "SELECT * FROM users WHERE access_code = '$code'";
+    $result = mysqli_query($conn,$sql);
+    $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+    //$active = $row['active'];
+
+    $_SESSION["user_id"] = $row['user_id'];
+    //$_SESSION["image"] = $row['image'];
+    $_SESSION["user_fname"] = $row['user_fname'];
+    $_SESSION["user_lname"] = $row['user_lname'];
+    $_SESSION["user_email"] = $row['user_email'];
+    $_SESSION["user_pnum"] = $row['user_pnum'];
+    $_SESSION["access_code"] = $row['access_code'];
+    $_SESSION["user_password"] = $row['user_password'];
+    //$_SESSION["fname"] = $username;*/
+    echo $_SESSION['USER']['user_id'];
 
 ?>
 
@@ -46,16 +64,20 @@
         <img src="#">
         <ul>
             <li><a href="#">Home</a></li>
-            <li><a href="#">Projects</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Services</a></li>
+            <li><a href="#">Videos</a></li>
+            <li><a href="#">Right for me</a></li>
+            <li><a href="#">FAQs</a></li>
             <li>
                 <div class="dropdown">
-                    <button class="dropbtn">Dropdown<i class="fa fa-caret-down"></i></button>
+                    <button class="dropbtn">Services<i class="fa fa-caret-down"></i></button>
                     <div class="dropdown-content">
                         <a href="#">Link 1</a>
                         <a href="#">Link 2</a>
-                        <a href="#">Link 3</a>
+                        <a href="community_forum_1.php">Community Forum</a>
+                        <a href="#">Link 4</a>
+                        <a href="#">Link 5</a>
+                        <a href="#">Link 6</a>
+                        <a href="#">Contraceptive Reviews</a>
                     </div>
                 </div>
             </li>
@@ -63,6 +85,7 @@
             <div class="profile_pic">
                 <a href="profile.php" id="avatar_name" href="#name">
                     <img id="avatar" src="<?php //echo $_SESSION["image"]; ?>" alt="avatar">
+                    <?php echo $_SESSION['USER']['user_fname']; ?>
                 </a>
             </div>
         </ul>
