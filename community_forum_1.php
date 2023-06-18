@@ -207,7 +207,7 @@
                                     template.querySelector(".js-title").innerHTML = obj.rows[i].forum_title;//si .forum_title ito naman sa db
                                     template.querySelector(".js-post").innerHTML = obj.rows[i].forum_desc; //ito naman sa db
                                     template.querySelector(".js-date").innerHTML = obj.rows[i].date;// si .date based  sa nasa ajax
-                                    template.querySelector(".js-comment-link").setAttribute('onclick',`mypost.view_comments(${obj.rows[i].id})`);
+                                    template.querySelector(".js-comment-link").setAttribute('onclick',`mypost.view_comments(${obj.rows[i].forum_id})`);
                                     template.querySelector(".js-username").innerHTML = (typeof obj.rows[i].user == 'object') ? obj.rows[i].user.user_fname : 'User';
                                     template.querySelector(".js-profile-link").href = (typeof obj.rows[i].user == 'object') ? 'profile.php?id='+obj.rows[i].user.user_id : '#';
 
@@ -233,9 +233,9 @@
 			ajax.send(form);
 		},
 
-		view_comments: function(id){
+		view_comments: function(forum_id){
 
-			window.location.href = "post.php?id="+id;
+			window.location.href = "post.php?id="+forum_id;
 		},
 
         next_page: function(){ //dito iicrement si page

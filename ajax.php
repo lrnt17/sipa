@@ -83,9 +83,24 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 		}
 
 	}else
-	if($_POST['data_type'] == 'load_posts')
+	if($_POST['data_type'] == 'delete_post') //ito na yung sa post, naway makuha mo na lorent yung logic
 	{
 
+		$id = (int)($_POST['id']);
+		$user_id = $_SESSION['USER']['user_id'];
+ 
+		//si limit 1 is parang pag may nakita na syang match sa data, iistop na sya
+		//para rin tipid sa memory
+		$query = "delete from forum where forum_id = '$id' && user_id = '$user_id' limit 1";
+		query($query);
+
+		$info['success'] = true;
+		$info['message'] = "Your post was deleted successfully";
+
+	}else
+	if($_POST['data_type'] == 'load_posts')
+	{
+		//$user_id = $_SESSION['USER']['user_id'] ?? 0; //chiencheck if may user ba
 		$page_number = (int)$_POST['page_number'];
 		$limit = 5;
 		$offset = ($page_number - 1) * $limit;

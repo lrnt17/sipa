@@ -96,8 +96,11 @@
                 Next page
             </button>
         </div>
+
+        
     </section>
     
+    <?php include('community_forum_3_edit_my_post.php') ?>
     <!-- post card template-->
 	<div class="js-post-card hide class_42" style="animation: appear 3s ease;" >
 		<a href="#" class="js-profile-link class_45" >
@@ -123,11 +126,13 @@
 					Comments
 				</div>
 			</div>
-            <div class="class_51" >
-				<i class="bi bi-chat-left-dots class_52">
-				</i>
-				<div class="js-comment-link class_53" style="color:blue;cursor: pointer;"  >
-					Comments
+            
+            <div class="js-modification-buttons class_51" >
+				<div class="js-edit-button class_53" style="color:blue;cursor: pointer;"  >
+					Edit
+				</div>
+                <div class="js-delete-button class_53" style="color:red;cursor: pointer;"  >
+					Delete
 				</div>
 			</div>
 		</div>
@@ -214,7 +219,10 @@
                                     template.querySelector(".js-title").innerHTML = obj.rows[i].forum_title;//si .forum_title ito naman sa db
                                     template.querySelector(".js-post").innerHTML = obj.rows[i].forum_desc; //ito naman sa db
                                     template.querySelector(".js-date").innerHTML = obj.rows[i].date;// si .date based  sa nasa ajax
-                                    template.querySelector(".js-comment-link").setAttribute('onclick',`mypost.view_comments(${obj.rows[i].id})`);
+                                    template.querySelector(".js-comment-link").setAttribute('onclick',`mypost.view_comments(${obj.rows[i].forum_id})`);
+                                    template.querySelector(".js-delete-button").setAttribute('onclick',`mypost.delete(${obj.rows[i].forum_id})`);
+                                    template.querySelector(".js-edit-button").setAttribute('onclick',`edit_post.show(${obj.rows[i].forum_id})`);
+
                                     template.querySelector(".js-username").innerHTML = (typeof obj.rows[i].user == 'object') ? obj.rows[i].user.user_fname : 'User';
                                     template.querySelector(".js-profile-link").href = (typeof obj.rows[i].user == 'object') ? 'profile.php?id='+obj.rows[i].user.user_id : '#';
 
@@ -222,6 +230,12 @@
                                         template.querySelector(".js-image").src = obj.rows[i].user.image;*/
 
                                     let clone = template.cloneNode(true);
+
+                                    clone.setAttribute('forum_id','post_'+obj.rows[i].forum_id);
+                                    let row_data = JSON.stringify(obj.rows[i]);
+								    row_data = row_data.replaceAll('"','\\"');
+                                    clone.setAttribute('row',row_data);
+
                                     clone.classList.remove('hide');
                                     
                                     post_holder.appendChild(clone);
@@ -262,6 +276,40 @@
             //mypost.load_my_posts();
         },
 
+        delete: function(forum_id) {
+            if (!confirm("Are you sure you want to delete this post?")) {
+                alert(forum_id);
+                return;
+            }
+            
+            let form = new FormData(); //new form within javascript
+ 
+			form.append('id', forum_id);
+			form.append('data_type', 'delete_post');
+			var ajax = new XMLHttpRequest();
+
+			ajax.addEventListener('readystatechange',function(){
+
+				if(ajax.readyState == 4)
+				{
+					if(ajax.status == 200){
+
+						//console.log(ajax.responseText);
+						let obj = JSON.parse(ajax.responseText);
+						alert(obj.message);
+
+						if(obj.success){
+							mypost.load_my_posts();
+						}
+					}else{
+						alert("Please check your internet connection");
+					}
+				}
+			});
+
+			ajax.open('post','ajax.php', true);
+			ajax.send(form);
+        }
 
 	};
 
