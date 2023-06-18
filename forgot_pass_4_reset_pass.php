@@ -39,6 +39,14 @@
             }
         }
     </script>
+    <style>
+   .skiptranslate iframe  {
+    visibility: hidden !important;
+    } 
+    body{
+    top:0!important;
+    }
+    </style>
 </head>
 <body>
     <div class="parent">
@@ -56,7 +64,7 @@
         <!-- 2nd child div -->
         <div class="child">
             <h1>Create New Password</h1>
-            <p>Your password must be different to previous used password.</p>
+            <p>Your password must be different from previously used password.</p>
             <p>Strong password includes numbers, letters, and <br>
                 punctuation marks.</p>
             <form action="forgot_pass_5_reset_success.php" method="post" onsubmit="return check(event);">

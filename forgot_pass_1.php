@@ -34,7 +34,7 @@
             <div id="reg_block">
                 <h1>Forgot Password?</h1>
                 <p id="sub">Enter your phone number and we will send you a code to reset your password <br><br>
-                You will recieve instructions for resetting your password.</p>
+                You will receive instructions for resetting your password.</p>
                 <form action="forgot_pass_1.php" method="post">
                     <div class="form">
                         <input type="text" name="pnum" id="pnum" required>
