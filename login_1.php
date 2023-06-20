@@ -9,6 +9,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/324d76b648.js" crossorigin="anonymous"></script>
     <title>Sign in | SiPa</title>
 
 <style>
@@ -24,10 +28,111 @@
         letter-spacing: 1px;
     }
 
+    nav{
+        max-width: 1280px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px 5%;
+    }
+
+    .nav__links a,
+    .cta,
+    .overlay__content a {
+        font-weight: 400;
+        color: #edf0f1;
+        text-decoration: none;
+    }
+
+    .nav__links {
+        list-style: none;
+        display: flex;
+    }
+
+    .nav__links li {
+        padding: 0px 20px;
+    }
+
+    .nav__links li a {
+        transition: color 0.3s ease 0s;
+    }
+
+    .nav__links li a:hover {
+        color: #383838;
+    }
+
+    .cta {
+        padding: 9px 25px;
+        background-color: rgba(0, 136, 169, 1);
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: background-color 0.3s ease 0s;
+    }
+
+    .cta:hover {
+        background-color: rgba(0, 136, 169, 0.8);
+    }
+
+    .menu {
+        display: none;
+    }
+
+    .overlay {
+        height: 100%;
+        width: 0;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        background-color: #486ba7;
+        overflow-x: hidden;
+        transition: width 0.5s ease 0s;
+    }
+
+    .overlay--active {
+        width: 100%;
+    }
+
+    .overlay__content {
+        display: flex;
+        height: 100%;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .overlay a {
+        padding: 15px;
+        font-size: 36px;
+        display: block;
+        transition: color 0.3s ease 0s;
+    }
+
+    .overlay a:hover,
+    .overlay a:focus {
+        color: #383838;
+    }
+    .overlay .close {
+        position: absolute;
+        top: 20px;
+        right: 45px;
+        font-size: 60px;
+        color: #edf0f1;
+    }
+
     .parent{
         margin: 0;
         padding: 0;
         width: 100%;
+        display:flex;
     }
     
     .container{
@@ -39,8 +144,7 @@
     }
 
     p{
-        white-space: nowrap;
-        
+        white-space: nowrap; 
     }
 
     .header-text{
@@ -54,7 +158,7 @@
         font-size: 50px;
         color:#FFFFFF;
         margin-top: -50px;
-        font-weight: 500;
+        font-weight: 400;
     }
 
     .info-text{
@@ -67,7 +171,7 @@
     .logo{
         height: 65px;
         cursor: pointer;
-        padding: 20px 50px 20px;
+        padding: 10px 0px 10px;
     }
 
     .doctor{
@@ -89,9 +193,11 @@
 
     .container-box{
         right: 0px;
-        margin-top: -170px;
+        position: relative;
+        margin: 0 auto;
+        width:100%;
         float: right;
-        padding-right: 50px;
+        padding-right: 0px 0px 0px 90px;
     }
 
     .container-box .sign-in .form input{
@@ -121,25 +227,39 @@
         margin-bottom: 20px;
     }
 
+    .fontpass {
+        position: relative;
+        }
+          
+    .fontpass i{
+        position: absolute;
+        right: 15px;
+        top: 40px;
+        color: gray;
+    }
+
     a {
         font-weight: 300;
         text-decoration: none;
         color: #FFFFFF;
         letter-spacing: 1px;
-        margin-right:100px;
+        font-size: 15px;
     }
 
     .translate {
-        padding-top: 30px;
         float: right;
-        z-index: -1;
     }
 
     .links{
         position: absolute;
-        padding-top: 30px;
+        padding-top: 35px;
+        width: 80%;
         float: right;
-        padding-right: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: row;
+        flex-wrap: nowrap;
     }
 
     .checkbox-text{
@@ -147,7 +267,6 @@
         font-size: 15px;
         font-weight: 300;
         color: #575757;
-        
     }
     
     label{
@@ -205,24 +324,36 @@
         text-align: center;
         color: #575757;
         width:100%;
+        word-wrap: break-word;
+        white-space: normal
+    }
+
+    .text-cont{
+        padding: 10px;
+        margin-top: 30px;
     }
 
     @media (max-width: 1350px) {
 
+        .overlay a {
+            font-size: 20px;
+        }
+        .overlay .close {
+            font-size: 40px;
+            top: 15px;
+            right: -13px;
+        }
+
         .header-text2{
-        font-size: 40px;
+            font-size: 40px;
         }
 
         .header-text{
-        font-size: 40px;
+            font-size: 40px;
         }
 
         .info-text{
             font-size: 15px;
-        }
-
-        .container-box{
-        margin-top: -112px;
         }
 
         .doctor{
@@ -231,6 +362,31 @@
     }
 
     @media (max-width: 1225px) {
+
+        nav{
+            position: relative;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 10px 32px;
+        }
+
+        .menu{
+            display:none;
+        }
+
+        .nav__links,
+        .cta {
+            display: none;
+        }
+        .menu {
+            display: initial;
+        }
+
+        header {
+            margin-top: -20px;
+            justify-content: flex-end;
+        }
 
         .header-text2{
             text-align: center;
@@ -252,12 +408,12 @@
         }
 
         .container-box{
+            height: 75%;
+            margin: 0;
             position: absolute;
             top: 50%;
-            right: 50%;
-            -webkit-transform: translate(-50%, -50%);
-            transform: translate(50%, -8%);
-            padding-right: 0px;
+            left: 50%;
+            transform: translate(-50%, -32%);
         }
 
         .doctor{
@@ -268,6 +424,11 @@
         }
 
         .sign-in{
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             width: 390px;
             min-height: auto;
         }
@@ -310,26 +471,48 @@
             margin-right: 50px;
         }
 
-        .translate {
-            padding-top: 25px;
-            float: right;
-            z-index: -1;
-        }
-
         .links{
-            padding-top: 25px;
+            position: absolute;
+            bottom: 0px;
+            width: 80%;
         }
     }
 
 </style>
 <body>
 
+    <!-- nav bar div -->
+    <header>
+        <a href="#"><img class="logo" src="logo1.png" alt="logo"></a>
+            <nav>
+                <ul class="nav__links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Videos</a></li>
+                    <li><a href="#">Right for me</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Services</a></li>
+                </ul>
+            </nav>
+            <p class="menu cta"><i class="fa-solid fa-bars"></i></p>
+    </header>
+
+     <!-- menu div / min-width -->
+    <div class="overlay">
+        <a class="close">&times;</a>
+        <div class="overlay__content">
+            <a href="#" >Home</a>
+            <a href="#">Videos</a>
+            <a href="#">Right for me</a>
+            <a href="#">FAQs</a>
+            <a href="#">Services</a>
+        </div>
+    </div>
+
     <!-- parent div -->
     <div class="parent">
         <!-- 1st child div -->
         <div class = "container">
             <img class="doctor" src="doctor.png" alt=""><!-- background photo-->
-            <img class="logo" src="logo1.png" alt=""><!-- logo -->
             <div class = "text"><!-- texts -->
                 <p class = "header-text">Welcome back to</p>
                 <p class = "header-text2">SiPa Siguradong Pagpipilian</p>
@@ -349,9 +532,11 @@
                         <input type="text" name="code" id="code" required>
                     </div>
                     <div class="form">
-                    <label for="pass">Password</label>
-                        <input type="password" name="pass" id="pass" required>
-                        <i class="fas fa-eye" id="togglePassword"></i>
+                        <div class="fontpass">
+                            <i class="fas fa-eye" style="font-size:15px; cursor: pointer;" id="togglePassword"></i>
+                            <label for="pass">Password</label>
+                            <input type="password" name="pass" id="pass" required>
+                        </div>
                     </div>
                     <!--<input class="log-btn" type="submit" value="Sign in" name="login">-->
                     <button class="class_60 log-btn" value="Sign in">Login</button>
@@ -360,11 +545,13 @@
                 
                 <a href="forgotpass_1.php" id="forgotpass" class="a-forgot">Forgot password?</a>
                 
-                <div class="lines">
-                    <p class="text-dha" id="dont_have_account">Don't have an account?</p>
+                <div class="text-cont">
+                    <div class="lines">
+                        <p class="text-dha" id="dont_have_account">Don't have an account?</p>
+                    </div>
+                    <p class="text-visit">Visit the nearest health facility in your area</p>
                 </div>
-                <p class="text-visit">Visit the nearest health facility in your area</p>
-                
+
                 <!-- show password toggle script -->
                 <script>
                     const togglePassword = document.querySelector("#togglePassword");
@@ -380,22 +567,28 @@
                     });
                 </script>
             </div>
-            <!-- language -->
-            <span>
-                <div class="translate" id="google_translate_element"></div>
-                <script type="text/javascript">
-                        function googleTranslateElementInit() {
-                        new google.translate.TranslateElement({
-                            pageLanguage: 'en',
-                            includedLanguages: 'en,tl',
-                            layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-                            autoDisplay: false,
-                            multilanguagePage: true
-                        }, 'google_translate_element');
-                        }
-                    </script>
-                    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-            </span>
+            <!-- language / links -->
+            <div class="links">
+                <span>
+                    <!-- language -->
+                    <div class="translate" id="google_translate_element"></div>
+                    <script type="text/javascript">
+                            function googleTranslateElementInit() {
+                            new google.translate.TranslateElement({
+                                pageLanguage: 'en',
+                                includedLanguages: 'en,tl',
+                                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                                autoDisplay: false,
+                                multilanguagePage: true
+                            }, 'google_translate_element');
+                            }
+                        </script>
+                        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+                </span>
+
+                <a href="">Privacy Policy</a>
+                <a href="">Terms of Use</a>
+            </div>
             <!--<div class="dropdown">
                 <form action="#">
                     <label for="cars">Language: </label>
@@ -405,8 +598,6 @@
                     </select>
                 </form>
             </div>-->
-            <a href="">Privacy Policy</a>
-            <a href="">Terms of Use</a>
         </div>
     </div>
 
@@ -449,5 +640,22 @@
             },
         };
     </script>
+
+    <!-- open menu in min-width -->
+    <script>
+        const doc = document;
+        const menuOpen = doc.querySelector(".menu");
+        const menuClose = doc.querySelector(".close");
+        const overlay = doc.querySelector(".overlay");
+
+        menuOpen.addEventListener("click", () => {
+        overlay.classList.add("overlay--active");
+        });
+
+        menuClose.addEventListener("click", () => {
+        overlay.classList.remove("overlay--active");
+        });
+    </script>
+
 </body>
 </html>
