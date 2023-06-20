@@ -203,8 +203,9 @@
     .container-box .sign-in .form input{
         width: 90%;
         height: 100%;
-        border: 2px solid #B9B9B9;
-        padding: 13px 20px;
+        border:none;
+        border-bottom: 2px solid #B9B9B9;
+        padding: 13px 37px;
         font-size: 1rem;
         border-radius: 0px;
         background: transparent;
@@ -236,6 +237,13 @@
         right: 15px;
         top: 40px;
         color: gray;
+    }
+
+    .fonticon .fa-solid{
+        position: absolute;
+        left: 0px;
+        top: 37px;
+        color: #575757;
     }
 
     a {
@@ -435,7 +443,7 @@
 
         .container-box .sign-in .form input{
             height: 90%;
-            padding: 10px 17px;
+            padding: 10px 27px;
             font-size: 1rem;
         }
 
@@ -528,12 +536,16 @@
                 <!--<form action="login_2_successfull.php" method="post">-->
                 <form onsubmit="login.submit(event)" method="post">
                     <div class="form">
-                        <label for="code">Access Code</label>
-                        <input type="text" name="code" id="code" required>
+                        <div class="fonticon">
+                            <i class="fa-sharp fa-solid fa-shield-halved" style="font-size:15px;"></i>
+                            <label for="code">Access Code</label>
+                            <input type="text" name="code" id="code" required>
+                        </div>
                     </div>
                     <div class="form">
                         <div class="fontpass">
                             <i class="fas fa-eye" style="font-size:15px; cursor: pointer;" id="togglePassword"></i>
+                            <i class="fa-solid fa-lock" style="font-size:15px;"></i>
                             <label for="pass">Password</label>
                             <input type="password" name="pass" id="pass" required>
                         </div>
