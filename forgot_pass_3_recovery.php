@@ -202,7 +202,7 @@
     }
 
     .container-box .reco-pass .form input{
-        width: 90%;
+        width: 85%;
         height: 100%;
         border:none;
         border-bottom: 2px solid #B9B9B9;
@@ -527,7 +527,7 @@
         <div class="container-box">
             <div class="reco-pass">
                 <h1>Password Recovery?</h1>
-                <p class="text-rem" id="sub">An SMS message with a verification code was just sent to your number</p>
+                <p class="text-rem" id="sub">An SMS message with a verification code was just sent to your number</p></br><br>
 
                 <form action="forgot_pass_4_reset_pass.php" method="post">
                     <div class="form">
@@ -570,6 +570,7 @@
                 <a href="">Privacy Policy</a>
                 <a href="">Terms of Use</a>
             </div>
+        </div>
     </div>
 </body>
 </html>

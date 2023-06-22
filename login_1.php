@@ -23,7 +23,7 @@
     body{
         top:0!important;
         background: linear-gradient(67deg,#70AFED ,#1F6CB5 25%);
-        font-family: Helvetica Neue;
+        font-family: 'Inter', sans-serif;
 	    scroll-behavior: smooth;
         letter-spacing: 1px;
     }
@@ -192,20 +192,20 @@
     }
 
     .container-box{
-        right: 0px;
         position: relative;
         margin: 0 auto;
+        right: 0px;
         width:100%;
         float: right;
-        padding-right: 0px 0px 0px 90px;
+        padding: 0px 0px 0px 90px;
     }
 
     .container-box .sign-in .form input{
-        width: 90%;
+        width: 85%;
         height: 100%;
         border:none;
         border-bottom: 2px solid #B9B9B9;
-        padding: 13px 37px;
+        padding: 13px 35px;
         font-size: 1rem;
         border-radius: 0px;
         background: transparent;
@@ -228,11 +228,11 @@
         margin-bottom: 20px;
     }
 
-    .fontpass {
+    .fonticon {
         position: relative;
         }
           
-    .fontpass i{
+    .fonticon i{
         position: absolute;
         right: 15px;
         top: 40px;
@@ -255,7 +255,7 @@
     }
 
     .translate {
-        float: right;
+        float: left;
     }
 
     .links{
@@ -311,7 +311,7 @@
     .lines::after, .lines::before{
         content: '';
         position: absolute;
-        height: 1px;
+        height: 1.2px;
         margin: auto;
         background: #2F2F2F;
         width: 25%;
@@ -543,7 +543,7 @@
                         </div>
                     </div>
                     <div class="form">
-                        <div class="fontpass">
+                        <div class="fonticon">
                             <i class="fas fa-eye" style="font-size:15px; cursor: pointer;" id="togglePassword"></i>
                             <i class="fa-solid fa-lock" style="font-size:15px;"></i>
                             <label for="pass">Password</label>
@@ -579,7 +579,7 @@
                     });
                 </script>
             </div>
-            <!-- language / links -->
+            <!-- language -->
             <div class="links">
                 <span>
                     <!-- language -->

@@ -197,7 +197,7 @@
     }
 
     .container-box .forgot_pass .form input{
-        width: 90%;
+        width: 85%;
         height: 100%;
         border:none;
         border-bottom: 2px solid #B9B9B9;
