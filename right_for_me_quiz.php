@@ -1,5 +1,7 @@
 <?php include("connect.php"); session_start(); ?>
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,9 +57,9 @@
     </div>
 
     <h3>User Experiences</h3>
-    <p>Identify what methods you have past experience with.</p>
+    <p>Identify what methods you have past experience with.<span style="color: red;">*</span></p>
     
-    <form action="right_for_me_quiz_result.php" method="post">
+    <form id= "quiz_form" action="right_for_me_quiz_result.php" method="post" onsubmit="validateForm(event)">
     <div class="user-experience-container" id="user-experience-container">
         <table>
             <tr>
@@ -282,56 +284,42 @@
     <br>
 
     <h3>Personal Preferences</h3>
-    <p>Let us know which of the following factors is for you.</p>
+    <p>Let us know which of the following factors is for you.<span style="color: red;">*</span></p>
 
     <div class ="personal-preferences-container" id="personal-preferences-container">
-   
-        <table style="border-collapse: collapse;">
-            <tr>
-                <td style="padding: 10px; text-align: left; font-weight: bold;" colspan="6">Cost effectiveness</td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><input type="radio" name="costEffectiveness" value="veryImportant"> <label>Very Important</label></td>
-                <td><input type="radio" name="costEffectiveness" value="important"> <label>Important</label></td>
-                <td><input type="radio" name="costEffectiveness" value="neutral"> <label>Neutral</label></td>
-                <td><input type="radio" name="costEffectiveness" value="unimportant"> <label>Unimportant</label></td>
-                <td><input type="radio" name="costEffectiveness" value="veryUnimportant"> <label>Very Unimportant</label></td>
-            </tr>
-            <tr>
-                <td style="padding: 10px; text-align: left; font-weight: bold;" colspan="6">Helps with managing periods and side effects</td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><input type="radio" name="managingPeriods" value="veryImportant"> <label>Very Important</label></td>
-                <td><input type="radio" name="managingPeriods" value="important"> <label>Important</label></td>
-                <td><input type="radio" name="managingPeriods" value="neutral"> <label>Neutral</label></td>
-                <td><input type="radio" name="managingPeriods" value="unimportant"> <label>Unimportant</label></td>
-                <td><input type="radio" name="managingPeriods" value="veryUnimportant"> <label>Very Unimportant</label></td>
-            </tr>
-            <tr>
-                <td style="padding: 10px; text-align: left; font-weight: bold;" colspan="6">Effective at preventing pregnancy</td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><input type="radio" name="preventingPregnancy" value="veryImportant"> <label>Very Important</label></td>
-                <td><input type="radio" name="preventingPregnancy" value="important"> <label>Important</label></td>
-                <td><input type="radio" name="preventingPregnancy" value="neutral"> <label>Neutral</label></td>
-                <td><input type="radio" name="preventingPregnancy" value="unimportant"> <label>Unimportant</label></td>
-                <td><input type="radio" name="preventingPregnancy" value="veryUnimportant"> <label>Very Unimportant</label></td>
-            </tr>
-            <tr>
-                <td style="padding: 10px; text-align: left; font-weight: bold;" colspan="6">Low possibility of gaining weight</td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><input type="radio" name="gainingWeight" value="veryImportant"> <label>Very Important</label></td>
-                <td><input type="radio" name="gainingWeight" value="important"> <label>Important</label></td>
-                <td><input type="radio" name="gainingWeight" value="neutral"> <label>Neutral</label></td>
-                <td><input type="radio" name="gainingWeight" value="unimportant"> <label>Unimportant</label></td>
-                <td><input type="radio" name="gainingWeight" value="veryUnimportant"> <label>Very Unimportant</label></td>
-            </tr>
-        </table>
+
+                <span><b>Cost effectiveness</b></span>
+                <br>
+                <input type="radio" name="costEffectiveness" value="veryImportant"> <label>Very Important</label>
+                <input type="radio" name="costEffectiveness" value="important"> <label>Important</label>
+                <input type="radio" name="costEffectiveness" value="neutral"> <label>Neutral</label>
+                <input type="radio" name="costEffectiveness" value="unimportant"> <label>Unimportant</label>
+                <input type="radio" name="costEffectiveness" value="veryUnimportant"> <label>Very Unimportant</label>
+                <br><br>
+                <span><b>Helps with managing periods and side effects</b></span>
+                <br>
+                <input type="radio" name="managingPeriods" value="veryImportant"> <label>Very Important</label>
+                <input type="radio" name="managingPeriods" value="important"> <label>Important</label>
+                <input type="radio" name="managingPeriods" value="neutral"> <label>Neutral</label>
+                <input type="radio" name="managingPeriods" value="unimportant"> <label>Unimportant</label>
+                <input type="radio" name="managingPeriods" value="veryUnimportant"> <label>Very Unimportant</label>
+                <br><br>
+                <span><b>Effective at preventing pregnancy</b></span>
+                <br>
+                <input type="radio" name="preventingPregnancy" value="veryImportant"> <label>Very Important</label>
+                <input type="radio" name="preventingPregnancy" value="important"> <label>Important</label>
+                <input type="radio" name="preventingPregnancy" value="neutral"> <label>Neutral</label>
+                <input type="radio" name="preventingPregnancy" value="unimportant"> <label>Unimportant</label>
+                <input type="radio" name="preventingPregnancy" value="veryUnimportant"> <label>Very Unimportant</label>
+                <br><br>
+                <span><b>Low possibility of gaining weight</b></span>
+                <br>
+                <input type="radio" name="gainingWeight" value="veryImportant"> <label>Very Important</label>
+                <input type="radio" name="gainingWeight" value="important"> <label>Important</label>
+                <input type="radio" name="gainingWeight" value="neutral"> <label>Neutral</label>
+                <input type="radio" name="gainingWeight" value="unimportant"> <label>Unimportant</label>
+                <input type="radio" name="gainingWeight" value="veryUnimportant"> <label>Very Unimportant</label>
+                <br><br>
 
     </div>
 
@@ -339,7 +327,7 @@
 
     <h3>Medical History</h3>
     <div class ="medical-history-container" id="medical-history-container">
-        <p><b>Do you have a concern about any of the following conditions? (choose all that apply)</b></p>
+        <p><b>Do you have a concern about any of the following conditions? (choose all that apply)<span style="color: red;">*</span></b></p>
         <input type="checkbox" name="med-hist-chckbx" id="depression"> <label for="depression">Depression or anxiety</label><br>
         <input type="checkbox" name="med-hist-chckbx" id="acne"> <label for="acne">Acne and breakouts</label><br>
         <input type="checkbox" name="med-hist-chckbx" id="blood-clotting-disorder"> <label for="blood-clotting-disorder">Blood clotting disorder</label><br>
@@ -355,7 +343,7 @@
     <h3>Additional Factors</h3>
     <div class ="additional-factors-container" id="additional-factors-container">
         <div class = "number-1-additional-factor" id="number-1-additional-factor">
-            <p><b>1. How do you feel about the insertion of a foreign object into your vagina?</b></p>
+            <p><b>1. How do you feel about the insertion of a foreign object into your vagina?<span style="color: red;">*</span></b></p>
             <label><input type="radio" class="additional-factors-radio" id="very-comfortable" name="answer1">Very Comfortable</label><br>
             <label><input type="radio" class="additional-factors-radio" id="comfortable" name="answer1">Comfortable</label><br>
             <label><input type="radio" class="additional-factors-radio" id="neutral" name="answer1">Neutral</label><br>
@@ -364,7 +352,7 @@
         </div>
         <br>
         <div class = "number-2-additional-factor" id="number-2-additional-factor">
-            <p><b>2. At what hormone level do you feel most comfortable?</b></p>
+            <p><b>2. At what hormone level do you feel most comfortable?<span style="color: red;">*</span></b></p>
             <label><input type="radio" class="additional-factors-radio" id="no-hormones" name="answer2">No hormones</label><br>
             <label><input type="radio" class="additional-factors-radio" id="one-hormone" name="answer2">One hormone (progestin only methods)</label><br>
             <label><input type="radio" class="additional-factors-radio" id="two-hormones" name="answer2">Two hormones (progestin and estrogen methods)</label><br>
@@ -372,7 +360,7 @@
         </div>
         <br>
         <div class = "number-3-additional-factor" id="number-3-additional-factor">
-            <p><b>3. How often do you want to use your contraceptive method?</b></p>
+            <p><b>3. How often do you want to use your contraceptive method?<span style="color: red;">*</span></b></p>
             <label><input type="radio" class="additional-factors-radio" id="daily" name="answer3">Daily</label><br>
             <label><input type="radio" class="additional-factors-radio" id="weekly" name="answer3">Weekly</label><br>
             <label><input type="radio" class="additional-factors-radio" id="monthly" name="answer3">Monthly</label><br>
@@ -381,7 +369,7 @@
         </div>
         <br>
         <div class = "number-4-additional-factor" id="number-4-additional-factor">
-        <p><b>4. Do you want to permanently stop having children?</b></p>
+        <p><b>4. Do you want to permanently stop having children?<span style="color: red;">*</span></b></p>
             <label><input type="radio" class="additional-factors-radio" id="yes" name="answer4">Yes</label><br>
             <label><input type="radio" class="additional-factors-radio" id="no" name="answer4">No</label><br>
             <label><input type="radio" class="additional-factors-radio" id="dontknow3" name="answer4">I don't know/ no preference</label>
@@ -518,37 +506,128 @@
         //enable the radiobuttons when a checkbox is selected
         
         function toggleRadioButtons(method) {
-  var checkbox = document.getElementById(method);
-  var experienceRadios = document.getElementsByName(method + "Experience");
-  var considerRadios = document.getElementsByName(method + "Consider");
+        var checkbox = document.getElementById(method);
+        var experienceRadios = document.getElementsByName(method + "Experience");
+        var considerRadios = document.getElementsByName(method + "Consider");
 
-  if (checkbox.checked) {
-    for (var i = 0; i < experienceRadios.length; i++) {
-      experienceRadios[i].disabled = false;
-    }
-    for (var j = 0; j < considerRadios.length; j++) {
-      considerRadios[j].disabled = false;
-    }
-  } else {
-    for (var i = 0; i < experienceRadios.length; i++) {
-      experienceRadios[i].disabled = true;
-      experienceRadios[i].checked = false;
-    }
-    for (var j = 0; j < considerRadios.length; j++) {
-      considerRadios[j].disabled = true;
-      considerRadios[j].checked = false;
-    }
-  }
-}
+        if (checkbox.checked) {
+            for (var i = 0; i < experienceRadios.length; i++) {
+            experienceRadios[i].disabled = false;
+            }
+            for (var j = 0; j < considerRadios.length; j++) {
+            considerRadios[j].disabled = false;
+            }
+        } else {
+            for (var i = 0; i < experienceRadios.length; i++) {
+            experienceRadios[i].disabled = true;
+            experienceRadios[i].checked = false;
+            }
+            for (var j = 0; j < considerRadios.length; j++) {
+            considerRadios[j].disabled = true;
+            considerRadios[j].checked = false;
+            }
+        }
+        }
+
+        //validate the radiobuttons before submitting
+        
+        function validateForm(event) {
+        var radioGroups = document.querySelectorAll('input[type="radio"][name^="costEffectiveness"], input[type="radio"][name^="managingPeriods"], input[type="radio"][name^="preventingPregnancy"], input[type="radio"][name^="gainingWeight"], input[type="radio"][name^="answer1"], input[type="radio"][name^="answer2"], input[type="radio"][name^="answer3"], input[type="radio"][name^="answer4"]');
+        var checkboxesMedHist = document.querySelectorAll('input[type="checkbox"][name="med-hist-chckbx"]');
+        var checkboxesUserExp = document.querySelectorAll('input[type="checkbox"][name="user-exp-chckbx"]');
+        var noneOfTheAboveCheckbox = document.getElementById('none-of-the-above');
+        var noneOfTheAboveCheckboxUserExp = document.getElementById('user-experience-checkbox-none');
+
+        var radioChecked = false;
+            for (var i = 0; i < radioGroups.length; i++) {
+                if (radioGroups[i].checked) {
+                    radioChecked = true;
+                    break;
+                }
+            }
+
+        var medHistCheckboxChecked = false;
+            for (var k = 0; k < checkboxesMedHist.length; k++) {
+                if (checkboxesMedHist[k].checked) {
+                    medHistCheckboxChecked = true;
+                    break;
+                }
+            }
+
+        var userExpCheckboxChecked = false;
+            for (var l = 0; l < checkboxesUserExp.length; l++) {
+                if (checkboxesUserExp[l].checked) {
+                    userExpCheckboxChecked = true;
+                    break;
+                }
+            }
+
+            if ((!radioChecked || (!noneOfTheAboveCheckbox.checked && !medHistCheckboxChecked) || (!noneOfTheAboveCheckboxUserExp.checked && !userExpCheckboxChecked))) {
+                alert('Please select an option for each question or check at least one option on the checkboxes.');
+                event.preventDefault();
+            } else {
+                // Form validation succeeded, allow the form to submit
+                // The form will automatically navigate to right_for_me_quiz_result.php
+            }
+        }
 
 
-</script>
 
-<table>
-  <!-- table content -->
-</table>
 
+
+
+
+
+
+
+
+
+
+        //scoring logic for the quiz
+
+        //array list of contraceptive methods
+        var contraceptives = [
+        { method: "hormonal_IUD", score: 0 },
+        { method: "copper_IUD", score: 0 },
+        { method: "the_implant", score: 0 },
+        { method: "the_shot", score: 0 },
+        { method: "HVR", score: 0 },
+        { method: "pill", score: 0 },
+        { method: "condom", score: 0 },
+        { method: "diaphragm", score: 0 },
+        { method: "spermicide", score: 0 },
+        { method: "withdrawl_method", score: 0 },
+        { method: "calendar_method", score: 0 },
+        { method: "temperature_method", score: 0 },
+        { method: "emergency_contraception", score: 0 },
+        { method: "vasectomy", score: 0 },
+        { method: "tubal_ligation", score: 0 }
+        ];
+
+        // Increment the score for a particular contraceptive method
+        function incrementScore(method) {
+        var contraceptive = contraceptives.find(c => c.method === method);
+        if (contraceptive) {
+            contraceptive.score++;
+        }
+        }
+        
+
+        // Example usage: Increment the score for the "pill" method
+        incrementScore("pill");
+
+        contraceptives.sort((a, b) => b.score - a.score);
+
+        var topThree = contraceptives.slice(0, 3);
 
     </script>
+
+
 </body>
 </html>
+
+<?php
+
+
+
+?>
