@@ -59,7 +59,7 @@
     <h3>User Experiences</h3>
     <p>Identify what methods you have past experience with.<span style="color: red;">*</span></p>
     
-    <form id= "quiz_form" action="right_for_me_quiz_result.php" method="post" onsubmit="validateForm(event)">
+    <form id= "quiz_form" action="#" method="post" onsubmit="validateForm(event)">
     <div class="user-experience-container" id="user-experience-container">
         <table>
             <tr>
@@ -146,16 +146,16 @@
             </td>
             </tr>
             <tr>
-            <td><input type="checkbox" name="user-exp-chckbx" id="pills" onchange="toggleRadioButtons('pills')"> <label for="pills">Pills</label></td>
+            <td><input type="checkbox" name="user-exp-chckbx" id="thePill" onchange="toggleRadioButtons('thePill')"> <label for="thePill">Pills</label></td>
             <td>
-                <label><input type="radio" class="user-exp-radio" id="pillsExperience" name="pillsExperience" value="good" disabled required> Good</label>
-                <label><input type="radio" class="user-exp-radio" id="pillsExperience" name="pillsExperience" value="neutral" disabled required> Neutral</label>
-                <label><input type="radio" class="user-exp-radio" id="pillsExperience" name="pillsExperience" value="bad" disabled required> Bad</label>
+                <label><input type="radio" class="user-exp-radio" id="thePillExperience" name="thePillExperience" value="good" disabled required> Good</label>
+                <label><input type="radio" class="user-exp-radio" id="thePillExperience" name="thePillExperience" value="neutral" disabled required> Neutral</label>
+                <label><input type="radio" class="user-exp-radio" id="thePillExperience" name="thePillExperience" value="bad" disabled required> Bad</label>
             </td>
             <td>
-                <label><input type="radio" class="user-exp-radio" id="pillsConsider" name="pillsConsider" value="yes" disabled required> Yes</label>
-                <label><input type="radio" class="user-exp-radio" id="pillsConsider" name="pillsConsider" value="no" disabled required> No</label>
-                <label><input type="radio" class="user-exp-radio" id="pillsConsider" name="pillsConsider" value="dontKnow" disabled required> I don't know</label>
+                <label><input type="radio" class="user-exp-radio" id="thePillConsider" name="thePillConsider" value="yes" disabled required> Yes</label>
+                <label><input type="radio" class="user-exp-radio" id="thePillConsider" name="thePillConsider" value="no" disabled required> No</label>
+                <label><input type="radio" class="user-exp-radio" id="thePillConsider" name="thePillConsider" value="dontKnow" disabled required> I don't know</label>
             </td>
             </tr>
             <tr>
@@ -568,8 +568,216 @@
             } else {
                 // Form validation succeeded, allow the form to submit
                 // The form will automatically navigate to right_for_me_quiz_result.php
+
+
+            //------------------------FOR SCORING NA ITONG PART NA TO---------------------------------------
+
+            //---------------WORKING SCORING SYSTEM FOR USER EXPERIENCE NA TO------------------------
+            var form = document.getElementById("quiz_form");
+            var selectedMethods = [];
+            var scores = {};
+
+            // Define all contraceptive methods
+            var contraceptiveMethods = [
+            'hormonalIUD',
+            'copperIUD',
+            'implant',
+            'theShot',
+            'hormonalVaginalRing',
+            'hormonalPatch',
+            'thePill',
+            'condom',
+            'diaphragm',
+            'spermicide',
+            'withdrawalMethod',
+            'calendarMethod',
+            'temperatureMethod',
+            'emergencyContraception',
+            'vasectomy',
+            'tubalLigation'
+            ];
+
+            // Define the current scores for each contraceptive method
+            var methodScores = {};
+            contraceptiveMethods.forEach(function (method) {
+            methodScores[method] = 0;
+            });
+
+            // Loop through all the checkboxes to find the selected methods
+            var checkboxes = form.querySelectorAll('input[type="checkbox"][name="user-exp-chckbx"]:checked');
+            checkboxes.forEach(function (checkbox) {
+            selectedMethods.push(checkbox.id);
+            });
+
+            // Loop through the selected methods and calculate scores based on user answers
+            selectedMethods.forEach(function (method) {
+            var experienceValue = form.elements[method + "Experience"].value;
+            var considerValue = form.elements[method + "Consider"].value;
+
+            if (experienceValue === "good") {
+                methodScores[method] += 8;
+            } else if (experienceValue === "bad") {
+                methodScores[method] -= 8;
             }
-        }
+
+            if (considerValue === "yes") {
+                methodScores[method] += 2;
+            } else if (considerValue === "no") {
+                delete methodScores[method];
+            }
+            });
+
+            //------------------PERSONAL PREFERENCE SCORING WORKING NA-----------------------------
+            // Define the methods associated with each feature
+            var costEffectivenessMethods = [
+            'condom',
+            'thePill',
+            'hormonalPatch',
+            'hormonalVaginalRing',
+            'diaphragm',
+            'withdrawalMethod',
+            'calendarMethod',
+            'temperatureMethod',
+            ];
+            var preventingPregnancyMethods = [
+            'thePill',
+            'hormonalVaginalRing',
+            'hormonalPatch',
+            'theShot',
+            'implant',
+            'copperIUD',
+            'hormonalIUD',
+            'vasectomy',
+            'tubalLigation'
+            ];
+            var managingPeriodsMethods = [
+            'thePill',
+            'hormonalVaginalRing',
+            'implant',
+            'hormonalIUD',
+            'hormonalPatch',
+            'theShot'
+            ];
+            var gainingWeightMethods = [
+            'condom',
+            'copperIUD'
+            ];
+
+            // Loop through all contraceptive methods and calculate scores based on user preferences
+            contraceptiveMethods.forEach(function (method) {
+            // Get the user's preference for each feature
+            var costEffectivenessValue = form.elements["costEffectiveness"].value;
+            var preventingPregnancyValue = form.elements["preventingPregnancy"].value;
+            var managingPeriodsValue = form.elements["managingPeriods"].value;
+            var gainingWeightValue = form.elements["gainingWeight"].value;
+
+            // Calculate scores based on user preferences for each method
+            if (costEffectivenessMethods.includes(method)) {
+                methodScores[method] += getScore(costEffectivenessValue);
+            }
+
+            if (preventingPregnancyMethods.includes(method)) {
+                methodScores[method] += getScore(preventingPregnancyValue);
+            }
+
+            if (managingPeriodsMethods.includes(method)) {
+                methodScores[method] += getScore(managingPeriodsValue);
+            }
+
+            if (gainingWeightMethods.includes(method)) {
+                methodScores[method] += getScore(gainingWeightValue);
+            }
+            });
+
+            // Function to get the score based on the user's preference value
+            function getScore(value) {
+            switch (value) {
+                case "veryImportant":
+                return 2;
+                case "important":
+                return 1;
+                case "neutral":
+                return 0;
+                case "unimportant":
+                return -1;
+                case "veryUnimportant":
+                return -2;
+                default:
+                return 0;
+            }
+            }
+
+            //SCORING SYSTEM CODE FOR MEDICAL HISTORY NAMAN DITO
+
+            //SCORING SYSTEM CODE FOR ADDITIONAL FACTORS NAMAN DITO
+
+
+               // Sort the method scores in descending order
+                /*
+                var sortedMethodScores = Object.entries(methodScores).sort(function (a, b) {
+                return b[1] - a[1];
+                });
+
+                // Get the top 3 methods with the highest scores
+                var recommendations = sortedMethodScores.slice(0, 3).map(function (entry) {
+                return entry[0];
+                });
+                
+                alert("Recommendations: " + recommendations);
+*/
+                // PARA MATESTING KUNG GUMAGANA YUNG SCORING, ICCONCATENATE YUNG SCORES SA RECOMMENDED
+
+                //Sort the method scores in descending order  
+                /*var sortedMethodScores = Object.entries(methodScores).sort(function (a, b) {
+                return b[1] - a[1];
+                });
+
+                // Get the top 3 methods with the highest scores
+                var recommendations = sortedMethodScores.slice(0, 3).map(function (entry) {
+                return entry[0] + " (Score: " + entry[1] + ")";
+                });
+
+                // Concatenate all contraceptive methods with their scores /
+                var allMethodsScores = Object.entries(methodScores).map(function (entry) {
+                return entry[0] + " (Score: " + entry[1] + ")";
+                });
+
+                // Show all contraceptive methods with their scores in the alert 
+                alert("Recommendations: " + recommendations + "\n\nAll Methods with Scores: \n" + allMethodsScores.join("\n"));
+                */
+                //GOODS NA, AND NADEDELETE YUNG METHOD KAPAG NAG NO SA CONSIDER USING AGAIN NICE NICE 
+                
+
+
+
+            //---------------PANG SORT NG TOP 3 RECOMMENDED CONTRACEPTIVE METHOD WITH CHECKING------------------------
+            // Sort the method scores in descending order
+            var sortedMethodScores = Object.entries(methodScores).sort(function (a, b) {
+            return b[1] - a[1];
+            });
+
+            // Get the top 3 methods with the highest scores
+            var recommendations = sortedMethodScores.slice(0, 3).map(function (entry) {
+            return entry[0];
+            });
+
+            // Concatenate all contraceptive methods with their scores
+            var allMethodsScores = Object.entries(methodScores).map(function (entry) {
+            return entry[0] + " (Score: " + entry[1] + ")";
+            });
+
+            // Show all contraceptive methods with their scores in the alert 
+            alert("Recommendations: " + recommendations + "\n\nAll Methods with Scores: \n" + allMethodsScores.join("\n"));
+
+
+                
+                }
+
+        };
+
+
+            
+        
 
 
 
@@ -586,7 +794,7 @@
         //scoring logic for the quiz
 
         //array list of contraceptive methods
-        var contraceptives = [
+       /* var contraceptives = [
         { method: "hormonal_IUD", score: 0 },
         { method: "copper_IUD", score: 0 },
         { method: "the_implant", score: 0 },
@@ -619,7 +827,7 @@
         contraceptives.sort((a, b) => b.score - a.score);
 
         var topThree = contraceptives.slice(0, 3);
-
+*/
     </script>
 
 
