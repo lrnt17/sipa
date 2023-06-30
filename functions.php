@@ -18,9 +18,9 @@ function query($query)
 {
 	global $conn; //yung term na "global" para makuha pa rin yung variable outside the function
 				// and nasa config.inc.php si $con
-
+	//echo $query;
 	$result = mysqli_query($conn, $query); //si $query nasa ajax.inc.php
-
+	 
 	//pag may laman si result, magiging true
 	//kapag si $result is not boleean -> "!is_bool", gagaawin nya yung condition
 	if(!is_bool($result) && mysqli_num_rows($result) > 0)
@@ -38,7 +38,7 @@ function query($query)
 	return false;
 }
 
-/*function logged_in(){ // sa pag log in 
+function logged_in(){ // sa pag log in 
 
 	//this condition means that pag hindi empty si $_SESSION['USER'], true ganon
 	if(!empty($_SESSION['USER']))
@@ -65,4 +65,20 @@ function get_image($path)
 
 	//kapag alang laman, ito yung default na pic
 	return 'assets/images/user.jpg?v1';
-}*/
+}
+
+function i_own_post($row)
+{
+	if(logged_in() && $_SESSION['USER']['user_id'] == $row['user_id'])
+		return true;
+
+	return false;
+}
+
+function i_own_profile($row)
+{
+	if(logged_in() && $_SESSION['USER']['user_id'] == $row['user_id'])
+		return true;
+
+	return false;
+}

@@ -1,5 +1,5 @@
 <?php
-include("connect.php");
+/*include("connect.php");
 $_SESSION["pnum"] = '09234726098';
 $pnum = $_SESSION["pnum"];
 $verification_code = substr(number_format(time() * rand(), 0, '', ''), 0, 6);
@@ -58,7 +58,20 @@ echo $output;
 
 // insert in users table
 $sql = "INSERT INTO verification_codes(user_pnum, verification_code, pnum_verified_at) VALUES ('" . $_SESSION["pnum"] . "', '" . $verification_code . "', NULL)";
-mysqli_query($conn, $sql);*/               
+mysqli_query($conn, $sql);*/
+
+
 ?>
 
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Page</title>
+</head>
+<body>
+     Your HTML content here 
+
+    <script type="text/javascript" src="sms_testing.js"></script>
+</body>
+</html>
 

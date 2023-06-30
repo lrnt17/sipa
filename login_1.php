@@ -490,30 +490,15 @@
 <body>
 
     <!-- nav bar div -->
+    <!-- i dont know if need pa to kasi login pa lang -->
+    <!-- naiwan yung logo HAHAHAHAHAHAHAHHA -->
     <header>
         <a href="#"><img class="logo" src="logo1.png" alt="logo"></a>
-            <nav>
-                <ul class="nav__links">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Videos</a></li>
-                    <li><a href="#">Right for me</a></li>
-                    <li><a href="#">FAQs</a></li>
-                    <li><a href="#">Services</a></li>
-                </ul>
-            </nav>
-            <p class="menu cta"><i class="fa-solid fa-bars"></i></p>
     </header>
 
      <!-- menu div / min-width -->
     <div class="overlay">
         <a class="close">&times;</a>
-        <div class="overlay__content">
-            <a href="#" >Home</a>
-            <a href="#">Videos</a>
-            <a href="#">Right for me</a>
-            <a href="#">FAQs</a>
-            <a href="#">Services</a>
-        </div>
     </div>
 
     <!-- parent div -->
@@ -555,7 +540,7 @@
                     <!--<input type="checkbox" name="" id=""><p class ="checkbox-text">Keep me logged in-->
                 </form>
                 
-                <a href="forgotpass_1.php" id="forgotpass" class="a-forgot">Forgot password?</a>
+                <a href="forgot_pass_1.php" id="forgotpass" class="a-forgot">Forgot password?</a>
                 
                 <div class="text-cont">
                     <div class="lines">
@@ -564,110 +549,79 @@
                     <p class="text-visit">Visit the nearest health facility in your area</p>
                 </div>
 
-                <!-- show password toggle script -->
-                <script>
-                    const togglePassword = document.querySelector("#togglePassword");
-                    const password = document.querySelector("#pass");
+                <!-- language, privacy policy, terms of use -->
+                <?php include('languageprivacyterms.php') ?>
 
-                    togglePassword.addEventListener("click", function () {
-                        this.classList.toggle("fa-eye-slash");
-                        // toggle the type attribute
-                        const type = password.getAttribute("type") === "password" ? "text" : "password";
-                        password.setAttribute("type", type);
-                        
-                        // toggle the icon
-                    });
-                </script>
             </div>
-            <!-- language -->
-            <div class="links">
-                <span>
-                    <!-- language -->
-                    <div class="translate" id="google_translate_element"></div>
-                    <script type="text/javascript">
-                            function googleTranslateElementInit() {
-                            new google.translate.TranslateElement({
-                                pageLanguage: 'en',
-                                includedLanguages: 'en,tl',
-                                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-                                autoDisplay: false,
-                                multilanguagePage: true
-                            }, 'google_translate_element');
-                            }
-                        </script>
-                        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-                </span>
-
-                <a href="">Privacy Policy</a>
-                <a href="">Terms of Use</a>
-            </div>
-            <!--<div class="dropdown">
-                <form action="#">
-                    <label for="cars">Language: </label>
-                    <select id="language">
-                        <option value="1" selected="selected">English</option>
-                        <option value="2">Tagalog</option>
-                    </select>
-                </form>
-            </div>-->
         </div>
     </div>
-
-    <script>
-        var login = {
-        
-            submit: function(e){
-                e.preventDefault();
-                let inputs = e.currentTarget.querySelectorAll("input");
-                let form = new FormData();
-
-                for (var i = inputs.length - 1; i >= 0; i--) {
-                    form.append(inputs[i].name, inputs[i].value);
-                }
-                
-                form.append('data_type', 'login');
-                
-                var ajax = new XMLHttpRequest();
-
-                ajax.addEventListener('readystatechange',function(){
-
-                    if(ajax.readyState == 4)
-                    {
-                        if(ajax.status == 200){
-
-                            //ganto daw iconvert si JSON back to javascript
-                            let obj = JSON.parse(ajax.responseText);
-                            alert(obj.message); //nasa ajax.php yung .message
-
-                            if(obj.success)//nasa ajax.php yung .sucess
-                                window.location.href = "home_1_with_user.php";
-                        }else{
-                            alert("Please check your internet connection");
-                        }
-                    }
-                });
-
-                ajax.open('post','ajax.php', true);
-                ajax.send(form);
-            },
-        };
-    </script>
-
-    <!-- open menu in min-width -->
-    <script>
-        const doc = document;
-        const menuOpen = doc.querySelector(".menu");
-        const menuClose = doc.querySelector(".close");
-        const overlay = doc.querySelector(".overlay");
-
-        menuOpen.addEventListener("click", () => {
-        overlay.classList.add("overlay--active");
-        });
-
-        menuClose.addEventListener("click", () => {
-        overlay.classList.remove("overlay--active");
-        });
-    </script>
-
 </body>
+
+<script>
+    var login = {
+    
+        submit: function(e){
+            e.preventDefault();
+            let inputs = e.currentTarget.querySelectorAll("input");
+            let form = new FormData();
+
+            for (var i = inputs.length - 1; i >= 0; i--) {
+                form.append(inputs[i].name, inputs[i].value);
+            }
+            
+            form.append('data_type', 'login');
+            
+            var ajax = new XMLHttpRequest();
+
+            ajax.addEventListener('readystatechange',function(){
+
+                if(ajax.readyState == 4)
+                {
+                    if(ajax.status == 200){
+
+                        //ganto daw iconvert si JSON back to javascript
+                        let obj = JSON.parse(ajax.responseText);
+                        alert(obj.message); //nasa ajax.php yung .message
+
+                        if(obj.success)//nasa ajax.php yung .sucess
+                            window.location.href = "home_1_with_user.php";
+                    }else{
+                        alert("Please check your internet connection");
+                    }
+                }
+            });
+
+            ajax.open('post','ajax.php', true);
+            ajax.send(form);
+        },
+    };
+
+    // open menu in min-width
+    const doc = document;
+    const menuOpen = doc.querySelector(".menu");
+    const menuClose = doc.querySelector(".close");
+    const overlay = doc.querySelector(".overlay");
+
+    menuOpen.addEventListener("click", () => {
+    overlay.classList.add("overlay--active");
+    });
+
+    menuClose.addEventListener("click", () => {
+    overlay.classList.remove("overlay--active");
+    });
+
+    // show password toggle script
+    const togglePassword = document.querySelector("#togglePassword");
+    const password = document.querySelector("#pass");
+
+    togglePassword.addEventListener("click", function () {
+        this.classList.toggle("fa-eye-slash");
+        // toggle the type attribute
+        const type = password.getAttribute("type") === "password" ? "text" : "password";
+        password.setAttribute("type", type);
+        
+        // toggle the icon
+    });
+</script>
+
 </html>

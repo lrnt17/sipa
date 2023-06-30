@@ -10,7 +10,7 @@
         $page = 1;
     }
     //pagination end
-    echo $_SESSION['USER']['user_id'];
+    //echo $_SESSION['USER']['user_id'];
 ?>
 
 <!DOCTYPE html>
@@ -22,52 +22,28 @@
 </head>
 <body>
     <style>
+        @keyframes appear{
+			0%{
+				opacity: 0;
+			}
+			100%{
+				opacity: 1;
+			}
+		}
+        
 		/* tinatago si sign up, naka hide sya */
 		.hide{
 			display:none;
 		}
 
 	</style>
-    <!-- navigation bar with logo -->
-    <div class="navigation-bar" id="navigation-container">
-        <img src="#">
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Videos</a></li>
-            <li><a href="#">Right for me</a></li>
-            <li><a href="#">FAQs</a></li>
-            <li>
-                <div class="dropdown">
-                    <button class="dropbtn">Services<i class="fa fa-caret-down"></i></button>
-                    <div class="dropdown-content">
-                        <a href="#">Link 1</a>
-                        <a href="#">Link 2</a>
-                        <a href="community_forum_1.php">Community Forum</a>
-                        <a href="#">Link 4</a>
-                        <a href="#">Link 5</a>
-                        <a href="#">Link 6</a>
-                        <a href="#">Contraceptive Reviews</a>
-                    </div>
-                </div>
-            </li>
-            <div class="profile_pic">
-                <a href="profile.php" id="avatar_name" href="#name">
-                    <img id="avatar" src="<?php //echo $_SESSION["image"]; ?>" alt="avatar">
-                    <?php echo $_SESSION['USER']['user_fname']; ?>
-                </a>
-            </div>
-        </ul>
-    </div>
 
-    <h1>Community Forum</h1>
-    <input type="text" name="search" id="search" placeholder="Search for topics">
-    <br><br>
+    <!-- navigation bar with logo -->
+    <?php include('header.php') ?>
+    <?php include('community-forum.php') ?>
 
     <!-- community forum content -->
     <section>
-        <a href="community_forum_1.php">Community Topics</a>
-        <a href="community_forum_2_my_topics.php">My Topics</a>
-
         <form onsubmit="mypost.submit(event)" method="post" class="class_42" >
             <div class="">
                 <input type="text" placeholder="Title" name="post_title" id="post_title" class="js-post-title">

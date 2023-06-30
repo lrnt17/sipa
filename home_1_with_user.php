@@ -1,25 +1,8 @@
 <?php 
-    include("connect.php");
+    require("connect.php");
     require('functions.php');
     
-    /*$code = $_SESSION["code"];
-
-    $sql = "SELECT * FROM users WHERE access_code = '$code'";
-    $result = mysqli_query($conn,$sql);
-    $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-    //$active = $row['active'];
-
-    $_SESSION["user_id"] = $row['user_id'];
-    //$_SESSION["image"] = $row['image'];
-    $_SESSION["user_fname"] = $row['user_fname'];
-    $_SESSION["user_lname"] = $row['user_lname'];
-    $_SESSION["user_email"] = $row['user_email'];
-    $_SESSION["user_pnum"] = $row['user_pnum'];
-    $_SESSION["access_code"] = $row['access_code'];
-    $_SESSION["user_password"] = $row['user_password'];
-    //$_SESSION["fname"] = $username;*/
-    echo $_SESSION['USER']['user_id'];
-
+    //echo $_SESSION['USER']['user_id'];
 ?>
 
 <!DOCTYPE html>
@@ -36,14 +19,12 @@
         href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.css"
         type="text/css"
     />
-
     <title>SiPa | Contraceptive Decision Support System</title>
-
     <script>
         function toggleAnswer(element) {
         var answer = element.nextElementSibling;
         answer.style.display = answer.style.display === "none" ? "block" : "none";
-        }
+        } // !!!!
     </script>
     <style>
         body {
@@ -65,36 +46,7 @@
 <body>
 
     <!-- navigation bar with logo -->
-    <div class="navigation-bar" id="navigation-container">
-        <img src="#">
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Videos</a></li>
-            <li><a href="#">Right for me</a></li>
-            <li><a href="#">FAQs</a></li>
-            <li>
-                <div class="dropdown">
-                    <button class="dropbtn">Services<i class="fa fa-caret-down"></i></button>
-                    <div class="dropdown-content">
-                        <a href="#">Link 1</a>
-                        <a href="#">Link 2</a>
-                        <a href="community_forum_1.php">Community Forum</a>
-                        <a href="#">Link 4</a>
-                        <a href="#">Link 5</a>
-                        <a href="#">Link 6</a>
-                        <a href="#">Contraceptive Reviews</a>
-                    </div>
-                </div>
-            </li>
-            <li><a href="#">Sign in</a></li>
-            <div class="profile_pic">
-                <a href="profile.php" id="avatar_name" href="#name">
-                    <img id="avatar" src="<?php //echo $_SESSION["image"]; ?>" alt="avatar">
-                    <?php echo $_SESSION['USER']['user_fname']; ?>
-                </a>
-            </div>
-        </ul>
-    </div>
+    <?php include('header.php') ?>
 
     <!-- background picture eme -->
     <img src="" alt="">
