@@ -146,16 +146,29 @@
             </td>
             </tr>
             <tr>
-            <td><input type="checkbox" name="user-exp-chckbx" id="thePill" onchange="toggleRadioButtons('thePill')"> <label for="thePill">Pills</label></td>
+            <td><input type="checkbox" name="user-exp-chckbx" id="combinedPill" onchange="toggleRadioButtons('combinedPill')"> <label for="combinedPill">Combined Pill</label></td>
             <td>
-                <label><input type="radio" class="user-exp-radio" id="thePillExperience" name="thePillExperience" value="good" disabled required> Good</label>
-                <label><input type="radio" class="user-exp-radio" id="thePillExperience" name="thePillExperience" value="neutral" disabled required> Neutral</label>
-                <label><input type="radio" class="user-exp-radio" id="thePillExperience" name="thePillExperience" value="bad" disabled required> Bad</label>
+                <label><input type="radio" class="user-exp-radio" id="combinedPillExperience" name="combinedPillExperience" value="good" disabled required> Good</label>
+                <label><input type="radio" class="user-exp-radio" id="combinedPillExperience" name="combinedPillExperience" value="neutral" disabled required> Neutral</label>
+                <label><input type="radio" class="user-exp-radio" id="combinedPillExperience" name="combinedPillExperience" value="bad" disabled required> Bad</label>
             </td>
             <td>
-                <label><input type="radio" class="user-exp-radio" id="thePillConsider" name="thePillConsider" value="yes" disabled required> Yes</label>
-                <label><input type="radio" class="user-exp-radio" id="thePillConsider" name="thePillConsider" value="no" disabled required> No</label>
-                <label><input type="radio" class="user-exp-radio" id="thePillConsider" name="thePillConsider" value="dontKnow" disabled required> I don't know</label>
+                <label><input type="radio" class="user-exp-radio" id="combinedPillConsider" name="combinedPillConsider" value="yes" disabled required> Yes</label>
+                <label><input type="radio" class="user-exp-radio" id="combinedPillConsider" name="combinedPillConsider" value="no" disabled required> No</label>
+                <label><input type="radio" class="user-exp-radio" id="combinedPillConsider" name="combinedPillConsider" value="dontKnow" disabled required> I don't know</label>
+            </td>
+            </tr>
+            <tr>
+            <td><input type="checkbox" name="user-exp-chckbx" id="miniPill" onchange="toggleRadioButtons('miniPill')"> <label for="miniPill">Mini Pill</label></td>
+            <td>
+                <label><input type="radio" class="user-exp-radio" id="miniPillExperience" name="miniPillExperience" value="good" disabled required> Good</label>
+                <label><input type="radio" class="user-exp-radio" id="miniPillExperience" name="miniPillExperience" value="neutral" disabled required> Neutral</label>
+                <label><input type="radio" class="user-exp-radio" id="miniPillExperience" name="miniPillExperience" value="bad" disabled required> Bad</label>
+            </td>
+            <td>
+                <label><input type="radio" class="user-exp-radio" id="miniPillConsider" name="miniPillConsider" value="yes" disabled required> Yes</label>
+                <label><input type="radio" class="user-exp-radio" id="miniPillConsider" name="miniPillConsider" value="no" disabled required> No</label>
+                <label><input type="radio" class="user-exp-radio" id="miniPillConsider" name="miniPillConsider" value="dontKnow" disabled required> I don't know</label>
             </td>
             </tr>
             <tr>
@@ -290,35 +303,35 @@
 
                 <span><b>Cost effectiveness</b></span>
                 <br>
-                <input type="radio" name="costEffectiveness" value="veryImportant"> <label>Very Important</label>
-                <input type="radio" name="costEffectiveness" value="important"> <label>Important</label>
-                <input type="radio" name="costEffectiveness" value="neutral"> <label>Neutral</label>
-                <input type="radio" name="costEffectiveness" value="unimportant"> <label>Unimportant</label>
-                <input type="radio" name="costEffectiveness" value="veryUnimportant"> <label>Very Unimportant</label>
+                <label><input type="radio" name="costEffectiveness" id="costEffectiveness1" value="veryImportant">Very Important</label>
+                <label><input type="radio" name="costEffectiveness" id="costEffectiveness2" value="important">Important</label>
+                <label><input type="radio" name="costEffectiveness" id="costEffectiveness3" value="neutral">Neutral</label>
+                <label><input type="radio" name="costEffectiveness" id="costEffectiveness4" value="unimportant">Unimportant</label>
+                <label><input type="radio" name="costEffectiveness" id="costEffectiveness5" value="veryUnimportant">Very Unimportant</label>
                 <br><br>
                 <span><b>Helps with managing periods and side effects</b></span>
                 <br>
-                <input type="radio" name="managingPeriods" value="veryImportant"> <label>Very Important</label>
-                <input type="radio" name="managingPeriods" value="important"> <label>Important</label>
-                <input type="radio" name="managingPeriods" value="neutral"> <label>Neutral</label>
-                <input type="radio" name="managingPeriods" value="unimportant"> <label>Unimportant</label>
-                <input type="radio" name="managingPeriods" value="veryUnimportant"> <label>Very Unimportant</label>
+                <label><input type="radio" name="managingPeriods" id="managingPeriods1" value="veryImportant">Very Important</label>
+                <label><input type="radio" name="managingPeriods" id="managingPeriods2" value="important">Important</label>
+                <label><input type="radio" name="managingPeriods" id="managingPeriods3" value="neutral">Neutral</label>
+                <label><input type="radio" name="managingPeriods" id="managingPeriods4" value="unimportant">Unimportant</label>
+                <label><input type="radio" name="managingPeriods" id="managingPeriods5" value="veryUnimportant">Very Unimportant</label>
                 <br><br>
                 <span><b>Effective at preventing pregnancy</b></span>
                 <br>
-                <input type="radio" name="preventingPregnancy" value="veryImportant"> <label>Very Important</label>
-                <input type="radio" name="preventingPregnancy" value="important"> <label>Important</label>
-                <input type="radio" name="preventingPregnancy" value="neutral"> <label>Neutral</label>
-                <input type="radio" name="preventingPregnancy" value="unimportant"> <label>Unimportant</label>
-                <input type="radio" name="preventingPregnancy" value="veryUnimportant"> <label>Very Unimportant</label>
+                <label><input type="radio" name="preventingPregnancy" id="preventingPregnancy1" value="veryImportant">Very Important</label>
+                <label><input type="radio" name="preventingPregnancy" id="preventingPregnancy2" value="important">Important</label>
+                <label><input type="radio" name="preventingPregnancy" id="preventingPregnancy3" value="neutral">Neutral</label>
+                <label><input type="radio" name="preventingPregnancy" id="preventingPregnancy4" value="unimportant">Unimportant</label>
+                <label><input type="radio" name="preventingPregnancy" id="preventingPregnancy5" value="veryUnimportant">Very Unimportant</label>
                 <br><br>
                 <span><b>Low possibility of gaining weight</b></span>
                 <br>
-                <input type="radio" name="gainingWeight" value="veryImportant"> <label>Very Important</label>
-                <input type="radio" name="gainingWeight" value="important"> <label>Important</label>
-                <input type="radio" name="gainingWeight" value="neutral"> <label>Neutral</label>
-                <input type="radio" name="gainingWeight" value="unimportant"> <label>Unimportant</label>
-                <input type="radio" name="gainingWeight" value="veryUnimportant"> <label>Very Unimportant</label>
+                <label><input type="radio" name="gainingWeight" id="gainingWeight1" value="veryImportant">Very Important</label>
+                <label><input type="radio" name="gainingWeight" id="gainingWeight2" value="important">Important</label>
+                <label><input type="radio" name="gainingWeight" id="gainingWeight3" value="neutral">Neutral</label>
+                <label><input type="radio" name="gainingWeight" id="gainingWeight4" value="unimportant">Unimportant</label>
+                <label><input type="radio" name="gainingWeight" id="gainingWeight5" value="veryUnimportant">Very Unimportant</label>
                 <br><br>
 
     </div>
@@ -344,35 +357,35 @@
     <div class ="additional-factors-container" id="additional-factors-container">
         <div class = "number-1-additional-factor" id="number-1-additional-factor">
             <p><b>1. How do you feel about the insertion of a foreign object into your vagina?<span style="color: red;">*</span></b></p>
-            <label><input type="radio" class="additional-factors-radio" id="very-comfortable" name="answer1">Very Comfortable</label><br>
-            <label><input type="radio" class="additional-factors-radio" id="comfortable" name="answer1">Comfortable</label><br>
-            <label><input type="radio" class="additional-factors-radio" id="neutral" name="answer1">Neutral</label><br>
-            <label><input type="radio" class="additional-factors-radio" id="uncomfortable" name="answer1">Uncomfortable</label><br>
-            <label><input type="radio" class="additional-factors-radio" id="very-uncomfortable" name="answer1">Very Uncomfortable</label>
+            <label><input type="radio" class="additional-factors-radio" value= "veryComfortable" id="very-comfortable" name="answer1">Very Comfortable</label><br>
+            <label><input type="radio" class="additional-factors-radio" value= "comfortable" id="comfortable" name="answer1">Comfortable</label><br>
+            <label><input type="radio" class="additional-factors-radio" value= "neutral" id="neutral" name="answer1">Neutral</label><br>
+            <label><input type="radio" class="additional-factors-radio" value= "uncomfortable" id="uncomfortable" name="answer1">Uncomfortable</label><br>
+            <label><input type="radio" class="additional-factors-radio" value= "veryUncomfortable" id="very-uncomfortable" name="answer1">Very Uncomfortable</label>
         </div>
         <br>
         <div class = "number-2-additional-factor" id="number-2-additional-factor">
             <p><b>2. At what hormone level do you feel most comfortable?<span style="color: red;">*</span></b></p>
-            <label><input type="radio" class="additional-factors-radio" id="no-hormones" name="answer2">No hormones</label><br>
-            <label><input type="radio" class="additional-factors-radio" id="one-hormone" name="answer2">One hormone (progestin only methods)</label><br>
-            <label><input type="radio" class="additional-factors-radio" id="two-hormones" name="answer2">Two hormones (progestin and estrogen methods)</label><br>
-            <label><input type="radio" class="additional-factors-radio" id="dontknow" name="answer2">I don't know/ no preference</label>
+            <label><input type="radio" class="additional-factors-radio" value="no-hormones" id="no-hormones" name="answer2">No hormones</label><br>
+            <label><input type="radio" class="additional-factors-radio" value="one-hormone" id="one-hormone" name="answer2">One hormone (progestin only methods)</label><br>
+            <label><input type="radio" class="additional-factors-radio" value="two-hormones" id="two-hormones" name="answer2">Two hormones (progestin and estrogen methods)</label><br>
+            <label><input type="radio" class="additional-factors-radio" value="dontknow" id="dontknow" name="answer2">I don't know/ no preference</label>
         </div>
         <br>
         <div class = "number-3-additional-factor" id="number-3-additional-factor">
             <p><b>3. How often do you want to use your contraceptive method?<span style="color: red;">*</span></b></p>
-            <label><input type="radio" class="additional-factors-radio" id="daily" name="answer3">Daily</label><br>
-            <label><input type="radio" class="additional-factors-radio" id="weekly" name="answer3">Weekly</label><br>
-            <label><input type="radio" class="additional-factors-radio" id="monthly" name="answer3">Monthly</label><br>
-            <label><input type="radio" class="additional-factors-radio" id="yearly" name="answer3">Yearly</label><br>
-            <label><input type="radio" class="additional-factors-radio" id="dontknow2" name="answer3">I don't know/ no preference</label>
+            <label><input type="radio" class="additional-factors-radio" value="daily" id="daily" name="answer3">Daily</label><br>
+            <label><input type="radio" class="additional-factors-radio" value="weeklyl" id="weekly" name="answer3">Weekly</label><br>
+            <label><input type="radio" class="additional-factors-radio" value="monthly" id="monthly" name="answer3">Monthly</label><br>
+            <label><input type="radio" class="additional-factors-radio" value="yearly" id="yearly" name="answer3">Yearly</label><br>
+            <label><input type="radio" class="additional-factors-radio" value="dontknow2" id="dontknow2" name="answer3">I don't know/ no preference</label>
         </div>
         <br>
         <div class = "number-4-additional-factor" id="number-4-additional-factor">
         <p><b>4. Do you want to permanently stop having children?<span style="color: red;">*</span></b></p>
-            <label><input type="radio" class="additional-factors-radio" id="yes" name="answer4">Yes</label><br>
-            <label><input type="radio" class="additional-factors-radio" id="no" name="answer4">No</label><br>
-            <label><input type="radio" class="additional-factors-radio" id="dontknow3" name="answer4">I don't know/ no preference</label>
+            <label><input type="radio" class="additional-factors-radio" value="yes" id="yes" name="answer4">Yes</label><br>
+            <label><input type="radio" class="additional-factors-radio" value="no" id="no" name="answer4">No</label><br>
+            <label><input type="radio" class="additional-factors-radio" value="dontknow3" id="dontknow3" name="answer4">I don't know/ no preference</label>
         </div>
         <br>
     </div>
@@ -570,9 +583,9 @@
                 // The form will automatically navigate to right_for_me_quiz_result.php
 
 
-            //------------------------FOR SCORING NA ITONG PART NA TO---------------------------------------
+            //---------------------------FOR SCORING NA ITONG PART NA TO---------------------------------------
 
-            //---------------WORKING SCORING SYSTEM FOR USER EXPERIENCE NA TO------------------------
+            //------------------WORKING SCORING SYSTEM FOR USER EXPERIENCE------------------------
             var form = document.getElementById("quiz_form");
             var selectedMethods = [];
             var scores = {};
@@ -585,7 +598,8 @@
             'theShot',
             'hormonalVaginalRing',
             'hormonalPatch',
-            'thePill',
+            'combinedPill',
+            'miniPill',
             'condom',
             'diaphragm',
             'spermicide',
@@ -627,11 +641,12 @@
             }
             });
 
-            //------------------PERSONAL PREFERENCE SCORING WORKING NA-----------------------------
+            //------------------WORKING SCORING SYSTEM FOR PERSONAL PREFERENCE-----------------------------
             // Define the methods associated with each feature
             var costEffectivenessMethods = [
             'condom',
-            'thePill',
+            'combinedPill',
+            'miniPill',
             'hormonalPatch',
             'hormonalVaginalRing',
             'diaphragm',
@@ -640,7 +655,8 @@
             'temperatureMethod',
             ];
             var preventingPregnancyMethods = [
-            'thePill',
+            'combinedPill',
+            'miniPill',
             'hormonalVaginalRing',
             'hormonalPatch',
             'theShot',
@@ -651,7 +667,8 @@
             'tubalLigation'
             ];
             var managingPeriodsMethods = [
-            'thePill',
+            'combinedPill',
+            'miniPill',
             'hormonalVaginalRing',
             'implant',
             'hormonalIUD',
@@ -707,45 +724,125 @@
             }
             }
 
-            //SCORING SYSTEM CODE FOR MEDICAL HISTORY NAMAN DITO
+            //------------------SCORING SYSTEM CODE FOR MEDICAL HISTORY NAMAN DITO ------------------------------
 
-            //SCORING SYSTEM CODE FOR ADDITIONAL FACTORS NAMAN DITO
+            // Get the user's answers for the medical history questions
+            var medHistCheckboxes = form.querySelectorAll('input[type="checkbox"][name="med-hist-chckbx"]:checked');
+            var medHistConditions = [];
+            medHistCheckboxes.forEach(function (checkbox) {
+            medHistConditions.push(checkbox.id);
+            });
+
+            // Update scores based on medical history conditions
+            medHistConditions.forEach(function (condition) {
+            if (condition === "acne" || condition === "pcos") {
+                methodScores["combinedPill"] += 2;
+                methodScores["hormonalPatch"] += 2;
+                methodScores["hormonalVaginalRing"] += 2;
+            } else if (condition === "depression") {
+                delete methodScores["combinedPill"];
+                delete methodScores["hormonalPatch"];
+                delete methodScores["hormonalVaginalRing"];
+            } else if (condition === "blood-clotting-disorder" || condition === "hypertension") {
+                delete methodScores["combinedPill"];
+                delete methodScores["hormonalPatch"];
+                delete methodScores["hormonalVaginalRing"];
+            } else if (condition === "treatment-for-sti") {
+                delete methodScores["hormonalIUD"];
+                delete methodScores["copperIUD"];
+            }
+            });
 
 
-               // Sort the method scores in descending order
-                /*
-                var sortedMethodScores = Object.entries(methodScores).sort(function (a, b) {
-                return b[1] - a[1];
-                });
 
-                // Get the top 3 methods with the highest scores
-                var recommendations = sortedMethodScores.slice(0, 3).map(function (entry) {
-                return entry[0];
-                });
-                
-                alert("Recommendations: " + recommendations);
-*/
-                // PARA MATESTING KUNG GUMAGANA YUNG SCORING, ICCONCATENATE YUNG SCORES SA RECOMMENDED
+            //------------------WORKING SCORING SYSTEM CODE FOR ADDITIONAL FACTORS---------------------------
 
-                //Sort the method scores in descending order  
-                /*var sortedMethodScores = Object.entries(methodScores).sort(function (a, b) {
-                return b[1] - a[1];
-                });
+            // Define the methods associated with each question
+            var foreignObjectMethods = ['hormonalIUD', 'copperIUD', 'diaphragm', 'hormonalVaginalRing'];
+            var hormoneLevelMethods = ['condom', 'withdrawalMethod', 'temperatureMethod', 'calendarMethod', 'diaphragm', 'spermicide', 'vasectomy', 'tubalLigation', 'copperIUD', 'implant', 'miniPill', 'theShot', 'hormonalIUD', 'patch', 'combinedPill', 'emergencyContraception', 'hormonalVaginalRing'];
+            var frequencyMethods = ['condom', 'diaphragm', 'spermicide', 'withdrawalMethod', 'calendarMethod', 'temperatureMethod', 'miniPill', 'combinedPill', 'patch', 'shot', 'implant', 'copperIUD', 'hormonalIUD'];
+            var permanentMethods = ['vasectomy', 'tubalLigation'];
 
-                // Get the top 3 methods with the highest scores
-                var recommendations = sortedMethodScores.slice(0, 3).map(function (entry) {
-                return entry[0] + " (Score: " + entry[1] + ")";
-                });
+            // Define the relevant methods for each hormone level category
+            var noHormonesMethods = ['condom', 'withdrawalMethod', 'temperatureMethod', 'calendarMethod', 'diaphragm', 'spermicide', 'vasectomy', 'tubalLigation', 'copperIUD'];
+            var oneHormoneMethods = ['implant', 'miniPill', 'theShot', 'hormonalIUD'];
+            var twoHormonesMethods = ['patch', 'combinedPill', 'emergencyContraception', 'hormonalVaginalRing'];
 
-                // Concatenate all contraceptive methods with their scores /
-                var allMethodsScores = Object.entries(methodScores).map(function (entry) {
-                return entry[0] + " (Score: " + entry[1] + ")";
-                });
+            // Get the user's answers for each question
+            var answer1Value = form.elements["answer1"].value;
+            var answer2Value = form.elements["answer2"].value;
+            var answer3Value = form.elements["answer3"].value;
+            var answer4Value = form.elements["answer4"].value;
 
-                // Show all contraceptive methods with their scores in the alert 
-                alert("Recommendations: " + recommendations + "\n\nAll Methods with Scores: \n" + allMethodsScores.join("\n"));
-                */
-                //GOODS NA, AND NADEDELETE YUNG METHOD KAPAG NAG NO SA CONSIDER USING AGAIN NICE NICE 
+            // Calculate scores based on user answers for each method
+            contraceptiveMethods.forEach(function (method) {
+                // Question 1: How do you feel about the insertion of a foreign object into your vagina?
+                if (foreignObjectMethods.includes(method)) {
+                    methodScores[method] += getScoreAF(answer1Value);
+                }
+
+                // Question 2: At what hormone level do you feel most comfortable?
+                if (hormoneLevelMethods.includes(method)) {
+                    methodScores[method] += getScoreHormoneLevel(method, answer2Value);
+                }
+
+                // Question 3: How often do you want to use your contraceptive method?
+                if (frequencyMethods.includes(method)) {
+                    methodScores[method] += getScoreAF(answer3Value);
+                }
+
+                // Question 4: Do you want to permanently stop having children?
+                if (permanentMethods.includes(method)) {
+                    if (answer4Value === "yes") {
+                        methodScores[method] += 15;
+                    } else if (answer4Value === "dontknow3") {
+                        methodScores[method] = 0;
+                    } else {
+                        delete methodScores[method];
+                    }
+                }
+            });
+
+            // Function to get the score based on the user's answer value for hormone level
+            function getScoreHormoneLevel(method, value) {
+                if (noHormonesMethods.includes(method) && value === "no-hormones") {
+                    return 2;
+                } else if (oneHormoneMethods.includes(method) && value === "one-hormone") {
+                    return 2;
+                } else if (twoHormonesMethods.includes(method) && value === "two-hormones") {
+                    return 2;
+                }
+                return 0;
+            }
+
+            // Function to get the score based on the user's answer value for other questions
+            function getScoreAF(value) {
+                switch (value) {
+                    case "veryComfortable":
+                        return 2;
+                    case "comfortable":
+                        return 1;
+                    case "neutral":
+                        return 0;
+                    case "uncomfortable":
+                        return -1;
+                    case "veryUncomfortable":
+                        return -2;
+                    case "daily":
+                        return 2;
+                    case "weekly":
+                        return 2;
+                    case "monthly":
+                        return 2;
+                    case "yearly":
+                        return 2;
+                    default:
+                        return 0;
+                }
+            }
+
+
+            
                 
 
 
@@ -787,47 +884,6 @@
 
 
 
-
-
-
-
-        //scoring logic for the quiz
-
-        //array list of contraceptive methods
-       /* var contraceptives = [
-        { method: "hormonal_IUD", score: 0 },
-        { method: "copper_IUD", score: 0 },
-        { method: "the_implant", score: 0 },
-        { method: "the_shot", score: 0 },
-        { method: "HVR", score: 0 },
-        { method: "pill", score: 0 },
-        { method: "condom", score: 0 },
-        { method: "diaphragm", score: 0 },
-        { method: "spermicide", score: 0 },
-        { method: "withdrawl_method", score: 0 },
-        { method: "calendar_method", score: 0 },
-        { method: "temperature_method", score: 0 },
-        { method: "emergency_contraception", score: 0 },
-        { method: "vasectomy", score: 0 },
-        { method: "tubal_ligation", score: 0 }
-        ];
-
-        // Increment the score for a particular contraceptive method
-        function incrementScore(method) {
-        var contraceptive = contraceptives.find(c => c.method === method);
-        if (contraceptive) {
-            contraceptive.score++;
-        }
-        }
-        
-
-        // Example usage: Increment the score for the "pill" method
-        incrementScore("pill");
-
-        contraceptives.sort((a, b) => b.score - a.score);
-
-        var topThree = contraceptives.slice(0, 3);
-*/
     </script>
 
 
