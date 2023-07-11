@@ -64,10 +64,19 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 
 		$post = addslashes($_POST['post']);
 		$post_title = addslashes($_POST['post_title']);
+		$anonymous = $_POST['anonymous'];
 		$user_id = $_SESSION['USER']['user_id'];
+		
+		if($anonymous == 'true'){
+			$userfname = $_SESSION['USER']['user_fname'];
+			$user_fname = substr($userfname, 0, 1) . str_repeat('*', strlen($userfname) - 2) . substr($userfname, -1);
+		}else{
+			$user_fname = $_SESSION['USER']['user_fname'];
+		}
+
 		$date = date("Y-m-d H:i:s");
  
-		$query = "insert into forum (user_id,forum_timestamp,forum_title,forum_desc) values ('$user_id','$date','$post_title','$post')";
+		$query = "insert into forum (user_id,user_fname,forum_timestamp,forum_title,forum_desc) values ('$user_id','$user_fname','$date','$post_title','$post')";
 		query($query);
 
 		$query = "select * from forum where user_id = '$user_id' order by forum_id desc limit 1";
@@ -115,27 +124,50 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 		}
 
 	}else
-	if($_POST['data_type'] == 'my_edit_post' || $_POST['data_type'] == 'my_edit_comment') {
+	if($_POST['data_type'] == 'my_edit_comment') {
 		$post = addslashes($_POST['post']);
 		$id = (int)($_POST['id']);
 		$user_id = $_SESSION['USER']['user_id'];
 		$date = date("Y-m-d H:i:s");
 	
-		if($_POST['data_type'] == 'my_edit_post') {
-			$post_title = addslashes($_POST['post_title']);
-			$query = "update forum set forum_desc = '$post', forum_title = '$post_title', forum_timestamp = '$date' where user_id = '$user_id' && forum_id = '$id' limit 1";
-			$info['message'] = "Your post was edited successfully";
-		} else {
-			$query = "update forum set forum_desc = '$post', forum_timestamp = '$date' where user_id = '$user_id' && forum_id = '$id' limit 1";
-			$info['message'] = "Your comment was edited successfully";
-		}
+		$query = "update forum set forum_desc = '$post', forum_timestamp = '$date' where user_id = '$user_id' && forum_id = '$id' limit 1";
+		query($query);
+
+		$info['success'] = true;
+		$info['message'] = "Your comment was edited successfully";
+		
+	}else
+	if($_POST['data_type'] == 'my_edit_post') {
+		
+		$id = (int)($_POST['forum_id']);
+		$post_title = addslashes($_POST['title']);
+		$post = addslashes($_POST['content']);
+		$user_id = $_SESSION['USER']['user_id'];
+		$date = date("Y-m-d H:i:s");
+		
+		$query = "update forum set forum_desc = '$post', forum_title = '$post_title', forum_timestamp = '$date' where user_id = '$user_id' && forum_id = '$id' limit 1";
+		query($query);
+
+		$info['success'] = true;
+		$info['updated_date'] = date('Y-m-d\TH:i:s', strtotime($date));
+		$info['message'] = "Your post was edited successfully";
+		
+	}else
+	if($_POST['data_type'] == 'my_edit_reply') {
+		$post = addslashes($_POST['post']);
+		$id = (int)($_POST['id']);
+		$user_id = $_SESSION['USER']['user_id'];
+		$date = date("Y-m-d H:i:s");
 	
+		$query = "update forum set forum_desc = '$post', forum_timestamp = '$date' where user_id = '$user_id' && forum_id = '$id' limit 1";
+		$info['message'] = "Your reply was edited successfully";
+		
 		query($query);
 		$info['success'] = true;
 	}else
 	if($_POST['data_type'] == 'delete_post') //ito na yung sa post, naway makuha mo na lorent yung logic
 	{
-		$comment_part = $_POST['comment_part'];
+		
 		$id = (int)($_POST['id']);
 		$user_id = $_SESSION['USER']['user_id'];
  
@@ -146,49 +178,157 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 
 		$info['success'] = true;
 
+		
+		$info['message'] = "Your post was deleted successfully";
+		
+
+		// Fetch comment_parent_id for the comment being deleted
+		/*$query = "select comment_parent_id from forum where forum_id = '$id' limit 1";
+		$res = query($query);
+		if($res){
+			$comment_parent_id = $res[0]['comment_parent_id'];
+		}
+	
+		$query = "delete from forum where forum_id = '$id' && user_id = '$user_id' limit 1";
+		query($query);
+	
 		if($comment_part) {
-			$info['message'] = "Your comment was deleted successfully";
+			//count how many comments on this post
+			$query = "select count(*) as num from forum where comment_parent_id = '$comment_parent_id'";
+			$res = query($query);
+			if($res){
+				$num = $res[0]['num'];
+				$query = "update forum set comment_count = '$num' where forum_id = '$comment_parent_id' limit 1";
+				query($query);
+			}
+		}
+	
+		$info['success'] = true;
+	
+		if($comment_part) {
+			$info['message'] = "Your comment was deleted successfully" . $comment_part;
+		}
+		else {
+			$info['message'] = "Your post was deleted successfully" . $comment_part;
+		}*/
+
+	}else
+	if($_POST['data_type'] == 'delete_comment') //ito na yung sa post, naway makuha mo na lorent yung logic
+	{
+		//$comment_part = $_POST['comment_part'];
+		$id = (int)($_POST['id']);
+		$user_id = $_SESSION['USER']['user_id'];
+ 
+		//si limit 1 is parang pag may nakita na syang match sa data, iistop na sya
+		//para rin tipid sa memory
+		/*$query = "delete from forum where forum_id = '$id' && user_id = '$user_id' limit 1";
+		query($query);
+
+		$info['success'] = true;
+
+		if($comment_part) {
+			$info['message'] = "Your comment was deleted successfully" . $id;
 		}
 		else {
 			$info['message'] = "Your post was deleted successfully";
+		}*/
+
+		// Fetch comment_parent_id for the comment being deleted
+		$query = "select comment_parent_id from forum where forum_id = '$id' limit 1";
+		$res = query($query);
+		if($res){
+			$comment_parent_id = $res[0]['comment_parent_id'];
 		}
+	
+		$query = "delete from forum where forum_id = '$id' && user_id = '$user_id' limit 1";
+		query($query);
+	
+		//if($comment_part) {
+			//count how many comments on this post
+			$query = "select count(*) as num from forum where comment_parent_id = '$comment_parent_id'";
+			$res = query($query);
+			if($res){
+				$num = $res[0]['num'];
+				$query = "update forum set comment_count = '$num' where forum_id = '$comment_parent_id' limit 1";
+				query($query);
+			}
+		//}
+	
+		$info['success'] = true;
+	
+		//if($comment_part) {
+			$info['message'] = "Your comment was deleted successfully";
+		//}
+		//else {
+		//	$info['message'] = "Your post was deleted successfully" . $comment_part;
+		//}
 
 	}else
-	if($_POST['data_type'] == 'load_posts')
+	if($_POST['data_type'] == 'load_posts') //Initial work done
 	{
-		$user_id = $_SESSION['USER']['user_id'] ?? 0; //chiencheck if may user ba
-		$page_number = (int)$_POST['page_number'];
-		$limit = 5;
-		$offset = ($page_number - 1) * $limit;
-		//si offset parang iniiskip yung 1st ten results (yung nasa right) and get
-		//the next ten reuslts (katabi nung limit)
-		$query = "select * from forum order by forum_id desc limit $limit offset $offset";
+		$user_id = $_SESSION['USER']['user_id'] ?? 0;
+		$start = $_POST['start'];
+		$limit = $_POST['limit'];
+
+		$query = "select * from forum where comment_parent_id = 0 && reply_parent_id = 0 order by forum_id desc limit $start, $limit";
+		
 		$rows = query($query);
 		
 		if($rows){
 
 			foreach ($rows as $key => $row) {
-				$rows[$key]['date'] = date("jS M, Y H:i:s a",strtotime($row['forum_timestamp']));
-				//nl2br - pwede kang mag new line sa textarea tas ganun din output
-				//htmlspecialchars - lahat ng characters sa keyboard ginagawang string 
+				$rows[$key]['date'] = date('Y-m-d\TH:i:s', strtotime($row['forum_timestamp']));
 				$rows[$key]['forum_desc'] = nl2br(htmlspecialchars($row['forum_desc']));
-
+	
 				$rows[$key]['user_owns'] = false;
 				if($user_id == $row['user_id'])
 					$rows[$key]['user_owns'] = true;
-
+	
 				$id = $row['user_id'];
 				$query = "select * from users where user_id = '$id' limit 1";
 				$user_row = query($query);
 				
 				if($user_row){
-					$rows[$key]['user'] = $user_row[0]; //ito yung may .user
-					//$rows[$key]['user']['image'] = get_image($user_row[0]['image']);
+					$rows[$key]['user']['image'] = get_image($user_row[0]['user_image']);
 				}
+	
+				$forum_id = $row['forum_id'];
+				$query = "select count(*) from rating_info where post_id = $forum_id AND rating_action = 'like' limit 1";
+				$rating_row = query($query);
+	
+				if($rating_row){
+					$rows[$key]['getlikes'] = $rating_row[0];
+				}
+				
 			}
 			
+			// Check if there are more rows to load
+			$query = "select count(*) from forum where comment_parent_id = 0 && reply_parent_id = 0";
+			$result = query($query);
+			if ($result) {
+				$totalRows = intval($result[0]['count(*)']);
+				if ($start + count($rows) < $totalRows) {
+					// There are more rows to load
+					$info['hasMore'] = true;
+				} else {
+					// There are no more rows to load
+					$info['hasMore'] = false;
+				}
+			} else {
+				// Error querying database
+				// Assume there are no more rows to load
+				$info['hasMore'] = false;
+			}
+	
+			// Return rows
 			$info['rows'] = $rows;
 		}
+		else{
+			// No rows returned
+			// Assume there are no more rows to load
+			$info['hasMore'] = false;
+		}
+		 // Return success status
 		$info['success'] = true;
 
 	}else
@@ -202,7 +342,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 		//si offset parang iniiskip yung 1st ten results (yung nasa right) and get
 		//the next ten reuslts (katabi nung limit)
 	
-		$query = "select * from forum where comment_parent_id = '$post_id' order by forum_id desc limit $limit offset $offset";
+		$query = "select * from forum where comment_parent_id = '$post_id' && reply_parent_id = 0 order by forum_id desc limit $limit offset $offset";
 		
 		$rows = query($query);
 		
@@ -242,7 +382,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 		$offset = ($page_number - 1) * $limit;
 		//si offset parang iniiskip yung 1st ten results (yung nasa right) and get
 		//the next ten reuslts (katabi nung limit)
-		$query = "select * from forum where user_id = $user_id && comment_parent_id = 0 order by forum_id desc limit $limit offset $offset";
+		$query = "select * from forum where user_id = $user_id && comment_parent_id = 0 && reply_parent_id = 0 order by forum_id desc limit $limit offset $offset";
 		$rows = query($query);
 		
 		if($rows){
@@ -379,9 +519,157 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 			query($query);
 		}*/
 
+	}else
+	if($_POST['data_type'] == 'get_replies') { // bago to
+		$user_id = $_SESSION['USER']['user_id'] ?? 0;
+		$forum_id = (int)$_POST['forum_id'];
+		$query = "SELECT * FROM forum WHERE reply_parent_id = '$forum_id' ORDER BY forum_id DESC";
+		$rows = query($query);
+		
+		if ($rows) {
+			foreach ($rows as $key => $row) {
+				$rows[$key]['date'] = date("jS M, Y H:i:s a", strtotime($row['forum_timestamp']));
+				$rows[$key]['forum_desc'] = nl2br(htmlspecialchars($row['forum_desc']));
+				
+				$rows[$key]['user_owns'] = false;
+				if ($user_id == $row['user_id']) {
+					$rows[$key]['user_owns'] = true;
+				}
+
+				$id = $row['user_id'];
+				$query = "SELECT * FROM users WHERE user_id = '$id' LIMIT 1";
+				$user_row = query($query);
+				if ($user_row) {
+					//$rows[$key]['user'] = $user_row[0];
+					$rows[$key]['user']['image'] = get_image($user_row[0]['user_image']);
+				}
+			}
+			$info['rows'] = $rows;
+		}
+		$info['success'] = true;
+	}else
+	if($_POST['data_type'] == 'add_reply') {//bago to
+		$forum_id = (int)$_POST['forum_id'];
+		$reply_text = addslashes($_POST['reply_text']);
+		$user_id = $_SESSION['USER']['user_id'];
+		$user_fname = $_SESSION['USER']['user_fname'];
+		$date = date("Y-m-d H:i:s");
+		// Insert new row into forum table with comment_parent_id set to forum_id
+		$query = "INSERT INTO forum (user_id, user_fname, forum_timestamp, forum_desc, reply_parent_id) VALUES ('$user_id', '$user_fname', '$date', '$reply_text', '$forum_id')";
+		query($query);
+		
+		// Return success message and data for new reply
+		$query = "SELECT * FROM forum WHERE user_id = '$user_id' AND reply_parent_id = '$forum_id' ORDER BY forum_id DESC LIMIT 1";
+		$row = query($query);
+		if ($row) {
+			$row = $row[0];
+			$info['success'] = true;
+			$info['message'] = "Your reply was added successfully";
+			$info['row'] = $row;
+		}
+
+		//count how many reply on this post
+		$query = "select count(*) as num from forum where reply_parent_id = '$forum_id'";
+		$res = query($query);
+		if($res){
+			$num = $res[0]['num'];
+			$query = "update forum set reply_count = '$num' where forum_id = '$forum_id' limit 1";
+			query($query);
+		}
+	}else
+	if($_POST['data_type'] == 'delete_reply') //ito na yung sa post, naway makuha mo na lorent yung logic
+	{
+		$id = (int)($_POST['id']);
+		$user_id = $_SESSION['USER']['user_id'];
+
+		$query = "select reply_parent_id from forum where forum_id = '$id' limit 1";
+		$res = query($query);
+		if($res){
+			$reply_parent_id = $res[0]['reply_parent_id'];
+		}
+	
+		$query = "delete from forum where forum_id = '$id' && user_id = '$user_id' limit 1";
+		query($query);
+
+		$query = "select count(*) as num from forum where reply_parent_id = '$reply_parent_id'";
+		$res = query($query);
+		if($res){
+			$num = $res[0]['num'];
+			$query = "update forum set reply_count = '$num' where forum_id = '$reply_parent_id' limit 1";
+			query($query);
+		}
+		
+		$info['success'] = true;
+		$info['message'] = "Your reply was deleted successfully";
+	}else
+	if($_POST['data_type'] == 'load_posts_decoy')//DO NOT INCLUDE
+	{
+		$user_id = $_SESSION['USER']['user_id'] ?? 0;
+		$start = $_POST['start'];
+		$limit = $_POST['limit'];
+
+		$query = "select * from forum where comment_parent_id = 0 && reply_parent_id = 0 order by forum_id desc limit $start, $limit";
+		
+		$rows = query($query);
+		
+		if($rows){
+
+			foreach ($rows as $key => $row) {
+				$rows[$key]['date'] = date('Y-m-d\TH:i:s', strtotime($row['forum_timestamp']));
+				$rows[$key]['forum_desc'] = nl2br(htmlspecialchars($row['forum_desc']));
+	
+				$rows[$key]['user_owns'] = false;
+				if($user_id == $row['user_id'])
+					$rows[$key]['user_owns'] = true;
+	
+				$id = $row['user_id'];
+				$query = "select * from users where user_id = '$id' limit 1";
+				$user_row = query($query);
+				
+				if($user_row){
+					$rows[$key]['user']['image'] = get_image($user_row[0]['user_image']);
+				}
+	
+				$forum_id = $row['forum_id'];
+				$query = "select count(*) from rating_info where post_id = $forum_id AND rating_action = 'like' limit 1";
+				$rating_row = query($query);
+	
+				if($rating_row){
+					$rows[$key]['getlikes'] = $rating_row[0];
+				}
+				
+			}
+			
+			// Check if there are more rows to load
+			$query = "select count(*) from forum where comment_parent_id = 0 && reply_parent_id = 0";
+			$result = query($query);
+			if ($result) {
+				$totalRows = intval($result[0]['count(*)']);
+				if ($start + count($rows) < $totalRows) {
+					// There are more rows to load
+					$info['hasMore'] = true;
+				} else {
+					// There are no more rows to load
+					$info['hasMore'] = false;
+				}
+			} else {
+				// Error querying database
+				// Assume there are no more rows to load
+				$info['hasMore'] = false;
+			}
+	
+			// Return rows
+			$info['rows'] = $rows;
+		}
+		else{
+			// No rows returned
+			// Assume there are no more rows to load
+			$info['hasMore'] = false;
+		}
+		 // Return success status
+		$info['success'] = true;
 	}
 	
-
 }
 // kinoconvert to json string si "$info", nag ooutput to ng variable $info
 echo json_encode($info);

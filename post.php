@@ -54,6 +54,11 @@
 			display:none;
 		}
 
+        .js-userimage-reply{
+            width: 50px;
+            height: 50px;
+        }
+
 	</style>
     <?php include('header.php') ?>
     <?php include('community-forum.php') ?>
@@ -80,30 +85,31 @@
                         <div>
                             <img src="<?=$row['user']['user_image']?>" class="class_47" >
                             <h2 class="class_48" style="font-size:16px"  >
-                                <?=$row['user']['user_fname'] ?? 'Unknown'?>
+                                <?//=$row['user']['user_fname'] ?? 'Unknown'?>
+                                <?=$row['user_fname']?>
                             </h2>
                         </div>
                         <div class="class_49" >
-                            <div class="class_15"  >
+                           <h4 class="class_41"  >
+                                <?=date("jS M, Y H:i:s a",strtotime($row['forum_timestamp']))?>
+                            </h4> 
+                            <div class="class_15">
                                 <?=nl2br(htmlspecialchars($row['forum_title']))?>
                             </div>
-                            <h4 class="class_41"  >
-                                <?=date("jS M, Y H:i:s a",strtotime($row['forum_timestamp']))?>
-                            </h4>
                             <div class="class_15"  >
                                 <?=nl2br(htmlspecialchars($row['forum_desc']))?>
                             </div>
 
-                            <?php if(i_own_post($row)):?>
-                                <div class="class_51" >
-                                    <div onclick="my_edit_post.show_me(<?=$row['forum_id']?>)" class="class_53" style="color:blue;cursor: pointer;"  >
+                            <?php// if(i_own_post($row)):?>
+                                <!--<div class="class_51" >
+                                    <div onclick="my_edit_post.show_me(<?//=$row['forum_id']?>)" class="class_53" style="color:blue;cursor: pointer;"  >
                                         Edit
                                     </div>
-                                    <div onclick="mypost.delete(<?=$row['forum_id']?>)" class="class_53" style="color:red;cursor: pointer;"  >
+                                    <div onclick="mypost.delete(<?//=$row['forum_id']?>)" class="class_53" style="color:red;cursor: pointer;"  >
                                         Delete
                                     </div>
-                                </div>
-                            <?php endif;?>
+                                </div>-->
+                            <?php// endif;?>
 
                         </div>
                     </div>
@@ -164,6 +170,7 @@
 		<br><br>
 		<?php //include('login.inc.php') ?>
 		<?php //include('signup.inc.php') ?>
+        <?php include('edit-my-reply.php') ?>
         <?php include('community_forum_3_edit_my_post.php') ?>
 		<?php include('community_forum_5_edit_my_comment.php') ?>
 	</section>
@@ -183,7 +190,15 @@
 			<div class="js-comment class_15"  >
 				is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets c
 			</div>
-			
+			<div class="class_51" >
+				<i class="bi bi-chat-left-dots class_52">
+				</i>
+				<div class="js-reply-link class_53" style="color:blue;cursor: pointer;"  >
+					Reply
+				</div>
+                
+			</div>
+            
 			<div class="js-action-buttons class_51" >
 				<div class="js-edit-button class_53" style="color:blue;cursor: pointer;"  >
 					Edit
@@ -201,7 +216,8 @@
     var page_number = <?=$page?>;
     var post_id = <?=$post_id?>;
 </script>
-<script src="mypost.js?v10"></script>
-<script src="mycomment.js?v8"></script>
+<!--<script src="allposts.js?v1"></script>-->
+<script src="mypost.js?v11"></script>
+<script src="mycomment.js?v34"></script>
 
 </html>

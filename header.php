@@ -25,8 +25,8 @@
             <!-- pag clinick si "Services" na link, lalabas tong dropdown  -->
             <div id="dropdown" style="display: none;">
                 <a href="#">Period Calculator</a><br>
-                <a href="#">Contraceptive Cost Calculator</a><br>
-                <a href="community_forum_1.php">Community Forum</a><br>
+                <a href="contraceptive-cost-calcu.php">Contraceptive Cost Calculator</a><br>
+                <a href="community-topics.php">Community Forum</a><br>
                 <a href="#">About STDs</a><br>
                 <a href="#">Contraception Method Comparison</a><br>
                 <a href="#">Find a health care provider</a><br>

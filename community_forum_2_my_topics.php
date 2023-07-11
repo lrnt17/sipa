@@ -127,6 +127,7 @@
 					Delete
 				</div>
 			</div>
+            
 		</div>
 	</div>
 	<!--end post card template-->
