@@ -20,6 +20,10 @@
 			$row['user'] = $user_row[0];
 			$row['user']['user_image'] = get_image($user_row[0]['user_image']);
 		}
+
+        $forum_id = $row['forum_id'];
+        $query = "select count(*) from rating_info where post_id = $forum_id AND rating_action = 'like' limit 1";
+        $rating_row = query($query);
 	}
 
 	$page = $_GET['page'] ?? 1;
@@ -28,7 +32,6 @@
 	if($page < 1){
         $page = 1;
     }
-
 ?>
 
 <!DOCTYPE html>
@@ -59,6 +62,18 @@
             height: 50px;
         }
 
+        .btn{
+            background-color: blue;
+        }
+
+        .btn_selected{
+            background-color: red;
+        }
+
+        .js-replied{
+            height: 120px;
+            border: 10px solid yellowgreen;
+        }
 	</style>
     <?php include('header.php') ?>
     <?php include('community-forum.php') ?>
@@ -83,15 +98,16 @@
                             </h2>
                         </a>-->
                         <div>
-                            <img src="<?=$row['user']['user_image']?>" class="class_47" >
+                            <img src="<?=$row['user_img']?>" class="class_47" >
                             <h2 class="class_48" style="font-size:16px"  >
                                 <?//=$row['user']['user_fname'] ?? 'Unknown'?>
                                 <?=$row['user_fname']?>
                             </h2>
                         </div>
                         <div class="class_49" >
-                           <h4 class="class_41"  >
-                                <?=date("jS M, Y H:i:s a",strtotime($row['forum_timestamp']))?>
+                            <h4 class="class_41"  >
+                                <?//=date("jS M, Y H:i:s a",strtotime($row['forum_timestamp']))?>
+                                <span id="post-timestamp"><?=date('Y-m-d\TH:i:s',strtotime($row['forum_timestamp']))?></span>
                             </h4> 
                             <div class="class_15">
                                 <?=nl2br(htmlspecialchars($row['forum_title']))?>
@@ -100,6 +116,26 @@
                                 <?=nl2br(htmlspecialchars($row['forum_desc']))?>
                             </div>
 
+                            <!-- Display Like button and number of likes -->
+                            <button class="single-post js-like-button" forum_id="<?=$row['forum_id']?>" style="cursor: pointer;">
+                                Like
+                            </button>
+                            <span class="single-post js-num-likes" forum_id="<?=$row['forum_id']?>">
+                                <?php 
+                                    if($rating_row){
+                                        $row['getlikes'] = $rating_row[0];
+                                        if (is_array($row['getlikes'])) {
+                                            foreach ($row['getlikes'] as $value) {
+                                                if ($value > 0) {
+                                                    echo $value;
+                                                }
+                                            }
+                                        } else {
+                                            echo $row['getlikes'];
+                                        }
+                                    }
+                                ?>
+                            </span>
                             <?php// if(i_own_post($row)):?>
                                 <!--<div class="class_51" >
                                     <div onclick="my_edit_post.show_me(<?//=$row['forum_id']?>)" class="class_53" style="color:blue;cursor: pointer;"  >
@@ -117,13 +153,23 @@
                     <!-- comments on a post -->
                     <div class="class_11" >
                         <h1 class="class_41" >
-                            Comments
+                            Comments -------------------------------------------------------------------------------------------------------------------------------------------------------
                         </h1>
+
+                        <section class="js-comments-loading">
+                            <div style="padding:10px;text-align:center;">Loading comments....</div>
+                        </section>
+                        
+                        <br><br>
 
                         <?php if(logged_in()):?>
                             <form onsubmit="mycomment.submit(event)" method="post" class="class_42" >
                                 <div class="class_43" >
                                     <textarea placeholder="Write a comment" name="post" class="js-comment-input class_44" ></textarea>
+                                </div>
+                                <div>
+                                    <label for="anonymous">Post anonymously:</label>
+                                    <input type="checkbox" id="anonymous" name="anonymous" class="js-anonymous-comment">
                                 </div>
                                 <div class="class_45" >
                                     <button class="class_46"  >
@@ -141,11 +187,7 @@
                             </div>
                         <?php endif;?>
 
-                        <section class="js-comments-loading">
-                            <div style="padding:10px;text-align:center;">Loading comments....</div>
-                        </section>
-
-                        <div class="class_37" style="display: flex;justify-content: space-between;" >
+                        <!--<div class="class_37" style="display: flex;justify-content: space-between;" >
                             <button onclick="mycomment.prev_page()" class="class_54"  >
                                 Prev page
                             </button>
@@ -153,7 +195,7 @@
                             <button onclick="mycomment.next_page()" class="class_39"  >
                                 Next page
                             </button>
-                        </div>
+                        </div>-->
                     </div>
                 <?php else:?>
                     <div class="class_16" >
@@ -190,15 +232,12 @@
 			<div class="js-comment class_15"  >
 				is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets c
 			</div>
-			<div class="class_51" >
-				<i class="bi bi-chat-left-dots class_52">
-				</i>
-				<div class="js-reply-link class_53" style="color:blue;cursor: pointer;"  >
-					Reply
-				</div>
-                
-			</div>
-            
+            <div class="js-like-section">
+                <button class="js-like-button class_53" style="cursor: pointer;"  >
+                    Like
+                </button>
+                <span class="js-num-likes"></span>
+            </div>
 			<div class="js-action-buttons class_51" >
 				<div class="js-edit-button class_53" style="color:blue;cursor: pointer;"  >
 					Edit
@@ -207,17 +246,54 @@
 					Delete
 				</div>
 			</div>
+			<div class="js-reply-section class_51" >
+				<i class="bi bi-chat-left-dots class_52">
+				</i>
+				<div class="js-reply-link class_53" style="color:blue;cursor: pointer;"  >
+					Reply
+				</div>
+			</div>
+            
 		</div>
 	</div>
 	<!--end comment card template-->
 </body>
 
 <script>
-    var page_number = <?=$page?>;
+    //var page_number = <?=$page?>;
     var post_id = <?=$post_id?>;
+    
 </script>
 <!--<script src="allposts.js?v1"></script>-->
-<script src="mypost.js?v11"></script>
-<script src="mycomment.js?v34"></script>
+<!--<script src="mypost.js?v11"></script>-->
+<script src="time.js?v1"></script>
+<script src="like-rating.js?v3"></script>
+<script src="community-topics.js?v6"></script>
+<script src="mycomment.js?v39"></script>
+
+<script>
+    // Call the updateTimestamps function initially when the page loads
+    time.updateTimestamps(document.getElementById('post-timestamp'), '<?=$row['forum_timestamp']?>');
+    
+    //Call the forum.singlePost method when the page is loaded
+    window.addEventListener('DOMContentLoaded', function() {
+        mycomment.singlePost();
+    });
+
+    //-----------------------------------------------------------------------------------------------------
+// Assuming you have multiple <a> tags with the class "clearSessionStorage"
+let clearSessionStorageLinks = document.querySelectorAll('.js-link');
+
+// Loop through each <a> tag and attach the event listener
+clearSessionStorageLinks.forEach(function(link) {
+  link.addEventListener('click', function(event) {
+    //event.preventDefault(); // Prevent the default hyperlink behavior
+    sessionStorage.clear(); // Clear the entire sessionStorage
+    // Or you can use sessionStorage.removeItem(key) to remove specific items
+    
+    // Additional actions or code after clearing sessionStorage, if needed
+  });
+});
+</script>
 
 </html>

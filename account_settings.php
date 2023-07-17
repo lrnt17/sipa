@@ -435,5 +435,22 @@
 
     };
 </script>
+<script>
+    //-----------------------------------------------------------------------------------------------------
+    // Assuming you have multiple <a> tags with the class "clearSessionStorage"
+    let clearSessionStorageLinks = document.querySelectorAll('.js-link');
 
+    // Loop through each <a> tag and attach the event listener
+    clearSessionStorageLinks.forEach(function(link) {
+    link.addEventListener('click', function(event) {
+        //event.preventDefault(); // Prevent the default hyperlink behavior
+        sessionStorage.clear(); // Clear the entire sessionStorage
+        // Or you can use sessionStorage.removeItem(key) to remove specific items
+        
+        // Additional actions or code after clearing sessionStorage, if needed
+    });
+    });
+
+//-----------------------------------------------------------------------------------------------------
+</script>
 </html>

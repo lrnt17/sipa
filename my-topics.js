@@ -1,4 +1,4 @@
-var allposts = {
+var myposts = {
 
     start: (typeof start == 'undefined') ? 0 : start,
     limit: (typeof limit == 'undefined') ? 5 : limit,
@@ -39,9 +39,9 @@ var allposts = {
                         document.getElementById("post_title").value = "";
                         document.querySelector(".js-anonymous").checked = false;
                         
-                        // Reset allposts.start and call allposts.loadMorePosts with clearExisting set to true
-                        allposts.start = 0;
-                        allposts.loadMorePosts(null, true);
+                        // Reset myposts.start and call myposts.loadMorePosts with clearExisting set to true
+                        myposts.start = 0;
+                        myposts.loadMorePosts(null, true);
                     }
                 }else{
                     alert("Please check your internet connection");
@@ -55,7 +55,7 @@ var allposts = {
 
     view_comments: function(id){
         sessionStorage.setItem('scrollPosition', window.pageYOffset);
-        sessionStorage.setItem('numPosts', allposts.start);
+        sessionStorage.setItem('numPosts', myposts.start);
         window.location.href = "post.php?id="+id;
     },
 
@@ -84,8 +84,6 @@ var allposts = {
                     alert(obj.message);
 
                     if(obj.success){
-                        //allposts.loadMorePosts();
-                        //window.location.reload();
 
                         // Find and remove the post element from the page
                         let postElement = document.querySelector(`#post_${forum_id}`);
@@ -104,9 +102,7 @@ var allposts = {
     new_topic: function(){
         
         // Get reference to the form element
-        //document.querySelector('.js-start-topic').classList.remove('hide');
         var form = document.querySelector('.js-start-topic');
-        //var button = document.querySelector('button');
         if (form.classList.contains('hide')) {
             form.classList.remove('hide');
         } else {
@@ -115,106 +111,12 @@ var allposts = {
         }
     },
 
-    /*userLiked: function(forum_id, callback) {
-        
-        //alert(forum_id);
-        let form = new FormData();
-
-        form.append('forum_id', forum_id);
-        form.append('data_type', 'user_liked');
-        var ajax = new XMLHttpRequest();
-
-        ajax.addEventListener('readystatechange',function(){
-
-            if(ajax.readyState == 4)
-            {
-                if(ajax.status == 200){
-
-                    //console.log(ajax.responseText);
-                    let obj = JSON.parse(ajax.responseText);
-                    if(obj.success){
-                        //return true;
-                        callback(true);
-                    }else{
-                        //return false;
-                        callback(false);
-                    }
-                }else{
-                    alert("Please check your internet connection");
-                }
-            }
-        });
-
-        ajax.open('post','ajax.php', true);
-        ajax.send(form);
-    },
-
-    like: function(likeButton){
-
-        let forum_id = likeButton.getAttribute('forum_id');
-        
-        if (likeButton.classList.contains('btn')) {
-            action = 'like';
-            //console.log(action);
-        } else if (likeButton.classList.contains('btn_selected')) {
-            action = 'unlike';
-        } else {
-            console.log('The button does not have either class');
-        }
-
-        let form = new FormData(); //new form within javascript
-
-        form.append('action', action);
-        form.append('forum_id', forum_id);
-        form.append('data_type', 'add_like');
-        var ajax = new XMLHttpRequest();
-
-        ajax.addEventListener('readystatechange',function(){
-
-            if(ajax.readyState == 4)
-            {
-                if(ajax.status == 200){
-
-                    //console.log(ajax.responseText);
-                    let obj = JSON.parse(ajax.responseText);
-                    console.log(obj.row.likes['count(*)']);
-
-                    if(obj.success){
-                        
-                        if (action == 'like') {
-                            likeButton.classList.remove('btn');
-                            likeButton.classList.add('btn_selected');
-                        }else{
-                            likeButton.classList.remove('btn_selected');
-                            likeButton.classList.add('btn');
-                        }
-
-                        //dito nangyayari yung pag add ng number matically
-                        let likesCount = obj.row.likes['count(*)'];
-                        let likesElement = document.querySelector(`.js-num-likes[forum_id="${forum_id}"]`);
-                        if (likesCount == 0) {
-                            likesElement.innerHTML = '';
-                        } else {
-                            likesElement.innerHTML = likesCount;
-                        }
-                        //document.querySelector(`.js-num-likes[forum_id="${forum_id}"]`).innerHTML = obj.row.likes['count(*)'];
-                    }
-                }else{
-                    alert("Please check your internet connection");
-                }
-            }
-        });
-
-        ajax.open('post','ajax.php', true);
-        ajax.send(form);
-    },*/
-
     loadMorePosts: function(callback, clearExisting = false) {
         
         let form = new FormData();
-        form.append('start', allposts.start);
-        form.append('limit', allposts.limit);
-        form.append('data_type', 'load_posts');
+        form.append('start', myposts.start);
+        form.append('limit', myposts.limit);
+        form.append('data_type', 'load_my_posts');
         var ajax = new XMLHttpRequest();
     
         ajax.addEventListener('readystatechange', function() {
@@ -230,8 +132,8 @@ var allposts = {
                             document.getElementById("loadMoreBtn").style.display = "";
                         }
 
-                        allposts.displayPosts(obj.rows, clearExisting);
-                        allposts.start += obj.rows.length;
+                        myposts.displayPosts(obj.rows, clearExisting);
+                        myposts.start += obj.rows.length;
 
                         // Call callback function
                         if (typeof callback === 'function') {
@@ -299,13 +201,13 @@ var allposts = {
             }
             postCard.querySelector(".js-post").innerHTML = postText;
 
-            postCard.querySelector(".js-comment-link").setAttribute('onclick',`allposts.view_comments(${posts[i].forum_id})`);
+            postCard.querySelector(".js-comment-link").setAttribute('onclick',`myposts.view_comments(${posts[i].forum_id})`);
             postCard.querySelector(".js-like-button").setAttribute('forum_id', posts[i].forum_id);
             postCard.querySelector(".js-num-likes").setAttribute('forum_id', posts[i].forum_id);
 
-            postCard.querySelector(".js-delete-button").setAttribute('onclick',`allposts.delete_post(${posts[i].forum_id})`);
+            postCard.querySelector(".js-delete-button").setAttribute('onclick',`myposts.delete_post(${posts[i].forum_id})`);
             //postCard.querySelector(".js-edit-button").setAttribute('onclick',`my_edit_post.show_me(${posts[i].forum_id})`);
-            postCard.querySelector(".js-edit-button").setAttribute('onclick',`allposts.editPost(${posts[i].forum_id})`);
+            postCard.querySelector(".js-edit-button").setAttribute('onclick',`myposts.editPost(${posts[i].forum_id})`);
 
             //counting the number of comments
             if(posts[i].comment_count > 0){
@@ -344,7 +246,7 @@ var allposts = {
 
             //for pressing like button
             clone.querySelector('.js-like-button').addEventListener('click', function(event) {
-                // Call the allposts.like function and pass a reference to the clicked button element
+                // Call the myposts.like function and pass a reference to the clicked button element
                 like_rating.like(event.target, false);
             });
 
@@ -364,43 +266,6 @@ var allposts = {
             postContainer.insertBefore(clone, loadMoreBtn);
         }
     },
-
-    /*updateTimestamps: function(element, timestamp) {
-        var postTimestamp = new Date(timestamp); // Convert the timestamp to a JavaScript Date object
-        var now = new Date();
-        var elapsed = Math.floor((now - postTimestamp) / 1000); // Elapsed time in seconds
-    
-        /*if (elapsed < 60) {
-            element.textContent = 'Just now';
-        } else if (elapsed < 3600) {
-            var minutes = Math.floor(elapsed / 60);
-            element.textContent = minutes + ' minute' + (minutes > 1 ? 's' : '') + ' ago';
-        } else {
-            element.textContent = postTimestamp.toLocaleString(); // Display the full timestamp
-        }
-
-        if (elapsed < 60) {
-            element.textContent = 'Just now';
-        } else if (elapsed < 3600) {
-            var minutes = Math.floor(elapsed / 60);
-            element.textContent = minutes + ' minute' + (minutes > 1 ? 's' : '') + ' ago';
-        } else if (elapsed < 86400) {
-            var hours = Math.floor(elapsed / 3600);
-            element.textContent = hours + ' hour' + (hours > 1 ? 's' : '') + ' ago';
-        } else if (elapsed < 604800) {
-            var days = Math.floor(elapsed / 86400);
-            element.textContent = days + ' day' + (days > 1 ? 's' : '') + ' ago';
-        } else if (elapsed < 2592000) {
-            var weeks = Math.floor(elapsed / 604800);
-            element.textContent = weeks + ' week' + (weeks > 1 ? 's' : '') + ' ago';
-        } else if (elapsed < 31536000) {
-            var months = Math.floor(elapsed / 2592000);
-            element.textContent = months + ' month' + (months > 1 ? 's' : '') + ' ago';
-        } else {
-            var years = Math.floor(elapsed / 31536000);
-            element.textContent = years + ' year' + (years > 1 ? 's' : '') + ' ago';
-        }
-    },*/
 
     editPost: function(forum_id) {
         // Find the post element using the forum_id
@@ -446,7 +311,7 @@ var allposts = {
             let editedContent = editInput.value;
 
             // Call a function to save the edited title and content
-            allposts.savePost(forum_id, editedTitle, editedContent);
+            myposts.savePost(forum_id, editedTitle, editedContent);
         });
 
         // Attach event listener to the Cancel button
@@ -563,7 +428,7 @@ var allposts = {
 
                         let forum_id_int = parseInt(forum_id);
                         let forum_id_string = forum_id_int.toString();
-                        allposts.updatePostData(forum_id_string, data);
+                        myposts.updatePostData(forum_id_string, data);
                     }
                         
                 }else{
@@ -592,8 +457,8 @@ var allposts = {
 
                     if (obj.success) {
 
-                        allposts.start = 0;
-                        allposts.displayPosts(obj.rows, true);
+                        myposts.start = 0;
+                        myposts.displayPosts(obj.rows, true);
                         
                         sessionStorage.setItem('searchResults', JSON.stringify(obj.rows));
 
@@ -631,7 +496,7 @@ var allposts = {
                     if(obj.success && obj.hasOwnProperty('rows')){
                         let updatedPost = obj.rows[0];
                         // Call the updateStoredSearchResults function to update the sessionStorage with the updated post data
-                        allposts.updateStoredSearchResults(forum_id, updatedPost);
+                        myposts.updateStoredSearchResults(forum_id, updatedPost);
                     }
                 }
             }
@@ -665,15 +530,15 @@ var allposts = {
 
 
 //-----------------------------------------------------------------------------------------------------
-if (typeof all_topics_page != 'undefined') {
+if (typeof my_topics_page != 'undefined') {
     // Check if number of posts is saved
     if (sessionStorage.getItem('numPosts') !== null) {
         // Calculate number of times to call loadMorePosts
-        let numCalls = Math.ceil((sessionStorage.getItem('numPosts') - allposts.start) / allposts.limit);
+        let numCalls = Math.ceil((sessionStorage.getItem('numPosts') - myposts.start) / myposts.limit);
         // Define recursive function to call loadMorePosts
         let loadMore = function(i) {
             if (i > 0) {
-                allposts.loadMorePosts(function() {
+                myposts.loadMorePosts(function() {
                     loadMore(i - 1);
                 });
             } else {
@@ -689,7 +554,7 @@ if (typeof all_topics_page != 'undefined') {
         // Call loadMorePosts
         loadMore(numCalls);
     } else {
-        allposts.loadMorePosts();
+        myposts.loadMorePosts();
     }
 }
 

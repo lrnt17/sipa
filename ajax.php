@@ -70,13 +70,16 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 		if($anonymous == 'true'){
 			$userfname = $_SESSION['USER']['user_fname'];
 			$user_fname = substr($userfname, 0, 1) . str_repeat('*', strlen($userfname) - 2) . substr($userfname, -1);
+			//$userimg = $_SESSION['USER']['user_image'];
+			$user_img = 'assets/images/user.jpg?v1';
 		}else{
 			$user_fname = $_SESSION['USER']['user_fname'];
+			$user_img = $_SESSION['USER']['user_image'];
 		}
 
 		$date = date("Y-m-d H:i:s");
  
-		$query = "insert into forum (user_id,user_fname,forum_timestamp,forum_title,forum_desc) values ('$user_id','$user_fname','$date','$post_title','$post')";
+		$query = "insert into forum (user_img,user_id,user_fname,forum_timestamp,forum_title,forum_desc) values ('$user_img','$user_id','$user_fname','$date','$post_title','$post')";
 		query($query);
 
 		$query = "select * from forum where user_id = '$user_id' order by forum_id desc limit 1";
@@ -96,10 +99,22 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 	{
 		$post_id = (int)($_POST['post_id']);
 		$post = addslashes($_POST['post']);
+		$anonymous = $_POST['anonymous'];
 		$user_id = $_SESSION['USER']['user_id'];
+
+		if($anonymous == 'true'){
+			$userfname = $_SESSION['USER']['user_fname'];
+			$user_fname = substr($userfname, 0, 1) . str_repeat('*', strlen($userfname) - 2) . substr($userfname, -1);
+			//$userimg = $_SESSION['USER']['user_image'];
+			$user_img = 'assets/images/user.jpg?v1';
+		}else{
+			$user_fname = $_SESSION['USER']['user_fname'];
+			$user_img = $_SESSION['USER']['user_image'];
+		}
+
 		$date = date("Y-m-d H:i:s");
  
-		$query = "insert into forum (user_id,forum_timestamp,forum_desc,comment_parent_id) values ('$user_id','$date','$post','$post_id')";
+		$query = "insert into forum (user_img,user_id,user_fname,forum_timestamp,forum_desc,comment_parent_id) values ('$user_img','$user_id','$user_fname','$date','$post','$post_id')";
 		query($query);
 
 		$query = "select * from forum where user_id = '$user_id' && comment_parent_id = '$post_id' order by forum_id desc limit 1";
@@ -124,9 +139,10 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 		}
 
 	}else
-	if($_POST['data_type'] == 'my_edit_comment') {
-		$post = addslashes($_POST['post']);
-		$id = (int)($_POST['id']);
+	if($_POST['data_type'] == 'my_edit_comment') 
+	{
+		$post = addslashes($_POST['content']);
+		$id = (int)($_POST['forum_id']);
 		$user_id = $_SESSION['USER']['user_id'];
 		$date = date("Y-m-d H:i:s");
 	
@@ -134,10 +150,12 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 		query($query);
 
 		$info['success'] = true;
+		$info['updated_date'] = date('Y-m-d\TH:i:s', strtotime($date));
 		$info['message'] = "Your comment was edited successfully";
 		
 	}else
-	if($_POST['data_type'] == 'my_edit_post') {
+	if($_POST['data_type'] == 'my_edit_post') 
+	{
 		
 		$id = (int)($_POST['forum_id']);
 		$post_title = addslashes($_POST['title']);
@@ -153,7 +171,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 		$info['message'] = "Your post was edited successfully";
 		
 	}else
-	if($_POST['data_type'] == 'my_edit_reply') {
+	if($_POST['data_type'] == 'my_edit_reply') 
+	{
 		$post = addslashes($_POST['post']);
 		$id = (int)($_POST['id']);
 		$user_id = $_SESSION['USER']['user_id'];
@@ -284,13 +303,13 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 				if($user_id == $row['user_id'])
 					$rows[$key]['user_owns'] = true;
 	
-				$id = $row['user_id'];
+				/*$id = $row['user_id'];
 				$query = "select * from users where user_id = '$id' limit 1";
 				$user_row = query($query);
 				
 				if($user_row){
 					$rows[$key]['user']['image'] = get_image($user_row[0]['user_image']);
-				}
+				}*/
 	
 				$forum_id = $row['forum_id'];
 				$query = "select count(*) from rating_info where post_id = $forum_id AND rating_action = 'like' limit 1";
@@ -336,20 +355,21 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 	{
 		$user_id = $_SESSION['USER']['user_id'] ?? 0; //chiencheck if may user ba
 		$post_id = (int)$_POST['post_id'];
-		$page_number = (int)$_POST['page_number'];
+		/*$page_number = (int)$_POST['page_number'];
 		$limit = 5;
-		$offset = ($page_number - 1) * $limit;
+		$offset = ($page_number - 1) * $limit;*/
 		//si offset parang iniiskip yung 1st ten results (yung nasa right) and get
 		//the next ten reuslts (katabi nung limit)
 	
-		$query = "select * from forum where comment_parent_id = '$post_id' && reply_parent_id = 0 order by forum_id desc limit $limit offset $offset";
+		//$query = "select * from forum where comment_parent_id = '$post_id' && reply_parent_id = 0 order by forum_id desc limit $limit offset $offset";
+		$query = "select * from forum where comment_parent_id = '$post_id' && reply_parent_id = 0 order by forum_id desc";
 		
 		$rows = query($query);
 		
 		if($rows){
 
 			foreach ($rows as $key => $row) {
-				$rows[$key]['date'] = date("jS M, Y H:i:s a",strtotime($row['forum_timestamp']));
+				$rows[$key]['date'] = date('Y-m-d\TH:i:s',strtotime($row['forum_timestamp']));
 				//nl2br - pwede kang mag new line sa textarea tas ganun din output
 				//htmlspecialchars - lahat ng characters sa keyboard ginagawang string 
 				$rows[$key]['forum_desc'] = nl2br(htmlspecialchars($row['forum_desc']));
@@ -366,6 +386,14 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 					$rows[$key]['user'] = $user_row[0]; //ito yung may .user
 					$rows[$key]['user']['image'] = get_image($user_row[0]['user_image']);
 				}
+
+				$forum_id = $row['forum_id'];
+				$query = "select count(*) from rating_info where post_id = $forum_id AND rating_action = 'like' limit 1";
+				$rating_row = query($query);
+	
+				if($rating_row){
+					$rows[$key]['getlikes'] = $rating_row[0];
+				}
 			}
 			
 			$info['rows'] = $rows;
@@ -376,47 +404,63 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 	}else
 	if($_POST['data_type'] == 'load_my_posts')//mytopics ito
 	{
-		$user_id = $_SESSION['USER']['user_id'];
-		$page_number = (int)$_POST['page_number'];
-		$limit = 5;
-		$offset = ($page_number - 1) * $limit;
+		$user_id = $_SESSION['USER']['user_id'] ?? 0;
+		$start = $_POST['start'];
+		$limit = $_POST['limit'];
+		
 		//si offset parang iniiskip yung 1st ten results (yung nasa right) and get
 		//the next ten reuslts (katabi nung limit)
-		$query = "select * from forum where user_id = $user_id && comment_parent_id = 0 && reply_parent_id = 0 order by forum_id desc limit $limit offset $offset";
+		//$query = "select * from forum where user_id = $user_id && comment_parent_id = 0 && reply_parent_id = 0 order by forum_id desc limit $limit offset $offset";
+		$query = "select * from forum where user_id = $user_id && comment_parent_id = 0 && reply_parent_id = 0 order by forum_id desc limit $start, $limit";
 		$rows = query($query);
 		
 		if($rows){
 
 			foreach ($rows as $key => $row) {
-				$rows[$key]['date'] = date("jS M, Y H:i:s a",strtotime($row['forum_timestamp']));
+				$rows[$key]['date'] = date('Y-m-d\TH:i:s', strtotime($row['forum_timestamp']));
 				$rows[$key]['forum_desc'] = nl2br(htmlspecialchars($row['forum_desc']));
-
-				$id = $row['user_id'];
-				$query = "select * from users where user_id = '$id' limit 1";
-				$user_row = query($query);
-				
-				if($user_row){
-					$rows[$key]['user'] = $user_row[0]; //ito yung may .user
-					$rows[$key]['user']['image'] = get_image($user_row[0]['user_image']);
-				}
-
+	
+				$rows[$key]['user_owns'] = false;
+				if($user_id == $row['user_id'])
+					$rows[$key]['user_owns'] = true;
+	
 				$forum_id = $row['forum_id'];
 				$query = "select count(*) from rating_info where post_id = $forum_id AND rating_action = 'like' limit 1";
 				$rating_row = query($query);
-
+	
 				if($rating_row){
 					$rows[$key]['getlikes'] = $rating_row[0];
 				}
-				/*$query = "select * from rating_info where user_id = '$id' and post_id = '$forum_id' and rating_action = 'like' limit 1";
-				$rating_row = query($query);
 				
-				if($rating_row){
-					$rows[$key]['userlikes'] = $rating_row[0]; //ito yung may .userlike
-				}*/
 			}
 			
+			// Check if there are more rows to load
+			$query = "select count(*) from forum where comment_parent_id = 0 && reply_parent_id = 0";
+			$result = query($query);
+			if ($result) {
+				$totalRows = intval($result[0]['count(*)']);
+				if ($start + count($rows) < $totalRows) {
+					// There are more rows to load
+					$info['hasMore'] = true;
+				} else {
+					// There are no more rows to load
+					$info['hasMore'] = false;
+				}
+			} else {
+				// Error querying database
+				// Assume there are no more rows to load
+				$info['hasMore'] = false;
+			}
+	
+			// Return rows
 			$info['rows'] = $rows;
 		}
+		else{
+			// No rows returned
+			// Assume there are no more rows to load
+			$info['hasMore'] = false;
+		}
+		 // Return success status
 		$info['success'] = true;
 
 	}else
@@ -507,7 +551,6 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 			$row = ['likes' => $likes[0]];
 			$info['row'] = $row;
 			$info['success'] = true;
-			
 		}
 		
 		//count how many comments on this post
@@ -520,7 +563,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 		}*/
 
 	}else
-	if($_POST['data_type'] == 'get_replies') { // bago to
+	if($_POST['data_type'] == 'get_replies') 
+	{ // bago to
 		$user_id = $_SESSION['USER']['user_id'] ?? 0;
 		$forum_id = (int)$_POST['forum_id'];
 		$query = "SELECT * FROM forum WHERE reply_parent_id = '$forum_id' ORDER BY forum_id DESC";
@@ -528,7 +572,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 		
 		if ($rows) {
 			foreach ($rows as $key => $row) {
-				$rows[$key]['date'] = date("jS M, Y H:i:s a", strtotime($row['forum_timestamp']));
+				$rows[$key]['date'] = date('Y-m-d\TH:i:s', strtotime($row['forum_timestamp']));
 				$rows[$key]['forum_desc'] = nl2br(htmlspecialchars($row['forum_desc']));
 				
 				$rows[$key]['user_owns'] = false;
@@ -543,19 +587,40 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 					//$rows[$key]['user'] = $user_row[0];
 					$rows[$key]['user']['image'] = get_image($user_row[0]['user_image']);
 				}
+
+				$forum_id = $row['forum_id'];
+				$query = "select count(*) from rating_info where post_id = $forum_id AND rating_action = 'like' limit 1";
+				$rating_row = query($query);
+	
+				if($rating_row){
+					$rows[$key]['getlikes'] = $rating_row[0];
+				}
 			}
 			$info['rows'] = $rows;
 		}
 		$info['success'] = true;
 	}else
-	if($_POST['data_type'] == 'add_reply') {//bago to
+	if($_POST['data_type'] == 'add_reply') 
+	{//bago to
 		$forum_id = (int)$_POST['forum_id'];
 		$reply_text = addslashes($_POST['reply_text']);
+		$anonymous = $_POST['anonymous'];
 		$user_id = $_SESSION['USER']['user_id'];
-		$user_fname = $_SESSION['USER']['user_fname'];
+
+		if($anonymous == 'true'){
+			$userfname = $_SESSION['USER']['user_fname'];
+			$user_fname = substr($userfname, 0, 1) . str_repeat('*', strlen($userfname) - 2) . substr($userfname, -1);
+			//$userimg = $_SESSION['USER']['user_image'];
+			$user_img = 'assets/images/user.jpg?v1';
+		}else{
+			$user_fname = $_SESSION['USER']['user_fname'];
+			$user_img = $_SESSION['USER']['user_image'];
+		}
+
 		$date = date("Y-m-d H:i:s");
+
 		// Insert new row into forum table with comment_parent_id set to forum_id
-		$query = "INSERT INTO forum (user_id, user_fname, forum_timestamp, forum_desc, reply_parent_id) VALUES ('$user_id', '$user_fname', '$date', '$reply_text', '$forum_id')";
+		$query = "INSERT INTO forum (user_img, user_id, user_fname, forum_timestamp, forum_desc, reply_parent_id) VALUES ('$user_img', '$user_id', '$user_fname', '$date', '$reply_text', '$forum_id')";
 		query($query);
 		
 		// Return success message and data for new reply
@@ -665,6 +730,157 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 			// No rows returned
 			// Assume there are no more rows to load
 			$info['hasMore'] = false;
+		}
+		 // Return success status
+		$info['success'] = true;
+	}else
+	if($_POST['data_type'] == 'search_posts')
+	{
+		$user_id = $_SESSION['USER']['user_id'] ?? 0;
+		//$start = $_POST['start'];
+		//$limit = $_POST['limit'];
+		$query = $_POST['query'] ?? '';
+		$posts = [];
+		
+		$query = "SELECT * FROM forum WHERE (forum_title LIKE '%$query%' OR forum_desc LIKE '%$query%') AND comment_parent_id = 0 AND reply_parent_id = 0 ORDER BY forum_id DESC";
+		$rows = query($query);
+		
+		if($rows){
+
+			foreach ($rows as $key => $row) {
+				$rows[$key]['date'] = date('Y-m-d\TH:i:s', strtotime($row['forum_timestamp']));
+				$rows[$key]['forum_desc'] = nl2br(htmlspecialchars($row['forum_desc']));
+	
+				$rows[$key]['user_owns'] = false;
+				if($user_id == $row['user_id'])
+					$rows[$key]['user_owns'] = true;
+	
+				$id = $row['user_id'];
+				$query = "select * from users where user_id = '$id' limit 1";
+				$user_row = query($query);
+				
+				if($user_row){
+					$rows[$key]['user']['image'] = get_image($user_row[0]['user_image']);
+				}
+	
+				$forum_id = $row['forum_id'];
+				$query = "select count(*) from rating_info where post_id = $forum_id AND rating_action = 'like' limit 1";
+				$rating_row = query($query);
+	
+				if($rating_row){
+					$rows[$key]['getlikes'] = $rating_row[0];
+				} /*else {
+					$rows[$key]['getlikes'] = ['count(*)' => 0];
+				}*/ //else testing
+			}
+
+			$info['rows'] = $rows;
+			// Return success status
+			$info['success'] = true;
+		}
+		
+		
+
+		/*$query = "select * from forum where comment_parent_id = 0 && reply_parent_id = 0 order by forum_id desc limit $start, $limit";
+		
+		$rows = query($query);
+		
+		if($rows){
+
+			foreach ($rows as $key => $row) {
+				$rows[$key]['date'] = date('Y-m-d\TH:i:s', strtotime($row['forum_timestamp']));
+				$rows[$key]['forum_desc'] = nl2br(htmlspecialchars($row['forum_desc']));
+	
+				$rows[$key]['user_owns'] = false;
+				if($user_id == $row['user_id'])
+					$rows[$key]['user_owns'] = true;
+	
+				$id = $row['user_id'];
+				$query = "select * from users where user_id = '$id' limit 1";
+				$user_row = query($query);
+				
+				if($user_row){
+					$rows[$key]['user']['image'] = get_image($user_row[0]['user_image']);
+				}
+	
+				$forum_id = $row['forum_id'];
+				$query = "select count(*) from rating_info where post_id = $forum_id AND rating_action = 'like' limit 1";
+				$rating_row = query($query);
+	
+				if($rating_row){
+					$rows[$key]['getlikes'] = $rating_row[0];
+				}
+				
+			}
+			
+			// Check if there are more rows to load
+			$query = "select count(*) from forum where comment_parent_id = 0 && reply_parent_id = 0";
+			$result = query($query);
+			if ($result) {
+				$totalRows = intval($result[0]['count(*)']);
+				if ($start + count($rows) < $totalRows) {
+					// There are more rows to load
+					$info['hasMore'] = true;
+				} else {
+					// There are no more rows to load
+					$info['hasMore'] = false;
+				}
+			} else {
+				// Error querying database
+				// Assume there are no more rows to load
+				$info['hasMore'] = false;
+			}
+	
+			// Return rows
+			$info['rows'] = $rows;
+		}
+		else{
+			// No rows returned
+			// Assume there are no more rows to load
+			$info['hasMore'] = false;
+		}
+		 // Return success status
+		$info['success'] = true;*/
+	}else
+	if($_POST['data_type'] == 'find_post')
+	{
+		$user_id = $_SESSION['USER']['user_id'] ?? 0;
+		$id = (int)($_POST['forum_id']);
+
+		$query = "select * from forum where forum_id = $id && comment_parent_id = 0 && reply_parent_id = 0 limit 1";
+		
+		$rows = query($query);
+		
+		if($rows){
+
+			foreach ($rows as $key => $row) {
+				$rows[$key]['date'] = date('Y-m-d\TH:i:s', strtotime($row['forum_timestamp']));
+				$rows[$key]['forum_desc'] = nl2br(htmlspecialchars($row['forum_desc']));
+	
+				$rows[$key]['user_owns'] = false;
+				if($user_id == $row['user_id'])
+					$rows[$key]['user_owns'] = true;
+	
+				$id = $row['user_id'];
+				$query = "select * from users where user_id = '$id' limit 1";
+				$user_row = query($query);
+				
+				if($user_row){
+					$rows[$key]['user']['image'] = get_image($user_row[0]['user_image']);
+				}
+	
+				$forum_id = $row['forum_id'];
+				$query = "select count(*) from rating_info where post_id = $forum_id AND rating_action = 'like' limit 1";
+				$rating_row = query($query);
+	
+				if($rating_row){
+					$rows[$key]['getlikes'] = $rating_row[0];
+				}
+				
+			}
+	
+			// Return rows
+			$info['rows'] = $rows;
 		}
 		 // Return success status
 		$info['success'] = true;

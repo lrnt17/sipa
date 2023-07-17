@@ -17,7 +17,7 @@
 		</div>-->
         <!-- mga links  -->
         <div>
-			<a href="home_1_with_user.php">Home</a>
+			<a href="home_1_with_user.php" class="js-link">Home</a>
             <a href="#">Videos</a>
             <a href="#">Right for me</a>
             <a href="#">FAQs</a>
@@ -25,8 +25,8 @@
             <!-- pag clinick si "Services" na link, lalabas tong dropdown  -->
             <div id="dropdown" style="display: none;">
                 <a href="#">Period Calculator</a><br>
-                <a href="contraceptive-cost-calcu.php">Contraceptive Cost Calculator</a><br>
-                <a href="community-topics.php">Community Forum</a><br>
+                <a href="contraceptive-cost-calcu.php" class="js-link">Contraceptive Cost Calculator</a><br>
+                <a href="community-topics.php" class="js-link">Community Forum</a><br>
                 <a href="#">About STDs</a><br>
                 <a href="#">Contraception Method Comparison</a><br>
                 <a href="#">Find a health care provider</a><br>
@@ -34,8 +34,8 @@
             </div>
             <div>
                 <?php if(logged_in()):?>
-                    <a href="account_settings.php"><img src="<?= get_image($_SESSION['USER']['user_image'])?>" title="SiPa"></a>
-                    <a href="account_settings.php">
+                    <a href="account_settings.php" class="js-link"><img src="<?= get_image($_SESSION['USER']['user_image'])?>" title="SiPa"></a>
+                    <a href="account_settings.php" class="js-link">
                         <span>Hi, <?= $_SESSION['USER']['user_fname']?></span>
                     </a>
                 <?php else:?>

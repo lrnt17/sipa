@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Community Forum | SiPa</title>
+    <title>My Topics | SiPa</title>
 </head>
 <body>
     <style>
@@ -47,8 +47,8 @@
     <section>
         <div class="js-personal-post ">
             <?php if(logged_in()):?>
-                <button onclick="allposts.new_topic()">+ Start New Topic</button>
-                <form onsubmit="allposts.submit(event)" method="post" class="js-start-topic class_42 hide " >
+                <button onclick="myposts.new_topic()">+ Start New Topic</button>
+                <form onsubmit="myposts.submit(event)" method="post" class="js-start-topic class_42 hide " >
                     <div class="">
                         <input type="text" placeholder="Title" name="post_title" id="post_title" class="js-post-title">
                     </div>
@@ -81,7 +81,7 @@
             <div id="postsSection">
                 <div id="postContainer">
                     <!-- Existing posts go here -->
-                    <button id="loadMoreBtn" onclick="allposts.loadMorePosts()" class="js-loadmore-btn ">View More</button>
+                    <button id="loadMoreBtn" onclick="myposts.loadMorePosts()" class="js-loadmore-btn ">View More</button>
                 </div>
             </div>
 
@@ -146,13 +146,13 @@
 </body>
 
 <script>
-	var all_topics_page = true;
+	var my_topics_page = true;
     let start = 0;
     let limit = 5;
 </script>
 <script src="like-rating.js?v4"></script>
 <script src="time.js?v1"></script>
-<script src="community-topics.js?v6"></script>
+<script src="my-topics.js?v1"></script>
 
 
 <script>
@@ -177,22 +177,22 @@
         if (query !== '') {
             document.getElementById("loadMoreBtn").style.display = "none";
 
-            // Call the allposts.search method with the user's query
-            allposts.search(query);
+            // Call the myposts.search method with the user's query
+            myposts.search(query);
         } else {
             // Clear any stored search results from sessionStorage
             sessionStorage.removeItem('searchResults');
             
             // Clear any existing posts and load the first 5 posts from the database
-            allposts.start = 0;
-            allposts.loadMorePosts(null, true);
+            myposts.start = 0;
+            myposts.loadMorePosts(null, true);
         }
     });
 
     if (storedSearchResults) {
         // Parse the stored search results and display them
         let searchResults = JSON.parse(storedSearchResults);
-        allposts.displayPosts(searchResults, true);
+        myposts.displayPosts(searchResults, true);
         document.getElementById("loadMoreBtn").style.display = "none";
     }
 
