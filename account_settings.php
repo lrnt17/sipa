@@ -172,6 +172,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="assets/css/acc-form.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/324d76b648.js" crossorigin="anonymous"></script>
     <title>Account Settings | SiPa</title>
 
     <style>
@@ -194,154 +199,163 @@
     </style>
 </head>
 <body>
-    
-    <section>
+
+<div class="parent">
+    <div class="container">
+    <!--<section>-->
         <!-- navigation bar with logo -->
         
 
         <!-- your account -->
-        <div>
+        <div class="acc-box">
             <?php if(!empty($errors)):?>
                 <script>
                     alert("<?php echo implode("\n", $errors); ?>");
                 </script>
             <?php endif;?>
-            <h1>Your Account</h1>
-            <p>See information about your account, password, or about your account deletion.</p>
+            <h2>Your Account</h2>
+            <p class ="text-desc">See information about your account, password, or about your account deletion.</p>
             <br>
 
             <div>
                 <div onclick="account.show('.js-account-info-modal', '.js-acc-info')" class="js-settings class_15" style="cursor:pointer;" >
-                    <p class="js-acc-info bold">Account information</p>
-                    <p>See your account information like your name and email address.</p>
+                <i class="fa-solid fa-user"></i>    
+                <p class="js-acc-info bold">Account information</p>
+                    <p class ="text-desc-a" >See your account information like your name and email address.</p>
                 </div>
                 <div onclick="account.show('.js-change-password-modal', '.js-cha-pass')" class="js-settings class_15" style="cursor:pointer;" >
+                    <i class="fa-solid fa-lock"></i>    
                     <p class="js-cha-pass">Change your password</p>
-                    <p>Change your password anytime.</p>
+                    <p class ="text-desc-a">Change your password anytime.</p></br>
                 </div>
                 <div onclick="account.show('.js-delete-account-modal', '.js-del-acc')" class="js-settings class_15" style="cursor:pointer;" >
+                    <i class="fa-solid fa-heart-crack"></i>
                     <p class="js-del-acc">Delete your account</p>
-                    <p>Deletion of your account.</p>
+                    <p  class ="text-desc-a">Deletion of your account.</p></br>
                 </div>
             </div>
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
             <button onclick="user.logout()" class="class_39"  >
                 Logout
             </button>
         </div>
 
-    </section>
+   <!-- </section>-->
     
     <?php if(!empty($row)):?>
         <form method="post" enctype="multipart/form-data" class="class_26" >
             <!-- account information modal -->
-            <div class="js-account-info-modal">
-                <h1>Account information</h1>
-                <label>
-                    <img src="<?=get_image($row['user_image'])?>" class="js-image class_28" style="cursor: pointer;" >
-                    <input onchange="display_image(this.files[0])" type="file" name="image" class="class_29">
+                <div class="js-account-info-modal">
+                    <h2>Account information</h2>
+                    <label>
+                        <img src="<?=get_image($row['user_image'])?>" class="js-image class_28" style="cursor: pointer; height:50px; border-radius: 50px; display: inline-block;" >
+                        <input onchange="display_image(this.files[0])" type="file" name="image" class="class_29">
 
-                    <script>
-                        
-                        function display_image(file)
-                        {
-                            let allowed = ['image/jpeg','image/png','image/webp'];
+                        <script>
+                            
+                            function display_image(file)
+                            {
+                                let allowed = ['image/jpeg','image/png','image/webp'];
 
-                            if(!allowed.includes(file.type)){
-                                alert("That file type is not allowed!");
-                                return;
+                                if(!allowed.includes(file.type)){
+                                    alert("That file type is not allowed!");
+                                    return;
+                                }
+
+                                let img = document.querySelector(".js-image");
+                                img.src = URL.createObjectURL(file);
                             }
+                        </script>
+                    </label>
 
-                            let img = document.querySelector(".js-image");
-                            img.src = URL.createObjectURL(file);
-                        }
-                    </script>
-                </label>
+                    <div class="class_30" >
+                        <div class="class_31">
+                            <label >
+                                Name
+                            </label>
+                        <div class="class_311" >
+                            <input value="<?=$row['user_fname']?>" placeholder="First Name (Optional)" type="text" name="userfname" class="class_33">
+                            <input value="<?=$row['user_lname']?>" placeholder="Last Name (Optional)" type="text" name="userlname" class="class_33">
+                        </div>
+                        </div>
+                        <div class="class_31" >
+                            <label >
+                                Email
+                            </label><br>
+                            <input value="<?=$row['user_email']?>" placeholder="Email" type="text" name="email" class="class_33"  required="true">
+                        </div>
+                        <div class="class_311" >
+                            <label class="class_312"  >
+                                Date of Birth
+                            </label>
+                            <label class="class_312"  >
+                                Sex
+                            </label>
+                        </div>
+                        <div class="class_311" >
+                        <div class="class_312" >
+                            <input value="<?=$row['user_dob']?>" placeholder="Email" type="date" name="dob" class="class_33"  required="true">
+                        </div>
+                        <div class="class_312" >
+                            <input type="radio" name="sex" value="Male" <?php if ($user_sex === "Male") echo "checked"; ?>>Male
+                            <input type="radio" name="sex" value="Female" <?php if ($user_sex === "Female") echo "checked"; ?>>Female
+                            <input type="radio" name="sex" value="Other" <?php if ($user_sex === "Other") echo "checked"; ?>>Other
+                        </div>
+                        </div>
+                        <div class="class_31" >
+                            <label >
+                                Phone Number
+                            </label>
+                            <!--+63--><input value="<?=$row['user_pnum']?>" placeholder="9998887777" type="text" name="pnum" class="class_33"  required="true">
+                        </div>
 
-                <div class="class_30" >
-                    <div class="class_31" >
-                        <label class="class_32"  >
-                            Name
-                        </label>
-                        <input value="<?=$row['user_fname']?>" placeholder="First Name (Optional)" type="text" name="userfname" class="class_33">
-                        <input value="<?=$row['user_lname']?>" placeholder="Last Name (Optional)" type="text" name="userlname" class="class_33">
-                    </div>
-                    <div class="class_31" >
-                        <label class="class_32"  >
-                            Email
-                        </label>
-                        <input value="<?=$row['user_email']?>" placeholder="Email" type="text" name="email" class="class_33"  required="true">
-                    </div>
-                    <div class="class_31" >
-                        <label class="class_32"  >
-                            Date of Birth
-                        </label>
-                        <input value="<?=$row['user_dob']?>" placeholder="Email" type="date" name="dob" class="class_33"  required="true">
-                    </div>
-                    <div class="class_31" >
-                        <label class="class_32"  >
-                            Sex
-                        </label>
-                        <br>
-                        <input type="radio" name="sex" value="Male" <?php if ($user_sex === "Male") echo "checked"; ?>>Male<br>
-                        <input type="radio" name="sex" value="Female" <?php if ($user_sex === "Female") echo "checked"; ?>>Female<br>
-                        <input type="radio" name="sex" value="Other" <?php if ($user_sex === "Other") echo "checked"; ?>>Other<br>
-                    </div>
-                    <div class="class_31" >
-                        <label class="class_32"  >
-                            Phone Number
-                        </label>
-                        +63<input value="<?=$row['user_pnum']?>" placeholder="9998887777" type="text" name="pnum" class="class_33"  required="true">
-                    </div>
-                    <hr>
-
-                    <div class="class_37">
-                        <button class="class_38">
-                            Save
-                        </button>
-                        <!--<a href="profile.php">
-                            <button type="button" class="class_39">
-                                Back
+                        <div class="class_37">
+                            <button class="class_38">
+                                Save
                             </button>
-                        </a>-->
-                        <div class="class_40">
+                            <!--<a href="profile.php">
+                                <button type="button" class="class_39">
+                                    Back
+                                </button>
+                            </a>-->
+                            <div class="class_40">
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             <!-- end of account information modal -->
 
             <!-- change password modal -->
             <div class="js-change-password-modal hide">
-                <h1>Change your password</h1>
+                <h2>Change your password</h2></br>
                 <div class="class_30">
                     <div class="class_31">
                         <label class="class_32">
-                            Current Password:
+                            Current Password
                         </label>
                         <input placeholder="" type="password" name="current_password" class="class_33">
-                    </div>
+                    </div></br>
                     <div class="class_31">
                         <label class="class_32">
-                            New Password:
+                            New Password
                         </label>
                         <input placeholder="" type="password" name="new_password" class="class_33">
-                    </div>
+                    </div></br>
                     <div class="class_31">
                         <label class="class_36">
-                            Retype New Password:
+                            Retype New Password
                         </label>
                         <input placeholder="" type="password" name="retype_password" class="class_33">
                     </div>
-                    <br>
-                    <p>Changing your password will log you out.</p>
-                    <hr>
+                    <p class="chan-text">Changing your password will log you out.</p>
+                    
 
                     <div class="class_37">
                         <button class="class_38">
                             Save
                         </button>
                         <a href="profile.php">
-                            <button type="button" class="class_39">
+                            <button type="button" class="class_391">
                                 Back
                             </button>
                         </a>
@@ -351,24 +365,25 @@
             </div>
             <!-- end of change password modal -->
 
-        </form>
+        
         <!-- delete account modal -->
         <div class="js-delete-account-modal hide">
-            <h1>Delete your account</h1>
+            <h2>Delete your account</h2>
             <div class="class_30" >
-                <span>
+                <p class="text-desc">
                     You're trying to delete your SiPa account, which provides access to various SiPa 
                     services. You'll no longer be able to to use any of those services, and you account 
                     and data will be lost.
-                </span>
+                </p>
                 <hr>
                 
-                <button onclick="account.delete()" class="class_39"  >
+                <button onclick="account.delete()" class="del-btn"  >
                     Delete account
                 </button>
                 
             </div>
         </div>
+        </form>
         <!-- end of delete account modal -->
     <?php else:?>
         <div class="class_16" >
@@ -379,6 +394,8 @@
             </div>
         </div>
     <?php endif;?>
+    </div>
+</div>
 </body>
 
 <script>
