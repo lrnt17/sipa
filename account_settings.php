@@ -172,10 +172,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="assets/css/acc-form.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/324d76b648.js" crossorigin="anonymous"></script>
     <title>Account Settings | SiPa</title>
 
@@ -196,60 +192,115 @@
         .bold{
             font-weight: 900;
         }
+
+        *{
+            color:black;
+        }
+
+        .text-desc-a{
+            font-size: 13px;
+            color: #575757;
+            width:80%;
+            word-wrap: break-word;
+            white-space: normal
+        }
+
+        .class_311{
+            display:flex;
+            align-items: center;
+        }
+        .class_312{
+            width: 100%;
+            margin: 0px 30px 0px 0px;
+        }
+
+        .class_31{
+            margin-top: 10px;
+        }
+
+        .class_33{
+            width: 100%;
+            padding: 0px 0px 2px 0px;
+            border: none;
+            border-bottom: 2.2px solid #B9B9B9;
+            font-size: 15px;
+            outline: none;
+            margin: 10px 30px 15px 0px;
+        }
     </style>
 </head>
-<body>
+<body style="background: #F2F5FF;">
 
 <div class="parent">
     <div class="container">
     <!--<section>-->
-        <!-- navigation bar with logo -->
-        
 
         <!-- your account -->
-        <div class="acc-box">
-            <?php if(!empty($errors)):?>
-                <script>
-                    alert("<?php echo implode("\n", $errors); ?>");
-                </script>
-            <?php endif;?>
-            <h2>Your Account</h2>
-            <p class ="text-desc">See information about your account, password, or about your account deletion.</p>
+        <div class="parent text-left py-4 col-lg-10 col-md-15">
+        <div class="container d-lg-flex flex-row d-md-block" style="height: 550px;">
+        <div class="rounded-start-5 p-5 shadow-sm rounded col-xxl-4 col-xl-5 col-lg-6 col-sm-fluid" style="background: #D2E0F8;">
+            <h2 style="color: #2F2F2F;
+            font-weight: 500;">Your Account</h2>
+            <p class ="text-desc d-none md-none d-lg-block" style="font-size: 14px; color: #575757; width:100%;
+            word-wrap: break-word; white-space: normal; position: relative; top: -5px;">See information about your account, password, or about your account deletion.</p>
             <br>
 
-            <div>
-                <div onclick="account.show('.js-account-info-modal', '.js-acc-info')" class="js-settings class_15" style="cursor:pointer;" >
-                <i class="fa-solid fa-user"></i>    
-                <p class="js-acc-info bold">Account information</p>
-                    <p class ="text-desc-a" >See your account information like your name and email address.</p>
+            <div class="row row-cols-6 gx-10 row-cols-lg-1 d-m-fluid">
+                <div onclick="account.show('.js-account-info-modal', '.js-acc-info')" class="js-settings class_15 row" style="cursor:pointer;" >
+                    <div class="col-2 d-none md-none d-lg-block"><i class="fa-solid fa-user"></i> </div>
+                    <div class="col"> <p class="js-acc-info bold" style="display: inline;">Account information</p></div>
                 </div>
-                <div onclick="account.show('.js-change-password-modal', '.js-cha-pass')" class="js-settings class_15" style="cursor:pointer;" >
-                    <i class="fa-solid fa-lock"></i>    
-                    <p class="js-cha-pass">Change your password</p>
-                    <p class ="text-desc-a">Change your password anytime.</p></br>
+                <div class="row">
+                    <div class="col-2"> </div>
+                    <div class="col d-none md-none d-lg-block"><p class ="text-desc-a">See your account information like your name and email address.</p></div>
                 </div>
-                <div onclick="account.show('.js-delete-account-modal', '.js-del-acc')" class="js-settings class_15" style="cursor:pointer;" >
-                    <i class="fa-solid fa-heart-crack"></i>
-                    <p class="js-del-acc">Delete your account</p>
-                    <p  class ="text-desc-a">Deletion of your account.</p></br>
+
+                <div onclick="account.show('.js-change-password-modal', '.js-cha-pass')" class="js-settings class_15 row" style="cursor:pointer;" >
+                    <div class="col-2 d-none md-none d-lg-block"><i class="fa-solid fa-lock"></i></i> </div>
+                    <div class="col"><p class="js-cha-pass" style="display:inline">Change your password</p></div>
                 </div>
+                <div class="row">
+                    <div class="col-2"> </div>
+                    <div class="col d-none md-none d-lg-block"><p class ="text-desc-a">Change your password anytime.</p></div>
+                </div>
+
+                <div onclick="account.show('.js-delete-account-modal', '.js-del-acc')" class="js-settings class_15 row" style="cursor:pointer;" >
+                    <div class="col-2 d-none md-none d-lg-block"><i class="fa-solid fa-heart-crack"></i></i> </div>
+                    <div class="col"><p class="js-del-acc" style="display:inline">Delete your account</p></div>
+                </div>
+                <div class="row">
+                    <div class="col-2"> </div>
+                    <div class="col d-none md-none d-lg-block"><p class ="text-desc-a">Deletion of your account.</p></div>
+                </div>
+
+                <div class="row" style="align-items: center">
+                    <div class="col-2 d-none md-none d-lg-block"><i class="fa-solid fa-arrow-right-from-bracket"></i></div>
+                    <div class="col"><button onclick="user.logout()" class="class_39 btn btn-link" style="text-decoration: none; color:black;"  >
+                        Logout
+                    </button></div>
+                </div>
+               
             </div>
-            <i class="fa-solid fa-arrow-right-from-bracket"></i>
-            <button onclick="user.logout()" class="class_39"  >
-                Logout
-            </button>
+
         </div>
+
+        <!-- your account end-->
+        
+
+        
+
 
    <!-- </section>-->
     
     <?php if(!empty($row)):?>
-        <form method="post" enctype="multipart/form-data" class="class_26" >
+        <form method="post" enctype="multipart/form-data" class="class_26  p-5 rounded-end-5 shadow-sm rounded col-xxl-8 col-xl-9 col-lg-9 col-sm-fluid" style="height: 550px; background-color: #ffff;" >
             <!-- account information modal -->
                 <div class="js-account-info-modal">
-                    <h2>Account information</h2>
+                    <h2 style="color: #2F2F2F;
+                    font-weight: 500;">Account information</h2>
                     <label>
-                        <img src="<?=get_image($row['user_image'])?>" class="js-image class_28" style="cursor: pointer; height:50px; border-radius: 50px; display: inline-block;" >
-                        <input onchange="display_image(this.files[0])" type="file" name="image" class="class_29">
+                        <img src="<?=get_image($row['user_image'])?>" class="js-image rounded-circle class_28" style="cursor: pointer; height:50px; border-style: solid;" >
+                        <input onchange="display_image(this.files[0])" type="file" name="image" class="class_29" style="display:none;">
 
                         <script>
                             
@@ -309,8 +360,8 @@
                             <!--+63--><input value="<?=$row['user_pnum']?>" placeholder="9998887777" type="text" name="pnum" class="class_33"  required="true">
                         </div>
 
-                        <div class="class_37">
-                            <button class="class_38">
+                        <div class="class_37 d-flex flex-row-reverse">
+                            <button class="class_38 btn" style="background-color: #F2C1A7; color:#ffff;" >
                                 Save
                             </button>
                             <!--<a href="profile.php">
@@ -327,7 +378,8 @@
 
             <!-- change password modal -->
             <div class="js-change-password-modal hide">
-                <h2>Change your password</h2></br>
+            <h2 style="color: #2F2F2F;
+            font-weight: 500;">Change your password</h2></br>
                 <div class="class_30">
                     <div class="class_31">
                         <label class="class_32">
@@ -347,15 +399,18 @@
                         </label>
                         <input placeholder="" type="password" name="retype_password" class="class_33">
                     </div>
-                    <p class="chan-text">Changing your password will log you out.</p>
+                    <p class="chan-text" style="
+                    bottom: 21px;
+                    font-size: 12px;
+                    color: #575757;">Changing your password will log you out.</p>
                     
 
-                    <div class="class_37">
-                        <button class="class_38">
+                    <div class="class_37 d-flex flex-row-reverse">
+                        <button class="class_38 btn" style="background-color: #F2C1A7; color:#ffff; margin-left: 10px; ">
                             Save
                         </button>
                         <a href="profile.php">
-                            <button type="button" class="class_391">
+                            <button type="button" class="class_39 btn btn-outline-danger" style=" margin-left: 10px;">
                                 Back
                             </button>
                         </a>
@@ -368,7 +423,8 @@
         
         <!-- delete account modal -->
         <div class="js-delete-account-modal hide">
-            <h2>Delete your account</h2>
+            <h2 style="color: #2F2F2F;
+            font-weight: 500;">Delete your account</h2>
             <div class="class_30" >
                 <p class="text-desc">
                     You're trying to delete your SiPa account, which provides access to various SiPa 
@@ -377,7 +433,7 @@
                 </p>
                 <hr>
                 
-                <button onclick="account.delete()" class="del-btn"  >
+                <button onclick="account.delete()" class="del-btn btn" style=" color: #ab0f15; font-weight: bold;" >
                     Delete account
                 </button>
                 
