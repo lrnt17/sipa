@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Topics | SiPa</title>
 </head>
-<body>
+<body style="background: #F2F5FF;">
     <style>
         @keyframes appear{
 			0%{
@@ -26,16 +26,63 @@
 			display:none;
 		}
 
-		.btn{
-            background-color: blue;
-        }
-
-        .btn_selected{
-            background-color: red;
+		.btn_selected{
+            background: transparent;
+            border: none;
+            outline: none;
+            color: red;
         }
 
         .highlight {
             background-color: yellow;
+        }
+
+        input:focus, textarea:focus{
+            outline: none;
+        }
+
+        input[type=checkbox]{
+            height: 0;
+            width: 0;
+            visibility: hidden;
+        }
+
+        label {
+            cursor: pointer;
+            text-indent: -9999px;
+            width: 34px;
+            height: 20px;
+            top: 3px;
+            left: 2px;
+            background: grey;
+            display: block;
+            border-radius: 100px;
+            position: relative;
+        }
+
+        label:after {
+            content: '';
+            position: absolute;
+            top: 2.5px;
+            left: 2.5px;
+            width: 15px;
+            height: 15px;
+            background: #fff;
+            border-radius: 90px;
+            transition: 0.3s;
+        }
+
+        input:checked + label {
+            background: #5582da;
+        }
+
+        input:checked + label:after {
+            left: calc(50% - 1px);
+            transform: translateX(- 80%);
+        }
+
+        label:active:after {
+            width: 20px;
         }
 	</style>
 
@@ -43,105 +90,146 @@
     <?php include('header.php') ?>
     <?php include('community-forum.php') ?>
 
-    <!-- community forum content -->
-    <section>
-        <div class="js-personal-post ">
-            <?php if(logged_in()):?>
-                <button onclick="myposts.new_topic()">+ Start New Topic</button>
-                <form onsubmit="myposts.submit(event)" method="post" class="js-start-topic class_42 hide " >
-                    <div class="">
-                        <input type="text" placeholder="Title" name="post_title" id="post_title" class="js-post-title">
+    <div class="container">
+        <div class="row px-5">
+            <div class="col-2">
+                <!-- sa column 'tong div -->
+            </div>
+
+            <div class="col">
+                <!-- community forum content -->
+                <section>
+                    <div class="js-personal-post ">
+                        <?php if(logged_in()):?>
+                            <div class="d-grid">
+                                <button onclick="myposts.new_topic()" class="btn text-start p-3 rounded-4" style="background: #F2C1A7;" id="btn"> <i class="fa-solid fa-plus"></i> &nbsp; Start New Topic</button>
+                            </div>
+
+                            <form onsubmit="myposts.submit(event)" method="post" class="js-start-topic class_42 hide p-4 rounded-5 shadow-sm" style="background: #fff;" >
+                                <div class="d-grid">
+                                    <input type="text" placeholder="Title" name="post_title" id="post_title" class="js-post-title fs-5 m-2" style="border: none; border-bottom: 1px solid gray;">
+                                </div>
+                                <div class="class_43 d-grid" >
+                                    <textarea placeholder="Whats on your mind?" rows="5" name="post" class="js-post-input class_44 mx-2" style="border: none; border-bottom: 1px solid gray;resize: none;"></textarea>
+                                </div>
+                            
+                            <div class="row mx-1 my-2">
+                                <div class="col-auto me-auto">
+                                    <p for="anonymous" class="" style="display:inline; color:#5582da;">Post anonymously:</p>
+                                    <input type="checkbox" id="anonymous" name="anonymous" class="js-anonymous"><label for="anonymous">anonymous</label>
+                                </div>
+                                <div class="class_45 col-auto" >
+                                    <button class="class_46 btn fs-5" style="font-weight:600;">
+                                        Post
+                                    </button>
+                                </div>
+                            </div>
+                            </form>
+
+                        <?php else:?>
+                            <div class="d-grid" >
+                                <p class="text-start p-3 rounded-4" style="background: #F2C1A7;" > <i class="fa-solid fa-circle-exclamation"> </i> You're not signed in. 
+                                <a href="login_1.php" class="js-link" style="text-decoration:none;">Click here to sign in and post</a></p>
+                            </div>
+                        <?php endif;?>
+
+                        <section class="js-posts">
+                                <div style="padding:10px;text-align:center;"></div>
+                        </section>
+
+                        <div id="postsSection">
+                            <div id="postContainer">
+                                <!-- Existing posts go here -->
+                                <button id="loadMoreBtn" onclick="myposts.loadMorePosts()" class="js-loadmore-btn btn">View More</button>
+                            </div>
+                        </div>
+
+                        <div class="class_37" style="display: flex;justify-content: space-between;" >
+                        </div>
                     </div>
-                    <div class="class_43" >
-                        <textarea placeholder="Whats on your mind?" name="post" class="js-post-input class_44" ></textarea>
-                    </div>
-                    
-                    <div>
-                        <label for="anonymous">Post anonymously:</label>
-                        <input type="checkbox" id="anonymous" name="anonymous" class="js-anonymous">
-                    </div>
-                    <div class="class_45" >
-                        <button class="class_46">
-                            Post
-                        </button>
+
+                    <!-- modal ito na mag-aappear pag pinindot ni user yung edit button -->
+                    <?php include'community_forum_3_edit_my_post.php'?> 
+                </section>
+                <!-- end community forum content -->
+
+                <!-- post card template-->
+                <template id="postCardTemplate" class="js-postCardTemplate">
+                    <div class="js-post-card class_42 ps-5 pe-5 pt-5 pb-4 my-5 rounded-5 shadow-sm" style="animation: appear 3s ease; background-color:white;">
                         
+                        <div class="class_49" >
+                            <div class="row mb-2">
+                                <div class="col">
+                                    <h2 class="js-title">
+                                        Contraception
+                                    </h2>
+                                </div>
+                                <div class="col-1">
+                                    <!--edit, delete btn-->
+                                    <div class="js-modification-buttons class_51" >
+                                    <a data-toggle="dropdown" class="btn"><i class="fa-solid fa-ellipsis fs-4"></i></a>
+                                        <div class="container">
+                                            <ul class="dropdown-menu">
+                                                <div class="js-edit-button class_53 dropdown-item" style="color:blue;cursor: pointer;"  >
+                                                    Edit
+                                                </div>
+                                                <div class="js-delete-button class_53 dropdown-item" style="color:red;cursor: pointer;"  >
+                                                    Delete
+                                                </div>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <!--end edit, delete btn-->
+                                </div>
+
+                            </div>
+                            <!-- post -->
+                            <div class="js-post class_15"  >
+                                is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets c
+                            </div>
+
+                        <hr>
+                        <div class="row">
+                            <div class="col-4">
+                                <img src="assets/images/user.jpg" class="js-image class_47" style="width:40px; height:40px; border-radius:50%; border-style: solid;" >
+                            
+                                <span style="font-size:14px; color:gray;"> Posted by</span> 
+                                <a href="#" class="js-profile-link class_45 py-2" style="text-decoration:none;">
+                                    <h2 class="js-username class_48" style="font-size:14px; display:inline;" >
+                                        Jane Name
+                                    </h2>
+                                </a>
+                            </div>
+
+                            <div class="col-3 py-2">
+                                <p class="js-date class_41" style="font-size:14px; color: gray;">
+                                    3rd Jan 23 14:35 pm
+                                </p>
+                            </div>
+
+                            <div class="class_51 js-comment-link-count col-3 py-2" >
+                                <div class="js-comment-link class_53" style="color:#2268e2; cursor: pointer;">
+                                    Comment 
+                                </div>
+                            </div>
+
+                            <div class="col-2 py-2">
+                                <button class="js-like-button class_53 " style="cursor: pointer;"  >
+                                <i class="fa-solid fa-heart" style="pointer-events: none;"></i>
+                                </button>
+                                
+                                <span class="js-num-likes"></span>
+                            </div>
+                        </div>
+
+                        </div>
                     </div>
-                </form>
-            <?php else:?>
-                <div class="class_13" >
-                    You're not logged in <br>
-                    <a href="login_1.php" class="js-link">Click here to login and post</a>
-				</div>
-            <?php endif;?>
-
-            <section class="js-posts">
-                    <div style="padding:10px;text-align:center;"></div>
-            </section>
-
-            <div id="postsSection">
-                <div id="postContainer">
-                    <!-- Existing posts go here -->
-                    <button id="loadMoreBtn" onclick="myposts.loadMorePosts()" class="js-loadmore-btn ">View More</button>
-                </div>
-            </div>
-
-            <div class="class_37" style="display: flex;justify-content: space-between;" >
-            </div>
-        </div>
-
-        <!-- modal ito na mag-aappear pag pinindot ni user yung edit button -->
-        <?php include'community_forum_3_edit_my_post.php' ?>        
-    </section>
-   
-    <!-- post card template-->
-    <template id="postCardTemplate" class="js-postCardTemplate">
-        <div class="js-post-card class_42" style="animation: appear 3s ease;">
-            <img src="assets/images/user.jpg" class="js-image class_47" >
-            <div>
-                <span>Posted by</span> 
-                <a href="#" class="js-profile-link class_45" >
-                    <h2 class="js-username class_48" style="font-size:16px; display:inline;" >
-                        Jane Name
-                    </h2>
-                </a>
-            </div>
-            <div class="class_49" >
-                <h4 class="js-date class_41"  >
-                    3rd Jan 23 14:35 pm
-                </h4>
-                <h2 class="js-title ">
-                    Contraception
-                </h2>
-                <div class="js-post class_15"  >
-                    is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets c
-                </div>
-                <div class="class_51 js-comment-link-count" >
-                    <i class="bi bi-chat-left-dots class_52">
-                    </i>
-                    <div class="js-comment-link class_53" style="color:blue;cursor: pointer;"  >
-                        Comment
-                    </div>
-                </div>
-
-                
-                <button class="js-like-button class_53" style="cursor: pointer;"  >
-                Like
-                </button>
-                
-                <span class="js-num-likes"></span>
-                
-                <div class="js-modification-buttons class_51" >
-                    <div class="js-edit-button class_53" style="color:blue;cursor: pointer;"  >
-                        Edit
-                    </div>
-                    <div class="js-delete-button class_53" style="color:red;cursor: pointer;"  >
-                        Delete
-                    </div>
-                </div>
+                </template>
+                <!--end post card template-->
+        
             </div>
         </div>
-    </template>
-	<!--end post card template-->
+    </div>
 
 </body>
 
@@ -157,6 +245,12 @@
 
 <script>
 //-----------------------------------------------------------------------------------------------------
+    // hide start new topic button
+    const btn = document.getElementById('btn');
+        btn.addEventListener('click', () => {
+        btn.style.display = 'none';
+    });
+
     // Check if the page is being loaded as a result of a refresh
     if (performance.navigation.type === performance.navigation.TYPE_RELOAD) {
         // Clear any stored search results from sessionStorage

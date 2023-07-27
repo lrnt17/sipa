@@ -8,6 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
     <title>Community Forum | SiPa</title>
 </head>
 <body style="background: #F2F5FF;">
@@ -26,12 +27,12 @@
 			display:none;
 		}
 
-		.btn{
-            background-color: blue;
-        }
 
         .btn_selected{
-            background-color: red;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: red;
         }
 
         .highlight {
@@ -83,8 +84,9 @@
         }
 
         label:active:after {
-            width: 130px;
+            width: 20px;
         }
+
 	</style>
 
     <!-- navigation bar with logo -->
@@ -103,7 +105,7 @@
                     <div class="js-personal-post ">
                         <?php if(logged_in()):?>
                             <div class="d-grid">
-                                <button onclick="allposts.new_topic()" class="btn text-start p-3 rounded-4" style="background: #F2C1A7;" id="btn"> <i class="fa-solid fa-plus"></i>  Start New Topic</button>
+                                <button onclick="allposts.new_topic()" class="btn text-start p-3 rounded-4" style="background: #F2C1A7;" id="btn"> <i class="fa-solid fa-plus"></i> &nbsp; Start New Topic</button>
                             </div>
 
                             <form onsubmit="allposts.submit(event)" method="post" class="js-start-topic class_42 hide p-4 rounded-5 shadow-sm" style="background: #fff;" >
@@ -128,9 +130,9 @@
                             </form>
 
                         <?php else:?>
-                            <div class="class_13" >
-                                You're not logged in <br>
-                                <a href="login_1.php" class="js-link">Click here to login and post</a>
+                            <div class="d-grid" >
+                                <p class="text-start p-3 rounded-4" style="background: #F2C1A7;" > <i class="fa-solid fa-circle-exclamation"> </i> You're not signed in. 
+                                <a href="login_1.php" class="js-link" style="text-decoration:none;">Click here to sign in and post</a></p>
                             </div>
                         <?php endif;?>
 
@@ -160,7 +162,7 @@
                         
                         <div class="class_49" >
                             <div class="row mb-2">
-                                <div class="col-auto me-auto">
+                                <div class="col">
                                     <h2 class="js-title">
                                         Contraception
                                     </h2>
@@ -169,24 +171,26 @@
                                     <!--edit, delete btn-->
                                     <div class="js-modification-buttons class_51" >
                                     <a data-toggle="dropdown" class="btn"><i class="fa-solid fa-ellipsis fs-4"></i></a>
-                                        <divc class="container">
-                                        <ul class="dropdown-menu">
-                                            <div class="js-edit-button class_53 dropdown-item" style="color:blue;cursor: pointer;"  >
-                                                Edit
-                                            </div>
-                                            <div class="js-delete-button class_53 dropdown-item" style="color:red;cursor: pointer;"  >
-                                                Delete
-                                            </div>
-                                        </ul>
+                                        <div class="container">
+                                            <ul class="dropdown-menu">
+                                                <div class="js-edit-button class_53 dropdown-item" style="color:blue;cursor: pointer;"  >
+                                                    Edit
+                                                </div>
+                                                <div class="js-delete-button class_53 dropdown-item" style="color:red;cursor: pointer;"  >
+                                                    Delete
+                                                </div>
+                                            </ul>
                                         </div>
                                     </div>
                                     <!--end edit, delete btn-->
                                 </div>
 
                             </div>
+                            <!-- post -->
                             <div class="js-post class_15"  >
                                 is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets c
                             </div>
+
                         <hr>
                         <div class="row">
                             <div class="col-4">
@@ -207,16 +211,14 @@
                             </div>
 
                             <div class="class_51 js-comment-link-count col-3 py-2" >
-                                <i class="bi bi-chat-left-dots class_52">
-                                </i>
-                                <div class="js-comment-link class_53" style="color:blue;cursor: pointer;">
-                                    Comment
+                                <div class="js-comment-link class_53" style="color:#2268e2; cursor: pointer;">
+                                    Comment 
                                 </div>
                             </div>
 
                             <div class="col-2 py-2">
                                 <button class="js-like-button class_53 " style="cursor: pointer;"  >
-                                Like
+                                <i class="fa-solid fa-heart" style="pointer-events: none;"></i>
                                 </button>
                                 
                                 <span class="js-num-likes"></span>
@@ -241,7 +243,7 @@
 </script>
 <script src="like-rating.js?v4"></script>
 <script src="time.js?v1"></script>
-<script src="community-topics.js?v6"></script>
+<script src="community-topics.js?v8"></script>
 
 
 <script>

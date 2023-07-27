@@ -40,8 +40,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Post</title>
-</head>
-<body>
+
     <style>
 		
 		@keyframes appear{
@@ -58,37 +57,95 @@
 		}
 
         .js-userimage-reply{
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
+            border-radius:50%; border-style: solid;
         }
 
-        .btn{
-            background-color: blue;
+        .replies-container{
+            background-color:;
         }
-
         .btn_selected{
-            background-color: red;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: red;
         }
 
-        .js-replied{
-            height: 120px;
-            border: 10px solid yellowgreen;
+        input:focus, textarea:focus{
+            outline: none;
+        }
+
+        input[type=checkbox]{
+            height: 0;
+            width: 0;
+            visibility: hidden;
+        }
+
+        label {
+            cursor: pointer;
+            text-indent: -9999px;
+            width: 34px;
+            height: 20px;
+            top: 3px;
+            left: 2px;
+            background: grey;
+            display: block;
+            border-radius: 100px;
+            position: relative;
+        }
+
+        label:after {
+            content: '';
+            position: absolute;
+            top: 2.5px;
+            left: 2.5px;
+            width: 15px;
+            height: 15px;
+            background: #fff;
+            border-radius: 90px;
+            transition: 0.3s;
+        }
+
+        input:checked + label {
+            background: #5582da;
+        }
+
+        input:checked + label:after {
+            left: calc(50% - 1px);
+            transform: translateX(- 80%);
+        }
+
+        label:active:after {
+            width: 20px;
         }
 	</style>
+</head>
+<body style="background: #F2F5FF;">
+    
     <?php include('header.php') ?>
     <?php include('community-forum.php') ?>
 
+    <div class="container">
+        <div class="row px-5">
+            <div class="col-2">
+                <!-- sa column 'tong div -->
+            </div>
+
+            <div class="col">
+
 	<section class="class_1" >
-        <div class="js-personal-post ">
+        <div class="js-personal-post ps-5 pe-5 pt-5 pb-4 my-5 rounded-5 shadow-sm" style="animation: appear 3s ease; background-color:white;">
             <div class="class_11" >
                 <?php //include('success.alert.inc.php') ?>
                 <?php //include('fail.alert.inc.php') ?>
                 
-                <h1 class="class_41"  >
+                <!--<h1 class="class_41"  >
                     Single Post
-                </h1>
+                </h1>-->
     
                 <?php if(!empty($row)): //pag merong nakitang post?>
+                    <!-- post card -->
                     <div id="post_<?=$row['forum_id']?>" row="<?=htmlspecialchars(json_encode($row))?>" class="class_42" >
                         
                         <!--<a href="profile.php?id=<?//=$row['user']['user_id'] ?? 0?>" class="class_45" >
@@ -97,45 +154,70 @@
                                 <?//=$row['user']['username'] ?? 'Unknown'?>
                             </h2>
                         </a>-->
-                        <div>
-                            <img src="<?=$row['user_img']?>" class="class_47" >
-                            <h2 class="class_48" style="font-size:16px"  >
-                                <?//=$row['user']['user_fname'] ?? 'Unknown'?>
-                                <?=$row['user_fname']?>
-                            </h2>
-                        </div>
+                        
                         <div class="class_49" >
-                            <h4 class="class_41"  >
-                                <?//=date("jS M, Y H:i:s a",strtotime($row['forum_timestamp']))?>
-                                <span id="post-timestamp"><?=date('Y-m-d\TH:i:s',strtotime($row['forum_timestamp']))?></span>
-                            </h4> 
-                            <div class="class_15">
-                                <?=nl2br(htmlspecialchars($row['forum_title']))?>
+                            
+                            <div class="class_15"> <!-- title -->
+                                <h2 class="js-title py-1">
+                                    <?=nl2br(htmlspecialchars($row['forum_title']))?> 
+                                </h2>
                             </div>
-                            <div class="class_15"  >
+
+                            <div class="class_15 py-1"> <!-- post -->
                                 <?=nl2br(htmlspecialchars($row['forum_desc']))?>
                             </div>
 
-                            <!-- Display Like button and number of likes -->
-                            <button class="single-post js-like-button" forum_id="<?=$row['forum_id']?>" style="cursor: pointer;">
-                                Like
-                            </button>
-                            <span class="single-post js-num-likes" forum_id="<?=$row['forum_id']?>">
-                                <?php 
-                                    if($rating_row){
-                                        $row['getlikes'] = $rating_row[0];
-                                        if (is_array($row['getlikes'])) {
-                                            foreach ($row['getlikes'] as $value) {
-                                                if ($value > 0) {
-                                                    echo $value;
+
+                            <hr>
+
+                            <div class="row m-1" style="align-items: center;">
+                                <div class="col-5">
+                                    <img src="<?=$row['user_img']?>" class="class_47" style="width:40px; height:40px; border-radius:50%; border-style: solid;" >
+                                    <span style="font-size:14px; color:gray;"> Posted by</span> 
+                                    <h2 class="class_48" style="font-size:14px; display:inline; color:blue;" >
+                                        <?//=$row['user']['user_fname'] ?? 'Unknown'?>
+                                        <?=$row['user_fname']?>
+                                    </h2>
+                                </div>
+
+                                <!-- time -->
+                                <div class="col-5 pt-3">
+                                    <p class="class_41" style="font-size:14px; color: gray;" > 
+                                        <?//=date("jS M, Y H:i:s a",strtotime($row['forum_timestamp']))?>
+                                        <span id="post-timestamp"><?=date('Y-m-d\TH:i:s',strtotime($row['forum_timestamp']))?></span>
+                                    </p> 
+                                </div>
+                                
+
+                                <!-- Display Like button and number of likes -->
+                                <div class="col-2 pt-2">
+                                    <button class="single-post js-like-button " forum_id="<?=$row['forum_id']?>" style="cursor: pointer;">
+                                        <i class="fa-solid fa-heart" style="pointer-events: none;"></i>
+                                    </button>
+                                    <span class="single-post js-num-likes" style="display:inline;" forum_id="<?=$row['forum_id']?>">
+                                        <?php 
+                                            if($rating_row){
+                                                $row['getlikes'] = $rating_row[0];
+                                                if (is_array($row['getlikes'])) {
+                                                    foreach ($row['getlikes'] as $value) {
+                                                        if ($value > 0) {
+                                                            echo $value;
+                                                        }
+                                                    }
+                                                } else {
+                                                    echo $row['getlikes'];
                                                 }
                                             }
-                                        } else {
-                                            echo $row['getlikes'];
-                                        }
-                                    }
-                                ?>
-                            </span>
+                                        ?>
+                                    </span>
+                                </div>
+
+                            </div>
+
+                            <hr>
+
+                            <!-- profile, name -->
+                            
                             <?php// if(i_own_post($row)):?>
                                 <!--<div class="class_51" >
                                     <div onclick="my_edit_post.show_me(<?//=$row['forum_id']?>)" class="class_53" style="color:blue;cursor: pointer;"  >
@@ -152,9 +234,9 @@
                     
                     <!-- comments on a post -->
                     <div class="class_11" >
-                        <h1 class="class_41" >
-                            Comments -------------------------------------------------------------------------------------------------------------------------------------------------------
-                        </h1>
+                        <p class="class_41" style="font-size:16px; color: #1b4ca1;" >
+                            Comments 
+                        </p>
 
                         <section class="js-comments-loading">
                             <div style="padding:10px;text-align:center;">Loading comments....</div>
@@ -162,27 +244,31 @@
                         
                         <br><br>
 
+                        <!-- comment box-->
                         <?php if(logged_in()):?>
-                            <form onsubmit="mycomment.submit(event)" method="post" class="class_42" >
-                                <div class="class_43" >
-                                    <textarea placeholder="Write a comment" name="post" class="js-comment-input class_44" ></textarea>
+                            <form onsubmit="mycomment.submit(event)" method="post" class="class_42 p-2 rounded-4" style="background-color:#ebebeb;" >
+                                <div class="d-grid" >
+                                    <textarea placeholder="Write a comment" rows="2" name="post" class="js-comment-input class_44 p-3" style="background-color: transparent; border:none; resize: none;" ></textarea>
                                 </div>
-                                <div>
-                                    <label for="anonymous">Post anonymously:</label>
-                                    <input type="checkbox" id="anonymous" name="anonymous" class="js-anonymous-comment">
-                                </div>
-                                <div class="class_45" >
-                                    <button class="class_46"  >
-                                        Comment
-                                    </button>
+                                <hr>
+                                <div class="row mx-1 my-2">
+                                    <div class="col-auto me-auto">
+                                        <p for="anonymous" style="display:inline; color:#5582da;">Post anonymously:</p>
+                                        <input type="checkbox" id="anonymous" name="anonymous" class="js-anonymous-comment"><label for="anonymous">anonymous</label>
+                                    </div>
+                                    <div class="class_45 col-auto" >
+                                        <button class="class_46 btn">
+                                            <i class="fa-solid fa-reply" style="pointer-events: none;"></i>
+                                        </button>
+                                    </div>
                                 </div>
                             </form>
                         <?php else:?>
                             <div class="class_13" >
-                                <i class="bi bi-info-circle-fill class_14">
-                                </i>
+                                
                                 <div onclick="user.login()" class="class_15" style="cursor:pointer;text-align: center;"  >
-                                    You're not logged in <br>Click here to login and comment
+                                    <i class="fa-solid fa-circle-exclamation"> </i> You're not signed in. 
+                                    <p style="color: blue;">Click here to sign in and comment</p>
                                 </div>
                             </div>
                         <?php endif;?>
@@ -218,45 +304,101 @@
 	</section>
 	
 	<!--comment card template-->
-	<div class="js-comment-card hide class_42" style="animation: appear 3s ease;"  >
-		<a href="#" class="js-profile-link class_45" >
-			<img src="assets/images/57.png" class="js-photo class_47" >
-			<h2 class="js-username class_48" style="font-size:16px" >
-				Jane Name
-			</h2>
-		</a>
-		<div class="class_49" >
-			<h4 class="js-date class_41"  >
-				3rd Jan 23 14:35 pm
-			</h4>
-			<div class="js-comment class_15"  >
-				is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets c
-			</div>
-            <div class="js-like-section">
-                <button class="js-like-button class_53" style="cursor: pointer;"  >
-                    Like
-                </button>
-                <span class="js-num-likes"></span>
+	<div class="js-comment-card hide class_42 my-4" style="animation: appear 3s ease; background-color: ;">
+    
+     <!--3 cols (pic, reply, edit)-->
+    <div class="row">
+         <!--profile pic-->
+         <div class="col-auto">
+            <a href="#" class="js-profile-link class_45" style="text-decoration:none;">
+                <img src="assets/images/57.png" class="js-photo class_47" style="width:40px; height:40px; border-radius:50%; border-style: solid;"  >
+            </a>
+        </div>
+		
+        <!--reply--> <!--NAME, COMMENT, TIME, LIKE -->
+		<div class="col" >
+            <!--div for name, comment-->
+            <div class="cont p-3 rounded-4" style="background-color:#f2f2f2;">
+                <div class="row">
+                    <div class="col-auto me-auto">
+                        <a href="#" class="js-profile-link class_45" style="text-decoration:none;">
+                            <h2 class="js-username class_48" style="font-size:16px" >
+                                Jane Name
+                            </h2>
+                        </a>
+                    </div>
+
+                    <!--time-->
+                    <div class="col-auto">
+                        <p class="js-date class_41" style="font-size:14px; color: gray;" >
+                            3rd Jan 23 14:35 pm
+                        </p>
+                </div>
+                
+                </div>
+
+
+                
+
+                <div class="js-comment class_15"  >
+                    is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets c
+                </div>
             </div>
-			<div class="js-action-buttons class_51" >
-				<div class="js-edit-button class_53" style="color:blue;cursor: pointer;"  >
-					Edit
-				</div>
-				<div class="js-delete-button class_53" style="color:red;cursor: pointer;"  >
-					Delete
-				</div>
-			</div>
-			<div class="js-reply-section class_51" >
-				<i class="bi bi-chat-left-dots class_52">
-				</i>
-				<div class="js-reply-link class_53" style="color:blue;cursor: pointer;"  >
-					Reply
-				</div>
-			</div>
-            
+
+            <!--inside col, row for like,time-->
+            <div class="row mt-3">
+                <!--like, like span-->
+                <div class="js-like-section col-auto">
+                    <button class="js-like-button class_53" style="font-size:14px; cursor: pointer;"  >
+                       <i class="fa-solid fa-heart" style="pointer-events: none;"></i>
+                    </button>
+                    <span class="js-num-likes"></span>
+                </div>
+                
+                
+
+                <div class="js-reply-section class_51 col" >
+                    <div class="js-reply-link class_53" style="font-size:14px; color:blue;cursor: pointer; color: #1b4ca1; "  >
+                        Reply
+                    </div>
+                </div>
+            </div>
 		</div>
+
+        <!--edit,del-->
+        <div class="col-1">
+            <div class="js-action-buttons class_51" >
+
+            <!--3 dots-->
+            <a data-toggle="dropdown" class="btn"><i class="fa-solid fa-ellipsis fs-4"></i></a>
+                
+                <!--div edit,del-->
+
+                <div class="container">
+                    <!--ul element-->
+                    <ul class="dropdown-menu">
+                        <div class="js-edit-button class_53 dropdown-item" style="color:blue;cursor: pointer;"  >
+                            Edit
+                        </div>
+                        <div class="js-delete-button class_53 dropdown-item" style="color:red;cursor: pointer;"  >
+                            Delete
+                        </div>
+                    </ul>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+        
+
 	</div>
 	<!--end comment card template-->
+
+            </div>
+        </div>
+    </div>
 </body>
 
 <script>
@@ -269,7 +411,7 @@
 <script src="time.js?v1"></script>
 <script src="like-rating.js?v3"></script>
 <script src="community-topics.js?v6"></script>
-<script src="mycomment.js?v39"></script>
+<script src="mycomment.js?v42"></script>
 
 <script>
     // Call the updateTimestamps function initially when the page loads

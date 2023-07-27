@@ -153,7 +153,7 @@ var mycomment = {
                             }
 
                         }else{
-                            post_holder.innerHTML = "<div style='text-align:center;padding:10px'>No comments found</div>";
+                            post_holder.innerHTML = "<div style='text-align:center;padding:10px; color:gray;'>No comments found</div>";
                         }
                     }
                     //document.querySelector(".js-page-number").innerHTML = "Page " + mycomment.page_number;
@@ -184,18 +184,24 @@ var mycomment = {
         let editTextarea = document.createElement('textarea');
         editTextarea.classList.add('js-comment-input');
         editTextarea.value = commentText;
+        editTextarea.classList.add('form-control');
+        editTextarea.style.resize = 'none';
+        editTextarea.rows = 2; // Set the number of rows to 5
+
 
         // Replace the reply content with the input field
         commentElement.parentNode.replaceChild(editTextarea, commentElement);
 
         // Add a Save button for submitting the edited reply
         let saveButton = document.createElement('button');
-        saveButton.classList.add('js-save-button');
+        saveButton.classList.add('js-save-button', 'btn' , 'px-3', 'mr-3');
         saveButton.innerHTML = 'Save';
+
+        saveButton.style.backgroundColor = '#F2C1A7';
 
         // Add a Cancel button for canceling the edit
         let cancelButton = document.createElement('button');
-        cancelButton.classList.add('js-cancel-button');
+        cancelButton.classList.add('js-cancel-button', 'btn', 'btn-outline-danger', 'm-3');
         cancelButton.innerHTML = 'Cancel';
 
         // Attach event listener to the Save button
@@ -375,17 +381,63 @@ var mycomment = {
                     if (typeof data.rows == 'object' && data.rows.length > 0) {
                         // Loop through replies data and create elements for each reply
                         for (let i = data.rows.length - 1; i >= 0; i--) {
-                            //Outer div
+                            //Outer div ROW (pic, reply, edit)
                             let replyWrapper = document.createElement('div');
-                            replyWrapper.classList.add('reply-wrapper');
+                            replyWrapper.classList.add('reply-wrapper', 'row', 'pt-4');
+                            replyWrapper.style.background='';
 
-                                //Inner divs
+                                //Inner divs (madami ako in-add na div, para madesign)
+
+                                //<!--COL profile pic-->
+                                let col1 = document.createElement('div');
+                                col1.classList.add('col-auto');
+
+                                //<!--COL name, comment, time, like -->
+                                let col2 = document.createElement('div');
+                                col2.classList.add('col');
+                                
+                                //<!--div for name, comment-->
+                                let divname_com = document.createElement('div');
+                                divname_com.classList.add('reply', 'p-3', 'rounded-4');
+                                divname_com.style.background='#f2f2f2';
+
+                                //<!--row for like, time-->
+                                let divlike_time = document.createElement('div');
+                                divlike_time.classList.add('reply', 'row', 'mt-3');
+
+                                //<!--col like, like span-->
+                                let divlike_time_col1 = document.createElement('div');
+                                divlike_time_col1.classList.add('col-auto');
+
+                                //<!--col time-->
+                                let divlike_time_col2 = document.createElement('div');
+                                divlike_time_col2.classList.add('col-auto');
+
+                                //<!--COL edit,del-->
+                                let col3 = document.createElement('div');
+                                col3.classList.add('col-1');
+                                
+                                //<!--3 dot btn-->
+                                let aTagbtn = document.createElement('a');
+                                aTagbtn.classList.add('btn');
+                                aTagbtn.setAttribute("data-toggle", "dropdown");
+                                aTagbtn.innerHTML = '<i class="fa-solid fa-ellipsis fs-4"></i>';
+
+                                //<!--edit,del container-->
+                                let col3_container = document.createElement('div');
+                                col3_container.classList.add('container');
+
+                                //<!--edit,del dropdown ( NANDITO NAKALAGAY YUNG EDIT AND DELETE BUTTON )-->
+                                let btn_dropdown = document.createElement('ul');
+                                btn_dropdown.classList.add('dropdown-menu');
+
 
 
                                 let userimageElement = document.createElement('img');
                                 userimageElement.src = 'assets/images/57.png'; // Default image source
-                                userimageElement.classList.add('js-userimage-reply');
+                                userimageElement.classList.add('js-userimage-reply','m-2');
                                 userimageElement.src = data.rows[i].user_img;
+
                                 /*if (typeof data.rows[i].user == 'object') {
                                     userimageElement.src = data.rows[i].user.image;
                                 }*/
@@ -394,20 +446,26 @@ var mycomment = {
                                 usernameElement.classList.add('js-username-reply');
                                 //usernameElement.innerHTML = (data.rows[i].user_fname) ? data.rows[i].user_fname : 'User';
                                 usernameElement.innerHTML = data.rows[i].user_fname;
+                                usernameElement.style.color='blue';
+                                usernameElement.style.display='inline';
                                 
                                 let dateTimeElement = document.createElement('div');
-                                dateTimeElement.classList.add('js-date');
+                                dateTimeElement.classList.add('js-date', 'mx-5');
                                 //dateTimeElement.innerHTML = data.rows[i].date;
+                                dateTimeElement.style.display='inline';
+                                dateTimeElement.style.fontSize='14px';
+                                dateTimeElement.style.color='gray';
 
                                 let replyElement = document.createElement('div');
                                 replyElement.classList.add('reply');
+                                replyElement.style.background='';
                                 replyElement.innerHTML = data.rows[i].forum_desc;
 
                                 let likeButtonElement = document.createElement('button');
                                 likeButtonElement.classList.add('js-like-button');
                                 likeButtonElement.setAttribute('forum_id', data.rows[i].forum_id);
                                 likeButtonElement.style.cursor = 'pointer';
-                                likeButtonElement.innerHTML = 'Like';
+                                likeButtonElement.innerHTML = '<i class="fa-solid fa-heart" style="pointer-events: none;"></i>';
 
                                 let numlikeElement = document.createElement('span');
                                 numlikeElement.classList.add('js-num-likes');
@@ -442,14 +500,36 @@ var mycomment = {
                                 // Append action buttons to container
                                 actionButtonsContainer.appendChild(editButton);
                                 actionButtonsContainer.appendChild(deleteButton);*/
+                            
+                            //<!--profile pic-->
+                            col1.appendChild(userimageElement);
+                            replyWrapper.appendChild(col1); //col1
 
-                            replyWrapper.appendChild(userimageElement);
-                            replyWrapper.appendChild(usernameElement);
-                            replyWrapper.appendChild(dateTimeElement);
-                            replyWrapper.appendChild(replyElement);
-                            replyWrapper.appendChild(likeButtonElement);
-                            replyWrapper.appendChild(numlikeElement);
-                            replyWrapper.appendChild(actionButtonsContainer);
+                            //<!--name, comment-->
+                            divname_com.appendChild(usernameElement);
+                            divname_com.appendChild(replyElement);
+                            col2.appendChild(divname_com); // div
+                            replyWrapper.appendChild(col2); //col2
+
+                            //<!--like, like span-->
+                            divlike_time_col1.appendChild(likeButtonElement);
+                            divlike_time_col1.appendChild(numlikeElement);
+                            divlike_time.appendChild(divlike_time_col1); // col
+                            col2.appendChild(divlike_time); //row
+                            replyWrapper.appendChild(col2); //col2
+
+                            //<!--time-->
+                            divlike_time_col2.appendChild(dateTimeElement);
+                            divlike_time.appendChild(divlike_time_col2); // col
+                            col2.appendChild(divlike_time); //row
+                            replyWrapper.appendChild(col2); //col2
+
+                            //<!--edit, del-->
+                            col3.appendChild(aTagbtn); // 3dot button
+                            btn_dropdown.appendChild(actionButtonsContainer); // EDIT, DELETE button
+                            col3_container.appendChild(btn_dropdown); //container div
+                            col3.appendChild(col3_container); //col3
+                            replyWrapper.appendChild(col3); //col3
 
                             let clone = replyWrapper.cloneNode(true);
                             clone.setAttribute('id','post_'+data.rows[i].forum_id);
@@ -482,7 +562,7 @@ var mycomment = {
 
                             // Create edit button bago to!!!!!!!!!!!!!!!!!!!!!!!!!
                             let editButton = document.createElement('div');
-                            editButton.classList.add('js-edit-button', 'class_53');
+                            editButton.classList.add('js-edit-button', 'class_53', 'dropdown-item');
                             editButton.style.color = 'blue';
                             editButton.style.cursor = 'pointer';
                             editButton.innerHTML = 'Edit';
@@ -492,7 +572,7 @@ var mycomment = {
 
                             // Create delete button
                             let deleteButton = document.createElement('div');
-                            deleteButton.classList.add('js-delete-button', 'class_53');
+                            deleteButton.classList.add('js-delete-button', 'class_53', 'dropdown-item');
                             deleteButton.style.color = 'red';
                             deleteButton.style.cursor = 'pointer';
                             deleteButton.innerHTML = 'Delete';
@@ -518,6 +598,9 @@ var mycomment = {
                         let noRepliesMessage = document.createElement('p');
                         noRepliesMessage.innerHTML = 'No replies yet';
                         repliesContainer.appendChild(noRepliesMessage);
+                        noRepliesMessage.classList.add('p-4');
+                        noRepliesMessage.style.textAlign='center';
+                        noRepliesMessage.style.color='gray';
                     }
                     
                     // Create form element for adding new reply
@@ -526,25 +609,44 @@ var mycomment = {
                     replyForm.classList = 'js-replied';
                     replyForm.method = 'post';
                     replyForm.setAttribute('forum_id', forum_id);
+                    replyForm.classList.add('p-2', 'rounded-4','my-3');
+                    replyForm.style.background ='#ebebeb';
                     
+                    let textArea = document.createElement('div');
+                    textArea.classList.add("d-grid");
                     // Create textarea element for reply input
                     let replyInput = document.createElement('textarea');
                     replyInput.placeholder = 'Add a reply...';
                     replyInput.classList = 'js-reply-input';
                     replyInput.name = 'reply_text';
                     replyForm.appendChild(replyInput);
+                    replyInput.classList.add('form-control', 'p-3');
+                    replyInput.style.resize = 'none';
+                    replyInput.rows = 2; 
+                    replyInput.style.background ='transparent';
+                    replyInput.style.border ='none';
+
+                    textArea.appendChild(replyInput);
+                    replyForm.appendChild(textArea);
                     
-                    let breakTag1 = document.createElement('br');
-                    replyForm.appendChild(breakTag1);
+                    let hr1 = document.createElement('hr');
+                    replyForm.appendChild(hr1);
+
+                    // Create div element for anonymous checkbox
+                    let anonymousDivRow = document.createElement('div');
+                    anonymousDivRow.classList.add("row", "mx-1", "my-2");
                     
                     // Create div element for anonymous checkbox
                     let anonymousDiv = document.createElement('div');
+                    anonymousDiv.classList.add("col-auto", "me-auto");
 
-                        // Create label element for anonymous checkbox
-                        let anonymousLabel = document.createElement('label');
-                        anonymousLabel.setAttribute('for', 'anonymous');
-                        anonymousLabel.textContent = 'Post anonymously:';
-                        anonymousDiv.appendChild(anonymousLabel);
+                        // Create p element for anonymous checkbox
+                        let anonymousP = document.createElement('p');
+                        anonymousP.setAttribute('for', 'anonymous');
+                        anonymousP.textContent = 'Anonymous:';
+                        anonymousP.style.color = '#5582da';
+                        anonymousP.style.display = 'inline';
+                        anonymousDiv.appendChild(anonymousP);
 
                         // Create input element for anonymous checkbox
                         let anonymousInput = document.createElement('input');
@@ -554,16 +656,29 @@ var mycomment = {
                         anonymousInput.classList.add('js-anonymous-reply');
                         anonymousDiv.appendChild(anonymousInput);
 
-                    // Append div element to form
-                    replyForm.appendChild(anonymousDiv);
-                    
-                    let breakTag2 = document.createElement('br');
-                    replyForm.appendChild(breakTag2);
+                        // Create p element for anonymous checkbox
+                        let anonymousLabel = document.createElement('label');
+                        anonymousLabel.setAttribute('for', 'anonymous');
+                        anonymousLabel.textContent = 'Post anonymously:';
+                        anonymousLabel.style.color = '#5582da';
+                        anonymousDiv.appendChild(anonymousLabel);
 
-                    // Create button element for submitting form
-                    let replyButton = document.createElement('button');
-                    replyButton.innerHTML = 'Reply';
-                    replyForm.appendChild(replyButton);
+
+                    // Append div element to form
+                    anonymousDivRow.appendChild(anonymousDiv);
+                    
+                    // Create div element for anonymous reply btn
+                    let anonymousDiv2 = document.createElement('div');
+                    anonymousDiv2.classList.add("col-auto");
+
+                        // Create button element for submitting form
+                        let replyButton = document.createElement('button');
+                        replyButton.innerHTML = '<i class="fa-solid fa-reply" style="pointer-events: none;"> </i>';
+                        replyButton.classList.add('btn');
+                        anonymousDiv2.appendChild(replyButton);
+                    
+                    // Append div element to form
+                    anonymousDivRow.appendChild(anonymousDiv2);
                     
                     // Append form element to replies container
                     repliesContainer.appendChild(replyForm);
@@ -574,6 +689,8 @@ var mycomment = {
                         replyButtonElement.parentNode.appendChild(repliesContainer);
                     }
 
+                    // Append div element to form
+                    replyForm.appendChild(anonymousDivRow);
 
                 }
             }
@@ -680,13 +797,19 @@ var mycomment = {
         let editInput = document.createElement('input');
         editInput.type = 'text';
         editInput.value = replyText;
+        editInput.classList.add('form-control');
+        editInput.style.resize = 'none';
+        editInput.rows = 2; // Set the number of rows to 5
 
         // Replace the reply content with the input field
         replyWrapper.replaceChild(editInput, replyElement);
 
         // Add a Save button for submitting the edited reply
         let saveButton = document.createElement('button');
+        saveButton.classList.add('btn' , 'px-3', 'mr-3');
         saveButton.innerHTML = 'Save';
+
+        saveButton.style.backgroundColor = '#F2C1A7';
 
         // Attach event listener to the Save button
         saveButton.addEventListener('click', mycomment.saveReply);
@@ -696,7 +819,7 @@ var mycomment = {
 
         // Add a Cancel button for canceling the edit
         let cancelButton = document.createElement('button');
-        cancelButton.classList.add('js-cancel-edit');
+        cancelButton.classList.add('js-cancel-edit', 'btn', 'btn-outline-danger', 'm-3');
         cancelButton.innerHTML = 'Cancel';
 
         // Attach event listener to the Cancel button
