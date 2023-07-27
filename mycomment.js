@@ -785,6 +785,7 @@ var mycomment = {
     },
 
     editReply: function(e) {
+        alert();
         // Get the parent replyWrapper element
         let replyWrapper = e.target.closest('.reply-wrapper');
         //console.log(replyWrapper);
