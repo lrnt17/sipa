@@ -398,12 +398,12 @@ var mycomment = {
                                 
                                 //<!--div for name, comment-->
                                 let divname_com = document.createElement('div');
-                                divname_com.classList.add('reply', 'p-3', 'rounded-4');
+                                divname_com.classList.add('p-3', 'rounded-4');
                                 divname_com.style.background='#f2f2f2';
 
                                 //<!--row for like, time-->
                                 let divlike_time = document.createElement('div');
-                                divlike_time.classList.add('reply', 'row', 'mt-3');
+                                divlike_time.classList.add('row', 'mt-3');
 
                                 //<!--col like, like span-->
                                 let divlike_time_col1 = document.createElement('div');
@@ -415,7 +415,7 @@ var mycomment = {
 
                                 //<!--COL edit,del-->
                                 let col3 = document.createElement('div');
-                                col3.classList.add('col-1');
+                                col3.classList.add('js-action-button','col-1');
                                 
                                 //<!--3 dot btn-->
                                 let aTagbtn = document.createElement('a');
@@ -585,7 +585,7 @@ var mycomment = {
                             clonedActionButtonsContainer.appendChild(editButton);
                             clonedActionButtonsContainer.appendChild(deleteButton);
 
-                            let action_buttons = clone.querySelector(".js-action-buttons");
+                            let action_buttons = clone.querySelector(".js-action-button");
                             if(!data.rows[i].user_owns){
                                 action_buttons.remove();
                             }
@@ -785,11 +785,14 @@ var mycomment = {
     },
 
     editReply: function(e) {
-        alert();
+        //alert();
         // Get the parent replyWrapper element
         let replyWrapper = e.target.closest('.reply-wrapper');
         //console.log(replyWrapper);
         // Get the existing reply content
+        // Get the existing reply content from col2, divname_com
+        let col2 = replyWrapper.querySelector('.col');
+        let divname_com = col2.querySelector('.p-3');
         let replyElement = replyWrapper.querySelector('.reply');
         //console.log(replyElement);
         let replyText = replyElement.innerHTML;
@@ -803,7 +806,7 @@ var mycomment = {
         editInput.rows = 2; // Set the number of rows to 5
 
         // Replace the reply content with the input field
-        replyWrapper.replaceChild(editInput, replyElement);
+        divname_com.replaceChild(editInput, replyElement);
 
         // Add a Save button for submitting the edited reply
         let saveButton = document.createElement('button');
@@ -816,7 +819,7 @@ var mycomment = {
         saveButton.addEventListener('click', mycomment.saveReply);
 
         // Append the Save button to the replyWrapper element
-        replyWrapper.appendChild(saveButton);
+        divname_com.appendChild(saveButton);
 
         // Add a Cancel button for canceling the edit
         let cancelButton = document.createElement('button');
@@ -826,16 +829,16 @@ var mycomment = {
         // Attach event listener to the Cancel button
         cancelButton.addEventListener('click', function() {
             // Replace editInput and saveButton with original replyElement
-            replyWrapper.replaceChild(replyElement, editInput);
-            replyWrapper.removeChild(saveButton);
-            replyWrapper.removeChild(cancelButton);
+            divname_com.replaceChild(replyElement, editInput);
+            divname_com.removeChild(saveButton);
+            divname_com.removeChild(cancelButton);
             // Show the edit and delete buttons
-            replyWrapper.querySelector('.js-edit-button').classList.remove('hide');
-            replyWrapper.querySelector('.js-delete-button').classList.remove('hide');
+            divname_com.querySelector('.js-edit-button').classList.remove('hide');
+            divname_com.querySelector('.js-delete-button').classList.remove('hide');
         });
 
         // Append the Cancel button to the replyWrapper element
-        replyWrapper.appendChild(cancelButton);
+        divname_com.appendChild(cancelButton);
 
         // Hide the edit and delete buttons
         replyWrapper.querySelector('.js-edit-button').classList.add('hide');
@@ -848,6 +851,8 @@ var mycomment = {
         let replyWrapper = e.target.closest('.reply-wrapper');
         console.log(replyWrapper);
         // Get the edited reply input field
+        let col2 = replyWrapper.querySelector('.col');
+        let divname_com = col2.querySelector('.p-3');
         let editInput = replyWrapper.querySelector('input');
         console.log(editInput);
         // Get the edited reply content
@@ -883,10 +888,16 @@ var mycomment = {
                         let replyElement = document.createElement('div');
                         replyElement.classList.add('reply');
                         replyElement.innerHTML = editedReplyText;
+
+                        // Select the date element
+                        let dateElement = replyWrapper.querySelector('.js-date');
+                        // Update the date element with the updated date
+                        time.updateTimestamps(dateElement, obj.updated_date);
+
                         // Replace editInput and saveButton with replyElement
                         let saveButton = replyWrapper.querySelector('button');
-                        replyWrapper.replaceChild(replyElement, editInput);
-                        replyWrapper.removeChild(saveButton);
+                        divname_com.replaceChild(replyElement, editInput);
+                        divname_com.removeChild(saveButton);
 
                         // Show the edit and delete buttons
                         replyWrapper.querySelector('.js-edit-button').classList.remove('hide');
@@ -894,7 +905,7 @@ var mycomment = {
                         
                         // Remove the cancel button
                         let cancelButton = replyWrapper.querySelector('.js-cancel-edit');
-                        replyWrapper.removeChild(cancelButton);
+                        divname_com.removeChild(cancelButton);
                     }//nasa ajax.php yung .sucess
                         //window.location.reload();
                         

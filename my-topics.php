@@ -34,7 +34,7 @@
         }
 
         .highlight {
-            background-color: yellow;
+            background-color: #D2E0F8;
         }
 
         input:focus, textarea:focus{
@@ -92,7 +92,7 @@
 
     <div class="container">
         <div class="row px-5">
-            <div class="col-2">
+            <div class="col-2 d-none d-lg-block">
                 <!-- sa column 'tong div -->
             </div>
 
@@ -140,7 +140,8 @@
                         <div id="postsSection">
                             <div id="postContainer">
                                 <!-- Existing posts go here -->
-                                <button id="loadMoreBtn" onclick="myposts.loadMorePosts()" class="js-loadmore-btn btn">View More</button>
+                                <button id="loadMoreBtn" onclick="myposts.loadMorePosts()" class="js-loadmore-btn btn" style="position: absolute;
+                                left: 50%; transform: translateX(-50%); color: #424242;">View More</button>
                             </div>
                         </div>
 
@@ -240,7 +241,7 @@
 </script>
 <script src="like-rating.js?v4"></script>
 <script src="time.js?v1"></script>
-<script src="my-topics.js?v1"></script>
+<script src="my-topics.js?v2"></script>
 
 
 <script>

@@ -36,7 +36,7 @@
         }
 
         .highlight {
-            background-color: yellow;
+            background-color: #D2E0F8;
         }
 
         input:focus, textarea:focus{
@@ -95,8 +95,8 @@
 
     <div class="container">
         <div class="row px-5">
-            <div class="col-2">
-                <!-- sa column 'tong div -->
+            <div class="col-2 d-none d-lg-block">
+                <!-- sa column 'tong div --> 
             </div>
 
             <div class="col">
@@ -143,7 +143,8 @@
                         <div id="postsSection">
                             <div id="postContainer">
                                 <!-- Existing posts go here -->
-                                <button id="loadMoreBtn" onclick="allposts.loadMorePosts()" class="js-loadmore-btn btn">View More</button>
+                                <button id="loadMoreBtn" onclick="allposts.loadMorePosts()" class="js-loadmore-btn btn" style="position: absolute;
+                                left: 50%; transform: translateX(-50%); color: #424242;">View More</button>
                             </div>
                         </div>
 
@@ -158,7 +159,7 @@
 
                 <!-- post card template-->
                 <template id="postCardTemplate" class="js-postCardTemplate">
-                    <div class="js-post-card class_42 ps-5 pe-5 pt-5 pb-4 my-5 rounded-5 shadow-sm" style="animation: appear 3s ease; background-color:white;">
+                    <div class="js-post-card class_42 ps-5 pe-5 pt-5 pb-4 mb-5 mt-3 rounded-5 shadow-sm" style="animation: appear 3s ease; background-color:white;">
                         
                         <div class="class_49" >
                             <div class="row mb-2">

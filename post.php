@@ -128,14 +128,14 @@
 
     <div class="container">
         <div class="row px-5">
-            <div class="col-2">
+            <div class="col-2 d-none d-lg-block">
                 <!-- sa column 'tong div -->
             </div>
 
             <div class="col">
 
 	<section class="class_1" >
-        <div class="js-personal-post ps-5 pe-5 pt-5 pb-4 my-5 rounded-5 shadow-sm" style="animation: appear 3s ease; background-color:white;">
+        <div class="js-personal-post ps-5 pe-5 pt-5 pb-4 rounded-5 shadow-sm" style="animation: appear 3s ease; background-color:white;">
             <div class="class_11" >
                 <?php //include('success.alert.inc.php') ?>
                 <?php //include('fail.alert.inc.php') ?>
@@ -337,9 +337,6 @@
                 
                 </div>
 
-
-                
-
                 <div class="js-comment class_15"  >
                     is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets c
                 </div>
@@ -355,8 +352,6 @@
                     <span class="js-num-likes"></span>
                 </div>
                 
-                
-
                 <div class="js-reply-section class_51 col" >
                     <div class="js-reply-link class_53" style="font-size:14px; color:blue;cursor: pointer; color: #1b4ca1; "  >
                         Reply
@@ -367,14 +362,15 @@
 
         <!--edit,del-->
         <div class="col-1">
+            <!--div-->
             <div class="js-action-buttons class_51" >
 
             <!--3 dots-->
             <a data-toggle="dropdown" class="btn"><i class="fa-solid fa-ellipsis fs-4"></i></a>
                 
                 <!--div edit,del-->
-
                 <div class="container">
+                    
                     <!--ul element-->
                     <ul class="dropdown-menu">
                         <div class="js-edit-button class_53 dropdown-item" style="color:blue;cursor: pointer;"  >
@@ -411,7 +407,7 @@
 <script src="time.js?v1"></script>
 <script src="like-rating.js?v3"></script>
 <script src="community-topics.js?v6"></script>
-<script src="mycomment.js?v42"></script>
+<script src="mycomment.js?v46"></script>
 
 <script>
     // Call the updateTimestamps function initially when the page loads

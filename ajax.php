@@ -180,6 +180,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 	
 		$query = "update forum set forum_desc = '$post', forum_timestamp = '$date' where user_id = '$user_id' && forum_id = '$id' limit 1";
 		$info['message'] = "Your reply was edited successfully";
+		$info['updated_date'] = date('Y-m-d\TH:i:s', strtotime($date));
 		
 		query($query);
 		$info['success'] = true;

@@ -18,6 +18,15 @@
     box-shadow: none;
     border:none;
     }
+    /* Default style for anchor tags */
+    .nav-link {
+        font-weight: normal; /* Use the default font weight */
+    }
+
+    /* Style for active anchor tags (text will be bold) */
+    .nav-link.active {
+        font-weight: bold;
+    }
 </style>
 
 <div>
@@ -51,18 +60,46 @@
 </br></br>-->
 
     <div class="container">
-        <div class="row" style="width:15%;">
-            <div class="col">
-            <a href="community-topics.php" class="js-link nav-link active" ><i class="fa-regular fa-comments" style="display:inline;"></i>&nbsp; Community Topics</a>
+        <div class="row-auto">
+            <div class="col-auto p-1">
+                <a href="community-topics.php" class="js-link nav-link active" ><i class="fa-regular fa-comments" style="display:inline;"></i>&nbsp; Community Topics</a>
             </div>
-        </div>
-        <div class="row" style="width:15%;">
-            <div class="col">
+            <div class="col p-1 mb-4">
                 <a href="my-topics.php" class="js-link nav-link"><i class="fa-solid fa-question" style="display:inline;"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;My Topics</a>
             </div>
-            
         </div>
+        
     </div>
     
     
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+        // Wait for the document to be ready
+        $(document).ready(function () {
+        // Function to set the active class based on the current URL
+        function setActiveLink() {
+            var url = window.location.href;
+            $(".js-link").each(function () {
+                if (url.includes($(this).attr("href"))) {
+                    $(this).addClass("active");
+                } else {
+                    $(this).removeClass("active");
+                }
+            });
+        }
+
+        // Attach click event handler to anchor tags with the class "js-link"
+        $(".js-link").on("click", function () {
+            // Remove the "active" class from all anchor tags
+            $(".js-link").removeClass("active");
+            // Add the "active" class to the clicked anchor tag
+            $(this).addClass("active");
+        });
+
+        // Set the active link on page load
+        setActiveLink();
+    });
+</script>
+</script>
