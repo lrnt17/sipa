@@ -24,6 +24,41 @@
     input:disabled + label {
   color: lightgray;
     }
+    #start_date_picker {
+    display: none;
+  }
+  /* CSS to resize the calendar container */
+  .flatpickr-calendar {
+    width: 300px; /* You can adjust this value to your preferred width */
+  }
+
+  /* Adjust the positioning and styling of the dropdown menu */
+  .input-container {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+label {
+  margin-right: 10px;
+}
+
+.separator {
+  color: #888;
+  margin: 0 10px;
+}
+
+#longevity-input {
+  padding: 5px;
+  width: 50px; /* Adjust this width as needed */
+}
+
+select {
+  padding: 5px;
+  color: blue;
+}
+
+
    </style>
    
 
@@ -113,31 +148,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="submit" value="Back" name="submit_back">
         </form>
     </div>
-    
-    <div>
-        <p>Contraceptive method reminder via<p>
-            <h3>SMS</h3>
-    </div>
 
-    <div>
+    <div id="method_buttons_container">
+  <p>Select a contraceptive method based on the result of your assessment.</p>
+  <!-- New Save Button -->
+  <!-- Note: Removed the inline "display: none" style from the button -->
+  <button id="save_method_button" style="display:none">Save Method Only</button>
+</div>
+
+<div id="sms_reminder_btn" style="display: none;">
+  <div>
+    <p>Contraceptive method reminder via</p>
+    <h3>SMS</h3>
+  </div>
   <p>Would you like to receive SMS reminders to take your selected contraceptive method as recommended?</p>
-  <form id="sms_reminder_btn" action="#" method="post">
+  <!-- Move the "Remind Me!" button inside the form -->
+  <form id="sms_reminder_form" action="#" method="post">
     <input type="submit" value="Remind Me!" name="submit_remind" id="remind_me_btn">
   </form>
 </div>
 
-<!-- Add the container for the contraceptive method buttons -->
-<div id="method_buttons_container" style="display: none;">
-<p>Select a contraceptive method based on the result of your assessment.</p>
+<div class="input-container" style="background-color: #EDEDED; width: 300px; display: none;" >
+  <label for="longevity">Longevity</label>
+  <span class="separator">|</span>
+  <input type="text" id="longevity-input" pattern="[0-9]*" maxlength="2" placeholder="00">
+  <select id="duration-dropdown">
+    <option value="day">Day/s</option>
+    <option value="week">Week/s</option>
+    <option value="month">Month/s</option>
+    <option value="year">Year/s</option>
+  </select>
 </div>
-
 <script>
   let selectedMethod = ''; // Variable to store the selected contraceptive method
 
-  document.getElementById("remind_me_btn").addEventListener("click", function (event) {
-    event.preventDefault();
-
-    const recommendationsJson = '<?php echo addslashes($_POST['recommendations']); ?>';
+  const recommendationsJson = '<?php echo addslashes($_POST['recommendations']); ?>';
     const recommendations = JSON.parse(recommendationsJson);
 
     const container = document.getElementById("method_buttons_container");
@@ -146,7 +191,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     recommendations.forEach(function (method) {
       fetchMethodDetails(method, container);
     });
-  });
+    
+
+    /*document.getElementById("save_method_button").addEventListener("click", function () {
+  if (selectedMethod) {
+    const saveMethodOnlyButton = document.getElementById("save_method_button");
+    saveMethodOnlyButton.style.display = "none";
+
+    const smsReminderForm = document.getElementById("sms_reminder_btn");
+    smsReminderForm.style.display = "none";
+
+    const remindMeButton = document.getElementById("remind_me_btn");
+    remindMeButton.style.display = "none"; // Hide the "Remind Me!" button when "Save Method Only" is clicked
+  }});
+  */
+
+document.getElementById("remind_me_btn").addEventListener("click", function (event) {
+  event.preventDefault();
+  const remindMeButton = document.getElementById("remind_me_btn");
+  remindMeButton.style.display = "none"; // Hide the "Remind Me!" button when clicked
+
+  showDatePicker();
+});
+
 
   function fetchMethodDetails(method, container) {
     const xhr = new XMLHttpRequest();
@@ -184,7 +251,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
               });
 
-              showDatePicker();
+               // Make the AJAX request to save the selected contraceptive method
+   const xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === XMLHttpRequest.DONE) {
+        if (xhr.status === 200) {
+          const response = JSON.parse(xhr.responseText);
+          if (response.success) {
+            alert("Contraceptive method successfully saved!");
+          } else {
+            alert("Error saving contraceptive method. Please try again.");
+          }
+        } else {
+          alert("Error saving contraceptive method. Please try again.");
+        }
+      }
+    };
+
+    xhr.open("POST", "save_method_only.php", true);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    const user_id = '<?php echo $_SESSION['USER']['user_id']; ?>';
+    xhr.send(
+      "user_id=" + encodeURIComponent(user_id) + "&selected_method=" + encodeURIComponent(selectedMethod)
+    );
+   
+              showReminderButton();
             }
           });
         } else {
@@ -197,59 +288,73 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     xhr.send();
   }
 
+
+
+  function showReminderButton() {
+  const smsReminderBtn = document.getElementById("sms_reminder_btn");
+  smsReminderBtn.style.display = "block";
+}
+
+
   function showDatePicker() {
-    const datePickerContainer = document.createElement("div");
-    datePickerContainer.id = "date_picker_container";
+  const datePickerContainer = document.createElement("div");
+  datePickerContainer.id = "date_picker_container";
 
-    const datePickerLabel = document.createElement("label");
-    datePickerLabel.textContent = "Select the start date for the contraceptive method: ";
+  const datePickerLabel = document.createElement("label");
+  datePickerLabel.textContent = "Select the start date for the contraceptive method: ";
 
-    const datePickerInput = document.createElement("input");
-    datePickerInput.type = "text";
-    datePickerInput.id = "start_date_picker";
-    datePickerInput.setAttribute("placeholder", "Select a date...");
+  const datePickerInput = document.createElement("input");
+  datePickerInput.type = "text";
+  datePickerInput.id = "start_date_picker";
+  datePickerInput.setAttribute("placeholder", "Select a date...");
 
-    datePickerContainer.appendChild(datePickerLabel);
-    datePickerContainer.appendChild(datePickerInput);
+  datePickerContainer.appendChild(datePickerLabel);
+  datePickerContainer.appendChild(datePickerInput);
 
-    // Append the date picker container to the page
-    document.getElementById("method_buttons_container").appendChild(datePickerContainer);
+  const inputContainer = document.querySelector(".input-container");
+  inputContainer.style.display = "block"; // Show the longevity input container
 
-    // Create a flatpickr instance for the date picker input
-    const flatpickrInstance = flatpickr(datePickerInput, {
-      dateFormat: "Y-m-d",
-      enableTime: false,
-      minDate: "today",
-    });
+  // Append the date picker container after the "Remind Me!" button div
+  document.getElementById("sms_reminder_btn").insertAdjacentElement('afterend', datePickerContainer);
 
-    // Create and append the "Save" button
-    const saveButton = document.createElement("button");
-    saveButton.textContent = "Save";
-    saveButton.style.display = "none"; // Hide the save button initially
-
-    saveButton.addEventListener("click", function () {
-      const selectedDate = flatpickrInstance.selectedDates[0];
-      // Add one day to the selectedDate kasi ayaw maayos yung date XD pero iibahin ko pa to pag may time pa ayaw sa utc manila e hmp
-      const nextDay = new Date(selectedDate);
-      nextDay.setDate(selectedDate.getDate() + 1);
-      const formattedDate = nextDay.toISOString().split("T")[0];
-      updateStartDate(formattedDate);
-    });
-
-    datePickerContainer.appendChild(saveButton);
-
-    // Show the save button only when the user selects a date
-    datePickerInput.addEventListener("change", function () {
+  // Create a flatpickr instance for the date picker input
+  flatpickr(datePickerInput, {
+    dateFormat: "Y-m-d",
+    enableTime: false,
+    minDate: "today",
+    inline: true, // Display the calendar without a need to click on the input
+    onChange: function(selectedDates, dateStr, instance) {
+      // This function is triggered when a date is selected
+      const saveButton = document.getElementById("save_date_button");
       saveButton.style.display = "block";
-    });
-  }
+    }
+  });
+
+  // Create and append the "Save" button
+  const saveButton = document.createElement("button");
+  saveButton.id = "save_date_button";
+  saveButton.textContent = "Save";
+  saveButton.style.display = "none"; // Hide the save button initially
+
+  saveButton.addEventListener("click", function () {
+    const selectedDate = datePickerInput.value;
+    const formattedDate = selectedDate.split("T")[0];
+    updateStartDate(formattedDate);
+  });
+
+  datePickerContainer.appendChild(saveButton);
+
+  // Remove the input field from the container
+  datePickerContainer.removeChild(datePickerInput);
+}
+
 
   function updateStartDate(formattedDate) {
     const xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
       if (xhr.readyState === XMLHttpRequest.DONE) {
         if (xhr.status === 200) {
-          alert(formattedDate + "Selected contraceptive method and start date saved to the database.");
+          alert("Selected contraceptive method and start date saved to the database.");
         } else {
           alert("Error updating selected contraceptive method and start date in the database.");
         }
@@ -264,6 +369,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     );
   }
 </script>
+
+
+
+
+
 
 
 
@@ -319,6 +429,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+  const longevityInput = document.getElementById('longevity-input');
+  const durationDropdown = document.getElementById('duration-dropdown');
+
+  durationDropdown.addEventListener('change', () => {
+    const selectedValue = durationDropdown.value;
+    switch (selectedValue) {
+      case 'day':
+        longevityInput.maxLength = 1;
+        longevityInput.placeholder = '6 days';
+        break;
+      case 'month':
+        longevityInput.maxLength = 2;
+        longevityInput.placeholder = '11 months';
+        break;
+      case 'year':
+        longevityInput.maxLength = 2;
+        longevityInput.placeholder = '10 years';
+        break;
+      default:
+        longevityInput.maxLength = 2;
+        longevityInput.placeholder = '';
+    }
+  });
+</script>
+
+
+
+
 </body>
 
 
