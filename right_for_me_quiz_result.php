@@ -11,6 +11,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"/>
     <title>SiPa | Right for Me</title>
     <style>
    .skiptranslate iframe  {
@@ -119,13 +120,153 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
     <div>
-        <p>Would you like to receive SMS reminders to take your selected contraceptive method as recommended?<p>
-        <form id= "sms_reminder_btn" action="#" method="post">
-        <input type="submit" value="Remind Me!" name="submit_remind">
-        </form>
-    </div>
+  <p>Would you like to receive SMS reminders to take your selected contraceptive method as recommended?</p>
+  <form id="sms_reminder_btn" action="#" method="post">
+    <input type="submit" value="Remind Me!" name="submit_remind" id="remind_me_btn">
+  </form>
+</div>
 
-    
+<!-- Add the container for the contraceptive method buttons -->
+<div id="method_buttons_container" style="display: none;">
+<p>Select a contraceptive method based on the result of your assessment.</p>
+</div>
+
+<script>
+  let selectedMethod = ''; // Variable to store the selected contraceptive method
+
+  document.getElementById("remind_me_btn").addEventListener("click", function (event) {
+    event.preventDefault();
+
+    const recommendationsJson = '<?php echo addslashes($_POST['recommendations']); ?>';
+    const recommendations = JSON.parse(recommendationsJson);
+
+    const container = document.getElementById("method_buttons_container");
+    container.style.display = "block";
+
+    recommendations.forEach(function (method) {
+      fetchMethodDetails(method, container);
+    });
+  });
+
+  function fetchMethodDetails(method, container) {
+    const xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === XMLHttpRequest.DONE) {
+        if (xhr.status === 200) {
+          const methodDetails = JSON.parse(xhr.responseText);
+          const button = document.createElement("button");
+          button.classList.add("method_btn");
+          button.textContent = methodDetails.birth_control_name;
+          button.setAttribute("data-selected", "false");
+
+          const img = document.createElement("img");
+          img.src = methodDetails.birth_control_img;
+          img.alt = methodDetails.birth_control_name;
+          img.width = 50;
+          img.height = 50;
+
+          button.appendChild(img);
+          container.appendChild(button);
+
+          // Add an event listener to handle button selection
+          button.addEventListener("click", function () {
+            selectedMethod = methodDetails.birth_control_name; // Store the selected method
+            const isSelected = button.getAttribute("data-selected") === "true";
+
+            // If the button is already selected, remove it from the view
+            if (isSelected) {
+              button.style.display = "none";
+            } else {
+              const methodButtons = container.querySelectorAll(".method_btn");
+              methodButtons.forEach(function (otherButton) {
+                if (otherButton !== button) {
+                  otherButton.style.display = "none";
+                }
+              });
+
+              showDatePicker();
+            }
+          });
+        } else {
+          console.error("Error fetching method details");
+        }
+      }
+    };
+
+    xhr.open("GET", `get_method_details.php?method_name=${encodeURIComponent(method)}`, true);
+    xhr.send();
+  }
+
+  function showDatePicker() {
+    const datePickerContainer = document.createElement("div");
+    datePickerContainer.id = "date_picker_container";
+
+    const datePickerLabel = document.createElement("label");
+    datePickerLabel.textContent = "Select the start date for the contraceptive method: ";
+
+    const datePickerInput = document.createElement("input");
+    datePickerInput.type = "text";
+    datePickerInput.id = "start_date_picker";
+    datePickerInput.setAttribute("placeholder", "Select a date...");
+
+    datePickerContainer.appendChild(datePickerLabel);
+    datePickerContainer.appendChild(datePickerInput);
+
+    // Append the date picker container to the page
+    document.getElementById("method_buttons_container").appendChild(datePickerContainer);
+
+    // Create a flatpickr instance for the date picker input
+    const flatpickrInstance = flatpickr(datePickerInput, {
+      dateFormat: "Y-m-d",
+      enableTime: false,
+      minDate: "today",
+    });
+
+    // Create and append the "Save" button
+    const saveButton = document.createElement("button");
+    saveButton.textContent = "Save";
+    saveButton.style.display = "none"; // Hide the save button initially
+
+    saveButton.addEventListener("click", function () {
+      const selectedDate = flatpickrInstance.selectedDates[0];
+      // Add one day to the selectedDate kasi ayaw maayos yung date XD pero iibahin ko pa to pag may time pa ayaw sa utc manila e hmp
+      const nextDay = new Date(selectedDate);
+      nextDay.setDate(selectedDate.getDate() + 1);
+      const formattedDate = nextDay.toISOString().split("T")[0];
+      updateStartDate(formattedDate);
+    });
+
+    datePickerContainer.appendChild(saveButton);
+
+    // Show the save button only when the user selects a date
+    datePickerInput.addEventListener("change", function () {
+      saveButton.style.display = "block";
+    });
+  }
+
+  function updateStartDate(formattedDate) {
+    const xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === XMLHttpRequest.DONE) {
+        if (xhr.status === 200) {
+          alert(formattedDate + "Selected contraceptive method and start date saved to the database.");
+        } else {
+          alert("Error updating selected contraceptive method and start date in the database.");
+        }
+      }
+    };
+
+    xhr.open("POST", "save_method_and_start_date.php", true);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    const user_id = '<?php echo $_SESSION['USER']['user_id']; ?>';
+    xhr.send(
+      "user_id=" + encodeURIComponent(user_id) + "&selected_method=" + encodeURIComponent(selectedMethod) + "&selected_date=" + encodeURIComponent(formattedDate)
+    );
+  }
+</script>
+
+
+
 
 <!-- footer -->
 
@@ -177,12 +318,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <a href="">Terms of Use</a>
         </div>
 </footer>
-
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 </body>
 
-<script>
-          
-</script>
 
 </html>
-
