@@ -95,7 +95,14 @@ var like_rating = {
                         data = data.replaceAll('\\"','"');
                         data = JSON.parse(data);
 
-                        allposts.updatePostData(forum_id, data);
+                        //allposts.updatePostData(forum_id, data);
+                        //myposts.updatePostData(forum_id, data);
+                        if (typeof allposts !== 'undefined') {
+                            allposts.updatePostData(forum_id, data);
+                        }
+                        if (typeof myposts !== 'undefined') {
+                            myposts.updatePostData(forum_id, data);
+                        }
                     }
                 }else{
                     alert("Please check your internet connection");

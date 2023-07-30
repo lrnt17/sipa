@@ -2,6 +2,7 @@ var myposts = {
 
     start: (typeof start == 'undefined') ? 0 : start,
     limit: (typeof limit == 'undefined') ? 5 : limit,
+    numDeleted: 0, // variable to keep track of the number of deleted posts
 
     submit: function(e){
 
@@ -29,7 +30,6 @@ var myposts = {
             {
                 if(ajax.status == 200){
 
-                    console.log(ajax.responseText);
                     let obj = JSON.parse(ajax.responseText);
                     alert(obj.message);
 
@@ -86,8 +86,39 @@ var myposts = {
                     if(obj.success){
 
                         // Find and remove the post element from the page
-                        let postElement = document.querySelector(`#post_${forum_id}`);
-                        postElement.parentNode.removeChild(postElement);
+                        //let postElement = document.querySelector(`#post_${forum_id}`);
+                        //postElement.parentNode.removeChild(postElement);
+                        window.location.reload();
+                        //myposts.numDeleted++; // increment the number of deleted 
+
+                        // check if there are any search results stored in sessionStorage
+                        /*let storedSearchResults = sessionStorage.getItem('searchResults');
+                        if (storedSearchResults) {
+                            console.log(storedSearchResults);
+                            // deletion is happening in the search results
+                            let searchResults = JSON.parse(storedSearchResults);
+                            // remove the deleted post from the search results
+                            searchResults = searchResults.filter(function(post) {
+                                let forum_id_int = parseInt(forum_id);
+                                let forum_id_string = forum_id_int.toString();
+                                return post.forum_id !== forum_id_string;
+                            });
+                            // update the search results stored in sessionStorage
+                            sessionStorage.setItem('searchResults', JSON.stringify(searchResults));
+                            // display the updated search results
+                            myposts.displayPosts(searchResults, true);
+                            // check if there are no more search results and display the "No posts found" message
+                            if (searchResults.length === 0) {
+                                let postContainer = document.getElementById("postContainer");
+                                let loadMoreBtn = document.getElementById("loadMoreBtn");
+                                postContainer.innerHTML = '<p>No posts found</p>';
+                                loadMoreBtn.style.display = "none";
+                                postContainer.appendChild(loadMoreBtn);
+                            }
+                        } else {
+                            // deletion is happening in the normal page itself without searching
+                            myposts.numDeleted++; // increment the number of deleted posts
+                        }*/
                     }
                 }else{
                     alert("Please check your internet connection");
@@ -114,6 +145,8 @@ var myposts = {
     loadMorePosts: function(callback, clearExisting = false) {
         
         let form = new FormData();
+        //form.append('start', myposts.start - myposts.numDeleted); // adjust the start value to take into account any deleted posts
+        //form.append('start', Math.max(0, myposts.start - myposts.numDeleted));
         form.append('start', myposts.start);
         form.append('limit', myposts.limit);
         form.append('data_type', 'load_my_posts');
@@ -174,6 +207,14 @@ var myposts = {
         let searchWords = searchQuery.split(' ');
 
         for (var i = 0; i < posts.length; i++) {
+            /*let post = posts[i];
+            // check if a post with the same forum_id as the current post already exists in the list of displayed posts
+            let existingPostElement = document.querySelector(`#post_${post.forum_id}`);
+            if (existingPostElement) {
+                // update the existing post element with the new data
+               //existingPostElement.innerHTML = createPostHtml(post);
+               existingPostElement.remove();
+            } //else {*/
             let postCard = postCardTemplate.content.cloneNode(true);
 
             /*if(typeof posts[i].user == 'object'){
@@ -259,11 +300,12 @@ var myposts = {
             if(!posts[i].user_owns){
                 action_buttons.remove();
             }
-			// Update the timestamp dynamically
+            // Update the timestamp dynamically
             let timestampElement = clone.querySelector('.js-date');
             time.updateTimestamps(timestampElement, posts[i].date);
 
             postContainer.insertBefore(clone, loadMoreBtn);
+            //}
         }
     },
 
@@ -461,7 +503,6 @@ var myposts = {
                         myposts.displayPosts(obj.rows, true);
                         
                         sessionStorage.setItem('searchResults', JSON.stringify(obj.rows));
-
                     } else {
 
                         // Display an error message

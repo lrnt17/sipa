@@ -150,9 +150,9 @@
     let start = 0;
     let limit = 5;
 </script>
-<script src="like-rating.js?v4"></script>
+<script src="like-rating.js?v5"></script>
 <script src="time.js?v1"></script>
-<script src="my-topics.js?v1"></script>
+<script src="my-topics.js?v5"></script>
 
 
 <script>
@@ -182,7 +182,7 @@
         } else {
             // Clear any stored search results from sessionStorage
             sessionStorage.removeItem('searchResults');
-            
+            console.log(storedSearchResults);
             // Clear any existing posts and load the first 5 posts from the database
             myposts.start = 0;
             myposts.loadMorePosts(null, true);

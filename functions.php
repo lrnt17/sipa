@@ -82,3 +82,12 @@ function i_own_profile($row)
 
 	return false;
 }
+
+function head_admin($row) {
+	
+    if ($row == 'BUSTOS00001') {
+        return true;
+    } else {
+        return false;
+    }
+}

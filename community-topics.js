@@ -85,11 +85,11 @@ var allposts = {
 
                     if(obj.success){
                         //allposts.loadMorePosts();
-                        //window.location.reload();
+                        window.location.reload();
 
                         // Find and remove the post element from the page
-                        let postElement = document.querySelector(`#post_${forum_id}`);
-                        postElement.parentNode.removeChild(postElement);
+                        //let postElement = document.querySelector(`#post_${forum_id}`);
+                        //postElement.parentNode.removeChild(postElement);
                     }
                 }else{
                     alert("Please check your internet connection");

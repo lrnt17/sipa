@@ -121,7 +121,7 @@
 
 <?php 
     
-    if ($_POST["submit"]){
+    if (isset($_POST["submit"])){
 
         $_SESSION["fname"] = $_POST['fname'];
         $_SESSION["lname"] = $_POST['lname'];

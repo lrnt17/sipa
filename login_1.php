@@ -9,12 +9,112 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/forms.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/324d76b648.js" crossorigin="anonymous"></script>
     <title>Sign in | SiPa</title>
+    <style>
+        /* The Modal (background) */
+        .js-sched-appointment-modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        /* Modal Content */
+        .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        }
+
+        /* The Close Button */
+        .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+        }
+
+        .block{
+            display: block;
+        }
+
+        .hide{
+            display: none;
+        }
+
+        table{
+            table-layout: fixed;
+        }
+
+        td{
+            width: 33%;
+        }
+
+        .today{
+            color: orange;
+        }
+
+        
+        .new-dates:hover{
+            background-color: purple;
+            color: white;
+            cursor: pointer;
+        }
+
+        .old-dates {
+            /* Style for dates that are less than the current date */
+            color: gray;
+        }
+
+        .fullybooked-dates {
+            color: red;
+        }
+
+        .selected {
+            color: white;
+            background-color: purple;
+        }
+
+        .selected-timeslot{
+            color: white;
+            background-color: purple;
+        }
+
+        .weekend-dates{
+            opacity: 0.3;
+            background-color: gray;
+        }
+
+        .current-date{
+            color: orange;
+        }
+
+        .booked{
+            background-color: red;
+        }
+    </style>
 </head>
 <body>
 
@@ -67,7 +167,8 @@
                     <div class="lines">
                         <p class="text-dha" id="dont_have_account">Don't have an account?</p>
                     </div>
-                    <p class="text-visit">Visit the nearest health facility in your area</p>
+                    <div onclick="sched_appointment.show()">Schedule an Appoitment</div>
+                    <p class="text-visit">or Visit the nearest health facility in your area</p>
                 </div>
                 
                 <!-- show password toggle script -->
@@ -93,6 +194,7 @@
             <?php include('languageprivacyterms.php') ?>
         </div>
     </div>
+    <?php include('sched-appointment.php') ?>
 </body>
 
 <script>
@@ -102,7 +204,7 @@
             e.preventDefault();
             let inputs = e.currentTarget.querySelectorAll("input");
             let form = new FormData();
-
+            
             for (var i = inputs.length - 1; i >= 0; i--) {
                 form.append(inputs[i].name, inputs[i].value);
             }
@@ -134,8 +236,6 @@
         },
     };
 
-
-    
 </script>
 
 </html>

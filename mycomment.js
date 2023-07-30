@@ -686,6 +686,7 @@ var mycomment = {
 
         // Add a Save button for submitting the edited reply
         let saveButton = document.createElement('button');
+        saveButton.classList.add('js-save-edit');
         saveButton.innerHTML = 'Save';
 
         // Attach event listener to the Save button
@@ -759,8 +760,14 @@ var mycomment = {
                         let replyElement = document.createElement('div');
                         replyElement.classList.add('reply');
                         replyElement.innerHTML = editedReplyText;
+
+                        // Select the date element
+                        let dateElement = replyWrapper.querySelector('.js-date');
+                        // Update the date element with the updated date
+                        time.updateTimestamps(dateElement, obj.updated_date);
+
                         // Replace editInput and saveButton with replyElement
-                        let saveButton = replyWrapper.querySelector('button');
+                        let saveButton = replyWrapper.querySelector('.js-save-edit');
                         replyWrapper.replaceChild(replyElement, editInput);
                         replyWrapper.removeChild(saveButton);
 

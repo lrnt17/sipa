@@ -38,7 +38,27 @@
         }
         .skiptranslate iframe  {
         visibility: hidden !important;
-        } 
+        }
+        
+        /* Style for women container */
+        #women-container {
+            display: flex;
+            flex-direction: row;
+        }
+
+        /* Style for pregnant and non-pregnant women containers */
+        #pregnant-women-container,
+        #non-pregnant-women-container {
+            display: flex;
+            flex-direction: row;
+        }
+
+        /* Style for images */
+        #pregnant-women-container img,
+        #non-pregnant-women-container img {
+            width: 50px;
+            height: 50px;
+        }
     </style>
   
     <script src="script.js" defer></script>
@@ -190,7 +210,7 @@
     </div>
     
     <!-- community forum -->
-
+    <?php include('method-interactive-display.php') ?>
 
     <!-- maps -->
     <div>

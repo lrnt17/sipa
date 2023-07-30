@@ -180,6 +180,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 	
 		$query = "update forum set forum_desc = '$post', forum_timestamp = '$date' where user_id = '$user_id' && forum_id = '$id' limit 1";
 		$info['message'] = "Your reply was edited successfully";
+		$info['updated_date'] = date('Y-m-d\TH:i:s', strtotime($date));
 		
 		query($query);
 		$info['success'] = true;
@@ -435,7 +436,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 			}
 			
 			// Check if there are more rows to load
-			$query = "select count(*) from forum where comment_parent_id = 0 && reply_parent_id = 0";
+			$query = "select count(*) from forum where user_id = $user_id && comment_parent_id = 0 && reply_parent_id = 0";
 			$result = query($query);
 			if ($result) {
 				$totalRows = intval($result[0]['count(*)']);
@@ -884,6 +885,26 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 		}
 		 // Return success status
 		$info['success'] = true;
+	}else
+	if($_POST['data_type'] == 'load_method')
+	{
+		$user_id = $_SESSION['USER']['user_id'] ?? 0;
+		$method_id = (int)$_POST['method_id'];
+	
+		$query = "select * from birth_controls where birth_control_id = '$method_id' limit 1";
+		
+		$rows = query($query);
+		
+		if($rows){
+
+			// Extract the preggy and not_preggy values from the first row
+			$info['method_name'] = $rows[0]['birth_control_name'];
+			$info['preggy'] = $rows[0]['preggy'];
+			$info['not_preggy'] = $rows[0]['not_preggy'];
+		}
+
+		$info['success'] = true;
+
 	}
 	
 }

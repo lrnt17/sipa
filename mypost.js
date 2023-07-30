@@ -129,6 +129,8 @@ var mypost = {
                                 row_data = row_data.replaceAll('"','\\"');
                                 clone.setAttribute('row',row_data);
 
+                                //missing... pero di naman na need
+
                                 clone.classList.remove('hide');
                                 
                                 post_holder.appendChild(clone);
@@ -176,8 +178,10 @@ var mypost = {
         }
         
         let form = new FormData(); //new form within javascript
-
+        //let comment_part = false;
+        
         form.append('id', forum_id);
+        //form.append('comment_part', comment_part);
         form.append('data_type', 'delete_post');
         var ajax = new XMLHttpRequest();
 
@@ -190,9 +194,9 @@ var mypost = {
                     //console.log(ajax.responseText);
                     let obj = JSON.parse(ajax.responseText);
                     alert(obj.message);
-
                     if(obj.success){
-                        mypost.load_my_posts();
+                        //mypost.load_my_posts();
+                        window.location.reload();
                     }
                 }else{
                     alert("Please check your internet connection");
