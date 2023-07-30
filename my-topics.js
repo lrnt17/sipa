@@ -252,16 +252,16 @@ var myposts = {
 
             //counting the number of comments
             if(posts[i].comment_count > 0){
-                postCard.querySelector(".js-comment-link").innerHTML = `${posts[i].comment_count}+ Comments`;
+                postCard.querySelector(".js-comment-link").innerHTML = ` <i class="fa-solid fa-comments"></i> &nbsp;  ${posts[i].comment_count} +`;
             }else{
-                postCard.querySelector(".js-comment-link").innerHTML = `Comment`;
+                postCard.querySelector(".js-comment-link").innerHTML = `<i class="fa-solid fa-comments"></i>`;
             }
             
             //counting the number of likes
             if (posts[i].getlikes['count(*)'] == 0) {
                 postCard.querySelector(".js-num-likes").innerHTML = "";
             } else {
-                postCard.querySelector(".js-num-likes").innerHTML = `${posts[i].getlikes['count(*)']} like${posts[i].getlikes['count(*)'] > 1 ? 's' : ''}`;
+                postCard.querySelector(".js-num-likes").innerHTML = `${posts[i].getlikes['count(*)']} `; // like${posts[i].getlikes['count(*)'] > 1 ? 's' : ''}
             }
 
             //---------------------------------------------------------------------------------------
@@ -324,13 +324,31 @@ var myposts = {
         // Create new input elements for the title and content
         let editTitleInput = document.createElement('input');
         editTitleInput.type = 'text';
+        editTitleInput.classList.add('form-control', 'fs-3'); // Add Bootstrap class 'form-control' for styling
         editTitleInput.classList.add('js-title');
         editTitleInput.value = replyTitleText;
 
+        // Custom style
+        editTitleInput.style.borderBottom = '1px light gray'; 
+        editTitleInput.style.borderTop = 'none';
+        editTitleInput.style.borderLeft = 'none';
+        editTitleInput.style.borderRight = 'none';
+        editTitleInput.style.borderRadius ='0px';
+        editTitleInput.style.marginBottom ='10px';
+        editTitleInput.style.outline = 'none';
+
         let editInput = document.createElement('textarea');
         //editInput.type = 'text';
+        editInput.classList.add('form-control');
         editInput.classList.add('js-post');
         editInput.value = replyText;
+        editInput.style.resize = 'none';
+        editInput.rows = 5; // Set the number of rows to 5
+
+        // Custom style
+        editInput.style.border = 'none';
+        editInput.style.borderRadius ='0px';
+    
 
         // Replace the reply content with the input field
         replytitleElement.parentNode.replaceChild(editTitleInput, replytitleElement);
@@ -338,12 +356,14 @@ var myposts = {
 
         // Add a Save button for submitting the edited reply
         let saveButton = document.createElement('button');
-        saveButton.classList.add('js-save-button');
+        saveButton.classList.add('js-save-button', 'btn' , 'px-3', 'mr-3');
         saveButton.innerHTML = 'Save';
+
+        saveButton.style.backgroundColor = '#F2C1A7';
 
         // Add a Cancel button for canceling the edit
         let cancelButton = document.createElement('button');
-        cancelButton.classList.add('js-cancel-button');
+        cancelButton.classList.add('js-cancel-button', 'btn', 'btn-outline-danger', 'm-3'); // Add the 'row' and 'col-md-6' classes
         cancelButton.innerHTML = 'Cancel';
 
         // Attach event listener to the Save button

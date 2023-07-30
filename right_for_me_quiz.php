@@ -59,7 +59,7 @@
     <h3>User Experiences</h3>
     <p>Identify what methods you have past experience with.<span style="color: red;">*</span></p>
     
-    <form id= "quiz_form" action="#" method="post" onsubmit="validateForm(event)">
+    <form id= "quiz_form" action="right_for_me_quiz_result.php" method="post" onsubmit="validateForm(event)">
     <div class="user-experience-container" id="user-experience-container">
         <table>
             <tr>
@@ -389,6 +389,7 @@
         </div>
         <br>
     </div>
+    <input type="hidden" name="recommendations" id="recommendations_input" value="">
     <input type="submit" value="Get Result" name="submit">
     </form>
 
@@ -796,7 +797,7 @@
                     if (answer4Value === "yes") {
                         methodScores[method] += 15;
                     } else if (answer4Value === "dontknow3") {
-                        methodScores[method] = 0;
+                        methodScores[method] += 0;
                     } else {
                         delete methodScores[method];
                     }
@@ -806,11 +807,13 @@
             // Function to get the score based on the user's answer value for hormone level
             function getScoreHormoneLevel(method, value) {
                 if (noHormonesMethods.includes(method) && value === "no-hormones") {
-                    return 2;
-                } else if (oneHormoneMethods.includes(method) && value === "one-hormone") {
-                    return 2;
-                } else if (twoHormonesMethods.includes(method) && value === "two-hormones") {
-                    return 2;
+                    return 5;
+                } 
+                else if (oneHormoneMethods.includes(method) && value === "one-hormone") {
+                    return 5;
+                }
+                else if (twoHormonesMethods.includes(method) && value === "two-hormones") {
+                    return 5;
                 }
                 return 0;
             }
@@ -825,9 +828,12 @@
                     case "neutral":
                         return 0;
                     case "uncomfortable":
-                        return -1;
+                        return -4;
                     case "veryUncomfortable":
-                        return -2;
+                        delete methodScores["copperIUD"];
+                        delete methodScores["diaphragm"];
+                        delete methodScores["hormonalVaginalRing"];
+                        delete methodScores["hormonalIUD"];
                     case "daily":
                         return 2;
                     case "weekly":
@@ -858,34 +864,37 @@
             return entry[0];
             });
 
-            // Concatenate all contraceptive methods with their scores
+            // Set the value of the hidden input field to the recommendations
+            var recommendationsInput = document.getElementById("recommendations_input");
+            recommendationsInput.value = JSON.stringify(recommendations);
+
+            // Submit the form
+            // Since you're using onsubmit, you don't need to explicitly submit the form
+            // The form will be submitted automatically after this function finishes.
+
+            // Concatenate all contraceptive methods with their scores | para makita scores ng ibang methods
             var allMethodsScores = Object.entries(methodScores).map(function (entry) {
             return entry[0] + " (Score: " + entry[1] + ")";
             });
 
-            // Show all contraceptive methods with their scores in the alert 
-            alert("Recommendations: " + recommendations + "\n\nAll Methods with Scores: \n" + allMethodsScores.join("\n"));
+            // Show all contraceptive methods with their scores in the alert | para macheck if working
+            //alert("Recommendations: " + recommendations + "\n\nAll Methods with Scores: \n" + allMethodsScores.join("\n"));
 
-
+            // Set the value of the hidden input field to the recommendations
+            var recommendationsInput = document.getElementById("recommendations_input");
+            recommendationsInput.value = JSON.stringify(recommendations);
+            
                 
                 }
-
         };
-
-
-            
-        
-
-
-
-
-
-
-
 
 
     </script>
 
+    <div id="recommendation">
+        
+
+    </div>
 
 </body>
 </html>

@@ -87,9 +87,12 @@
                 </form>
             </div>
 
-            <!-- language, privacy policy, terms of use -->
-            <?php include('languageprivacyterms.php') ?>
+            
         </div>
+    </div>
+    <!-- language, privacy policy, terms of use -->
+    <div class="lang-box">
+        <?php include('languageprivacyterms.php') ?>
     </div>
 </body>
 </html>

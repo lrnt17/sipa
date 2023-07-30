@@ -190,11 +190,11 @@
                 
 
             </div>
-            <!-- language, privacy policy, terms of use -->
-            <?php include('languageprivacyterms.php') ?>
         </div>
     </div>
     <?php include('sched-appointment.php') ?>
+    <!-- language, privacy policy, terms of use -->
+        <?php include('languageprivacyterms.php') ?>
 </body>
 
 <script>

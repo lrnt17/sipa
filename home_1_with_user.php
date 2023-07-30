@@ -63,7 +63,7 @@
   
     <script src="script.js" defer></script>
 </head>
-<body>
+<body style="background: #F2F5FF;">
 
     <!-- navigation bar with logo -->
     <?php include('header.php') ?>
