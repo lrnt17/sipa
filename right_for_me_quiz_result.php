@@ -1,6 +1,9 @@
-<?php 
-    include("connect.php"); 
+<?php
+
+    require("connect.php");
     require('functions.php');
+
+    echo $_SESSION['USER']['user_id'];
 ?>
 
 
@@ -65,31 +68,7 @@ select {
 </head>
 <body>
     <!-- navigation bar with logo -->
-    <div class="navigation-bar" id="navigation-container">
-        <img src="#">
-        <ul>
-            <li><a href="home_1_with_user.php">Home</a></li>
-            <li><a href="#">Projects</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Services</a></li>
-            <li>
-                <div class="dropdown">
-                    <button class="dropbtn">Dropdown<i class="fa fa-caret-down"></i></button>
-                    <div class="dropdown-content">
-                        <a href="#">Link 1</a>
-                        <a href="#">Link 2</a>
-                        <a href="#">Link 3</a>
-                    </div>
-                </div>
-            </li>
-            <li><a href="#">Sign in</a></li>
-            <div class="profile_pic">
-                <a href="profile.php" id="avatar_name" href="#name">
-                    <img id="avatar" src="<?php //echo $_SESSION["image"]; ?>" alt="avatar">
-                </a>
-            </div>
-        </ul>
-    </div>
+    <?php include('header.php') ?>
 
     <div class="title-quiz-result" id="title-quiz-result">
         <h1>Contraception Method Result</h1>
@@ -168,7 +147,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   </form>
 </div>
 
-<div class="input-container" style="background-color: #EDEDED; width: 300px; display: none;" >
+<div class="input-container" style=" width: 280px; display: none;" >
+<p>How long will you take it? <br></p>
+<div class="input-container" style="background-color: #EDEDED; width: 250px;">
   <label for="longevity">Longevity</label>
   <span class="separator">|</span>
   <input type="text" id="longevity-input" pattern="[0-9]*" maxlength="2" placeholder="00">
@@ -179,8 +160,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <option value="year">Year/s</option>
   </select>
 </div>
+</div>
+
+<!-- Create a container for the Save button -->
+<div id="save_button_container" style="display: none;">
+  <p>Once your inputs have been saved, you will start receiving SMS reminders for taking your selected contraceptive method.</p>
+</div>
+
+
 <script>
   let selectedMethod = ''; // Variable to store the selected contraceptive method
+  let dateFilled = false; // Variable to track if the date picker is filled
+let longevityFilled = false; // Variable to track if the longevity input is filled
 
   const recommendationsJson = '<?php echo addslashes($_POST['recommendations']); ?>';
     const recommendations = JSON.parse(recommendationsJson);
@@ -213,7 +204,6 @@ document.getElementById("remind_me_btn").addEventListener("click", function (eve
 
   showDatePicker();
 });
-
 
   function fetchMethodDetails(method, container) {
     const xhr = new XMLHttpRequest();
@@ -325,16 +315,26 @@ document.getElementById("remind_me_btn").addEventListener("click", function (eve
     inline: true, // Display the calendar without a need to click on the input
     onChange: function(selectedDates, dateStr, instance) {
       // This function is triggered when a date is selected
-      const saveButton = document.getElementById("save_date_button");
-      saveButton.style.display = "block";
+    dateFilled = !!datePickerInput.value; // Convert to boolean, true if filled, false if empty
+    checkShowSaveButton();
     }
   });
+
+  // Event listener for longevity input
+const longevityInput = document.getElementById("longevity-input");
+longevityInput.addEventListener("input", function () {
+  // Remove any non-numeric characters from the input
+  this.value = this.value.replace(/\D/g, '');
+  longevityFilled = !!longevityInput.value; // Convert to boolean, true if filled, false if empty
+  checkShowSaveButton();
+});
 
   // Create and append the "Save" button
   const saveButton = document.createElement("button");
   saveButton.id = "save_date_button";
   saveButton.textContent = "Save";
   saveButton.style.display = "none"; // Hide the save button initially
+  saveButton.disabled = true;
 
   saveButton.addEventListener("click", function () {
     const selectedDate = datePickerInput.value;
@@ -342,12 +342,44 @@ document.getElementById("remind_me_btn").addEventListener("click", function (eve
     updateStartDate(formattedDate);
   });
 
-  datePickerContainer.appendChild(saveButton);
+// Get the longevity input container
+const longevityInputContainer = document.querySelector(".input-container");
 
-  // Remove the input field from the container
+// Append the "Save" button after the longevity input container
+longevityInputContainer.insertAdjacentElement('afterend', saveButton);
+
+
+  // Remove the input field from the container pangalis ng input para rekta calendar nalang 
   datePickerContainer.removeChild(datePickerInput);
 }
 
+
+// Add event listener for the date picker to check if it's filled
+document.getElementById("start_date_picker").addEventListener("change", function () {
+  dateFilled = !!this.value; // Convert to boolean, true if filled, false if empty
+  checkShowSaveButton();
+});
+
+// Add event listener for the longevity input to check if it's filled
+document.getElementById("longevity-input").addEventListener("input", function () {
+  longevityFilled = !!this.value; // Convert to boolean, true if filled, false if empty
+  checkShowSaveButton();
+});
+
+// Function to check whether to show the save button or not
+function checkShowSaveButton() {
+  const saveButton = document.getElementById("save_date_button");
+  const saveButtonContainer = document.getElementById("save_button_container");
+  const longevityValue = parseInt(longevityInput.value, 10); // Parse the longevity input value as an integer
+  
+  if (dateFilled && longevityFilled && longevityValue !== 0) {
+    saveButton.style.display = "block";
+    saveButtonContainer.style.display = "block";
+    saveButton.disabled = false;
+  } else {
+    saveButton.disabled = true;
+  }
+}
 
   function updateStartDate(formattedDate) {
     const xhr = new XMLHttpRequest();
@@ -462,3 +494,4 @@ document.getElementById("remind_me_btn").addEventListener("click", function (eve
 
 
 </html>
+
