@@ -1,4 +1,10 @@
-<?php include("connect.php"); session_start(); ?>
+<?php
+
+    require("connect.php");
+    require('functions.php');
+
+    echo $_SESSION['USER']['user_id'];
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,137 +23,151 @@
    </style>
 </head>
 <body>
-    <!-- navigation bar with logo -->
-    <div class="navigation-bar" id="navigation-container">
-        <img src="#">
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Projects</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Services</a></li>
-            <li>
-                <div class="dropdown">
-                    <button class="dropbtn">Dropdown<i class="fa fa-caret-down"></i></button>
-                    <div class="dropdown-content">
-                        <a href="#">Link 1</a>
-                        <a href="#">Link 2</a>
-                        <a href="#">Link 3</a>
-                    </div>
-                </div>
-            </li>
-            <li><a href="#">Sign in</a></li>
-            <div class="profile_pic">
-                <a href="profile.php" id="avatar_name" href="#name">
-                    <img id="avatar" src="<?php //echo $_SESSION["image"]; ?>" alt="avatar">
-                </a>
+    <section>
+        <!-- navigation bar with logo -->
+        <?php include('header.php') ?>
+
+        <div>
+            <h1>Is it right for me?</h1>
+            <div class="search-container">
+                <form action="/action_page.php">
+                <input type="text" placeholder="Search.." name="search">
+                </form>
             </div>
-        </ul>
-    </div>
-
-    <div>
-        <h1>Is it right for me?</h1>
-        <div class="search-container">
-            <form action="/action_page.php">
-            <input type="text" placeholder="Search.." name="search">
-            <button type="submit"><i class="fa fa-search"></i></button>
-            </form>
         </div>
-    </div>
 
-    <h3>Pick what’s important to you</h3>
+        <h3>Pick what's important to you</h3>
 
-    <a href="">Take the quiz</a>
+        <a href="right_for_me_quiz.php">Take the quiz</a>
 
-    <p>Empower yourself with the freedom to choose: use a contraceptive method</p>
-    <h2>Contraceptive Methods</h2>
+        <p>Empower yourself with the freedom to choose: use a contraceptive method</p>
+        <h2>Contraceptive Methods</h2>
 
-    <div class="parent">
-        <?php 
-            $page=0;
-            if(isset($_POST["page"])) {
-                $page=$_POST["page"];
-                $page=($page*6)-6;//counting for 9 image is displayed in one page
-            }
+        <section class="js-display-methods">
+            <div style="padding:10px;text-align:center;">Loading contraceptive methods....</div>
+        </section>
+        <br><br>
 
-            $result1 = mysqli_query($conn,"SELECT * FROM birth_controls LIMIT $page,6");
+        <!-- footer -->
+        <footer>
+            <div>
+                <img src="" alt="">
 
-            while ($row=mysqli_fetch_array($result1)) 
-            {
-        ?>
+                <a href="#">Home</a>
+                <a href="#">FAQs</a>
+                <a href="#">Services</a>
+                <a href="#">Contraceptive Method</a>
+                <a href="#">Videos</a>
+                <a href="#">Period Calculator</a>
+                <a href="#">Community Forum</a>
+                <a href="#">About STDs</a>
 
-        <div class="container">
-            <a href="https://example.com" class="button">
-                <img src="<?php echo $row["birth_control_img"]; ?>" alt="" height="236" width="354">
-                <div class="text"><?php echo $row["birth_control_name"]; ?></div>
-                <div class="overlay">
-                    <div class="text"><?php echo $row["birth_control_desc"]; ?></div>
-                </div>
+                <p>Our Partner</p>
+                <img src="" alt="">
+
+                <h3>+63 912 345 6789</h3>
+                <!-- icon -->
+                <!-- icon -->
+            </div>
+            
+            <div>
+                <!-- Translation Code here -->
+                <span>
+                    <div class="translate" id="google_translate_element"></div>
+
+                    <script type="text/javascript">
+                            function googleTranslateElementInit() {
+                            new google.translate.TranslateElement({
+                                pageLanguage: 'en',
+                                includedLanguages: 'en,tl',
+                                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                                autoDisplay: false,
+                                multilanguagePage: true
+                            }, 'google_translate_element');
+                            }
+                        </script>
+                        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+                </span>
+                <!-- Translation Code End here -->
+                <a href="">Privacy Policy</a>
+                <a href="">Terms of Use</a>
+            </div>
+        </footer>
+    </section>
+    
+    <!-- contraceptive method template -->
+    <template class="js-method-template">
+        <div class="box">
+            <a href="" class="js-method-link">
+                <img src="assets/images/contraceptive.png" alt="sample" class="js-method-image">
+                <h2 class="js-method-name">Pill</h2>
+                <div class="js-method-desc"  >
+				    is simply dummy text of the printing and typesetting industry. 
+                    Lorem Ipsum has been the industry's standard dummy text ever 
+                    since the 1500s, when an unknown printer took a galley of 
+                    type and scrambled it to make a type specimen book.
+			    </div>
             </a>
-        </div>
-        
-        <?php 
-            }
-
-            $result2 = mysqli_query($conn,"SELECT * FROM birth_controls");
-            $count = mysqli_num_rows($result2);
-            $a=$count/6;
-            $a=ceil($a);
-        ?>
-    </div>
-    
-    <!-- page number -->
-    <form method="post">
-        <?php for($b=1;$b<=$a;$b++){ ?>
-            <div class="pagination">
-                <input type="submit" value="<?php echo $b;?>" name="page" class="links">
-            </div>
-        <?php } ?>
-    </form>
-    
-    <!-- footer -->
-    <footer>
-        <div>
-            <img src="" alt="">
-
-            <a href="#">Home</a>
-            <a href="#">FAQs</a>
-            <a href="#">Services</a>
-            <a href="#">Contraceptive Method</a>
-            <a href="#">Videos</a>
-            <a href="#">Period Calculator</a>
-            <a href="#">Community Forum</a>
-            <a href="#">About STDs</a>
-
-            <p>Our Partner</p>
-            <img src="" alt="">
-
-            <h3>+63 912 345 6789</h3>
-            <!-- icon -->
-            <!-- icon -->
-        </div>
-        
-        <div>
-            <!-- Translation Code here -->
-            <span>
-                <div class="translate" id="google_translate_element"></div>
-
-                   <script type="text/javascript">
-                        function googleTranslateElementInit() {
-                        new google.translate.TranslateElement({
-                            pageLanguage: 'en',
-                            includedLanguages: 'en,tl',
-                            layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-                            autoDisplay: false,
-                            multilanguagePage: true
-                        }, 'google_translate_element');
-                        }
-                    </script>
-                    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-            </span>
-            <!-- Translation Code End here -->
-            <a href="">Privacy Policy</a>
-            <a href="">Terms of Use</a>
-        </div>
-    </footer>
+        </div>  
+    </template>
+    <!-- end contraceptive method template -->
 </body>
+<script>
+    var contra_method = {
+        load_methods: function(e){
+
+            let form = new FormData();
+            form.append('data_type', 'load_all_methods');
+
+            var ajax = new XMLHttpRequest();
+
+            ajax.addEventListener('readystatechange',function(){
+
+                if(ajax.readyState == 4)
+                {
+                    if(ajax.status == 200){
+
+                        //console.log(ajax.responseText);
+                        let obj = JSON.parse(ajax.responseText);
+                        
+                        if(obj.success){
+                            let method_holder = document.querySelector(".js-display-methods");
+                            method_holder.innerHTML = "";
+
+                            let template = document.querySelector(".js-method-template");
+
+                            if(typeof obj.rows == 'object')
+                            {
+                                for (var i = 0; i < obj.rows.length; i++) {
+                                    let clone_template = template.content.cloneNode(true);
+
+                                    clone_template.querySelector(".js-method-name").innerHTML = obj.rows[i].birth_control_name;
+                                    clone_template.querySelector(".js-method-desc").innerHTML = obj.rows[i].birth_control_desc;
+                                    clone_template.querySelector(".js-method-link").href = 'about-contraceptive.php?id='+obj.rows[i].birth_control_id;
+
+                                    /*let clone = template.cloneNode(true);
+                                    clone.setAttribute('id','post_'+obj.rows[i].id);
+                                    let row_data = JSON.stringify(obj.rows[i]);
+                                    row_data = row_data.replaceAll('"','\\"');
+
+                                    clone.setAttribute('row',row_data);
+                                    clone.classList.remove('hide');*/
+                                    
+                                    method_holder.appendChild(clone_template);
+                                }
+                            }else{
+                                method_holder.innerHTML = "<div>No posts found</div>";
+                            }
+                        }
+                    }
+                }
+            });
+
+            ajax.open('post','ajax.php', true);
+            ajax.send(form);
+        },
+    };
+
+    contra_method.load_methods();
+</script>
 </html>

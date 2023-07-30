@@ -905,6 +905,15 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 
 		$info['success'] = true;
 
+	}else
+	if($_POST['data_type'] == 'load_all_methods')
+	{
+		$user_id = $_SESSION['USER']['user_id'] ?? 0;
+		$query = "select * from birth_controls";
+		$rows = query($query);
+		$info['rows'] = $rows;
+		$info['success'] = true;
+
 	}
 	
 }

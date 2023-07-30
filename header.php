@@ -21,7 +21,7 @@
                 <a class="nav-link" href="#">Videos</a>
               </li>
               <li class="nav-item mx-2">
-                <a class="nav-link" href="#">Right for me</a>
+                <a class="nav-link" href="right_for_me_1.php">Right for me</a>
               </li>
               <li class="nav-item mx-2">
                 <a class="nav-link" href="#">FAQs</a>

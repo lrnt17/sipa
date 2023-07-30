@@ -1,6 +1,10 @@
-<?php include("connect.php"); session_start(); ?>
+<?php
 
+    require("connect.php");
+    require('functions.php');
 
+    echo $_SESSION['USER']['user_id'];
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -26,34 +30,10 @@
 </head>
 <body>
     <!-- navigation bar with logo -->
-    <div class="navigation-bar" id="navigation-container">
-        <img src="#">
-        <ul>
-            <li><a href="home_1_with_user.php">Home</a></li>
-            <li><a href="#">Projects</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Services</a></li>
-            <li>
-                <div class="dropdown">
-                    <button class="dropbtn">Dropdown<i class="fa fa-caret-down"></i></button>
-                    <div class="dropdown-content">
-                        <a href="#">Link 1</a>
-                        <a href="#">Link 2</a>
-                        <a href="#">Link 3</a>
-                    </div>
-                </div>
-            </li>
-            <li><a href="#">Sign in</a></li>
-            <div class="profile_pic">
-                <a href="profile.php" id="avatar_name" href="#name">
-                    <img id="avatar" src="<?php //echo $_SESSION["image"]; ?>" alt="avatar">
-                </a>
-            </div>
-        </ul>
-    </div>
+    <?php include('header.php') ?>
 
     <div class="title-quiz" id="title-quiz">
-    <h1>Take the quiz</h1>
+        <h1>Take the quiz</h1>
     </div>
 
     <h3>User Experiences</h3>
