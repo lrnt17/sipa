@@ -3,7 +3,6 @@
     require("connect.php");
     require('functions.php');
 
-    echo $_SESSION['USER']['user_id'];
 ?>
 
 
