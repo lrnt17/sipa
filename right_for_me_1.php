@@ -38,8 +38,12 @@
 
         <h3>Pick what's important to you</h3>
 
-        <a href="right_for_me_quiz.php">Take the quiz</a>
-
+        <?php if(logged_in()):?>
+            <a href="right_for_me_quiz.php">Take the quiz</a>
+        <?php else:?>
+            <a href="login_1.php" class="js-link" style="text-decoration:none;">Click here to sign in and take the quiz</a></p>
+        <?php endif;?>
+        
         <p>Empower yourself with the freedom to choose: use a contraceptive method</p>
         <h2>Contraceptive Methods</h2>
 

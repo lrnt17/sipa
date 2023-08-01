@@ -1,7 +1,6 @@
 <?php 
     require("connect.php");
     require('functions.php');
-    include('header.php');
 
     if(!logged_in()){
 		header("Location: home_1_with_user.php");
@@ -230,7 +229,7 @@
     </style>
 </head>
 <body style="background: #F2F5FF;">
-
+<?php include('header.php'); ?>
 <div class="parent">
     <div class="container">
     <!--<section>-->

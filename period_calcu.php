@@ -1,3 +1,87 @@
+<?php
+    /*
+    function build_calendar1($month, $year){
+
+        $daysOfWeek = array('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat');
+        //Then we'll get the first day of the month that is in the argument of this function
+        $firstDayOfMonth = mktime(0,0,0,$month,1,$year);
+        //Now getting the number of days this month contains
+        $numberDays = date('t', $firstDayOfMonth);
+        //Getting some information about the first day of this month
+        $dateComponents = getdate($firstDayOfMonth);
+        //Getting the name of this month
+        $monthName = $dateComponents['month'];
+        //Getting the index value 0-6 of the first day of this month
+        $dayOfWeek = $dateComponents['wday'];
+        //Getting the current date
+        $dateToday = date('Y-m-d');
+        //Now creating the HTML table
+        $calendar = "<table class='table table-bordered'>";
+        $calendar.="<center><h2>$monthName $year</h2>";
+
+        $calendar.="<tr>";
+
+        //Creating the calendars headers
+        foreach($daysOfWeek as $day){
+            $calendar.="<th class='header'>$day</th>";
+        }
+
+        $calendar.= "</tr><tr>";
+
+        //The variable $dayOfWeek will make sure that there must be only 7 columns on our table
+        if($dayOfWeek > 0){
+            for($k=0; $k<$dayOfWeek;$k++){
+                $calendar.="<td></td>";
+            }
+        }
+
+        //Initiating the day counter
+        $currentDay = 1;
+
+        //Getting the month number
+        $month = str_pad($month, 2, "0", STR_PAD_LEFT);
+
+        while ($currentDay <= $numberDays) {
+
+            //If seventh column (Saturday) reached, start a new row
+            if ($dayOfWeek==7) {
+                $dayOfWeek=0;
+                $calendar.="</tr><tr>";
+            }
+            $currentDayRel = str_pad($currentDay, 2, "0", STR_PAD_LEFT);
+            $date = "$year-$month-$currentDayRel";
+
+            $dayname = strtolower(date('l', strtotime($date)));
+            $eventNum = 0;
+            $today = $date==date('Y-m-d')? "today" : "";
+            $isWeekend = ($dayOfWeek == 0 || $dayOfWeek == 6); // Check if it's Saturday (0) or Sunday (6)
+            
+            $calendar.="<td><h4>$currentDay</h4>";
+
+            $calendar.="</td>";
+
+            //Incrementing the counters
+            $currentDay++;
+            $dayOfWeek++;
+        }
+
+        //Completing the row of the last week in month, if necessary
+        if($dayOfWeek != 7){
+            $remainingDays = 7-$dayOfWeek;
+
+            for ($i=0; $i<$remainingDays; $i++) { 
+                $calendar.="<td></td>";
+            }
+        }
+
+        $calendar.="</tr>";
+        $calendar.="</table>";
+
+        echo $calendar;
+    }
+    */
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +92,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/324d76b648.js" crossorigin="anonymous"></script>
     <title>Period Tracker</title>
-    <style>
+    <!--<style>
         body {
             top:0!important;
             height: 100%;
@@ -242,6 +326,19 @@
 
         }
         
+    </style>-->
+    <style>
+        .period-day {
+    background-color: pink;
+    }
+
+    .ovulation-day {
+        background-color: #c7e3b1;
+    }
+
+    .hide{
+        display: none;
+    }
     </style>
 </head>
 <body>
@@ -265,8 +362,8 @@
             <h1 class= "title-text1">your periods</h1>
         </div>
     </div>
-
-    <div id="form-container">
+    
+    <!--<div id="form-container">
         <div class="form-con">
             <div class="form-box">
                 <label for="last-period">First day of last period</label>
@@ -274,24 +371,46 @@
             </div>
             <div class="form-box">
                 <label for="period-length">Length of last period (in days)</label>
-                <input type="number" id="period-length" placeholder="ex. 7" required>
+                <input type="number" id="period-length" placeholder="ex. 7" min="1" max="10" value="5" required>
             </div>
             <div class="form-box">
                 <label for="cycle-length">Length of menstrual cycle (in days)</label>
-                <input type="number" id="cycle-length" placeholder="ex. 28" required>
+                <input type="number" id="cycle-length" placeholder="ex. 28" min="21" max="35" value="28" required>
             </div>
         </div>
-        
     </div>
     <div class="btn">
         <button class="class_60 log-btn" onclick="calculatePeriod()">Calculate my period</button>
+    </div>-->
+    <div id="form-container">
+        <form onsubmit="period_calcu.submit(event)" method="post" class="form-con">
+            <div class="form-box">
+                <label for="last-period">First day of last period</label>
+                <input type="date" id="last-period" required>
+            </div>
+            <div class="form-box">
+                <label for="period-length">Length of last period (in days)</label>
+                <input type="number" id="period-length" placeholder="ex. 7" min="1" max="10" value="5" required>
+            </div>
+            <div class="form-box">
+                <label for="cycle-length">Length of menstrual cycle (in days)</label>
+                <input type="number" id="cycle-length" placeholder="ex. 28" min="21" max="35" value="28" required>
+            </div>
+            <div class="btn">
+                <button class="class_60 log-btn">Calculate my period</button>
+            </div>
+        </form>
     </div>
-
+    
     <div class="resultbox">
+        <div class="js-period-calcu-buttons hide">
+            <button id="prev-3-months">Previous 3 Months</button>
+            <button id="next-3-months" onclick="period_calcu.next3Months()">Next 3 Months</button>
+        </div>
         <div id="result"></div>
     </div>
 
-    <script>
+    <!--<script>
 
       function createCalendar(firstDay, periodLength, cycleLength) {
           var currentDate = new Date(firstDay);
@@ -397,6 +516,79 @@
             var calendar = createCalendar(firstDay, periodLength, cycleLength);
             result.appendChild(calendar);
         }
+    </script>-->
+    <script>
+        function calculatePeriod() {
+            // Get user inputs
+            const firstDayLastPeriod = document.getElementById('last-period').value;
+            const periodLength = parseInt(document.getElementById('period-length').value);
+            const cycleLength = parseInt(document.getElementById('cycle-length').value);
+
+            // Make an AJAX request to the PHP script to calculate the period and ovulation days
+            const xhr = new XMLHttpRequest();
+            const url = `calculate_period.php?first_day_last_period=${firstDayLastPeriod}&period_length=${periodLength}&cycle_length=${cycleLength}`;
+            xhr.open('GET', url, true);
+            xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                // Display the result on the calendar
+                const result = xhr.responseText;
+                document.getElementById('result').innerHTML = result;
+            }
+            };
+            xhr.send();
+        }
+
+        var period_calcu = {
+
+            submit: function(e){
+
+                e.preventDefault();
+                let firstDayLastPeriod = document.getElementById('last-period').value;
+                let periodLength = parseInt(document.getElementById('period-length').value);
+                let cycleLength = parseInt(document.getElementById('cycle-length').value);
+
+                let form = new FormData();
+
+                form.append('firstDayLastPeriod', firstDayLastPeriod);
+                form.append('periodLength', periodLength);
+                form.append('cycleLength', cycleLength);
+                form.append('data_type', 'submit_periodResult');
+                var ajax = new XMLHttpRequest();
+
+                ajax.addEventListener('readystatechange',function(){
+
+                    if(ajax.readyState == 4)
+                    {
+                        if(ajax.status == 200){
+
+                            let obj = JSON.parse(ajax.responseText);
+                            document.getElementById('result').innerHTML = obj.rows;
+                            document.querySelector(".js-period-calcu-buttons").classList.remove('hide');
+                        }else{
+                            alert("Please check your internet connection");
+                        }
+                    }
+                });
+
+                ajax.open('post','testing_only.php', true);
+                ajax.send(form);
+            },
+
+            /*next3Months: function() {
+                // Add 3 months to the end date
+                let calendarEndDate = new Date(document.getElementById('calendar-end-date').value);
+                calendarEndDate.setMonth(calendarEndDate.getMonth() + 3);
+
+                // Update the value of the calendar-end-date input
+                document.getElementById('calendar-end-date').value = calendarEndDate.toISOString().slice(0, 10);
+
+                // Send an AJAX request to rebuild the calendar with the new end date
+                this.submit(new Event('submit'));
+            }*/
+        };
+
+        var currentDate = new Date().toISOString().slice(0, 10);
+        document.getElementById('last-period').value = currentDate;
     </script>
 </body>
 </html>

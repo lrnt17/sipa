@@ -899,8 +899,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 
 			// Extract the preggy and not_preggy values from the first row
 			$info['method_name'] = $rows[0]['birth_control_name'];
-			$info['preggy'] = $rows[0]['preggy'];
-			$info['not_preggy'] = $rows[0]['not_preggy'];
+			$info['preggy'] = $rows[0]['birth_control_preggy'];
+			//$info['not_preggy'] = $rows[0]['not_preggy'];
 		}
 
 		$info['success'] = true;

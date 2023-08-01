@@ -184,6 +184,34 @@
 
         $info['success'] = true;
         $info['message'] = "Your appointment was successfully created";
+      } else
+      if ($_POST['data_type'] == 'submit_periodResult') {
+
+        $firstDayLastPeriod = new DateTime($_POST['firstDayLastPeriod']);
+        $periodLength = (int)$_POST['periodLength'];
+        $cycleLength = (int)$_POST['cycleLength'];
+        $startDateTime = clone $firstDayLastPeriod;
+        $endDateTime = clone $startDateTime;
+        $endDateTime->add(new DateInterval('P3M'));
+        $periodDays = [];
+        $ovulationDays = [];
+        $currentDate = clone $startDateTime;
+        while ($currentDate <= $endDateTime) {
+            $periodStart = clone $currentDate;
+            $periodEnd = clone $currentDate;
+            $periodEnd->add(new DateInterval("P{$periodLength}D"))->sub(new DateInterval('P1D'));
+            $periodDays[] = ['start' => $periodStart->format('Y-m-d'), 'end' => $periodEnd->format('Y-m-d')];
+            $ovulationStart = clone $currentDate;
+            $ovulationStart->add(new DateInterval("P{$cycleLength}D"))->sub(new DateInterval('P16D'));
+            $ovulationEnd = clone $ovulationStart;
+            $ovulationEnd->add(new DateInterval('P4D'));
+            $ovulationDays[] = ['start' => $ovulationStart->format('Y-m-d'), 'end' => $ovulationEnd->format('Y-m-d')];
+            $currentDate->add(new DateInterval("P{$cycleLength}D"));
+        }
+        include 'calculate_period.php';
+        // Assign generated calendar to rows key in info array
+        $info['rows'] = build_calendar($startDateTime->format('n'),$startDateTime->format('Y'),$periodDays,$ovulationDays);
+        
       }
   }
 
