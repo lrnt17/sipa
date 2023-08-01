@@ -3,8 +3,8 @@
     require("connect.php");
     require('functions.php');
 
-    echo $_SESSION['USER']['user_id'];
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -33,7 +33,7 @@
     <?php include('header.php') ?>
 
     <div class="title-quiz" id="title-quiz">
-        <h1>Take the quiz</h1>
+    <h1>Take the quiz</h1>
     </div>
 
     <h3>User Experiences</h3>
@@ -858,7 +858,7 @@
             });
 
             // Show all contraceptive methods with their scores in the alert | para macheck if working
-            //alert("Recommendations: " + recommendations + "\n\nAll Methods with Scores: \n" + allMethodsScores.join("\n"));
+            alert("Recommendations: " + recommendations + "\n\nAll Methods with Scores: \n" + allMethodsScores.join("\n"));
 
             // Set the value of the hidden input field to the recommendations
             var recommendationsInput = document.getElementById("recommendations_input");
