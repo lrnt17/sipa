@@ -1,85 +1,6 @@
 <?php
-    /*
-    function build_calendar1($month, $year){
-
-        $daysOfWeek = array('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat');
-        //Then we'll get the first day of the month that is in the argument of this function
-        $firstDayOfMonth = mktime(0,0,0,$month,1,$year);
-        //Now getting the number of days this month contains
-        $numberDays = date('t', $firstDayOfMonth);
-        //Getting some information about the first day of this month
-        $dateComponents = getdate($firstDayOfMonth);
-        //Getting the name of this month
-        $monthName = $dateComponents['month'];
-        //Getting the index value 0-6 of the first day of this month
-        $dayOfWeek = $dateComponents['wday'];
-        //Getting the current date
-        $dateToday = date('Y-m-d');
-        //Now creating the HTML table
-        $calendar = "<table class='table table-bordered'>";
-        $calendar.="<center><h2>$monthName $year</h2>";
-
-        $calendar.="<tr>";
-
-        //Creating the calendars headers
-        foreach($daysOfWeek as $day){
-            $calendar.="<th class='header'>$day</th>";
-        }
-
-        $calendar.= "</tr><tr>";
-
-        //The variable $dayOfWeek will make sure that there must be only 7 columns on our table
-        if($dayOfWeek > 0){
-            for($k=0; $k<$dayOfWeek;$k++){
-                $calendar.="<td></td>";
-            }
-        }
-
-        //Initiating the day counter
-        $currentDay = 1;
-
-        //Getting the month number
-        $month = str_pad($month, 2, "0", STR_PAD_LEFT);
-
-        while ($currentDay <= $numberDays) {
-
-            //If seventh column (Saturday) reached, start a new row
-            if ($dayOfWeek==7) {
-                $dayOfWeek=0;
-                $calendar.="</tr><tr>";
-            }
-            $currentDayRel = str_pad($currentDay, 2, "0", STR_PAD_LEFT);
-            $date = "$year-$month-$currentDayRel";
-
-            $dayname = strtolower(date('l', strtotime($date)));
-            $eventNum = 0;
-            $today = $date==date('Y-m-d')? "today" : "";
-            $isWeekend = ($dayOfWeek == 0 || $dayOfWeek == 6); // Check if it's Saturday (0) or Sunday (6)
-            
-            $calendar.="<td><h4>$currentDay</h4>";
-
-            $calendar.="</td>";
-
-            //Incrementing the counters
-            $currentDay++;
-            $dayOfWeek++;
-        }
-
-        //Completing the row of the last week in month, if necessary
-        if($dayOfWeek != 7){
-            $remainingDays = 7-$dayOfWeek;
-
-            for ($i=0; $i<$remainingDays; $i++) { 
-                $calendar.="<td></td>";
-            }
-        }
-
-        $calendar.="</tr>";
-        $calendar.="</table>";
-
-        echo $calendar;
-    }
-    */
+    require('connect.php');
+    require('functions.php');
 ?>
 
 <!DOCTYPE html>
@@ -339,9 +260,22 @@
     .hide{
         display: none;
     }
+
+    .table {
+        display: inline-block;
+        margin: 10px
+    }
+
+    #result {
+        display: flex;
+  flex-wrap: wrap;
+    }
     </style>
 </head>
 <body>
+    <!-- navigation bar with logo -->
+    <?php //include('header.php') ?>
+
     <div class="container-header">
         <div class="head">
             <div class="h1text">
@@ -363,25 +297,6 @@
         </div>
     </div>
     
-    <!--<div id="form-container">
-        <div class="form-con">
-            <div class="form-box">
-                <label for="last-period">First day of last period</label>
-                <input type="date" id="last-period" required>
-            </div>
-            <div class="form-box">
-                <label for="period-length">Length of last period (in days)</label>
-                <input type="number" id="period-length" placeholder="ex. 7" min="1" max="10" value="5" required>
-            </div>
-            <div class="form-box">
-                <label for="cycle-length">Length of menstrual cycle (in days)</label>
-                <input type="number" id="cycle-length" placeholder="ex. 28" min="21" max="35" value="28" required>
-            </div>
-        </div>
-    </div>
-    <div class="btn">
-        <button class="class_60 log-btn" onclick="calculatePeriod()">Calculate my period</button>
-    </div>-->
     <div id="form-container">
         <form onsubmit="period_calcu.submit(event)" method="post" class="form-con">
             <div class="form-box">
@@ -404,142 +319,17 @@
     
     <div class="resultbox">
         <div class="js-period-calcu-buttons hide">
-            <button id="prev-3-months">Previous 3 Months</button>
             <button id="next-3-months" onclick="period_calcu.next3Months()">Next 3 Months</button>
         </div>
         <div id="result"></div>
     </div>
 
-    <!--<script>
-
-      function createCalendar(firstDay, periodLength, cycleLength) {
-          var currentDate = new Date(firstDay);
-          var currentMonth = currentDate.getMonth();
-          var currentYear = currentDate.getFullYear();
-          var table = document.createElement('table');
-          var thead = document.createElement('thead');
-          var tbody = document.createElement('tbody');
-          var tr = document.createElement('tr');
-          var th = document.createElement('th');
-          th.colSpan = 7;
-
-          th.textContent = currentDate.toLocaleString('default', { month: 'long' }) + ' ' + currentYear;
-
-          tr.appendChild(th);
-          thead.appendChild(tr);
-
-          tr = document.createElement('tr');
-          var daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-          for (var i = 0; i < daysOfWeek.length; i++) {
-              th = document.createElement('th');
-              th.textContent = daysOfWeek[i];
-              tr.appendChild(th);
-          }
-          thead.appendChild(tr);
-
-          tr = document.createElement('tr');
-          for (var i = 0; i < currentDate.getDay(); i++) {
-              var td = document.createElement('td');
-              tr.appendChild(td);
-          }
-
-          for (var i = 0; i < 90; i++) {
-
-              if (currentDate.getMonth() !== currentMonth) {
-                  tbody.appendChild(tr);
-                  table.appendChild(thead);
-                  table.appendChild(tbody);
-                  currentMonth = currentDate.getMonth();
-                  currentYear = currentDate.getFullYear();
-                  thead = document.createElement('thead');
-                  tbody = document.createElement('tbody');
-                  tr = document.createElement('tr');
-                  th = document.createElement('th');
-                  th.colSpan = 7;
-
-                  th.textContent = currentDate.toLocaleString('default', { month: 'long' }) + ' ' + currentYear;
-
-                  tr.appendChild(th);
-                  thead.appendChild(tr);
-
-                  tr = document.createElement('tr');
-
-                  for (var j = 0; j < daysOfWeek.length; j++) {
-                      th = document.createElement('th');
-                      th.textContent = daysOfWeek[j];
-                      tr.appendChild(th);
-                  }
-                  thead.appendChild(tr);
-
-                  tr = document.createElement('tr');
-
-                  for (var j = 0; j < currentDate.getDay(); j++) {
-                      td = document.createElement('td');
-                      tr.appendChild(td);
-                  }
-              }
-
-              td = document.createElement('td');
-
-              if (i % cycleLength < periodLength) {
-                  td.classList.add('period-day');
-              } else if (i % cycleLength === cycleLength - 14) {
-                  td.classList.add('ovulation-day');
-              }
-
-              td.textContent = currentDate.getDate();
-              tr.appendChild(td);
-
-              if (currentDate.getDay() === 6) {
-                  tbody.appendChild(tr);
-                  tr = document.createElement('tr');
-              }
-
-              currentDate.setDate(currentDate.getDate() + 1);
-          }
-
-          tbody.appendChild(tr);
-          table.appendChild(thead);
-          table.appendChild(tbody);
-
-          return table;
-      }
-
-        function calculatePeriod() {
-            var firstDay = document.getElementById('last-period').value;
-            var periodLength = parseInt(document.getElementById('period-length').value);
-            var cycleLength = parseInt(document.getElementById('cycle-length').value);
-
-            var result = document.getElementById('result');
-            result.innerHTML = '';
-
-            var calendar = createCalendar(firstDay, periodLength, cycleLength);
-            result.appendChild(calendar);
-        }
-    </script>-->
     <script>
-        function calculatePeriod() {
-            // Get user inputs
-            const firstDayLastPeriod = document.getElementById('last-period').value;
-            const periodLength = parseInt(document.getElementById('period-length').value);
-            const cycleLength = parseInt(document.getElementById('cycle-length').value);
-
-            // Make an AJAX request to the PHP script to calculate the period and ovulation days
-            const xhr = new XMLHttpRequest();
-            const url = `calculate_period.php?first_day_last_period=${firstDayLastPeriod}&period_length=${periodLength}&cycle_length=${cycleLength}`;
-            xhr.open('GET', url, true);
-            xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                // Display the result on the calendar
-                const result = xhr.responseText;
-                document.getElementById('result').innerHTML = result;
-            }
-            };
-            xhr.send();
-        }
 
         var period_calcu = {
 
+            numOfMonths: 2,
+            addMonths: 3,
             submit: function(e){
 
                 e.preventDefault();
@@ -552,6 +342,8 @@
                 form.append('firstDayLastPeriod', firstDayLastPeriod);
                 form.append('periodLength', periodLength);
                 form.append('cycleLength', cycleLength);
+                form.append('numOfMonths', period_calcu.numOfMonths);
+                form.append('addMonths', period_calcu.addMonths);
                 form.append('data_type', 'submit_periodResult');
                 var ajax = new XMLHttpRequest();
 
@@ -560,31 +352,37 @@
                     if(ajax.readyState == 4)
                     {
                         if(ajax.status == 200){
-
+                            //document.getElementById('result').innerHTML = "";
                             let obj = JSON.parse(ajax.responseText);
-                            document.getElementById('result').innerHTML = obj.rows;
-                            document.querySelector(".js-period-calcu-buttons").classList.remove('hide');
+
+                            if(obj.success){
+                                //document.getElementById('result').innerHTML = "";
+                                document.getElementById('result').innerHTML = obj.rows;
+                            }
+                            
+                            if (period_calcu.numOfMonths == 11) {
+                                document.querySelector(".js-period-calcu-buttons").classList.add('hide');
+                            } else {
+                                document.querySelector(".js-period-calcu-buttons").classList.remove('hide');
+                            }
+                            
                         }else{
                             alert("Please check your internet connection");
                         }
                     }
                 });
 
-                ajax.open('post','testing_only.php', true);
+                ajax.open('post','ajax.php', true);
                 ajax.send(form);
             },
 
-            /*next3Months: function() {
-                // Add 3 months to the end date
-                let calendarEndDate = new Date(document.getElementById('calendar-end-date').value);
-                calendarEndDate.setMonth(calendarEndDate.getMonth() + 3);
+            next3Months: function(){
+                period_calcu.numOfMonths = period_calcu.numOfMonths + 3;
+                period_calcu.addMonths += 3;
 
-                // Update the value of the calendar-end-date input
-                document.getElementById('calendar-end-date').value = calendarEndDate.toISOString().slice(0, 10);
-
-                // Send an AJAX request to rebuild the calendar with the new end date
-                this.submit(new Event('submit'));
-            }*/
+                console.log(period_calcu.numOfMonths);
+                period_calcu.submit(event);
+            },
         };
 
         var currentDate = new Date().toISOString().slice(0, 10);
@@ -592,3 +390,5 @@
     </script>
 </body>
 </html>
+
+

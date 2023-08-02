@@ -1,19 +1,23 @@
 <?php
-function build_calendar($startMonth, $startYear, $periodDays, $ovulationDays) {
+//DO NOT INCLUDE
+function build_calendar($startMonth, $startYear, $periodDays, $ovulationDays, $numOfMonths) {
     // Get the selected date of the first day of the last period
     $startDate = $startYear . '-' . str_pad($startMonth, 2, '0', STR_PAD_LEFT) . '-01';
 
     // Calculate the start and end dates of the three months
     $startDateTime = new DateTime($startDate);
     $endDateTime = clone $startDateTime;
-    $endDateTime->add(new DateInterval('P2M')); // Add 2 months to get the end of the 3-month period
+    //$endDateTime->add(new DateInterval('P2M')); // Add 2 months to get the end of the 3-month period
+    $endDateTime->add(new DateInterval("P{$numOfMonths}M"));
 
     // Initialize calendar variable
-    $calendar = "<table class='table table-bordered'>";
-    $calendar .= "<tr><th colspan='7'>Three Months Calendar</th></tr>";
+    //$calendar = "<table class='table table-bordered'>";
+    $calendar = "";
+    //$calendar .= "<tr><th colspan='7'>Three Months Calendar</th></tr>";
 
     // Loop through each month for the 3-month period
     while ($startDateTime <= $endDateTime) {
+        $calendar .= "<table class='table table-bordered'>"; //testing
         $month = $startDateTime->format('n');
         $year = $startDateTime->format('Y');
         $numDays = cal_days_in_month(CAL_GREGORIAN, $month, $year);
@@ -83,11 +87,13 @@ function build_calendar($startMonth, $startYear, $periodDays, $ovulationDays) {
 
         $calendar .= "</tr>";
         $startDateTime->add(new DateInterval('P1M'));
+        $calendar .= "</table>";//testing
     }
 
-    $calendar .= "</table>";
+    //$calendar .= "</table>";
     return $calendar;
 }
+
 /*
 // Get the user inputs from the query string
 $firstDayLastPeriod = new DateTime($_GET['first_day_last_period']);

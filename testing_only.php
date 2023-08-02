@@ -184,15 +184,19 @@
 
         $info['success'] = true;
         $info['message'] = "Your appointment was successfully created";
-      } else
+      } /*else
       if ($_POST['data_type'] == 'submit_periodResult') {
 
         $firstDayLastPeriod = new DateTime($_POST['firstDayLastPeriod']);
         $periodLength = (int)$_POST['periodLength'];
         $cycleLength = (int)$_POST['cycleLength'];
+        $numOfMonths = (int)$_POST['numOfMonths'];
+        $addMonths = (int)$_POST['addMonths'];
+
         $startDateTime = clone $firstDayLastPeriod;
         $endDateTime = clone $startDateTime;
-        $endDateTime->add(new DateInterval('P3M'));
+        //$endDateTime->add(new DateInterval('P3M'));
+        $endDateTime->add(new DateInterval("P{$addMonths}M"));
         $periodDays = [];
         $ovulationDays = [];
         $currentDate = clone $startDateTime;
@@ -210,9 +214,9 @@
         }
         include 'calculate_period.php';
         // Assign generated calendar to rows key in info array
-        $info['rows'] = build_calendar($startDateTime->format('n'),$startDateTime->format('Y'),$periodDays,$ovulationDays);
-        
-      }
+        $info['rows'] = build_calendar($startDateTime->format('n'),$startDateTime->format('Y'),$periodDays,$ovulationDays,$numOfMonths);
+        $info['success'] = true;
+      }*/
   }
 
   echo json_encode($info);

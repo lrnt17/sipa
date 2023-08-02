@@ -31,7 +31,7 @@
                   Services
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Period Calculator</a>
+                    <a class="js-link dropdown-item" href="period_calcu.php">Period Calculator</a>
                     <a class="js-link dropdown-item" href="#">Contraceptive Cost Calculator</a>
                     <a class="js-link dropdown-item" href="community-topics.php">Community Forum</a>
                     <a class="dropdown-item" href="#">About STDs</a>
