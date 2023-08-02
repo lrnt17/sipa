@@ -41,7 +41,17 @@
                 </div>
               </li>
               <li>
-                    <a class="js-link navbar-brand d-none d-md-block d-lg-none" href="account_settings.php"><img class="border border-dark rounded-circle" src="<?= get_image($_SESSION['USER']['user_image'])?>" title="SiPa"  width="40" height="40;"></a>
+                  <div class="row mt-2" style="align-items: center;">
+                    <div class="col-auto">
+                      <a class="js-link navbar-brand d-md-block d-lg-none" href="account_settings.php"><img class="border border-dark rounded-circle" src="<?= get_image($_SESSION['USER']['user_image'])?>" title="SiPa"  width="40" height="40;"></a>
+                    </div>
+                    <div class="col-auto">
+                      <a class="js-link navbar-brand d-md-block d-lg-none" href="account_settings.php" style="display: inline;">
+                          <span style="font-size: 16px; color:#383838;"><?= $_SESSION['USER']['user_fname']?></span>
+                      </a>
+
+                    </div>
+                  </div>
               </li>
             </ul>
           </div>
