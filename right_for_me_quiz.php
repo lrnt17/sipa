@@ -1,9 +1,8 @@
-<?php
+<?php  
+    include("connect.php");
+    include("functions.php");
+    session_start(); ?>
 
-    require("connect.php");
-    require('functions.php');
-
-?>
 
 
 <!DOCTYPE html>
@@ -28,351 +27,479 @@
    
 
 </head>
-<body>
+<body style="background: #F2F5FF;">
     <!-- navigation bar with logo -->
     <?php include('header.php') ?>
 
-    <div class="title-quiz" id="title-quiz">
-    <h1>Take the quiz</h1>
+    <div class="container rounded-5" style="background: #D2E0F8;">
+        <div class="row mx-5 justify-content-center" style="text-align:center; padding: 2%;">
+        
+            <div class="col-auto"><p style="font-size: 3.5rem;">Take the</p></div>
+            <div class="col-auto"><p style="font-size: 3.5rem; font-weight:bolder;" >quiz</p></div>
+        </div>
     </div>
-
-    <h3>User Experiences</h3>
-    <p>Identify what methods you have past experience with.<span style="color: red;">*</span></p>
+    <br><br>
+    <div class="container mt-3">
+        <div class="row" style="align-items: center;">
+            <div class="col-auto">
+                <div class="vl" style="width: 10px;
+                background-color: #F2C1A7;
+                border-radius: 99px;
+                height: 75px;
+                display: -webkit-inline-box;"></div>
+            </div>
+        
+            <div class="col-auto mt-3">
+                <h5>User Experiences</h5>
+                <p>Identify what methods you have past experience with.<span style="color: red;"> *</span></p>
+            </div>
+        </div>
+    
+        <br>
     
     <form id= "quiz_form" action="right_for_me_quiz_result.php" method="post" onsubmit="validateForm(event)">
-    <div class="user-experience-container" id="user-experience-container">
-        <table>
-            <tr>
-                <th>Contraceptive Method</th>
-                <th>How was your Experience?</th>
-                <th>Would you consider using this again?</th>
-            </tr>
-            <tr>
-                <td><input type="checkbox" name="user-exp-chckbx" id="hormonalIUD" onchange="toggleRadioButtons('hormonalIUD')"> <label for="hormonalIUD">Hormonal IUD</label></td>
-                <td>
-                    <label><input type="radio" class="user-exp-radio" id="hormonalIUDExperience" name="hormonalIUDExperience" value="good"disabled required> Good</label>
-                    <label><input type="radio" class="user-exp-radio" id="hormonalIUDExperience" name="hormonalIUDExperience" value="neutral"disabled required> Neutral</label>
-                    <label><input type="radio" class="user-exp-radio" id="hormonalIUDExperience" name="hormonalIUDExperience" value="bad"disabled required> Bad</label>
-                </td>
-                <td>
-                    <label><input type="radio" class="user-exp-radio" id="hormonalIUDConsider" name="hormonalIUDConsider" value="yes"disabled required> Yes</label>
-                    <label><input type="radio" class="user-exp-radio" id="hormonalIUDConsider" name="hormonalIUDConsider" value="no"disabled required> No</label>
-                    <label><input type="radio" class="user-exp-radio" id="hormonalIUDConsider" name="hormonalIUDConsider" value="dontKnow" disabled required> I don't know</label>
-                </td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" name="user-exp-chckbx" id="copperIUD" onchange="toggleRadioButtons('copperIUD')"> <label for="copperIUD">Copper IUD</label></td>
-                <td>
-                    <label><input type="radio" class="user-exp-radio" id="copperIUDExperience" name="copperIUDExperience" value="good"disabled required> Good</label>
-                    <label><input type="radio" class="user-exp-radio" id="copperIUDExperience" name="copperIUDExperience" value="neutral" disabled required> Neutral</label>
-                    <label><input type="radio" class="user-exp-radio" id="copperIUDExperience" name="copperIUDExperience" value="bad" disabled required> Bad</label>
-                </td>
-            <td>
-                <label><input type="radio" class="user-exp-radio" id="copperIUDConsider" name="copperIUDConsider" value="yes" disabled required> Yes</label>
-                <label><input type="radio" class="user-exp-radio" id="copperIUDConsider" name="copperIUDConsider" value="no" disabled required> No</label>
-                <label><input type="radio" class="user-exp-radio" id="copperIUDConsider" name="copperIUDConsider" value="dontKnow" disabled required> I don't know</label>
-            </td>
-            </tr>
-            <tr>
-            <td><input type="checkbox" name="user-exp-chckbx" id="implant" onchange="toggleRadioButtons('implant')"> <label for="implant">Implant</label></td>
-            <td>
-                <label><input type="radio" class="user-exp-radio" id="implantExperience" name="implantExperience" value="good" disabled required> Good</label>
-                <label><input type="radio" class="user-exp-radio" id="implantExperience" name="implantExperience" value="neutral" disabled required> Neutral</label>
-                <label><input type="radio" class="user-exp-radio" id="implantExperience" name="implantExperience" value="bad" disabled required> Bad</label>
-            </td>
-            <td>
-                <label><input type="radio" class="user-exp-radio" id="implantConsider" name="implantConsider" value="yes" disabled required> Yes</label>
-                <label><input type="radio" class="user-exp-radio" id="implantConsider" name="implantConsider" value="no" disabled required> No</label>
-                <label><input type="radio" class="user-exp-radio" id="implantConsider" name="implantConsider" value="dontKnow" disabled required> I don't know</label>
-            </td>
-            </tr>
-            <tr>
-            <td><input type="checkbox" name="user-exp-chckbx" id="injection"  onchange="toggleRadioButtons('injection')"> <label for="injection">Injection/DMPA</label></td>
-            <td>
-                <label><input type="radio" class="user-exp-radio" id="injectionExperience" name="injectionExperience" value="good" disabled required> Good</label>
-                <label><input type="radio" class="user-exp-radio" id="injectionExperience" name="injectionExperience" value="neutral" disabled required> Neutral</label>
-                <label><input type="radio" class="user-exp-radio" id="injectionExperience" name="injectionExperience" value="bad" disabled required> Bad</label>
-            </td>
-            <td>
-                <label><input type="radio" class="user-exp-radio" id="injectionConsider" name="injectionConsider" value="yes" disabled required> Yes</label>
-                <label><input type="radio" class="user-exp-radio" id="injectionConsider" name="injectionConsider" value="no" disabled required> No</label>
-                <label><input type="radio" class="user-exp-radio" id="injectionConsider" name="injectionConsider" value="dontKnow"disabled required> I don't know</label>
-            </td>
-            </tr>
-            <tr>
-            <td><input type="checkbox" name="user-exp-chckbx" id="hormonalVaginalRing"  onchange="toggleRadioButtons('hormonalVaginalRing')"> <label for="hormonalVaginalRing">Hormonal Vaginal Ring</label></td>
-            <td>
-                <label><input type="radio" class="user-exp-radio" id="hormonalVaginalRingExperience" name="hormonalVaginalRingExperience" value="good" disabled required> Good</label>
-                <label><input type="radio" class="user-exp-radio" id="hormonalVaginalRingExperience" name="hormonalVaginalRingExperience" value="neutral" disabled required> Neutral</label>
-                <label><input type="radio" class="user-exp-radio" id="hormonalVaginalRingExperience" name="hormonalVaginalRingExperience" value="bad" disabled required> Bad</label>
-            </td>
-            <td>
-                <label><input type="radio" class="user-exp-radio" id="hormonalVaginalRingConsider" name="hormonalVaginalRingConsider" value="yes" disabled required> Yes</label>
-                <label><input type="radio" class="user-exp-radio" id="hormonalVaginalRingConsider" name="hormonalVaginalRingConsider" value="no" disabled required> No</label>
-                <label><input type="radio" class="user-exp-radio" id="hormonalVaginalRingConsider" name="hormonalVaginalRingConsider" value="dontKnow" disabled required> I don't know</label>
-            </td>
-            </tr>
-            <tr>
-            <td><input type="checkbox" name="user-exp-chckbx" id="hormonalPatch"  onchange="toggleRadioButtons('hormonalPatch')"> <label for="hormonalPatch">Hormonal Patch</label></td>
-            <td>
-                <label><input type="radio" class="user-exp-radio" id="hormonalPatchExperience" name="hormonalPatchExperience" value="good" disabled required> Good</label>
-                <label><input type="radio" class="user-exp-radio" id="hormonalPatchExperience" name="hormonalPatchExperience" value="neutral" disabled required> Neutral</label>
-                <label><input type="radio" class="user-exp-radio" id="hormonalPatchExperience" name="hormonalPatchExperience" value="bad" disabled required> Bad</label>
-            </td>
-            <td>
-                <label><input type="radio" class="user-exp-radio" id="hormonalPatchConsider" name="hormonalPatchConsider" value="yes" disabled required> Yes</label>
-                <label><input type="radio" class="user-exp-radio" id="hormonalPatchConsider" name="hormonalPatchConsider" value="no" disabled required> No</label>
-                <label><input type="radio" class="user-exp-radio" id="hormonalPatchConsider" name="hormonalPatchConsider" value="dontKnow" disabled required> I don't know</label>
-            </td>
-            </tr>
-            <tr>
-            <td><input type="checkbox" name="user-exp-chckbx" id="combinedPill" onchange="toggleRadioButtons('combinedPill')"> <label for="combinedPill">Combined Pill</label></td>
-            <td>
-                <label><input type="radio" class="user-exp-radio" id="combinedPillExperience" name="combinedPillExperience" value="good" disabled required> Good</label>
-                <label><input type="radio" class="user-exp-radio" id="combinedPillExperience" name="combinedPillExperience" value="neutral" disabled required> Neutral</label>
-                <label><input type="radio" class="user-exp-radio" id="combinedPillExperience" name="combinedPillExperience" value="bad" disabled required> Bad</label>
-            </td>
-            <td>
-                <label><input type="radio" class="user-exp-radio" id="combinedPillConsider" name="combinedPillConsider" value="yes" disabled required> Yes</label>
-                <label><input type="radio" class="user-exp-radio" id="combinedPillConsider" name="combinedPillConsider" value="no" disabled required> No</label>
-                <label><input type="radio" class="user-exp-radio" id="combinedPillConsider" name="combinedPillConsider" value="dontKnow" disabled required> I don't know</label>
-            </td>
-            </tr>
-            <tr>
-            <td><input type="checkbox" name="user-exp-chckbx" id="miniPill" onchange="toggleRadioButtons('miniPill')"> <label for="miniPill">Mini Pill</label></td>
-            <td>
-                <label><input type="radio" class="user-exp-radio" id="miniPillExperience" name="miniPillExperience" value="good" disabled required> Good</label>
-                <label><input type="radio" class="user-exp-radio" id="miniPillExperience" name="miniPillExperience" value="neutral" disabled required> Neutral</label>
-                <label><input type="radio" class="user-exp-radio" id="miniPillExperience" name="miniPillExperience" value="bad" disabled required> Bad</label>
-            </td>
-            <td>
-                <label><input type="radio" class="user-exp-radio" id="miniPillConsider" name="miniPillConsider" value="yes" disabled required> Yes</label>
-                <label><input type="radio" class="user-exp-radio" id="miniPillConsider" name="miniPillConsider" value="no" disabled required> No</label>
-                <label><input type="radio" class="user-exp-radio" id="miniPillConsider" name="miniPillConsider" value="dontKnow" disabled required> I don't know</label>
-            </td>
-            </tr>
-            <tr>
-            <td><input type="checkbox" name="user-exp-chckbx" id="condom" onchange="toggleRadioButtons('condom')"> <label for="condom">Condom</label></td>
-            <td>
-                <label><input type="radio" class="user-exp-radio" id="condomExperience" name="condomExperience" value="good" disabled required> Good</label>
-                <label><input type="radio" class="user-exp-radio" id="condomExperience" name="condomExperience" value="neutral" disabled required> Neutral</label>
-                <label><input type="radio" class="user-exp-radio" id="condomExperience" name="condomExperience" value="bad" disabled required> Bad</label>
-            </td>
-            <td>
-                <label><input type="radio" class="user-exp-radio" id="condomConsider" name="condomConsider" value="yes" disabled required> Yes</label>
-                <label><input type="radio" class="user-exp-radio" id="condomConsider" name="condomConsider" value="no" disabled required> No</label>
-                <label><input type="radio" class="user-exp-radio" id="condomConsider" name="condomConsider" value="dontKnow" disabled required> I don't know</label>
-            </td>
-            </tr>
-            <tr>
-            <td><input type="checkbox" name="user-exp-chckbx" id="diaphragm" onchange="toggleRadioButtons('diaphragm')"> <label for="diaphragm">Diaphragm</label></td>
-            <td>
-                <label><input type="radio" class="user-exp-radio" id="diaphragmExperience" name="diaphragmExperience" value="good" disabled required> Good</label>
-                <label><input type="radio" class="user-exp-radio" id="diaphragmExperience" name="diaphragmExperience" value="neutral" disabled required> Neutral</label>
-                <label><input type="radio" class="user-exp-radio" id="diaphragmExperience" name="diaphragmExperience" value="bad" disabled required> Bad</label>
-            </td>
-            <td>
-                <label><input type="radio" class="user-exp-radio" id="diaphragmConsider" name="diaphragmConsider" value="yes" disabled required> Yes</label>
-                <label><input type="radio" class="user-exp-radio" id="diaphragmConsider" name="diaphragmConsider" value="no" disabled required> No</label>
-                <label><input type="radio" class="user-exp-radio" id="diaphragmConsider" name="diaphragmConsider" value="dontKnow" disabled required> I don't know</label>
-            </td>
-            </tr>
-            <tr>
-            <td><input type="checkbox" name="user-exp-chckbx" id="spermicide" onchange="toggleRadioButtons('spermicide')"> <label for="spermicide">Spermicide</label></td>
-            <td>
-                <label><input type="radio" class="user-exp-radio" id="spermicideExperience" name="spermicideExperience" value="good" disabled required> Good</label>
-                <label><input type="radio" class="user-exp-radio" id="spermicideExperience" name="spermicideExperience" value="neutral" disabled required> Neutral</label>
-                <label><input type="radio" class="user-exp-radio" id="spermicideExperience" name="spermicideExperience" value="bad" disabled required> Bad</label>
-            </td>
-            <td>
-                <label><input type="radio" class="user-exp-radio" id="spermicideConsider" name="spermicideConsider" value="yes" disabled required> Yes</label>
-                <label><input type="radio" class="user-exp-radio" id="spermicideConsider" name="spermicideConsider" value="no" disabled required> No</label>
-                <label><input type="radio" class="user-exp-radio" id="spermicideConsider" name="spermicideConsider" value="dontKnow" disabled required> I don't know</label>
-            </td>
-            </tr>
-            <tr>
-            <td><input type="checkbox" name="user-exp-chckbx" id="withdrawal" onchange="toggleRadioButtons('withdrawal')"> <label for="withdrawal">Withdrawal Method</label></td>
-            <td>
-                <label><input type="radio" class="user-exp-radio" id="withdrawalExperience" name="withdrawalExperience" value="good" disabled required> Good</label>
-                <label><input type="radio" class="user-exp-radio" id="withdrawalExperience" name="withdrawalExperience" value="neutral" disabled required> Neutral</label>
-                <label><input type="radio" class="user-exp-radio" id="withdrawalExperience" name="withdrawalExperience" value="bad" disabled required> Bad</label>
-            </td>
-            <td>
-                <label><input type="radio" class="user-exp-radio" id="withdrawalConsider" name="withdrawalConsider" value="yes" disabled required> Yes</label>
-                <label><input type="radio" class="user-exp-radio" id="withdrawalConsider" name="withdrawalConsider" value="no" disabled required> No</label>
-                <label><input type="radio" class="user-exp-radio" id="withdrawalConsider" name="withdrawalConsider" value="dontKnow" disabled required> I don't know</label>
-            </td>
-            </tr>
-            <tr>
-            <td><input type="checkbox" name="user-exp-chckbx" id="calendarMethod" onchange="toggleRadioButtons('calendarMethod')"> <label for="calendarMethod">Calendar Method</label></td>
-            <td>
-                <label><input type="radio" class="user-exp-radio" id="calendarMethodExperience" name="calendarMethodExperience" value="good" disabled required> Good</label>
-                <label><input type="radio" class="user-exp-radio" id="calendarMethodExperience" name="calendarMethodExperience" value="neutral" disabled required> Neutral</label>
-                <label><input type="radio" class="user-exp-radio" id="calendarMethodExperience" name="calendarMethodExperience" value="bad" disabled required> Bad</label>
-            </td>
-            <td>
-                <label><input type="radio" class="user-exp-radio" id="calendarMethodConsider" name="calendarMethodConsider" value="yes" disabled required> Yes</label>
-                <label><input type="radio" class="user-exp-radio" id="calendarMethodConsider" name="calendarMethodConsider" value="no" disabled required> No</label>
-                <label><input type="radio" class="user-exp-radio" id="calendarMethodConsider" name="calendarMethodConsider" value="dontKnow" disabled required> I don't know</label>
-            </td>
-            </tr>
-            <tr>
-            <td><input type="checkbox" name="user-exp-chckbx" id="tempMethod" onchange="toggleRadioButtons('tempMethod')"> <label for="tempMethod">Temperature Method</label></td>
-            <td>
-                <label><input type="radio" class="user-exp-radio" id="tempMethodExperience" name="tempMethodExperience" value="good" disabled required> Good</label>
-                <label><input type="radio" class="user-exp-radio" id="tempMethodExperience" name="tempMethodExperience" value="neutral" disabled required> Neutral</label>
-                <label><input type="radio" class="user-exp-radio" id="tempMethodExperience" name="tempMethodExperience" value="bad" disabled required> Bad</label>
-            </td>
-            <td>
-                <label><input type="radio" class="user-exp-radio" id="tempMethodConsider" name="tempMethodConsider" value="yes" disabled required> Yes</label>
-                <label><input type="radio" class="user-exp-radio" id="tempMethodConsider" name="tempMethodConsider" value="no" disabled required> No</label>
-                <label><input type="radio" class="user-exp-radio" id="tempMethodConsider" name="tempMethodConsider" value="dontKnow" disabled required> I don't know</label>
-            </td>
-            </tr>
-            <tr>
-            <td><input type="checkbox" name="user-exp-chckbx" id="emergencyContraception" onchange="toggleRadioButtons('emergencyContraception')"> <label for="emergencyContraception">Emergency Contraception</label></td>
-            <td>
-                <label><input type="radio" class="user-exp-radio" id="emergencyContraceptionExperience" name="emergencyContraceptionExperience" value="good" disabled required> Good</label>
-                <label><input type="radio" class="user-exp-radio" id="emergencyContraceptionExperience" name="emergencyContraceptionExperience" value="neutral" disabled required> Neutral</label>
-                <label><input type="radio" class="user-exp-radio" id="emergencyContraceptionExperience" name="emergencyContraceptionExperience" value="bad" disabled required> Bad</label>
-            </td>
-            <td>
-                <label><input type="radio" class="user-exp-radio" id="emergencyContraceptionConsider" name="emergencyContraceptionConsider" value="yes" disabled required> Yes</label>
-                <label><input type="radio" class="user-exp-radio" id="emergencyContraceptionConsider" name="emergencyContraceptionConsider" value="no" disabled required> No</label>
-                <label><input type="radio" class="user-exp-radio" id="emergencyContraceptionConsider" name="emergencyContraceptionConsider" value="dontKnow" disabled required> I don't know</label>
-            </td>
-            </tr>
-            <tr>
-            <td><input type="checkbox" name="user-exp-chckbx" id="vasectomy" onchange="toggleRadioButtons('vasectomy')"> <label for="vasectomy">Vasectomy</label></td>
-            <td>
-                <label><input type="radio" class="user-exp-radio" id="vasectomyExperience" name="vasectomyExperience" value="good" disabled required> Good</label>
-                <label><input type="radio" class="user-exp-radio" id="vasectomyExperience" name="vasectomyExperience" value="neutral" disabled required> Neutral</label>
-                <label><input type="radio" class="user-exp-radio" id="vasectomyExperience" name="vasectomyExperience" value="bad" disabled required> Bad</label>
-            </td>
-            <td>
-                <label><input type="radio" class="user-exp-radio" id="vasectomyConsider1" name="vasectomyConsider" value="yes" disabled required> Yes</label>
-                <label><input type="radio" class="user-exp-radio" id="vasectomyConsider2" name="vasectomyConsider" value="no" disabled required> No</label>
-                <label><input type="radio" class="user-exp-radio" id="vasectomyConsider3" name="vasectomyConsider" value="dontKnow" disabled required> I don't know</label>
-            </td>
-            </tr>
-            <tr>
-            <td><input type="checkbox" name="user-exp-chckbx" id="tubalLigation" onchange="toggleRadioButtons('tubalLigation')"> <label for="tubalLigation">Tubal Ligation</label></td>
-            <td>
-                <label><input type="radio" class="user-exp-radio" id="tubalLigationExperience" name="tubalLigationExperience" value="good" disabled required> Good</label>
-                <label><input type="radio" class="user-exp-radio" id="tubalLigationExperience" name="tubalLigationExperience" value="neutral" disabled required> Neutral</label>
-                <label><input type="radio" class="user-exp-radio" id="tubalLigationExperience" name="tubalLigationExperience" value="bad" disabled required> Bad</label>
-            </td>
-            <td>
-                <label><input type="radio" class="user-exp-radio" id="tubalLigationConsider" name="tubalLigationConsider" value="yes" disabled required> Yes</label>
-                <label><input type="radio" class="user-exp-radio" id="tubalLigationConsider" name="tubalLigationConsider" value="no" disabled required> No</label>
-                <label><input type="radio" class="user-exp-radio" id="tubalLigationConsider" name="tubalLigationConsider" value="dontKnow" disabled required> I don't know</label>
-            </td>
-            </tr>
-        </table>
-        <br>
-        <input type="checkbox" id="user-experience-checkbox-none"> <label for="user-experience-checkbox-none">I have not used any of these methods</label>
 
+    <div class="container p-5 rounded-2 shadow-sm rounded" style="background:white;">
+        <div class="user-experience-container" id="user-experience-container">
+            <table class="table table-hover">
+                <tr>
+                    <th>Contraceptive Method</th>
+                    <th>How was your Experience?</th>
+                    <th>Would you consider using this again?</th>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" name="user-exp-chckbx" id="hormonalIUD" onchange="toggleRadioButtons('hormonalIUD')"> <label for="hormonalIUD">Hormonal IUD</label></td>
+                    <td>
+                        <label><input type="radio" class="user-exp-radio" id="hormonalIUDExperience" name="hormonalIUDExperience" value="good"disabled required> Good</label>
+                        <label><input type="radio" class="user-exp-radio" id="hormonalIUDExperience" name="hormonalIUDExperience" value="neutral"disabled required> Neutral</label>
+                        <label><input type="radio" class="user-exp-radio" id="hormonalIUDExperience" name="hormonalIUDExperience" value="bad"disabled required> Bad</label>
+                    </td>
+                    <td>
+                        <label><input type="radio" class="user-exp-radio" id="hormonalIUDConsider" name="hormonalIUDConsider" value="yes"disabled required> Yes</label>
+                        <label><input type="radio" class="user-exp-radio" id="hormonalIUDConsider" name="hormonalIUDConsider" value="no"disabled required> No</label>
+                        <label><input type="radio" class="user-exp-radio" id="hormonalIUDConsider" name="hormonalIUDConsider" value="dontKnow" disabled required> I don't know</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" name="user-exp-chckbx" id="copperIUD" onchange="toggleRadioButtons('copperIUD')"> <label for="copperIUD">Copper IUD</label></td>
+                    <td>
+                        <label><input type="radio" class="user-exp-radio" id="copperIUDExperience" name="copperIUDExperience" value="good"disabled required> Good</label>
+                        <label><input type="radio" class="user-exp-radio" id="copperIUDExperience" name="copperIUDExperience" value="neutral" disabled required> Neutral</label>
+                        <label><input type="radio" class="user-exp-radio" id="copperIUDExperience" name="copperIUDExperience" value="bad" disabled required> Bad</label>
+                    </td>
+                <td>
+                    <label><input type="radio" class="user-exp-radio" id="copperIUDConsider" name="copperIUDConsider" value="yes" disabled required> Yes</label>
+                    <label><input type="radio" class="user-exp-radio" id="copperIUDConsider" name="copperIUDConsider" value="no" disabled required> No</label>
+                    <label><input type="radio" class="user-exp-radio" id="copperIUDConsider" name="copperIUDConsider" value="dontKnow" disabled required> I don't know</label>
+                </td>
+                </tr>
+                <tr>
+                <td><input type="checkbox" name="user-exp-chckbx" id="implant" onchange="toggleRadioButtons('implant')"> <label for="implant">Implant</label></td>
+                <td>
+                    <label><input type="radio" class="user-exp-radio" id="implantExperience" name="implantExperience" value="good" disabled required> Good</label>
+                    <label><input type="radio" class="user-exp-radio" id="implantExperience" name="implantExperience" value="neutral" disabled required> Neutral</label>
+                    <label><input type="radio" class="user-exp-radio" id="implantExperience" name="implantExperience" value="bad" disabled required> Bad</label>
+                </td>
+                <td>
+                    <label><input type="radio" class="user-exp-radio" id="implantConsider" name="implantConsider" value="yes" disabled required> Yes</label>
+                    <label><input type="radio" class="user-exp-radio" id="implantConsider" name="implantConsider" value="no" disabled required> No</label>
+                    <label><input type="radio" class="user-exp-radio" id="implantConsider" name="implantConsider" value="dontKnow" disabled required> I don't know</label>
+                </td>
+                </tr>
+                <tr>
+                <td><input type="checkbox" name="user-exp-chckbx" id="injection"  onchange="toggleRadioButtons('injection')"> <label for="injection">Injection/DMPA</label></td>
+                <td>
+                    <label><input type="radio" class="user-exp-radio" id="injectionExperience" name="injectionExperience" value="good" disabled required> Good</label>
+                    <label><input type="radio" class="user-exp-radio" id="injectionExperience" name="injectionExperience" value="neutral" disabled required> Neutral</label>
+                    <label><input type="radio" class="user-exp-radio" id="injectionExperience" name="injectionExperience" value="bad" disabled required> Bad</label>
+                </td>
+                <td>
+                    <label><input type="radio" class="user-exp-radio" id="injectionConsider" name="injectionConsider" value="yes" disabled required> Yes</label>
+                    <label><input type="radio" class="user-exp-radio" id="injectionConsider" name="injectionConsider" value="no" disabled required> No</label>
+                    <label><input type="radio" class="user-exp-radio" id="injectionConsider" name="injectionConsider" value="dontKnow"disabled required> I don't know</label>
+                </td>
+                </tr>
+                <tr>
+                <td><input type="checkbox" name="user-exp-chckbx" id="hormonalVaginalRing"  onchange="toggleRadioButtons('hormonalVaginalRing')"> <label for="hormonalVaginalRing">Hormonal Vaginal Ring</label></td>
+                <td>
+                    <label><input type="radio" class="user-exp-radio" id="hormonalVaginalRingExperience" name="hormonalVaginalRingExperience" value="good" disabled required> Good</label>
+                    <label><input type="radio" class="user-exp-radio" id="hormonalVaginalRingExperience" name="hormonalVaginalRingExperience" value="neutral" disabled required> Neutral</label>
+                    <label><input type="radio" class="user-exp-radio" id="hormonalVaginalRingExperience" name="hormonalVaginalRingExperience" value="bad" disabled required> Bad</label>
+                </td>
+                <td>
+                    <label><input type="radio" class="user-exp-radio" id="hormonalVaginalRingConsider" name="hormonalVaginalRingConsider" value="yes" disabled required> Yes</label>
+                    <label><input type="radio" class="user-exp-radio" id="hormonalVaginalRingConsider" name="hormonalVaginalRingConsider" value="no" disabled required> No</label>
+                    <label><input type="radio" class="user-exp-radio" id="hormonalVaginalRingConsider" name="hormonalVaginalRingConsider" value="dontKnow" disabled required> I don't know</label>
+                </td>
+                </tr>
+                <tr>
+                <td><input type="checkbox" name="user-exp-chckbx" id="hormonalPatch"  onchange="toggleRadioButtons('hormonalPatch')"> <label for="hormonalPatch">Hormonal Patch</label></td>
+                <td>
+                    <label><input type="radio" class="user-exp-radio" id="hormonalPatchExperience" name="hormonalPatchExperience" value="good" disabled required> Good</label>
+                    <label><input type="radio" class="user-exp-radio" id="hormonalPatchExperience" name="hormonalPatchExperience" value="neutral" disabled required> Neutral</label>
+                    <label><input type="radio" class="user-exp-radio" id="hormonalPatchExperience" name="hormonalPatchExperience" value="bad" disabled required> Bad</label>
+                </td>
+                <td>
+                    <label><input type="radio" class="user-exp-radio" id="hormonalPatchConsider" name="hormonalPatchConsider" value="yes" disabled required> Yes</label>
+                    <label><input type="radio" class="user-exp-radio" id="hormonalPatchConsider" name="hormonalPatchConsider" value="no" disabled required> No</label>
+                    <label><input type="radio" class="user-exp-radio" id="hormonalPatchConsider" name="hormonalPatchConsider" value="dontKnow" disabled required> I don't know</label>
+                </td>
+                </tr>
+                <tr>
+                <td><input type="checkbox" name="user-exp-chckbx" id="combinedPill" onchange="toggleRadioButtons('combinedPill')"> <label for="combinedPill">Combined Pill</label></td>
+                <td>
+                    <label><input type="radio" class="user-exp-radio" id="combinedPillExperience" name="combinedPillExperience" value="good" disabled required> Good</label>
+                    <label><input type="radio" class="user-exp-radio" id="combinedPillExperience" name="combinedPillExperience" value="neutral" disabled required> Neutral</label>
+                    <label><input type="radio" class="user-exp-radio" id="combinedPillExperience" name="combinedPillExperience" value="bad" disabled required> Bad</label>
+                </td>
+                <td>
+                    <label><input type="radio" class="user-exp-radio" id="combinedPillConsider" name="combinedPillConsider" value="yes" disabled required> Yes</label>
+                    <label><input type="radio" class="user-exp-radio" id="combinedPillConsider" name="combinedPillConsider" value="no" disabled required> No</label>
+                    <label><input type="radio" class="user-exp-radio" id="combinedPillConsider" name="combinedPillConsider" value="dontKnow" disabled required> I don't know</label>
+                </td>
+                </tr>
+                <tr>
+                <td><input type="checkbox" name="user-exp-chckbx" id="miniPill" onchange="toggleRadioButtons('miniPill')"> <label for="miniPill">Mini Pill</label></td>
+                <td>
+                    <label><input type="radio" class="user-exp-radio" id="miniPillExperience" name="miniPillExperience" value="good" disabled required> Good</label>
+                    <label><input type="radio" class="user-exp-radio" id="miniPillExperience" name="miniPillExperience" value="neutral" disabled required> Neutral</label>
+                    <label><input type="radio" class="user-exp-radio" id="miniPillExperience" name="miniPillExperience" value="bad" disabled required> Bad</label>
+                </td>
+                <td>
+                    <label><input type="radio" class="user-exp-radio" id="miniPillConsider" name="miniPillConsider" value="yes" disabled required> Yes</label>
+                    <label><input type="radio" class="user-exp-radio" id="miniPillConsider" name="miniPillConsider" value="no" disabled required> No</label>
+                    <label><input type="radio" class="user-exp-radio" id="miniPillConsider" name="miniPillConsider" value="dontKnow" disabled required> I don't know</label>
+                </td>
+                </tr>
+                <tr>
+                <td><input type="checkbox" name="user-exp-chckbx" id="condom" onchange="toggleRadioButtons('condom')"> <label for="condom">Condom</label></td>
+                <td>
+                    <label><input type="radio" class="user-exp-radio" id="condomExperience" name="condomExperience" value="good" disabled required> Good</label>
+                    <label><input type="radio" class="user-exp-radio" id="condomExperience" name="condomExperience" value="neutral" disabled required> Neutral</label>
+                    <label><input type="radio" class="user-exp-radio" id="condomExperience" name="condomExperience" value="bad" disabled required> Bad</label>
+                </td>
+                <td>
+                    <label><input type="radio" class="user-exp-radio" id="condomConsider" name="condomConsider" value="yes" disabled required> Yes</label>
+                    <label><input type="radio" class="user-exp-radio" id="condomConsider" name="condomConsider" value="no" disabled required> No</label>
+                    <label><input type="radio" class="user-exp-radio" id="condomConsider" name="condomConsider" value="dontKnow" disabled required> I don't know</label>
+                </td>
+                </tr>
+                <tr>
+                <td><input type="checkbox" name="user-exp-chckbx" id="diaphragm" onchange="toggleRadioButtons('diaphragm')"> <label for="diaphragm">Diaphragm</label></td>
+                <td>
+                    <label><input type="radio" class="user-exp-radio" id="diaphragmExperience" name="diaphragmExperience" value="good" disabled required> Good</label>
+                    <label><input type="radio" class="user-exp-radio" id="diaphragmExperience" name="diaphragmExperience" value="neutral" disabled required> Neutral</label>
+                    <label><input type="radio" class="user-exp-radio" id="diaphragmExperience" name="diaphragmExperience" value="bad" disabled required> Bad</label>
+                </td>
+                <td>
+                    <label><input type="radio" class="user-exp-radio" id="diaphragmConsider" name="diaphragmConsider" value="yes" disabled required> Yes</label>
+                    <label><input type="radio" class="user-exp-radio" id="diaphragmConsider" name="diaphragmConsider" value="no" disabled required> No</label>
+                    <label><input type="radio" class="user-exp-radio" id="diaphragmConsider" name="diaphragmConsider" value="dontKnow" disabled required> I don't know</label>
+                </td>
+                </tr>
+                <tr>
+                <td><input type="checkbox" name="user-exp-chckbx" id="spermicide" onchange="toggleRadioButtons('spermicide')"> <label for="spermicide">Spermicide</label></td>
+                <td>
+                    <label><input type="radio" class="user-exp-radio" id="spermicideExperience" name="spermicideExperience" value="good" disabled required> Good</label>
+                    <label><input type="radio" class="user-exp-radio" id="spermicideExperience" name="spermicideExperience" value="neutral" disabled required> Neutral</label>
+                    <label><input type="radio" class="user-exp-radio" id="spermicideExperience" name="spermicideExperience" value="bad" disabled required> Bad</label>
+                </td>
+                <td>
+                    <label><input type="radio" class="user-exp-radio" id="spermicideConsider" name="spermicideConsider" value="yes" disabled required> Yes</label>
+                    <label><input type="radio" class="user-exp-radio" id="spermicideConsider" name="spermicideConsider" value="no" disabled required> No</label>
+                    <label><input type="radio" class="user-exp-radio" id="spermicideConsider" name="spermicideConsider" value="dontKnow" disabled required> I don't know</label>
+                </td>
+                </tr>
+                <tr>
+                <td><input type="checkbox" name="user-exp-chckbx" id="withdrawal" onchange="toggleRadioButtons('withdrawal')"> <label for="withdrawal">Withdrawal Method</label></td>
+                <td>
+                    <label><input type="radio" class="user-exp-radio" id="withdrawalExperience" name="withdrawalExperience" value="good" disabled required> Good</label>
+                    <label><input type="radio" class="user-exp-radio" id="withdrawalExperience" name="withdrawalExperience" value="neutral" disabled required> Neutral</label>
+                    <label><input type="radio" class="user-exp-radio" id="withdrawalExperience" name="withdrawalExperience" value="bad" disabled required> Bad</label>
+                </td>
+                <td>
+                    <label><input type="radio" class="user-exp-radio" id="withdrawalConsider" name="withdrawalConsider" value="yes" disabled required> Yes</label>
+                    <label><input type="radio" class="user-exp-radio" id="withdrawalConsider" name="withdrawalConsider" value="no" disabled required> No</label>
+                    <label><input type="radio" class="user-exp-radio" id="withdrawalConsider" name="withdrawalConsider" value="dontKnow" disabled required> I don't know</label>
+                </td>
+                </tr>
+                <tr>
+                <td><input type="checkbox" name="user-exp-chckbx" id="calendarMethod" onchange="toggleRadioButtons('calendarMethod')"> <label for="calendarMethod">Calendar Method</label></td>
+                <td>
+                    <label><input type="radio" class="user-exp-radio" id="calendarMethodExperience" name="calendarMethodExperience" value="good" disabled required> Good</label>
+                    <label><input type="radio" class="user-exp-radio" id="calendarMethodExperience" name="calendarMethodExperience" value="neutral" disabled required> Neutral</label>
+                    <label><input type="radio" class="user-exp-radio" id="calendarMethodExperience" name="calendarMethodExperience" value="bad" disabled required> Bad</label>
+                </td>
+                <td>
+                    <label><input type="radio" class="user-exp-radio" id="calendarMethodConsider" name="calendarMethodConsider" value="yes" disabled required> Yes</label>
+                    <label><input type="radio" class="user-exp-radio" id="calendarMethodConsider" name="calendarMethodConsider" value="no" disabled required> No</label>
+                    <label><input type="radio" class="user-exp-radio" id="calendarMethodConsider" name="calendarMethodConsider" value="dontKnow" disabled required> I don't know</label>
+                </td>
+                </tr>
+                <tr>
+                <td><input type="checkbox" name="user-exp-chckbx" id="tempMethod" onchange="toggleRadioButtons('tempMethod')"> <label for="tempMethod">Temperature Method</label></td>
+                <td>
+                    <label><input type="radio" class="user-exp-radio" id="tempMethodExperience" name="tempMethodExperience" value="good" disabled required> Good</label>
+                    <label><input type="radio" class="user-exp-radio" id="tempMethodExperience" name="tempMethodExperience" value="neutral" disabled required> Neutral</label>
+                    <label><input type="radio" class="user-exp-radio" id="tempMethodExperience" name="tempMethodExperience" value="bad" disabled required> Bad</label>
+                </td>
+                <td>
+                    <label><input type="radio" class="user-exp-radio" id="tempMethodConsider" name="tempMethodConsider" value="yes" disabled required> Yes</label>
+                    <label><input type="radio" class="user-exp-radio" id="tempMethodConsider" name="tempMethodConsider" value="no" disabled required> No</label>
+                    <label><input type="radio" class="user-exp-radio" id="tempMethodConsider" name="tempMethodConsider" value="dontKnow" disabled required> I don't know</label>
+                </td>
+                </tr>
+                <tr>
+                <td><input type="checkbox" name="user-exp-chckbx" id="emergencyContraception" onchange="toggleRadioButtons('emergencyContraception')"> <label for="emergencyContraception">Emergency Contraception</label></td>
+                <td>
+                    <label><input type="radio" class="user-exp-radio" id="emergencyContraceptionExperience" name="emergencyContraceptionExperience" value="good" disabled required> Good</label>
+                    <label><input type="radio" class="user-exp-radio" id="emergencyContraceptionExperience" name="emergencyContraceptionExperience" value="neutral" disabled required> Neutral</label>
+                    <label><input type="radio" class="user-exp-radio" id="emergencyContraceptionExperience" name="emergencyContraceptionExperience" value="bad" disabled required> Bad</label>
+                </td>
+                <td>
+                    <label><input type="radio" class="user-exp-radio" id="emergencyContraceptionConsider" name="emergencyContraceptionConsider" value="yes" disabled required> Yes</label>
+                    <label><input type="radio" class="user-exp-radio" id="emergencyContraceptionConsider" name="emergencyContraceptionConsider" value="no" disabled required> No</label>
+                    <label><input type="radio" class="user-exp-radio" id="emergencyContraceptionConsider" name="emergencyContraceptionConsider" value="dontKnow" disabled required> I don't know</label>
+                </td>
+                </tr>
+                <tr>
+                <td><input type="checkbox" name="user-exp-chckbx" id="vasectomy" onchange="toggleRadioButtons('vasectomy')"> <label for="vasectomy">Vasectomy</label></td>
+                <td>
+                    <label><input type="radio" class="user-exp-radio" id="vasectomyExperience" name="vasectomyExperience" value="good" disabled required> Good</label>
+                    <label><input type="radio" class="user-exp-radio" id="vasectomyExperience" name="vasectomyExperience" value="neutral" disabled required> Neutral</label>
+                    <label><input type="radio" class="user-exp-radio" id="vasectomyExperience" name="vasectomyExperience" value="bad" disabled required> Bad</label>
+                </td>
+                <td>
+                    <label><input type="radio" class="user-exp-radio" id="vasectomyConsider1" name="vasectomyConsider" value="yes" disabled required> Yes</label>
+                    <label><input type="radio" class="user-exp-radio" id="vasectomyConsider2" name="vasectomyConsider" value="no" disabled required> No</label>
+                    <label><input type="radio" class="user-exp-radio" id="vasectomyConsider3" name="vasectomyConsider" value="dontKnow" disabled required> I don't know</label>
+                </td>
+                </tr>
+                <tr>
+                <td><input type="checkbox" name="user-exp-chckbx" id="tubalLigation" onchange="toggleRadioButtons('tubalLigation')"> <label for="tubalLigation">Tubal Ligation</label></td>
+                <td>
+                    <label><input type="radio" class="user-exp-radio" id="tubalLigationExperience" name="tubalLigationExperience" value="good" disabled required> Good</label>
+                    <label><input type="radio" class="user-exp-radio" id="tubalLigationExperience" name="tubalLigationExperience" value="neutral" disabled required> Neutral</label>
+                    <label><input type="radio" class="user-exp-radio" id="tubalLigationExperience" name="tubalLigationExperience" value="bad" disabled required> Bad</label>
+                </td>
+                <td>
+                    <label><input type="radio" class="user-exp-radio" id="tubalLigationConsider" name="tubalLigationConsider" value="yes" disabled required> Yes</label>
+                    <label><input type="radio" class="user-exp-radio" id="tubalLigationConsider" name="tubalLigationConsider" value="no" disabled required> No</label>
+                    <label><input type="radio" class="user-exp-radio" id="tubalLigationConsider" name="tubalLigationConsider" value="dontKnow" disabled required> I don't know</label>
+                </td>
+                </tr>
+            </table>
+            <br>
+            <input type="checkbox" id="user-experience-checkbox-none"> <label for="user-experience-checkbox-none">I have not used any of these methods</label>
+
+        </div>
     </div>
+
     
-    <br>
+    <br><br><br>
+        <div class="row" style="align-items: center;">
+            <div class="col-auto">
+                <div class="vl" style="width: 10px;
+                background-color: #915E98;
+                border-radius: 99px;
+                height: 75px;
+                display: -webkit-inline-box;"></div>
+            </div>
+        
+            <div class="col-auto mt-3">
+                <h5>Personal Preferences</h5>
+                <p>Let us know which of the following factors is for you.<span style="color: red;"> *</span></p>
+            </div>
+        </div>
 
-    <h3>Personal Preferences</h3>
-    <p>Let us know which of the following factors is for you.<span style="color: red;">*</span></p>
+        <br>
 
-    <div class ="personal-preferences-container" id="personal-preferences-container">
+    <div class="container p-5 rounded-2 shadow-sm rounded" style="background:white;">
+        <div class ="personal-preferences-container" id="personal-preferences-container">
 
                 <span><b>Cost effectiveness</b></span>
                 <br>
-                <label><input type="radio" name="costEffectiveness" id="costEffectiveness1" value="veryImportant">Very Important</label>
-                <label><input type="radio" name="costEffectiveness" id="costEffectiveness2" value="important">Important</label>
-                <label><input type="radio" name="costEffectiveness" id="costEffectiveness3" value="neutral">Neutral</label>
-                <label><input type="radio" name="costEffectiveness" id="costEffectiveness4" value="unimportant">Unimportant</label>
-                <label><input type="radio" name="costEffectiveness" id="costEffectiveness5" value="veryUnimportant">Very Unimportant</label>
-                <br><br>
+                <div class="row m-3">
+                    <div class="col">
+                        <label><input type="radio" name="costEffectiveness" id="costEffectiveness1" value="veryImportant"> Very Important</label>
+                    </div>
+                    <div class="col">
+                        <label><input type="radio" name="costEffectiveness" id="costEffectiveness2" value="important"> Important</label>
+                    </div>
+                    <div class="col">
+                        <label><input type="radio" name="costEffectiveness" id="costEffectiveness3" value="neutral"> Neutral</label>
+                    </div>
+                    <div class="col">
+                        <label><input type="radio" name="costEffectiveness" id="costEffectiveness4" value="unimportant"> Unimportant</label>
+                    </div>
+                    <div class="col">
+                        <label><input type="radio" name="costEffectiveness" id="costEffectiveness5" value="veryUnimportant"> Very Unimportant</label>
+                    </div>
+                </div>
+                <br>
                 <span><b>Helps with managing periods and side effects</b></span>
                 <br>
-                <label><input type="radio" name="managingPeriods" id="managingPeriods1" value="veryImportant">Very Important</label>
-                <label><input type="radio" name="managingPeriods" id="managingPeriods2" value="important">Important</label>
-                <label><input type="radio" name="managingPeriods" id="managingPeriods3" value="neutral">Neutral</label>
-                <label><input type="radio" name="managingPeriods" id="managingPeriods4" value="unimportant">Unimportant</label>
-                <label><input type="radio" name="managingPeriods" id="managingPeriods5" value="veryUnimportant">Very Unimportant</label>
-                <br><br>
+                <div class="row m-3">
+                    <div class="col">
+                        <label><input type="radio" name="managingPeriods" id="managingPeriods1" value="veryImportant"> Very Important</label>
+                    </div>
+                    <div class="col">
+                        <label><input type="radio" name="managingPeriods" id="managingPeriods2" value="important"> Important</label>
+                    </div>
+                    <div class="col">
+                        <label><input type="radio" name="managingPeriods" id="managingPeriods3" value="neutral"> Neutral</label>
+                    </div>
+                    <div class="col">
+                        <label><input type="radio" name="managingPeriods" id="managingPeriods4" value="unimportant"> Unimportant</label>
+                    </div>
+                    <div class="col">
+                        <label><input type="radio" name="managingPeriods" id="managingPeriods5" value="veryUnimportant"> Very Unimportant</label>
+                    </div>
+                </div>
+                <br>
                 <span><b>Effective at preventing pregnancy</b></span>
                 <br>
-                <label><input type="radio" name="preventingPregnancy" id="preventingPregnancy1" value="veryImportant">Very Important</label>
-                <label><input type="radio" name="preventingPregnancy" id="preventingPregnancy2" value="important">Important</label>
-                <label><input type="radio" name="preventingPregnancy" id="preventingPregnancy3" value="neutral">Neutral</label>
-                <label><input type="radio" name="preventingPregnancy" id="preventingPregnancy4" value="unimportant">Unimportant</label>
-                <label><input type="radio" name="preventingPregnancy" id="preventingPregnancy5" value="veryUnimportant">Very Unimportant</label>
-                <br><br>
+                <div class="row m-3">
+                    <div class="col">
+                        <label><input type="radio" name="preventingPregnancy" id="preventingPregnancy1" value="veryImportant"> Very Important</label>
+                    </div>
+                    <div class="col">
+                        <label><input type="radio" name="preventingPregnancy" id="preventingPregnancy2" value="important"> Important</label>
+                    </div>
+                    <div class="col">
+                        <label><input type="radio" name="preventingPregnancy" id="preventingPregnancy3" value="neutral"> Neutral</label>
+                    </div>
+                    <div class="col">
+                        <label><input type="radio" name="preventingPregnancy" id="preventingPregnancy4" value="unimportant"> Unimportant</label>
+                    </div>
+                    <div class="col">
+                        <label><input type="radio" name="preventingPregnancy" id="preventingPregnancy5" value="veryUnimportant"> Very Unimportant</label>
+                    </div>
+                </div>
+
+                <br>
                 <span><b>Low possibility of gaining weight</b></span>
                 <br>
-                <label><input type="radio" name="gainingWeight" id="gainingWeight1" value="veryImportant">Very Important</label>
-                <label><input type="radio" name="gainingWeight" id="gainingWeight2" value="important">Important</label>
-                <label><input type="radio" name="gainingWeight" id="gainingWeight3" value="neutral">Neutral</label>
-                <label><input type="radio" name="gainingWeight" id="gainingWeight4" value="unimportant">Unimportant</label>
-                <label><input type="radio" name="gainingWeight" id="gainingWeight5" value="veryUnimportant">Very Unimportant</label>
-                <br><br>
+
+                <div class="row m-3">
+                    <div class="col">
+                        <label><input type="radio" name="gainingWeight" id="gainingWeight1" value="veryImportant"> Very Important</label>
+                    </div>
+                    <div class="col">
+                        <label><input type="radio" name="gainingWeight" id="gainingWeight2" value="important"> Important</label>
+                    </div>
+                    <div class="col">
+                        <label><input type="radio" name="gainingWeight" id="gainingWeight3" value="neutral"> Neutral</label>
+                    </div>
+                    <div class="col">
+                        <label><input type="radio" name="gainingWeight" id="gainingWeight4" value="unimportant"> Unimportant</label>
+                    </div>
+                    <div class="col">
+                        <label><input type="radio" name="gainingWeight" id="gainingWeight5" value="veryUnimportant"> Very Unimportant</label>
+                    </div>
+                </div>
+
+        </div>
 
     </div>
 
-    <br>
 
-    <h3>Medical History</h3>
-    <div class ="medical-history-container" id="medical-history-container">
-        <p><b>Do you have a concern about any of the following conditions? (choose all that apply)<span style="color: red;">*</span></b></p>
-        <input type="checkbox" name="med-hist-chckbx" id="depression"> <label for="depression">Depression or anxiety</label><br>
-        <input type="checkbox" name="med-hist-chckbx" id="acne"> <label for="acne">Acne and breakouts</label><br>
-        <input type="checkbox" name="med-hist-chckbx" id="blood-clotting-disorder"> <label for="blood-clotting-disorder">Blood clotting disorder</label><br>
-        <input type="checkbox" name="med-hist-chckbx" id="pcos"> <label for="pcos">Polycystic Ovary Syndrome (PCOS) or Endometriosis</label><br>
-        <input type="checkbox" name="med-hist-chckbx" id="hypertension"> <label for="hypertension">Hypertension or highblood pressure</label><br>
-        <input type="checkbox" name="med-hist-chckbx" id="treatment-for-sti"> <label for="treatment-for-sti">Treatment for Sexual Transmitted Infection (STIs)</label><br><br>
-        <input type="checkbox"  id="none-of-the-above"> <label for="none-of-the-above"><b>None of the above</b></n></label>
+
+    <br><br><br>
+
+        <div class="row" style="align-items: center;">
+            <div class="col-auto">
+                <div class="vl" style="width: 10px;
+                background-color: #1F6CB5;
+                border-radius: 99px;
+                height: 75px;
+                display: -webkit-inline-box;"></div>
+            </div>
         
+            <div class="col-auto">
+                <h5>Medical History</h5>
+                
+            </div>
+        </div>
+
+        <br>
+
+    <div class="cont p-5 rounded-2 shadow-sm rounded" style="background:white;">
+        <div class ="medical-history-container" id="medical-history-container">
+            <p><b>Do you have a concern about any of the following conditions? (choose all that apply)<span style="color: red;"> *</span></b></p>
+            <input type="checkbox" name="med-hist-chckbx" id="depression"> <label for="depression"> Depression or anxiety</label><br>
+            <input type="checkbox" name="med-hist-chckbx" id="acne"> <label for="acne"> Acne and breakouts</label><br>
+            <input type="checkbox" name="med-hist-chckbx" id="blood-clotting-disorder"> <label for="blood-clotting-disorder"> Blood clotting disorder</label><br>
+            <input type="checkbox" name="med-hist-chckbx" id="pcos"> <label for="pcos"> Polycystic Ovary Syndrome (PCOS) or Endometriosis</label><br>
+            <input type="checkbox" name="med-hist-chckbx" id="hypertension"> <label for="hypertension"> Hypertension or highblood pressure</label><br>
+            <input type="checkbox" name="med-hist-chckbx" id="treatment-for-sti"> <label for="treatment-for-sti"> Treatment for Sexual Transmitted Infection (STIs)</label><br><br>
+            <input type="checkbox"  id="none-of-the-above"> <label for="none-of-the-above"><b> None of the above</b></n></label>
+            
+        </div>
     </div>
 
-    <br>
+    
 
-    <h3>Additional Factors</h3>
-    <div class ="additional-factors-container" id="additional-factors-container">
-        <div class = "number-1-additional-factor" id="number-1-additional-factor">
-            <p><b>1. How do you feel about the insertion of a foreign object into your vagina?<span style="color: red;">*</span></b></p>
-            <label><input type="radio" class="additional-factors-radio" value= "veryComfortable" id="very-comfortable" name="answer1">Very Comfortable</label><br>
-            <label><input type="radio" class="additional-factors-radio" value= "comfortable" id="comfortable" name="answer1">Comfortable</label><br>
-            <label><input type="radio" class="additional-factors-radio" value= "neutral" id="neutral" name="answer1">Neutral</label><br>
-            <label><input type="radio" class="additional-factors-radio" value= "uncomfortable" id="uncomfortable" name="answer1">Uncomfortable</label><br>
-            <label><input type="radio" class="additional-factors-radio" value= "veryUncomfortable" id="very-uncomfortable" name="answer1">Very Uncomfortable</label>
+    <br><br><br>
+
+        <div class="row" style="align-items: center;">
+            <div class="col-auto">
+                <div class="vl" style="width: 10px;
+                background-color: #B6CCF5;
+                border-radius: 99px;
+                height: 75px;
+                display: -webkit-inline-box;"></div>
+            </div>
+        
+            <div class="col-auto">
+                <h5>Additional Factors</h5>
+            </div>
         </div>
+        
         <br>
-        <div class = "number-2-additional-factor" id="number-2-additional-factor">
-            <p><b>2. At what hormone level do you feel most comfortable?<span style="color: red;">*</span></b></p>
-            <label><input type="radio" class="additional-factors-radio" value="no-hormones" id="no-hormones" name="answer2">No hormones</label><br>
-            <label><input type="radio" class="additional-factors-radio" value="one-hormone" id="one-hormone" name="answer2">One hormone (progestin only methods)</label><br>
-            <label><input type="radio" class="additional-factors-radio" value="two-hormones" id="two-hormones" name="answer2">Two hormones (progestin and estrogen methods)</label><br>
-            <label><input type="radio" class="additional-factors-radio" value="dontknow" id="dontknow" name="answer2">I don't know/ no preference</label>
+    <div class="cont p-5 rounded-2 shadow-sm rounded" style="background:white;">
+        <div class ="additional-factors-container" id="additional-factors-container">
+            <div class = "number-1-additional-factor" id="number-1-additional-factor">
+                <p><b>1. How do you feel about the insertion of a foreign object into your vagina?<span style="color: red;"> *</span></b></p>
+                <label><input type="radio" class="additional-factors-radio" value= "veryComfortable" id="very-comfortable" name="answer1"> Very Comfortable</label><br>
+                <label><input type="radio" class="additional-factors-radio" value= "comfortable" id="comfortable" name="answer1"> Comfortable</label><br>
+                <label><input type="radio" class="additional-factors-radio" value= "neutral" id="neutral" name="answer1"> Neutral</label><br>
+                <label><input type="radio" class="additional-factors-radio" value= "uncomfortable" id="uncomfortable" name="answer1"> Uncomfortable</label><br>
+                <label><input type="radio" class="additional-factors-radio" value= "veryUncomfortable" id="very-uncomfortable" name="answer1"> Very Uncomfortable</label>
+            </div>
+            <br>
+            <div class = "number-2-additional-factor" id="number-2-additional-factor">
+                <p><b>2. At what hormone level do you feel most comfortable?<span style="color: red;"> *</span></b></p>
+                <label><input type="radio" class="additional-factors-radio" value="no-hormones" id="no-hormones" name="answer2"> No hormones</label><br>
+                <label><input type="radio" class="additional-factors-radio" value="one-hormone" id="one-hormone" name="answer2"> One hormone (progestin only methods)</label><br>
+                <label><input type="radio" class="additional-factors-radio" value="two-hormones" id="two-hormones" name="answer2"> Two hormones (progestin and estrogen methods)</label><br>
+                <label><input type="radio" class="additional-factors-radio" value="dontknow" id="dontknow" name="answer2"> I don't know/ no preference</label>
+            </div>
+            <br>
+            <div class = "number-3-additional-factor" id="number-3-additional-factor">
+                <p><b>3. How often do you want to use your contraceptive method?<span style="color: red;"> *</span></b></p>
+                <label><input type="radio" class="additional-factors-radio" value="daily" id="daily" name="answer3"> Daily</label><br>
+                <label><input type="radio" class="additional-factors-radio" value="weeklyl" id="weekly" name="answer3"> Weekly</label><br>
+                <label><input type="radio" class="additional-factors-radio" value="monthly" id="monthly" name="answer3"> Monthly</label><br>
+                <label><input type="radio" class="additional-factors-radio" value="yearly" id="yearly" name="answer3"> Yearly</label><br>
+                <label><input type="radio" class="additional-factors-radio" value="dontknow2" id="dontknow2" name="answer3"> I don't know/ no preference</label>
+            </div>
+            <br>
+            <div class = "number-4-additional-factor" id="number-4-additional-factor">
+            <p><b>4. Do you want to permanently stop having children?<span style="color: red;"> *</span></b></p>
+                <label><input type="radio" class="additional-factors-radio" value="yes" id="yes" name="answer4"> Yes</label><br>
+                <label><input type="radio" class="additional-factors-radio" value="no" id="no" name="answer4"> No</label><br>
+                <label><input type="radio" class="additional-factors-radio" value="dontknow3" id="dontknow3" name="answer4"> I don't know/ no preference</label>
+            </div>
+            <br>
         </div>
-        <br>
-        <div class = "number-3-additional-factor" id="number-3-additional-factor">
-            <p><b>3. How often do you want to use your contraceptive method?<span style="color: red;">*</span></b></p>
-            <label><input type="radio" class="additional-factors-radio" value="daily" id="daily" name="answer3">Daily</label><br>
-            <label><input type="radio" class="additional-factors-radio" value="weeklyl" id="weekly" name="answer3">Weekly</label><br>
-            <label><input type="radio" class="additional-factors-radio" value="monthly" id="monthly" name="answer3">Monthly</label><br>
-            <label><input type="radio" class="additional-factors-radio" value="yearly" id="yearly" name="answer3">Yearly</label><br>
-            <label><input type="radio" class="additional-factors-radio" value="dontknow2" id="dontknow2" name="answer3">I don't know/ no preference</label>
-        </div>
-        <br>
-        <div class = "number-4-additional-factor" id="number-4-additional-factor">
-        <p><b>4. Do you want to permanently stop having children?<span style="color: red;">*</span></b></p>
-            <label><input type="radio" class="additional-factors-radio" value="yes" id="yes" name="answer4">Yes</label><br>
-            <label><input type="radio" class="additional-factors-radio" value="no" id="no" name="answer4">No</label><br>
-            <label><input type="radio" class="additional-factors-radio" value="dontknow3" id="dontknow3" name="answer4">I don't know/ no preference</label>
-        </div>
-        <br>
     </div>
+    
     <input type="hidden" name="recommendations" id="recommendations_input" value="">
-    <input type="submit" value="Get Result" name="submit">
+    <input type="submit" value="Get Result" name="submit" class="btn my-4 px-5 py-3" style="background: #D2E0F8; float:right;">
     </form>
 
+    </div>
     
     
     <br><br><br><br>
