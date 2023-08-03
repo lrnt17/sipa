@@ -8,9 +8,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/324d76b648.js" crossorigin="anonymous"></script>
     <title>Period Tracker</title>
     <!--<style>
@@ -250,54 +247,86 @@
     </style>-->
     <style>
         .period-day {
-    background-color: pink;
-    }
+            background-color: #CAA4D0;
+            color:#ffff;
+        }
 
-    .ovulation-day {
-        background-color: #c7e3b1;
-    }
+        .ovulation-day {
+            background-color: #F0C2A9;
+            color:#ffff;
+        }
 
-    .hide{
-        display: none;
-    }
+        .hide{
+            display: none;
+        }
 
-    .table {
-        display: inline-block;
-        margin: 10px
-    }
+        .table {
+            display: inline-block;
+            margin: 10px
+        }
 
-    #result {
-        display: flex;
-  flex-wrap: wrap;
-    }
+        #result {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .day{
+            color: #184DA8; font-weight: lighter;
+            font-size:14px;
+        }
+
+        table, th, td {
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 5px;
+        }
     </style>
 </head>
-<body>
+<body style="background: #F2F5FF;">
     <!-- navigation bar with logo -->
-    <?php //include('header.php') ?>
+    <?php include('header.php') ?>
 
-    <div class="container-header">
-        <div class="head">
-            <div class="h1text">
-                <h1 class="header-text">Period &#8202;</h1>
-                <h1 class= "header-text1">Calculator</h1>
+    <div class="container rounded-5" style="background: #D2E0F8;">
+        <div class="row mx-5 justify-content-center" style="text-align:center; padding: 4%;">
+        
+            <div class="col-auto"><p style="font-size: 3.5rem;">Period</p></div>
+            <div class="col-auto"><p style="font-size: 3.5rem; font-weight:bolder;" >Calculator</p></div>
+        </div>
+    </div>
+
+<div class="container">
+
+            <div class="row height d-flex justify-content-center align-items-center">
+
+              <div class="col-md-6">
+
+                <div class="cap p-3 rounded-4 shadow-sm rounded" style="position: relative; top: -40px; background:#ffff; text-align:center;">
+                    Wondering, “When will I get my period?” ALWAYS knows! Our easy tracking tool helps map out your cycle for months.
+                </div>
+                
+              </div>
+            </div>
+    
+
+        <div class="row" style="align-items: center;">
+            <div class="col-auto">
+                <div class="vl" style="width: 10px;
+                background-color: #1F6CB5;
+                border-radius: 99px;
+                height: 75px;
+                display: -webkit-inline-box;"></div>
+            </div>
+        
+            <div class="col-auto mt-3">
+                <div class="row">
+                    <div class="col-auto"><p style="font-size: 2rem;  font-weight:bolder;">Track</p></div>
+                    <div class="col-auto"><p style="font-size: 2rem;" >your periods</p></div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="infobox">
-        <div class="infotext-box">
-            <p>Wondering, “When will I get my period?” ALWAYS knows! Our easy tracking tool helps map out your cycle for months.</p>
-        </div>
-    </div>
-    <div class="top-con">
-        <div class="vl"></div>
-        <div class="title">
-            <h1 class="title-text">Track &#8202;</h1>
-            <h1 class= "title-text1">your periods</h1>
-        </div>
-    </div>
+        
     
-    <div id="form-container">
+    <!--<div id="form-container">
         <form onsubmit="period_calcu.submit(event)" method="post" class="form-con">
             <div class="form-box">
                 <label for="last-period">First day of last period</label>
@@ -315,14 +344,106 @@
                 <button class="class_60 log-btn">Calculate my period</button>
             </div>
         </form>
+    </div>-->
+
+    <div class="text-center"id="form-container">
+        <form onsubmit="period_calcu.submit(event)" method="post" class="form-con">
+
+            <div class="row align-items-start mt-4">
+                <div class="col">
+                    <div class="container">
+                        <label for="last-period" style="font-weight: bold; color:#5A5A5A;">First day of last period</label>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="container">
+                        <label for="period-length" style="font-weight: bold; color:#5A5A5A;">Length of last period (in days)</label>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="container">
+                        <label for="cycle-length" style="font-weight: bold; color:#5A5A5A;">Length of menstrual cycle (in days)</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row align-items-start my-4">
+                <div class="col">
+                    <div class="container p-3 rounded-4 shadow-sm rounded" style="background:#ffff;">
+                        <input class="py-3" type="date" id="last-period" style="border: none;
+                        outline: none; font-size:20px; color:#5A5A5A;"required>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="container p-3 rounded-4 shadow-sm rounded" style="background:#ffff;">
+                        <input class="py-3" type="number" id="period-length" placeholder="ex. 7" min="1" max="10" value="5" style="border: none;
+                        outline: none; font-size:20px; color:#5A5A5A;" required>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="container p-3 rounded-4 shadow-sm rounded" style="background:#ffff;">
+                        <input class="py-3" type="number" id="cycle-length" placeholder="ex. 28" min="21" max="35" value="28" style="border: none;
+                        outline: none; font-size:20px; color:#5A5A5A;" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="">
+                        <button class="btn my-3 px-5 py-3 rounded-pill shadow-sm rounded" style="background: #D2E0F8;">Calculate my period</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="row" style="align-items: center;">
+            <div class="col-auto">
+                <div class="vl" style="width: 20px;
+                background-color: #CAA4D0;
+                border-radius: 99px;
+                height: 20px;
+                display: -webkit-inline-box;"></div>
+            </div>
+        
+            <div class="col-auto mt-2">
+                <div class="row">
+                    <div class="col-auto"><p style="color:#5A5A5A;">Period days</p></div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="align-items: center;">
+            <div class="col-auto">
+                <div class="vl" style="width: 20px;
+                background-color: #F0C2A9;
+                border-radius: 99px;
+                height: 20px;
+                display: -webkit-inline-box;"></div>
+            </div>
+        
+            <div class="col-auto mt-2">
+                <div class="row">
+                    <div class="col-auto"><p style="color:#5A5A5A;">Ovulation period</p></div>
+                </div>
+            </div>
+        </div>
     </div>
     
-    <div class="resultbox">
+    <div class="resultbox row">
         <div class="js-period-calcu-buttons hide">
-            <button id="next-3-months" onclick="period_calcu.next3Months()">Next 3 Months</button>
+            <div class="row mt-2" style="justify-content: flex-end;">
+                <div class="col-auto">
+                    <p style="margin-top:10px;">Next 3 months </p>
+                </div>
+                <div class="col-auto">
+                    <button id="next-3-months" onclick="period_calcu.next3Months()" class="btn" style="font-size:20px; color:#1F6CB5; float:right;"><i class="fa-solid fa-circle-chevron-right"></i></button>
+                </div>
+            </div>
         </div>
-        <div id="result"></div>
+        <div id="result" style="justify-content: space-evenly;"></div>
+        
     </div>
+
+</div>
 
     <script>
 

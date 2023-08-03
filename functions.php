@@ -109,16 +109,17 @@ function build_calendar($startMonth, $startYear, $periodDays, $ovulationDays, $n
 
     // Loop through each month for the 3-month period
     while ($startDateTime <= $endDateTime) {
-        $calendar .= "<table class='table table-bordered'>"; //testing
+        $calendar .= "<div class='calendar-container m-4 rounded-4 shadow-sm rounded' style='background:#ffff;'>"; // Add a div container
+        $calendar .= "<table class='m-4' >"; //testing
         $month = $startDateTime->format('n');
         $year = $startDateTime->format('Y');
         $numDays = cal_days_in_month(CAL_GREGORIAN, $month, $year);
         $firstDayOfMonth = new DateTime($year . '-' . str_pad($month, 2, '0', STR_PAD_LEFT) . '-01');
         $dayOfWeek = $firstDayOfMonth->format('w');
         
-        $calendar .= "<tr><th colspan='7'>" . $startDateTime->format('F Y') . "</th></tr>";
+        $calendar .= "<tr><th colspan='7' style='text-align:center; color:#5A5A5A;''>" . $startDateTime->format('F Y') . "</th></tr>";
         $calendar .= "<tr>";
-        $daysOfWeek = array('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat');
+        $daysOfWeek = array('<span class="day">Sun</span>', '<span class="day">Mon</span>', '<span class="day">Tue</span>', '<span class="day">Wed</span>', '<span class="day">Thu</span>', '<span class="day">Fri</span>', '<span class="day">Sat</span>');
         foreach ($daysOfWeek as $day) {
             $calendar .= "<th class='header'>$day</th>";
         }
@@ -180,6 +181,7 @@ function build_calendar($startMonth, $startYear, $periodDays, $ovulationDays, $n
         $calendar .= "</tr>";
         $startDateTime->add(new DateInterval('P1M'));
         $calendar .= "</table>";//testing
+        $calendar .= "</div>"; // Close the div container
     }
 
     //$calendar .= "</table>";
