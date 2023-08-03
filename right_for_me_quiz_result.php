@@ -2,7 +2,6 @@
 
     require("connect.php");
     require('functions.php');
-
 ?>
 
 
@@ -50,9 +49,9 @@ label {
   margin: 0 10px;
 }
 
-#longevity-input {
+#usage-input {
   padding: 5px;
-  width: 50px; /* Adjust this width as needed */
+  width: 80px; /* Adjust this width as needed */
 }
 
 select {
@@ -146,31 +145,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   </form>
 </div>
 
-<div class="input-container" style=" width: 280px; display: none;" >
-<p>How long will you take it? <br></p>
+
+<div class="input-container" style=" width: 400px; display: none;" >
+<p>How many times would you like to use this  method?</p>
+
+<!--niliitan ko lang to kasi parang note lang sya ikaw na po bahala mag adjust -->
+<p style="font-size:12px">(Ex.: 2 times, and Mini Pill is the selected method.  You will opt to receive SMS reminders for 2 months because you will take <b>2 packs of pills</b>.) </p>
 <div class="input-container" style="background-color: #EDEDED; width: 250px;">
-  <label for="longevity">Longevity</label>
+  <label for="usage">Usage</label>
+  <!-- etong separator guide lang hahaha palitan mo nalangg -->
   <span class="separator">|</span>
-  <input type="text" id="longevity-input" pattern="[0-9]*" maxlength="2" placeholder="00">
-  <select id="duration-dropdown">
-    <option value="day">Day/s</option>
-    <option value="week">Week/s</option>
-    <option value="month">Month/s</option>
-    <option value="year">Year/s</option>
-  </select>
+  <input type="text" id="usage-input" pattern="[0-9]*" maxlength="2" placeholder="00">
+  <label for="time">time/s</label>
 </div>
 </div>
 
 <!-- Create a container for the Save button -->
 <div id="save_button_container" style="display: none;">
-  <p>Once your inputs have been saved, you will start receiving SMS reminders for taking your selected contraceptive method.</p>
+  <p style="font-size:15px">Once your inputs have been saved, you will start receiving SMS reminders for taking your selected contraceptive method.</p>
 </div>
 
 
 <script>
   let selectedMethod = ''; // Variable to store the selected contraceptive method
   let dateFilled = false; // Variable to track if the date picker is filled
-let longevityFilled = false; // Variable to track if the longevity input is filled
+let usageFilled = false; // Variable to track if the usage input is filled
 
   const recommendationsJson = '<?php echo addslashes($_POST['recommendations']); ?>';
     const recommendations = JSON.parse(recommendationsJson);
@@ -301,7 +300,7 @@ document.getElementById("remind_me_btn").addEventListener("click", function (eve
   datePickerContainer.appendChild(datePickerInput);
 
   const inputContainer = document.querySelector(".input-container");
-  inputContainer.style.display = "block"; // Show the longevity input container
+  inputContainer.style.display = "block"; // Show the usage input container
 
   // Append the date picker container after the "Remind Me!" button div
   document.getElementById("sms_reminder_btn").insertAdjacentElement('afterend', datePickerContainer);
@@ -319,12 +318,12 @@ document.getElementById("remind_me_btn").addEventListener("click", function (eve
     }
   });
 
-  // Event listener for longevity input
-const longevityInput = document.getElementById("longevity-input");
-longevityInput.addEventListener("input", function () {
+  // Event listener for usage input
+const usageInput = document.getElementById("usage-input");
+usageInput.addEventListener("input", function () {
   // Remove any non-numeric characters from the input
   this.value = this.value.replace(/\D/g, '');
-  longevityFilled = !!longevityInput.value; // Convert to boolean, true if filled, false if empty
+  usageFilled = !!usageInput.value; // Convert to boolean, true if filled, false if empty
   checkShowSaveButton();
 });
 
@@ -341,11 +340,11 @@ longevityInput.addEventListener("input", function () {
     updateStartDate(formattedDate);
   });
 
-// Get the longevity input container
-const longevityInputContainer = document.querySelector(".input-container");
+// Get the usage input container
+const usageInputContainer = document.querySelector(".input-container");
 
-// Append the "Save" button after the longevity input container
-longevityInputContainer.insertAdjacentElement('afterend', saveButton);
+// Append the "Save" button after the usage input container
+usageInputContainer.insertAdjacentElement('afterend', saveButton);
 
 
   // Remove the input field from the container pangalis ng input para rekta calendar nalang 
@@ -359,9 +358,9 @@ document.getElementById("start_date_picker").addEventListener("change", function
   checkShowSaveButton();
 });
 
-// Add event listener for the longevity input to check if it's filled
-document.getElementById("longevity-input").addEventListener("input", function () {
-  longevityFilled = !!this.value; // Convert to boolean, true if filled, false if empty
+// Add event listener for the usage input to check if it's filled
+document.getElementById("usage-input").addEventListener("input", function () {
+  usageFilled = !!this.value; // Convert to boolean, true if filled, false if empty
   checkShowSaveButton();
 });
 
@@ -369,9 +368,9 @@ document.getElementById("longevity-input").addEventListener("input", function ()
 function checkShowSaveButton() {
   const saveButton = document.getElementById("save_date_button");
   const saveButtonContainer = document.getElementById("save_button_container");
-  const longevityValue = parseInt(longevityInput.value, 10); // Parse the longevity input value as an integer
+  const usageValue = parseInt(usageInput.value, 10); // Parse the usage input value as an integer
   
-  if (dateFilled && longevityFilled && longevityValue !== 0) {
+  if (dateFilled && usageFilled && usageValue !== 0) {
     saveButton.style.display = "block";
     saveButtonContainer.style.display = "block";
     saveButton.disabled = false;
@@ -385,7 +384,11 @@ function checkShowSaveButton() {
     xhr.onreadystatechange = function () {
       if (xhr.readyState === XMLHttpRequest.DONE) {
         if (xhr.status === 200) {
-          alert("Selected contraceptive method and start date saved to the database.");
+          alert("Selected contraceptive method, start date, and usage saved to the database.");
+
+          // Schedule the SMS reminders based on the selected method
+          //scheduleSMS(selectedMethod);
+
         } else {
           alert("Error updating selected contraceptive method and start date in the database.");
         }
@@ -395,8 +398,9 @@ function checkShowSaveButton() {
     xhr.open("POST", "save_method_and_start_date.php", true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     const user_id = '<?php echo $_SESSION['USER']['user_id']; ?>';
+    const usageValue = parseInt(usageInput.value, 10); // Parse the usage input value as an integer
     xhr.send(
-      "user_id=" + encodeURIComponent(user_id) + "&selected_method=" + encodeURIComponent(selectedMethod) + "&selected_date=" + encodeURIComponent(formattedDate)
+      "user_id=" + encodeURIComponent(user_id) + "&selected_method=" + encodeURIComponent(selectedMethod) + "&selected_date=" + encodeURIComponent(formattedDate) + "&birth_control_usage=" + encodeURIComponent(usageValue)
     );
   }
 </script>
@@ -461,30 +465,31 @@ function checkShowSaveButton() {
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script>
-  const longevityInput = document.getElementById('longevity-input');
+  const usageInput = document.getElementById('usage-input');
   const durationDropdown = document.getElementById('duration-dropdown');
 
   durationDropdown.addEventListener('change', () => {
     const selectedValue = durationDropdown.value;
     switch (selectedValue) {
       case 'day':
-        longevityInput.maxLength = 1;
-        longevityInput.placeholder = '6 days';
+        usageInput.maxLength = 1;
+        usageInput.placeholder = '6 days';
         break;
       case 'month':
-        longevityInput.maxLength = 2;
-        longevityInput.placeholder = '11 months';
+        usageInput.maxLength = 2;
+       usageInput.placeholder = '11 months';
         break;
       case 'year':
-        longevityInput.maxLength = 2;
-        longevityInput.placeholder = '10 years';
+        usageInput.maxLength = 2;
+        usageInput.placeholder = '10 years';
         break;
       default:
-        longevityInput.maxLength = 2;
-        longevityInput.placeholder = '';
+        usageInput.maxLength = 2;
+        usageInput.placeholder = '';
     }
   });
 </script>
+
 
 
 
@@ -493,4 +498,3 @@ function checkShowSaveButton() {
 
 
 </html>
-
