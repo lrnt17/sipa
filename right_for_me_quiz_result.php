@@ -130,7 +130,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <p>Select a contraceptive method based on the result of your assessment.</p>
   <!-- New Save Button -->
   <!-- Note: Removed the inline "display: none" style from the button -->
-  <button id="save_method_button" style="display:none">Save Method Only</button>
+  <button id="save_method_button" style="display:none;">Save Method Only</button>
+</div>
+
+<div id="not_applicable_div" style="display:none;">
+  <p>Your selected method does not need SMS reminder as it is used every time you need it. Make sure to follow the directions on how to use it to ensure its effectiveness!</p>
 </div>
 
 <div id="sms_reminder_btn" style="display: none;">
@@ -204,6 +208,9 @@ document.getElementById("remind_me_btn").addEventListener("click", function (eve
 });
 
   function fetchMethodDetails(method, container) {
+
+    
+
     const xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
       if (xhr.readyState === XMLHttpRequest.DONE) {
@@ -262,8 +269,19 @@ document.getElementById("remind_me_btn").addEventListener("click", function (eve
     xhr.send(
       "user_id=" + encodeURIComponent(user_id) + "&selected_method=" + encodeURIComponent(selectedMethod)
     );
-   
+            // Check if the selected method is one of the listed methods
+    const notApplicableSMSMethod =
+          ["condom", "diaphragm", "spermicide", "withdrawal method", "calendar method", "temperature method", "emergency contraception", "vasectomy", "tubal ligation"].includes(
+            methodDetails.birth_control_name.toLowerCase()
+          );
+              // Show the reminder button only if it's not a special method
+            if (!notApplicableSMSMethod) {
               showReminderButton();
+            }
+            else{
+              const notApplicable = document.getElementById("not_applicable_div");
+  notApplicable.style.display = "block";
+            }
             }
           });
         } else {
