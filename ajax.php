@@ -467,31 +467,39 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 	}else
 	if($_POST['data_type'] == 'login') //login version
 	{
-
-		$code = addslashes($_POST['code']);
-		//check if this account exists
-		$query = "select * from users where access_code = '$code' limit 1";
+		$username = addslashes($_POST['username']);
+		
+		$query = "select * from users where user_name = '$username' limit 1";
 		$row = query($query);
 
-		if(!$row) //wrong email pag lumabas yung nasa loob ng condition na to 
+		if(!$row)
 		{
-			$info['message'] = "Wrong email or password"; //ito yung lumalabas sa login.inc.php
+			$info['message'] = "Wrong email or password";
 		}else
 		{
-			$row = $row[0]; //1st item in that row that we want 
-
-			//verification ng password if <goods></goods>
-			
-			if($_POST['pass'] == $row['user_password'])
+			$row = $row[0];
+			//password_verify($_POST['pass'], $row['user_password'])
+			if(password_verify($_POST['pass'], $row['user_password']))
 			{
-				//correct
-				$info['success'] = true;
-				authenticate($row);
-				$info['message'] = "Successful login";
+				if ($row['user_role'] == 'admin') {
+					$info['admin_success'] = true;
+					authenticate($row);
+					$info['message'] = "Admin Successful login";
+
+				} elseif ($row['user_role'] == 'head_admin') {
+					$info['head_admin_success'] = true;
+					authenticate($row);
+					$info['message'] = "Head Admin Successful login";
+
+				} else {
+					$info['success'] = true;
+					authenticate($row);
+					$info['message'] = "Successful login";
+				}
+
 			}else{
 				$info['message'] = "Wrong email or password";
 			}
-
 		}
 	}else
 	if($_POST['data_type'] == 'logout') //logout version
@@ -915,8 +923,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 		$info['success'] = true;
 
 	}else
-	if ($_POST['data_type'] == 'submit_periodResult') {
-
+	if ($_POST['data_type'] == 'submit_periodResult') 
+	{
 		$firstDayLastPeriod = new DateTime($_POST['firstDayLastPeriod']);
 		$periodLength = (int)$_POST['periodLength'];
 		$cycleLength = (int)$_POST['cycleLength'];
@@ -945,8 +953,94 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 		}
 		
 		// Assign generated calendar to rows key in info array
-		$info['rows'] = build_calendar($startDateTime->format('n'),$startDateTime->format('Y'),$periodDays,$ovulationDays,$numOfMonths);
+		$info['rows'] = period_calendar($startDateTime->format('n'),$startDateTime->format('Y'),$periodDays,$ovulationDays,$numOfMonths);
 		$info['success'] = true;
+	}else
+	if ($_POST['data_type'] == 'load_method_info') 
+	{
+		$birth_control_id = (int)$_POST['birth_control_id'];
+
+        $query = "select * from method_positive_effects where birth_control_id = '$birth_control_id'";
+        $positive_rows = query($query);
+
+        if ($positive_rows) {
+          $info['positive_rows'] = $positive_rows;
+          $info['positive_rows_success'] = true;
+        }
+
+        $query = "select * from method_negative_effects where birth_control_id = '$birth_control_id'";
+        $negative_rows = query($query);
+
+        if ($negative_rows) {
+          $info['negative_rows'] = $negative_rows;
+          $info['negative_rows_success'] = true;
+        }
+
+		$query = "select * from method_fyi where birth_control_id = '$birth_control_id'";
+        $fyi_rows = query($query);
+
+        if ($fyi_rows) {
+          $info['fyi_rows'] = $fyi_rows;
+          $info['fyi_rows_success'] = true;
+        }
+	}else
+	if ($_POST['data_type'] == 'load_chart') 
+	{
+        $query = "select * from birth_controls_chart";
+        $chart = query($query);
+
+        if ($chart) {
+			// Create a new array to hold the modified data
+			$modifiedData = [];
+	
+			// Loop through the data and remove the underscores from the column names
+			foreach ($chart as $row) {
+				$modifiedRow = [];
+				foreach ($row as $key => $value) {
+					$newKey = str_replace('_', ' ', $key);
+					$modifiedRow[$newKey] = $value;
+				}
+				$modifiedData[] = $modifiedRow;
+			}
+	
+			// Set the modified data in the response
+			$info['chart_data'] = $modifiedData;
+			$info['success'] = true;
+		}
+	}else
+	if ($_POST['data_type'] == 'load_sidebyside_data')
+	{
+		$birth_control_id = (int)$_POST['birth_control_id'];
+		$query = "";
+
+		if (empty($birth_control_id)) {
+			$query = "SELECT * FROM birth_controls_sidebyside";
+		} else {
+			$query = "SELECT * FROM birth_controls_sidebyside WHERE birth_control_id = '$birth_control_id'";
+		}
+
+		$rows = query($query);
+		
+		$info = array();
+		$info['columns'] = array();
+		$info['rows'] = array();
+
+		if ($rows) {
+
+			foreach ($rows as $row) {
+				$info['rows'][] = $row;
+			}
+
+			$info['columns'] = array_keys($info['rows'][0]);
+			$info['success'] = true;
+			// Exclude columns
+			$columns_to_exclude = ['sidebyside_id', 'birth_control_id', 'birth_control_name', 'birth_control_icon'];
+			foreach ($columns_to_exclude as $column_to_exclude) {
+				if (($key = array_search($column_to_exclude, $info['columns'])) !== false) {
+					unset($info['columns'][$key]);
+				}
+			}
+		}
 	}
 	
 }

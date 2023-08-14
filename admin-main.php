@@ -63,8 +63,11 @@
             <p class="js-reg">Registration</p>
         </div>
         <?php if(head_admin($row['admin_empnum'])):?>
-            <div onclick="admin.show('.js-mange-admin-modal', '.js-mange-admin')" class="js-admin class_15" style="cursor:pointer;" >
+            <div onclick="admin.show('.js-mange-admin-modal', '.js-mange-admin')" class="js-admin" style="cursor:pointer;" >
                 <p class="js-mange-admin">Manage Administrators</p>
+            </div>
+            <div onclick="admin.show('.js-mange-contraceptives-modal', '.js-mange-contra')" class="js-admin" style="cursor:pointer;" >
+                <p class="js-mange-contra">Manage Contraceptives</p>
             </div>
         <?php endif;?>
         <div>---------------------------------------------------------------------------------------------</div>
@@ -74,6 +77,7 @@
     <?php include('admin-users.php');?>
     <?php include('admin-registration.php');?>
     <?php include('admin-mange-admin.php');?>
+    <?php include('admin-mange-contraceptives.php');?>
 </body>
 <script>
     var admin = {
@@ -85,8 +89,12 @@
             document.querySelector(".js-registration-modal").classList.add('hide');
 
             let jsMangeAdminModal = document.querySelector(".js-mange-admin-modal");
+            let jsMangeContraceptivesModal = document.querySelector(".js-mange-contraceptives-modal");
             if (jsMangeAdminModal) {
                 jsMangeAdminModal.classList.add('hide');
+            } 
+            if (jsMangeContraceptivesModal) {
+                jsMangeContraceptivesModal.classList.add('hide');
             }
 
             // Remove bold class from all links
@@ -95,8 +103,12 @@
             document.querySelector(".js-reg").classList.remove('bold');
             
             let jsMangeAdmin = document.querySelector(".js-mange-admin");
+            let jsMangeContraceptives = document.querySelector(".js-mange-contra");
             if (jsMangeAdmin) {
                 jsMangeAdmin.classList.remove('bold');
+            } 
+            if (jsMangeContraceptives) {
+                jsMangeContraceptives.classList.remove('bold');
             }
 
             // Show the specified modal

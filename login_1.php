@@ -144,8 +144,8 @@
                     <div class="form">
                         <div class="fonticon">
                             <i class="fa-sharp fa-solid fa-shield-halved" style="font-size:15px;"></i>
-                            <label for="code">Access Code</label>
-                            <input type="text" name="code" id="code" required>
+                            <label for="username">Username</label>
+                            <input type="text" name="username" id="username" required>
                         </div>
                     </div>
                     <div class="form">
@@ -219,12 +219,17 @@
                 {
                     if(ajax.status == 200){
 
-                        //ganto daw iconvert si JSON back to javascript
+                        console.log(ajax.responseText);
                         let obj = JSON.parse(ajax.responseText);
-                        alert(obj.message); //nasa ajax.php yung .message
+                        alert(obj.message);
 
-                        if(obj.success)//nasa ajax.php yung .sucess
+                        if(obj.success){
                             window.location.href = "home_1_with_user.php";
+                        }else if (obj.admin_success) {
+                            window.location.href = "admin/index.php";
+                        }else if (obj.head_admin_success) {
+                            window.location.href = "admin/index.php";
+                        }
                     }else{
                         alert("Please check your internet connection");
                     }

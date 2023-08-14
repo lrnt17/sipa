@@ -217,6 +217,143 @@
         $info['rows'] = build_calendar($startDateTime->format('n'),$startDateTime->format('Y'),$periodDays,$ovulationDays,$numOfMonths);
         $info['success'] = true;
       }*/
+      else
+      if ($_POST['data_type'] == 'add_method_details') {
+    
+        $advantages_input = addslashes($_POST['advantages_input']);
+        $disadvantages_input = addslashes($_POST['disadvantages_input']);
+        $fyi_input = addslashes($_POST['fyi_input']);
+        $selected_method = $_POST['selected_method_id'];
+    
+        if (!empty($advantages_input)) {
+          $query = "insert into method_positive_effects (birth_control_id,positive_effect_desc) values ('$selected_method','$advantages_input')";
+          query($query);
+        }
+
+        if (!empty($disadvantages_input)) {
+          $query = "insert into method_negative_effects (birth_control_id,negative_effect_desc) values ('$selected_method','$disadvantages_input')";
+          query($query);
+        }
+
+        if (!empty($fyi_input)) {
+          $query = "insert into method_fyi (birth_control_id,fyi_desc) values ('$selected_method','$fyi_input')";
+          query($query);
+        }
+
+        /*$query = "SELECT * FROM appointments WHERE app_date = '$appointment_date' && app_timeslot = '$appointment_timeslot'";
+        $rows = query($query);*/
+
+        $info['success'] = true;
+        $info['message'] = "Method details successfully added";
+      }
+      else
+      if ($_POST['data_type'] == 'load_method_effects') {
+
+        $selectedOption = (int)$_POST['selectedOption'];
+
+        $query = "select * from method_positive_effects where birth_control_id = '$selectedOption'";
+        $positive_rows = query($query);
+
+        if ($positive_rows) {
+          $info['positive_rows'] = $positive_rows;
+          $info['positive_rows_success'] = true;
+        }
+
+        $query = "select * from method_negative_effects where birth_control_id = '$selectedOption'";
+        $negative_rows = query($query);
+
+        if ($negative_rows) {
+          $info['negative_rows'] = $negative_rows;
+          $info['negative_rows_success'] = true;
+        }
+
+        $query = "select * from method_fyi where birth_control_id = '$selectedOption'";
+        $fyi_rows = query($query);
+
+        if ($fyi_rows) {
+          $info['fyi_rows'] = $fyi_rows;
+          $info['fyi_rows_success'] = true;
+        }
+        
+      } else
+      if ($_POST['data_type'] == 'delete_positive_effects') {
+
+          // Get IDs of rows to delete
+          $ids = json_decode($_POST['positive_effect_ids']);
+
+          // Delete rows from database
+          foreach ($ids as $id) {
+            $id = (int)$id;
+            $query = "delete from method_positive_effects where positive_effect_id = '$id' LIMIT 1";
+            query($query);
+          }
+
+          $info['success'] = true;
+          $info['message'] = "Your positive effect/s was deleted successfully";
+      } else
+      if ($_POST['data_type'] == 'delete_negative_effects') {
+
+          // Get IDs of rows to delete
+          $ids = json_decode($_POST['negative_effect_ids']);
+
+          // Delete rows from database
+          foreach ($ids as $id) {
+            $id = (int)$id;
+            $query = "delete from method_negative_effects where negative_effect_id = '$id' LIMIT 1";
+            query($query);
+          }
+
+          $info['success'] = true;
+          $info['message'] = "Your negative effect/s was deleted successfully";
+      } else
+      if ($_POST['data_type'] == 'delete_fyi') {
+
+          // Get IDs of rows to delete
+          $ids = json_decode($_POST['fyi_ids']);
+
+          // Delete rows from database
+          foreach ($ids as $id) {
+            $id = (int)$id;
+            $query = "delete from method_fyi where fyi_id = '$id' LIMIT 1";
+            query($query);
+          }
+
+          $info['success'] = true;
+          $info['message'] = "Your did you know info/s was deleted successfully";
+      } else
+      if ($_POST['data_type'] == 'edit_positive_desc') {
+    
+        $edited_positive_input = addslashes($_POST['advantages_input']);
+        $positive_effect_id = (int)($_POST['positive_effect_id']);
+      
+        $query = "update method_positive_effects set positive_effect_desc = '$edited_positive_input' where positive_effect_id = '$positive_effect_id' limit 1";
+        query($query);
+    
+        $info['success'] = true;
+        $info['message'] = "Positive effect was edited successfully";
+      } else
+      if ($_POST['data_type'] == 'edit_negative_desc') {
+    
+        $edited_negative_input = addslashes($_POST['disadvantages_input']);
+        $negative_effect_id = (int)($_POST['negative_effect_id']);
+      
+        $query = "update method_negative_effects set negative_effect_desc = '$edited_negative_input' where negative_effect_id = '$negative_effect_id' limit 1";
+        query($query);
+    
+        $info['success'] = true;
+        $info['message'] = "negative effect was edited successfully";
+      } else
+      if ($_POST['data_type'] == 'edit_fyi_desc') {
+    
+        $edited_fyi_input = addslashes($_POST['fyi_input']);
+        $fyi_id = (int)($_POST['fyi_id']);
+      
+        $query = "update method_fyi set fyi_desc = '$edited_fyi_input' where fyi_id = '$fyi_id' limit 1";
+        query($query);
+    
+        $info['success'] = true;
+        $info['message'] = "fyi was edited successfully";
+      }
   }
 
   echo json_encode($info);

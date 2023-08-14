@@ -362,8 +362,7 @@
             
             console.log(data);
 
-            if(typeof data == 'object')
-			{
+            if(typeof data == 'object') {
 				document.querySelector(".js-edit-emp_number").value = data.admin_empnum;
 				document.querySelector(".js-edit-fullname").value = data.admin_fullname;
                 document.querySelector(".js-edit-gmail").value = data.admin_email;
@@ -371,7 +370,7 @@
                 document.querySelector(".js-edit-specialization").value = data.specialization;
 				document.querySelector(".js-edit-pnum").value = data.admin_pnum;
                 document.querySelector(".js-edit-address").value = data.admin_address;
-			}else{
+			} else {
 				alert("Invalid post data");
 			}
 

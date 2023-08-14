@@ -10,6 +10,6 @@
     <h2>Account Management</h2>
     <p>Are you a user or a health worker?</p>
     <button onclick="location.href='login_1.php'">User</button>
-    <button onclick="location.href='admin-login.php'">Health Worker</button>
+    <button onclick="location.href='admin/login.php'">Health Worker</button>
 </body>
 </html>

@@ -3,7 +3,11 @@
     require("connect.php");
     require('functions.php');
 
-    echo $_SESSION['USER']['user_id'];
+    if(!logged_in()){
+		header("Location: home_1_with_user.php");
+		die;
+	}
+    
 ?>
 
 <!DOCTYPE html>

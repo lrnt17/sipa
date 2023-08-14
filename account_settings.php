@@ -1,17 +1,26 @@
 <?php 
     require("connect.php");
     require('functions.php');
-
+    
     if(!logged_in()){
 		header("Location: home_1_with_user.php");
 		die;
 	}
 
+    include('header.php');
+    
     $user_id = $_SESSION['USER']['user_id'];
     $user_sex = $_SESSION['USER']['user_sex'];
-    $user_password = $_SESSION['USER']['user_password'];
-
+    //$user_password = $_SESSION['USER']['user_password'];
+    //echo $user_password;
     //echo $user_id;
+    $query = "select * from users where user_id = '$user_id' limit 1";
+	$row = query($query);
+
+	if($row)
+	{
+		$row = $row[0];
+	}
 
     //update if statement
     if($_SERVER['REQUEST_METHOD'] == "POST")
@@ -62,14 +71,16 @@
         }*/
 
         if (!empty($_POST['current_password']) && !empty($_POST['new_password'])) {
-
-            if ($_POST['current_password'] == $user_password) {
+            //if ($_POST['current_password'] == $user_password) {
+            if (password_verify($_POST['current_password'], $row['user_password'])) {
+                
                 // Check if the new password and retype password match
                 if ($_POST['new_password'] !== $_POST['retype_password']) {
                     $errors['password'] = "New passwords do not match";
                 } else {
                     // Update the password in the database
-                    $password = $_POST['new_password'];
+                    //$password = $_POST['new_password'];
+                    $password = password_hash($_POST['new_password'], PASSWORD_DEFAULT);
                     
                     // Log out the user and redirect to login page
                     //session_destroy();
@@ -156,13 +167,13 @@
 		}
 	}
 
-	$query = "select * from users where user_id = '$user_id' limit 1";
+	/*$query = "select * from users where user_id = '$user_id' limit 1";
 	$row = query($query);
 
 	if($row)
 	{
 		$row = $row[0];
-	}
+	}*/
 
 ?>
 
@@ -229,7 +240,7 @@
     </style>
 </head>
 <body style="background: #F2F5FF;">
-<?php include('header.php'); ?>
+<?php //include('header.php'); ?>
 <div class="parent">
     <div class="container">
     <!--<section>-->
@@ -285,7 +296,18 @@
 
         <!-- your account end-->
         
-
+        <?php if(!empty($errors)):?>
+            <!--<div class="" >
+                <i class="">
+                </i>
+                <div class=""  >
+                    <?//=implode("<br>", $errors)?>
+                </div>
+            </div>-->
+            <script>
+                alert("<?=implode('/n', $errors)?>");
+            </script>
+        <?php endif;?>
         
 
 
@@ -384,19 +406,19 @@
                         <label class="class_32">
                             Current Password
                         </label>
-                        <input placeholder="" type="password" name="current_password" class="class_33">
+                        <input type="password" name="current_password" class="class_33">
                     </div></br>
                     <div class="class_31">
                         <label class="class_32">
                             New Password
                         </label>
-                        <input placeholder="" type="password" name="new_password" class="class_33">
+                        <input type="password" name="new_password" class="class_33">
                     </div></br>
                     <div class="class_31">
                         <label class="class_36">
                             Retype New Password
                         </label>
-                        <input placeholder="" type="password" name="retype_password" class="class_33">
+                        <input type="password" name="retype_password" class="class_33">
                     </div>
                     <p class="chan-text" style="
                     bottom: 21px;
@@ -419,7 +441,7 @@
             </div>
             <!-- end of change password modal -->
 
-        
+        </form>
         <!-- delete account modal -->
         <div class="js-delete-account-modal hide">
             <h2 style="color: #2F2F2F;
@@ -438,7 +460,7 @@
                 
             </div>
         </div>
-        </form>
+        
         <!-- end of delete account modal -->
     <?php else:?>
         <div class="class_16" >

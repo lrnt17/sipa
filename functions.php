@@ -38,6 +38,17 @@ function query($query)
 	return false;
 }
 
+function alter_table_query($query){
+    
+    global $conn;
+
+    if ($conn->query($query) === TRUE) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 function logged_in(){ // sa pag log in 
 
 	//this condition means that pag hindi empty si $_SESSION['USER'], true ganon
@@ -67,6 +78,17 @@ function get_image($path)
 	return 'assets/images/user.jpg?v1';
 }
 
+function get_admin_image($path)
+{
+	//kapag may laman yung picture, magiging true itong condition
+	//so kapag hindi empty pero nag eexist yung file, return path
+	if(!empty($path) && file_exists($path))
+		return $path;
+
+	//kapag alang laman, ito yung default na pic
+	return '../assets/images/user.jpg?v1';
+}
+
 function i_own_post($row)
 {
 	if(logged_in() && $_SESSION['USER']['user_id'] == $row['user_id'])
@@ -92,7 +114,16 @@ function head_admin($row) {
     }
 }
 
-function build_calendar($startMonth, $startYear, $periodDays, $ovulationDays, $numOfMonths) {
+function check_head_admin($user_role) {
+	
+    if ($user_role === 'head_admin') {
+        return true;
+    }
+
+    return false;
+}
+
+function period_calendar($startMonth, $startYear, $periodDays, $ovulationDays, $numOfMonths) {
     // Get the selected date of the first day of the last period
     $startDate = $startYear . '-' . str_pad($startMonth, 2, '0', STR_PAD_LEFT) . '-01';
 
