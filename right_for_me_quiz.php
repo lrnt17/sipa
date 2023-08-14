@@ -40,7 +40,7 @@
     </div>
     <br><br>
     <div class="container mt-3">
-        <div class="row" style="align-items: center;">
+        <div class="row flex-nowrap" style="align-items: center;">
             <div class="col-auto">
                 <div class="vl" style="width: 10px;
                 background-color: #F2C1A7;
@@ -49,7 +49,7 @@
                 display: -webkit-inline-box;"></div>
             </div>
         
-            <div class="col-auto mt-3">
+            <div class="col mt-3">
                 <h5>User Experiences</h5>
                 <p>Identify what methods you have past experience with.<span style="color: red;"> *</span></p>
             </div>
@@ -320,19 +320,19 @@
                 <span><b>Cost effectiveness</b></span>
                 <br>
                 <div class="row m-3">
-                    <div class="col">
+                    <div class="col-md">
                         <label><input type="radio" name="costEffectiveness" id="costEffectiveness1" value="veryImportant"> Very Important</label>
                     </div>
-                    <div class="col">
+                    <div class="col-md">
                         <label><input type="radio" name="costEffectiveness" id="costEffectiveness2" value="important"> Important</label>
                     </div>
-                    <div class="col">
+                    <div class="col-md">
                         <label><input type="radio" name="costEffectiveness" id="costEffectiveness3" value="neutral"> Neutral</label>
                     </div>
-                    <div class="col">
+                    <div class="col-md">
                         <label><input type="radio" name="costEffectiveness" id="costEffectiveness4" value="unimportant"> Unimportant</label>
                     </div>
-                    <div class="col">
+                    <div class="col-md">
                         <label><input type="radio" name="costEffectiveness" id="costEffectiveness5" value="veryUnimportant"> Very Unimportant</label>
                     </div>
                 </div>
@@ -340,19 +340,19 @@
                 <span><b>Helps with managing periods and side effects</b></span>
                 <br>
                 <div class="row m-3">
-                    <div class="col">
+                    <div class="col-md">
                         <label><input type="radio" name="managingPeriods" id="managingPeriods1" value="veryImportant"> Very Important</label>
                     </div>
-                    <div class="col">
+                    <div class="col-md">
                         <label><input type="radio" name="managingPeriods" id="managingPeriods2" value="important"> Important</label>
                     </div>
-                    <div class="col">
+                    <div class="col-md">
                         <label><input type="radio" name="managingPeriods" id="managingPeriods3" value="neutral"> Neutral</label>
                     </div>
-                    <div class="col">
+                    <div class="col-md">
                         <label><input type="radio" name="managingPeriods" id="managingPeriods4" value="unimportant"> Unimportant</label>
                     </div>
-                    <div class="col">
+                    <div class="col-md">
                         <label><input type="radio" name="managingPeriods" id="managingPeriods5" value="veryUnimportant"> Very Unimportant</label>
                     </div>
                 </div>
@@ -360,19 +360,19 @@
                 <span><b>Effective at preventing pregnancy</b></span>
                 <br>
                 <div class="row m-3">
-                    <div class="col">
+                    <div class="col-md">
                         <label><input type="radio" name="preventingPregnancy" id="preventingPregnancy1" value="veryImportant"> Very Important</label>
                     </div>
-                    <div class="col">
+                    <div class="col-md">
                         <label><input type="radio" name="preventingPregnancy" id="preventingPregnancy2" value="important"> Important</label>
                     </div>
-                    <div class="col">
+                    <div class="col-md">
                         <label><input type="radio" name="preventingPregnancy" id="preventingPregnancy3" value="neutral"> Neutral</label>
                     </div>
-                    <div class="col">
+                    <div class="col-md">
                         <label><input type="radio" name="preventingPregnancy" id="preventingPregnancy4" value="unimportant"> Unimportant</label>
                     </div>
-                    <div class="col">
+                    <div class="col-md">
                         <label><input type="radio" name="preventingPregnancy" id="preventingPregnancy5" value="veryUnimportant"> Very Unimportant</label>
                     </div>
                 </div>
@@ -382,19 +382,19 @@
                 <br>
 
                 <div class="row m-3">
-                    <div class="col">
+                    <div class="col-md">
                         <label><input type="radio" name="gainingWeight" id="gainingWeight1" value="veryImportant"> Very Important</label>
                     </div>
-                    <div class="col">
+                    <div class="col-md">
                         <label><input type="radio" name="gainingWeight" id="gainingWeight2" value="important"> Important</label>
                     </div>
-                    <div class="col">
+                    <div class="col-md">
                         <label><input type="radio" name="gainingWeight" id="gainingWeight3" value="neutral"> Neutral</label>
                     </div>
-                    <div class="col">
+                    <div class="col-md">
                         <label><input type="radio" name="gainingWeight" id="gainingWeight4" value="unimportant"> Unimportant</label>
                     </div>
-                    <div class="col">
+                    <div class="col-md">
                         <label><input type="radio" name="gainingWeight" id="gainingWeight5" value="veryUnimportant"> Very Unimportant</label>
                     </div>
                 </div>

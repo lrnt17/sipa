@@ -41,7 +41,8 @@
                 </div>
               </li>
               <li>
-                  <div class="row mt-2" style="align-items: center;">
+              <?php if(logged_in()):?>
+                <div class="row mt-2" style="align-items: center;">
                     <div class="col-auto">
                       <a class="js-link navbar-brand d-md-block d-lg-none" href="account_settings.php"><img class="border border-dark rounded-circle" src="<?= get_image($_SESSION['USER']['user_image'])?>" title="SiPa"  width="40" height="40;"></a>
                     </div>
@@ -52,6 +53,17 @@
 
                     </div>
                   </div>
+                <?php else:?>
+                  <div class="row mt-2" style="align-items: center;">
+                    <div class="col-auto ms-2">
+                      <i class="fa-solid fa-arrow-right-to-bracket d-md-block d-lg-none" style="cursor:pointer; font-size: 20px; color:#2268e2;" onclick="user.login()"></i>
+                    </div>
+                    <div class="col-auto">
+                      <span class="js-link navbar-brand d-md-block d-lg-none" style="cursor:pointer; font-size: 17px; color:#2268e2;" onclick="user.login()">Sign in</span>
+                    </div>
+                  </div>
+                <?php endif;?>
+                  
               </li>
             </ul>
           </div>
@@ -62,7 +74,7 @@
 
                     </a>
                 <?php else:?>
-                    <span style="cursor:pointer; font-size: 16px;" onclick="user.login()">Sign in</span>
+                    <span class="js-link navbar-brand d-none d-lg-block d-lx-none" style="cursor:pointer; font-size: 16px; color:#2268e2;" onclick="user.login()">Sign in</span>
                 <?php endif;?>
           
         </nav>

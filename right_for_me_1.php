@@ -46,6 +46,22 @@
         height: 6px;
     }
 
+    .circle {
+    padding: 1%;
+    background-color: #D2E0F8;
+    width: 3.7em;
+    height: 3.7em;
+    border-radius: 100%;
+    text-align: center;
+    font-size: 3em;
+    line-height: 3em;
+    font-weight: 100;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1.5%;
+    margin-bottom: 1.5%;
+  }
+
    </style>
 </head>
 <body style="background: #F2F5FF;">
@@ -60,7 +76,8 @@
         </div>
     </div>
 
-    <div class="container">
+    <!-- Search Bar-->
+    <!--<div class="container"> 
 
             <div class="row height d-flex justify-content-center align-items-center">
 
@@ -75,7 +92,7 @@
                 
               </div>
             </div>
-     </div>
+     </div>-->
     
 
     <!--<div>
@@ -87,7 +104,7 @@
             </form>
         </div>
     </div>-->
-    <div class="container mt-3">
+    <div class="container mt-5"> <!-- mt-3-->
         <div class="row" style="align-items: center;">
             <div class="col-auto">
                 <div class="vl"></div>
@@ -98,11 +115,20 @@
             </div>
         </div>
 
-        </br></br></br></br></br>
-        <div class="d-flex justify-content-center">
-            <a href="right_for_me_quiz.php">Take the quiz</a>
+        <div class="center-container" style="text-align: center;position: relative;">
+            <div class="circle shadow-sm" id="circle1" style="background-color: #F2C1A7; position: absolute; width: 3.9em; height: 3.9em;
+            left: 48.7%; transform: translate(-47%, -6%); z-index: -2;"></div>
+
+            <div class="circle shadow-sm" id="circle2" style="background-color: #CAA4D0; position: absolute; width: 3.9em; height: 3.9em; left: 51%;
+            transform: translate(-55%, 5%); z-index: -1;"></div>
         </div>
-        </br></br></br></br></br></br>
+        <div class="circle d-flex justify-content-center">
+            <a href="right_for_me_quiz.php" style="
+            font-size: 24px;
+            text-decoration: none;
+            font-weight: 600; color:#383838;">Take the quiz</a>
+        </div>
+        </br></br></br>
 
         <div class="row">
             <div class="d-flex justify-content-center">

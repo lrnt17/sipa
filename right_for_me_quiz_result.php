@@ -13,6 +13,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"/>
+    <script src="https://kit.fontawesome.com/324d76b648.js" crossorigin="anonymous"></script>
     <title>SiPa | Right for Me</title>
     <style>
    .skiptranslate iframe  {
@@ -31,6 +32,9 @@
   /* CSS to resize the calendar container */
   .flatpickr-calendar {
     width: 300px; /* You can adjust this value to your preferred width */
+    border-radius: 5%;
+    padding: 20px;
+    margin-left: 50px;
   }
 
   /* Adjust the positioning and styling of the dropdown menu */
@@ -59,18 +63,80 @@ select {
   color: blue;
 }
 
+.img_container {
+    overflow: hidden; /* Hide any overflow from the image */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  /* Add blue hover effect */
+  .method_btn.hover:hover {
+      background-color: #D2E0F8;
+  }
+
+  input:focus{
+      outline: none;
+  }
+
+  .custom-width-hidden {
+  display: none;
+  }
+
+  .custom-width-hidden p {
+    width: 600px; /* Set the desired width */
+  } 
+
+  .circle {
+    padding: 1%;
+    background-color: #D2E0F8;
+    width: 3em;
+    height: 3em;
+    border-radius: 100%;
+    text-align: center;
+    font-size: 3em;
+    line-height: 2.2em;
+    font-weight: 100;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1.5%; 
+    margin-bottom: 1.5%; 
+  }
 
    </style>
    
 
 </head>
-<body>
+<body style="background: #F2F5FF;">
     <!-- navigation bar with logo -->
     <?php include('header.php') ?>
 
-    <div class="title-quiz-result" id="title-quiz-result">
-        <h1>Contraception Method Result</h1>
+    <div class="container rounded-5" style="background: #D2E0F8;">
+        <div class="row mx-5 justify-content-center" style="text-align:center; padding: 2%;">
+        
+            <div class="col-auto"><p style="font-size: 3.5rem;">Contraception Method</p></div>
+            <div class="col-auto"><p style="font-size: 3.5rem; font-weight:bolder;" >Result</p></div>
+        </div>
     </div>
+    <br><br>
+    <div class="container mt-3">
+        <div class="row flex-nowrap" style="align-items: center;">
+            <div class="col-auto">
+                <div class="vl" style="width: 10px;
+                background-color: #1F6CB5;
+                border-radius: 99px;
+                height: 75px;
+                display: -webkit-inline-box;"></div>
+            </div>
+        
+            <div class="col mt-3">
+                <h5>Your recommendation</h5>
+                <p > Based on your answers, these are the methods to consider.</p>
+            </div>
+        </div>
+
+    
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get the recommendations from the POST data
@@ -81,7 +147,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
      // Start a flex container to display items horizontally
      //try lang to sa css para makita yung pagdisplay ng pahorizontal..pwede mo pa iedit hehe 
-  echo '<div style="display: flex; flex-wrap: wrap;">';
+  echo '<div class="container d-flex justify-content-center">';
+  echo '<div class="row" style="justify-content: space-evenly;">';
   
     // Now, you can use the $recommendations array as needed
     // For example, you can loop through the recommended contraceptive methods:
@@ -105,68 +172,167 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Display the contraceptive method information
 
             //paalis nalang tong css na i2 if gagawan mo na pu ng css
-        echo '<div style="flex: 0 0 300px; margin: 10px; border: 1px solid #ccc; padding: 10px;">';
-        echo "<h2>{$row['birth_control_name']}</h2>";
-        echo "<img src='{$row['birth_control_img']}' alt='{$row['birth_control_name']}' style='width: 100px; height: 100px;'><br>";
-        echo "<p>{$row['birth_control_desc']}</p>";
-        echo "</div>";
+            ?>
+
+          <div class="col-sm-12 col-lg-4">
+              <div class="container d-flex justify-content-center">
+                  <div class="card mx-1 my-5 rounded-4" style="width: 80%; background-color:#BDD8F0;">
+                          <img src="<?php echo $row["birth_control_img"]; ?>" class="card-img-top rounded-4 shadow-sm rounded" style=";" alt="...">
+                      <div class="card-body" style=" min-height:14rem;">
+                          <h5 class="card-title" style="text-align:center; color:#3B3B3B;"><?php echo $row["birth_control_name"]; ?></h5>
+                          <p class="card-text mt-3">What it is?</p>
+                          <p class="card-text" style="margin-top: -3%;"><?php echo $row["birth_control_desc"]; ?></p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        <?php 
       }
     } else {
       // Handle the case where the method name is not found in the birth_controls table
       echo "<p>Contraceptive method '$method' not found.</p>";
     }
   }echo "</div>";
+  echo "</div>";
 };
 
 ?>
 
-    <div>
+
+
         <form id= "back_btn" action="right_for_me_quiz.php" method="post">
-            <input type="submit" value="Back" name="submit_back">
+            <div class="row mt-2" >
+                  <div class="col-auto">
+                      <button id="next-3-months" class="btn" style="font-size:20px; color:#1F6CB5; float:right;"><i class="fa-solid fa-circle-chevron-left"></i></button>
+                  </div>
+                  <div class="col-auto">
+                      <p style="margin-top:10px;">Back</p>
+                  </div>
+              </div>
+            <div>
+            <!-- <input class="btn" type="submit" value="Back" name="submit_back">-->
         </form>
     </div>
 
-    <div id="method_buttons_container">
-  <p>Select a contraceptive method based on the result of your assessment.</p>
+<div id="method_buttons_container">
+
+    <div class="row mt-5 mb-3 flex-nowrap" style="align-items: center;">
+            <div class="col-auto">
+                <div class="vl" style="width: 10px;
+                background-color: #915E98;
+                border-radius: 99px;
+                height: 75px;
+                display: -webkit-inline-box;
+                white-space: nowrap;"></div>
+            </div>
+        
+            <div class="col">
+                <h5>Select a contraceptive method based on the result of your assessment.</h5>
+            </div>
+    </div>
   <!-- New Save Button -->
   <!-- Note: Removed the inline "display: none" style from the button -->
   <button id="save_method_button" style="display:none;">Save Method Only</button>
 </div>
 
 <div id="not_applicable_div" style="display:none;">
-  <p>Your selected method does not need SMS reminder as it is used every time you need it. Make sure to follow the directions on how to use it to ensure its effectiveness!</p>
+  <div class="d-grid  p-3  px-3 rounded-4 my-4 mb-5" style="background: #F2C1A7;" >
+    <p class="text-start" >
+    <div style="text-align: center;">
+    <i class="fa-solid fa-prescription mb-4" style="font-size:30px;"></i>
+    </div>Your selected method does not need SMS reminder as it is used every time you need it. Make sure to follow the directions on how to use it to ensure its effectiveness!</p>
+  </div>
 </div>
 
 <div id="sms_reminder_btn" style="display: none;">
-  <div>
-    <p>Contraceptive method reminder via</p>
-    <h3>SMS</h3>
+  <div class="row my-4 flex-nowrap" style="align-items: center;">
+              <div class="col-auto">
+                  <div class="vl" style="width: 10px;
+                  background-color: #1F6CB5;
+                  border-radius: 99px;
+                  height: 75px;
+                  display: -webkit-inline-box;"></div>
+              </div>
+          
+              <div class="col mt-3">
+                  <h5>SMS</h5>
+                  <p >Contraceptive method reminder via</p>
+                  
+              </div>
   </div>
-  <p>Would you like to receive SMS reminders to take your selected contraceptive method as recommended?</p>
+      <div class="row ms-3 flex-nowrap" style="align-items: center;">
+            <div class="col-auto">
+                <div class="vl" style="width: 20px;
+                background-color: #CAA4D0;
+                border-radius: 99px;
+                height: 20px;
+                display: -webkit-inline-box;"></div>
+            </div>
+        
+            <div class="col mt-2">
+                <div class="row">
+                    <div class="col-auto"><p style="color:#5A5A5A;">Would you like to receive SMS reminders to take your selected contraceptive method as recommended?</p></div>
+                </div>
+            </div>
+        </div>
   <!-- Move the "Remind Me!" button inside the form -->
-  <form id="sms_reminder_form" action="#" method="post">
-    <input type="submit" value="Remind Me!" name="submit_remind" id="remind_me_btn">
+  <div class="center-container" style="text-align: center;position: relative;">
+    <div class="circle shadow-sm" id="circle1" style="background-color: #F2C1A7; position: absolute; width: 3.1em; height: 3.1em;
+    left: 48.7%; transform: translate(-47%, -6%); z-index: -2;"></div>
+
+    <div class="circle shadow-sm" id="circle2" style="background-color: #CAA4D0; position: absolute; width: 3.1em; height: 3.1em; left: 51%;
+    transform: translate(-55%, 5%); z-index: -1;"></div>
+  </div>
+
+  <form class="circle shadow-sm" id="sms_reminder_form" action="#" method="post" class="m-5">
+    <input type="submit" value="Remind Me!" name="submit_remind" id="remind_me_btn" class="btn" style="font-weight: 600;">
   </form>
+
 </div>
 
 
-<div class="input-container" style=" width: 400px; display: none;" >
-<p>How many times would you like to use this  method?</p>
+<div class="input-container" style=" width: ; display: none;" >
+<div class="row ms-3 flex-nowrap" style="align-items: center;">
+            <div class="col-auto">
+                <div class="vl" style="width: 20px;
+                background-color: #4574C4;
+                border-radius: 99px;
+                height: 20px;
+                display: -webkit-inline-box;"></div>
+            </div>
+        
+            <div class="col mt-2">
+              <p style="color:#5A5A5A;">How many times would you like to use this  method?</p>
+            </div>
+</div>
+
+<div class="row mx-5">
+    <p class="mx-2" style="font-size:12px; color:#5A5A5A;">(Ex.: 2 times, and Mini Pill is the selected method.  You will opt to receive SMS reminders for 2 months because you will take <b>2 packs of pills</b>.) </p>
+</div>
 
 <!--niliitan ko lang to kasi parang note lang sya ikaw na po bahala mag adjust -->
-<p style="font-size:12px">(Ex.: 2 times, and Mini Pill is the selected method.  You will opt to receive SMS reminders for 2 months because you will take <b>2 packs of pills</b>.) </p>
-<div class="input-container" style="background-color: #EDEDED; width: 250px;">
-  <label for="usage">Usage</label>
-  <!-- etong separator guide lang hahaha palitan mo nalangg -->
-  <span class="separator">|</span>
-  <input type="text" id="usage-input" pattern="[0-9]*" maxlength="2" placeholder="00">
-  <label for="time">time/s</label>
-</div>
+  <div class="mx-3">
+    <div class="input-container mx-5 my-3 rounded-3 shadow-sm px-4 py-3" style="background-color: white; width: 250px;">
+      <label for="usage">Usage </label>
+      <!-- etong separator guide lang hahaha palitan mo nalangg -->
+      <span style="width: 4px;
+        background-color: #7B7777;
+        border-radius: 99px;
+        height: 33px;
+        display: inline-block;
+        margin-left: 7px;"></span>
+      <input type="text" style="border:none; padding-left:35px;" id="usage-input" pattern="[0-9]*" maxlength="2" placeholder="00">
+      <label for="time" style="color:#1F6CB5;"> time/s</label>
+    </div>
+  </div>
+
 </div>
 
 <!-- Create a container for the Save button -->
-<div id="save_button_container" style="display: none;">
-  <p style="font-size:15px">Once your inputs have been saved, you will start receiving SMS reminders for taking your selected contraceptive method.</p>
+<div id="save_button_container_txt" class="my-4 custom-width-hidden" >
+  <div class="d-flex justify-content-end" style="text-align: right;">  
+    <p style="font-size:14px; color:#5A5A5A;">Once your inputs have been saved, you will start receiving SMS reminders for taking your selected contraceptive method.</p>
+  </div>
 </div>
 
 
@@ -202,12 +368,18 @@ let usageFilled = false; // Variable to track if the usage input is filled
 document.getElementById("remind_me_btn").addEventListener("click", function (event) {
   event.preventDefault();
   const remindMeButton = document.getElementById("remind_me_btn");
+  const remindCon = document.getElementById("sms_reminder_form");
+  const cir1 = document.getElementById("circle1");
+  const cir2 = document.getElementById("circle2");
   remindMeButton.style.display = "none"; // Hide the "Remind Me!" button when clicked
+  remindCon.style.display = "none";
+  cir1.style.display = "none";
+  cir2.style.display = "none";
 
   showDatePicker();
 });
 
-  function fetchMethodDetails(method, container) {
+function fetchMethodDetails(method, container) {
 
     
 
@@ -217,18 +389,34 @@ document.getElementById("remind_me_btn").addEventListener("click", function (eve
         if (xhr.status === 200) {
           const methodDetails = JSON.parse(xhr.responseText);
           const button = document.createElement("button");
-          button.classList.add("method_btn");
-          button.textContent = methodDetails.birth_control_name;
-          button.setAttribute("data-selected", "false");
+                button.classList.add("method_btn", "btn", "mx-3","my-3", "btn-light", "shadow-sm");
 
-          const img = document.createElement("img");
-          img.src = methodDetails.birth_control_img;
-          img.alt = methodDetails.birth_control_name;
-          img.width = 50;
-          img.height = 50;
+                // Set the width and height of the button
+                button.style.width = "150px"; // Adjust the width as needed
+                button.style.height = "150px"; // Adjust the height as needed
 
-          button.appendChild(img);
-          container.appendChild(button);
+                button.classList.add("hover");
+
+                const methodNameDiv = document.createElement("div");
+                methodNameDiv.textContent = methodDetails.birth_control_name;
+                methodNameDiv.classList.add("method_name");
+                button.appendChild(methodNameDiv);
+
+                const imgDiv = document.createElement("div");
+                imgDiv.classList.add("img_container", "rounded-3", "shadow-sm"); // Add this class for styling
+
+                const img = document.createElement("img");
+                img.src = methodDetails.birth_control_img;
+                img.alt = methodDetails.birth_control_name;
+                img.style.maxWidth = "100%";
+                img.style.maxHeight = "100%";
+                img.style.objectFit = "contain"; // Make the image fit within the container
+                imgDiv.appendChild(img);
+
+                button.appendChild(imgDiv);
+
+                button.setAttribute("data-selected", "false");
+                container.appendChild(button);
 
           // Add an event listener to handle button selection
           button.addEventListener("click", function () {
@@ -245,6 +433,10 @@ document.getElementById("remind_me_btn").addEventListener("click", function (eve
                   otherButton.style.display = "none";
                 }
               });
+
+               // Change the button color when selected
+                button.style.backgroundColor = "#D2E0F8"; 
+
 
                // Make the AJAX request to save the selected contraceptive method
    const xhr = new XMLHttpRequest();
@@ -292,7 +484,7 @@ document.getElementById("remind_me_btn").addEventListener("click", function (eve
 
     xhr.open("GET", `get_method_details.php?method_name=${encodeURIComponent(method)}`, true);
     xhr.send();
-  }
+}
 
 
 
@@ -302,19 +494,34 @@ document.getElementById("remind_me_btn").addEventListener("click", function (eve
 }
 
 
-  function showDatePicker() {
+function showDatePicker() {
   const datePickerContainer = document.createElement("div");
   datePickerContainer.id = "date_picker_container";
+  datePickerContainer.classList.add("m-4");
 
   const datePickerLabel = document.createElement("label");
   datePickerLabel.textContent = "Select the start date for the contraceptive method: ";
+
+   // Create and append the provided HTML content
+   const additionalContent = document.createElement("div");
+  additionalContent.innerHTML = `
+    <div class="row mb-4 flex-nowrap" style="align-items: center; padding-left:7px;">
+      <div class="col-auto">
+        <div class="vl" style="width: 20px; background-color: #F2C1A7; border-radius: 99px; height: 20px; display: -webkit-inline-box;"></div>
+      </div>
+      <div class="col mt-2">
+        <p style="color:#5A5A5A;">Select the start date for the contraceptive method: </p>
+      </div>
+    </div>
+  `;
+  datePickerContainer.appendChild(additionalContent);
 
   const datePickerInput = document.createElement("input");
   datePickerInput.type = "text";
   datePickerInput.id = "start_date_picker";
   datePickerInput.setAttribute("placeholder", "Select a date...");
 
-  datePickerContainer.appendChild(datePickerLabel);
+ // datePickerContainer.appendChild(datePickerLabel);
   datePickerContainer.appendChild(datePickerInput);
 
   const inputContainer = document.querySelector(".input-container");
@@ -337,13 +544,13 @@ document.getElementById("remind_me_btn").addEventListener("click", function (eve
   });
 
   // Event listener for usage input
-const usageInput = document.getElementById("usage-input");
-usageInput.addEventListener("input", function () {
-  // Remove any non-numeric characters from the input
-  this.value = this.value.replace(/\D/g, '');
-  usageFilled = !!usageInput.value; // Convert to boolean, true if filled, false if empty
-  checkShowSaveButton();
-});
+  const usageInput = document.getElementById("usage-input");
+  usageInput.addEventListener("input", function () {
+    // Remove any non-numeric characters from the input
+    this.value = this.value.replace(/\D/g, '');
+    usageFilled = !!usageInput.value; // Convert to boolean, true if filled, false if empty
+    checkShowSaveButton();
+  });
 
   // Create and append the "Save" button
   const saveButton = document.createElement("button");
@@ -351,6 +558,10 @@ usageInput.addEventListener("input", function () {
   saveButton.textContent = "Save";
   saveButton.style.display = "none"; // Hide the save button initially
   saveButton.disabled = true;
+  saveButton.classList.add("btn","px-4", "shadow-sm");
+  saveButton.style.background ="#C5A6C9";
+  saveButton.style.color ="white";
+
 
   saveButton.addEventListener("click", function () {
     const selectedDate = datePickerInput.value;
@@ -358,11 +569,18 @@ usageInput.addEventListener("input", function () {
     updateStartDate(formattedDate);
   });
 
-// Get the usage input container
-const usageInputContainer = document.querySelector(".input-container");
+  // Create a div to contain the "Save" button
+  const saveButtonDiv = document.createElement("div");
+  saveButtonDiv.classList.add("d-flex", "justify-content-end", "mt-4"); // Bootstrap classes for flex and alignment
+  saveButtonDiv.id = "save_button_container"; // You can add an id to the div if needed
+  saveButtonDiv.appendChild(saveButton);
 
-// Append the "Save" button after the usage input container
-usageInputContainer.insertAdjacentElement('afterend', saveButton);
+
+  // Get the usage input container
+  const usageInputContainer = document.querySelector(".input-container");
+
+  // Append the "Save" button after the usage input container
+  usageInputContainer.insertAdjacentElement('afterend', saveButtonDiv);
 
 
   // Remove the input field from the container pangalis ng input para rekta calendar nalang 
@@ -385,7 +603,7 @@ document.getElementById("usage-input").addEventListener("input", function () {
 // Function to check whether to show the save button or not
 function checkShowSaveButton() {
   const saveButton = document.getElementById("save_date_button");
-  const saveButtonContainer = document.getElementById("save_button_container");
+  const saveButtonContainer = document.getElementById("save_button_container_txt");
   const usageValue = parseInt(usageInput.value, 10); // Parse the usage input value as an integer
   
   if (dateFilled && usageFilled && usageValue !== 0) {
@@ -434,53 +652,8 @@ function checkShowSaveButton() {
 <!-- footer -->
 
 
-<footer>
-        <div>
-            
-            <img src="" alt="">
-
-            <a href="#">Home</a>
-            <a href="#">FAQs</a>
-            <a href="#">Services</a>
-            <a href="#">Contraceptive Method</a>
-            <a href="#">Videos</a>
-            <a href="#">Period Calculator</a>
-            <a href="#">Community Forum</a>
-            <a href="#">About STDs</a>
-
-            <p>Our Partner</p>
-            <img src="" alt="">
-
-            <h3>+63 912 345 6789</h3>
-            <!-- icon -->
-            <!-- icon -->
-        </div>
-        
-        <div>
-            <!-- Translation Code here -->
-            <span>
-                <div class="translate" id="google_translate_element"></div>
-
-                   <script type="text/javascript">
-                        function googleTranslateElementInit() {
-                        new google.translate.TranslateElement({
-                            pageLanguage: 'en',
-                            includedLanguages: 'en,tl',
-                            layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-                            autoDisplay: false,
-                            multilanguagePage: true
-                        }, 'google_translate_element');
-                        }
-                    </script>
-                    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-            </span>
 
 
-            <!-- Translation Code End here -->
-            <a href="">Privacy Policy</a>
-            <a href="">Terms of Use</a>
-        </div>
-</footer>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script>
   const usageInput = document.getElementById('usage-input');
