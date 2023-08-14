@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $selected_method_safe = mysqli_real_escape_string($conn, $selected_method);
 
   // Update the users table with the selected contraceptive method
-  $query = "UPDATE users SET birth_control_name = '$selected_method_safe' WHERE user_id = '$user_id'";
+  $query = "UPDATE users SET birth_control_name = '$selected_method_safe', birth_control_startdate = NULL, birth_control_usage = NULL WHERE user_id = '$user_id'";
   $result = mysqli_query($conn, $query);
 
   // Check if the update was successful
