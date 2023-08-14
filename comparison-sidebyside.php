@@ -93,43 +93,6 @@
 <body>
     <section class="js-comparison-sidebyside hide">
         <?php include('compare-methods.php') ?>
-        <!--
-        <div class="pricing-wrapper clearfix">
-            <div class="pricing-table">
-                <ul class="table-list">
-                    <li>10 GB <span>gnhgngngngn</span></li>
-                    <li>1 nhgnngnn <span>gnhgngn</span></li>
-                    <li>25 GB <span>gnhgngnghnn</span></li>
-                    <li>gnhgngn <span>gnhngngngn</span></li>
-                    <li>gnhgngngng <span>kkhhhjhkhkh</span></li>
-                    <li>gnhgnh <span>gnhnnngn</span></li>
-                </ul>
-            </div>
-            
-            <div class="pricing-table">
-                <ul class="table-list">
-                    <li>10 GB <span>gnhgngngngn</span></li>
-                    <li>1 nhgnngnn <span>gnhgngn</span></li>
-                    <li>25 GB <span>gnhgngnghnn</span></li>
-                    <li>gnhgngn <span>gnhngngngn</span></li>
-                    <li>gnhgngngng <span>kkhhhjhkhkh</span></li>
-                    <li>gnhgnh <span>gnhnnngn</span></li>
-                </ul>
-            </div>
-
-            <div class="pricing-table">
-                <ul class="table-list">
-                    <li>10 GB <span>gnhgngngngn</span></li>
-                    <li>1 nhgnngnn <span>gnhgngn</span></li>
-                    <li>25 GB <span>gnhgngnghnn</span></li>
-                    <li>gnhgngn <span>gnhngngngnqqqqqqqqqqqqqqqqqqqqq qqqqqqqqqqqqq qqqqqq</span></li>
-                    <li>gnhgngngng <span>kkhhhjhkhkh</span></li>
-                    <li>gnhgnh <span>gnhnnngn</span></li>
-                </ul>
-            </div>
-        </div>
-        -->
-        <div>------------------------------------------------------------------------------</div>
         
         <div id="side_by_side">
             <div class="js-table js-column-labels">
@@ -430,7 +393,7 @@
         },
 
         list_height_adjust: function() {
-
+            /*
             // Get the first and second list elements
             let list1 = document.querySelector(".js-list1");
             let list2 = document.querySelector(".js-list2");
@@ -462,6 +425,59 @@
                     item3.style.height = maxHeight + "px";
                 }
             }
+            */
+            let list1 = document.querySelector(".js-list1");
+            let list2 = document.querySelector(".js-list2");
+            let list3 = document.querySelector(".js-list3");
+
+            // Get the list items from each list
+            let items1 = list1.getElementsByTagName("li");
+            let items2 = list2 ? list2.getElementsByTagName("li") : null;
+            let items3 = list3 ? list3.getElementsByTagName("li") : null;
+
+            // Get the number of list items in each list
+            let numItems1 = items1.length;
+            let numItems2 = items2 ? items2.length : 0;
+            let numItems3 = items3 ? items3.length : 0;
+
+            // Get the maximum number of list items
+            let maxNumItems = Math.max(numItems1, numItems2, numItems3);
+
+            // Loop over the list items
+            for (let i = 0; i < maxNumItems; i++) {
+                // Get the current list item from each list
+                let item1 = i < numItems1 ? items1[i] : null;
+                let item2 = i < numItems2 ? items2[i] : null;
+                let item3 = i < numItems3 ? items3[i] : null;
+
+                // Remove the style attribute from each item
+                if (item1) {
+                    item1.removeAttribute("style");
+                }
+                if (item2) {
+                    item2.removeAttribute("style");
+                }
+                if (item3) {
+                    item3.removeAttribute("style");
+                }
+
+                // Get the computed height of each item
+                let item1Height = item1 ? window.getComputedStyle(item1).getPropertyValue("height") : "0px";
+                let item2Height = item2 ? window.getComputedStyle(item2).getPropertyValue("height") : "0px";
+                let item3Height = item3 ? window.getComputedStyle(item3).getPropertyValue("height") : "0px";
+
+                // Set the height of all items to the maximum height
+                let maxHeight = Math.max(parseInt(item1Height), parseInt(item2Height), parseInt(item3Height));
+                if (item1) {
+                    item1.style.height = maxHeight + "px";
+                }
+                if (item2) {
+                    item2.style.height = maxHeight + "px";
+                }
+                if (item3) {
+                    item3.style.height = maxHeight + "px";
+                }
+            }
         },
 
         close_selected_contraceptive: function(clickedElement) {
@@ -471,12 +487,14 @@
                 
                 // This was the first div element
                 document.querySelector('.js-select_1').innerHTML = "";
+                compare_sidebyside.list_height_adjust();
                 compare_sidebyside.disable_second_div_click();
                 compare_sidebyside.load_contraceptive_options_1();
                 
             } else if (clickedElement.className.includes('js-close-selected2')) {
                 // This was another div element
                 document.querySelector('.js-select_2').innerHTML = "";
+                compare_sidebyside.list_height_adjust();
                 compare_sidebyside.load_contraceptive_options_2();
             }
 
