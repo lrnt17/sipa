@@ -117,6 +117,8 @@
     var compare_sidebyside = {
 
         secondDiv: document.querySelector('.js-select_2'),
+        birth_control_id: null,
+        correspondingDiv: null,
 
         load_column_labels: function(){
 
@@ -196,6 +198,7 @@
                                 div.setAttribute('onclick',`compare_sidebyside.selected_contraceptive_1('${obj.rows[i].birth_control_id}')`);
                                 select_method_holder.appendChild(div);
                             }
+                            
                         }
                     }else{
                         alert("Please check your internet connection");
@@ -246,6 +249,7 @@
                                 select_method_holder.appendChild(div);
                             }
                         }
+                        compare_sidebyside.add_pointer_event(compare_sidebyside.birth_control_id);
                     }else{
                         alert("Please check your internet connection");
                     }
@@ -254,7 +258,6 @@
 
             ajax.open('post','ajax.php', true);
             ajax.send(form);
-
         },
 
         enable_second_div_click: function(){
@@ -270,6 +273,11 @@
         selected_contraceptive_1: function(birth_control_id){
             
             compare_sidebyside.enable_second_div_click();
+
+            // Make the corresponding div element unclickable
+            compare_sidebyside.birth_control_id = birth_control_id;
+            compare_sidebyside.add_pointer_event(compare_sidebyside.birth_control_id);
+
             let select_method_holder = document.querySelector('.js-select_1');
             select_method_holder.innerHTML = "";
 
@@ -379,8 +387,8 @@
                             }
                             select_method_holder.appendChild(ul);
                             compare_sidebyside.list_height_adjust();
-
                         }
+                        
                     }else{
                         alert("Please check your internet connection");
                     }
@@ -488,16 +496,51 @@
                 // This was the first div element
                 document.querySelector('.js-select_1').innerHTML = "";
                 compare_sidebyside.list_height_adjust();
+                compare_sidebyside.remove_pointer_event(compare_sidebyside.birth_control_id);
                 compare_sidebyside.disable_second_div_click();
                 compare_sidebyside.load_contraceptive_options_1();
                 
             } else if (clickedElement.className.includes('js-close-selected2')) {
+
                 // This was another div element
                 document.querySelector('.js-select_2').innerHTML = "";
                 compare_sidebyside.list_height_adjust();
                 compare_sidebyside.load_contraceptive_options_2();
             }
+        },
 
+        add_pointer_event: function(birth_control_id){
+            // Find the corresponding div element in the second set
+            let secondSet = document.querySelectorAll('.js-select_2 .js-options');
+
+            compare_sidebyside.correspondingDiv = Array.from(secondSet).find(function(div) {
+                return div.getAttribute('onclick').includes(`selected_contraceptive_2('${birth_control_id}')`);
+            });
+
+            if (compare_sidebyside.correspondingDiv) {
+                compare_sidebyside.correspondingDiv.style.pointerEvents = 'none';
+            }
+        },
+
+        remove_pointer_event: function(birth_control_id){
+            // Find the corresponding div element in the second set
+            let secondSet = document.querySelectorAll('.js-select_2 .js-options');
+
+            if (secondSet.length === 0) {
+                
+                compare_sidebyside.birth_control_id = null;
+                compare_sidebyside.correspondingDiv = null;
+
+                return;
+            } 
+
+            compare_sidebyside.correspondingDiv = Array.from(secondSet).find(function(div) {
+                return div.getAttribute('onclick').includes(`selected_contraceptive_2('${birth_control_id}')`);
+            });
+
+            if (compare_sidebyside.correspondingDiv) {
+                compare_sidebyside.correspondingDiv.style.pointerEvents = '';
+            }
         },
     };
     
