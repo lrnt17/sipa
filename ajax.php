@@ -1041,6 +1041,42 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 				}
 			}
 		}
+	}else
+	if($_POST['data_type'] == 'add_video') //ito na yung sa post, naway makuha mo na lorent yung logic
+	{
+		$video_name = $_FILES['user_video']['name'];
+		$video_title = addslashes($_POST['post']);
+		$video_desc = addslashes($_POST['post_title']);
+		$birth_control_id = (int)$_POST['anonymous'];
+		$user_id = $_SESSION['USER']['user_id'];
+		
+		if($anonymous == 'true'){
+			$userfname = $_SESSION['USER']['user_fname'];
+			$user_fname = substr($userfname, 0, 1) . str_repeat('*', strlen($userfname) - 2) . substr($userfname, -1);
+			//$userimg = $_SESSION['USER']['user_image'];
+			$user_img = 'assets/images/user.jpg?v1';
+		}else{
+			$user_fname = $_SESSION['USER']['user_fname'];
+			$user_img = $_SESSION['USER']['user_image'];
+		}
+
+		$date = date("Y-m-d H:i:s");
+ 
+		$query = "insert into forum (user_img,user_id,user_fname,forum_timestamp,forum_title,forum_desc) values ('$user_img','$user_id','$user_fname','$date','$post_title','$post')";
+		query($query);
+
+		$query = "select * from forum where user_id = '$user_id' order by forum_id desc limit 1";
+		$row = query($query);
+		
+		if($row){
+
+			$row = $row[0];
+			$info['success'] = true;
+			$info['message'] = "Your post was created successfully";
+			$info['row'] = $row;
+			
+		}
+
 	}
 	
 }

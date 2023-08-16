@@ -1,7 +1,8 @@
 <?php  
-    include("connect.php");
-    include("functions.php");
-    session_start(); ?>
+    require("connect.php");
+    require("functions.php");
+    //session_start(); 
+?>
 
 
 
