@@ -3,10 +3,10 @@
     require("connect.php");
     require('functions.php');
 
-    if(!logged_in()){
+    /*if(!logged_in()){
 		header("Location: home_1_with_user.php");
 		die;
-	}
+	}*/
     
 ?>
 
@@ -155,9 +155,9 @@
 
    
 
-<div class="container d-flex justify-content-center">
+<!--<div class="container d-flex justify-content-center">
     <div class="row" style="justify-content: space-evenly;">
-        <?php 
+        <?php /*
             $page = 0;
             if(isset($_POST["page"])) {
                 $page = $_POST["page"];
@@ -172,22 +172,22 @@
             while ($row = mysqli_fetch_array($result1)) {
                 if ($cards_in_current_row == 0) {
                     echo '<div class="row">';
-                }
+                }*/
         ?>
         
         <div class="col-sm-12 col-lg-4">
             <div class="container d-flex justify-content-center">
                 <div class="card m-4" style="width: 80%;">
-                    <img src="<?php echo $row["birth_control_img"]; ?>" class="card-img-top" alt="...">
+                    <img src="<?php //echo $row["birth_control_img"]; ?>" class="card-img-top" alt="...">
                     <div class="card-body" style="background-color:#BDD8F0; min-height:12rem;">
                         <h5 class="card-title"><a href="https://example.com" class="" style="text-decoration:none"><?php echo $row["birth_control_name"]; ?></a></h5>
-                        <p class="card-text"><?php echo $row["birth_control_desc"]; ?></p>
+                        <p class="card-text"><?php //echo $row["birth_control_desc"]; ?></p>
                     </div>
                 </div>
             </div>
         </div>
         
-        <?php 
+        <?php/* 
                 $cards_in_current_row++;
                 if ($cards_in_current_row == $cards_per_row) {
                     echo '</div>'; // Close the row after displaying 3 cards
@@ -202,22 +202,26 @@
             $result2 = mysqli_query($conn,"SELECT * FROM birth_controls");
             $count = mysqli_num_rows($result2);
             $a = $count / 6;
-            $a = ceil($a);
+            $a = ceil($a);*/
         ?>
     </div>
-</div>
+</div>-->
 
     
     <!-- page number -->
-    <div class="d-flex justify-content-center align-items-center mt-3 mb-5">
+    <!--<div class="d-flex justify-content-center align-items-center mt-3 mb-5">
         <form method="post" class="d-flex flex-row">
-            <?php for($b=1; $b<=$a; $b++) { ?>
+            <?php /*for($b=1; $b<=$a; $b++) { ?>
                 <div class="me-2">
                     <input type="submit" value="<?php echo $b; ?>" name="page" class="btn m-2 px-3" style="background: #D2E0F8;">
                 </div>
-            <?php } ?>
+            <?php } */?>
         </form>
-    </div>
+    </div>-->
+    <section class="js-display-methods">
+        <div style="padding:10px;text-align:center;">Loading contraceptive methods....</div>
+    </section>
+    <br><br>
     
     <!-- footer -->
     <footer>
@@ -285,6 +289,7 @@
 </body>
 <script>
     var contra_method = {
+        
         load_methods: function(e){
 
             let form = new FormData();

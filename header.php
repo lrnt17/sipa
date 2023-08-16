@@ -18,10 +18,10 @@
                 <a class="js-link nav-link" href="home_1_with_user.php">Home <span class="sr-only"></span></a>
               </li>
               <li class="nav-item mx-2">
-                <a class="nav-link" href="#">Videos</a>
+                <a class="js-link nav-link" href="community-videos.php">Videos</a>
               </li>
               <li class="nav-item mx-2">
-                <a class="nav-link" href="right_for_me_1.php">Right for me</a>
+                <a class="js-link nav-link" href="right_for_me_1.php">Right for me</a>
               </li>
               <li class="nav-item mx-2">
                 <a class="nav-link" href="#">FAQs</a>
@@ -37,7 +37,7 @@
                     <a class="dropdown-item" href="#">About STDs</a>
                     <a class="js-link dropdown-item" href="comparison-chart.php">Contraception Method Comparison</a>
                     <a class="dropdown-item" href="#">Find a health care provider</a>
-                    <a class="dropdown-item" href="#">Contraceptive Reviews</a>
+                    <!--<a class="dropdown-item" href="#">Contraceptive Reviews</a>-->
                 </div>
               </li>
               <li>
