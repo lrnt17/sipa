@@ -6,6 +6,7 @@ var allvideos = {
 
         if (form.classList.contains('hide')) {
             form.classList.remove('hide');
+            //allvideos.display_video_to_upload();
         } else {
             form.classList.add('hide');
         }
@@ -16,10 +17,16 @@ var allvideos = {
         let fileInput = document.getElementById('video_to_upload');
         let dropZone = document.getElementById('drop_zone');
         let output = document.querySelector('.js-display-video');
+        let fileName = document.getElementById('file-name');
 
         // Handle file input change
         fileInput.addEventListener('change', function(e) {
-            loadFile(e.target.files[0]);
+            /*loadFile(e.target.files[0]);
+            fileName.textContent = ' ' + e.target.files[0].name;*/
+            if(e.target.files.length > 0) {
+                loadFile(e.target.files[0]);
+                fileName.textContent = ' ' + e.target.files[0].name;
+            }
         });
 
         // Prevent default behavior (Prevent file from being opened)
@@ -32,9 +39,15 @@ var allvideos = {
             e.preventDefault();
             e.stopPropagation();
 
-            if(e.dataTransfer.files) {
-            loadFile(e.dataTransfer.files[0]);
-            fileInput.files = e.dataTransfer.files;
+            /*if(e.dataTransfer.files) {
+                loadFile(e.dataTransfer.files[0]);
+                fileInput.files = e.dataTransfer.files;
+                fileName.textContent = ' ' + e.dataTransfer.files[0].name;
+            }*/
+            if(e.dataTransfer.files.length > 0) {
+                loadFile(e.dataTransfer.files[0]);
+                fileInput.files = e.dataTransfer.files;
+                fileName.textContent = ' ' + e.dataTransfer.files[0].name;
             }
         });
 
@@ -42,7 +55,7 @@ var allvideos = {
             output.src = URL.createObjectURL(file);
             output.style.display = 'block';
             output.onload = function() {
-            URL.revokeObjectURL(output.src) // free memory
+                URL.revokeObjectURL(output.src) // free memory
             }
         }
     },
@@ -52,6 +65,7 @@ var allvideos = {
         e.preventDefault();
         let video_title_input = document.querySelector(".js-video-title").value.trim();
         let video_desc_input = document.querySelector(".js-video-desc").value.trim();
+        let anonymous = document.querySelector(".js-anonymous-video").checked;
 
         let select_method = document.getElementById('select_contraceptive');
         let selected_method = select_method.options[select_method.selectedIndex].value;
@@ -64,6 +78,7 @@ var allvideos = {
         form.append('video_title_input', video_title_input);
         form.append('video_desc_input', video_desc_input);
         form.append('selected_method', selected_method);
+        form.append('anonymous', anonymous);
         form.append('user_video', file);
         form.append('data_type', 'add_video');
 
@@ -75,6 +90,7 @@ var allvideos = {
             {
                 if(ajax.status == 200){
 
+                    console.log(ajax.responseText);
                     let obj = JSON.parse(ajax.responseText);
                     alert(obj.message);
 
@@ -92,7 +108,7 @@ var allvideos = {
             }
         });
 
-        ajax.open('post','ajax-admin.php', true);
+        ajax.open('post','ajax.php', true);
         ajax.send(form);
     },
 

@@ -1044,16 +1044,15 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 	}else
 	if($_POST['data_type'] == 'add_video') //ito na yung sa post, naway makuha mo na lorent yung logic
 	{
-		$video_name = $_FILES['user_video']['name'];
-		$video_title = addslashes($_POST['post']);
-		$video_desc = addslashes($_POST['post_title']);
-		$birth_control_id = (int)$_POST['anonymous'];
+		$video_title = addslashes($_POST['video_title_input']);
+		$video_desc = addslashes($_POST['video_desc_input']);
+		$birth_control_id = (int)$_POST['selected_method'];
 		$user_id = $_SESSION['USER']['user_id'];
+		$anonymous = $_POST['anonymous'];
 		
 		if($anonymous == 'true'){
 			$userfname = $_SESSION['USER']['user_fname'];
 			$user_fname = substr($userfname, 0, 1) . str_repeat('*', strlen($userfname) - 2) . substr($userfname, -1);
-			//$userimg = $_SESSION['USER']['user_image'];
 			$user_img = 'assets/images/user.jpg?v1';
 		}else{
 			$user_fname = $_SESSION['USER']['user_fname'];
@@ -1061,22 +1060,51 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 		}
 
 		$date = date("Y-m-d H:i:s");
- 
-		$query = "insert into forum (user_img,user_id,user_fname,forum_timestamp,forum_title,forum_desc) values ('$user_img','$user_id','$user_fname','$date','$post_title','$post')";
-		query($query);
 
-		$query = "select * from forum where user_id = '$user_id' order by forum_id desc limit 1";
-		$row = query($query);
-		
-		if($row){
+		$video_name = $_FILES['user_video']['name'];
+		$tmp_name = $_FILES['user_video']['tmp_name'];
+    	$error = $_FILES['user_video']['error'];
 
-			$row = $row[0];
-			$info['success'] = true;
-			$info['message'] = "Your post was created successfully";
-			$info['row'] = $row;
-			
+		if ($error === 0) {
+			$video_ex = pathinfo($video_name, PATHINFO_EXTENSION);
+			//$info['message'] = $video_ex;
+			$video_ex_lc = strtolower($video_ex);
+	
+			$allowed_exs = array("mp4", 'webm', 'avi', 'flv');
+	
+			if (in_array($video_ex_lc, $allowed_exs)) {
+				
+				$new_video_name = uniqid("video-", true). '.'.$video_ex_lc;
+				$video_upload_path = 'uploads/'. $new_video_name;
+				move_uploaded_file($tmp_name, $video_upload_path);
+				
+				$vdeoFilename = $video_upload_path;
+
+				$query = "insert into videos (birth_control_id,user_id,user_img,user_fname,video_timestamp,video,video_title,video_desc) 
+				values ('$birth_control_id','$user_id','$user_img','$user_fname','$date','$vdeoFilename','$video_title','$video_desc')";
+				query($query);
+
+				/*$query = "select * from forum where user_id = '$user_id' order by forum_id desc limit 1";
+				$row = query($query);
+				
+				if($row){
+
+					$row = $row[0];
+					$info['success'] = true;
+					$info['message'] = "Your post was created successfully";
+					$info['row'] = $row;
+				}*/
+
+				$info['success'] = true;
+				$info['message'] = "Your video was uploaded successfully";
+
+			}else {
+				$info['message'] = "You can't upload files of this type";
+			}
+		} else {
+			// Error uploading file
+			$info['message'] = "An error occurred while uploading the file";
 		}
-
 	}
 	
 }
