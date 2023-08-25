@@ -57,6 +57,40 @@
         margin: 2rem auto; 
       }
 
+      @keyframes fadeIn {
+          from {
+              opacity: 0;
+          }
+          to {
+              opacity: 1;
+          }
+      }
+
+      @keyframes slideDownFadeIn {
+          from {
+              max-height: 0;
+              opacity: 0;
+          }
+          to {
+              max-height: 500px;
+              opacity: 1;
+          }
+      }
+
+      @keyframes slideUpFadeOut {
+          from {
+              max-height: 500px;
+              opacity: 1;
+          }
+          to {
+              max-height: 0;
+              opacity: 0;
+          }
+      }
+
+      .faq-item.slide-up .item-answer {
+          animation: slideUpFadeOut 1s ease; 
+      }
       .faq-item {
           width: 40vw;
           min-width: 850px;
@@ -66,7 +100,8 @@
           overflow: hidden; 
           transition: max-height 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; 
           box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-
+          animation: fadeIn 2s ease;
+          display: none; /* Start with display none */
       }
       .item-question {
           background: #fff;
@@ -95,7 +130,6 @@
       .close {
           display: none;
       }
-
       .show-answer .item-answer {
           display: block;
           background: #fff;
@@ -106,8 +140,8 @@
           box-shadow: none;
           background-color: #F2C1A7; 
           border-top: 1px solid #AC471A;
+          animation: slideDownFadeIn 2s ease;
       }
-
       .show-answer .item-question {
       background-color: #F2C1A7; 
       }
@@ -117,6 +151,13 @@
       .show-answer .expand {
           display: none;
       }
+      
+      /* pang change ng kulay ng highlight sa text
+      mark {
+        background-color: yellow !important; 
+        color: inherit; //Preserve the text color 
+      }
+      */
 
     
    </style>
@@ -235,70 +276,135 @@
                   
                   faqItem.innerHTML = markup;
                   faqsContainer.append(faqItem);
+
+                   // Add a setTimeout to trigger the fade-in animation
+                    setTimeout(() => {
+                        faqItem.style.display = 'block';
+                    }, 100); // You can adjust the delay as needed
           });
         
 
 
         //add ng function para sa arrow pag niclick yun, lalabas ang kasagutan sa katanungan *elyen*
-        const toggleButtons = document.querySelectorAll('.arrows-container');   
-            toggleButtons.forEach(button => {
-                button.addEventListener('click', function(e) {
-                    const faqItem = e.currentTarget.parentElement.parentElement;
-                    faqItem.classList.toggle("show-answer");
-                    });
+        const toggleButtons = document.querySelectorAll('.arrows-container');
+          toggleButtons.forEach(button => {
+              button.addEventListener('click', function(e) {
+                  const faqItem = e.currentTarget.parentElement.parentElement;
+                  const itemAnswer = faqItem.querySelector('.item-answer');
+
+                  if (faqItem.classList.contains('show-answer')) {
+                      // If showing answer, toggle the show-answer class and set slideUpFadeOut animation
+                      faqItem.classList.remove('show-answer');
+                      faqItem.classList.add('slide-up'); // Add the slide-up class
+                      itemAnswer.style.animation = 'slideUpFadeOut 1s ease'; // Adjust the duration as needed
+                  } else {
+                      // If hiding answer, toggle the show-answer class and remove slide-up class
+                      faqItem.classList.add('show-answer');
+                      faqItem.classList.remove('slide-up'); // Remove the slide-up class
+                      itemAnswer.style.animation = 'slideDownFadeIn 1s ease'; // Adjust the duration to match CSS
+                  }
+              });
           });
 
 
 
-        //search function pag may nagmatch na word edi maffilter 
+
+
+
+        //search function pag may nagmatch na word edi maffilter tas may paanimation para maangas
         const searchInput = document.getElementById('search');
-            searchInput.addEventListener('input', function() {
-                const searchText = searchInput.value.toLowerCase();
+        let fadeIntervals = [];
+
+        searchInput.addEventListener('input', function() {
+            const searchText = searchInput.value.toLowerCase();
+            
+            // Clear existing fade intervals
+            fadeIntervals.forEach(interval => clearInterval(interval));
+            fadeIntervals = [];
+            
+            // Hide all FAQ items first
+            document.querySelectorAll('.faq-item').forEach((faqItem) => {
+                faqItem.style.display = 'none';
+                faqItem.style.opacity = '0';
+            });
+            
+            const filteredFAQs = faqData.filter((item) => {
+                const questionText = item.question.toLowerCase();
+                const answerText = item.answer.toLowerCase();
                 
-                faqData.forEach((item, index) => {
-                    const faqItem = document.querySelectorAll('.faq-item')[index];
-                    const questionText = item.question.toLowerCase();
-                    const answerText = item.answer.toLowerCase();
+                if (searchText) {
+                    const questionMatches = questionText.includes(searchText);
                     
-                    if (searchText) {
-                        // Check if the question contains the search text
-                        const questionMatches = questionText.includes(searchText);
-                        
-                        if (questionMatches) {
-                            // Show the FAQ item
-                            faqItem.style.display = 'block';
-                            
-                            // Highlight the matching text in question
-                            const highlightedQuestion = item.question.replace(new RegExp(searchText, 'gi'), (match) => `<mark>${match}</mark>`);
-                            
-                            // Update the HTML with highlighted text in the question
-                            faqItem.querySelector('.question-text').innerHTML = highlightedQuestion;
-                        } else if (answerText.includes(searchText)) {
-                            // Show the FAQ item
-                            faqItem.style.display = 'block';
-                            
-                            // Highlight the matching text in answer
-                            const highlightedAnswer = item.answer.replace(new RegExp(searchText, 'gi'), (match) => `<mark>${match}</mark>`);
-                            
-                            // Update the HTML with highlighted text in the answer
-                            faqItem.querySelector('.item-answer span').innerHTML = highlightedAnswer;
-                            
-                            // Automatically expand the FAQ item if answer matches
-                            faqItem.classList.add('show-answer');
-                        } else {
-                            faqItem.style.display = 'none';
-                        }
-                    } else {
-                        // If there is no search text, reset highlighting and show all FAQs
-                        faqItem.style.display = 'block';
-                        faqItem.querySelector('.question-text').innerHTML = item.question;
-                        faqItem.querySelector('.item-answer span').innerHTML = item.answer;
-                        
-                        // Collapse the FAQ item
-                        faqItem.classList.remove('show-answer');
+                    if (questionMatches) {
+                        return true;
+                    } else if (answerText.includes(searchText)) {
+                        return true;
                     }
-                });
-          });
+                    
+                    return false;
+                }
+                
+                return true;
+            });
+
+            filteredFAQs.forEach((item, index) => {
+                const faqItem = document.querySelectorAll('.faq-item')[index];
+                const questionText = item.question.toLowerCase();
+                const answerText = item.answer.toLowerCase();
+                
+                if (searchText) {
+                    const questionMatches = questionText.includes(searchText);
+                    
+                    if (questionMatches) {
+                        // Show the FAQ item
+                        faqItem.style.display = 'block';
+                        
+                        // Highlight the matching text in question
+                        const highlightedQuestion = item.question.replace(new RegExp(searchText, 'gi'), (match) => `<mark>${match}</mark>`);
+                        
+                        // Update the HTML with highlighted text in the question
+                        faqItem.querySelector('.question-text').innerHTML = highlightedQuestion;
+                    } else if (answerText.includes(searchText)) {
+                        // Show the FAQ item
+                        faqItem.style.display = 'block';
+                        
+                        // Highlight the matching text in answer
+                        const highlightedAnswer = item.answer.replace(new RegExp(searchText, 'gi'), (match) => `<mark>${match}</mark>`);
+                        
+                        // Update the HTML with highlighted text in the answer
+                        faqItem.querySelector('.item-answer span').innerHTML = highlightedAnswer;
+                        
+                        // Automatically expand the FAQ item if answer matches
+                        faqItem.classList.add('show-answer');
+                    } else {
+                        faqItem.style.display = 'none';
+                    }
+                } else {
+                    // If there is no search text, reset highlighting and show all FAQs
+                    faqItem.style.display = 'block';
+                    faqItem.querySelector('.question-text').innerHTML = item.question;
+                    faqItem.querySelector('.item-answer span').innerHTML = item.answer;
+                    
+                    // Collapse the FAQ item
+                    faqItem.classList.remove('show-answer');
+                }
+                
+                // Gradually adjust opacity with smooth fading effect
+                let opacityValue = 0;
+                const fadeInInterval = setInterval(() => {
+                    opacityValue += 0.05;
+                    faqItem.style.opacity = opacityValue;
+                    if (opacityValue >= 1) {
+                        clearInterval(fadeInInterval);
+                    }
+                }, 50);
+                
+                fadeIntervals.push(fadeInInterval);
+            });
+        });
+
+
+
 
 
 
