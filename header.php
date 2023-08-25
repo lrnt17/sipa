@@ -24,7 +24,7 @@
                 <a class="js-link nav-link" href="right_for_me_1.php">Right for me</a>
               </li>
               <li class="nav-item mx-2">
-                <a class="nav-link" href="#">FAQs</a>
+                <a class="nav-link" href="faqs.php">FAQs</a>
               </li>
               <li class="nav-item dropdown mx-2">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
