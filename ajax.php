@@ -1105,6 +1105,452 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 			// Error uploading file
 			$info['message'] = "An error occurred while uploading the file";
 		}
+	}else
+	if($_POST['data_type'] == 'load_videos')
+	{
+		$user_id = $_SESSION['USER']['user_id'] ?? 0;
+		$start = $_POST['start'];
+		$limit = $_POST['limit'];
+
+		$query = "select * from videos where comment_parent_id = 0 && reply_parent_id = 0 order by video_id desc limit $start, $limit";
+		
+		$rows = query($query);
+		
+		if($rows){
+
+			foreach ($rows as $key => $row) {
+				$rows[$key]['date'] = date('Y-m-d\TH:i:s', strtotime($row['video_timestamp']));
+				$rows[$key]['video_title'] = htmlspecialchars($row['video_title']);
+				$rows[$key]['video_desc'] = nl2br(htmlspecialchars($row['video_desc']));
+				$rows[$key]['user_img'] = get_image($row['user_img']);
+	
+				$rows[$key]['user_owns'] = false;
+				if($user_id == $row['user_id'])
+					$rows[$key]['user_owns'] = true;
+	
+				$birth_control_id = $row['birth_control_id'];
+				$query = "select * from birth_controls where birth_control_id = '$birth_control_id' limit 1";
+				$birth_control_row = query($query);
+				
+				if($birth_control_row){
+					$rows[$key]['birth_control']['name'] = $birth_control_row[0]['birth_control_name'];
+				}
+				/*$id = $row['user_id'];
+				$query = "select * from users where user_id = '$id' limit 1";
+				$user_row = query($query);
+				
+				if($user_row){
+					$rows[$key]['user']['image'] = get_image($user_row[0]['user_image']);
+				}*/
+	
+				/*$forum_id = $row['forum_id'];
+				$query = "select count(*) from rating_info where post_id = $forum_id AND rating_action = 'like' limit 1";
+				$rating_row = query($query);
+	
+				if($rating_row){
+					$rows[$key]['getlikes'] = $rating_row[0];
+				}*/
+				
+			}
+			
+			// Check if there are more rows to load
+			$query = "select count(*) from videos where comment_parent_id = 0 && reply_parent_id = 0";
+			$result = query($query);
+
+			if ($result) {
+
+				$totalRows = intval($result[0]['count(*)']);
+				if ($start + count($rows) < $totalRows) {
+					// There are more rows to load
+					$info['hasMore'] = true;
+				} else {
+					// There are no more rows to load
+					$info['hasMore'] = false;
+				}
+
+			} else {
+				// Error querying database
+				// Assume there are no more rows to load
+				$info['hasMore'] = false;
+			}
+	
+			// Return rows
+			$info['rows'] = $rows;
+		}
+		else{
+			// No rows returned
+			// Assume there are no more rows to load
+			$info['hasMore'] = false;
+		}
+		 // Return success status
+		$info['success'] = true;
+
+	}else
+	if($_POST['data_type'] == 'add_video_comment') //ito na yung sa post, naway makuha mo na lorent yung logic
+	{
+		$video_id = (int)($_POST['video_id']);
+		$comment = addslashes($_POST['comment']);
+		$anonymous = $_POST['anonymous'];
+		$user_id = $_SESSION['USER']['user_id'];
+
+		if($anonymous == 'true'){
+			$userfname = $_SESSION['USER']['user_fname'];
+			$user_fname = substr($userfname, 0, 1) . str_repeat('*', strlen($userfname) - 2) . substr($userfname, -1);
+			//$userimg = $_SESSION['USER']['user_image'];
+			$user_img = 'assets/images/user.jpg?v1';
+		}else{
+			$user_fname = $_SESSION['USER']['user_fname'];
+			$user_img = $_SESSION['USER']['user_image'];
+		}
+
+		$date = date("Y-m-d H:i:s");
+ 
+		$query = "insert into videos (user_img,user_id,user_fname,video_timestamp,video_desc,comment_parent_id) values ('$user_img','$user_id','$user_fname','$date','$comment','$video_id')";
+		query($query);
+
+		$query = "select * from videos where user_id = '$user_id' && comment_parent_id = '$video_id' order by video_id desc limit 1";
+		$row = query($query);
+		
+		if($row){
+
+			$row = $row[0];
+			$info['success'] = true;
+			$info['message'] = "Your comment was created successfully";
+			$info['row'] = $row;
+			
+		}
+
+		//count how many comments on this post
+		$query = "select count(*) as num from videos where comment_parent_id = '$video_id'";
+		$res = query($query);
+		if($res){
+			$num = $res[0]['num'];
+			$query = "update videos set comment_count = '$num' where video_id = '$video_id' limit 1";
+			query($query);
+		}
+
+	}else
+	if($_POST['data_type'] == 'load_video_comments')
+	{
+		$user_id = $_SESSION['USER']['user_id'] ?? 0;
+		$video_id = (int)$_POST['video_id'];
+	
+		$query = "select * from videos where comment_parent_id = '$video_id' && reply_parent_id = 0 order by video_id desc";
+		
+		$rows = query($query);
+		
+		if($rows){
+
+			foreach ($rows as $key => $row) {
+				$rows[$key]['date'] = date('Y-m-d\TH:i:s',strtotime($row['video_timestamp']));
+				$rows[$key]['video_desc'] = nl2br(htmlspecialchars($row['video_desc']));
+
+				$rows[$key]['user_owns'] = false;
+				if($user_id == $row['user_id'])
+					$rows[$key]['user_owns'] = true;
+
+				/*$id = $row['user_id'];
+				$query = "select * from users where user_id = '$id' limit 1";
+				$user_row = query($query);
+				
+				if($user_row){
+					$rows[$key]['user'] = $user_row[0]; //ito yung may .user
+					$rows[$key]['user']['image'] = get_image($user_row[0]['user_image']);
+				}*/
+
+				$video_id = $row['video_id'];
+				$query = "select count(*) from rating_video where video_id = $video_id AND rating_action = 'like' limit 1";
+				$rating_row = query($query);
+	
+				if($rating_row){
+					$rows[$key]['getlikes'] = $rating_row[0];
+				}
+			}
+			
+			$info['rows'] = $rows;
+		}
+
+		$info['success'] = true;
+
+	}else
+	if($_POST['data_type'] == 'user_liked_video')
+	{
+		$video_id = (int)($_POST['video_id']);
+		$user_id = $_SESSION['USER']['user_id'];
+		
+		$query = "select * from rating_video where user_id = '$user_id' and video_id = '$video_id' and rating_action = 'like' limit 1";		
+		$rows = query($query);
+		
+		if ($rows) {
+			$info['rows'] = $rows;
+			$info['success'] = true;
+		}
+	}else
+	if($_POST['data_type'] == 'add_like_video') //ito na yung sa post, naway makuha mo na lorent yung logic
+	{
+		$user_id = $_SESSION['USER']['user_id'];
+		$video_id = (int)$_POST['video_id'];
+		$action  = $_POST['action'];
+ 
+		if ($action == 'like') {
+			$query = "insert into rating_video (user_id,video_id,rating_action) values ('$user_id',$video_id,'like')
+			on duplicate key update rating_action = 'like'";
+			query($query);
+
+		} elseif ($action == 'unlike') {
+			$query = "delete from rating_video where user_id = '$user_id' AND video_id = '$video_id'";
+			query($query);
+		}
+
+		$row = [];
+		$likes_query = "select count(*) from rating_video where video_id = '$video_id' AND rating_action = 'like'";
+		$likes = query($likes_query);
+
+		if ($likes) {
+			$row = ['likes' => $likes[0]];
+			$info['row'] = $row;
+			$info['success'] = true;
+		}
+
+	}else
+	if($_POST['data_type'] == 'increment_views')
+	{
+		$video_id = (int)($_POST['video_id']);
+		
+		$query = "UPDATE videos SET view_count = view_count + 1 WHERE video_id = '$video_id'";
+		$check = query($query);
+
+		if ($check) {
+			$info['success'] = true;
+		}
+		
+	}else
+	if($_POST['data_type'] == 'my_edit_comment_video') 
+	{
+		$edited_comment = addslashes($_POST['edited_comment']);
+		$video_id = (int)($_POST['video_id']);
+		$user_id = $_SESSION['USER']['user_id'];
+		$date = date("Y-m-d H:i:s");
+	
+		$query = "update videos set video_desc = '$edited_comment', video_timestamp = '$date' where user_id = '$user_id' && video_id = '$video_id' limit 1";
+		query($query);
+
+		$info['success'] = true;
+		$info['updated_date'] = date('Y-m-d\TH:i:s', strtotime($date));
+		$info['message'] = "Your comment was edited successfully";
+		
+	}else
+	if($_POST['data_type'] == 'delete_comment_video')
+	{
+		$video_id = (int)($_POST['video_id']);
+		$user_id = $_SESSION['USER']['user_id'];
+
+		// Fetch comment_parent_id for the comment being deleted
+		$query = "select comment_parent_id from videos where video_id = '$video_id' limit 1";
+		$res = query($query);
+		if($res){
+			$comment_parent_id = $res[0]['comment_parent_id'];
+		}
+	
+		$query = "delete from videos where video_id = '$video_id' && user_id = '$user_id' limit 1";
+		query($query);
+	
+		$query = "select count(*) as num from videos where comment_parent_id = '$comment_parent_id'";
+		$res = query($query);
+		if($res){
+			$num = $res[0]['num'];
+			$query = "update videos set comment_count = '$num' where video_id = '$comment_parent_id' limit 1";
+			query($query);
+		}
+	
+		$info['success'] = true;
+		$info['message'] = "Your comment was deleted successfully";
+
+	}else
+	if($_POST['data_type'] == 'get_replies_video') 
+	{ 
+		$user_id = $_SESSION['USER']['user_id'] ?? 0;
+		$video_id = (int)$_POST['video_id'];
+		$query = "SELECT * FROM videos WHERE reply_parent_id = '$video_id' ORDER BY video_id DESC";
+		$rows = query($query);
+		
+		if ($rows) {
+			foreach ($rows as $key => $row) {
+				$rows[$key]['date'] = date('Y-m-d\TH:i:s', strtotime($row['video_timestamp']));
+				$rows[$key]['video_desc'] = nl2br(htmlspecialchars($row['video_desc']));
+				
+				$rows[$key]['user_owns'] = false;
+				if ($user_id == $row['user_id']) {
+					$rows[$key]['user_owns'] = true;
+				}
+
+				$id = $row['user_id'];
+				$query = "SELECT * FROM users WHERE user_id = '$id' LIMIT 1";
+				$user_row = query($query);
+				if ($user_row) {
+					//$rows[$key]['user'] = $user_row[0];
+					$rows[$key]['user']['image'] = get_image($user_row[0]['user_image']);
+				}
+
+				$video_id = $row['video_id'];
+				$query = "select count(*) from rating_video where video_id = $video_id AND rating_action = 'like' limit 1";
+				$rating_row = query($query);
+	
+				if($rating_row){
+					$rows[$key]['getlikes'] = $rating_row[0];
+				}
+			}
+			$info['rows'] = $rows;
+		}
+		$info['success'] = true;
+
+	}else
+	if($_POST['data_type'] == 'add_reply_video') 
+	{
+		$video_id = (int)$_POST['video_id'];
+		$reply_text = addslashes($_POST['reply_text']);
+		$anonymous = $_POST['anonymous'];
+		$user_id = $_SESSION['USER']['user_id'];
+
+		if($anonymous == 'true'){
+			$userfname = $_SESSION['USER']['user_fname'];
+			$user_fname = substr($userfname, 0, 1) . str_repeat('*', strlen($userfname) - 2) . substr($userfname, -1);
+			//$userimg = $_SESSION['USER']['user_image'];
+			$user_img = 'assets/images/user.jpg?v1';
+		}else{
+			$user_fname = $_SESSION['USER']['user_fname'];
+			$user_img = $_SESSION['USER']['user_image'];
+		}
+
+		$date = date("Y-m-d H:i:s");
+
+		// Insert new row into forum table with comment_parent_id set to video_id
+		$query = "INSERT INTO videos (user_img, user_id, user_fname, video_timestamp, video_desc, reply_parent_id) VALUES ('$user_img', '$user_id', '$user_fname', '$date', '$reply_text', '$video_id')";
+		query($query);
+		
+		// Return success message and data for new reply
+		$query = "SELECT * FROM videos WHERE user_id = '$user_id' AND reply_parent_id = '$video_id' ORDER BY video_id DESC LIMIT 1";
+		$row = query($query);
+		if ($row) {
+			$row = $row[0];
+			$info['success'] = true;
+			$info['message'] = "Your reply was added successfully";
+			$info['row'] = $row;
+		}
+
+		//count how many reply on this post
+		$query = "select count(*) as num from videos where reply_parent_id = '$video_id'";
+		$res = query($query);
+		if($res){
+			$num = $res[0]['num'];
+			$query = "update videos set reply_count = '$num' where video_id = '$video_id' limit 1";
+			query($query);
+		}
+	}else
+	if($_POST['data_type'] == 'my_edit_reply_video') 
+	{
+		$edited_reply_text = addslashes($_POST['edited_reply_text']);
+		$video_id = (int)($_POST['video_id']);
+		$user_id = $_SESSION['USER']['user_id'];
+		$date = date("Y-m-d H:i:s");
+	
+		$query = "update videos set video_desc = '$edited_reply_text', video_timestamp = '$date' where user_id = '$user_id' && video_id = '$video_id' limit 1";
+		$info['message'] = "Your reply was edited successfully";
+		$info['updated_date'] = date('Y-m-d\TH:i:s', strtotime($date));
+		
+		query($query);
+		$info['success'] = true;
+	}else
+	if($_POST['data_type'] == 'delete_reply_video') //ito na yung sa post, naway makuha mo na lorent yung logic
+	{
+		$video_id = (int)($_POST['video_id']);
+		$user_id = $_SESSION['USER']['user_id'];
+
+		$query = "select reply_parent_id from videos where video_id = '$video_id' limit 1";
+		$res = query($query);
+		if($res){
+			$reply_parent_id = $res[0]['reply_parent_id'];
+		}
+	
+		$query = "delete from videos where video_id = '$video_id' && user_id = '$user_id' limit 1";
+		query($query);
+
+		$query = "select count(*) as num from videos where reply_parent_id = '$reply_parent_id'";
+		$res = query($query);
+		if($res){
+			$num = $res[0]['num'];
+			$query = "update videos set reply_count = '$num' where video_id = '$reply_parent_id' limit 1";
+			query($query);
+		}
+		
+		$info['success'] = true;
+		$info['message'] = "Your reply was deleted successfully";
+	}else
+	if($_POST['data_type'] == 'load_my_videos') 
+	{
+		$user_id = $_SESSION['USER']['user_id'] ?? 0;
+
+		$query = "select * from videos where user_id = $user_id && comment_parent_id = 0 && reply_parent_id = 0 order by video_id desc";
+		$rows = query($query);
+		
+		if($rows){
+			foreach ($rows as $key => $row) {
+
+				$datetime = new DateTime($row['video_timestamp']);
+				$date = $datetime->format('m-d-Y');
+				$rows[$key]['date'] = $date;
+
+				$video_id = $row['video_id'];
+				$query = "select count(*) from rating_video where video_id = $video_id AND rating_action = 'like' limit 1";
+				$rating_row = query($query);
+	
+				if($rating_row){
+					$rows[$key]['getlikes'] = $rating_row[0];
+				}
+
+				$birth_control_id = $row['birth_control_id'];
+				$query = "select * from birth_controls where birth_control_id = '$birth_control_id' limit 1";
+				$birth_control_row = query($query);
+				
+				if($birth_control_row){
+					$rows[$key]['birth_control']['name'] = $birth_control_row[0]['birth_control_name'];
+				}
+			}
+			$info['rows'] = $rows;
+			$info['success'] = true;
+		}
+	}else
+	if($_POST['data_type'] == 'edit_video_details') 
+	{
+		
+		$video_id = (int)($_POST['video_id']);
+		$edited_title = addslashes($_POST['edited_title']);
+		$edited_desc = addslashes($_POST['edited_desc']);
+		$birth_control_id = (int)$_POST['birth_control_id'];
+		$user_id = $_SESSION['USER']['user_id'];
+		//$date = date("Y-m-d H:i:s");
+		
+		$query = "update videos set video_desc = '$edited_desc', video_title = '$edited_title', birth_control_id = '$birth_control_id' where user_id = '$user_id' && video_id = '$video_id' limit 1";
+		query($query);
+
+		$info['success'] = true;
+		//$info['updated_date'] = date('Y-m-d\TH:i:s', strtotime($date));
+		$info['message'] = "Your video details was edited successfully";
+		
+	}else
+	if($_POST['data_type'] == 'delete_video') //ito na yung sa post, naway makuha mo na lorent yung logic
+	{
+		$ids = json_decode($_POST['ids']);
+
+		foreach ($ids as $id) {
+			$id = (string)$id;
+			$query = "delete from videos where video_id = '$id' LIMIT 1";
+			query($query);
+		}
+
+		$info['success'] = true;
+		$info['message'] = "Video/s deleted successfully";
+
 	}
 	
 }

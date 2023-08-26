@@ -59,7 +59,7 @@
             <div id="VideosSection">
                 <div id="videoContainer">
                     <!-- Existing videos go here -->
-                    <button id="loadMoreBtn" onclick="allvideos.load_more_videos()" class="js-loadmore-btn ">View More</button>
+                    <button id="loadMoreBtn" onclick="allvideos.loadMoreVideos()" class="js-loadmore-btn ">View More</button>
                 </div>
             </div>
         </div>
@@ -72,7 +72,7 @@
                 <div>
                     <div id="drop_zone">Drop & drop video to upload or</div>
                     <input type="file" name="video_to_upload" id="video_to_upload" class="hide" onchange="allvideos.display_video_to_upload(event)" required>
-                    <label for="video_to_upload">Select File</label>
+                    <label for="video_to_upload" style="cursor:pointer;">Select File</label>
                     <br>
                     <video class="js-display-video hide" width="200" controls></video>
                     <span id="file-name"></span>
@@ -100,22 +100,23 @@
                 </div>
             </form>
         </div>
+
     </section>
 
     <!-- video card template-->
     <template id="videoCardTemplate" class="js-videoCardTemplate">
         <div class="js-video-card" style="animation: appear 3s ease;">
-            <img src="assets/images/user.jpg" class="js-image" >
             <div class="js-video-link" style="cursor: pointer;">
                 <div>
                     <!--<video src="uploads/<?//=$video['video_url']?>" controls></video>-->
-                    <video src="" width="200" controls></video>
+                    <video src="" width="200" class="js-video-display"></video>
                 </div>
                 <div>
                     <h2 class="js-video-title">
                         Contraception
                     </h2>
                     <span>Posted by</span> 
+                    <img src="assets/images/user.jpg" class="js-image" width="100">
                     <!--<a href="#" class="js-profile-link" >-->
                         <h2 class="js-username" style="font-size:16px; display:inline;" >
                             Jane Name
@@ -124,7 +125,7 @@
                     <p class="js-views-count">
                         567 views
                     </p>
-                    <h4 class="js-date ">
+                    <h4 class="js-date">
                         3rd Jan 23 14:35 pm
                     </h4>
                 </div>
@@ -154,12 +155,13 @@
 <script>
 	var all_videos_page = true;
     let start = 0;
-    let limit = 5;
+    let limit = 4;
 </script>
-<script src="community-videos.js?v2"></script>
+<script src="time.js?v1"></script>
+<script src="community-videos.js?v7"></script>
 
 <script>
-/*
+
 //-----------------------------------------------------------------------------------------------------
     // Check if the page is being loaded as a result of a refresh
     if (performance.navigation.type === performance.navigation.TYPE_RELOAD) {
@@ -181,22 +183,22 @@
         if (query !== '') {
             document.getElementById("loadMoreBtn").style.display = "none";
 
-            // Call the allposts.search method with the user's query
-            allposts.search(query);
+            // Call the allvideos.search method with the user's query
+            allvideos.search(query);
         } else {
             // Clear any stored search results from sessionStorage
             sessionStorage.removeItem('searchResults');
             
             // Clear any existing posts and load the first 5 posts from the database
-            allposts.start = 0;
-            allposts.loadMorePosts(null, true);
+            allvideos.start = 0;
+            allvideos.loadMorePosts(null, true);
         }
     });
 
     if (storedSearchResults) {
         // Parse the stored search results and display them
         let searchResults = JSON.parse(storedSearchResults);
-        allposts.displayPosts(searchResults, true);
+        allvideos.displayPosts(searchResults, true);
         document.getElementById("loadMoreBtn").style.display = "none";
     }
 
@@ -216,6 +218,6 @@
     });
 
 //-----------------------------------------------------------------------------------------------------
-*/
+
 </script>
 </html>
