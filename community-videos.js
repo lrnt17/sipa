@@ -2,6 +2,7 @@ var allvideos = {
 
     start: (typeof start == 'undefined') ? 0 : start,
     limit: (typeof limit == 'undefined') ? 4 : limit,
+    category_id: 0,
 
     open_upload_video: function(){
 
@@ -103,6 +104,7 @@ var allvideos = {
                         document.querySelector(".js-video-title").value = "";
                         document.querySelector(".js-video-desc").value = "";
                         document.getElementById("video_to_upload").value = null;
+                        document.getElementById('file-name').textContent = "";
                         select_method.selectedIndex = 0;
                         document.querySelector(".js-anonymous-video").checked = false;
 
@@ -115,6 +117,7 @@ var allvideos = {
                         // Reset allvideos.start and call allvideos.loadMorevideos with clearExisting set to true
                         allvideos.start = 0;
                         allvideos.loadMoreVideos(null, true);
+                        //allvideos.hide_upload_modal();
                     }
                 }else{
                     alert("Please check your internet connection");
@@ -180,6 +183,7 @@ var allvideos = {
         let form = new FormData();
         form.append('start', allvideos.start);
         form.append('limit', allvideos.limit);
+        form.append('category_id', allvideos.category_id);
         form.append('data_type', 'load_videos');
         var ajax = new XMLHttpRequest();
     
@@ -187,7 +191,7 @@ var allvideos = {
             if (ajax.readyState == 4) {
                 if (ajax.status == 200) {
 
-                    console.log(ajax.responseText);
+                    //console.log(ajax.responseText);
                     
                     let obj = JSON.parse(ajax.responseText);
                     if (obj.success) {
@@ -228,9 +232,9 @@ var allvideos = {
         }
 
         // Display message if there are no videos
-        if (videos.length === 0) {
+        if (typeof videos === 'undefined') {
             let messageElement = document.createElement('p');
-            messageElement.textContent = "No discussions found";
+            messageElement.textContent = "No videos found";
             videoContainer.insertBefore(messageElement, loadMoreBtn);
             return;
         }
@@ -258,7 +262,7 @@ var allvideos = {
                 let searchWordRegex = new RegExp(searchWord, 'gi');
                 videoTitle = videoTitle.replace(searchWordRegex, '<span class="highlight">$&</span>');
             }
-            videoCard.querySelector(".js-video-title").innerHTML = videoTitle;
+            videoCard.querySelector(".js-video-title-display").innerHTML = videoTitle;
             videoCard.querySelector(".js-video-display").src = videos[i].video;
             videoCard.querySelector(".js-video-category").innerHTML = videos[i].birth_control.name;
             //videoCard.querySelector(".js-post").textContent = videos[i].forum_desc;
@@ -337,11 +341,198 @@ var allvideos = {
         }
     },
 
-    blank: function(){
+    contraceptive_scroll_buttons: function(){
+        
+        let scrollMenu = document.getElementById('scrollmenu');
+        let prevBtn = document.getElementById('prevBtn');
+        let nextBtn = document.getElementById('nextBtn');
 
+        let form = new FormData();
+
+        form.append('data_type', 'load_all_methods');
+        var ajax = new XMLHttpRequest();
+
+        ajax.addEventListener('readystatechange',function(){
+
+            if(ajax.readyState == 4)
+            {
+                if(ajax.status == 200){
+
+                    let obj = JSON.parse(ajax.responseText);
+
+                    if(obj.success){
+                        
+                        scrollMenu.innerHTML = "";
+
+                        let all_button = document.createElement('button');
+                        all_button.textContent = 'All';
+                        all_button.setAttribute('onclick',`allvideos.sort_birth_control_id(0)`);
+                        scrollMenu.appendChild(all_button);
+
+                        obj.rows.forEach(function(contraceptive) {
+                            /*let option = document.createElement("option");
+                            option.value = contraceptive.birth_control_id;
+                            option.text = contraceptive.birth_control_name;
+                            option.setAttribute("contraceptive-name", contraceptive.birth_control_name);
+                            selectElement.appendChild(option);*/
+                            let button = document.createElement('button');
+                            button.textContent = contraceptive.birth_control_name;
+                            button.setAttribute('onclick',`allvideos.sort_birth_control_id('${contraceptive.birth_control_id}')`);
+                            scrollMenu.appendChild(button);
+                        });
+
+                        let isDown = false;
+                        let startX;
+                        let scrollLeft;
+
+                        scrollMenu.addEventListener('mousedown', (e) => {
+                            isDown = true;
+                            startX = e.pageX - scrollMenu.offsetLeft;
+                            scrollLeft = scrollMenu.scrollLeft;
+                        });
+
+                        scrollMenu.addEventListener('mouseleave', () => {
+                            isDown = false;
+                        });
+
+                        scrollMenu.addEventListener('mouseup', () => {
+                            isDown = false;
+                        });
+
+                        scrollMenu.addEventListener('mousemove', (e) => {
+                            if(!isDown) return;
+                            e.preventDefault();
+                            const x = e.pageX - scrollMenu.offsetLeft;
+                            const walk = (x - startX) * 1; //scroll-fast
+                            scrollMenu.scrollLeft = scrollLeft - walk;
+                        });
+
+                        prevBtn.addEventListener('click', () => {
+                            scrollMenu.scrollLeft -= 100;
+                        });
+
+                        nextBtn.addEventListener('click', () => {
+                            scrollMenu.scrollLeft += 100;
+                        });
+
+                        function checkArrows() {
+                            prevBtn.style.visibility = (scrollMenu.scrollLeft > 0) ? 'visible' : 'hidden';
+                            const maxScrollLeft = scrollMenu.scrollWidth - scrollMenu.clientWidth;
+                            nextBtn.style.visibility = (maxScrollLeft - scrollMenu.scrollLeft <= 1) ? 'hidden' : 'visible';
+                        }
+
+                        checkArrows();
+
+                        scrollMenu.addEventListener('scroll', checkArrows);
+                    }
+                }
+            }
+        });
+
+        ajax.open('post','ajax.php', true);
+        ajax.send(form);
+        /*let scrollMenu = document.getElementById('scrollmenu');
+        let prevBtn = document.getElementById('prevBtn');
+        let nextBtn = document.getElementById('nextBtn');
+        
+        for (var i = 0; i < 10; i++) {
+            let button = document.createElement('button');
+            button.textContent = 'Button ' + (i + 1);
+            scrollMenu.appendChild(button);
+        }
+
+        var isDown = false;
+        var startX;
+        var scrollLeft;
+
+        scrollMenu.addEventListener('mousedown', (e) => {
+            isDown = true;
+            startX = e.pageX - scrollMenu.offsetLeft;
+            scrollLeft = scrollMenu.scrollLeft;
+        });
+
+        scrollMenu.addEventListener('mouseleave', () => {
+            isDown = false;
+        });
+
+        scrollMenu.addEventListener('mouseup', () => {
+            isDown = false;
+        });
+
+        scrollMenu.addEventListener('mousemove', (e) => {
+            if(!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - scrollMenu.offsetLeft;
+            const walk = (x - startX) * 1; //scroll-fast
+            scrollMenu.scrollLeft = scrollLeft - walk;
+        });
+
+        prevBtn.addEventListener('click', () => {
+            scrollMenu.scrollLeft -= 100;
+        });
+
+        nextBtn.addEventListener('click', () => {
+            scrollMenu.scrollLeft += 100;
+        });
+
+        function checkArrows() {
+            prevBtn.style.visibility = (scrollMenu.scrollLeft > 0) ? 'visible' : 'hidden';
+            const maxScrollLeft = scrollMenu.scrollWidth - scrollMenu.clientWidth;
+            nextBtn.style.visibility = (maxScrollLeft - scrollMenu.scrollLeft <= 1) ? 'hidden' : 'visible';
+        }
+
+        checkArrows();
+
+        scrollMenu.addEventListener('scroll', checkArrows);*/
         
     },
     
+    sort_birth_control_id: function(birth_control_id){
+
+        allvideos.category_id = birth_control_id;
+
+        allvideos.start = 0;
+        allvideos.loadMoreVideos(null, true);
+    },
+
+    search_videos: function(query) {
+
+        let form = new FormData();
+        form.append('query', query);
+        form.append('data_type', 'search_videos');
+
+        var ajax = new XMLHttpRequest();
+    
+        ajax.addEventListener('readystatechange', function() {
+            if (ajax.readyState == 4) {
+                if (ajax.status == 200) {
+
+                    let obj = JSON.parse(ajax.responseText);
+
+                    if (obj.success) {
+
+                        allvideos.start = 0;
+                        allvideos.displayVideos(obj.rows, true);
+                        
+                        sessionStorage.setItem('searchResults', JSON.stringify(obj.rows));
+                    } else {
+
+                        // Display an error message
+                        let videoContainer = document.getElementById("videoContainer");
+                        let loadMoreBtn = document.getElementById("loadMoreBtn");
+                        videoContainer.innerHTML = '<p>No videos found</p>';
+                        loadMoreBtn.style.display = "none";
+                        videoContainer.appendChild(loadMoreBtn);
+                        
+                    }
+                }
+            }
+        });
+    
+        ajax.open('post', 'ajax.php', true);
+        ajax.send(form);
+    },
+
     blank: function(){
 
         
@@ -349,6 +540,9 @@ var allvideos = {
 };
 
 if (typeof all_videos_page != 'undefined') {
+
+    allvideos.contraceptive_scroll_buttons();
+
     // Check if number of videos is saved
     if (sessionStorage.getItem('numVideos') !== null) {
         // Calculate number of times to call loadMoreVideos

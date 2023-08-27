@@ -40,7 +40,7 @@
 </style>
 <body>
     <!-- navigation bar with logo -->
-    <?php //include('header.php') ?>
+    <?php include('header.php') ?>
     <?php include('videos.php') ?>
 
     <!-- community video content -->

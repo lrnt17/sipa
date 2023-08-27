@@ -37,21 +37,69 @@
     .highlight {
         background-color: yellow;
     }
+
+    /* scroll buttons sa may tabi ni upload video*/
+    .scrollmenu {
+        overflow: auto;
+        white-space: nowrap;
+        scrollbar-width: none; /* For Firefox */
+        -ms-overflow-style: none;  /* For Internet Explorer and Edge */
+    }
+
+    .scrollmenu::-webkit-scrollbar { 
+        display: none;  /* For Chrome, Safari and Opera */
+    }
+
+    .scrollmenu button {
+        display: inline-block;
+        text-align: center;
+        padding: 14px;
+        text-decoration: none;
+    }
+
+    .arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 2em;
+        color: #000;
+    }
+
+    .arrow-left {
+        left: 10px;
+    }
+
+    .arrow-right {
+        right: 10px;
+    }
+
+    .js-method-butttons{
+        width: 500px;
+    }
 </style>
 <body>
     <!-- navigation bar with logo -->
-    <?php //include('header.php') ?>
+    <?php include('header.php') ?>
     <?php include('videos.php') ?>
 
     <!-- community video content -->
     <section>
         <div class="js-personal-videos ">
-            <?php if(logged_in()):?>
+            <!--
+            <?php //if(logged_in()):?>
                 <div onclick="allvideos.open_upload_video()" style="cursor:pointer;">Upload Video</div>
-            <?php else:?>
+            <?php //else:?>
                 <div onclick="allvideos.login_alert()" style="cursor:pointer;">Upload Video</div>
-            <?php endif;?>
+            <?php //endif;?>
+            -->
             
+            <div class="js-method-buttons">
+                <button class="arrow arrow-left" id="prevBtn"><</button>
+                <div class="scrollmenu" id="scrollmenu"></div>
+                <button class="arrow arrow-right" id="nextBtn">></button>
+            </div>
+            
+            <br><br><br><br><br><br><br><br><br>
             <section class="js-videos">
                     <div style="padding:10px;text-align:center;"></div>
             </section>
@@ -66,7 +114,7 @@
         <br><br>
 
         <!-- upload video modal -->
-        <div class="js-upload-video hide">
+        <!--<div class="js-upload-video hide">
             <div class="" style="float:right;cursor:pointer;" onclick="allvideos.open_upload_video()">X</div>
             <form onsubmit="allvideos.upload_video(event)" method="post" enctype="multipart/form-data">
                 <div>
@@ -86,7 +134,7 @@
                 <div>
                     <b>Select a Contraceptive Category: </b>
                     <select id="select_contraceptive" required>
-                        <!-- The options will be dynamically populated with JavaScript -->
+                        
                     </select>
                 </div>
                 
@@ -98,7 +146,7 @@
                 <div class="">
                     <button class="">Post</button>
                 </div>
-            </form>
+            </form>-->
         </div>
 
     </section>
@@ -112,7 +160,7 @@
                     <video src="" width="200" class="js-video-display"></video>
                 </div>
                 <div>
-                    <h2 class="js-video-title">
+                    <h2 class="js-video-title-display">
                         Contraception
                     </h2>
                     <span>Posted by</span> 
@@ -158,7 +206,7 @@
     let limit = 4;
 </script>
 <script src="time.js?v1"></script>
-<script src="community-videos.js?v7"></script>
+<script src="community-videos.js?v11"></script>
 
 <script>
 
@@ -181,25 +229,29 @@
         let query = event.target.value;
 
         if (query !== '') {
-            document.getElementById("loadMoreBtn").style.display = "none";
+            document.getElementById("loadMoreBtn").classList.add('hide');
+            document.querySelector(".js-method-buttons").classList.add('hide');
 
             // Call the allvideos.search method with the user's query
-            allvideos.search(query);
+            allvideos.search_videos(query);
         } else {
             // Clear any stored search results from sessionStorage
             sessionStorage.removeItem('searchResults');
-            
+            document.getElementById("loadMoreBtn").classList.remove('hide');
+            document.querySelector(".js-method-buttons").classList.remove('hide');
             // Clear any existing posts and load the first 5 posts from the database
             allvideos.start = 0;
-            allvideos.loadMorePosts(null, true);
+            allvideos.category_id = 0;
+            allvideos.loadMoreVideos(null, true);
         }
     });
 
     if (storedSearchResults) {
         // Parse the stored search results and display them
         let searchResults = JSON.parse(storedSearchResults);
-        allvideos.displayPosts(searchResults, true);
-        document.getElementById("loadMoreBtn").style.display = "none";
+        allvideos.displayVideos(searchResults, true);
+        document.getElementById("loadMoreBtn").classList.add('hide');
+        document.querySelector(".js-method-buttons").classList.add('hide');
     }
 
 //-----------------------------------------------------------------------------------------------------
