@@ -1,15 +1,51 @@
 <?php 
     defined('APP') or die('direct script access denied!'); 
 ?>
+<style>
+        .label {
+        text-decoration: none;
+        color: black;
+        font-weight: 400;
+    }
+
+    .col-custom {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: transparent;
+    }
+
+    .col-custom.active {
+        background-color: #D2E0F8; /* Set your desired background color here */
+    }
+
+    .col-custom.active a {
+        font-weight: bold; /* Make the text bold for the active link */
+    }
+</style>
+
 
 <section>
+    <div class="container mt-5">
+        <div class="row">
+        <div class="col py-4 rounded-top-4 col-custom" data-target="chart">
+            <a href="comparison-chart.php" class="label">Comparison Chart</a>
+        </div>
+        <div class="col py-4 rounded-top-4 col-custom" data-target="sidebyside">
+            <a href="comparison-sidebyside.php" class="label">Side-by-side Comparison</a>
+        </div>
+        </div>
+    </div>
     <!--<p><b>Compare</b> contraception methods</p>
     <div onclick="compare_method.show_chart()" style="cursor:pointer;">Comparison Chart</div>
     <div onclick="compare_method.show_sidebyside()" style="cursor:pointer;">Side-by-side Comparison</div>-->
     <?//php include('comparison-chart.php'); ?>
     <?//php include('comparison-sidebyside.php'); ?>
-    <a href="comparison-chart.php">Comparison Chart</a>
-    <a href="comparison-sidebyside.php">Side-by-side Comparison</a>
+
+
+    <!-- cinomment ko lang [dalawang a tag]-->
+    <!--<a href="comparison-chart.php">Comparison Chart</a>
+    <a href="comparison-sidebyside.php">Side-by-side Comparison</a>-->
 </section>
 
 <!--<script>
@@ -26,3 +62,27 @@
         },
     };
 </script>-->
+
+<script>
+    // Check if there's an active link stored in local storage
+    const activeLink = localStorage.getItem('activeLink');
+
+    if (activeLink) {
+        const activeCol = document.querySelector(`[data-target="${activeLink}"]`);
+        activeCol.classList.add('active');
+    }
+
+    // Add click event listeners to each link
+    const cols = document.querySelectorAll('.col-custom');
+
+    cols.forEach(col => {
+        col.addEventListener('click', () => {
+            const target = col.getAttribute('data-target');
+            cols.forEach(c => c.classList.remove('active'));
+            col.classList.add('active');
+            
+            // Store the active link in local storage
+            localStorage.setItem('activeLink', target);
+        });
+    });
+</script>
