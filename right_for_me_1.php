@@ -18,58 +18,104 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/324d76b648.js" crossorigin="anonymous"></script>
     <title>SiPa | Right for Me</title>
-    <style>
-   .skiptranslate iframe  {
-    visibility: hidden !important;
-    } 
-    body{
-    top:0!important;
+<style>
+    .skiptranslate iframe  {
+        visibility: hidden !important;
+        } 
+        body{
+        top:0!important;
+        }
+
+        .form .fa-solid{
+        position: absolute;
+        top:20px;
+        left: 20px;
+        color: #9ca3af;
+        }
+
+        .form-input:focus{
+        box-shadow: none;
+        border:none;
+        }
+
+        .vl {
+            width: 10px;
+            background-color: #1F6CB5;
+            border-radius: 99px;
+            height: 50px;
+            display: -webkit-inline-box;
+        }
+
+        .circle {
+        padding: 1%;
+        background-color: #D2E0F8;
+        width: 3.7em;
+        height: 3.7em;
+        border-radius: 100%;
+        text-align: center;
+        font-size: 3em;
+        line-height: 3em;
+        font-weight: 100;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 1.5%;
+        margin-bottom: 1.5%;
     }
 
-    .form .fa-solid{
-    position: absolute;
-    top:20px;
-    left: 20px;
-    color: #9ca3af;
+    .newsCard {
+        position: relative;
+        width: 280px;
+        height: 380px;
+        margin: 2rem auto;
+        background-color: #fff;
+        color:#fff;
+        overflow: hidden;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     }
 
-    .form-input:focus{
-    box-shadow: none;
-    border:none;
-    }
-
-    .vl {
-        width: 10px;
+    .newsCaption {
+        position: absolute;
+        top: auto;
+        bottom: 0;
+        opacity: 100;
+        left: 0;
+        width: 100%;
+        height: 70%;
         background-color: #1F6CB5;
-        border-radius: 99px;
-        height: 50px;
-        display: -webkit-inline-box;
+        padding: 15px;
+        -webkit-transform: translateY(75%);
+                transform: translateY(75%);
+        -webkit-backface-visibility: hidden;
+                backface-visibility: hidden;
+        -webkit-transition: opacity 0.1s 0.3s, -webkit-transform 0.4s;
+        transition: opacity 0.1s 0.3s, -webkit-transform 0.4s;
+        transition: transform 0.4s, opacity 0.1s 0.3s;
+        transition: transform 0.4s, opacity 0.1s 0.3s, -webkit-transform 0.4s;
     }
 
-    .vl-v{
-        width: 15%;
-        background-color: #1F6CB5;
-        border-radius: 99px;
-        height: 6px;
+    .newsCaption-title {
+        margin-top: 0px;
     }
 
-    .circle {
-    padding: 1%;
-    background-color: #D2E0F8;
-    width: 3.7em;
-    height: 3.7em;
-    border-radius: 100%;
-    text-align: center;
-    font-size: 3em;
-    line-height: 3em;
-    font-weight: 100;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 1.5%;
-    margin-bottom: 1.5%;
-  }
+    .newsCaption-content {
+        margin: 0;
+    }
 
-   </style>
+    .read:hover {
+        opacity: 0.6;
+    }
+
+    .news-Slide-up:hover .newsCaption {
+        opacity: 100;
+        -webkit-transform: translateY(0px);
+                transform: translateY(0px);
+        -webkit-transition: opacity 0.1s, -webkit-transform 0.4s;
+        transition: opacity 0.1s, -webkit-transform 0.4s;
+        transition: transform 0.4s, opacity 0.1s;
+        transition: transform 0.4s, opacity 0.1s, -webkit-transform 0.4s;
+    }
+
+</style>
 </head>
 <body style="background: #F2F5FF;">
     <!-- navigation bar with logo -->
@@ -139,7 +185,10 @@
 
         <div class="row">
             <div class="d-flex justify-content-center">
-                <div class="vl-v"></div>
+                <div style="width: 15%;
+            background-color: #1F6CB5;
+            border-radius: 99px;
+            height: 6px;"></div>
             </div>
         </div>
         <div class="row mt-4">
@@ -152,11 +201,10 @@
     </div>
 
     
-
-   
-
-<!--<div class="container d-flex justify-content-center">
+   <!-- 
+    <<div class="container d-flex justify-content-center">
     <div class="row" style="justify-content: space-evenly;">
+        <?php /*
         <?php /*
             $page = 0;
             if(isset($_POST["page"])) {
@@ -179,14 +227,17 @@
             <div class="container d-flex justify-content-center">
                 <div class="card m-4" style="width: 80%;">
                     <img src="<?php //echo $row["birth_control_img"]; ?>" class="card-img-top" alt="...">
+                    <img src="<?php //echo $row["birth_control_img"]; ?>" class="card-img-top" alt="...">
                     <div class="card-body" style="background-color:#BDD8F0; min-height:12rem;">
                         <h5 class="card-title"><a href="https://example.com" class="" style="text-decoration:none"><?php echo $row["birth_control_name"]; ?></a></h5>
+                        <p class="card-text"><?php //echo $row["birth_control_desc"]; ?></p>
                         <p class="card-text"><?php //echo $row["birth_control_desc"]; ?></p>
                     </div>
                 </div>
             </div>
         </div>
         
+        <?php/* 
         <?php/* 
                 $cards_in_current_row++;
                 if ($cards_in_current_row == $cards_per_row) {
@@ -203,8 +254,10 @@
             $count = mysqli_num_rows($result2);
             $a = $count / 6;
             $a = ceil($a);*/
+            $a = ceil($a);*/
         ?>
     </div>
+</div>-->
 </div>-->
 
     
@@ -269,69 +322,77 @@
             </div>
         </footer>
     </section>
-    
+
+   <!-- <div class='newsCard news-Slide-up rounded-4'>
+        <img src="assets/images/contraceptive.png">
+        <div class='newsCaption'>
+            <h2 class='newsCaption-title'>Title</h2>
+            <p class='newsCaption-content'>
+            Blurb to get reader hooked.
+            </p>
+            <p><a class='newsCaption-link' href='#'>READ MORE</a>  ></p>    
+        </div>
+    </div>-->
+
     <!-- contraceptive method template -->
     <template class="js-method-template">
-        <div class="box">
-            <a href="" class="js-method-link">
-                <img src="assets/images/contraceptive.png" alt="sample" class="js-method-image">
-                <h2 class="js-method-name">Pill</h2>
-                <div class="js-method-desc"  >
-				    is simply dummy text of the printing and typesetting industry. 
-                    Lorem Ipsum has been the industry's standard dummy text ever 
-                    since the 1500s, when an unknown printer took a galley of 
-                    type and scrambled it to make a type specimen book.
-			    </div>
-            </a>
-        </div>  
+        <div class='newsCard news-Slide-up rounded-4'>
+                    <img src="assets/images/contraceptive.png" alt="sample" class="js-method-image" style="width:300px;">
+                <div class='newsCaption rounded-4 shadow-sm'>
+                    <h5 class="js-method-name newsCaption-title py-2" style="text-align:center;">Pill</h5 >
+                    <div class="js-method-desc newsCaption-content px-2"  >
+                        is simply dummy text of the printing and typesetting industry. 
+                        Lorem Ipsum has been the industry's standard dummy text ever 
+                        since the 1500s, when an unknown printer took a galley of 
+                        type and scrambled it to make a type specimen book.
+                    </div>
+                <p class="read px-2 mt-2"><a class='js-method-link' href='#' style="text-decoration: none; color: white;"><i class="fa-solid fa-circle-info"> </i> READ MORE</a></p>   
+                </div>  
+        </div>
     </template>
     <!-- end contraceptive method template -->
 </body>
 <script>
     var contra_method = {
-        
-        load_methods: function(e){
-
+        load_methods: function(e) {
             let form = new FormData();
             form.append('data_type', 'load_all_methods');
 
             var ajax = new XMLHttpRequest();
 
-            ajax.addEventListener('readystatechange',function(){
-
-                if(ajax.readyState == 4)
-                {
-                    if(ajax.status == 200){
-
-                        //console.log(ajax.responseText);
+            ajax.addEventListener('readystatechange', function() {
+                if (ajax.readyState == 4) {
+                    if (ajax.status == 200) {
                         let obj = JSON.parse(ajax.responseText);
-                        
-                        if(obj.success){
+
+                        if (obj.success) {
                             let method_holder = document.querySelector(".js-display-methods");
-                            method_holder.innerHTML = "";
+                            method_holder.innerHTML = ""; // Clear existing content
 
-                            let template = document.querySelector(".js-method-template");
-
-                            if(typeof obj.rows == 'object')
-                            {
+                            if (typeof obj.rows == 'object') {
                                 for (var i = 0; i < obj.rows.length; i++) {
-                                    let clone_template = template.content.cloneNode(true);
+                                    if (i % 3 === 0) {
+                                        // Create a new row for every 3rd iteration
+                                        var rowDiv = document.createElement('div');
+                                        rowDiv.className = "row";
+                                        rowDiv.classList.add("mx-5", "my-5");
+                                        rowDiv.style.justifyContent = "space-evenly";
+                                        method_holder.appendChild(rowDiv);
+                                    }
+
+                                    let colDiv = document.createElement('div');
+                                    colDiv.className = "col-lg-3"; // Display three columns per row
+
+                                    let clone_template = document.querySelector(".js-method-template").content.cloneNode(true);
 
                                     clone_template.querySelector(".js-method-name").innerHTML = obj.rows[i].birth_control_name;
                                     clone_template.querySelector(".js-method-desc").innerHTML = obj.rows[i].birth_control_desc;
-                                    clone_template.querySelector(".js-method-link").href = 'about-contraceptive.php?id='+obj.rows[i].birth_control_id;
+                                    clone_template.querySelector(".js-method-link").href = 'about-contraceptive.php?id=' + obj.rows[i].birth_control_id;
 
-                                    /*let clone = template.cloneNode(true);
-                                    clone.setAttribute('id','post_'+obj.rows[i].id);
-                                    let row_data = JSON.stringify(obj.rows[i]);
-                                    row_data = row_data.replaceAll('"','\\"');
-
-                                    clone.setAttribute('row',row_data);
-                                    clone.classList.remove('hide');*/
-                                    
-                                    method_holder.appendChild(clone_template);
+                                    colDiv.appendChild(clone_template); // Append cloned template to the column
+                                    rowDiv.appendChild(colDiv); // Append column to the current row
                                 }
-                            }else{
+                            } else {
                                 method_holder.innerHTML = "<div>No posts found</div>";
                             }
                         }
@@ -339,7 +400,7 @@
                 }
             });
 
-            ajax.open('post','ajax.php', true);
+            ajax.open('post', 'ajax.php', true);
             ajax.send(form);
         },
     };

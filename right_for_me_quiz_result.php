@@ -177,8 +177,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <div class="col-sm-12 col-lg-4">
               <div class="container d-flex justify-content-center">
                   <div class="card mx-1 my-5 rounded-4" style="width: 80%; background-color:#BDD8F0;">
-                          <img src="<?php echo $row["birth_control_img"]; ?>" class="card-img-top rounded-4 shadow-sm rounded" style=";" alt="...">
-                      <div class="card-body" style=" min-height:14rem;">
+                  <div class="container rounded-4 justify-content-center" style="text-align: center; background: white; width: 100%; max-height: 200px; position: relative; overflow: hidden; padding: 0;">
+                          <img src="<?php echo $row["birth_control_img"]; ?>" class="card-img-top"style="width: 100%; height: auto; object-fit: cover;"alt="...">
+                  </div>
+                          <div class="card-body" style=" min-height:14rem;">
                           <h5 class="card-title" style="text-align:center; color:#3B3B3B;"><?php echo $row["birth_control_name"]; ?></h5>
                           <p class="card-text mt-3">What it is?</p>
                           <p class="card-text" style="margin-top: -3%;"><?php echo $row["birth_control_desc"]; ?></p>
