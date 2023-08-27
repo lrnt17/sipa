@@ -62,10 +62,10 @@
     <div class="container">
         <div class="row-auto">
             <div class="col-auto p-1">
-                <a href="community-topics.php" class="js-link nav-link active" ><i class="fa-regular fa-comments" style="display:inline;"></i>&nbsp; Community Topics</a>
+                <a href="community-topics.php" class="js-link nav-link active col-2" ><i class="fa-regular fa-comments" style="display:inline;"></i>&nbsp; Community Topics</a>
             </div>
             <div class="col p-1 mb-4">
-                <a href="my-topics.php" class="js-link nav-link"><i class="fa-solid fa-question" style="display:inline;"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;My Topics</a>
+                <a href="my-topics.php" class="js-link nav-link col-2"><i class="fa-solid fa-question" style="display:inline;"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;My Topics</a>
             </div>
         </div>
         
