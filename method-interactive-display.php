@@ -1,28 +1,64 @@
 <?php 
     defined('APP') or die('direct script access denied!');
 ?>
-<div>
-    <h1>How effective is contraception?</h1>
 
-    <h2>Choose a method:</h2>
-    <form onclick="method_display.updateDisplay(event)" class="js-method-buttons">
+<style>
+    .centered-form {
+        text-align: center;
+    }
+    .js-each-method-buttons {
+        background-color: #ffff; /* Set the initial background color */
+        transition: background-color 0.2s; /* Add a smooth transition effect */
+    }
+
+    .js-each-method-buttons:hover {
+        background-color: #F2C1A7; /* Change the background color on hover */
+        color: white; /* Set text color to contrast with the new background */
+    }
+
+    span{
+        font-weight:bold;
+    }
+</style>
+
+<div>
+        <div class="row">
+            <div class="d-flex justify-content-start mt-4 mb-3">
+                <div style="width: 15%;
+                background-color: #1F6CB5;
+                border-radius: 99px;
+                height: 6px;"></div>
+            </div>
+        </div>
+        <div class="row" class="my-1 custom-width-hidden" style="width:300px;">
+            <h2 style="color:#383838;">How effective is contraception?</h2>
+        </div>
+        
+        <div class="row">
+            <p style="color:#383838;">Choose a method:</p>
+        </div>
+
+    <form onclick="method_display.updateDisplay(event)" class="js-method-buttons centered-form">
         <!--<button name="method" value="1">Patch</button>
         <button name="method" value="2">Implant</button>
         <button name="method" value="3">Condom</button>-->
     </form>
-    <div>Using the <span class="js-method-name"></span>, 
+
+    <div class="my-4"> 
+        <p class="text-center" style="color:#525252;">Using the <span class="js-method-name"></span>, 
         typically <span class="js-preggy"></span> in 
-        10 women will get pregnant in one year.
+        <b>10</b> women will get pregnant in one year. </p>
     </div>
-    <div id="women-container">
-        <div id="pregnant-women-container"></div>
-        <div id="non-pregnant-women-container"></div>
+
+    <div id="women-container" class="row justify-content-center">
+        <!--<<div id="pregnant-women-container"></div>
+        <div id="non-pregnant-women-container"></div>-->
     </div>
 </div>
 
 <!-- contraceptive method buttons template -->
 <template class="js-method-buttons-template">
-    <button name="method" value="1" class="js-each-method-buttons">Patch</button>
+    <button name="method" value="1" class="js-each-method-buttons btn mx-3 my-2 px-4 py-2 rounded-4 shadow-sm rounded" style="min-width:235px;">Patch</button>
 </template>
 <!-- end contraceptive method buttons template -->
 
@@ -96,8 +132,8 @@
                     
                     if(obj.success){
                         
-                        let pregnantWomenContainer = document.getElementById('pregnant-women-container');
-                        let nonPregnantWomenContainer = document.getElementById('non-pregnant-women-container');
+                        let pregnantWomenContainer = document.getElementById('women-container');
+                        let nonPregnantWomenContainer = document.getElementById('women-container');
                         let methodName = document.querySelector(".js-method-name");
                         let numOfPreggy = document.querySelector(".js-preggy");
 
@@ -111,15 +147,31 @@
                         let numNonPreggy = Math.max(0, 10 - obj.preggy);
 
                         for (let i = 0; i < obj.preggy; i++) {
-                            let img = document.createElement('img');
-                            img.src = 'assets/images/preggy.png';
-                            pregnantWomenContainer.appendChild(img);
+                            let col = document.createElement('div');
+                            col.classList.add('col-auto');
+                            
+                            let preggyImg = document.createElement('img');
+                            preggyImg.src = 'assets/images/preggy-1.png'; // Use the correct path for preggy image
+                            preggyImg.style.height = "110px";
+                            preggyImg.style.width = "50px";
+                            preggyImg.classList.add('mx-3', 'my-2');
+                            
+                            col.appendChild(preggyImg);
+                            pregnantWomenContainer.appendChild(col);
                         }
                         
                         for (let i = 0; i < numNonPreggy; i++) {
-                            let img = document.createElement('img');
-                            img.src = 'assets/images/not_preggy.png';
-                            nonPregnantWomenContainer.appendChild(img);
+                            let col = document.createElement('div');
+                            col.classList.add('col-auto');
+                            
+                            let nonPreggyImg = document.createElement('img');
+                            nonPreggyImg.src = 'assets/images/not-preggy.png'; // Use the correct path for non-preggy image
+                            nonPreggyImg.style.height = "110px";
+                            nonPreggyImg.style.width = "60px";
+                            nonPreggyImg.classList.add('mx-2', 'my-2');
+                            
+                            col.appendChild(nonPreggyImg);
+                            nonPregnantWomenContainer.appendChild(col);
                         }
 
                         methodName.innerHTML = obj.method_name;

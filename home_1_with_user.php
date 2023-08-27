@@ -11,6 +11,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/324d76b648.js" crossorigin="anonymous"></script>
     <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
     <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.js"></script>
@@ -33,9 +34,12 @@
         }
 
         #map {
-            height: 446px;
-            width: 832px;
+            min-height: 306px;
+            min-width: 330px;
+            width:580px;
+            object-fit: cover;
         }
+        
         .skiptranslate iframe  {
         visibility: hidden !important;
         }
@@ -67,7 +71,7 @@
 
     <!-- navigation bar with logo -->
     <?php include('header.php') ?>
-
+<div class="container">
     <!-- background picture eme -->
     <img src="" alt="">
     <img src="" alt="">
@@ -144,7 +148,7 @@
                 </p>
             </div>
         </div>
-        <div class="faq">
+        <!--<div class="faq">
             <div class="question" onclick="toggleAnswer(this)">How can I have less period pain?</div>
             <div class="answer">
                 <p>Hormonal contraception is very good at reducing period pain. 
@@ -206,34 +210,69 @@
                 they are using hormonal contraception. 
                 </p>
             </div>
-        </div>
+        </div>-->
     </div>
     
     <!-- community forum -->
     <?php include('method-interactive-display.php') ?>
 
     <!-- maps -->
-    <div>
-        <p>Address</p>
-        <h4>Philippines</h4>
-        <p>Bustos, Bulacan</p>
+    <div class="container rounded-5 shadow-sm p-5 my-5" style="background: #B6CCF5;">
+        <div class="row">
+            <div class="col">
+                <div class="row" style="
+                display: flex;
+                justify-content: space-between;">
+                    <div class="col-auto">
+                        <p style="color:#383838;">Address</p>
+                        <h5>Philippines</h5>
+                        <p>Bustos, Bulacan</p>
+                    </div>
+                    <div class="col-auto">
+                        <p style="color:#383838;">Phone Number</p>
+                        <h5>+63 912 345 6789</h5>   
+                    </div>
+                    <div class="col-auto">
+                        <p style="color:#383838;">Email</p>
+                        <h5>sipa@gmail.com</h5>
+                    </div>
+                </div>
 
-        <p>Phone Number</p>
-        <h4>+63 912 345 6789</h4>   
+                <div class="row my-3" style="justify-content: center;">
+                    <div class="container px-4 py-2 rounded-pill shadow-sm" style="background:white;">
+                        <div class="row">
+                            <div class="col me-auto">
+                                <p class="my-3 ps-2" style="color:#383838;">Social Media</p>
+                            </div>
+                            <div class="col-auto" style="display: flex;
+                            align-items: center;">
+                                <a href="#"><i class="fa-brands fa-facebook my-2" style="font-size:45px; color:#2736A5;"></i></a>
+                            </div>
+                            <div class="col-auto"style="display: flex;
+                            align-items: center;">
+                                <a href="#"><i class="fa-brands fa-instagram my-2" style="font-size:45px; color:#6626CC;"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        <p>Email</p>
-        <h4>sipa@gmail.com</h4>
+            </div>
 
-        <div>
-            <p>We are in Social Media</p>
-            <!-- icon -->
-            <!-- icon -->
+
+            <div class="col">
+                <!-- map API -->
+                <div style="display: flex;
+                justify-content: center;">
+                    <div id='map' class="rounded-5 shadow-sm"></div>
+                </div>
+            </div>
+            
         </div>
-
-        <!-- map API -->
-        <div id='map'></div>
+            
+            
     </div>
 
+</div>
     <!-- footer -->
     <footer>
         <div>

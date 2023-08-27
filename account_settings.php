@@ -254,11 +254,11 @@
             <p class ="text-desc d-none md-none d-lg-block" style="font-size: 14px; color: #575757; width:100%;
             word-wrap: break-word; white-space: normal; position: relative; top: -5px;">See information about your account, password, or about your account deletion.</p>
             <br>
-
-            <div class="row row-cols-6 gx-10 row-cols-lg-1 d-m-fluid">
+        
+            <div class="row row-cols-6 gx-10 row-cols-lg-1 d-m-fluid" style="justify-content: space-between;">
                 <div onclick="account.show('.js-account-info-modal', '.js-acc-info')" class="js-settings class_15 row" style="cursor:pointer;" >
-                    <div class="col-2 d-none md-none d-lg-block"><i class="fa-solid fa-user"></i> </div>
-                    <div class="col"> <p class="js-acc-info bold" style="display: inline;">Account information</p></div>
+                    <div class="col-2"><i class="fa-solid fa-user" style="font-size:20px;"></i> </div>
+                    <div class="col d-none md-none d-lg-block"> <p class="js-acc-info bold" style="display: inline;">Account information</p></div>
                 </div>
                 <div class="row">
                     <div class="col-2"> </div>
@@ -266,8 +266,8 @@
                 </div>
 
                 <div onclick="account.show('.js-change-password-modal', '.js-cha-pass')" class="js-settings class_15 row" style="cursor:pointer;" >
-                    <div class="col-2 d-none md-none d-lg-block"><i class="fa-solid fa-lock"></i></i> </div>
-                    <div class="col"><p class="js-cha-pass" style="display:inline">Change your password</p></div>
+                    <div class="col-2 "><i class="fa-solid fa-lock" style="font-size:20px;"></i></div>
+                    <div class="col d-none md-none d-lg-block"><p class="js-cha-pass" style="display:inline">Change your password</p></div>
                 </div>
                 <div class="row">
                     <div class="col-2"> </div>
@@ -275,17 +275,17 @@
                 </div>
 
                 <div onclick="account.show('.js-delete-account-modal', '.js-del-acc')" class="js-settings class_15 row" style="cursor:pointer;" >
-                    <div class="col-2 d-none md-none d-lg-block"><i class="fa-solid fa-heart-crack"></i></i> </div>
-                    <div class="col"><p class="js-del-acc" style="display:inline">Delete your account</p></div>
+                    <div class="col-2 "><i class="fa-solid fa-heart-crack" style="font-size:20px;"></i> </div>
+                    <div class="col d-none md-none d-lg-block"><p class="js-del-acc" style="display:inline">Delete your account</p></div>
                 </div>
                 <div class="row">
                     <div class="col-2"> </div>
                     <div class="col d-none md-none d-lg-block"><p class ="text-desc-a">Deletion of your account.</p></div>
                 </div>
 
-                <div class="row" style="align-items: center">
-                    <div class="col-2 d-none md-none d-lg-block"><i class="fa-solid fa-arrow-right-from-bracket"></i></div>
-                    <div class="col"><button onclick="user.logout()" class="class_39 btn btn-link" style="text-decoration: none; color:black;"  >
+                <div class="row" style="align-items: center;">
+                    <div class="col-2"><i class="fa-solid fa-arrow-right-from-bracket" onclick="user.logout()" style="font-size:20px; cursor: pointer;"></i></div>
+                    <div class="col d-none md-none d-lg-block"><button onclick="user.logout()" class="class_39 btn btn-link" style="text-decoration: none; color:black;"  >
                         Logout
                     </button></div>
                 </div>
@@ -314,153 +314,155 @@
    <!-- </section>-->
     
     <?php if(!empty($row)):?>
-        <form method="post" enctype="multipart/form-data" class="class_26  p-5 rounded-end-5 shadow-sm rounded col-xxl-8 col-xl-9 col-lg-9 col-sm-fluid" style="height: 550px; background-color: #ffff;" >
-            <!-- account information modal -->
-                <div class="js-account-info-modal">
-                    <h2 style="color: #2F2F2F;
-                    font-weight: 500;">Account information</h2>
-                    <label>
-                        <img src="<?=get_image($row['user_image'])?>" class="js-image rounded-circle class_28" style="cursor: pointer; height:50px; border-style: solid;" >
-                        <input onchange="display_image(this.files[0])" type="file" name="image" class="class_29" style="display:none;">
+        <div class="conclass_26  p-5 rounded-end-5 shadow-sm rounded 
+        col-xxl-8 col-xl-9 col-lg-9 col-sm-fluid" style="height: 550px; background-color: #ffff;">
+            <form method="post" enctype="multipart/form-data" >
+                <!-- account information modal -->
+                    <div class="js-account-info-modal">
+                        <h2 style="color: #2F2F2F;
+                        font-weight: 500;">Account information</h2>
+                        <label>
+                            <img src="<?=get_image($row['user_image'])?>" class="js-image rounded-circle class_28" style="cursor: pointer; height:50px; border-style: solid;" >
+                            <input onchange="display_image(this.files[0])" type="file" name="image" class="class_29" style="display:none;">
 
-                        <script>
-                            
-                            function display_image(file)
-                            {
-                                let allowed = ['image/jpeg','image/png','image/webp'];
+                            <script>
+                                
+                                function display_image(file)
+                                {
+                                    let allowed = ['image/jpeg','image/png','image/webp'];
 
-                                if(!allowed.includes(file.type)){
-                                    alert("That file type is not allowed!");
-                                    return;
+                                    if(!allowed.includes(file.type)){
+                                        alert("That file type is not allowed!");
+                                        return;
+                                    }
+
+                                    let img = document.querySelector(".js-image");
+                                    img.src = URL.createObjectURL(file);
                                 }
+                            </script>
+                        </label>
 
-                                let img = document.querySelector(".js-image");
-                                img.src = URL.createObjectURL(file);
-                            }
-                        </script>
-                    </label>
+                        <div class="class_30" >
+                            <div class="class_31">
+                                <label >
+                                    Name
+                                </label>
+                            <div class="class_311" >
+                                <input value="<?=$row['user_fname']?>" placeholder="First Name (Optional)" type="text" name="userfname" class="class_33">
+                                <input value="<?=$row['user_lname']?>" placeholder="Last Name (Optional)" type="text" name="userlname" class="class_33">
+                            </div>
+                            </div>
+                            <div class="class_31" >
+                                <label >
+                                    Email
+                                </label><br>
+                                <input value="<?=$row['user_email']?>" placeholder="Email" type="text" name="email" class="class_33"  required="true">
+                            </div>
+                            <div class="class_311" >
+                                <label class="class_312"  >
+                                    Date of Birth
+                                </label>
+                                <label class="class_312"  >
+                                    Sex
+                                </label>
+                            </div>
+                            <div class="class_311" >
+                            <div class="class_312" >
+                                <input value="<?=$row['user_dob']?>" placeholder="Email" type="date" name="dob" class="class_33"  required="true">
+                            </div>
+                            <div class="class_312" >
+                                <input type="radio" name="sex" value="Male" <?php if ($user_sex === "Male") echo "checked"; ?>>Male
+                                <input type="radio" name="sex" value="Female" <?php if ($user_sex === "Female") echo "checked"; ?>>Female
+                                <input type="radio" name="sex" value="Other" <?php if ($user_sex === "Other") echo "checked"; ?>>Other
+                            </div>
+                            </div>
+                            <div class="class_31" >
+                                <label >
+                                    Phone Number
+                                </label>
+                                <!--+63--><input value="<?=$row['user_pnum']?>" placeholder="9998887777" type="text" name="pnum" class="class_33"  required="true">
+                            </div>
 
-                    <div class="class_30" >
-                        <div class="class_31">
-                            <label >
-                                Name
-                            </label>
-                        <div class="class_311" >
-                            <input value="<?=$row['user_fname']?>" placeholder="First Name (Optional)" type="text" name="userfname" class="class_33">
-                            <input value="<?=$row['user_lname']?>" placeholder="Last Name (Optional)" type="text" name="userlname" class="class_33">
-                        </div>
-                        </div>
-                        <div class="class_31" >
-                            <label >
-                                Email
-                            </label><br>
-                            <input value="<?=$row['user_email']?>" placeholder="Email" type="text" name="email" class="class_33"  required="true">
-                        </div>
-                        <div class="class_311" >
-                            <label class="class_312"  >
-                                Date of Birth
-                            </label>
-                            <label class="class_312"  >
-                                Sex
-                            </label>
-                        </div>
-                        <div class="class_311" >
-                        <div class="class_312" >
-                            <input value="<?=$row['user_dob']?>" placeholder="Email" type="date" name="dob" class="class_33"  required="true">
-                        </div>
-                        <div class="class_312" >
-                            <input type="radio" name="sex" value="Male" <?php if ($user_sex === "Male") echo "checked"; ?>>Male
-                            <input type="radio" name="sex" value="Female" <?php if ($user_sex === "Female") echo "checked"; ?>>Female
-                            <input type="radio" name="sex" value="Other" <?php if ($user_sex === "Other") echo "checked"; ?>>Other
-                        </div>
-                        </div>
-                        <div class="class_31" >
-                            <label >
-                                Phone Number
-                            </label>
-                            <!--+63--><input value="<?=$row['user_pnum']?>" placeholder="9998887777" type="text" name="pnum" class="class_33"  required="true">
-                        </div>
-
-                        <div class="class_37 d-flex flex-row-reverse">
-                            <button class="class_38 btn" style="background-color: #F2C1A7; color:#ffff;" >
-                                Save
-                            </button>
-                            <!--<a href="profile.php">
-                                <button type="button" class="class_39">
-                                    Back
+                            <div class="class_37 d-flex flex-row-reverse">
+                                <button class="class_38 btn" style="background-color: #F2C1A7; color:#ffff;" >
+                                    Save
                                 </button>
-                            </a>-->
-                            <div class="class_40">
+                                <!--<a href="profile.php">
+                                    <button type="button" class="class_39">
+                                        Back
+                                    </button>
+                                </a>-->
+                                <div class="class_40">
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            <!-- end of account information modal -->
+                <!-- end of account information modal -->
 
-            <!-- change password modal -->
-            <div class="js-change-password-modal hide">
-            <h2 style="color: #2F2F2F;
-            font-weight: 500;">Change your password</h2></br>
-                <div class="class_30">
-                    <div class="class_31">
-                        <label class="class_32">
-                            Current Password
-                        </label>
-                        <input type="password" name="current_password" class="class_33">
-                    </div></br>
-                    <div class="class_31">
-                        <label class="class_32">
-                            New Password
-                        </label>
-                        <input type="password" name="new_password" class="class_33">
-                    </div></br>
-                    <div class="class_31">
-                        <label class="class_36">
-                            Retype New Password
-                        </label>
-                        <input type="password" name="retype_password" class="class_33">
-                    </div>
-                    <p class="chan-text" style="
-                    bottom: 21px;
-                    font-size: 12px;
-                    color: #575757;">Changing your password will log you out.</p>
-                    
+                <!-- change password modal -->
+                <div class="js-change-password-modal hide">
+                <h2 style="color: #2F2F2F;
+                font-weight: 500;">Change your password</h2></br>
+                    <div class="class_30">
+                        <div class="class_31">
+                            <label class="class_32">
+                                Current Password
+                            </label>
+                            <input type="password" name="current_password" class="class_33">
+                        </div></br>
+                        <div class="class_31">
+                            <label class="class_32">
+                                New Password
+                            </label>
+                            <input type="password" name="new_password" class="class_33">
+                        </div></br>
+                        <div class="class_31">
+                            <label class="class_36">
+                                Retype New Password
+                            </label>
+                            <input type="password" name="retype_password" class="class_33">
+                        </div>
+                        <p class="chan-text" style="
+                        bottom: 21px;
+                        font-size: 12px;
+                        color: #575757;">Changing your password will log you out.</p>
+                        
 
-                    <div class="class_37 d-flex flex-row-reverse">
-                        <button class="class_38 btn" style="background-color: #F2C1A7; color:#ffff; margin-left: 10px; ">
-                            Save
-                        </button>
-                        <a href="profile.php">
-                            <button type="button" class="class_39 btn btn-outline-danger" style=" margin-left: 10px;">
-                                Back
+                        <div class="class_37 d-flex flex-row-reverse">
+                            <button class="class_38 btn" style="background-color: #F2C1A7; color:#ffff; margin-left: 10px; ">
+                                Save
                             </button>
-                        </a>
-                        <div class="class_40"></div>
+                            <a href="profile.php">
+                                <button type="button" class="class_39 btn btn-outline-danger" style=" margin-left: 10px;">
+                                    Back
+                                </button>
+                            </a>
+                            <div class="class_40"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <!-- end of change password modal -->
+                <!-- end of change password modal -->
 
-        </form>
-        <!-- delete account modal -->
-        <div class="js-delete-account-modal hide">
-            <h2 style="color: #2F2F2F;
-            font-weight: 500;">Delete your account</h2>
-            <div class="class_30" >
-                <p class="text-desc">
-                    You're trying to delete your SiPa account, which provides access to various SiPa 
-                    services. You'll no longer be able to to use any of those services, and you account 
-                    and data will be lost.
-                </p>
-                <hr>
-                
-                <button onclick="account.delete()" class="del-btn btn" style=" color: #ab0f15; font-weight: bold;" >
-                    Delete account
-                </button>
-                
+            </form>
+            <!-- delete account modal -->
+            <div class="js-delete-account-modal hide">
+                <h2 style="color: #2F2F2F;
+                font-weight: 500;">Delete your account</h2>
+                <div class="class_30" >
+                    <p class="text-desc">
+                        You're trying to delete your SiPa account, which provides access to various SiPa 
+                        services. You'll no longer be able to to use any of those services, and you account 
+                        and data will be lost.
+                    </p>
+                    <hr>
+                    
+                    <button onclick="account.delete()" class="del-btn btn" style=" color: #ab0f15; font-weight: bold;" >
+                        Delete account
+                    </button>
+                    
+                </div>
             </div>
         </div>
-        
         <!-- end of delete account modal -->
     <?php else:?>
         <div class="class_16" >

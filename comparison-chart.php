@@ -2,7 +2,7 @@
     require("connect.php");
     require('functions.php');
 
-    echo $_SESSION['USER']['user_id']."<br>";
+    //echo $_SESSION['USER']['user_id']."<br>";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,12 +21,14 @@
     }
 
     .star {
-    color: grey;
+    color: #DBDBDB;
     transition: color 0.2s;
+    font-size:20px;
     }
 
     .star.active {
-    color: purple;
+    color: #915E98;
+    font-size:20px;
     }
 
     .js-method-icon{
@@ -39,227 +41,112 @@
         height: 50px;
     }
     
-    #prices {
-        max-width: 1200px;
-        margin: auto;
-        /*width: 100%;*/
-        font-family: 'open sans';
-        font-weight: normal;
+/**
+ * A variation on Scrolling shadows by @kizmarh and @leaverou
+ * See http://lea.verou.me/2012/04/background-attachment-local/
+ * Only works in browsers supporting background-attachment: local; & CSS gradients
+ * Degrades gracefully
+ */
+
+
+/* Apply shadows to the entire table */
+.table-con table {
+    position: relative;
+    z-index: 0; /* Ensure the table content is behind the shadows */
+    width: auto;
+}
+
+/* Apply shadows to the background of the table-con container */
+.table-con {
+    position: relative; /* Make sure the shadows are positioned correctly */
+    overflow: auto;
+    background-image:
+        /* Shadows */
+        linear-gradient(to right, #D2E0F8, #D2E0F8),
+        linear-gradient(to right, #D2E0F8, #D2E0F8),
+    
+    /* Shadow covers */
+        linear-gradient(to right, rgba(0,0,0,.25), rgba(255,255,255,0)),
+        linear-gradient(to left, rgba(0,0,0,.25), rgba(255,255,255,0));
+
+    background-position: left center, right center, left center, right center;
+    background-repeat: no-repeat;
+    background-color: #D2E0F8;
+    background-size: 20px 100%, 20px 100%, 10px 100%, 10px 100%;
+    background-attachment: local, local, scroll, scroll;
+    
+    z-index: 1; /* Ensure the shadows are on top of the table content */
+}
+
+
+    table {
+        border-collapse: separate; /* Use 'separate' to have space between cells */
+        display: inline-block;
+        min-width: 100%;
+    }
+    table td {
+      border: 3px solid #D2E0F8; /* Adding a border for demonstration */
+    }
+    
+    table tr{
+        background-color: rgba(0,0,0,.1);
     }
 
-    .pricing-table {
-        /*width: 95%;*/
-        margin: auto auto 20px auto;
-        position: relative;
-        min-height: 340px;
-        padding-bottom: 55px;
-        text-align: center;
-        background: #fff;
+    table.js-chart td:hover {
+      background-color: #DBDBDB; /* Change this to the desired hover background color */
+      
+    }
+    .methodcell {
+        /* Allow the scrollable column to take remaining space */
+        /* Optional: Add styles for the scrollable column */
     }
 
-    .pricing-table td {
-        /*width: 33%;*/
-        vertical-align: top;
-    }
-
-    .pricing-table h2 {
-        display: block;
-        margin-bottom: 0px;
-        padding: 10px;
-        font-size: 1.4em;
-        background: #009342; /* Set the desired color directly */
-        font-weight: 800;
-        text-transform: uppercase;
-    }
-
-    #prices td:last-child h2 {
-        background: #018FFF; /* Set the desired color directly */
-    }
-
-    .pricing-table h3 {
-        display: block;
-        margin: 0;
-        padding: 0 0 10px;
-        background: #102e5c;
-        font-size: 0.9em;
-    }
-
-    #prices td:last-child h3 {
-        background: #018FFF; /* Set the desired color directly */
-    }
-
-    .pricing-table h4 {
-        display: block;
-        margin: 0;
-        /*width: 100%;*/
-        padding: 20px;
-        background: #30B643; /* Set the desired color directly */
-        font-size: 1.75em;
-        box-sizing: border-box;
-    }
-
-    #prices td:last-child h4 {
-        background: #39B5FF; /* Set the desired color directly */
-    }
-
-    .pricing-table h5 {
-        display: block;
-        margin: 0 0 15px 0;
-        font-weight: 700;
-        padding: 10px;
-        background: #44D354; /* Set the desired color directly */
-    }
-
-    #prices td:last-child h5 {
-        background: #65CAFC; /* Set the desired color directly */
-    }
-
-    .pricing-table h2,
-    .pricing-table h3,
-    .pricing-table h4,
-    .pricing-table h5 {
-        color: #fff;
-    }
-
-    /* Popular Table */
-
-    .popular .pricing-table {
-        margin-top: -10px;
-        min-height: 400px;
-    }
-
-    .popular .pricing-table h2 {
-        font-size: 1.8em;
-        background: #FF9138; /* Set the desired color directly */
-    }
-
-    .popular .pricing-table h3 {
-        background: #FF9138; /* Set the desired color directly */
-    }
-
-    .popular .pricing-table h4 {
-        background: #FEB63D; /* Set the desired color directly */
-    }
-
-    .popular .pricing-table h5 {
-        background: #F7CD6F; /* Set the desired color directly */
-    }
-
-    .pricing-table p {
-        margin: 10px auto;
-        padding: 5px 0 5px;
-        width: 80%;
-        font-weight: 300;
-        border-top: 1px solid rgba(0,0,0,0.1);
-    }
-
-    .pricing-table h5 + p {
-        
-    }
-
-    .pricing-table a {
-        display: block;
-        margin: auto;
-        width: 45%;
-        padding: 10px 0;
-        position: absolute;
-        bottom: 15px;
-        left: 0;
-        right: 0;
-        font-size: 0.85em;
-        color: #fff;
-        background: #2F333C;
-        text-decoration: none;
-        text-transform: uppercase;
-        transition: all .3s ease-in-out;
-    }
-
-    .popular .pricing-table a {
-        background: #2F333C;
-    }
-
-    .pricing-table a:hover {
-        background: #505A6B;
-    }
-
-    /*------------------------------------*/
-    /*---------- MEDIA QUERIES -----------*/
-    /*------------------------------------*/
-
-    @media screen and (max-width: 700px) {
-        #prices td {
-        display: block !important;
-        width: 100% !important;
-        }
-        .pricing-table {
-        min-height: 0;
-        }
-        .popular .pricing-table {
-        margin-top: 0px;
-        }
-    }
-
-    .hide{
-        display:none;
-    }
-
+    table td.fixed {
+    position: sticky;
+    left: 0;
+    background-color: #D2E0F8; /* You can adjust the background color */
+    z-index: 2; /* Ensure the fixed cell is above the scrollable content */
+    border: #D2E0F8;
+}
+    
 </style>
-<body>
+<body style="background: #F2F5FF;">
+    <!-- navigation bar with logo -->
+    <?php include('header.php') ?>
+
+    <div class="container mt-5"> <!-- mt-3-->
+        <div class="row" style="align-items: center;">
+            <div class="col-auto">
+                <div class="vl" style="width: 10px;
+                background-color: #1F6CB5;
+                border-radius: 99px;
+                height: 75px;
+                display: -webkit-inline-box;"></div>
+            </div>
+        
+            <div class="col-auto">
+                <h3>Pick what's important to you</h3>
+            </div>
+        </div>
+
 
     <section class="js-comparison-chart">
         <?php include('compare-methods.php') ?>
-        <!--<div>
-            <table id="comparison-chart" border="1">
-                <thead class="js-icons">
-
-                </thead>
-                <tbody></tbody>
-            </table>
-        </div>-->
-        
-        <table id="prices">
-            <tbody>
-                <tr>
-                    <td>
-                        <h2></h2>
-                        <h4></h4>
-                        <p>Feature List</p>
-                        <p>Feature List</p>
-                        <p>Feature List</p>
-                        <p>Feature List</p>
-                        <p>Feature List</p>
-                    </td>
-                    <td>
-                        <h2></h2>
-                        <h4></h4>
-                        <p>Feature List</p>
-                        <p>Feature List</p>
-                        <p>Feature List</p>
-                        <p>Feature List</p>
-                        <p>Feature List</p>
-                    </td>
-                    <td>
-                        <h2></h2>
-                        <h4></h4>
-                        <p>Feature List</p>
-                        <p>Feature List</p>
-                        <p>Feature List</p>
-                        <p>Feature List</p>
-                        <p>Feature List</p>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-
+    
         <!-- ///////////////////////////////////////////////////////////////////// -->
-        <table class="js-chart" border="1">
-            <tbody>
-                <tr>
-
-                </tr>
-            </tbody>
-        </table>
+        <div class="container table-con pt-4 pb-2 rounded-bottom-4 mb-5" style="
+            padding: 0;
+            margin: 0;">
+                <table class="js-chart table">
+                    <tbody>
+                        <tr>
+                            <!-- table content here -->
+                        </tr>
+                    </tbody>
+                </table>
+        </div>
     </section>
+
 
     <!-- Template for table row -->
     <template id="chart-template">
@@ -336,7 +223,7 @@
                                 cell.classList.add("column-" + (i+1));
                                 // Create a div element to hold the stars
                                 let starsDiv = document.createElement("div");
-                                starsDiv.classList.add("rating");
+                                starsDiv.classList.add("rating", "py-4");
 
                                 // Create the star elements
                                 for (let j = 0; j < 3; j++) {
@@ -407,7 +294,7 @@
 
                                 // Create a div element to hold the stars
                                 let starsDiv = document.createElement("div");
-                                starsDiv.classList.add("rating");
+                                starsDiv.classList.add("rating", "py-4");
 
                                 // Create the star elements
                                 for (let j = 0; j < 3; j++) {
@@ -456,12 +343,19 @@
 
                         // Create a cell for the column names
                         let columnNamesCell = document.createElement('td');
+                        columnNamesCell.classList.add("fixed");
+                        columnNamesCell.style.background="";
                         row.appendChild(columnNamesCell);
 
                         if(response.success){
 
                             // Add the column names to the column names cell
                             if (data.length > 0) {
+                                // Create a div element to hold the stars
+                                let nameDiv = document.createElement("div");
+                                nameDiv.classList.add("nameDiv","px-1", "mx-4");
+                                nameDiv.style.width="150px";
+                                nameDiv.style.height="530px";
                                 for (var key in data[0]) {
                                     // Skip the birth_control_chart_id and birth_control_id columns
                                     if (key === 'birth control chart id' || key === 'birth control id' || key === 'birth control name') {
@@ -470,13 +364,21 @@
 
                                     var columnName = document.createElement('p');
                                     columnName.textContent = key;
-                                    columnNamesCell.appendChild(columnName);
+                                    columnName.classList.add("py-4", "mb-3",);
+                                    columnName.style.textAlign = "right";
+                                    nameDiv.appendChild(columnName);
                                 }
+                                
+                                columnNamesCell.appendChild(nameDiv);
                             }
 
                             // Loop through the data and create a new cell for each contraceptive method
                             for (var i = 0; i < data.length; i++) {
                                 var methodCell = document.createElement('td');
+                                methodCell.classList.add("methodcell","px-2", "rounded-3");
+                               // methodCell.style.width="150px";
+                                
+                                //methodCell.style.background="#F4F7FF"
                                 row.appendChild(methodCell);
 
                                 // Loop through the columns for this contraceptive method
@@ -492,13 +394,14 @@
                                         let imgElement = document.createElement("img");
                                         imgElement.src = data[i][key];
                                         imgElement.title = data[i]['birth control name'];
-                                        imgElement.width = 25;
-                                        imgElement.height = 25;
+                                        imgElement.width = 55;
+                                        imgElement.height = 55;
+                                        imgElement.classList.add("mx-2");
                                         methodCell.appendChild(imgElement);
                                     } else {
                                         // Create a div element to hold the stars
                                         let starsDiv = document.createElement("div");
-                                        starsDiv.classList.add("rating");
+                                        starsDiv.classList.add("rating", "py-4");
 
                                         // Create the star elements
                                         for (let j = 0; j < 3; j++) {
@@ -535,18 +438,13 @@
 
     comparison_chart.load_chart();
 
-    //sample lang to pwede tanggalin
-    document.addEventListener('DOMContentLoaded', function() {
-        var pricesTds = document.querySelectorAll('#prices td');
-        pricesTds.forEach(function(td) {
-            var div = document.createElement('div');
-            div.className = 'pricing-table';
-            var content = td.innerHTML;
-            td.innerHTML = '';
-            div.innerHTML = content;
-            td.appendChild(div);
-        });
-    });
+
 
 </script>
+
+
+
+
+
+
 </html>
