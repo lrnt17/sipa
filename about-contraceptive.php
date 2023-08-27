@@ -32,6 +32,49 @@
             width: 100px;
             height: 100px;
         }
+        /* ---------------------------------------------------------------------- sa baba neto bago*/
+        .carousel {
+            display: flex;
+            overflow: hidden;
+            width: 100%;
+            max-width: 500px; /* Adjust based on your layout */
+            margin: 0 auto; /* Center the carousel */
+        }
+
+        .slide {
+            display: flex;
+            width: 100%;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide div {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .slide button {
+            flex: 1;
+            margin: 0 10px;
+            width: 200px; /* Adjust based on your layout */
+        }
+
+        .indicators {
+            display: flex;
+            justify-content: center;
+        }
+
+        .indicator {
+            height: 10px;
+            width: 10px;
+            background-color: #bbb;
+            border-radius: 50%;
+            margin: 5px;
+        }
+
+        .indicator.active {
+            background-color: #717171;
+        }
     </style>
 </head>
 <body style="background: #F2F5FF;">
@@ -141,10 +184,24 @@
                 </div>
             <?php endif;?>
         </div>
-
-
+        
     </section>
+    
+    <div>
+        <div class="carousel" id="carousel">
+            <div class="slide" id="slide">
+                <!-- Slide divs will be added here by JavaScript -->
+            </div>
+        </div>
 
+        <button id="prevBtn">Prev</button>
+        <button id="nextBtn">Next</button>
+
+        <div class="indicators" id="indicators">
+            <!-- Indicators will be added here by JavaScript -->
+        </div>
+    </div>
+    <br><br><br>
     <!-- template for contraceptive positive effects -->
     <template id="positive-info-template">
         <div class="js-positive-info-list py-2" style="color:#383838;">
@@ -245,8 +302,119 @@
             ajax.open('post','ajax.php', true);
             ajax.send(form);
         },
+
+        contraceptive_selections: function(){
+        
+            let carousel = document.getElementById('carousel');
+            let slide = document.getElementById('slide');
+            let prevBtn = document.getElementById('prevBtn');
+            let nextBtn = document.getElementById('nextBtn');
+            let indicators = document.getElementById('indicators');
+            
+            let form = new FormData();
+
+            form.append('data_type', 'load_all_methods');
+            var ajax = new XMLHttpRequest();
+
+            ajax.addEventListener('readystatechange',function(){
+
+                if(ajax.readyState == 4)
+                {
+                    if(ajax.status == 200){
+
+                        let obj = JSON.parse(ajax.responseText);
+
+                        if(obj.success){
+                            
+                            let totalButtons = obj.rows.length; // Total number of buttons
+                            let buttonsPerSlide = 4; // Number of buttons per slide
+                            let totalSlides = Math.ceil(totalButtons / buttonsPerSlide);
+                            let currentSlide = 0;
+
+                            // Create buttons
+                            for (var i = 0; i < totalSlides; i++) {
+                                let slideDiv = document.createElement('div');
+
+                                for (var j = 0; j < buttonsPerSlide; j++) {
+                                    let buttonIndex = i * buttonsPerSlide + j;
+
+                                    if (buttonIndex >= totalButtons) {
+                                        break;
+                                    }
+
+                                    let button = document.createElement('button');
+                                    button.textContent = obj.rows[buttonIndex].birth_control_name;
+                                    button.onclick = function() {
+                                        window.location.href = 'about-contraceptive.php?id=' + obj.rows[buttonIndex].birth_control_id;
+                                    };
+                                    slideDiv.appendChild(button);
+                                }
+
+                                slide.appendChild(slideDiv);
+                            }
+
+                            // Create indicators
+                            for (var i = 0; i < totalSlides; i++) {
+                                let indicator = document.createElement('div');
+                                indicator.classList.add('indicator');
+                                if (i === currentSlide) {
+                                    indicator.classList.add('active');
+                                }
+                                indicators.appendChild(indicator);
+                            }
+
+                            function updateCarousel() {
+                                slide.style.transform = 'translateX(-' + (currentSlide * carousel.offsetWidth) + 'px)';
+                                
+                                let indicatorElements = indicators.getElementsByClassName('indicator');
+                                for (var i = 0; i < indicatorElements.length; i++) {
+                                    indicatorElements[i].classList.remove('active');
+                                }
+                                indicatorElements[currentSlide].classList.add('active');
+                                
+                                prevBtn.disabled = currentSlide === 0;
+                                nextBtn.disabled = currentSlide === totalSlides - 1;
+                            }
+
+                            prevBtn.addEventListener('click', function() {
+                                currentSlide--;
+                                updateCarousel();
+                            });
+
+                            nextBtn.addEventListener('click', function() {
+                                currentSlide++;
+                                updateCarousel();
+                            });
+
+                            window.addEventListener('resize', updateCarousel);
+
+                            updateCarousel();
+                            //console.log(obj.rows.length);
+
+                            /*let all_button = document.createElement('button');
+                            all_button.textContent = 'All';
+                            all_button.setAttribute('onclick',`allvideos.sort_birth_control_id(0)`);
+                            scrollMenu.appendChild(all_button);
+
+                            obj.rows.forEach(function(contraceptive) {
+                                let button = document.createElement('button');
+                                button.textContent = contraceptive.birth_control_name;
+                                button.setAttribute('onclick',`allvideos.sort_birth_control_id('${contraceptive.birth_control_id}')`);
+                                scrollMenu.appendChild(button);
+                            });*/
+
+                        }
+                    }
+                }
+            });
+
+            ajax.open('post','ajax.php', true);
+            ajax.send(form);
+            
+        },
     };
 
+    load_method_info.contraceptive_selections();
     load_method_info.loadData(birth_control_id);
 </script>
 </html>

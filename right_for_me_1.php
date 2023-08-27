@@ -254,7 +254,7 @@
             $count = mysqli_num_rows($result2);
             $a = $count / 6;
             $a = ceil($a);*/
-            $a = ceil($a);*/
+            //$a = ceil($a);*/
         ?>
     </div>
 </div>-->
