@@ -187,10 +187,10 @@
         
     </section>
     
-    <div>
+    <?php include('contraceptive-carousel.php') ?>
+    <!--<div>
         <div class="carousel" id="carousel">
             <div class="slide" id="slide">
-                <!-- Slide divs will be added here by JavaScript -->
             </div>
         </div>
 
@@ -198,10 +198,9 @@
         <button id="nextBtn">Next</button>
 
         <div class="indicators" id="indicators">
-            <!-- Indicators will be added here by JavaScript -->
         </div>
     </div>
-    <br><br><br>
+    <br><br><br>-->
     <!-- template for contraceptive positive effects -->
     <template id="positive-info-template">
         <div class="js-positive-info-list py-2" style="color:#383838;">
@@ -414,7 +413,6 @@
         },
     };
 
-    load_method_info.contraceptive_selections();
     load_method_info.loadData(birth_control_id);
 </script>
 </html>
