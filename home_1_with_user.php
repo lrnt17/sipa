@@ -164,6 +164,9 @@
         .show-answer .expand {
             display: none;
         }
+        .question-text, .answer-text{
+            font-weight:normal;
+        }
     </style>
   
     <script src="script.js" defer></script>
@@ -238,7 +241,7 @@
     
     <!-- frequently asked questions -->
     <div class="col-auto">
-                <a href="faqs.php" style="text-decoration: none; color: black;"><h3>Frequently<br>asked questions</b></h3><a>
+                <a href="faqs.php" style="text-decoration: none; color: black;"><h3>Frequently<br>asked questions</h3></a>
           </div>
 
           <div class="faq-container" id="FAQs-container"></div>
@@ -399,7 +402,7 @@
                         </span>
                     </div>
                     <div class="item-answer">
-                        <span>${item.answer}</span>
+                        <span class="answer-text">${item.answer}</span>
                     </div>
                 `;
 
