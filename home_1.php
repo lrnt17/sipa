@@ -35,6 +35,106 @@
         }
         .skiptranslate iframe  {
         visibility: hidden !important;
+        }
+        .faq-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px; /* Adjust the gap as needed */
+            margin: 2rem auto; 
+        }
+
+        @keyframes slideDownFadeIn {
+            from {
+                max-height: 0;
+                opacity: 0;
+            }
+            to {
+                max-height: 500px;
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUpFadeOut {
+            from {
+                max-height: 500px;
+                opacity: 1;
+            }
+            to {
+                max-height: 0;
+                opacity: 0;
+            }
+        }
+
+        .faq-item.slide-up .item-answer {
+            animation: slideUpFadeOut 1s ease; 
+        }
+
+      .faq-item {
+            width: 40vw;
+            min-width: 400px;
+            height: auto; /* Set a fixed height for the FAQ item */
+            max-height: 500px;
+            margin-top: 1rem;
+            background-color: white;
+            border-radius: 10px; 
+            overflow: hidden; 
+            transition: height 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease,height 0.3s ease;
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+            animation: fadeIn 2s ease;
+        }
+        .item-question {
+            background: #fff;
+            font-size: 1rem;
+            padding: 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .question-text {
+            display: inline-block;
+        }
+        .arrows-container {
+            margin: 0.4rem;
+            cursor: pointer;
+        }
+
+        .item-answer {
+            display: none;
+            color: whitesmoke;
+            padding: 2rem;
+            max-height: 0; 
+            overflow: hidden; 
+            transition: max-height 0.3s ease, background-color 0.3s ease; 
+            border-top: 1px solid #AC471A;
+        }
+
+        .close {
+            display: none;
+        }
+
+        .show-answer .item-answer {
+            display: block;
+            background: #fff;
+            color: black;
+            cursor:pointer;
+            max-height: 500px; 
+            padding: 2rem;
+            box-shadow: none;
+            background-color: #F2C1A7; 
+            border-top: 1px solid #AC471A;
+            animation: slideDownFadeIn 2s ease;
+        }
+        .show-answer .item-question {
+            background-color: #F2C1A7; 
+        }
+
+        .show-answer .close {
+            display: inline;
+        }
+        
+        .show-answer .expand {
+            display: none;
         } 
    
     </style>
@@ -132,82 +232,28 @@
         <?php } ?>
     </form>
     
-    <p>Frequently <br> asked questions</p>
-    
-    <div class="faq-container">
-        <div class="faq">
-            <div class="question" onclick="toggleAnswer(this)">How can I have less period pain?</div>
-            <div class="answer">
-                <p>Hormonal contraception is very good at reducing period pain. 
-                Many people find that their periods are much less painful when 
-                they are using hormonal contraception. 
-                </p>
-            </div>
-        </div>
-        <div class="faq">
-            <div class="question" onclick="toggleAnswer(this)">How can I have less period pain?</div>
-            <div class="answer">
-                <p>Hormonal contraception is very good at reducing period pain. 
-                Many people find that their periods are much less painful when 
-                they are using hormonal contraception. 
-                </p>
-            </div>
-        </div>
-        <div class="faq">
-            <div class="question" onclick="toggleAnswer(this)">How can I have less period pain?</div>
-            <div class="answer">
-                <p>Hormonal contraception is very good at reducing period pain. 
-                Many people find that their periods are much less painful when 
-                they are using hormonal contraception. 
-                </p>
-            </div>
-        </div>
-        <div class="faq">
-            <div class="question" onclick="toggleAnswer(this)">How can I have less period pain?</div>
-            <div class="answer">
-                <p>Hormonal contraception is very good at reducing period pain. 
-                Many people find that their periods are much less painful when 
-                they are using hormonal contraception. 
-                </p>
-            </div>
-        </div>
-        <div class="faq">
-            <div class="question" onclick="toggleAnswer(this)">How can I have less period pain?</div>
-            <div class="answer">
-                <p>Hormonal contraception is very good at reducing period pain. 
-                Many people find that their periods are much less painful when 
-                they are using hormonal contraception. 
-                </p>
-            </div>
-        </div>
-        <div class="faq">
-            <div class="question" onclick="toggleAnswer(this)">How can I have less period pain?</div>
-            <div class="answer">
-                <p>Hormonal contraception is very good at reducing period pain. 
-                Many people find that their periods are much less painful when 
-                they are using hormonal contraception. 
-                </p>
-            </div>
-        </div>
-        <div class="faq">
-            <div class="question" onclick="toggleAnswer(this)">How can I have less period pain?</div>
-            <div class="answer">
-                <p>Hormonal contraception is very good at reducing period pain. 
-                Many people find that their periods are much less painful when 
-                they are using hormonal contraception. 
-                </p>
-            </div>
-        </div>
-        <div class="faq">
-            <div class="question" onclick="toggleAnswer(this)">How can I have less period pain?</div>
-            <div class="answer">
-                <p>Hormonal contraception is very good at reducing period pain. 
-                Many people find that their periods are much less painful when 
-                they are using hormonal contraception. 
-                </p>
-            </div>
-        </div>
-    </div>
+    <!-- frequently asked questions -->
+    <div class="col-auto">
+                <a href="faqs.php" style="text-decoration: none; color: black;"><h3>Frequently<br>asked questions</b></h3><a>
+          </div>
+
+          <div class="faq-container" id="FAQs-container"></div>
+
+          <?php // pang kuha ng question and answer sa db
+        $faqData = array();
+        $query = "SELECT * FROM faqs LIMIT 6"; // Limit the query to 6 rows
+        $result = mysqli_query($conn, $query);
+        
+        if ($result) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $faqData[] = array(
+                    'question' => $row['questions'],
+                    'answer' => $row['answers']
+                );
+            }
+        }
+        
+        ?>
 
     <!-- maps -->
     <div>
@@ -276,5 +322,72 @@
             <a href="">Terms of Use</a>
         </div>
     </footer>
+    <script>
+        //pang lagay ng data sa FAQs-container from faqData(na finetch from db)
+    const faqData = <?php echo json_encode($faqData); ?>;
+    const faqsContainer = document.getElementById('FAQs-container');
+    let lastExpandedItem = null; // Keep track of the last expanded item
+
+            faqData.slice(0, 6).forEach((item) => {
+                let faqItem = document.createElement('article');
+                faqItem.classList.add('faq-item');
+
+                let markup = `
+                    <div class="item-question"> 
+                        <span class="question-text">${item.question}</span>
+                        <span class="arrows-container">
+                            <span class="expand">⮟</span>
+                            <span class="close">⮝</span>
+                        </span>
+                    </div>
+                    <div class="item-answer">
+                        <span>${item.answer}</span>
+                    </div>
+                `;
+
+                faqItem.innerHTML = markup;
+                faqsContainer.append(faqItem);
+
+                // Add a setTimeout to trigger the fade-in animation
+                setTimeout(() => {
+                    faqItem.style.display = 'block';
+                }, 100); // You can adjust the delay as needed
+        });
+
+
+    // Add ng function para sa arrow pag niclick yun, lalabas ang kasagutan sa katanungan *elyen*
+    const toggleButtons = document.querySelectorAll('.arrows-container');
+    toggleButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            const faqItem = e.currentTarget.parentElement.parentElement;
+            const itemAnswer = faqItem.querySelector('.item-answer');
+            const allFaqItems = document.querySelectorAll('.faq-item');
+
+                allFaqItems.forEach(item => {
+                    if (item !== faqItem) {
+                        // Collapse other FAQ items and set their height to the default value
+                        item.classList.remove('show-answer');
+                        item.style.height = '100px';
+                        item.querySelector('.item-answer').style.animation = 'slideUpFadeOut 1s ease';
+                    }
+                });
+
+                if (faqItem.classList.contains('show-answer')) {
+                    // If showing answer, toggle the show-answer class and set slideUpFadeOut animation
+                    faqItem.classList.remove('show-answer');
+                    faqItem.classList.add('slide-up'); // Add the slide-up class
+                    itemAnswer.style.animation = 'slideUpFadeOut 1s ease'; // Adjust the duration as needed
+                } else {
+                    // If hiding answer, toggle the show-answer class and remove slide-up class
+                    faqItem.classList.add('show-answer');
+                    faqItem.classList.remove('slide-up'); // Remove the slide-up class
+                    itemAnswer.style.animation = 'slideDownFadeIn 1s ease'; // Adjust the duration to match CSS
+
+                    // Expand the height of the clicked FAQ item
+                    faqItem.style.height = 'auto';
+                }
+        });
+    });
+    </script>
 </body>
 </html>
