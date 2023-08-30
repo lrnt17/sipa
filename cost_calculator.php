@@ -93,12 +93,17 @@
     background-color:white;
     }
 
-    .contraceptive-button,
-    .condom-brand-button,
-    .recommended-brand-button {
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
-    border-radius:10px;
-    }
+    .contraceptive-button.hover:hover {
+      background-color: #D2E0F8;
+  }
+
+    .recommended-brand-button.hover:hover {
+      background-color: #D2E0F8;
+  }
+
+  .condom-brand-button.hover:hover {
+      background-color: #D2E0F8;
+  }
 
    </style>
    
@@ -110,18 +115,48 @@
     <!-- navigation bar with logo -->
     <?php include('header.php') ?>
 
-    <div class="title-cost-calculator" id="title-cost-calculator">
-        <h1>Contraceptive Cost Calculator</h1>
+    <div class="container rounded-5" style="background: #D2E0F8;">
+        <div class="row mx-5 justify-content-center" style="text-align:center; padding: 4%;">
+        
+            <div class="col-auto"><p style="font-size: 3.5rem;">Contraceptive Cost</p></div>
+            <div class="col-auto"><p style="font-size: 3.5rem; font-weight:bolder;" >Calculator</p></div>
+        </div>
     </div>
 
-    <div class= "title-description-container" id="title-description-container">
-        <p>This birth control calculator was designed to help you compare the costs and effectiveness of different contraceptive options.</p>
-    </div>
+<div class="container">
+    <div class="row height d-flex justify-content-center align-items-center">
+
+              <div class="col-md-6">
+
+                <div class="cap p-3 rounded-4 shadow-sm rounded" style="position: relative; top: -40px; background:#ffff; text-align:center; font-size:15px;">
+                This birth control calculator was designed to help you compare the costs and effectiveness of different contraceptive options.
+                </div>
+                
+              </div>
+            </div>
+    
+
+        <div class="row" style="align-items: center;">
+            <div class="col-auto">
+                <div class="vl" style="width: 10px;
+                background-color: #1F6CB5;
+                border-radius: 99px;
+                height: 75px;
+                display: -webkit-inline-box;"></div>
+            </div>
+        
+            <div class="col-auto mt-3">
+                    <div class="col-auto"><p style="font-size: 2rem;  font-weight:bolder;">Cost <span style="font-weight:normal;">calculator</span></p></div>
+            </div>
+        </div>
+
+        <div class="row mt-4 mb-3">
+            <h5 style="color:#383838;">Select a contraceptive method:</h5>
+        </div>
 
     <div class="cost-calculator-container" id="cost-calculator-container">
-    <h3>Cost Calculator</h3>
-    <p>Select a contraceptive method:</p>
         <div class="button-row">
+            <div class="col" style="display: flex; flex-wrap: wrap; justify-content: center;">
             <?php
                 // Fetch contraceptive methods from the database then gagawan ng button, tas di kasali yung condom, calendar, withdrawal, and temp method
                 $excluded_methods = array("Condom", "Calendar Method", "Withdrawal Method", "Temperature Method");
@@ -133,54 +168,91 @@
                 while ($row = mysqli_fetch_assoc($result)) {
                     $method_name = $row['birth_control_name'];
                     $method_img = $row['birth_control_img'];
-                    echo '<button class="contraceptive-button" data-method="' . $method_name . '">';
+                    echo '<button class="contraceptive-button btn mx-3 my-3 btn-light shadow-sm hover" style="width: 110px;height: 120px;" data-method="' . $method_name . '">';
                     echo '<span>' . $method_name . '</span>';
-                    echo '<img src="' . $method_img . '" alt="' . $method_name . '" width="80" height="80">';
+                    echo '<img src="' . $method_img . '" alt="' . $method_name . '" style="max-width: 100%; max-height: 100%; object-fit: contain;">';
                     echo '</button>';
         
-                    $count++; //counter para 7 lang kada row ang buttons 
-                    if ($count === 7) {
-                        echo '</div><div class="button-row">';
-                        $count = 0;
-                    }
+                    //$count++; //counter para 7 lang kada row ang buttons 
+                    //if ($count === 7) {
+                    //    echo '</div><div class="button-row">';
+                    //    $count = 0;
+                    //}
                 }
             ?>
+            </div>
         </div>
     </div>
 
 
     <!--Dito yung container ng method na napili-->
     <div class="selected-method-container" id="selected-method-container" style="display:none">
-    
-        <br>
-        <!--mapupunta dito yung selected method name na kasing laki ng h3-->
-        <h3><span id="selected-method-text"></span></h3>
-        <br>
-        <div class="longevity-input-container" id="longevity-input-container" style="background-color: #FFFFFF; width: 300px;">
-            <!--longevity ay nakaset na, so pag nagselect sa dropdown makikita kung ilang days, months, or weeks ittake yung selected method-->
-            <label for="longevity">Longevity</label>
-            <span class="separator">|</span>
-            <!--nakadisable tong input text field kasi system magcompute ng ilang days/weeks/months/years-->
-            <input type="text" id="longevity-input" pattern="[0-9]*" style="width: 70px" disabled>
-            <select id="duration-dropdown">
-                <!-- Options will be added dynamically using JavaScript -->
-            </select>
+ 
+        <div class="row mt-3 mb-4" style="align-items: center;">
+            <div class="col-auto">
+                <div class="vl" style="width: 10px;
+                background-color: #1F6CB5;
+                border-radius: 99px;
+                height: 60px;
+                display: -webkit-inline-box;"></div>
+            </div>
+        
+            <div class="col-auto mt-2">
+                    <div class="col-auto"><h3 id="selected-method-text"> Contraceptive Name </h3></div>
+            </div>
         </div>
-    </div>
 
-    <br>
+        <div class="row mb-2">
+            <div class="col-auto">
+                <div class="longevity-input-container mx-5 mb-3 rounded-3 shadow-sm px-4 py-3" id="longevity-input-container" style="background-color: white; max-width: 330px; ">
+                <!--longevity ay nakaset na, so pag nagselect sa dropdown makikita kung ilang days, months, or weeks ittake yung selected method-->
+                    <label for="longevity">Longevity</label>
+                    <span style="width: 4px;
+                    background-color: #7B7777;
+                    border-radius: 99px;
+                    height: 33px;
+                    display: inline-block;
+                    margin-left: 4px;
+                    margin-bottom: -12px;"></span>
+                    <!--nakadisable tong input text field kasi system magcompute ng ilang days/weeks/months/years-->
+                    <input type="text" id="longevity-input" style="border:none; padding-left:15px; width: 67px;" pattern="[0-9]*" style="width: 70px" disabled>
+                    <select id="duration-dropdown" style="color:#1F6CB5;">
+                        <!-- Options will be added dynamically using JavaScript -->
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="col-auto">
+
+                <div class="estimated-price-input-container mx-5 mb-3 rounded-3 shadow-sm px-4 py-3" id="estimated-price-input-container" style="background-color: #EFEFEF; width: 320px; display:none">
+                    <label class="pt-2" for="estimatePrice">Estimated Price</label>
+                    <span style="width: 4px;
+                    background-color: #7B7777;
+                    border-radius: 99px;
+                    height: 33px;
+                    display: inline-block;
+                    margin-left: 4px;
+                    margin-bottom: -10px;"></span>
+                    <input type="text" id="estimated-price-input" style="border:none; padding-left:15px; width: 45%; padding-bottom: 3.07px; background:none;" disabled> <!-- est price maa-add dynamically using JavaScript -->
+                </div>
+
+            </div>
+        </div>
     
-    <div class="estimated-price-input-container" id="estimated-price-input-container" style="background-color: #FFFFFF; width: 320px; display:none">
-        <label for="estimatePrice">Estimated Price</label>
-        <span class="separator">|</span>
-        <input type="text" id="estimated-price-input" disabled> <!-- est price maa-add dynamically using JavaScript -->
+
     </div>
 
-    <br>
 
-    <div class="condom-input-container" id="condom-input-container" style="background-color: #FFFFFF; width: 300px; display:none">
+    <div class="condom-input-container mx-5 rounded-3 shadow-sm px-4 py-3" id="condom-input-container" style="background-color: white; max-width: 330px; display:none">
         <label for="condom">Do you also buy condoms?</label>
-        <span class="separator">|</span>
+        <span style="width: 4px;
+                    background-color: #7B7777;
+                    border-radius: 99px;
+                    height: 33px;
+                    display: inline-block;
+                    margin-left: 2px;
+                    margin-bottom: -10px;"></span>
         <select id="answer-dropdown">
             <option value="no">No</option>
             <option value="yes">Yes</option>
@@ -193,11 +265,17 @@
     <!--nakahide muna, pag nagyes lang sa 'Do you also buy condoms?' lalabas -->
     <div class="condom-if-yes-container" id="condom-if-yes-container" style="display:none">
 
-        <div class="amount-needed-input-container" style="background-color: #FFFFFF; width: 500px;">
+        <div class="amount-needed-input-container  mx-5 rounded-3 shadow-sm px-4 py-3" style="background-color: white; max-width: max-content;">
             <label for="need">How many do you usually need?</label>
-            <span class="separator">|</span>
+            <span style="width: 4px;
+                    background-color: #7B7777;
+                    border-radius: 99px;
+                    height: 33px;
+                    display: inline-block;
+                    margin-left: 2px;
+                    margin-bottom: -10px;"></span>
             <!--nakadisable tong input text field coz js na bahala magcompute dine-->
-            <input type="text" id="condomAmount-input" pattern="[0-9]*" maxlength="2"  style="width: 50px;">
+            <input type="text" id="condomAmount-input" pattern="[0-9]*"maxlength="2" placeholder="00" style="width: 50px; padding-left: 15px;">
             <select id="condomAmount-dropdown">
                 <option value="day">Condom/Day</option>
                 <option value="week">Condom/Week</option>
@@ -205,33 +283,60 @@
                 <option value="month">Condom/Year</option>
             </select>
         </div>
-        <br>
         
-        <div class="amount-package-input-container" style="background-color: #FFFFFF; width: 240px;">
-            <label for="amountPackage">Amount in Package</label>
-            <span class="separator">|</span>
-            <!-- nakadisable, kukunin sa db yung amount in package then malalagay dito-->
-            <input type="text" id="condom-amount-package-input" style="width: 50px;"disabled>
-        </div>
-
-        <br>
-
-        <div class="estimated-condom-price-input-container" style="background-color: #FFFFFF; width: 420px;">
-            <label for="estimateCondomPrice">Estimated Price per Package</label>
-            <span class="separator">|</span>
-            <!-- nakadisable, kukunin sa db yung amount in package then malalagay dito-->
-            <input type="text" id="estimated-condom-price-input" disabled>
+        <div class="row">
+            <div class="col-auto mt-4">
+                <div class="amount-package-input-container mx-5 rounded-3 shadow-sm px-4 py-3" style="background-color: #FFFFFF;max-width: 330px; ">
+                    <label for="amountPackage">Amount in Package</label>
+                    <span style="width: 4px;
+                    background-color: #7B7777;
+                    border-radius: 99px;
+                    height: 33px;
+                    display: inline-block;
+                    margin-left: 2px;
+                    margin-bottom: -10px;"></span>
+                    <!-- nakadisable, kukunin sa db yung amount in package then malalagay dito-->
+                    <input type="text" id="condom-amount-package-input" style="width: 50px; padding-left: 15px;"disabled>
+                </div>
             </div>
-            <br>
+
+            <div class="col-auto mt-4 mb-4">
+                <div class="estimated-condom-price-input-container mx-5 rounded-3 shadow-sm px-4 py-3" style="background-color: #EFEFEF; width: 380px; ">
+                    <label for="estimateCondomPrice">Estimated Price per Package</label>
+                    <span style="width: 4px;
+                    background-color: #7B7777;
+                    border-radius: 99px;
+                    height: 33px;
+                    display: inline-block;
+                    margin-left: 2px;
+                    margin-bottom: -10px;"></span>
+                    <!-- nakadisable, kukunin sa db yung amount in package then malalagay dito-->
+                    <input type="text" id="estimated-condom-price-input" style="border:none; padding-left:15px; width: 30%; padding-bottom: 3.07px; background:none;" disabled>
+                </div>
+            </div>
+        </div>
+        
         </div>
     </div>
 
 
-        <div class="recommended-brand-container" id="recommended-brand-container" style="display:none">
+        <div class="container recommended-brand-container" id="recommended-brand-container" style="display:none">
             <div class="selected-method-brand-reco" id="selected-method-brand-reco">
-                <h3>Recommended Brands</h3>  
+                <div class="row mt-3" style="align-items: center;">
+                    <div class="col-auto">
+                        <div class="vl" style="width: 10px;
+                        background-color: #1F6CB5;
+                        border-radius: 99px;
+                        height: 60px;
+                        display: -webkit-inline-box;"></div>
+                    </div>
+                
+                    <div class="col-auto mt-2">
+                            <div class="col-auto"><h3>Recommended Brands</h3></div>
+                    </div>
+                </div>
                 <!--name ng selected method malalagay dine -->
-                <p style="font-size:20px;"> <span id="selected-method-text-reco"></span></p>
+                <h4 class="mt-4 mb-3" style="font-size:20px; color:#383838;"> <span id="selected-method-text-reco"></span></h4>
                 <p>Select a brand:</p>
 
                 <div class="method-brands-container" id="method-brands-container">
@@ -240,10 +345,9 @@
 
             </div>
 
-        <br>
          <!--nakahide muna to, magshow lang if yes sa do you buy condoms-->
             <div class="condom-if-yes-container" id="condom-brand" style="display:none" >
-                <p style="font-size:20px">Condom</p>
+                <h4 class="mt-3 mb-3" style="font-size:20px; color:#383838;">Condom</h4>
                 <p>Select condom brand:</p>
                 <!-- Generate buttons for condom brands -->
                 <?php
@@ -260,7 +364,7 @@
                 <?php foreach ($condomBrands as $index => $brand):
                     $amountPackage =  $brand['brand_amount_package'];?>
                     
-                    <button class="condom-brand-button <?php if ($index === 0) echo 'selected'; ?>">
+                    <button class="condom-brand-button btn mx-3 my-3 btn-light shadow-sm hover" style="width: 150px; height: 150px;" <?php if ($index === 0) echo 'selected'; ?>">
                         <span><?php echo $brand['brand_name']; ?></span>
                         <img src="<?php echo $brand['brand_img']; ?>" alt="<?php echo $brand['brand_name']; ?>" width="80" height="80">
                         <p>₱<?php echo $brand['brand_price']; ?>.00</p>
@@ -268,21 +372,43 @@
                 <?php endforeach; ?>
 
             </div>
-    </div>
+        </div>
 
-    <div class="cost_calculator_result" id="cost_calculator_result" style= "background: #D2E0F8; display:none">
-    
-        <label for="cost">How much will you spend over...</label>
-                <span class="separator">|</span>
-                <input type="text" id="cost-duration-input" pattern="[0-9]*" maxlength="2"  style="width: 50px;">
+
+
+    <div class="container cost_calculator_result p-5 my-5 rounded-4 shadow-sm " id="cost_calculator_result" style= "background: #D2E0F8; display:none">
+        <h3>Result</h3>
+
+        <div class="con mt-4 rounded-3 shadow-sm px-4 py-3" style="background-color: white; max-width: max-content;">
+            <label for="cost">How much will you spend over...</label>
+                <span style="width: 4px;
+                    background-color: #7B7777;
+                    border-radius: 99px;
+                    height: 33px;
+                    display: inline-block;
+                    margin-left: 2px;
+                    margin-bottom: -10px;"></span>
+                <input type="text" id="cost-duration-input" pattern="[0-9]*" maxlength="2" placeholder="00" style="width: 50px; padding-left: 15px;">
                 <select id="cost-duration-dropdown">
                     <option value="month">Month/s</option>
                     <option value="year">Year/s</option>
                 </select>
-        <br>
-        <label for="estimatedTotalPrice">You will spend</label>
-            <span class="separator">|</span>
-            <input type="text" id="estimated-total-price-input"  disabled>
+
+        </div>
+
+        <div class="con mt-4 rounded-3 shadow-sm px-4 py-3" style="background-color: white; max-width: max-content;">
+            <label for="estimatedTotalPrice">You will spend</label>
+            <span style="width: 4px;
+                    background-color: #7B7777;
+                    border-radius: 99px;
+                    height: 33px;
+                    display: inline-block;
+                    margin-left: 2px;
+                    margin-bottom: -10px;"></span>
+                <input type="text" id="estimated-total-price-input" style="padding-left: 21px; width: 160px;" disabled>
+        </div>
+
+
         <br><br>
          <!--mag switch case dito para macheck ano yung selected method tas kuhanin sa db effectivetess rate, check din if nakayes sa condom para lumabas yung youre mixing two types of birth control note. nakaphp echo dat yung method na pinili-->
         <p style="font-size:14px"><b>Your chosen type of birth control is 99.85% effective</b>. You’re mixing two types of birth control. This makes the efficacy higher that it would’ve been if you weren’t also using condoms.<br><br>You’re using hormonal birth control. We encourage you to stay informed about its many possible side effects.</p>
@@ -291,6 +417,7 @@
     </div>
 
 
+</div>
     <script>
     
     const buttons = document.querySelectorAll('.contraceptive-button');
@@ -318,7 +445,12 @@
 
         brandData.forEach((brand, index) => {
             const brandButton = document.createElement('button');
-            brandButton.classList.add('recommended-brand-button');
+            brandButton.classList.add('recommended-brand-button', "btn", "mx-3","my-3", "btn-light", "shadow-sm");
+            brandButton.style.width = "150px"; // Adjust the width as needed
+            brandButton.style.maxHeight = "170px"; // Adjust the height as needed
+
+            brandButton.classList.add("hover");
+
             if (index === 0) {
                 brandButton.classList.add('selected');
                 
