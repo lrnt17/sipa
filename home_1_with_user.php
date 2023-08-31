@@ -263,6 +263,7 @@
     ?>
     
     <?php include('forum-carousel.php') ?>
+    <?php include('most-viewed-video.php') ?>
     <!-- community forum -->
     <?php include('method-interactive-display.php') ?>
 
