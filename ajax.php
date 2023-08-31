@@ -1601,6 +1601,39 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 			
 			$info['success'] = true;
 		}
+	}else
+	if($_POST['data_type'] == 'load_forum_carousel') //Initial work done
+	{
+
+		$query = "SELECT forum.*, COUNT(rating_info.user_id) AS likes_count FROM forum JOIN 
+		rating_info ON forum.forum_id = rating_info.post_id WHERE forum.comment_parent_id = 0 
+		AND forum.reply_parent_id = 0 GROUP BY forum.forum_id ORDER BY likes_count DESC LIMIT 5";
+		
+		$rows = query($query);
+		
+		if($rows){
+
+			foreach ($rows as $key => $row) {
+				$rows[$key]['date'] = date('Y-m-d\TH:i:s', strtotime($row['forum_timestamp']));
+				$rows[$key]['forum_desc'] = nl2br(htmlspecialchars($row['forum_desc']));
+				$rows[$key]['user_img'] = get_image($row['user_img']);
+	
+				$forum_id = $row['forum_id'];
+				$query = "select count(*) from rating_info where post_id = $forum_id AND rating_action = 'like' limit 1";
+				$rating_row = query($query);
+	
+				if($rating_row){
+					$rows[$key]['getlikes'] = $rating_row[0];
+				}
+				
+			}
+	
+			// Return rows
+			$info['rows'] = $rows;
+		}
+		 // Return success status
+		$info['success'] = true;
+
 	}
 	
 }

@@ -20,6 +20,7 @@
         href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.css"
         type="text/css"
     />
+    <link rel="stylesheet" href="carousel.css">
     <title>SiPa | Contraceptive Decision Support System</title>
     <script>
         function toggleAnswer(element) {
@@ -239,15 +240,15 @@
     <!-- frequently asked questions -->
     <div class="col-auto">
                 <a href="faqs.php" style="text-decoration: none; color: black;"><h3>Frequently<br>asked questions</b></h3><a>
-          </div>
+    </div>
 
-          <div class="faq-container" id="FAQs-container"></div>
+    <div class="faq-container" id="FAQs-container"></div>
 
-          <?php // pang kuha ng question and answer sa db
+    <?php // pang kuha ng question and answer sa db
         $faqData = array();
         $query = "SELECT * FROM faqs LIMIT 6"; // Limit the query to 6 rows
         $result = mysqli_query($conn, $query);
-        
+
         if ($result) {
             while ($row = mysqli_fetch_assoc($result)) {
                 $faqData[] = array(
@@ -256,9 +257,9 @@
                 );
             }
         }
-        
-        ?>
+    ?>
     
+    <?php include('forum-carousel.php') ?>
     <!-- community forum -->
     <?php include('method-interactive-display.php') ?>
 
