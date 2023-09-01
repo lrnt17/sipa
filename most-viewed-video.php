@@ -2,44 +2,82 @@
     defined('APP') or die('direct script access denied!'); 
 ?>
 
-<section>
-    <div id="videoContainer">
+<div class="row">
+            <div class="d-flex justify-content-start mt-5 mb-3">
+                <div style="width: 15%;
+                background-color: #1F6CB5;
+                border-radius: 99px;
+                height: 6px;"></div>
+            </div>
+        </div>
+        <div class="row" class="my-1 custom-width-hidden" style="width:300px;">
+            <h2 style="color:#383838;">Videos</h2>
+        </div>
+
+<section class="my-3">
+    <div class="row" style="justify-content: space-evenly;" id="videoContainer">
         
     </div>
 
-    <a class="js-link" href="community-videos.php">View all videos</a>
+    <div class="row">
+        <div class="col mt-3 d-flex justify-content-center">
+            <a class="js-link" href="community-videos.php" style=" text-decoration: none; color:black;">
+                <button class="btn my-3 px-4 py-2 rounded-3 shadow-sm rounded" style="background: #ffff;">View all videos</button>
+            </a>
+        </div>
+    </div>
+
 </section>
 
 <template id="videoCardTemplate" class="js-video-template">
-    <div class="js-video-card " style="animation: appear 3s ease;">
-        <div class="js-video-link" style="cursor: pointer;">
-            <div>
+    <div class="col-lg-3 js-video-card m-3 rounded-4 shadow-sm" style="animation: appear 3s ease; background-color:white; width:320px; padding: 0;">
+    <div class="container shadow-sm rounded-4" style="position: relative; height:10.5rem; overflow: hidden; border: 8px solid #D2E0F8; padding: 0;">
                 <!--<video src="uploads/<?//=$video['video_url']?>" controls></video>-->
-                <video src="" width="200" class="js-video-display"></video>
+                <video src=""class="js-video-display"style="width: 100%;  object-fit: cover;"></video>
             </div>
+        <div class="js-video-link" style="cursor: pointer;">
+            
             <div>
-                <h2 class="js-video-title-display">
-                    Contraception
-                </h2>
-                <span>Posted by</span> 
-                <img src="assets/images/user.jpg" class="js-image" width="100">
-                <!--<a href="#" class="js-profile-link" >-->
-                    <h2 class="js-username" style="font-size:16px; display:inline;" >
-                        Jane Name
-                    </h2>
-                <!--</a>-->
-                <p class="js-views-count">
-                    567 views
-                </p>
-                <h4 class="js-date">
-                    3rd Jan 23 14:35 pm
-                </h4>
+                <div class="row py-3 px-2">
+                    <div class="col-auto">
+                        <div class="rounded-circle" style="background: white; width: 3rem; height: auto; border: 2px solid #F2F5FF; max-height: auto; position: relative; overflow: hidden; padding: 0;">
+                            <img src="assets/images/user.jpg" class="js-image" style="width: 100%; height: auto; object-fit: cover;">
+                        </div>
+                    </div>
+                    <div class="col ps-1">
+                        <div class="row">
+                            <h5 class="js-video-title-display" style="margin: 0;">
+                                Contraception
+                            </h5>
+                        </div>
+                        <div class="row">
+                            <p class="js-username" style="font-size:13px; display:inline; margin: 0;" >
+                                Jane Name
+                            </p>
+                        </div>
+                        <div class="row">
+                            <div class="col-auto">
+                                <p class="js-views-count" style="font-size:11px; display:inline; margin: 0;">
+                                    567 views
+                                </p>
+                            </div>
+                            <div class="col-auto">
+                                <p class="js-date" style="font-size:11px; display:inline; margin: 0;">
+                                    3rd Jan 23 14:35 pm
+                                </p>
+                            </div>
+                            <div class="col-auto">
+                                <div class="js-video-category-link" style="color:green;cursor: pointer;">
+                                    <p class="js-video-category" style="font-size:11px; display:inline; margin: 0;">
+                                        Mini Pill
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
             </div>
-        </div>
-        <div class="js-video-category-link" style="color:green;cursor: pointer;">
-            <p class="js-video-category">
-                Mini Pill
-            </p>
         </div>
     </div>
 </template>
