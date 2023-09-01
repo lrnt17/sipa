@@ -22,7 +22,7 @@
                 <label for="municipality">City/Municapality *</label><br>
                 <select name="municipality" id="municipality" required>
                     <option value="" disabled selected></option>
-                    <option value="Baliwag" disabled>Baliwag</option>
+                    <option value="Baliwag">Baliwag</option>
                     <option value="Bustos">Bustos</option>
                 </select><br>
 

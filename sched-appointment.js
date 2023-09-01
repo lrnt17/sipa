@@ -328,8 +328,52 @@ var sched_appointment = {
         // store the selected timeslot
         sched_appointment.selectedTimeslot = timeslot;
     },
+
+    load_city_municipality_list: function(){
+
+        let form = new FormData();
+
+        form.append('data_type', 'load_all_city_municipality');
+        var ajax = new XMLHttpRequest();
+
+        ajax.addEventListener('readystatechange',function(){
+
+            if(ajax.readyState == 4)
+            {
+                if(ajax.status == 200){
+
+                    let obj = JSON.parse(ajax.responseText);
+
+                    if(obj.success){
+                        
+                        let selectElement = document.getElementById("municipality");
+                        selectElement.innerHTML = "";
+
+                        let blankOption = document.createElement("option");
+                        blankOption.value = "";
+                        blankOption.text = "Select a City/Municipality";
+                        blankOption.disabled = true;
+                        blankOption.selected = true;
+                        selectElement.appendChild(blankOption);
+
+                        obj.rows.forEach(function(location) {
+                            let option = document.createElement("option");
+                            option.value = location.partner_facility_id;
+                            option.text = location.city_municipality;
+                            option.setAttribute("city-municipality-name", location.city_municipality);
+                            selectElement.appendChild(option);
+                        });
+                    }
+                }
+            }
+        });
+
+        ajax.open('post','ajax.php', true);
+        ajax.send(form);
+    },
 };
 
 if (typeof appointment != 'undefined') {
+    sched_appointment.load_city_municipality_list();
     sched_appointment.loadCalendar(sched_appointment.month, sched_appointment.year);
 }

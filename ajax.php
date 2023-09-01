@@ -1666,6 +1666,14 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 		 // Return success status
 		$info['success'] = true;
 
+	}else
+	if($_POST['data_type'] == 'load_all_city_municipality')
+	{
+		$query = "select * from partner_facility";
+		$rows = query($query);
+		$info['rows'] = $rows;
+		$info['success'] = true;
+
 	}
 	
 }
