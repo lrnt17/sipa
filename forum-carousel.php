@@ -41,9 +41,23 @@
         }
     </style>
 </head>
-
+        <div class="row mt-5">
+            <div class="d-flex justify-content-center mt-2">
+                <div style="width: 15%;
+            background-color: #1F6CB5;
+            border-radius: 99px;
+            height: 6px;"></div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <p class="text-center" style="color:#525252;">Share your own experiences and ask questions on</p>
+        </div>
+        <div class="row">
+            <h2 class="d-flex justify-content-center" style="color:#383838;">Community Forum</h2>
+        </div>
+        
 <section>
-    <div class="slider" id="carouselContainer">
+    <div class="slider my-4" id="carouselContainer">
         
     </div>
 
@@ -51,30 +65,71 @@
 
 <template id="carouselCardTemplate" class="js-carousel-template">
     <div class="js-carousel-card " style="animation: appear 3s ease;">
-        <div class="js-forum-link">
-            <img src="assets/images/user.jpg" class="js-image" width="100">
-            <div>
-                <!--<a href="#" class="js-profile-link class_45" >-->
-                    <h2 class="js-username " style="font-size:16px; display:inline; color: blue;" >
-                        Jane Name
-                    </h2>
-                <!--</a>-->
-            </div>
-            <div class="">
-                <h4 class="js-date">
-                    3rd Jan 23 14:35 pm
-                </h4>
-                <h2 class="js-title">
-                    Contraception
-                </h2>
-                <div class="js-post">
-                    is simply dummy text of the printing and typesetting industry. 
-                    Lorem Ipsum has been the industry's standard dummy text ever 
-                    since the 1500s, when an unknown printer took a galley of 
-                    type and scrambled it to make a type specimen book.
+        <div class="js-forum-link container p-4 rounded-4 shadow-sm hover" style="background-color:white; min-height:350px;">
+            <div class="con d-flex justify-content-center ">
+                <div class="rounded-circle" style="background: white; width: 25%; border: 2px solid #F2F5FF; max-height: auto; position: relative; overflow: hidden; padding: 0;">
+                    <img src="assets/images/user.jpg" class="js-image" style="width: 100%; height: auto; object-fit: cover;">
                 </div>
-                <span class="js-num-comments"></span>
-                <span class="js-num-likes"></span>
+            </div>
+            <div class="d-flex justify-content-center mt-3">
+                    <h4 class="js-username" style="display:inline; color:#383838;" >
+                        Jane Name
+                    </h4>
+            </div>
+
+            <div class="row">
+                <div class="d-flex justify-content-center mt-1 mb-3">
+                    <div style="width: 100%;
+                    background-color: #F2C1A7;
+                    border-radius: 99px;
+                    height: 4px;"></div>
+                </div>
+            </div>
+            
+            <div class="container">
+                    <div class="d-flex justify-content-center ">
+                        <h4 class="row js-title" style="color:#383838;" >
+                            Contraception
+                        </h4>
+
+                    </div>
+                    
+                    <div class="row js-post" style="text-align: justify; font-size:14px; color:#383838;">
+                        <p>is simply dummy text of the printing and typesetting industry. 
+                        Lorem Ipsum has been the industry's standard dummy text ever 
+                        since the 1500s, when an unknown printer took a galley of 
+                        type and scrambled it to make a type specimen book.</p>
+                    </div>
+
+                    <div class="row js-etc" style="position: absolute; bottom: 40px; display: flex; align-items: flex-end;">
+                        <div class="col-auto">
+                            <div class="row">
+                                <div class="col-1">
+                                    <p class="js-num-comments" style="font-size:14px; margin-top:2.5px; color:#383838;"></p>
+                                </div>
+                                <div class="col-1">
+                                    <i class="fa-solid fa-comment" style="font-size:12px; color: #2268e2;"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-auto me-auto">
+                            <div class="row">
+                                <div class="col-1">
+                                    <p class="js-num-likes" style="font-size:14px; margin-top:2.5px; color:#383838;"></p>
+                                </div>
+                                <div class="col-1 me-col">
+                                    <i class="fa-solid fa-heart" style="font-size:12px; color: red;"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <p class="js-date" style="font-size:12px; color:gray;">
+                                3rd Jan 23 14:35 pm
+                            </p>
+                        </div>
+                    </div>
+            </div>
+                
             </div>
         </div>
     </div>
@@ -130,11 +185,11 @@
                                 forumCard.querySelector(".js-username").textContent = obj.rows[i].user_fname;
 
                                 forumCard.querySelector(".js-title").innerHTML = obj.rows[i].forum_title;
-                                forumCard.querySelector(".js-post").innerHTML = obj.rows[i].forum_desc;
+                                forumCard.querySelector(".js-post").innerHTML = `${obj.rows[i].forum_desc}`;
 
                                 //counting the number of comments
                                 if(obj.rows[i].comment_count > 0){
-                                    forumCard.querySelector(".js-num-comments").innerHTML = `${obj.rows[i].comment_count}+ Comments`;
+                                    forumCard.querySelector(".js-num-comments").innerHTML = `${obj.rows[i].comment_count}`;
                                 }else{
                                     forumCard.querySelector(".js-num-comments").innerHTML = `0`;
                                 }
@@ -143,7 +198,7 @@
                                 if (obj.rows[i].getlikes['count(*)'] == 0) {
                                     forumCard.querySelector(".js-num-likes").innerHTML = "";
                                 } else {
-                                    forumCard.querySelector(".js-num-likes").innerHTML = `${obj.rows[i].getlikes['count(*)']} like${obj.rows[i].getlikes['count(*)'] > 1 ? 's' : ''}`;
+                                    forumCard.querySelector(".js-num-likes").innerHTML = `${obj.rows[i].getlikes['count(*)']} ${obj.rows[i].getlikes['count(*)'] > 1 ? '' : ''}`;
                                 }
 
                                 let timestampElement = forumCard.querySelector('.js-date');

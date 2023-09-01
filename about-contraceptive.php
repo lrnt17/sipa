@@ -32,49 +32,6 @@
             width: 100px;
             height: 100px;
         }
-        /* ---------------------------------------------------------------------- sa baba neto bago*/
-        .carousel {
-            display: flex;
-            overflow: hidden;
-            width: 100%;
-            max-width: 500px; /* Adjust based on your layout */
-            margin: 0 auto; /* Center the carousel */
-        }
-
-        .slide {
-            display: flex;
-            width: 100%;
-            transition: transform 0.5s ease-in-out;
-        }
-
-        .slide div {
-            display: flex;
-            justify-content: center;
-            width: 100%;
-        }
-
-        .slide button {
-            flex: 1;
-            margin: 0 10px;
-            width: 200px; /* Adjust based on your layout */
-        }
-
-        .indicators {
-            display: flex;
-            justify-content: center;
-        }
-
-        .indicator {
-            height: 10px;
-            width: 10px;
-            background-color: #bbb;
-            border-radius: 50%;
-            margin: 5px;
-        }
-
-        .indicator.active {
-            background-color: #717171;
-        }
     </style>
 </head>
 <body style="background: #F2F5FF;">
@@ -187,6 +144,19 @@
         
     </section>
     
+    <div class="row">
+            <div class="d-flex justify-content-center mb-4">
+                <div style="width: 15%;
+            background-color: #1F6CB5;
+            border-radius: 99px;
+            height: 6px;"></div>
+            </div>
+        </div>
+        <div class="row">
+            <h1 class="d-flex justify-content-center mb-5" style="color:#383838;">Other Contraceptive Methods</h1>
+        </div>
+    </div>
+
     <?php include('contraceptive-carousel.php') ?>
     
     <!-- template for contraceptive positive effects -->
