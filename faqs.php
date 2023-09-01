@@ -91,10 +91,8 @@
       .faq-item.slide-up .item-answer {
           animation: slideUpFadeOut 1s ease; 
       }
+
       .faq-item {
-          width: 40vw;
-          min-width: 850px;
-          margin-top: 1rem;
           background-color: white;
           border-radius: 10px; 
           overflow: hidden; 
@@ -103,10 +101,11 @@
           animation: fadeIn 2s ease;
           display: none; /* Start with display none */
       }
+
       .item-question {
           background: #fff;
           font-size: 1rem;
-          padding: 1.2rem;
+          padding: 1rem;
           display: flex;
           justify-content: space-between;
           align-items: center;
@@ -114,10 +113,12 @@
       .question-text {
           display: inline-block;
       }
+
       .arrows-container {
           margin: 0.4rem;
           cursor: pointer;
       }
+
       .item-answer {
           display: none;
           color: whitesmoke;
@@ -127,9 +128,11 @@
           transition: max-height 0.3s ease, background-color 0.3s ease; 
           border-top: 1px solid #AC471A;
       }
+
       .close {
           display: none;
       }
+
       .show-answer .item-answer {
           display: block;
           background: #fff;
@@ -142,22 +145,46 @@
           border-top: 1px solid #AC471A;
           animation: slideDownFadeIn 2s ease;
       }
+
       .show-answer .item-question {
       background-color: #F2C1A7; 
       }
+
       .show-answer .close {
           display: inline;
       }
+
       .show-answer .expand {
           display: none;
       }
       
-      /* pang change ng kulay ng highlight sa text
+
       mark {
-        background-color: yellow !important; 
-        color: inherit; //Preserve the text color 
+        background-color: #D2E0F8 !important; 
+        color: inherit;
       }
-      */
+    
+      .form .fa-solid{
+        position: absolute;
+        top:20px;
+        left: 20px;
+        color: #9ca3af;
+        }
+
+    .form-input:focus{
+        box-shadow: none;
+        border:none;
+    }
+    /* Default style for anchor tags */
+    .nav-link {
+        font-weight: normal; /* Use the default font weight */
+    }
+
+    /* Style for active anchor tags (text will be bold) */
+    .nav-link.active {
+        font-weight: bold;
+    }
+      
 
     
    </style>
@@ -194,17 +221,23 @@
       </div>
   </div>
 
-          <div class="col-auto">
+<div class="container">
+
+        <div class="row" style="align-items: center;">
+            <div class="col-auto">
                 <div class="vl"></div>
-          </div>
-
-          <div class="col-auto">
+            </div>
+        
+            <div class="col-auto">
                 <h3>Frequently <b>Asked Questions</b></h3>
-          </div>
+            </div>
+        </div>
 
-          <div class="faq-container" id="FAQs-container"></div>
+        <div class="faq-container" id="FAQs-container">
+            <!-- FAQS here -->
+        </div>
 
-    
+</div>
     <!-- footer -->
     <footer>
         <div>
@@ -259,14 +292,14 @@
         
               faqData.map((item) => {
                   let faqItem = document.createElement('article');
-                  faqItem.classList.add('faq-item');
+                  faqItem.classList.add('faq-item','container','my-2');
               
                   let markup = `
                       <div class="item-question"> 
                           <span class="question-text">${item.question}</span>
                           <span class="arrows-container">
-                              <span class="expand">⮟</span>
-                              <span class="close">⮝</span>
+                              <span class="expand"><i class="fa-solid fa-chevron-down" style="font-size:20px;"></i></span>
+                              <span class="close"><i class="fa-solid fa-xmark" style="font-size:20px;"></i></span>
                           </span>
                       </div>
                       <div class="item-answer">

@@ -194,10 +194,23 @@
         up the pros and cons.
     </p>
 
-    <h2>Contraceptive Methods</h2>
+        <div class="row">
+            <div class="d-flex justify-content-center mt-4 mb-3">
+                <div style="width: 10%;
+                background-color: #1F6CB5;
+                border-radius: 99px;
+                height: 6px;"></div>
+            </div>
+        </div>
+
+
+        <h1 class="d-flex justify-content-center mb-5" style="color:#383838;">Other Contraceptive Methods</h1>
+
+
+    <?php include('contraceptive-carousel.php') ?>
 
     <!-- birth controls pagination -->
-    <div class="parent">
+   <!-- <div class="parent">
         <?php 
             $page=0;
             if(isset($_POST["page"])) {
@@ -229,16 +242,16 @@
             $a=$count/4;
             $a=ceil($a);
         ?>
-    </div>
+    </div> -->
     
     <!-- page number -->
-    <form method="post">
+    <!--<form method="post">
         <?php for($b=1;$b<=$a;$b++){ ?>
             <div class="pagination">
                 <input type="submit" value="<?php echo $b;?>" name="page" class="links">
             </div>
         <?php } ?>
-    </form>
+    </form>-->
     
     <!-- frequently asked questions -->
     <div class="col-auto">

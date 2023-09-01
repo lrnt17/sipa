@@ -70,7 +70,7 @@
           <?php if(logged_in()):?>
                     <a class="js-link navbar-brand d-none d-lg-block d-lx-none" href="account_settings.php"><img class="border border-dark rounded-circle" src="<?= get_image($_SESSION['USER']['user_image'])?>" title="SiPa"  width="40" height="40;"></a>
                     <a class="js-link navbar-brand d-none d-lg-block d-lx-none" href="account_settings.php">
-                        <span style="font-size: 16px;">Hi, <?= $_SESSION['USER']['user_fname']?></span>
+                        <span style="font-size: 16px; font-weight:normal;">Hi, <?= $_SESSION['USER']['user_fname']?></span>
 
                     </a>
                 <?php else:?>
