@@ -277,10 +277,10 @@
             <!--nakadisable tong input text field coz js na bahala magcompute dine-->
             <input type="text" id="condomAmount-input" pattern="[0-9]*"maxlength="2" placeholder="00" style="width: 50px; padding-left: 15px;">
             <select id="condomAmount-dropdown">
-                <option value="day">Condom/Day</option>
-                <option value="week">Condom/Week</option>
-                <option selected="selected" value="month">Condom/Month</option>
-                <option value="month">Condom/Year</option>
+                <option value="condomday">Condom/Day</option>
+                <option value="condomweek">Condom/Week</option>
+                <option value="condommonth">Condom/Month</option>
+                <option value="condomyear">Condom/Year</option>
             </select>
         </div>
         
@@ -388,10 +388,13 @@
                     display: inline-block;
                     margin-left: 2px;
                     margin-bottom: -10px;"></span>
-                <input type="text" id="cost-duration-input" pattern="[0-9]*" maxlength="2" placeholder="00" style="width: 50px; padding-left: 15px;">
+                <input type="text" id="cost-duration-input" pattern="[0-9]*" maxlength="4" placeholder ="0"  style="width: 50px; padding-left: 15px;">
                 <select id="cost-duration-dropdown">
+                <option value="day">Day/s</option>
+                    <option value="week">Week/s</option>
                     <option value="month">Month/s</option>
                     <option value="year">Year/s</option>
+                    <option value="time" disabled>Time</option> //pang vasectomy and ligation lang to 
                 </select>
 
         </div>
@@ -411,13 +414,14 @@
 
         <br><br>
          <!--mag switch case dito para macheck ano yung selected method tas kuhanin sa db effectivetess rate, check din if nakayes sa condom para lumabas yung youre mixing two types of birth control note. nakaphp echo dat yung method na pinili-->
-        <p style="font-size:14px"><b>Your chosen type of birth control is 99.85% effective</b>. You’re mixing two types of birth control. This makes the efficacy higher that it would’ve been if you weren’t also using condoms.<br><br>You’re using hormonal birth control. We encourage you to stay informed about its many possible side effects.</p>
+         <p style="font-size:14px"><b>Your chosen type of birth control is <span id="effectiveness-rate"></span> effective.</b></p>
+         <p id ='mixingBirthControl' style ="display:none;">You’re mixing two types of birth control. This makes the efficacy higher that it would’ve been if you weren’t also using condoms.</p> 
+         <p id ="selectedMethodReminder"></p>
 
 
     </div>
 
 
-</div>
     <script>
     
     const buttons = document.querySelectorAll('.contraceptive-button');
@@ -428,9 +432,7 @@
     const costResult = document.getElementById('cost_calculator_result');
     const selectedMethodText = document.getElementById('selected-method-text');
     
-    const condomAmountInput = document.getElementById('condomAmount-input');
-
-                    
+    const condomAmountInput = document.getElementById('condomAmount-input');      
 
     // Get the estimated price input
     const estimatedPriceInput = document.getElementById('estimated-price-input');
@@ -450,7 +452,7 @@
             brandButton.style.maxHeight = "170px"; // Adjust the height as needed
 
             brandButton.classList.add("hover");
-
+            
             if (index === 0) {
                 brandButton.classList.add('selected');
                 
@@ -475,7 +477,7 @@
                 // Update the estimated price input with the brand_price of the clicked brand
                 estimatedPriceInput.value = `₱${brand.brand_price}.00`;
                 estimatedPriceInput.style.color = "#1F6CB5"; //ginaya ko lang color sa proto hehe
-                calculateEstimatedTotalPrice();
+                updateEstimatedTotalPrice();
             });
 
             recommendedBrandsList.appendChild(brandButton);
@@ -501,22 +503,48 @@
             button.classList.add('selected');
 
             const selectedMethod = button.getAttribute('data-method'); //after makaselect ng contraceptive method, madidisplay na mga nakahide na container
+            // Make an AJAX request to fetch the effectiveness rate from the server
+                    fetch('get_effectiveness_rate.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ selectedMethod }),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        // Update the HTML element with the retrieved effectiveness rate
+                        const effectivenessRateElement = document.getElementById('effectiveness-rate');
+                        effectivenessRateElement.textContent = `${data.effectivenessRate}`;
+                    })
+                    .catch(error => console.error('Error fetching effectiveness rate:', error));
+
+            console.log('selected method:', selectedMethod);
             selectedMethodContainer.style.display = 'block';
             estimatePriceInputContainer.style.display = 'block';
-            condomInputContainer.style.display = 'block';
+            //kapag permanent method, ala na yung do you also buy condoms tanong
+            if (selectedMethod === 'Vasectomy' || selectedMethod === 'Tubal Ligation') {
+                console.log('Selected method is Vasectomy or Tubal Ligationnn');
+                condomInputContainer.style.display = 'none';
+            } else {
+                condomInputContainer.style.display = 'block';
+            }
             recommendedBrandContainer.style.display = 'block';
             costResult.style.display = 'block';
             selectedMethodText.textContent = selectedMethod; // Set the selected method name
 
-            // Update the selected method name inside the recommended brands container
+            // Update the selected method name inside the recommended brands container and dun sa babang div 
             const selectedMethodTextReco = document.getElementById('selected-method-text-reco');
+            const selectedMethodReminder = document.getElementById('selectedMethodReminder');
             selectedMethodTextReco.textContent = selectedMethod;
+            selectedMethodReminder.textContent = "You’re using " + selectedMethod +". We encourage you to stay informed about it by visiting our about contraceptive page." ;
 
             // Hide condom-related containers
             condomIfYesContainer.style.display = 'none';
             condomBrandContainer.style.display = 'none';
+            document.getElementById('mixingBirthControl').style.display = 'none';
 
-            calculateEstimatedTotalPrice();
+            updateEstimatedTotalPrice();
 
 
             fetch('get_recommended_brands.php', {
@@ -552,6 +580,57 @@
                 updateDurationDropdown(numericValue, label); // Pass both numeric value and label
 
 
+            // Update the cost duration input and dropdown values kakadagdag lang
+            const longevityInputValue = document.getElementById('longevity-input').value;
+            const durationDropdownValue = document.getElementById('duration-dropdown').value;
+
+            const costDurationInput = document.getElementById('cost-duration-input');
+            const costDurationDropdown = document.getElementById('cost-duration-dropdown');
+
+            const selectedMethodd = button.getAttribute('data-method');
+            console.log('selected methodd:', selectedMethodd);
+            
+            // Set cost-duration-input and dropdown values for Vasectomy and Tubal Ligation kasi permanent method naman sila 
+            if (selectedMethodd === 'Vasectomy' || selectedMethodd === 'Tubal Ligation') {
+                console.log('Selected method is Vasectomy or Tubal Ligation');
+                costDurationInput.value = '1';
+                costDurationDropdown.value = 'time';
+                costDurationInput.disabled = true;
+                costDurationDropdown.disabled = true;
+            } else { //else yung dropdown at input text field is same muna as default sa longevity ng method
+                console.log('Selected method is not Vasectomy or Tubal Ligation');
+                // Set the values to be the same as longevity and duration
+                costDurationInput.value = longevityInputValue;
+                costDurationDropdown.value = durationDropdownValue;
+                costDurationInput.disabled = false;
+                costDurationDropdown.disabled = false;
+            }
+
+        
+
+        // Update condomAmount-dropdown based on duration-dropdown value para sync ng longevity and condom per day/week/month/year depending sa longevity
+        const condomAmountDropdown = document.getElementById('condomAmount-dropdown');
+        switch (durationDropdownValue) {
+            case 'day':
+                condomAmountDropdown.value = 'condomday';
+                break;
+            case 'week':
+                condomAmountDropdown.value = 'condomweek';
+                break;
+            case 'month':
+                condomAmountDropdown.value = 'condommonth';
+                break;
+            case 'year':
+                condomAmountDropdown.value = 'condomyear';
+                break;
+        }
+
+        // Disable the condomAmount-dropdown para di mamanipulate kahirap kasi icalculate pag paiba iba
+        condomAmountDropdown.disabled = true;
+
+        
+
+
                 // Process the received data and generate recommended brand buttons
                 generateRecommendedBrands(data);
                 estimatedPriceInput.value = `₱${data[0].brand_price}.00`; // Update the estimated price input ng selected method
@@ -562,6 +641,7 @@
 
                     });
                 });
+                
 
   
     // Function to update the duration dropdown options based on brand longevity, nakadepend so if month/s, day/s, week/s, month/s lang pwede sa dropdown options
@@ -688,36 +768,47 @@
         }
 
         longevityInput.value = calculatedTimeValue;
-    });
+        });
 
 
     const answerDropdown = document.getElementById('answer-dropdown');
     const condomIfYesContainer = document.getElementById('condom-if-yes-container');
     const condomBrandContainer = document.getElementById('condom-brand');
-    <?php
-    $condomBrandsJson = json_encode($condomBrands);
-    echo "const condomBrands = " . $condomBrandsJson . ";";
-    ?>
-    answerDropdown.addEventListener('change', () => {
-        if (answerDropdown.value === 'yes') {
-            condomIfYesContainer.style.display = 'block';
-            condomBrandContainer.style.display = 'block';
+        <?php
+        $condomBrandsJson = json_encode($condomBrands);
+        echo "const condomBrands = " . $condomBrandsJson . ";";
+        ?>
+        answerDropdown.addEventListener('change', () => {
+            if (answerDropdown.value === 'yes') {
+                condomIfYesContainer.style.display = 'block';
+                condomBrandContainer.style.display = 'block';
+                document.getElementById('mixingBirthControl').style.display = 'block';
 
-            const selectedBrandIndex = 0; // Change this index based on user selection
-            const selectedBrand = condomBrands[selectedBrandIndex];
-            const amountInPackageInput = document.getElementById('condom-amount-package-input');
-            amountInPackageInput.value = selectedBrand.brand_amount_package;
+                const selectedBrandIndex = 0; // Change this index based on user selection
+                const selectedBrand = condomBrands[selectedBrandIndex];
+                const amountInPackageInput = document.getElementById('condom-amount-package-input');
+                amountInPackageInput.value = selectedBrand.brand_amount_package;
+                const costDurationDropdown = document.getElementById('cost-duration-dropdown');
+                const longevityDropdown = document.getElementById('duration-dropdown');
+                costDurationDropdown.value = longevityDropdown.value;
+                const longevityInput = document.getElementById('longevity-input');
+                const costDurationInput = document.getElementById('cost-duration-input');
+                costDurationInput.value = longevityInput.value;
 
-        
-        // Trigger a click event on the first condom brand button to update the estimated condom price input
-        const firstCondomBrandButton = document.querySelector('.condom-brand-button');
-        firstCondomBrandButton.click();
+            
+            // Trigger a click event on the first condom brand button to update the estimated condom price input
+            const firstCondomBrandButton = document.querySelector('.condom-brand-button');
+            firstCondomBrandButton.click();
 
-        } else {
-            condomIfYesContainer.style.display = 'none';
-            condomBrandContainer.style.display = 'none';
-        }
-    });
+            } else {
+                condomIfYesContainer.style.display = 'none';
+                condomBrandContainer.style.display = 'none';
+                const longevityInput = document.getElementById('longevity-input');
+                const costDurationInput = document.getElementById('cost-duration-input');
+                costDurationInput.value = longevityInput.value;
+                document.getElementById('mixingBirthControl').style.display = 'none';
+            }
+        });
    
     const methodBrandButtons = document.querySelectorAll('.method-brand-button');
 
@@ -731,7 +822,7 @@
         // Add 'selected' class to the clicked button
         button.classList.add('selected');
 
-        
+        updateEstimatedTotalPrice();
 
         // Get the selected method
         const selectedMethod = button.getAttribute('data-method');
@@ -777,7 +868,7 @@
             // Add 'selected' class to the clicked button
             button.classList.add('selected');
 
-
+            
             
             // Update the estimated price input with the selected brand's price
             const selectedBrandPriceText = button.querySelector('p').textContent;
@@ -798,83 +889,214 @@
             amountInPackageInput.value = selectedBrandAmount;
 
             
-
-            calculateEstimatedTotalPrice();
+            updateEstimatedTotalPrice();
 
             });
         });
 
 
-        function calculateEstimatedTotalPrice() {
-    const answerDropdown = document.getElementById('answer-dropdown');
-    const estimatedPriceInput = document.getElementById('estimated-price-input');
-    const estimatedCondomPriceInput = document.getElementById('estimated-condom-price-input');
-    const condomAmountInput = document.getElementById('condomAmount-input');
+    function calculateEstimatedTotalPrice() {
+        const answerDropdown = document.getElementById('answer-dropdown');
+        const estimatedPriceInput = document.getElementById('estimated-price-input');
+        const estimatedCondomPriceInput = document.getElementById('estimated-condom-price-input');
+        const condomAmountInput = document.getElementById('condomAmount-input');
+        const condomAmountPackageInput = document.getElementById('condom-amount-package-input');
+        const costDurationInput = document.getElementById('cost-duration-input');
+        const costDurationDropdown = document.getElementById('cost-duration-dropdown');
+        const estimatedTotalPriceInput = document.getElementById('estimated-total-price-input');
+
+
+
+        // Calculate the estimated total price
+        if (answerDropdown.value === 'no') {
+            const estimatedPrice = parseFloat(estimatedPriceInput.value.replace('₱', '').replace('.00', ''));
+            console.log('estimatedPrice eto:', estimatedPrice);
+            estimatedTotalPriceInput.value = `₱${estimatedPrice.toFixed(2)}`;
+        } else if (answerDropdown.value === 'yes') {
+            const condomPricePerPackage = parseFloat(estimatedCondomPriceInput.value.replace('₱', '').replace('.00', ''));
+            const estimatedPrice = parseFloat(estimatedPriceInput.value.replace('₱', '').replace('.00', ''));
+            const condomAmount = parseFloat(condomAmountInput.value);
+            const amountInPackage = parseFloat(condomAmountPackageInput.value);
+            const totalPackagesNeeded = Math.ceil(condomAmount / amountInPackage);
+            const totalCondomPrice = condomPricePerPackage * totalPackagesNeeded;
+
+            let totalEstimatedPrice = totalCondomPrice + estimatedPrice;
+
+
+            estimatedTotalPriceInput.value = `₱${totalEstimatedPrice.toFixed(2)}`;
+
+            }
+        }
+
     const condomAmountPackageInput = document.getElementById('condom-amount-package-input');
     const costDurationInput = document.getElementById('cost-duration-input');
     const costDurationDropdown = document.getElementById('cost-duration-dropdown');
     const estimatedTotalPriceInput = document.getElementById('estimated-total-price-input');
+        answerDropdown.addEventListener('change', calculateEstimatedTotalPrice);
+        condomAmountPackageInput.addEventListener('input', calculateEstimatedTotalPrice);
+        costDurationInput.addEventListener('input', calculateEstimatedTotalPrice);
+        costDurationDropdown.addEventListener('change', calculateEstimatedTotalPrice);
 
-    /* pancheck ng values
-    console.log('answerDropdown.value:', answerDropdown.value);
-    console.log('estimatedPriceInput.value:', estimatedPriceInput.value);
-    console.log('estimatedCondomPriceInput.value:', estimatedCondomPriceInput.value);
-    console.log('condomAmountInput.value:', condomAmountInput.value);
-    console.log('condomAmountPackageInput.value:', condomAmountPackageInput.value);
-    console.log('costDurationInput.value:', costDurationInput.value);
-    console.log('costDurationDropdown.value:', costDurationDropdown.value);*/
 
-    // Calculate the estimated total price
-    if (answerDropdown.value === 'no') {
+        condomAmountInput.addEventListener('input', updateEstimatedTotalPrice);
+        costDurationInput.addEventListener('input', updateEstimatedTotalPrice);
+        costDurationDropdown.addEventListener('change', updateEstimatedTotalPrice);
+
+
+
+    function updateEstimatedTotalPrice() {
+        const estimatedPriceInput = document.getElementById('estimated-price-input');
+        const estimatedCondomPriceInput = document.getElementById('estimated-condom-price-input');
+        const condomAmountInput = document.getElementById('condomAmount-input');
+        const costDurationInput = document.getElementById('cost-duration-input');
+        const condomAmountPackageInput = document.getElementById('condom-amount-package-input');
+        const costDurationDropdown = document.getElementById('cost-duration-dropdown');
+        const estimatedTotalPriceInput = document.getElementById('estimated-total-price-input');
+        const longevityInput = document.getElementById('longevity-input');
+        const longevityDropdown = document.getElementById('duration-dropdown');
+
+        // Parse input values
+        const durationValue = parseFloat(costDurationInput.value);
+        const longevityValue = parseFloat(longevityInput.value);
         const estimatedPrice = parseFloat(estimatedPriceInput.value.replace('₱', '').replace('.00', ''));
-        console.log('estimatedPrice eto:', estimatedPrice);
-        estimatedTotalPriceInput.value = `₱${estimatedPrice.toFixed(2)}`;
-    } else if (answerDropdown.value === 'yes') {
         const condomPricePerPackage = parseFloat(estimatedCondomPriceInput.value.replace('₱', '').replace('.00', ''));
-        const estimatedPrice = parseFloat(estimatedPriceInput.value.replace('₱', '').replace('.00', ''));
         const condomAmount = parseFloat(condomAmountInput.value);
         const amountInPackage = parseFloat(condomAmountPackageInput.value);
-        const totalPackagesNeeded = Math.ceil(condomAmount / amountInPackage);
-        const totalCondomPrice = condomPricePerPackage * totalPackagesNeeded;
+            const totalPackagesNeeded = Math.ceil(condomAmount / amountInPackage);
+            console.log("ilan kelangang condom pack", totalPackagesNeeded);
+            const condomPrice = condomPricePerPackage * totalPackagesNeeded * longevityValue ;
+             
 
-        let totalEstimatedPrice = totalCondomPrice + estimatedPrice;
+        let newEstimatedTotalPrice;
+
+        if (longevityValue === durationValue && longevityDropdown.value === costDurationDropdown.value){
+
+            if (answerDropdown.value === 'yes'){
+                newEstimatedTotalPrice = ((estimatedPrice + condomPrice )).toFixed(2);
+            }
+            else {
+                // Reset to initial default price
+                newEstimatedTotalPrice = estimatedPrice.toFixed(2);;
+            }
+        
+        }
+
+        else if (answerDropdown.value === 'yes'){
+
+            if (longevityDropdown.value === 'day') { 
+                if (costDurationDropdown.value === 'week') {
+                    newEstimatedTotalPrice = ((estimatedPrice + condomPrice )* 7 * durationValue).toFixed(2);
+                } else if (costDurationDropdown.value === 'month') {
+                    newEstimatedTotalPrice = ((estimatedPrice + condomPrice )* 30 * durationValue).toFixed(2);
+                } else if (costDurationDropdown.value === 'year') {
+                    newEstimatedTotalPrice = ((estimatedPrice + condomPrice )* 365 * durationValue).toFixed(2);
+                } else {
+                    newEstimatedTotalPrice = ((estimatedPrice + condomPrice )* durationValue).toFixed(2);
+                }
+            }  
+            else if (longevityDropdown.value === 'week') {
+                if (costDurationDropdown.value === 'day') {
+                    newEstimatedTotalPrice = ((estimatedPrice + condomPrice )/ 7 * durationValue).toFixed(2);
+                } else if (costDurationDropdown.value === 'month') {
+                    newEstimatedTotalPrice = ((estimatedPrice + condomPrice )* 4 * durationValue).toFixed(2);
+                } else if (costDurationDropdown.value === 'year') {
+                    newEstimatedTotalPrice = ((estimatedPrice + condomPrice )* 52 / durationValue).toFixed(2);
+                } else {
+                    newEstimatedTotalPrice = ((estimatedPrice + condomPrice )/ longevityValue* durationValue).toFixed(2);
+                }
+            } 
+            else if (longevityDropdown.value === 'month') {
+                if (costDurationDropdown.value === 'day') {
+                    newEstimatedTotalPrice = ((estimatedPrice + condomPrice )/ 30 * durationValue).toFixed(2);
+                } else if (costDurationDropdown.value === 'week') {
+                    newEstimatedTotalPrice = ((estimatedPrice + condomPrice )/ 4 * durationValue).toFixed(2);
+                } else if (costDurationDropdown.value === 'year') {
+                    newEstimatedTotalPrice = ((estimatedPrice + condomPrice )* 12 * durationValue).toFixed(2);
+                } else {
+                    newEstimatedTotalPrice = ((estimatedPrice + condomPrice )/ longevityValue* durationValue).toFixed(2);
+                }
+            } 
+            else if (longevityDropdown.value === 'year') {
+                if (costDurationDropdown.value === 'day') {
+                    newEstimatedTotalPrice = (((estimatedPrice + condomPrice )/ 365 * durationValue)/longevityValue).toFixed(2);
+                } else if (costDurationDropdown.value === 'month') {
+                    newEstimatedTotalPrice = (((estimatedPrice + condomPrice )/ 12 * durationValue)/longevityValue).toFixed(2);
+                } else if (costDurationDropdown.value === 'week') {
+                    newEstimatedTotalPrice = (((estimatedPrice + condomPrice )/ 52 * durationValue)/longevityValue).toFixed(2);
+                } else {
+
+                    newEstimatedTotalPrice = ((estimatedPrice + condomPrice )/ longevityValue * durationValue).toFixed(2);
+                }
+            }
+        }
 
 
-        estimatedTotalPriceInput.value = `₱${totalEstimatedPrice.toFixed(2)}`;
+        else { 
+            if (longevityDropdown.value === 'day') { 
+                if (costDurationDropdown.value === 'week') {
+                    newEstimatedTotalPrice = (estimatedPrice* 7 * durationValue).toFixed(2);
+                } else if (costDurationDropdown.value === 'month') {
+                    newEstimatedTotalPrice = (estimatedPrice* 30 * durationValue).toFixed(2);
+                } else if (costDurationDropdown.value === 'year') {
+                    newEstimatedTotalPrice = (estimatedPrice* 365 * durationValue).toFixed(2);
+                } else {
+                    newEstimatedTotalPrice = ((estimatedPrice/ longevityValue)* durationValue).toFixed(2);
+                }
+            }  
+            else if (longevityDropdown.value === 'week') {
+                    if (costDurationDropdown.value === 'day') {
+                        newEstimatedTotalPrice = (estimatedPrice/ 7 * durationValue).toFixed(2);
+                    } else if (costDurationDropdown.value === 'month') {
+                        newEstimatedTotalPrice = (estimatedPrice* 4 * durationValue).toFixed(2);
+                    } else if (costDurationDropdown.value === 'year') {
+                        newEstimatedTotalPrice = (estimatedPrice* 52 / durationValue).toFixed(2);
+                    } else {
+                        newEstimatedTotalPrice = ((estimatedPrice/ longevityValue)* durationValue).toFixed(2);
+                    }
+            } 
+            else if (longevityDropdown.value === 'month') {
+                    if (costDurationDropdown.value === 'day') {
+                        newEstimatedTotalPrice = (estimatedPrice/ 30 * durationValue).toFixed(2);
+                    } else if (costDurationDropdown.value === 'week') {
+                        newEstimatedTotalPrice = (estimatedPrice/ 4 * durationValue).toFixed(2);
+                    } else if (costDurationDropdown.value === 'year') {
+                        newEstimatedTotalPrice = (estimatedPrice* 12 * durationValue).toFixed(2);
+                    } else {
+                        newEstimatedTotalPrice = ((estimatedPrice/ longevityValue)* durationValue).toFixed(2);
+                    }
+            } 
+            else if (longevityDropdown.value === 'year') {
+                    if (costDurationDropdown.value === 'day') {
+                        newEstimatedTotalPrice = (estimatedPrice/ (365* longevityValue) * durationValue).toFixed(2);
+                    } else if (costDurationDropdown.value === 'month') {
+                        newEstimatedTotalPrice = (estimatedPrice/ (12 * longevityValue) * durationValue).toFixed(2);
+                    } else if (costDurationDropdown.value === 'week') {
+                        newEstimatedTotalPrice = (estimatedPrice/ (52 * longevityValue)* durationValue).toFixed(2);
+                    } else {
+                        newEstimatedTotalPrice = ((estimatedPrice/ longevityValue) * durationValue).toFixed(2);
+                    }
+            }
+        }
 
-        console.log('condomPricePerPackage:', condomPricePerPackage.value);
-    console.log('totalPackagesNeeded.value:', totalPackagesNeeded.value);
-    console.log('totalCondomPrice.value:', totalCondomPrice.value);
-    console.log('totalEstimatedPrice.value:', totalEstimatedPrice.value);
+
+        // Update the estimated total price input
+        estimatedTotalPriceInput.value = `₱${newEstimatedTotalPrice}`;
     }
-}
-
-    const condomAmountPackageInput = document.getElementById('condom-amount-package-input');
-    
-    const costDurationInput = document.getElementById('cost-duration-input');
-    
-    const costDurationDropdown = document.getElementById('cost-duration-dropdown');
-    const estimatedTotalPriceInput = document.getElementById('estimated-total-price-input');
-answerDropdown.addEventListener('change', calculateEstimatedTotalPrice);
-condomAmountInput.addEventListener('input', calculateEstimatedTotalPrice);
-condomAmountPackageInput.addEventListener('input', calculateEstimatedTotalPrice);
-costDurationInput.addEventListener('input', calculateEstimatedTotalPrice);
-costDurationDropdown.addEventListener('change', calculateEstimatedTotalPrice);
 
 
-    
+      
 
      // Event listener for usage input para di mag accept ng letters, numbers lang
     const condomAmount = document.getElementById("condomAmount-input");
     const costDuration = document.getElementById("cost-duration-input");
-    condomAmount.addEventListener("input", function () {
-    // Remove any non-numeric characters from the input
-    this.value = this.value.replace(/\D/g, '');
-    });
-    costDuration.addEventListener("input", function () {
-    // Remove any non-numeric characters from the input
-    this.value = this.value.replace(/\D/g, '');
-    });
+            condomAmount.addEventListener("input", function () {
+            // Remove any non-numeric characters from the input
+            this.value = this.value.replace(/\D/g, '');
+            });
+            costDuration.addEventListener("input", function () {
+            // Remove any non-numeric characters from the input
+            this.value = this.value.replace(/\D/g, '');
+            });
     
 </script>
 
