@@ -6,6 +6,7 @@ var sched_appointment = {
     year: (typeof year == 'undefined') ? getFullYear(): year,
     selectedDate: null,
     selectedTimeslot: null,
+    location: null,
 
     submit_appointment: function(e){
         
@@ -29,6 +30,7 @@ var sched_appointment = {
 
         for (var i = inputs.length - 1; i >= 0; i--) {
             form.append(inputs[i].name, inputs[i].value);
+            //console.log(inputs[i].name, inputs[i].value);
         }
         
         form.append('selected_municipality', selected_municipality);
@@ -36,6 +38,8 @@ var sched_appointment = {
         form.append('appointment_date', appointment_date);
         form.append('appointment_timeslot', appointment_timeslot);
         form.append('data_type', 'add_appointment');
+        //console.log(selected_municipality, selected_gender, appointment_date, appointment_timeslot);
+        //return;
         var ajax = new XMLHttpRequest();
 
         ajax.addEventListener('readystatechange',function(){
@@ -57,7 +61,7 @@ var sched_appointment = {
             }
         });
 
-        ajax.open('post','testing_only.php', true);
+        ajax.open('post','ajax.php', true);
         ajax.send(form);
         
     },
@@ -111,6 +115,7 @@ var sched_appointment = {
                 return false;
             }
         }
+        sched_appointment.loadCalendar(sched_appointment.month, sched_appointment.year, sched_appointment.location);
         return true;
     },
 
@@ -183,7 +188,7 @@ var sched_appointment = {
         }
     },
 
-    loadCalendar: function (month, year) {
+    loadCalendar: function (month, year, location) {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
             if (xhttp.readyState == 4 && xhttp.status == 200) {
@@ -203,7 +208,7 @@ var sched_appointment = {
 
             }
         };
-        xhttp.open("GET", "calendar.php?month=" + month + "&year=" + year, true);
+        xhttp.open("GET", "calendar.php?month=" + month + "&year=" + year + "&location=" + location, true);
         xhttp.send();
     },
 
@@ -263,7 +268,7 @@ var sched_appointment = {
 
             }
         };
-        xhttp.open("GET", "calendar.php?timeslots=1&date=" + sched_appointment.selectedDate, true);
+        xhttp.open("GET", "calendar.php?timeslots=1&date=" + sched_appointment.selectedDate + "&location=" + sched_appointment.location, true);
         xhttp.send();
     },
 
@@ -275,14 +280,14 @@ var sched_appointment = {
         } else {
             sched_appointment.month--;
         }
-        sched_appointment.loadCalendar(sched_appointment.month, sched_appointment.year);
+        sched_appointment.loadCalendar(sched_appointment.month, sched_appointment.year, sched_appointment.location);
     },
 
     showThisMonth: function () {
         let dateNew = new Date();
         sched_appointment.month = dateNew.getMonth() + 1; // JavaScript months are 0-based
         sched_appointment.year = dateNew.getFullYear();
-        sched_appointment.loadCalendar(sched_appointment.month, sched_appointment.year);
+        sched_appointment.loadCalendar(sched_appointment.month, sched_appointment.year, sched_appointment.location);
     },
 
     showNextMonth: function () {
@@ -293,7 +298,7 @@ var sched_appointment = {
         } else {
             sched_appointment.month++;
         }
-        sched_appointment.loadCalendar(sched_appointment.month, sched_appointment.year);
+        sched_appointment.loadCalendar(sched_appointment.month, sched_appointment.year, sched_appointment.location);
     },
 
     selectDate: function (date){
@@ -358,7 +363,8 @@ var sched_appointment = {
 
                         obj.rows.forEach(function(location) {
                             let option = document.createElement("option");
-                            option.value = location.partner_facility_id;
+                            //option.value = location.partner_facility_id;
+                            option.value = location.city_municipality;
                             option.text = location.city_municipality;
                             option.setAttribute("city-municipality-name", location.city_municipality);
                             selectElement.appendChild(option);
@@ -371,9 +377,24 @@ var sched_appointment = {
         ajax.open('post','ajax.php', true);
         ajax.send(form);
     },
+
+    get_selected_city_municipality: function () {
+        
+        let select_city_municipality = document.getElementById("municipality");
+
+        // Add an event listener to the select element
+        select_city_municipality.addEventListener("change", function () {
+            // Get the selected option's value
+            let selected_city_municipality = select_city_municipality.value;
+            sched_appointment.location = selected_city_municipality;
+            console.log(sched_appointment.location);
+
+        });
+    },
 };
 
 if (typeof appointment != 'undefined') {
     sched_appointment.load_city_municipality_list();
-    sched_appointment.loadCalendar(sched_appointment.month, sched_appointment.year);
+    sched_appointment.get_selected_city_municipality();
+    //sched_appointment.loadCalendar(sched_appointment.month, sched_appointment.year);
 }

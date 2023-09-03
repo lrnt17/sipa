@@ -1674,6 +1674,29 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 		$info['rows'] = $rows;
 		$info['success'] = true;
 
+	}else
+	if($_POST['data_type'] == 'add_appointment')
+	{
+		$fullname = addslashes($_POST['fullname']);
+        $address = addslashes($_POST['address']);
+        $email = addslashes($_POST['email']);
+        $municipality = addslashes($_POST['selected_municipality']);
+        $contact = (int)($_POST['contact']);
+        $gender = $_POST['selected_gender'];
+        $dob = $_POST['dob'];
+        $appointment_date = $_POST['appointment_date'];
+        $appointment_timeslot = $_POST['appointment_timeslot'];
+    
+        $query = "insert into appointments (app_name,app_address,app_email,city_municipality,app_pnum,app_gender,app_bdate,app_date,app_timeslot) 
+        values ('$fullname','$address','$email','$municipality','$contact','$gender','$dob','$appointment_date','$appointment_timeslot')";
+        query($query);
+
+        /*$query = "SELECT * FROM appointments WHERE app_date = '$appointment_date' && app_timeslot = '$appointment_timeslot'";
+        $rows = query($query);*/
+
+        $info['success'] = true;
+        $info['message'] = "Your appointment was successfully created";
+
 	}
 	
 }

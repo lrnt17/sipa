@@ -21,9 +21,7 @@
 
                 <label for="municipality">City/Municapality *</label><br>
                 <select name="municipality" id="municipality" required>
-                    <option value="" disabled selected></option>
-                    <option value="Baliwag">Baliwag</option>
-                    <option value="Bustos">Bustos</option>
+                    
                 </select><br>
 
                 <label for="contact">Contact:</label><br>
@@ -54,7 +52,7 @@
                         </div>
                     </div>
                 </div>
-                <button type="button" onclick="sched_appointment.prevPage()">Previous</button>
+                <!--<button type="button" onclick="sched_appointment.prevPage()">Previous</button>-->
                 <button type="button" onclick="sched_appointment.nextPage()">Next</button>
             </div>
 
@@ -62,7 +60,7 @@
             <div class="page" id="page-3" style="display: none;">
                 <!-- Your form fields for page 3 here -->
                 <div class="timeslots"></div>
-                <button type="button" onclick="sched_appointment.prevPage()">Previous</button>
+                <!--<button type="button" onclick="sched_appointment.prevPage()">Previous</button>-->
                 <button>Submit</button>
             </div>
             
@@ -87,4 +85,4 @@
         }
     }*/
 </script>
-<script src="sched-appointment.js?v4"></script>
+<script src="sched-appointment.js?v6"></script>
