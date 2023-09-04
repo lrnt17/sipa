@@ -84,6 +84,11 @@ var sched_appointment = {
 
         let select_municipality = document.getElementById("municipality");
         select_municipality.selectedIndex = 0;
+
+        let select_health_facility = document.getElementById("health_facility");
+        select_health_facility.selectedIndex = 0;
+        document.querySelector(".js-select-health-facility").classList.add('hide');
+
         let select_gender = document.getElementById("gender");
         select_gender.selectedIndex = 0;
 
@@ -338,7 +343,7 @@ var sched_appointment = {
 
         let form = new FormData();
 
-        form.append('data_type', 'load_all_city_municipality');
+        form.append('data_type', 'load_city_municipalities');
         var ajax = new XMLHttpRequest();
 
         ajax.addEventListener('readystatechange',function(){
@@ -378,17 +383,72 @@ var sched_appointment = {
         ajax.send(form);
     },
 
+    load_health_facility_list: function(){
+
+        let city_municipality = sched_appointment.location;
+
+        let form = new FormData();
+
+        form.append('city_municipality', city_municipality);
+        form.append('data_type', 'load_health_facilities');
+        var ajax = new XMLHttpRequest();
+
+        ajax.addEventListener('readystatechange',function(){
+
+            if(ajax.readyState == 4)
+            {
+                if(ajax.status == 200){
+                    
+                    let obj = JSON.parse(ajax.responseText);
+
+                    if(obj.success){
+                        
+                        let selectElement = document.getElementById("health_facility");
+                        selectElement.innerHTML = "";
+
+                        let blankOption = document.createElement("option");
+                        blankOption.value = "";
+                        blankOption.text = "Select a Health Facility";
+                        blankOption.disabled = true;
+                        blankOption.selected = true;
+                        selectElement.appendChild(blankOption);
+
+                        obj.rows.forEach(function(healthcare_provider) {
+                            let option = document.createElement("option");
+                            //option.value = healthcare_provider.partner_facility_id;
+                            option.value = healthcare_provider.health_facility_name;
+                            option.text = healthcare_provider.health_facility_name;
+                            option.setAttribute("health-facility-name", healthcare_provider.health_facility_name);
+                            selectElement.appendChild(option);
+                        });
+                    }
+                }
+            }
+        });
+
+        ajax.open('post','ajax.php', true);
+        ajax.send(form);
+    },
+
     get_selected_city_municipality: function () {
         
         let select_city_municipality = document.getElementById("municipality");
+        let select_health_facility = document.getElementById("health_facility");
 
         // Add an event listener to the select element
         select_city_municipality.addEventListener("change", function () {
+
+            if (this.value !== '') {
+                select_health_facility.disabled = false;
+                document.querySelector(".js-select-health-facility").classList.remove('hide');
+            } else {
+                select_health_facility.disabled = true;
+            }
             // Get the selected option's value
             let selected_city_municipality = select_city_municipality.value;
             sched_appointment.location = selected_city_municipality;
             console.log(sched_appointment.location);
-
+            sched_appointment.load_health_facility_list();
         });
     },
 };

@@ -412,6 +412,43 @@
                 $info['success'] = true;
                 $info['message'] = "edited successfully";
             //}
+        }else
+        if ($_POST['data_type'] == 'load_appointments') 
+        {
+            $city_municipality = $_POST['city_municipality'];
+            $page = $_POST['page'];
+            //$rows_per_page = 10;
+            $rows_per_page = 2;
+            $offset = ($page - 1) * $rows_per_page;
+
+            $query = "SELECT COUNT(*) FROM appointments WHERE city_municipality = '$city_municipality'";
+            $result = query($query);
+            $total_rows = $result[0]['COUNT(*)'];
+            $last_page = ceil($total_rows / $rows_per_page);
+            
+            $query = "SELECT * FROM appointments WHERE city_municipality = '$city_municipality' ORDER BY app_id LIMIT $rows_per_page OFFSET $offset";
+            $rows = query($query);
+            
+            if($rows){
+                /*foreach ($rows as $key => $row) {
+
+                    $rows[$key]['user_image'] = get_admin_image($row['user_image']);
+                }*/
+                $info['rows'] = $rows;
+                $info['last_page'] = $last_page;
+                $info['success'] = true;
+            }
+        }else
+        if ($_POST['data_type'] == 'search_appointments') 
+        {
+            $city_municipality = $_POST['city_municipality'];
+            $query = $_POST['query'];
+            $sql = "SELECT * FROM appointments WHERE city_municipality = '$city_municipality' AND app_name LIKE '%$query%' ORDER BY app_id";
+            $rows = query($sql);
+            if ($rows) {
+                $info['rows'] = $rows;
+                $info['success'] = true;
+            }
         }
     }
   

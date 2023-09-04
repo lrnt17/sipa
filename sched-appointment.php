@@ -24,6 +24,13 @@
                     
                 </select><br>
 
+                <div class="js-select-health-facility hide">
+                    <label for="health_facility">Health Facility *</label><br>
+                    <select name="health_facility" id="health_facility" disabled required>
+                        
+                    </select>
+                </div>
+                
                 <label for="contact">Contact:</label><br>
                 +63 <input type="tel" id="contact" name="contact"><br>
 
@@ -85,4 +92,4 @@
         }
     }*/
 </script>
-<script src="sched-appointment.js?v6"></script>
+<script src="sched-appointment.js?v7"></script>

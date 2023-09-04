@@ -1667,12 +1667,26 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 		$info['success'] = true;
 
 	}else
-	if($_POST['data_type'] == 'load_all_city_municipality')
+	if($_POST['data_type'] == 'load_city_municipalities')
 	{
 		$query = "select * from partner_facility";
 		$rows = query($query);
 		$info['rows'] = $rows;
 		$info['success'] = true;
+
+	}else
+	if($_POST['data_type'] == 'load_health_facilities')
+	{
+		$city_municipality = $_POST['city_municipality'];
+
+		$query = "select * from partner_facility where city_municipality = '$city_municipality'";
+		$rows = query($query);
+
+		if ($rows) {
+			$info['rows'] = $rows;
+			$info['success'] = true;
+		}
+		
 
 	}else
 	if($_POST['data_type'] == 'add_appointment')
