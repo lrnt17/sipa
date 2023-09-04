@@ -153,7 +153,7 @@
             </div>
         </div>
         <div class="row">
-            <h1 class="d-flex justify-content-center mb-5" style="color:#383838;">Other Contraceptive Methods</h1>
+            <h1 class="d-flex justify-content-center" style="color:#383838;">Other Contraceptive Methods</h1>
         </div>
     </div>
 

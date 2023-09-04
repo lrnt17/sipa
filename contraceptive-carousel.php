@@ -3,55 +3,12 @@
 ?>
 
 <head>
-    <!--<style>
-        /*
-            .carousel {
-                display: flex;
-                overflow: hidden;
-                max-width:80%;
-                width: 100%; /* Adjust based on your layout /
-                margin: 0 auto; /* Center the carousel /
-            }
-
-            .slide {
-                display: flex;
-                width: 100%;
-                transition: transform 0.5s ease-in-out;
-            }
-
-            .slide div {
-                display: flex;
-                justify-content: center;
-                width: 100%;
-            }
-
-            .slide button {
-                flex: 1;
-                margin: 0 10px;
-                width: 200px; /* Adjust based on your layout /
-            }
-
-            .indicators {
-                display: flex;
-                justify-content: center;
-            }
-
-            .indicator {
-                height: 10px;
-                width: 10px;
-                background-color: #bbb;
-                border-radius: 50%;
-                margin: 5px;
-            }
-
-            .indicator.active {
-                background-color: #717171;
-            }
+    <style>
 
         .newsCard {
             position: relative;
-            max-width: 180px;
-            max-height: 300px;
+            max-width: 300px;
+            max-height: 340px;
             background-color: #fff;
             color:#fff;
             overflow: hidden;
@@ -101,8 +58,8 @@
             transition: transform 0.4s, opacity 0.1s;
             transition: transform 0.4s, opacity 0.1s, -webkit-transform 0.4s;
         }
-            */
-    </style>-->
+            
+    </style>
     <!-- Add the slick-theme.css if you want default styling -->
     <link
       rel="stylesheet"
@@ -115,12 +72,12 @@
       type="text/css"
       href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"
     />
-    <!--<style>
-        /*@import url('https://fonts.googleapis.com/css?family=Lato:400,700,900|Open+Sans:300,400|Oswald:400,700');*/
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Lato:400,700,900|Open+Sans:300,400|Oswald:400,700');
 
         /***************/
 
-        /*.slick-slide {
+        .slick-slide {
             transform: scale(0.8);
             transition: all 0.4s ease-in-out;
             padding: 40px 0;
@@ -132,9 +89,9 @@
 
         .js-forum-link{
             cursor: pointer;
-        }*/
+        }
 
-    </style>-->    
+    </style>   
 </head>
 
 <div class="container">
@@ -163,7 +120,6 @@
             </div>-->
 
         </div>
-        <br><br><br>
         <div class="slider-method-1" id="methodCarouselContainer">
             
         </div>
@@ -177,8 +133,8 @@
                     <img src="assets/images/contraceptive.png" alt="sample" class="js-method-image" style="width:300px;">
                 <div class='newsCaption rounded-4 shadow-sm'>
                     <div style="display: flow;">
-                        <p class="js-method-name newsCaption-title pt-1 pb-2" style="text-align:center; font-size:13.5px; font-weight:600;">Pill</p>
-                        <div class="js-method-desc newsCaption-content px-1" style="font-size:13px;" >
+                        <p class="js-method-name newsCaption-title pt-1 pb-2" style="text-align:center; font-size: 1rem; font-weight:600;">Pill</p>
+                        <div class="js-method-desc newsCaption-content px-1" style="font-size:1rem;" >
                             is simply dummy text of the printing and typesetting industry. 
                             Lorem Ipsum has been the industry's standard dummy text ever 
                             since the 1500s, when an unknown printer took a galley of 
@@ -203,7 +159,16 @@
             slidesToScroll: 4,
             responsive: [
                 {
-                breakpoint: 1024,
+                breakpoint: 1330,
+                settings: {
+                    slidesToShow: 4,
+                    slidesToScroll: 4,
+                    infinite: true,
+                    dots: true
+                }
+                },
+                {
+                breakpoint: 1200,
                 settings: {
                     slidesToShow: 3,
                     slidesToScroll: 3,
@@ -212,17 +177,10 @@
                 }
                 },
                 {
-                breakpoint: 600,
+                breakpoint: 768,
                 settings: {
                     slidesToShow: 2,
                     slidesToScroll: 2
-                }
-                },
-                {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1
                 }
                 }
                 // You can unslick at a given breakpoint now by adding:

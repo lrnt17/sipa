@@ -42,7 +42,7 @@
     </style>
 </head>
         <div class="row mt-5">
-            <div class="d-flex justify-content-center mt-2">
+            <div class="d-flex justify-content-center mt-5">
                 <div style="width: 15%;
             background-color: #1F6CB5;
             border-radius: 99px;
