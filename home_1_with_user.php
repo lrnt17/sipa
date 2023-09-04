@@ -30,8 +30,34 @@
     </script>
     <style>
         body {
+            overflow-x: hidden;
             margin: 0;
             top:0!important;
+        }
+
+        .con-nav{
+            background-color: #1F6CB5;
+        }
+
+        .con-nav.py-3 a.nav-link,
+        .con-nav.py-3 .navbar-toggler-icon {
+            color: white !important; 
+        }
+
+        .user-fname {
+            color: white !important; 
+        }
+
+        .main {
+        width: 100%;
+        max-height: 300px;
+        background-color: #1F6CB5;
+        /*background-image: linear-gradient(to right, #1F6CB5, #70AFED);*/
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        color: #fff;
+        padding: 0 20px;
         }
 
         #map {
@@ -66,8 +92,6 @@
         }
 
         .faq-container {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
             gap: 20px; /* Adjust the gap as needed */
             margin: 2rem auto; 
         }
@@ -99,10 +123,9 @@
         }
 
       .faq-item {
-            width: 40vw;
-            min-width: 400px;
-            height: auto; /* Set a fixed height for the FAQ item */
-            max-height: 500px;
+            width: 100%;
+            min-width: 200px;
+            min-height: 90px; /* Set a fixed height for the FAQ item */
             margin-top: 1rem;
             background-color: white;
             border-radius: 10px; 
@@ -168,34 +191,72 @@
         .question-text, .answer-text{
             font-weight:normal;
         }
+
+        .doctor{
+            transform: scaleX(-1);
+            position: absolute;
+            z-index: 1;
+            right: 0;
+            top: 4.6%;
+        }
+        
+        @media (max-width: 1200px) {
+            .doctor {
+            top: 4.05%; 
+            }
+        }
+        @media (max-width: 992px) {
+            .doctor {
+            display: none; 
+            }
+        }
     </style>
   
     <script src="script.js" defer></script>
 </head>
 <body style="background: #F2F5FF;">
-
+ 
     <!-- navigation bar with logo -->
     <?php include('header.php') ?>
+
+    <div class="main">
+        <div class="container">
+            <div class="row mt-5">
+                <div class="col-12 col-lg-5 me-auto">
+                    <br>
+                <h1 class="mt-3 mb-3"style="font-weight:500;">Is it right for me?</h1>
+                <p style="font-size:1rem; font-weight:300;">
+                    Choosing the appropriate contraceptive method is essential for maintaining 
+                    reproductive health and preventing unwanted pregnancy.
+                </p>
+                <a href="right_for_me_1.php" style="color:black;"><button class="btn rounded-pill shadow-sm mt-3 px-3 py-2" style="background-color:#ffff;">Find out more</button></a>
+                </div>
+                <div class="col-auto">
+                    <img class="doctor" src="doctor.png" alt="" width="500px" style="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <svg viewBox="0 0 500 100">
+        <path d="M 0 65 C 235 160 240 0 500 100 L 500 0 L 0 0" fill="#BBD3EA" opacity="0.5"></path>
+        <path d="M 0 50 C 150 150 300 0 500 80 L 500 0 L 0 0" fill="#1F6CB5"></path>
+    </svg>
+    
+
+
 <div class="container">
-    <!-- background picture eme -->
-    <img src="" alt="">
-    <img src="" alt="">
+    <div class="d-flex justify-content-center mt-5" style="text-align: center;">  
+        <p class="mt-4"style="font-size:14px; color:#5A5A5A; width: 400px;">
+            There are many types of contraception available and none are perfect. The 
+            Contraception Choices website provides honest information to help weigh 
+            up the pros and cons.
+        </p>
+    </div>
 
-    <h2>Is it right for me?</h2>
-    <p>
-        Choosing the appropriate contraceptive method is essential for maintaining 
-        reproductive health and preventing unwanted pregnancy.
-    </p>
-    <a href="#" target="_blank">Find out more</a>
-
-    <p>
-        There are many types of contraception available and none are perfect. The 
-        Contraception Choices website provides honest information to help weigh 
-        up the pros and cons.
-    </p>
+    
 
         <div class="row">
-            <div class="d-flex justify-content-center mt-4 mb-3">
+            <div class="d-flex justify-content-center mt-2 mb-3">
                 <div style="width: 10%;
                 background-color: #1F6CB5;
                 border-radius: 99px;
@@ -204,10 +265,13 @@
         </div>
 
 
-        <h1 class="d-flex justify-content-center mb-5" style="color:#383838;">Other Contraceptive Methods</h1>
+        <h1 class="d-flex justify-content-center" style="color:#383838;">Other Contraceptive Methods</h1>
 
+    </div>
 
     <?php include('contraceptive-carousel.php') ?>
+
+    <div class="container">
 
     <!-- birth controls pagination -->
    <!-- <div class="parent">
@@ -254,11 +318,29 @@
     </form>-->
     
     <!-- frequently asked questions -->
-    <div class="col-auto">
-                <a href="faqs.php" style="text-decoration: none; color: black;"><h3>Frequently<br>asked questions</h3></a>
-          </div>
+    <div class="row">
+            <div class="d-flex justify-content-start mb-3">
+                <div style="width: 15%;
+                background-color: #1F6CB5;
+                border-radius: 99px;
+                height: 6px;"></div>
+            </div>
+        </div>
+        <div class="row my-1 mb-3 custom-width-hidden" >
+            <h2 style="color:#383838;">Frequently<br>asked questions</h2>
+        </div>
 
-    <div class="faq-container" id="FAQs-container"></div>
+        <div class="faq-container row" id="FAQs-container">
+
+                <div class="col">
+                    <div class="faq-row"></div>
+                </div>
+
+                <div class="col">
+                    <div class="faq-row"></div>
+                </div>
+        </div>
+
 
     <?php // pang kuha ng question and answer sa db
         $faqData = array();
@@ -404,31 +486,41 @@
     const faqsContainer = document.getElementById('FAQs-container');
     let lastExpandedItem = null; // Keep track of the last expanded item
 
-            faqData.slice(0, 6).forEach((item) => {
-                let faqItem = document.createElement('article');
-                faqItem.classList.add('faq-item');
+    let currentRow = 0;
+    faqData.slice(0, 6).forEach((item, index) => {
+    let faqItem = document.createElement('article');
+    faqItem.classList.add('faq-item');
 
-                let markup = `
-                    <div class="item-question"> 
-                        <span class="question-text">${item.question}</span>
-                        <span class="arrows-container">
-                            <span class="expand">⮟</span>
-                            <span class="close">⮝</span>
-                        </span>
-                    </div>
-                    <div class="item-answer">
-                        <span class="answer-text">${item.answer}</span>
-                    </div>
-                `;
+        let markup = `
+            <div class="item-question"> 
+            <span class="question-text">${item.question}</span>
+            <span class="arrows-container">
+                <span class="expand"><i class="fa-solid fa-chevron-down" style="font-size:20px;"></i></span>
+                <span class="close"><i class="fa-solid fa-xmark" style="font-size:20px;"></i></span>
+            </span>
+            </div>
+            <div class="item-answer">
+            <span class="answer-text">${item.answer}</span>
+            </div>
+        `;
 
-                faqItem.innerHTML = markup;
-                faqsContainer.append(faqItem);
+        faqItem.innerHTML = markup;
 
-                // Add a setTimeout to trigger the fade-in animation
-                setTimeout(() => {
-                    faqItem.style.display = 'block';
-                }, 100); // You can adjust the delay as needed
-        });
+        // Determine the FAQ row to append to (every 3 items)
+        const faqRow = faqsContainer.querySelectorAll('.faq-row')[currentRow];
+        faqRow.appendChild(faqItem);
+
+        // Add a setTimeout to trigger the fade-in animation
+        setTimeout(() => {
+            faqItem.style.display = 'block';
+        }, 100); // You can adjust the delay as needed
+
+    // Move to the next row after every 3 items
+        if ((index + 1) % 3 === 0) {
+            currentRow++;
+        }
+    });
+
 
 
     // Add ng function para sa arrow pag niclick yun, lalabas ang kasagutan sa katanungan *elyen*
@@ -443,7 +535,7 @@
                     if (item !== faqItem) {
                         // Collapse other FAQ items and set their height to the default value
                         item.classList.remove('show-answer');
-                        item.style.height = '100px';
+                        item.style.height = '90px';
                         item.querySelector('.item-answer').style.animation = 'slideUpFadeOut 1s ease';
                     }
                 });
