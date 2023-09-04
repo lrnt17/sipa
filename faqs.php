@@ -229,7 +229,7 @@
             </div>
         
             <div class="col-auto">
-                <h3>Frequently <b>Asked Questions</b></h3>
+                <h3 style="font-weight: 400;">Frequently <b>Asked Questions</b></h3>
             </div>
         </div>
 
@@ -293,6 +293,7 @@
               faqData.map((item) => {
                   let faqItem = document.createElement('article');
                   faqItem.classList.add('faq-item','container','my-2');
+                  faqItem.style.padding ="0";
               
                   let markup = `
                       <div class="item-question"> 
