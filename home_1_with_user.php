@@ -245,13 +245,13 @@
 
 
 <div class="container">
-    <div class="d-flex justify-content-center mt-5" style="text-align: center;">  
-        <p class="mt-4"style="font-size:14px; color:#5A5A5A; width: 400px;">
-            There are many types of contraception available and none are perfect. The 
-            Contraception Choices website provides honest information to help weigh 
-            up the pros and cons.
-        </p>
-    </div>
+        <div class="d-flex justify-content-center mt-5" style="text-align: center;">  
+            <p class="mt-4"style="font-size:14px; color:#5A5A5A; width: 400px;">
+                There are many types of contraception available and none are perfect. The 
+                Contraception Choices website provides honest information to help weigh 
+                up the pros and cons.
+            </p>
+        </div>
 
     
 
@@ -419,52 +419,11 @@
     </div>
 
 </div>
-    <!-- footer -->
-    <footer>
-        <div>
-            <img src="" alt="">
 
-            <a href="#">Home</a>
-            <a href="#">FAQs</a>
-            <a href="#">Services</a>
-            <a href="#">Contraceptive Method</a>
-            <a href="#">Videos</a>
-            <a href="#">Period Calculator</a>
-            <a href="#">Community Forum</a>
-            <a href="#">About STDs</a>
+<?php include('footer.php') ?>
 
-            <p>Our Partner</p>
-            <img src="" alt="">
-
-            <h3>+63 912 345 6789</h3>
-            <!-- icon -->
-            <!-- icon -->
-        </div>
-        
-        <div>
-            <!-- Translation Code here -->
-            <span>
-                <div class="translate" id="google_translate_element"></div>
-
-                    <script type="text/javascript">
-                        function googleTranslateElementInit() {
-                        new google.translate.TranslateElement({
-                            pageLanguage: 'en',
-                            includedLanguages: 'en,tl',
-                            layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-                            autoDisplay: false,
-                            multilanguagePage: true
-                        }, 'google_translate_element');
-                        }
-                    </script>
-                    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-            </span>
-            <!-- Translation Code End here -->
-            <a href="">Privacy Policy</a>
-            <a href="">Terms of Use</a>
-        </div>
-    </footer>
 </body>
+
 <script>
     // Assuming you have multiple <a> tags with the class "clearSessionStorage"
     let clearSessionStorageLinks = document.querySelectorAll('.js-link');

@@ -48,7 +48,7 @@
 
 
                 <div class="container rounded-4 p-5 shadow-sm" style="background: #D2E0F8;position: relative;top: -104px;">
-                    <div class="row mx-3 mt-5">
+                    <div class="row mt-5">
                         <div class="row mt-5 flex-nowrap" style="align-items: center;">
                                     <div class="col-auto">
                                         <div class="vl" style="width: 10px;
@@ -179,6 +179,8 @@
             is simply dummy text of the printing and typesetting industry.
         </div>
     </template>
+
+    <?php include('footer.php') ?>
 </body>
 <script>
 

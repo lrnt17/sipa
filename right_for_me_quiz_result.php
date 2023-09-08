@@ -31,7 +31,7 @@
   }
   /* CSS to resize the calendar container */
   .flatpickr-calendar {
-    width: 300px; /* You can adjust this value to your preferred width */
+    width: fit-content; /* You can adjust this value to your preferred width */
     border-radius: 5%;
     padding: 20px;
     margin-left: 50px;
