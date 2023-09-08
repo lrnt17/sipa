@@ -125,7 +125,7 @@
             </div>
         
             <div class="col-auto">
-                <h3>Pick what's important to you</h3>
+                <h3 style="font-weight:400;"><b>Compare</b> contraceptive methods</h3>
             </div>
         </div>
 
@@ -163,6 +163,8 @@
             <div class="js-effectiveness"></div>
         </td>
     </template>
+
+    <?php include('footer.php') ?>
 
 </body>
 

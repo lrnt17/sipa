@@ -2,7 +2,7 @@
     require("connect.php");
     require('functions.php');
 
-    echo $_SESSION['USER']['user_id']."<br>";
+   // echo $_SESSION['USER']['user_id']."<br>";
 ?>
 
 <!DOCTYPE html>
@@ -10,6 +10,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/324d76b648.js" crossorigin="anonymous"></script>
     <title>Compare Side-by-side | SiPa</title>
 </head>
 <style>
@@ -22,14 +23,9 @@
         }
     }
 
-    li, .js-options{
-        animation: appear 1s ease-in-out; /* Apply the 'appear' animation with a duration of 1 second and ease-in-out timing function */
-    }
-
-
-
-
-
+    /*li, .js-options{
+        animation: appear 1s ease-in-out; /* Apply the 'appear' animation with a duration of 1 second and ease-in-out timing function 
+    }*/
 
     ul {
         list-style-type: none;
@@ -75,7 +71,6 @@
 
     .js-table{
         float: left;
-        border: 1px solid red;
     }
 
     ul {
@@ -85,29 +80,63 @@
       float:left;
     }
     li {
-      border: 1px solid black;
       padding: 10px;
-      width: 100px;
+      width: fit-content;
+    }
+
+    .js-select_2{
+        background-color:#ffff !important;
+        min-width: 10px;
+    }
+    .js-list1, .js-list2, .js-list3{
+        padding:0 !important;
+        max-width: 350px;
     }
 </style>
-<body>
-    <section class="js-comparison-sidebyside hide">
-        <?php include('compare-methods.php') ?>
-        
-        <div id="side_by_side">
-            <div class="js-table js-column-labels">
-                <ul class="js-list1">
-                    
-                </ul>
-            </div>
-            <div class="js-table js-select_1">
-                
-            </div>
-            <div class="js-table js-select_2">
+<body style="background: #F2F5FF;">
+ 
+ <!-- navigation bar with logo -->
+ <?php include('header.php') ?>
 
+ <div class="container mt-5"> <!-- mt-3-->
+        <div class="row" style="align-items: center;">
+            <div class="col-auto">
+                <div class="vl" style="width: 10px;
+                background-color: #1F6CB5;
+                border-radius: 99px;
+                height: 75px;
+                display: -webkit-inline-box;"></div>
+            </div>
+        
+            <div class="col-auto">
+                <h3 style="font-weight:400;"><b>Compare</b> contraceptive methods</h3>
             </div>
         </div>
-    </section>    
+
+
+    <section class="js-comparison-sidebyside hide">
+        <?php include('compare-methods.php') ?>
+
+            <div class="container rounded-bottom-4" style="background-color:#D2E0F8;" id="side_by_side">
+                <div class="row pe-2 pb-4 pt-4 mb-5">
+                    <div class="col-2 js-table js-column-labels pt-4 mt-2">
+                        <ul class="js-list1">
+                            
+                        </ul>
+                    </div>
+                    <div class="col js-table js-select_1 rounded-3 p-4 m-2 shadow-sm" style="background-color:#ffff; min-width: 10px;">
+                        
+                    </div>
+                    <div class="col js-table js-select_2 rounded-3 p-4 m-2 shadow-sm">
+
+                    </div>
+
+                </div>
+            </div>
+    </section>   
+</div> 
+
+<?php include('footer.php') ?>
 </body>
 <script>
     //var secondDiv = document.querySelector('.js-select_2');
@@ -141,7 +170,7 @@
                         if(obj.success){
 
                             let li = document.createElement('li');
-                            li.innerHTML = 'blankdiv';
+                            li.innerHTML = '‎';
                             column_labels.appendChild(li);
 
                             for (let column in obj.columns) {
@@ -161,8 +190,7 @@
 
         },
 
-        load_contraceptive_options_1: function(){
-            
+        load_contraceptive_options_1: function () {
             let select_method_holder = document.querySelector('.js-select_1');
 
             let form = new FormData();
@@ -171,45 +199,110 @@
 
             var ajax = new XMLHttpRequest();
 
-            ajax.addEventListener('readystatechange',function(){
+            ajax.addEventListener('readystatechange', function () {
+                if (ajax.readyState == 4) {
+                if (ajax.status == 200) {
+                    let obj = JSON.parse(ajax.responseText);
 
-                if(ajax.readyState == 4)
-                {
-                    if(ajax.status == 200){
+                    if (obj.success) {
+                    // Create a new row div
+                    let newRow = document.createElement('div');
+                    newRow.classList = 'row';
 
-                        let obj = JSON.parse(ajax.responseText);
+                    // Create a column with class 'js-options-title'
+                    let titleColumn = document.createElement('div');
+                    titleColumn.classList = 'col js-options-title';
+                    titleColumn.innerHTML = 'Select Method #1';
 
-                        if(obj.success){
+                    // Create a column for the custom content
+                    let customColumn = document.createElement('div');
+                    customColumn.classList = 'col-auto';
+                    customColumn.innerHTML = '<div class="vl" style="width: 7px; background-color: #1F6CB5; border-radius: 99px; height: 25px; display: -webkit-inline-box;"></div>';
 
-                            let div = document.createElement('div');
-                            div.classList = 'js-options-title';
-                            div.innerHTML = 'Select Method #1';
-                            select_method_holder.appendChild(div);
+                    // Append the titleColumn and customColumn to the newRow
+                    newRow.appendChild(customColumn);
+                    newRow.appendChild(titleColumn);
+                    
 
-                            let br = document.createElement('br');
-                            select_method_holder.appendChild(br);
+                    // Append the newRow to the select_method_holder
+                    select_method_holder.appendChild(newRow);
 
-                            for (let i = 0; i < obj.rows.length; i++) {
-                                let birthControlName = obj.rows[i].birth_control_name;
-                                let div = document.createElement('div');
-                                div.classList = 'js-options';
-                                div.textContent = birthControlName;
-                                div.style = "cursor:pointer;";
-                                div.setAttribute('onclick',`compare_sidebyside.selected_contraceptive_1('${obj.rows[i].birth_control_id}')`);
-                                select_method_holder.appendChild(div);
-                            }
-                            
-                        }
-                    }else{
-                        alert("Please check your internet connection");
+                    // Create a line break
+                    let br = document.createElement('br');
+                    select_method_holder.appendChild(br);
+
+                    for (let i = 0; i < obj.rows.length; i++) {
+                        let birthControlName = obj.rows[i].birth_control_name;
+                        let birthControlImage = obj.rows[i].birth_control_icon;
+
+                        // Create a div with class "row"
+                        let rowElement = document.createElement('div');
+                        rowElement.classList.add("row");
+
+                        // Create a div with class "col" for the image
+                        let imageCol = document.createElement('div');
+                        imageCol.classList.add("col-auto","rounded-4", "ms-2", "shadow-sm");
+                        imageCol.style.background="gray";
+                        imageCol.style.width="100px";
+                        imageCol.style.height="60px";
+                        imageCol.style.position="relative";
+                        imageCol.style.overflow="hidden";
+                        imageCol.style.padding="0";
+
+                        // Create an image element
+                        let imageElement = document.createElement('img');
+                        imageElement.src = birthControlImage;
+                        imageElement.style.width="100%";
+                        imageElement.style.height="auto";
+                        imageElement.style.objectFit="cover";
+
+                        // Append the image to the image column
+                        imageCol.appendChild(imageElement);
+
+                        // Create a div with class "col" for the text
+                        let textCol = document.createElement('div');
+                        textCol.classList.add("col");
+                        textCol.style.display="flex";
+                        textCol.style.alignItems="center";
+
+                        // Create a text element for the option name
+                        let textElement = document.createElement('div');
+                        textElement.textContent = birthControlName;
+                        
+                        // Append the text to the text column
+                        textCol.appendChild(textElement);
+
+                        // Append the image column and text column to the row
+                        rowElement.appendChild(imageCol);
+                        rowElement.appendChild(textCol);
+
+                        // Create a container for the entire option
+                        let optionContainer = document.createElement('div');
+                        optionContainer.classList.add("js-options", "p-2","ps-3", "my-2", "rounded-4", "shadow-sm");
+                        optionContainer.style.background = "white";
+                        optionContainer.style.cursor = "pointer";
+                        optionContainer.setAttribute('onclick', `compare_sidebyside.selected_contraceptive_1('${obj.rows[i].birth_control_id}')`);
+
+
+                        // Append the row to the option container
+                        optionContainer.appendChild(rowElement);
+
+                        // Append the option container to the select_method_holder
+                        select_method_holder.appendChild(optionContainer);
                     }
+
+                    }
+                } else {
+                    alert('Please check your internet connection');
+                }
                 }
             });
 
-            ajax.open('post','ajax.php', true);
+            ajax.open('post', 'ajax.php', true);
             ajax.send(form);
 
-        },
+    },
+
 
         load_contraceptive_options_2: function(){
 
@@ -231,29 +324,96 @@
 
                         if(obj.success){
 
-                            let div = document.createElement('div');
-                            div.classList = 'js-options-title';
-                            div.innerHTML = 'Select Method #2';
-                            select_method_holder.appendChild(div);
+                            // Create a new row div
+                            let newRow = document.createElement('div');
+                            newRow.classList = 'row';
 
+                            // Create a column with class 'js-options-title'
+                            let titleColumn = document.createElement('div');
+                            titleColumn.classList = 'col js-options-title';
+                            titleColumn.innerHTML = 'Select Method #2';
+
+                            // Create a column for the custom content
+                            let customColumn = document.createElement('div');
+                            customColumn.classList = 'col-auto';
+                            customColumn.innerHTML = '<div class="vl" style="width: 7px; background-color: #1F6CB5; border-radius: 99px; height: 25px; display: -webkit-inline-box;"></div>';
+
+                            // Append the titleColumn and customColumn to the newRow
+                            newRow.appendChild(customColumn);
+                            newRow.appendChild(titleColumn);
+
+                            // Append the newRow to the select_method_holder
+                            select_method_holder.appendChild(newRow);
+
+                            // Create a line break
                             let br = document.createElement('br');
                             select_method_holder.appendChild(br);
 
                             for (let i = 0; i < obj.rows.length; i++) {
                                 let birthControlName = obj.rows[i].birth_control_name;
-                                let div = document.createElement('div');
-                                div.classList = 'js-options';
-                                div.textContent = birthControlName;
-                                div.style = "cursor:pointer;";
-                                div.setAttribute('onclick',`compare_sidebyside.selected_contraceptive_2('${obj.rows[i].birth_control_id}')`);
-                                select_method_holder.appendChild(div);
+                                let birthControlImage = obj.rows[i].birth_control_icon;
+
+                                // Create a div with class "row"
+                                let rowElement = document.createElement('div');
+                                rowElement.classList.add("row");
+
+                                // Create a div with class "col" for the image
+                                let imageCol = document.createElement('div');
+                                imageCol.classList.add("col-auto","rounded-4", "ms-2", "shadow-sm");
+                                imageCol.style.background="gray";
+                                imageCol.style.width="100px";
+                                imageCol.style.height="60px";
+                                imageCol.style.position="relative";
+                                imageCol.style.overflow="hidden";
+                                imageCol.style.padding="0";
+
+                                // Create an image element
+                                let imageElement = document.createElement('img');
+                                imageElement.src = birthControlImage;
+                                imageElement.style.width="100%";
+                                imageElement.style.height="auto";
+                                imageElement.style.objectFit="cover";
+
+                                // Append the image to the image column
+                                imageCol.appendChild(imageElement);
+
+                                // Create a div with class "col" for the text
+                                let textCol = document.createElement('div');
+                                textCol.classList.add("col");
+                                textCol.style.display="flex";
+                                textCol.style.alignItems="center";
+
+                                // Create a text element for the option name
+                                let textElement = document.createElement('div');
+                                textElement.textContent = birthControlName;
+                                
+                                // Append the text to the text column
+                                textCol.appendChild(textElement);
+
+                                // Append the image column and text column to the row
+                                rowElement.appendChild(imageCol);
+                                rowElement.appendChild(textCol);
+
+                                // Create a container for the entire option
+                                let optionContainer = document.createElement('div');
+                                optionContainer.classList.add("js-options", "p-2","ps-3", "my-2", "rounded-4", "shadow-sm");
+                                optionContainer.style.background = "white";
+                                optionContainer.style.cursor = "pointer";
+                                optionContainer.setAttribute('onclick', `compare_sidebyside.selected_contraceptive_2('${obj.rows[i].birth_control_id}')`);
+
+
+                                // Append the row to the option container
+                                optionContainer.appendChild(rowElement);
+
+                                // Append the option container to the select_method_holder
+                                select_method_holder.appendChild(optionContainer);
+                                    }
+                                }
+                                compare_sidebyside.add_pointer_event(compare_sidebyside.birth_control_id);
+                            }else{
+                                alert("Please check your internet connection");
                             }
                         }
-                        compare_sidebyside.add_pointer_event(compare_sidebyside.birth_control_id);
-                    }else{
-                        alert("Please check your internet connection");
-                    }
-                }
             });
 
             ajax.open('post','ajax.php', true);
@@ -295,7 +455,7 @@
 
                         let obj = JSON.parse(ajax.responseText);
                         
-                        let excludedColumns = ["sidebyside_id", "birth_control_id", "birth_control_icon"];
+                        let excludedColumns = ["sidebyside_id", "birth_control_id"];
                         let ul = document.createElement("ul");
                         ul.classList = 'js-list2';
 
@@ -305,20 +465,76 @@
                             div.classList = 'js-close-selected1';
                             div.style = "float:right;cursor:pointer;";
                             div.setAttribute('onclick',`compare_sidebyside.close_selected_contraceptive(this)`);
-                            div.innerHTML = 'X';
+                            div.innerHTML = '<i class="fa-solid fa-xmark"></i>';
                             select_method_holder.appendChild(div);
 
                             for (let i = 0; i < obj.rows.length; i++) {
                                 
                                 let row = obj.rows[i];
+                                let li = document.createElement('li');
+
+                                // Create a div element with class "row"
+                                let rowDiv = document.createElement('div');
+                                rowDiv.className = 'row';
+
+                                // Create a div element for the column containing the image
+                                let imgCol = document.createElement('div');
+                                imgCol.className = 'col';
+
+                                // Create an img element and set its source to the value of birth_control_icon
+                                let img = document.createElement('img');
+                                img.src = row['birth_control_icon'];
+                                img.style.width="100%";
+                                img.style.height="auto";
+                                img.style.objectFit="cover";
+
+                                // Create a new div inside the imgCol for the image
+                                let imgContainerDiv = document.createElement('div');
+                                imgContainerDiv.classList.add("col-auto","rounded-4", "shadow-sm");
+                                imgContainerDiv.style.background="gray";
+                                imgContainerDiv.style.width="100px";
+                                imgContainerDiv.style.height="60px";
+                                imgContainerDiv.style.position="relative";
+                                imgContainerDiv.style.overflow="hidden";
+                                imgContainerDiv.style.padding="0";
+
+                                // Append the img element to the imgContainerDiv
+                                imgContainerDiv.appendChild(img);
+
+                                // Append the imgContainerDiv to the imgCol
+                                imgCol.appendChild(imgContainerDiv);
+
+                                // Append the img column to the row
+                                rowDiv.appendChild(imgCol);
+
+                                // Create a div element for the column containing the text
+                                let textCol = document.createElement('div');
+                                textCol.classList.add('col-auto','mt-2');
+                                textCol.style.display="flex";
+                                textCol.style.alignItems="center";
+
+                                // Create a p element and set its text content to the value of birth_control_name
+                                let p = document.createElement('h6');
+                                p.textContent = row['birth_control_name'];
+                                textCol.appendChild(p);
+
+                                // Append the text column to the row
+                                rowDiv.appendChild(textCol);
+
+                                // Append the row div to the li element
+                                li.appendChild(rowDiv);
+                                ul.appendChild(li);
+
 
                                 for (let key in row) {
 
-                                    if (!excludedColumns.includes(key)) {
+                                    if (!excludedColumns.includes(key) && key !== 'birth_control_name' && key !== 'birth_control_icon') {
+                                        //console.log(key);
                                         let value = row[key];
+
                                         let li = document.createElement('li');
-                                        //li.textContent = key + ': ' + value;
                                         li.textContent = value;
+
                                         ul.appendChild(li);
                                     }
                                 }
@@ -340,6 +556,12 @@
 
         selected_contraceptive_2: function(birth_control_id){
             
+            compare_sidebyside.enable_second_div_click();
+
+            // Make the corresponding div element unclickable
+            compare_sidebyside.birth_control_id = birth_control_id;
+            compare_sidebyside.add_pointer_event(compare_sidebyside.birth_control_id);
+
             let select_method_holder = document.querySelector('.js-select_2');
             select_method_holder.innerHTML = "";
 
@@ -357,38 +579,93 @@
 
                         let obj = JSON.parse(ajax.responseText);
                         
-                        let excludedColumns = ["sidebyside_id", "birth_control_id", "birth_control_icon"];
+                        let excludedColumns = ["sidebyside_id", "birth_control_id"];
                         let ul = document.createElement("ul");
-                        ul.classList = 'js-list3';
+                        ul.classList = 'js-list2';
 
                         if(obj.success){
                             
                             let div = document.createElement("div");
                             div.classList = 'js-close-selected2';
-                            div.style = "float:right;cursor:pointer;pointer-events: auto;";
+                            div.style = "float:right;cursor:pointer;";
                             div.setAttribute('onclick',`compare_sidebyside.close_selected_contraceptive(this)`);
-                            div.innerHTML = 'X';
+                            div.innerHTML = '<i class="fa-solid fa-xmark"></i>';
                             select_method_holder.appendChild(div);
 
                             for (let i = 0; i < obj.rows.length; i++) {
                                 
                                 let row = obj.rows[i];
+                                let li = document.createElement('li');
+
+                                // Create a div element with class "row"
+                                let rowDiv = document.createElement('div');
+                                rowDiv.className = 'row';
+
+                                // Create a div element for the column containing the image
+                                let imgCol = document.createElement('div');
+                                imgCol.className = 'col';
+
+                                // Create an img element and set its source to the value of birth_control_icon
+                                let img = document.createElement('img');
+                                img.src = row['birth_control_icon'];
+                                img.style.width="100%";
+                                img.style.height="auto";
+                                img.style.objectFit="cover";
+
+                                // Create a new div inside the imgCol for the image
+                                let imgContainerDiv = document.createElement('div');
+                                imgContainerDiv.classList.add("col-auto","rounded-4", "shadow-sm");
+                                imgContainerDiv.style.background="gray";
+                                imgContainerDiv.style.width="100px";
+                                imgContainerDiv.style.height="60px";
+                                imgContainerDiv.style.position="relative";
+                                imgContainerDiv.style.overflow="hidden";
+                                imgContainerDiv.style.padding="0";
+
+                                // Append the img element to the imgContainerDiv
+                                imgContainerDiv.appendChild(img);
+
+                                // Append the imgContainerDiv to the imgCol
+                                imgCol.appendChild(imgContainerDiv);
+
+                                // Append the img column to the row
+                                rowDiv.appendChild(imgCol);
+
+                                // Create a div element for the column containing the text
+                                let textCol = document.createElement('div');
+                                textCol.classList.add('col-auto','mt-2');
+                                textCol.style.display="flex";
+                                textCol.style.alignItems="center";
+
+                                // Create a p element and set its text content to the value of birth_control_name
+                                let p = document.createElement('h6');
+                                p.textContent = row['birth_control_name'];
+                                textCol.appendChild(p);
+
+                                // Append the text column to the row
+                                rowDiv.appendChild(textCol);
+
+                                // Append the row div to the li element
+                                li.appendChild(rowDiv);
+                                ul.appendChild(li);
 
                                 for (let key in row) {
 
-                                    if (!excludedColumns.includes(key)) {
+                                    if (!excludedColumns.includes(key) && key !== 'birth_control_name' && key !== 'birth_control_icon') {
+                                        //console.log(key);
                                         let value = row[key];
+
                                         let li = document.createElement('li');
-                                        //li.textContent = key + ': ' + value;
                                         li.textContent = value;
+
                                         ul.appendChild(li);
                                     }
                                 }
                             }
                             select_method_holder.appendChild(ul);
                             compare_sidebyside.list_height_adjust();
+
                         }
-                        
                     }else{
                         alert("Please check your internet connection");
                     }

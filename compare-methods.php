@@ -28,12 +28,12 @@
 <section>
     <div class="container mt-5">
         <div class="row">
-        <div class="col py-4 rounded-top-4 col-custom" data-target="chart">
-            <a href="comparison-chart.php" class="label">Comparison Chart</a>
-        </div>
-        <div class="col py-4 rounded-top-4 col-custom" data-target="sidebyside">
-            <a href="comparison-sidebyside.php" class="label">Side-by-side Comparison</a>
-        </div>
+            <div class="col py-4 rounded-top-4 col-custom" data-target="chart" id="chartDiv">
+                <a href="comparison-chart.php" class="label">Comparison Chart</a>
+            </div>
+            <div class="col py-4 rounded-top-4 col-custom" data-target="sidebyside" id="sidebysideDiv">
+                <a href="comparison-sidebyside.php" class="label">Side-by-side Comparison</a>
+            </div>
         </div>
     </div>
     <!--<p><b>Compare</b> contraception methods</p>
@@ -83,6 +83,25 @@
             
             // Store the active link in local storage
             localStorage.setItem('activeLink', target);
+        });
+    });
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Get references to the clickable divs
+        const chartDiv = document.getElementById("chartDiv");
+        const sidebysideDiv = document.getElementById("sidebysideDiv");
+
+        // Add click event listeners to the divs
+        chartDiv.addEventListener("click", function () {
+            // Redirect to the link when the div is clicked
+            window.location.href = chartDiv.querySelector("a").getAttribute("href");
+        });
+
+        sidebysideDiv.addEventListener("click", function () {
+            // Redirect to the link when the div is clicked
+            window.location.href = sidebysideDiv.querySelector("a").getAttribute("href");
         });
     });
 </script>
