@@ -193,9 +193,24 @@
                                 let birthControlName = obj.rows[i].birth_control_name;
                                 let div = document.createElement('div');
                                 div.classList = 'js-options';
-                                div.textContent = birthControlName;
                                 div.style = "cursor:pointer;";
                                 div.setAttribute('onclick',`compare_sidebyside.selected_contraceptive_1('${obj.rows[i].birth_control_id}')`);
+                                
+                                // Create a h3 element
+                                let h4 = document.createElement('h4');
+                                h4.textContent = birthControlName;
+                                
+                                // Create an img element
+                                let img = document.createElement('img');
+                                img.src = obj.rows[i].birth_control_icon; // Set the source of the image
+                                img.alt = obj.rows[i].birth_control_name; // Set the alt text of the image
+                                // Set the width and height of the image
+                                img.width = 25;
+                                img.height = 25;
+                                
+                                // Append the img element to the div element
+                                div.appendChild(img);
+                                div.appendChild(h4);
                                 select_method_holder.appendChild(div);
                             }
                             
@@ -243,9 +258,26 @@
                                 let birthControlName = obj.rows[i].birth_control_name;
                                 let div = document.createElement('div');
                                 div.classList = 'js-options';
-                                div.textContent = birthControlName;
                                 div.style = "cursor:pointer;";
+
+                                // Create a h3 element
+                                let h4 = document.createElement('h4');
+                                h4.textContent = birthControlName;
+                                
+                                // Create an img element
+                                let img = document.createElement('img');
+                                img.src = obj.rows[i].birth_control_icon; // Set the source of the image
+                                img.alt = obj.rows[i].birth_control_name; // Set the alt text of the image
+                                // Set the width and height of the image
+                                img.width = 25;
+                                img.height = 25;
+                                
+                                // Append the img element to the div element
+                                div.appendChild(img);
+                                div.appendChild(h4);
                                 div.setAttribute('onclick',`compare_sidebyside.selected_contraceptive_2('${obj.rows[i].birth_control_id}')`);
+                                
+                                
                                 select_method_holder.appendChild(div);
                             }
                         }
@@ -295,7 +327,7 @@
 
                         let obj = JSON.parse(ajax.responseText);
                         
-                        let excludedColumns = ["sidebyside_id", "birth_control_id", "birth_control_icon"];
+                        let excludedColumns = ["sidebyside_id", "birth_control_id"];
                         let ul = document.createElement("ul");
                         ul.classList = 'js-list2';
 
@@ -311,14 +343,36 @@
                             for (let i = 0; i < obj.rows.length; i++) {
                                 
                                 let row = obj.rows[i];
+                                let li = document.createElement('li');
+
+                                // Create a div element
+                                let div = document.createElement('div');
+
+                                // Create a p element and set its text content to the value of birth_control_name
+                                let p = document.createElement('p');
+                                p.textContent = row['birth_control_name'];
+                                div.appendChild(p);
+
+                                // Create an img element and set its source to the value of birth_control_image
+                                let img = document.createElement('img');
+                                img.src = row['birth_control_icon'];
+                                img.width = 25;
+                                img.height = 25;
+                                div.appendChild(img);
+
+                                // Append the div element to the li element
+                                li.appendChild(div);
+                                ul.appendChild(li);
 
                                 for (let key in row) {
 
-                                    if (!excludedColumns.includes(key)) {
+                                    if (!excludedColumns.includes(key) && key !== 'birth_control_name' && key !== 'birth_control_icon') {
+                                        //console.log(key);
                                         let value = row[key];
+
                                         let li = document.createElement('li');
-                                        //li.textContent = key + ': ' + value;
                                         li.textContent = value;
+
                                         ul.appendChild(li);
                                     }
                                 }
@@ -357,7 +411,7 @@
 
                         let obj = JSON.parse(ajax.responseText);
                         
-                        let excludedColumns = ["sidebyside_id", "birth_control_id", "birth_control_icon"];
+                        let excludedColumns = ["sidebyside_id", "birth_control_id"];
                         let ul = document.createElement("ul");
                         ul.classList = 'js-list3';
 
@@ -373,14 +427,36 @@
                             for (let i = 0; i < obj.rows.length; i++) {
                                 
                                 let row = obj.rows[i];
+                                let li = document.createElement('li');
+
+                                // Create a div element
+                                let div = document.createElement('div');
+
+                                // Create a p element and set its text content to the value of birth_control_name
+                                let p = document.createElement('p');
+                                p.textContent = row['birth_control_name'];
+                                div.appendChild(p);
+
+                                // Create an img element and set its source to the value of birth_control_image
+                                let img = document.createElement('img');
+                                img.src = row['birth_control_icon'];
+                                img.width = 25;
+                                img.height = 25;
+                                div.appendChild(img);
+
+                                // Append the div element to the li element
+                                li.appendChild(div);
+                                ul.appendChild(li);
 
                                 for (let key in row) {
 
-                                    if (!excludedColumns.includes(key)) {
+                                    if (!excludedColumns.includes(key) && key !== 'birth_control_name' && key !== 'birth_control_icon') {
+                                        
                                         let value = row[key];
+
                                         let li = document.createElement('li');
-                                        //li.textContent = key + ': ' + value;
                                         li.textContent = value;
+                                        
                                         ul.appendChild(li);
                                     }
                                 }
