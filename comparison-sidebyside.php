@@ -301,8 +301,7 @@
             ajax.open('post', 'ajax.php', true);
             ajax.send(form);
 
-    },
-
+        },
 
         load_contraceptive_options_2: function(){
 
@@ -581,7 +580,7 @@
                         
                         let excludedColumns = ["sidebyside_id", "birth_control_id"];
                         let ul = document.createElement("ul");
-                        ul.classList = 'js-list2';
+                        ul.classList = 'js-list3';
 
                         if(obj.success){
                             
@@ -657,7 +656,6 @@
 
                                         let li = document.createElement('li');
                                         li.textContent = value;
-
                                         ul.appendChild(li);
                                     }
                                 }
