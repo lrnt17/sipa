@@ -1691,26 +1691,35 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 	}else
 	if($_POST['data_type'] == 'add_appointment')
 	{
-		$fullname = addslashes($_POST['fullname']);
+		$fname = addslashes($_POST['fname']);
+		$lname = addslashes($_POST['lname']);
         $address = addslashes($_POST['address']);
         $email = addslashes($_POST['email']);
         $municipality = addslashes($_POST['selected_municipality']);
+		$health_facility = addslashes($_POST['selected_health_facility']);
         $contact = (int)($_POST['contact']);
         $gender = $_POST['selected_gender'];
         $dob = $_POST['dob'];
         $appointment_date = $_POST['appointment_date'];
         $appointment_timeslot = $_POST['appointment_timeslot'];
-    
-        $query = "insert into appointments (app_name,app_address,app_email,city_municipality,app_pnum,app_gender,app_bdate,app_date,app_timeslot) 
-        values ('$fullname','$address','$email','$municipality','$contact','$gender','$dob','$appointment_date','$appointment_timeslot')";
-        query($query);
 
-        /*$query = "SELECT * FROM appointments WHERE app_date = '$appointment_date' && app_timeslot = '$appointment_timeslot'";
-        $rows = query($query);*/
+		// Check if contact number already exists
+		$checkQuery = "SELECT * FROM appointments WHERE app_pnum = '$contact'";
+		$result = query($checkQuery);
 
-        $info['success'] = true;
-        $info['message'] = "Your appointment was successfully created";
+		if($result){
+			$info['message'] = "Your contact number already exists.";
+		} else {
+			// Insert the new record
+			$query = "INSERT INTO appointments (app_fname,app_lname,app_address,app_email,city_municipality,health_facility,app_pnum,app_gender,app_bdate,app_date,app_timeslot) 
+			VALUES ('$fname','$lname','$address','$email','$municipality','$health_facility','$contact','$gender','$dob','$appointment_date','$appointment_timeslot')";
+			query($query);
 
+			appointment_confirmation($contact, $fname, $municipality, $health_facility, $appointment_date, $appointment_timeslot);
+
+			$info['success'] = true;
+			$info['message'] = "Your appointment was successfully created";
+		}
 	}
 	
 }

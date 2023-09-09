@@ -21,6 +21,8 @@ var sched_appointment = {
         let inputs = e.currentTarget.querySelectorAll('.modal-content input');
         let select_municipality = document.getElementById("municipality");
         let selected_municipality = select_municipality.options[select_municipality.selectedIndex].value;
+        let select_health_facility = document.getElementById("health_facility");
+        let selected_health_facility = select_health_facility.options[select_health_facility.selectedIndex].value;
         let select_gender = document.getElementById("gender");
         let selected_gender = select_gender.options[select_gender.selectedIndex].value;
         let appointment_date = sched_appointment.selectedDate;
@@ -34,6 +36,7 @@ var sched_appointment = {
         }
         
         form.append('selected_municipality', selected_municipality);
+        form.append('selected_health_facility', selected_health_facility);
         form.append('selected_gender', selected_gender);
         form.append('appointment_date', appointment_date);
         form.append('appointment_timeslot', appointment_timeslot);
@@ -322,6 +325,7 @@ var sched_appointment = {
         td.classList.add('selected');
         
         sched_appointment.selectedDate = date;
+        document.querySelector('.js-selected-date').innerHTML = sched_appointment.selectedDate;
         console.log(sched_appointment.selectedDate);
         sched_appointment.loadTimeslots();
     },

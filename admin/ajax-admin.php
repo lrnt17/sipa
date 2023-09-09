@@ -416,17 +416,18 @@
         if ($_POST['data_type'] == 'load_appointments') 
         {
             $city_municipality = $_POST['city_municipality'];
+            $health_facility = $_POST['health_facility'];
             $page = $_POST['page'];
             //$rows_per_page = 10;
             $rows_per_page = 2;
             $offset = ($page - 1) * $rows_per_page;
 
-            $query = "SELECT COUNT(*) FROM appointments WHERE city_municipality = '$city_municipality'";
+            $query = "SELECT COUNT(*) FROM appointments WHERE city_municipality = '$city_municipality' AND health_facility = '$health_facility'";
             $result = query($query);
             $total_rows = $result[0]['COUNT(*)'];
             $last_page = ceil($total_rows / $rows_per_page);
             
-            $query = "SELECT * FROM appointments WHERE city_municipality = '$city_municipality' ORDER BY app_id LIMIT $rows_per_page OFFSET $offset";
+            $query = "SELECT * FROM appointments WHERE city_municipality = '$city_municipality' AND health_facility = '$health_facility' ORDER BY app_id LIMIT $rows_per_page OFFSET $offset";
             $rows = query($query);
             
             if($rows){
@@ -442,8 +443,10 @@
         if ($_POST['data_type'] == 'search_appointments') 
         {
             $city_municipality = $_POST['city_municipality'];
+            $health_facility = $_POST['health_facility'];
             $query = $_POST['query'];
-            $sql = "SELECT * FROM appointments WHERE city_municipality = '$city_municipality' AND app_name LIKE '%$query%' ORDER BY app_id";
+            //$sql = "SELECT * FROM appointments WHERE city_municipality = '$city_municipality' AND app_name LIKE '%$query%' ORDER BY app_id";
+            $sql = "SELECT * FROM appointments WHERE (app_fname LIKE '%$query%' OR app_lname LIKE '%$query%') AND city_municipality = '$city_municipality' AND health_facility = '$health_facility' ORDER BY app_id";
             $rows = query($sql);
             if ($rows) {
                 $info['rows'] = $rows;

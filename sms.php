@@ -34,11 +34,21 @@ echo $output;
 $number = '09234726098';
 $verification_code = substr(number_format(time() * rand(), 0, '', ''), 0, 6);
 
+$fname = 'John';
+$lname = 'Doe';
+$healthFacility = 'SiPa Health Center';
+$city = 'San Jose del Monte';
+$appointmentDate = '2023-09-10';
+$appointmentTimeslot = '10:00 AM - 11:00 AM';
+
+$message = "Dear $fname $lname, Thank you for choosing SiPa! We are happy to confirm that your appointment has been successfully scheduled at our $healthFacility in $city. Your appointment details are as follows: Date: $appointmentDate Time: $appointmentTimeslot We look forward to seeing you soon and providing you with the best service possible. If you have any questions or need to reschedule, please don't hesitate to contact us. Thank you again for choosing SiPa! Best regards, The SiPa Team";
+
 $ch = curl_init();
 $parameters = array(
 'apikey' => 'c17f81a2eb07d0ad839118cad67d2c55', //Your API KEY
 'number' => $number,
-'message' => 'Welcome to SiPa!',
+/*'message' => 'Welcome to SiPa! We are excited to have you join our community. Here at SiPa, we strive to provide the best service possible. Your verification code is: ' . $verification_code,*/
+'message' => $message,
 'sendername' => 'SEMAPHORE'
 );
 

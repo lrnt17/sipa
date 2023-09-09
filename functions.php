@@ -218,3 +218,28 @@ function period_calendar($startMonth, $startYear, $periodDays, $ovulationDays, $
     //$calendar .= "</table>";
     return $calendar;
 }
+
+function appointment_confirmation($contact, $fname, $municipality, $health_facility, $appointment_date, $appointment_timeslot) 
+{
+    $message = "Hi $fname, your appointment at $health_facility, $municipality is set on $appointment_date at $appointment_timeslot. Thanks, SiPa!";
+
+    $ch = curl_init();
+    $parameters = array(
+        'apikey' => 'c17f81a2eb07d0ad839118cad67d2c55', //Your API KEY
+        'number' => $contact,
+        'message' => $message,
+        'sendername' => 'SiPa'
+    );
+
+    curl_setopt( $ch, CURLOPT_URL,'https://semaphore.co/api/v4/messages' );
+    curl_setopt( $ch, CURLOPT_POST, 1 );
+
+    //Send the parameters set above with the request
+    curl_setopt( $ch, CURLOPT_POSTFIELDS, http_build_query( $parameters ) );
+
+    // Receive response from server
+    curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+    $output = curl_exec( $ch );
+    curl_close ($ch);
+
+}

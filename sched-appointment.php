@@ -10,8 +10,11 @@
             <!-- Page 1 -->
             <div class="page" id="page-1">
                 <!-- Your form fields for page 1 here -->
-                <label for="fullname">Fullname:</label><br>
-                <input type="text" id="fullname" name="fullname"><br>
+                <label for="fname">First Name:</label><br>
+                <input type="text" id="fname" name="fname" maxlength="30"><br>
+
+                <label for="lname">Last Name:</label><br>
+                <input type="text" id="lname" name="lname" maxlength="15"><br>
 
                 <label for="address">Address:</label><br>
                 <input type="text" id="address" name="address"><br>
@@ -32,7 +35,7 @@
                 </div>
                 
                 <label for="contact">Contact:</label><br>
-                +63 <input type="tel" id="contact" name="contact"><br>
+                +63 <input type="tel" id="contact" name="contact" maxlength="10"><br>
 
                 <label for="gender">Gender:</label><br>
                 <select id="gender" name="gender">
@@ -65,6 +68,7 @@
 
             <!-- Page 3 (Final page) -->
             <div class="page" id="page-3" style="display: none;">
+                <h1 class="js-selected-date"></h1>
                 <!-- Your form fields for page 3 here -->
                 <div class="timeslots"></div>
                 <!--<button type="button" onclick="sched_appointment.prevPage()">Previous</button>-->

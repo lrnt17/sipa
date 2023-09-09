@@ -106,7 +106,8 @@
                     <tr>
                         <th><input type="checkbox" id="select-all-appointment" onclick="appointment_list.select_all_appointment(this);"></th>
                         <th>ID</th>
-                        <th>Name</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
                         <th>Schedule</th>
                         <th>Status</th>
                         <th>Action</th>
@@ -141,7 +142,8 @@
                 </label>
             </td>
             <td class="js-appointment-id"></td>
-            <td class="js-username"></td>
+            <td class="js-userfname"></td>
+            <td class="js-userlname"></td>
             <td>
                 <div class="js-appointment-date"></div>
                 <div class="js-appointment-timeslot"></div>
@@ -164,10 +166,12 @@
         load_appointments: function(e){
 
             let city_municipality = '<?php echo $user_place; ?>';
+            let health_facility = '<?php echo $user_work_at; ?>';
             //console.log(city_municipality);return;
             let form = new FormData();
 
             form.append('city_municipality', city_municipality);
+            form.append('health_facility', health_facility);
             form.append('page', this.current_page);
             form.append('data_type', 'load_appointments');
             var ajax = new XMLHttpRequest();
@@ -193,7 +197,8 @@
                                 let row = document.importNode(template.content, true);
                                 row.querySelector(".js-select-appointment").setAttribute('user_id', data.rows[i].app_id);
                                 row.querySelector(".js-appointment-id").textContent = data.rows[i].app_id;
-                                row.querySelector(".js-username").textContent = data.rows[i].app_name;
+                                row.querySelector(".js-userfname").textContent = data.rows[i].app_fname;
+                                row.querySelector(".js-userlname").textContent = data.rows[i].app_lname;
                                 
                                 row.querySelector(".js-appointment-date").textContent = data.rows[i].app_date;
                                 row.querySelector(".js-appointment-timeslot").textContent = data.rows[i].app_timeslot;
@@ -244,10 +249,12 @@
             let template = document.querySelector("#appointments-template");
 
             let city_municipality = '<?php echo $user_place; ?>';
+            let health_facility = '<?php echo $user_work_at; ?>';
 
             let form = new FormData();
 
             form.append('city_municipality', city_municipality);
+            form.append('health_facility', health_facility);
             form.append('data_type', 'search_appointments');
             form.append('query', query);
 
@@ -268,7 +275,8 @@
                                 let row = document.importNode(template.content, true);
                                 row.querySelector(".js-select-appointment").setAttribute('user_id', data.rows[i].app_id);
                                 row.querySelector(".js-appointment-id").textContent = data.rows[i].app_id;
-                                row.querySelector(".js-username").textContent = data.rows[i].app_name;
+                                row.querySelector(".js-userfname").textContent = data.rows[i].app_fname;
+                                row.querySelector(".js-userlname").textContent = data.rows[i].app_lname;
                                 
                                 row.querySelector(".js-appointment-date").textContent = data.rows[i].app_date;
                                 row.querySelector(".js-appointment-timeslot").textContent = data.rows[i].app_timeslot;
@@ -293,7 +301,7 @@
                             
                             let row = document.createElement("tr");
                             let cell = document.createElement("td");
-                            cell.colSpan = 6;
+                            cell.colSpan = 7;
                             cell.textContent = "No match found";
                             row.appendChild(cell);
                             table.appendChild(row);
