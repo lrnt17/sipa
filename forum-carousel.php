@@ -57,7 +57,7 @@
         </div>
         
 <section>
-    <div class="slider my-4" id="carouselContainer">
+    <div class="slider my-4 mx-4" id="carouselContainer">
         
     </div>
 
@@ -65,7 +65,7 @@
 
 <template id="carouselCardTemplate" class="js-carousel-template">
     <div class="js-carousel-card " style="animation: appear 3s ease;">
-        <div class="js-forum-link container p-4 rounded-4 shadow-sm hover" style="background-color:white; min-height:350px;">
+        <div class="js-forum-link container p-4 rounded-4 shadow-sm hover" style="background-color:white; min-height:350px; max-width:330px;">
             <div class="con d-flex justify-content-center ">
                 <div class="rounded-circle" style="background: white; width: 25%; border: 2px solid #F2F5FF; max-height: auto; position: relative; overflow: hidden; padding: 0;">
                     <img src="assets/images/user.jpg" class="js-image" style="width: 100%; height: auto; object-fit: cover;">
@@ -151,6 +151,20 @@
             autoplay: true,
             centerMode: true,
             centerPadding: "0",
+            responsive: [
+                {
+                breakpoint: 576,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    autoplay: true,
+                    infinite: true,
+                }
+                }
+                // You can unslick at a given breakpoint now by adding:
+                // settings: "unslick"
+                // instead of a settings object
+            ]
         });
     });
 </script>
