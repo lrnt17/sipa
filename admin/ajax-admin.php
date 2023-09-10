@@ -452,6 +452,19 @@
                 $info['rows'] = $rows;
                 $info['success'] = true;
             }
+        }else
+        if ($_POST['data_type'] == 'delete_appointment')
+        {
+            $ids = json_decode($_POST['ids']);
+
+            foreach ($ids as $id) {
+                $id = (string)$id;
+                $query = "delete from appointments where app_id = '$id' LIMIT 1";
+                query($query);
+            }
+
+            $info['success'] = true;
+            $info['message'] = "Appointment/s deleted successfully";
         }
     }
   

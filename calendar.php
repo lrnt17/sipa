@@ -2,7 +2,7 @@
     require("connect.php");
     require('functions.php');
 
-    function build_calendar($month, $year, $duration, $cleanup, $start, $end, $max_slots, $city_municipality){
+    function build_calendar($month, $year, $duration, $cleanup, $start, $end, $max_slots, $city_municipality, $health_facility_name){
 
         /*$query = "SELECT * FROM appointments WHERE MONTH(app_date) = $month AND YEAR(app_date) = $year";
         $rows = query($query);
@@ -96,7 +96,7 @@
             $fully_booked = true;
             $timeslots = timeslots($duration, $cleanup, $start, $end);
             foreach ($timeslots as $timeslot) {
-                if (check_available_slots($date, $timeslot, $max_slots, $city_municipality) > 0) {
+                if (check_available_slots($date, $timeslot, $max_slots, $city_municipality, $health_facility_name) > 0) {
                     $fully_booked = false;
                     break;
                 }
@@ -172,17 +172,19 @@
     }
 
     // Handling AJAX request to get calendar data
-    if (isset($_GET['month']) && isset($_GET['year']) && isset($_GET['location'])) {
+    if (isset($_GET['month']) && isset($_GET['year']) && isset($_GET['location']) && isset($_GET['health_facility'])) {
         $month = $_GET['month'];
         $year = $_GET['year'];
         $location = $_GET['location'];
+        $health_facility = $_GET['health_facility'];
 
-        $query = "SELECT * FROM schedule_settings WHERE city_municipality = '$location' LIMIT 1";
+        $query = "SELECT * FROM schedule_settings WHERE city_municipality = '$location' AND health_facility_name = '$health_facility' LIMIT 1";
         $result = query($query);
         if ($result) {
             //$row = $result->fetch_assoc();
-            //echo $result[0]['duration'];
+            //echo $result[0]['health_facility_name'];
             $city_municipality = $result[0]['city_municipality'];
+            $health_facility_name = $result[0]['health_facility_name'];
             $duration = (int)$result[0]['duration']; // Update the duration if retrieved from the database
             $max_slots = (int)$result[0]['max_slot'];
             $start  = date("H:i", strtotime($result[0]['start_at']));
@@ -190,7 +192,7 @@
         }
         //include 'sched-appointment.php';
         // Generate and return the calendar HTML
-        $rows = build_calendar($month, $year, $duration, $cleanup, $start, $end, $max_slots, $city_municipality);
+        $rows = build_calendar($month, $year, $duration, $cleanup, $start, $end, $max_slots, $city_municipality, $health_facility_name);
         echo $rows;
     }
 
@@ -206,13 +208,15 @@
         // get the selected date from the GET parameters
         $selected_date = $_GET['date'];
         $location = $_GET['location'];
+        $health_facility = $_GET['health_facility'];
 
-        $query = "SELECT * FROM schedule_settings WHERE city_municipality = '$location' LIMIT 1";
+        $query = "SELECT * FROM schedule_settings WHERE city_municipality = '$location' AND health_facility_name = '$health_facility' LIMIT 1";
         $result = query($query);
         if ($result) {
             //$row = $result->fetch_assoc();
             //echo $result[0]['duration'];
             $city_municipality = $result[0]['city_municipality'];
+            $health_facility_name = $result[0]['health_facility_name'];
             $duration = (int)$result[0]['duration']; // Update the duration if retrieved from the database
             $max_slots = (int)$result[0]['max_slot'];
             $start  = date("H:i", strtotime($result[0]['start_at']));
@@ -255,7 +259,7 @@
             }*/
 
             // set the availableSlots property to the result of calling the check_available_slots function
-            $available_slots = check_available_slots($selected_date, $timeslot, $max_slots, $city_municipality);
+            $available_slots = check_available_slots($selected_date, $timeslot, $max_slots, $city_municipality, $health_facility_name);
             $timeslot_object->availableSlots = $available_slots;
             
             // check if there are no available slots for this timeslot
@@ -277,12 +281,12 @@
     }
 
     // create a function to check the available slots for a given timeslot on a given date
-    function check_available_slots($date, $timeslot, $max_slots, $city_municipality) {
+    function check_available_slots($date, $timeslot, $max_slots, $city_municipality, $health_facility_name) {
         // set the maximum number of slots for each timeslot
         //$max_slots = 1;
         
         // query to count the number of appointments for the given timeslot on the given date
-        $query = "SELECT COUNT(*) as count FROM appointments WHERE app_date = '$date' AND app_timeslot = '$timeslot' AND city_municipality = '$city_municipality'";
+        $query = "SELECT COUNT(*) as count FROM appointments WHERE app_date = '$date' AND app_timeslot = '$timeslot' AND city_municipality = '$city_municipality' AND health_facility = '$health_facility_name'";
         $result = query($query);
         
         // check if any results were returned

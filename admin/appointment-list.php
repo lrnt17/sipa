@@ -104,7 +104,7 @@
             <table border ="1" cellspacing="0" cellpadding="10" id="appointment_table">
                 <thead>
                     <tr>
-                        <th><input type="checkbox" id="select-all-appointment" onclick="appointment_list.select_all_appointment(this);"></th>
+                        <th><input type="checkbox" id="select-all-appointment" onclick="appointment_list.select_all_appointments(this);"></th>
                         <th>ID</th>
                         <th>First Name</th>
                         <th>Last Name</th>
@@ -131,13 +131,125 @@
             <!-- Delete button -->
             <div onclick="appointment_list.delete_appointment()" style="cursor:pointer;color:red;" id="delete-positive">Delete</div>
         </div>
+
+        <!-- View patient details modal -->
+        <div class="js-view-patient hide">
+            <div class="" style="float:right;cursor:pointer; margin: 10px;padding:5px;padding-left:10px;padding-right:10px;" onclick="appointment_list.hide()">X</div>
+            <h1>Administrator Details</h1>
+            <div>
+                <div>Appointment Schedule: <span class="js-view-appointment-schedule"></span></div>
+                <div>Timeslot: <span class="js-view-timeslot"></span></div>
+                <div>Patient Name: <span class="js-view-patient-name"></span></div>
+                <div>Gender: <span class="js-view-gender"></span></div>
+                <div>Date of Birth: <span class="js-view-dob"></span></div>
+                <div>Phone No.: <span class="js-view-pnum"></span></div>
+                <div>Gmail Address: <span class="js-view-gmail"></span></div>
+                <div>Address: <span class="js-view-address"></span></div>
+                <div>Status: <span class="js-view-status"></span></div>
+            </div>
+        </div>
+
+        <!-- Editing patient modal -->
+        <div class="js-edit-admin hide">
+            <div class="" style="float:right;cursor:pointer; margin: 10px;padding:5px;padding-left:10px;padding-right:10px;" onclick="manage_admins.hide()">X</div>
+            <h1>Edit Administrator</h1>
+            <form onsubmit="manage_admins.save(event)" method="post">
+                <div class="form">
+                    <label>
+                        <img src="../assets/images/user.jpg" class="js-edit-image" style="cursor: pointer;" width="25" height="25">
+                        <input onchange="display_image(this.files[0])" type="file" name="edit_image" class="js-image">
+
+                        <script>
+                            
+                            function display_image(file)
+                            {
+                                let allowed = ['image/jpeg','image/png','image/webp'];
+
+                                if(!allowed.includes(file.type)){
+                                    alert("That file type is not allowed!");
+                                    return;
+                                }
+
+                                let img = document.querySelector(".js-edit-image");
+                                img.src = URL.createObjectURL(file);
+                            }
+                        </script>
+                    </label>
+                </div>
+                <div class="form">
+                    <label for="edit_fname">First Name *</label>
+                    <input type="text" name="edit_fname" class="js-edit-fname edit-admin" required>
+                </div>
+                <div class="form">
+                    <label for="edit_lname">Last Name *</label>
+                    <input type="text" name="edit_lname" class="js-edit-lname edit-admin" required>
+                </div>
+                <div class="form">
+                    <label for="edit_dob">Date of Birth</label>
+                    <input type="date" name="edit_dob" class="js-edit-dob edit-admin">
+                </div>
+                <div class="form">
+                    <label for="edit_gender">Gender</label>
+                    <select name="edit_gender" id="edit_gender" class="js-edit-gender edit-admin" required>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+                <div class="form">
+                    <label for="edit_gmail">Gmail Address *</label>
+                    <input type="email" name="edit_gmail" class="js-edit-gmail edit-admin" required>
+                </div>
+                <div class="form">
+                    <label for="edit_city_municipality">City or Municipality</label>
+                    <select name="edit_city_municipality" id="edit_city_municipality" class="js-edit-city-municipality edit-admin" required>
+                        <option value="" disabled selected>Select City/Municipality</option>
+                        <option value="Baliwag">Baliwag</option>
+                        <option value="Bustos">Bustos</option>
+                    </select>
+                </div>
+                <div class="form">
+                    <label for="edit_health_facility">Health Facility Name:*</label>
+                    <select name="edit_health_facility" id="edit_health_facility" class="js-edit-health-facility edit-admin" required>
+                        <option value="" disabled selected>Select Health Facility Name</option>
+                        <option value="Bustos RHU">Bustos RHU</option>
+                    </select>
+                </div>
+                <div class="form">
+                    <label for="edit_specialization">Specialization *</label>
+                    <select name="edit_specialization" id="edit_specialization" class="js-edit-specialization edit-admin" required>
+                        <option value="" disabled selected>Select Specialization</option>
+                        <option value="Obstetrician-Gynecologist (OB-GYN)">Obstetrician-Gynecologist (OB-GYN)</option>
+                        <option value="Obstetrician">Obstetrician</option>
+                        <option value="Gynecologist">Gynecologist</option>
+                        <option value="Family Medicine Physician">Family Medicine Physician</option>
+                        <option value="Nurse Practitioner">Nurse Practitioner</option>
+                        <option value="Nurse-Midwife">Nurse-Midwife</option>
+                        <option value="Sexual Health Specialist">Sexual Health Specialist</option>
+                        <option value="Urologist">Urologist</option>
+                        <option value="Adolescent Medicine Specialist">Adolescent Medicine Specialist</option>
+                        <option value="Planned Parenthood Clinician">Planned Parenthood Clinician</option>
+                        <option value="Reproductive Health Counselor">Reproductive Health Counselor</option>
+                    </select>
+                </div>
+                <div class="form">
+                    <label for="edit_pnum">Phone Number *</label>
+                    <input type="number" name="edit_pnum" class="js-edit-pnum edit-admin" required>
+                </div>
+
+                <div class="class_45" >
+                    <button class="class_46">
+                        Save
+                    </button>
+                </div>
+            </form>
+        </div>
     </section>
 
     <template id="appointments-template">
         <tr>
             <td align="center" id="checkbox">
                 <label class="container">
-                    <input type="checkbox" class="js-select-appointment" name="all_appointment[]">
+                    <input type="checkbox" class="js-select-appointment" name="all_appointments[]">
                     <span class="checkmark"></span>
                 </label>
             </td>
@@ -195,7 +307,7 @@
                             // Generate table rows
                             for (let i = 0; i < data.rows.length; i++) {
                                 let row = document.importNode(template.content, true);
-                                row.querySelector(".js-select-appointment").setAttribute('user_id', data.rows[i].app_id);
+                                row.querySelector(".js-select-appointment").setAttribute('app_id', data.rows[i].app_id);
                                 row.querySelector(".js-appointment-id").textContent = data.rows[i].app_id;
                                 row.querySelector(".js-userfname").textContent = data.rows[i].app_fname;
                                 row.querySelector(".js-userlname").textContent = data.rows[i].app_lname;
@@ -314,6 +426,84 @@
             ajax.send(form);
         },
 
+        view_appointment: function(id){
+
+            document.querySelector(".js-view-patient").classList.remove('hide');
+            //manage_admins.edit_id = id;
+
+            let data = document.querySelector("#appointment_"+id).getAttribute("row");
+            data = data.replaceAll('\\"','"');
+            data = JSON.parse(data);
+            console.log(data);
+            if(typeof data == 'object') {
+
+                document.querySelector(".js-view-appointment-schedule").innerHTML = data.app_date;
+                document.querySelector(".js-view-timeslot").innerHTML = data.app_timeslot;
+                document.querySelector(".js-view-patient-name").innerHTML = data.app_fname + ' ' + data.app_lname;
+                document.querySelector(".js-view-gender").innerHTML = data.app_gender;
+
+                let date = new Date(data.app_bdate);
+                let formattedDate = date.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+
+                document.querySelector(".js-view-dob").innerHTML = formattedDate;
+                document.querySelector(".js-view-pnum").innerHTML = data.app_pnum;
+                document.querySelector(".js-view-gmail").innerHTML = data.app_email;
+                document.querySelector(".js-view-address").innerHTML = data.app_address;
+                document.querySelector(".js-view-status").innerHTML = data.status;
+
+            } else {
+                alert("Invalid data");
+            }
+        },
+
+        delete_appointment: function(){
+
+            let selectedRows = document.querySelectorAll("#appointment_table .js-select-appointment:checked");
+            if (selectedRows.length == 0) {
+                alert("Please select at least one row to delete");
+                return;
+            }
+
+            let ids = [];
+            selectedRows.forEach(function(row) {
+                let id = row.getAttribute("app_id");
+                ids.push(id);
+            });
+
+            //console.log(JSON.stringify(ids));return;
+
+            let form = new FormData();
+            form.append('ids', JSON.stringify(ids));
+            form.append('data_type', 'delete_appointment');
+
+            let ajax = new XMLHttpRequest();
+            ajax.addEventListener('readystatechange', function() {
+                if (ajax.readyState == 4) {
+                    if (ajax.status == 200) {
+                        let obj = JSON.parse(ajax.responseText);
+                        alert(obj.message);
+
+                        if (obj.success) {
+
+                            let table = document.querySelector("#appointment_table tbody");
+                            table.innerHTML = "";
+                            
+                            appointment_list.load_appointments();
+                            appointment_list.hide();
+                        }
+                    } else {
+                        alert("Please check your internet connection");
+                    }
+                }
+            });
+            ajax.open('post', 'ajax-admin.php', true);
+            ajax.send(form);
+        },
+
         go_to_page: function(page) {
 
             this.current_page = page;
@@ -340,7 +530,21 @@
             
             this.current_page = this.last_page;
             this.load_appointments();
-        }
+        },
+
+        hide: function(){
+            //document.querySelector(".js-add-admin").classList.add('hide');
+            //document.querySelector(".js-edit-admin").classList.add('hide');
+            document.querySelector(".js-view-patient").classList.add('hide');
+        },
+
+        select_all_appointments: function(source){
+            let checkboxes = document.getElementsByName('all_appointments[]');
+            for (let i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i] != source)
+                    checkboxes[i].checked = source.checked;
+            }
+        },
     };
 
     appointment_list.load_appointments();

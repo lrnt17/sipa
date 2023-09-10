@@ -29,7 +29,7 @@
 
                 <div class="js-select-health-facility hide">
                     <label for="health_facility">Health Facility *</label><br>
-                    <select name="health_facility" id="health_facility" disabled required>
+                    <select name="health_facility" id="health_facility" required>
                         
                     </select>
                 </div>
@@ -96,4 +96,4 @@
         }
     }*/
 </script>
-<script src="sched-appointment.js?v7"></script>
+<script src="sched-appointment.js?v8"></script>

@@ -7,6 +7,7 @@ var sched_appointment = {
     selectedDate: null,
     selectedTimeslot: null,
     location: null,
+    health_facility: null,
 
     submit_appointment: function(e){
         
@@ -114,17 +115,21 @@ var sched_appointment = {
     },
 
     validatePage1: function(){
-        // get all the input fields on page 1
-        let inputs = document.querySelectorAll('#page-1 input');
-        // check if all the input fields have been filled out
-        for (let i = 0; i < inputs.length; i++) {
-            if (inputs[i].value.trim() === '') {
+        
+        let fields = document.querySelectorAll('#page-1 select, #page-1 input');
+
+        for (let field of fields) {
+            if (!field.value.trim()) {
                 alert('Please fill up all the fields');
                 return false;
             }
         }
-        sched_appointment.loadCalendar(sched_appointment.month, sched_appointment.year, sched_appointment.location);
+
+        sched_appointment.get_selected_health_facility();
+        console.log(sched_appointment.health_facility);
+        sched_appointment.loadCalendar(sched_appointment.month, sched_appointment.year, sched_appointment.location, sched_appointment.health_facility);
         return true;
+
     },
 
     validatePage2: function(){
@@ -196,7 +201,7 @@ var sched_appointment = {
         }
     },
 
-    loadCalendar: function (month, year, location) {
+    loadCalendar: function (month, year, location, health_facility) {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
             if (xhttp.readyState == 4 && xhttp.status == 200) {
@@ -216,7 +221,7 @@ var sched_appointment = {
 
             }
         };
-        xhttp.open("GET", "calendar.php?month=" + month + "&year=" + year + "&location=" + location, true);
+        xhttp.open("GET", "calendar.php?month=" + month + "&year=" + year + "&location=" + location + "&health_facility=" + health_facility, true);
         xhttp.send();
     },
 
@@ -276,7 +281,7 @@ var sched_appointment = {
 
             }
         };
-        xhttp.open("GET", "calendar.php?timeslots=1&date=" + sched_appointment.selectedDate + "&location=" + sched_appointment.location, true);
+        xhttp.open("GET", "calendar.php?timeslots=1&date=" + sched_appointment.selectedDate + "&location=" + sched_appointment.location + "&health_facility=" + sched_appointment.health_facility, true);
         xhttp.send();
     },
 
@@ -288,14 +293,14 @@ var sched_appointment = {
         } else {
             sched_appointment.month--;
         }
-        sched_appointment.loadCalendar(sched_appointment.month, sched_appointment.year, sched_appointment.location);
+        sched_appointment.loadCalendar(sched_appointment.month, sched_appointment.year, sched_appointment.location, sched_appointment.health_facility);
     },
 
     showThisMonth: function () {
         let dateNew = new Date();
         sched_appointment.month = dateNew.getMonth() + 1; // JavaScript months are 0-based
         sched_appointment.year = dateNew.getFullYear();
-        sched_appointment.loadCalendar(sched_appointment.month, sched_appointment.year, sched_appointment.location);
+        sched_appointment.loadCalendar(sched_appointment.month, sched_appointment.year, sched_appointment.location, sched_appointment.health_facility);
     },
 
     showNextMonth: function () {
@@ -306,7 +311,7 @@ var sched_appointment = {
         } else {
             sched_appointment.month++;
         }
-        sched_appointment.loadCalendar(sched_appointment.month, sched_appointment.year, sched_appointment.location);
+        sched_appointment.loadCalendar(sched_appointment.month, sched_appointment.year, sched_appointment.location, sched_appointment.health_facility);
     },
 
     selectDate: function (date){
@@ -443,10 +448,10 @@ var sched_appointment = {
         select_city_municipality.addEventListener("change", function () {
 
             if (this.value !== '') {
-                select_health_facility.disabled = false;
+                //select_health_facility.disabled = false;
                 document.querySelector(".js-select-health-facility").classList.remove('hide');
             } else {
-                select_health_facility.disabled = true;
+                //select_health_facility.disabled = true;
             }
             // Get the selected option's value
             let selected_city_municipality = select_city_municipality.value;
@@ -455,6 +460,13 @@ var sched_appointment = {
             sched_appointment.load_health_facility_list();
         });
     },
+
+    get_selected_health_facility: function () {
+        
+        let selected_health_facility = document.getElementById("health_facility").value;
+        sched_appointment.health_facility = selected_health_facility;
+    },
+
 };
 
 if (typeof appointment != 'undefined') {
