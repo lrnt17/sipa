@@ -13,6 +13,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Appointment List | SiPa</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
     <style>
         body {
@@ -85,9 +86,66 @@
         }
     </style>
     <style>
+        .block{
+            display: block;
+        }
+
         .hide{
             display: none;
         }
+
+        table{
+            table-layout: fixed;
+        }
+
+        td{
+            width: 33%;
+        }
+
+        .today{
+            color: orange;
+        }
+
+        
+        .new-dates:hover{
+            background-color: purple;
+            color: white;
+            cursor: pointer;
+        }
+
+        .old-dates {
+            /* Style for dates that are less than the current date */
+            color: gray;
+        }
+
+        .fullybooked-dates {
+            color: red;
+        }
+
+        .selected {
+            color: white;
+            background-color: purple;
+        }
+
+        .selected-timeslot{
+            color: white;
+            background-color: purple;
+        }
+
+        .weekend-dates{
+            opacity: 0.3;
+            background-color: gray;
+        }
+
+        .current-date{
+            color: orange;
+        }
+
+        .booked{
+            background-color: red;
+        }
+
+
     </style>
 </head>
 <body>
@@ -185,7 +243,6 @@
                     <label for="edit_address">Address</label>
                     <input type="text" name="edit_address" class="js-edit-address edit-appointment">
                 </div>
-                
                 <div class="form">
                     <label for="edit_status">Status</label>
                     <select name="edit_status" id="edit_status" class="js-edit-status edit-appointment" required>
@@ -194,6 +251,18 @@
                         <option value="Cancelled">Cancelled</option>
                     </select>
                 </div>
+                <div class="calendar-layout-container">
+                    <div class="row">
+                        <button class='btn btn-xs btn-primary' type="button" onclick="appointment_list.showPreviousMonth()">Previous Month</button>
+                        <button class='btn btn-xs btn-primary' type="button" onclick="appointment_list.showThisMonth()">Current Month</button>
+                        <button class='btn btn-xs btn-primary' type="button" onclick="appointment_list.showNextMonth()">Next Month</button>
+                        <div class="col-md-12 calendar-layout">
+                            <!-- Calendar Layout display-->
+                        </div>
+                    </div>
+                </div>
+                <div class="timeslots"></div>
+
 
                 <div class="">
                     <button class="">Save</button>
@@ -226,7 +295,15 @@
     </template>
 
 <script>
-    var appointment_list = {
+    var appointment_admin_list = true;
+    let city_municipality = '<?php echo $user_place; ?>';
+    let health_facility = '<?php echo $user_work_at; ?>';
+    let current_page = 1;
+    let last_page = 0;
+    let dateComponents = new Date();
+    let month = dateComponents.getMonth() + 1; // JavaScript months are 0-based
+    let year = dateComponents.getFullYear();
+    /*var appointment_list = {
 
         edit_id: '',
         current_page: 1,
@@ -417,6 +494,33 @@
             }
         },
 
+        edit_appointment: function(id){
+
+            document.querySelector(".js-edit-appointment").classList.remove('hide');
+            appointment_list.edit_id = id;
+
+            let data = document.querySelector("#appointment_"+id).getAttribute("row");
+            data = data.replaceAll('\\"','"');
+            data = JSON.parse(data);
+            console.log(data);return;
+            if(typeof data == 'object') {
+
+                document.querySelector(".js-edit-image").src = data.user_image;
+                document.querySelector(".js-edit-fname").value = data.user_fname;
+                document.querySelector(".js-edit-lname").value = data.user_lname;
+                document.querySelector(".js-edit-dob").value = data.user_dob;
+                document.querySelector(".js-edit-gender").value = data.user_sex;
+                document.querySelector(".js-edit-gmail").value = data.user_email;
+                document.querySelector(".js-edit-city-municipality").value = data.city_municipality;
+                document.querySelector(".js-edit-health-facility").value = data.health_facility_name;
+                document.querySelector(".js-edit-specialization").value = data.specialization;
+                document.querySelector(".js-edit-pnum").value = data.user_pnum;
+
+            } else {
+                alert("Invalid data");
+            }
+        },
+
         delete_appointment: function(){
 
             let selectedRows = document.querySelectorAll("#appointment_table .js-select-appointment:checked");
@@ -504,8 +608,9 @@
         },
     };
 
-    appointment_list.load_appointments();
+    appointment_list.load_appointments();*/
 </script>
+<script src="appointment-list.js?v3"></script>
 <script>
     let searchInput = document.getElementById('search-username');
     

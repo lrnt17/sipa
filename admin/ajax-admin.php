@@ -465,6 +465,37 @@
 
             $info['success'] = true;
             $info['message'] = "Appointment/s deleted successfully";
+        }else
+        if ($_POST['data_type'] == 'edited_appointment') 
+        {
+            $app_id = (int)($_POST['app_id']);
+            $fname = addslashes($_POST['edit_fname']);
+            $lname = addslashes($_POST['edit_lname']);
+            $address = addslashes($_POST['edit_address']);
+            $email = addslashes($_POST['edit_gmail']);
+            $contact = (int)($_POST['edit_pnum']);
+            $gender = $_POST['edit_gender'];
+            $dob = $_POST['edit_dob'];
+            $status = $_POST['edit_status'];
+            $appointment_date = $_POST['appointment_date'];
+            $appointment_timeslot = $_POST['appointment_timeslot'];
+        
+            $query = "update appointments set 
+            app_fname = '$fname',
+            app_lname = '$lname',
+            app_bdate = '$dob',
+            app_gender = '$gender',
+            app_email = '$email',
+            app_pnum = '$contact',
+            app_address = '$address', 
+            status = '$status',
+            app_date = '$appointment_date',
+            app_timeslot = '$appointment_timeslot' 
+            where app_id = '$app_id' limit 1";
+            query($query);
+        
+            $info['success'] = true;
+            $info['message'] = "appointment was edited successfully";
         }
     }
   
