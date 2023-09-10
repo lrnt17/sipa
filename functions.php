@@ -243,3 +243,202 @@ function appointment_confirmation($contact, $fname, $municipality, $health_facil
     curl_close ($ch);
 
 }
+
+// Function to calculate and insert reminder dates into the reminder table
+function calculateAndInsertReminderDates($method, $startDate, $usage, $user_id, $conn) {
+    
+    // Define the duration for each method (in days)
+    $durations = array(
+        'Hormonal IUD' => 30 * 12 * 5, // 5 years
+        'Copper IUD' => 30 * 12 * 10, // 10 years
+        'Implant' => 30 * 12 * 3, // 3 years
+        'The Shot' => 30 * 3, // 3 months
+        'Hormonal Vaginal Ring' => 30, // 1 month sms reminder, on 4th week, the vaginal ring should be removed 
+        'Hormonal Patch' => 7, // 1 week, if usage is more than 3, there is a 1 week rest before the sms starts again
+        'Mini Pill' => 1, // everyday reminder for 21 days and a rest week after it. if the usage is more than or equal to 2, the sms should only resume after the rest week.
+        'Combined Pill' => 1 // everyday reminder for 21 days and a rest week after it. if the usage is more than or equal to 2, the sms should only resume after the rest week.
+    );
+
+    // Check if the method is valid
+    if (array_key_exists($method, $durations)) {
+        $duration = $durations[$method];
+
+        // Calculate the interval between usages based on duration and frequency
+        
+            $interval = $duration;
+
+        // Convert the start date to a Unix timestamp
+        $currentDate = strtotime($startDate);
+
+        // Prepare the SQL query for inserting reminder dates
+        $insertQuery = "INSERT INTO reminder (user_id, reminder_dates) VALUES ";
+        $values = array();
+
+        // Add start date to values
+        array_push($values,"($user_id,'$startDate')");
+        
+
+
+    // Calculate the number of iterations based on usage and method
+    if ($method == 'Mini Pill' || $method == 'Combined Pill') {
+        $iterations = 20 * $usage;
+    } else {
+        $iterations = $usage - 1;
+    }
+
+    // Generate reminder dates and SQL values
+    for ($i = 0; $i < $iterations; ++$i) {
+        // Add a one-week rest after every third reminder date for hormonal patch
+        if ($method == 'Hormonal Patch' && ($i + 1) % 3 == 0) {
+            $currentDate = strtotime("+7 day", $currentDate);
+        }
+
+        // For Mini Pill and Combined Pill, add a one-week rest after every 21st reminder date
+        if (($method == 'Mini Pill' || $method == 'Combined Pill') && ($i + 1) % 21 == 0 && ($i + 1) != $iterations) {
+            for ($j = 0; $j < 7; ++$j) {
+                $currentDate = strtotime("+1 day", $currentDate);
+            }
+            continue;
+        }
+
+        $reminderDate = date('Y-m-d', strtotime("+$duration days", $currentDate));
+        array_push($values,"($user_id,'$reminderDate')");
+        $currentDate = strtotime("+$duration days", $currentDate);
+    }
+
+    // If usage is 1, set reminderDate to startDate
+    if ($usage == 1 && $method != 'Combined Pill' && $method != 'Mini Pill') {
+        $reminderDate = $startDate;
+    }
+
+    // Insert reminder dates into the reminder table
+    if (!empty($values)) {
+        $insertQuery .= implode(",", $values);
+        if (mysqli_query($conn,$insertQuery)) {
+            // Update birth_control_enddate in users table with last reminder date
+            $updateQuery = "UPDATE users SET birth_control_enddate = '$reminderDate' WHERE user_id = $user_id";
+            if (mysqli_query($conn,$updateQuery)) {
+                return true; // Successfully inserted reminder dates and updated birth_control_enddate
+            } else {
+                return false; // Failed to update birth_control_enddate
+            }
+        } else {
+            return false; // Failed to insert reminder dates
+        }
+    }
+
+    return false; // Invalid method or other error
+    }
+}
+
+function sendInstantSMS($conn, $user_id) {
+    // Check if the user has birth control information and is eligible for an instant SMS
+    $birthControlQuery = "SELECT user_pnum, birth_control_name, birth_control_startdate, birth_control_enddate, birth_control_usage, isMessaged FROM users WHERE user_id = $user_id AND birth_control_startdate IS NOT NULL AND isMessaged IS NULL";
+    $birthControlResult = mysqli_query($conn, $birthControlQuery);
+
+    if ($birthControlResult && mysqli_num_rows($birthControlResult) > 0) {
+        while ($row = mysqli_fetch_assoc($birthControlResult)) {
+            $pnum = $row['user_pnum'];
+            $method = $row['birth_control_name'];
+            $startDate = $row['birth_control_startdate'];
+            $endDate = $row['birth_control_enddate'];
+            $cycle = $row['birth_control_usage'];
+            $isMessaged = $row['isMessaged'];
+
+            if ($cycle==1){ //pag isa lang usage, di na ilalagay end date kasi same lang start and end date nya pag isang gamitan lang dzuh
+                
+                // Customize the SMS message based on the birth control method and user's information
+                switch ($method) {
+                    case 'Hormonal IUD':
+                        $message = "Hi there! You will receive an SMS reminder for your Hormonal IUD schedule on $startDate. Stay on track!";
+                        break;
+
+                    case 'Copper IUD':
+                        $message = "Hi there! You will receive an SMS reminder for your Copper IUD schedule on $startDate. Stay on track!";
+                        break;
+
+                    case 'Implant':
+                        $message = "Hi there! You will receive an SMS reminder for your Implant schedule on $startDate. Stay on track!";
+                        break;
+
+                    case 'The Shot':
+                        $message = "Hi there! You will receive an SMS reminder for your the Shot schedule on $startDate. Stay on track!";
+                        break;
+
+                    case 'Hormonal Vaginal Ring':
+                        $message = "Hi there! You will receive an SMS reminder for your Hormonal Vaginal Ring schedule on $startDate. Stay on track!";
+                        break;
+
+                    case 'Hormonal Patch':
+                        $message = "Hi there! You will receive an SMS reminder for your Hormonal Patch schedule on $startDate. Stay on track!";
+                        break;
+
+                    case 'Mini Pill':
+                    case 'Combined Pill':
+                        $message = "Hi there! Your SMS reminder for your $method intake starts on $startDate and ends on $endDate. Stay on track!";
+                        break;
+                }
+            }
+            else {
+                    // Customize the SMS message based on the birth control method and user's information
+                switch ($method) {
+                    case 'Hormonal IUD':
+                        $message = "Hi there! Your SMS reminder for your Hormonal IUD schedule starts on $startDate and goes until $endDate, for a $cycle cycle. Stay on track!";
+                        break;
+                    
+                    case 'Copper IUD':
+                        $message = "Hi there! Your SMS reminder for your Copper IUD schedule begins on $startDate and goes until $endDate, for a $cycle cycle. Stay on track!";
+                        break;
+                    
+                    case 'Implant':
+                        $message = "Hi there! Your SMS reminder for your Implant schedule starts on $startDate and ends on $endDate, for a $cycle cycle. Stay on track!";
+                        break;
+                    
+                    case 'The Shot':
+                        $message = "Hi there! Your SMS reminder for The Shot begins on $startDate and lasts until $endDate, for a $cycle cycle. Stay on track!";
+                        break;
+                    
+                    case 'Hormonal Vaginal Ring':
+                        $message = "Hi there! Your SMS reminder for your Hormonal Vaginal Ring schedule starts on $startDate and goes until $endDate, for a $cycle cycle. Stay on track!";
+                        break;
+                    
+                    case 'Hormonal Patch':
+                        $message = "Hi there! Your SMS reminder for your Hormonal Patch schedule starts on $startDate and ends on $endDate, for a $cycle cycle. Stay on track!";
+                        break;
+                    
+                    case 'Mini Pill':
+                    case 'Combined Pill':
+                        $message = "Hi there! Your SMS reminder for your $method intake starts on $startDate and ends on $endDate, for a $cycle cycle. Stay on track!";
+                        break;
+        
+                }
+                    
+            }
+
+            sendSMS($pnum, $message);
+
+            // Mark the user as messaged by updating the isMessaged column to 1
+            mysqli_query($conn, "UPDATE users SET isMessaged = 1 WHERE user_id = $user_id");
+        }
+    }
+}
+
+function sendSMS($number, $message) {
+    $ch = curl_init();
+    $parameters = array(
+        'apikey' => 'c17f81a2eb07d0ad839118cad67d2c55', // Your API KEY
+        'number' => $number,
+        'message' => $message,
+        'sendername' => 'SiPa'
+    );
+
+    curl_setopt($ch, CURLOPT_URL, 'https://semaphore.co/api/v4/messages');
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($parameters));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    $output = curl_exec($ch);
+    curl_close($ch);
+
+    //echo $output;
+}
