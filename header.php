@@ -66,10 +66,10 @@
                   <?php else:?>
                     <div class="row mt-2" style="align-items: center;">
                       <div class="col-auto ms-2">
-                        <i class="fa-solid fa-arrow-right-to-bracket d-md-block d-lg-none" style="cursor:pointer; font-size: 20px; color:#2268e2;" onclick="user.login()"></i>
+                        <i class="fa-solid fa-arrow-right-to-bracket d-md-block d-lg-none" style="cursor:pointer; font-size: 20px; color:white;" onclick="user.login()"></i>
                       </div>
                       <div class="col-auto">
-                        <span class="js-link navbar-brand d-md-block d-lg-none" style="cursor:pointer; font-size: 17px; color:#2268e2;" onclick="user.login()">Sign in</span>
+                        <span class="js-link navbar-brand d-md-block d-lg-none" style="cursor:pointer; font-size: 17px; font-weight:normal; color:white;" onclick="user.login()">Sign in</span>
                       </div>
                     </div>
                   <?php endif;?>
@@ -84,7 +84,7 @@
 
                       </a>
                   <?php else:?>
-                      <span class="js-link navbar-brand d-none d-lg-block d-lx-none" style="cursor:pointer; font-size: 16px; color:#2268e2;" onclick="user.login()">Sign in</span>
+                      <span class="js-link navbar-brand d-none d-lg-block d-lx-none" style="cursor:pointer; font-size: 16px; font-weight:normal; color:white;" onclick="user.login()">Sign in</span>
                   <?php endif;?>
             
       </nav>
