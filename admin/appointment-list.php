@@ -133,7 +133,7 @@
         </div>
 
         <!-- View patient details modal -->
-        <div class="js-view-patient hide">
+        <div class="js-view-appointment hide">
             <div class="" style="float:right;cursor:pointer; margin: 10px;padding:5px;padding-left:10px;padding-right:10px;" onclick="appointment_list.hide()">X</div>
             <h1>Administrator Details</h1>
             <div>
@@ -150,96 +150,53 @@
         </div>
 
         <!-- Editing patient modal -->
-        <div class="js-edit-admin hide">
-            <div class="" style="float:right;cursor:pointer; margin: 10px;padding:5px;padding-left:10px;padding-right:10px;" onclick="manage_admins.hide()">X</div>
-            <h1>Edit Administrator</h1>
-            <form onsubmit="manage_admins.save(event)" method="post">
-                <div class="form">
-                    <label>
-                        <img src="../assets/images/user.jpg" class="js-edit-image" style="cursor: pointer;" width="25" height="25">
-                        <input onchange="display_image(this.files[0])" type="file" name="edit_image" class="js-image">
-
-                        <script>
-                            
-                            function display_image(file)
-                            {
-                                let allowed = ['image/jpeg','image/png','image/webp'];
-
-                                if(!allowed.includes(file.type)){
-                                    alert("That file type is not allowed!");
-                                    return;
-                                }
-
-                                let img = document.querySelector(".js-edit-image");
-                                img.src = URL.createObjectURL(file);
-                            }
-                        </script>
-                    </label>
-                </div>
+        <div class="js-edit-appointment hide">
+            <div class="" style="float:right;cursor:pointer; margin: 10px;padding:5px;padding-left:10px;padding-right:10px;" onclick="appointment_list.hide()">X</div>
+            <h1>Edit Appointment Details</h1>
+            <form onsubmit="appointment_list.save_updated_appointment(event)" method="post">
                 <div class="form">
                     <label for="edit_fname">First Name *</label>
-                    <input type="text" name="edit_fname" class="js-edit-fname edit-admin" required>
+                    <input type="text" name="edit_fname" class="js-edit-fname edit-appointment" required>
                 </div>
                 <div class="form">
                     <label for="edit_lname">Last Name *</label>
-                    <input type="text" name="edit_lname" class="js-edit-lname edit-admin" required>
+                    <input type="text" name="edit_lname" class="js-edit-lname edit-appointment" required>
                 </div>
                 <div class="form">
-                    <label for="edit_dob">Date of Birth</label>
-                    <input type="date" name="edit_dob" class="js-edit-dob edit-admin">
+                    <label for="edit_gmail">Gmail Address *</label>
+                    <input type="email" name="edit_gmail" class="js-edit-gmail edit-appointment" required>
+                </div>
+                <div class="form">
+                    <label for="edit_pnum">Phone Number *</label>
+                    <input type="number" name="edit_pnum" class="js-edit-pnum edit-appointment" required>
                 </div>
                 <div class="form">
                     <label for="edit_gender">Gender</label>
-                    <select name="edit_gender" id="edit_gender" class="js-edit-gender edit-admin" required>
+                    <select name="edit_gender" id="edit_gender" class="js-edit-gender edit-appointment" required>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                     </select>
                 </div>
                 <div class="form">
-                    <label for="edit_gmail">Gmail Address *</label>
-                    <input type="email" name="edit_gmail" class="js-edit-gmail edit-admin" required>
+                    <label for="edit_dob">Date of Birth</label>
+                    <input type="date" name="edit_dob" class="js-edit-dob edit-appointment">
                 </div>
                 <div class="form">
-                    <label for="edit_city_municipality">City or Municipality</label>
-                    <select name="edit_city_municipality" id="edit_city_municipality" class="js-edit-city-municipality edit-admin" required>
-                        <option value="" disabled selected>Select City/Municipality</option>
-                        <option value="Baliwag">Baliwag</option>
-                        <option value="Bustos">Bustos</option>
+                    <label for="edit_address">Address</label>
+                    <input type="text" name="edit_address" class="js-edit-address edit-appointment">
+                </div>
+                
+                <div class="form">
+                    <label for="edit_status">Status</label>
+                    <select name="edit_status" id="edit_status" class="js-edit-status edit-appointment" required>
+                        <option value="Pending">Pending</option>
+                        <option value="Confirmed">Confirmed</option>
+                        <option value="Cancelled">Cancelled</option>
                     </select>
-                </div>
-                <div class="form">
-                    <label for="edit_health_facility">Health Facility Name:*</label>
-                    <select name="edit_health_facility" id="edit_health_facility" class="js-edit-health-facility edit-admin" required>
-                        <option value="" disabled selected>Select Health Facility Name</option>
-                        <option value="Bustos RHU">Bustos RHU</option>
-                    </select>
-                </div>
-                <div class="form">
-                    <label for="edit_specialization">Specialization *</label>
-                    <select name="edit_specialization" id="edit_specialization" class="js-edit-specialization edit-admin" required>
-                        <option value="" disabled selected>Select Specialization</option>
-                        <option value="Obstetrician-Gynecologist (OB-GYN)">Obstetrician-Gynecologist (OB-GYN)</option>
-                        <option value="Obstetrician">Obstetrician</option>
-                        <option value="Gynecologist">Gynecologist</option>
-                        <option value="Family Medicine Physician">Family Medicine Physician</option>
-                        <option value="Nurse Practitioner">Nurse Practitioner</option>
-                        <option value="Nurse-Midwife">Nurse-Midwife</option>
-                        <option value="Sexual Health Specialist">Sexual Health Specialist</option>
-                        <option value="Urologist">Urologist</option>
-                        <option value="Adolescent Medicine Specialist">Adolescent Medicine Specialist</option>
-                        <option value="Planned Parenthood Clinician">Planned Parenthood Clinician</option>
-                        <option value="Reproductive Health Counselor">Reproductive Health Counselor</option>
-                    </select>
-                </div>
-                <div class="form">
-                    <label for="edit_pnum">Phone Number *</label>
-                    <input type="number" name="edit_pnum" class="js-edit-pnum edit-admin" required>
                 </div>
 
-                <div class="class_45" >
-                    <button class="class_46">
-                        Save
-                    </button>
+                <div class="">
+                    <button class="">Save</button>
                 </div>
             </form>
         </div>
@@ -428,7 +385,7 @@
 
         view_appointment: function(id){
 
-            document.querySelector(".js-view-patient").classList.remove('hide');
+            document.querySelector(".js-view-appointment").classList.remove('hide');
             //manage_admins.edit_id = id;
 
             let data = document.querySelector("#appointment_"+id).getAttribute("row");
@@ -534,8 +491,8 @@
 
         hide: function(){
             //document.querySelector(".js-add-admin").classList.add('hide');
-            //document.querySelector(".js-edit-admin").classList.add('hide');
-            document.querySelector(".js-view-patient").classList.add('hide');
+            document.querySelector(".js-edit-appointment").classList.add('hide');
+            document.querySelector(".js-view-appointment").classList.add('hide');
         },
 
         select_all_appointments: function(source){
