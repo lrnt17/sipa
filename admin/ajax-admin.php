@@ -87,7 +87,7 @@
                     $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
                 
                     //Recipients
-                    $mail->setFrom('iskapo081702@gmail.com', 'SiPa Siguradong Pagpipilian');
+                    $mail->setFrom('iskapo081702@gmail.com', 'SiPa Siguradong Pagpaplano');
                     $mail->addAddress($gmail, 'none');     //Add a recipient
                 
                     //Content
@@ -95,7 +95,7 @@
 
                     $mail->isHTML(true);                                  //Set email format to HTML
                     $mail->Subject = 'Registration';
-                    $mail->Body    = 'Welcome to SiPa Siguradong Pagpipilian. Your account has been created with the following details:<br><br>Username: <b>' . htmlspecialchars($username) . '</b><br>Password: <b>' . htmlspecialchars($password) . '</b>';
+                    $mail->Body    = 'Welcome to SiPa Siguradong Pagpaplano. Your account has been created with the following details:<br><br>Username: <b>' . htmlspecialchars($username) . '</b><br>Password: <b>' . htmlspecialchars($password) . '</b>';
                     $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
                 
                     $mail->send();
@@ -479,23 +479,101 @@
             $status = $_POST['edit_status'];
             $appointment_date = $_POST['appointment_date'];
             $appointment_timeslot = $_POST['appointment_timeslot'];
-        
-            $query = "update appointments set 
-            app_fname = '$fname',
-            app_lname = '$lname',
-            app_bdate = '$dob',
-            app_gender = '$gender',
-            app_email = '$email',
-            app_pnum = '$contact',
-            app_address = '$address', 
-            status = '$status',
-            app_date = '$appointment_date',
-            app_timeslot = '$appointment_timeslot' 
-            where app_id = '$app_id' limit 1";
-            query($query);
-        
-            $info['success'] = true;
-            $info['message'] = "appointment was edited successfully";
+            
+            // Fetch the current status of the appointment
+            $query = "SELECT status FROM appointments WHERE app_id = '$app_id' LIMIT 1";
+            $result = query($query);
+            $current_status = $result[0]['status'];
+
+            // Check if the current status is 'confirmed'
+            if ($current_status === 'Confirmed') {
+                // If the new status is 'cancelled' or 'pending', do not update the appointment and return an error message
+                if ($status === 'Cancelled' || $status === 'Pending') {
+                    $info['success'] = false;
+                    $info['message'] = "Cannot change status from Confirmed to '$status'";
+                } else {
+                    $info['success'] = false;
+                    $info['message'] = "Cannot update appointment because its status is already 'Confirmed'";
+                }
+            } else {
+
+                // If the new status is 'confirmed', send an SMS message using Semaphore
+                if ($status === 'Confirmed') {
+                    
+                    // Generate a random password
+                    $password = bin2hex(random_bytes(8));
+                    
+                    // Generate a username based on the first name and last name
+                    $username = trim(strtolower($fname . '.' . $lname));
+
+                    // Check if the generated username already exists in the database
+                    $query = "select * from users where user_name = '$username'";
+                    $row = query($query);
+
+                    // If the generated username already exists, append a number to it
+                    $i = 1;
+                    while ($row) {
+                        $username = trim(strtolower($fname . '.' . $lname . '.' . $i));
+                        $query = "select * from users where user_name = '$username'";
+                        $row = query($query);
+                        $i++;
+                    }
+
+                    $message = "Welcome to SiPa, Siguradong Pagpaplano! Your username is: $username and your password is: $password. Please change your password after your first login for security purposes.";
+
+                    $ch = curl_init();
+                    $parameters = array(
+                    'apikey' => 'c17f81a2eb07d0ad839118cad67d2c55', //Your API KEY
+                    'number' => $contact,
+                    'message' => $message,
+                    'sendername' => 'SiPa'
+                    );
+
+                    curl_setopt( $ch, CURLOPT_URL,'https://semaphore.co/api/v4/messages' );
+                    curl_setopt( $ch, CURLOPT_POST, 1 );
+
+                    //Send the parameters set above with the request
+                    curl_setopt( $ch, CURLOPT_POSTFIELDS, http_build_query( $parameters ) );
+
+                    // Receive response from server
+                    curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+                    $output = curl_exec( $ch );
+                    curl_close ($ch);
+
+                    $update_query = "UPDATE appointments SET status = '$status' WHERE app_id = '$app_id' LIMIT 1";
+                    query($update_query);
+                    
+                    // Insert the user details into the users table
+                    $password_hash = password_hash($password, PASSWORD_DEFAULT); // Hash the password before storing it in the database
+                    $user_role = 'user';
+                    $query = "INSERT INTO users (user_role, user_fname, user_lname, user_dob, user_sex, user_email, user_pnum, user_name, user_password) 
+                    VALUES ('$user_role', '$fname', '$lname', '$dob', '$gender', '$email', '$contact', '$username', '$password_hash')";
+                    query($query);
+
+                    $info['success'] = true;
+                    $info['message'] = "Appointment was confirmed successfully";
+
+                } else {
+
+                    $query = "update appointments set 
+                    app_fname = '$fname',
+                    app_lname = '$lname',
+                    app_bdate = '$dob',
+                    app_gender = '$gender',
+                    app_email = '$email',
+                    app_pnum = '$contact',
+                    app_address = '$address', 
+                    status = '$status',
+                    app_date = '$appointment_date',
+                    app_timeslot = '$appointment_timeslot' 
+                    where app_id = '$app_id' limit 1";
+                    query($query);
+                
+                    $info['success'] = true;
+                    $info['message'] = "Appointment was edited successfully";
+                }
+            }
+
         }
     }
   
