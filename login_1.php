@@ -116,6 +116,48 @@
             background-color: red;
         }
     </style>
+    
+    <!--Ito yung may iaagree na modal-->
+    <style>
+        /* The Modal (background) */
+        .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        /* Modal Content */
+        .content-modal {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        }
+
+        /* The close-policies Button */
+        .close-policies {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        }
+
+        .close-policies:hover,
+        .close-policies:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+        }
+    </style>
 </head>
 <body>
 
@@ -168,6 +210,7 @@
                     <div class="lines">
                         <p class="text-dha" id="dont_have_account">Don't have an account?</p>
                     </div>
+                    <button id="myBtn">Open Modal</button>
                     <div onclick="sched_appointment.show()">Schedule an Appoitment</div>
                     <p class="text-visit">or Visit the nearest health facility in your area</p>
                 </div>
@@ -194,20 +237,33 @@
         </div>
     </div>
     <?php include('sched-appointment.php') ?>
+    <?php include('agree-to-policies.php') ?>
     <!-- language, privacy policy, terms of use -->
         <?php include('languageprivacyterms.php') ?>
 </body>
 
 <script>
     var login = {
+
+        username: null,
+        password: null,
     
         submit: function(e){
+
             e.preventDefault();
+
             let inputs = e.currentTarget.querySelectorAll("input");
+
             let form = new FormData();
             
             for (var i = inputs.length - 1; i >= 0; i--) {
                 form.append(inputs[i].name, inputs[i].value);
+
+                if (inputs[i].name === 'username') {
+                    login.username = inputs[i].value;
+                } else if (inputs[i].name === 'pass') {
+                    login.password = inputs[i].value;
+                }
             }
             
             form.append('data_type', 'login');
@@ -226,10 +282,57 @@
 
                         if(obj.success){
                             window.location.href = "home_1_with_user.php";
+                        }else if (!obj.success) {
+                            document.getElementById("myModal").style.display = "block";
                         }else if (obj.admin_success) {
                             window.location.href = "admin/index.php";
                         }else if (obj.head_admin_success) {
                             window.location.href = "admin/index.php";
+                        }
+                    }else{
+                        alert("Please check your internet connection");
+                    }
+                }
+            });
+
+            ajax.open('post','ajax.php', true);
+            ajax.send(form);
+        },
+
+        agree_to_policies: function(e) {
+            
+            e.preventDefault();
+
+            let inputs = e.currentTarget.querySelectorAll("input");
+            let username = login.username;
+            let password = login.password;
+
+            let form = new FormData();
+
+            for (var i = inputs.length - 1; i >= 0; i--) {
+                form.append(inputs[i].name, inputs[i].value);
+                console.log(inputs[i].name, inputs[i].value);
+            }
+            console.log(username, password);
+            //return;
+            form.append('username', username);
+            form.append('pass', password);
+            form.append('data_type', 'login_with_agree');
+            
+            var ajax = new XMLHttpRequest();
+
+            ajax.addEventListener('readystatechange',function(){
+
+                if(ajax.readyState == 4)
+                {
+                    if(ajax.status == 200){
+
+                        console.log(ajax.responseText);
+                        let obj = JSON.parse(ajax.responseText);
+                        alert(obj.message);
+
+                        if(obj.success){
+                            window.location.href = "home_1_with_user.php";
                         }
                     }else{
                         alert("Please check your internet connection");

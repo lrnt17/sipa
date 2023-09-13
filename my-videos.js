@@ -16,9 +16,10 @@ var manage_my_videos = {
 
                     let data = JSON.parse(ajax.responseText);
 
+                    let table = document.querySelector("#video_table tbody");
+
                     if(data.success){
                         // Get table and template elements
-                        let table = document.querySelector("#video_table tbody");
                         let template = document.querySelector("#row-template");
 
                         // Generate table rows
@@ -63,6 +64,14 @@ var manage_my_videos = {
 
                             table.appendChild(clone);
                         }
+                    } else {
+
+                        let row = document.createElement("tr");
+                        let cell = document.createElement("td");
+                        cell.colSpan = 8;
+                        cell.textContent = "No videos found";
+                        row.appendChild(cell);
+                        table.appendChild(row);
                     }
                 }
             }

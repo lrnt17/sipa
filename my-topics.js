@@ -193,7 +193,7 @@ var myposts = {
         }
 
         // Display message if there are no posts
-        if (posts.length === 0) {
+        if (typeof posts === 'undefined') {
             let messageElement = document.createElement('p');
             messageElement.textContent = "No discussions found";
             postContainer.insertBefore(messageElement, loadMoreBtn);

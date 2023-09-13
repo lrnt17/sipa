@@ -2,7 +2,6 @@
     require("connect.php");
     require("functions.php");
 
-    echo $_SESSION['USER']['user_id'];
 ?>
 
 <!DOCTYPE html>
@@ -181,5 +180,5 @@
     </template>
 
 </body>
-<script src="my-videos.js?v1"></script>
+<script src="my-videos.js?v2"></script>
 </html>

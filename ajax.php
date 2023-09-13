@@ -299,6 +299,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 			foreach ($rows as $key => $row) {
 				$rows[$key]['date'] = date('Y-m-d\TH:i:s', strtotime($row['forum_timestamp']));
 				$rows[$key]['forum_desc'] = nl2br(htmlspecialchars($row['forum_desc']));
+				$rows[$key]['user_img'] = get_image($row['user_img']);
 	
 				$rows[$key]['user_owns'] = false;
 				if($user_id == $row['user_id'])
@@ -420,6 +421,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 			foreach ($rows as $key => $row) {
 				$rows[$key]['date'] = date('Y-m-d\TH:i:s', strtotime($row['forum_timestamp']));
 				$rows[$key]['forum_desc'] = nl2br(htmlspecialchars($row['forum_desc']));
+				$rows[$key]['user_img'] = get_image($row['user_img']);
 	
 				$rows[$key]['user_owns'] = false;
 				if($user_id == $row['user_id'])
@@ -492,9 +494,51 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 					$info['message'] = "Head Admin Successful login";
 
 				} else {
+					/*$info['success'] = true;
+					authenticate($row);
+					$info['message'] = "Successful login";*/
+					if ($row['privacy_policy'] == 'I agree' && $row['terms_conditions'] == 'I agree') {
+						$info['success'] = true;
+						authenticate($row);
+						$info['message'] = "Successful login";
+
+					} else {
+						$info['message'] = "You must agree to the privacy policy and terms and conditions";
+					
+					}
+				}
+
+			}else{
+				$info['message'] = "Wrong email or password";
+			}
+		}
+	}else
+	if($_POST['data_type'] == 'login_with_agree') //login version
+	{
+		$username = addslashes($_POST['username']);
+		$terms_conditions = $_POST['terms_conditions'];
+		$privacy_policy = $_POST['privacy_policy'];
+
+		$query = "UPDATE users SET terms_conditions = '$terms_conditions', privacy_policy = '$privacy_policy' WHERE user_name = '$username' LIMIT 1";
+		query($query);
+		
+		$query = "select * from users where user_name = '$username' limit 1";
+		$row = query($query);
+
+		if(!$row)
+		{
+			$info['message'] = "Wrong email or password";
+		}else
+		{
+			$row = $row[0];
+			//password_verify($_POST['pass'], $row['user_password'])
+			if(password_verify($_POST['pass'], $row['user_password']))
+			{
+				if ($row['user_role'] == 'user') {
 					$info['success'] = true;
 					authenticate($row);
 					$info['message'] = "Successful login";
+
 				}
 
 			}else{

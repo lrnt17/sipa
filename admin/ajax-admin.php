@@ -539,8 +539,19 @@
                     curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
                     $output = curl_exec( $ch );
                     curl_close ($ch);
-
-                    $update_query = "UPDATE appointments SET status = '$status' WHERE app_id = '$app_id' LIMIT 1";
+                    
+                    $update_query = "UPDATE appointments SET 
+                    app_fname = '$fname',
+                    app_lname = '$lname',
+                    app_bdate = '$dob',
+                    app_gender = '$gender',
+                    app_email = '$email',
+                    app_pnum = '$contact',
+                    app_address = '$address', 
+                    status = '$status',
+                    app_date = '$appointment_date',
+                    app_timeslot = '$appointment_timeslot' 
+                    WHERE app_id = '$app_id' LIMIT 1";
                     query($update_query);
                     
                     // Insert the user details into the users table

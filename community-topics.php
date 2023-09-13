@@ -245,7 +245,7 @@
 </script>
 <script src="like-rating.js?v4"></script>
 <script src="time.js?v1"></script>
-<script src="community-topics.js?v9"></script>
+<script src="community-topics.js?v10"></script>
 
 
 <script>
