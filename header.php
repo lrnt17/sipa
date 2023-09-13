@@ -44,7 +44,7 @@
                       <a class="js-link dropdown-item" href="period_calcu.php">Period Calculator</a>
                       <a class="js-link dropdown-item" href="cost_calculator.php">Contraceptive Cost Calculator</a>
                       <a class="js-link dropdown-item" href="community-topics.php">Community Forum</a>
-                      <a class="dropdown-item" href="#">About STDs</a>
+                      <a class="dropdown-item" href="about-std.php">About STDs</a>
                       <a class="js-link dropdown-item" href="comparison-chart.php">Contraception Method Comparison</a>
                       <a class="dropdown-item" href="#">Find a health care provider</a>
                       <!--<a class="dropdown-item" href="#">Contraceptive Reviews</a>-->
