@@ -967,6 +967,16 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 		$info['success'] = true;
 
 	}else
+	if($_POST['data_type'] == 'load_all_stds')
+	{
+		$user_id = $_SESSION['USER']['user_id'] ?? 0;
+		$query = "select * from std";
+		$rows = query($query);
+		$info['rows'] = $rows;
+		$info['success'] = true;
+
+	}
+	else
 	if ($_POST['data_type'] == 'submit_periodResult') 
 	{
 		$firstDayLastPeriod = new DateTime($_POST['firstDayLastPeriod']);
@@ -1028,6 +1038,35 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
           $info['fyi_rows_success'] = true;
         }
 	}else
+	if ($_POST['data_type'] == 'load_std_info') 
+	{
+		$std_id = $_POST['std_id'];
+
+        $query = "select * from std_symptoms where std_id = '$std_id'";
+        $symptoms_rows = query($query);
+
+        if ($symptoms_rows) {
+          $info['symptoms_rows'] = $symptoms_rows;
+          $info['symptoms_rows_success'] = true;
+        }
+
+        $query = "select * from std_signs where std_id = '$std_id'";
+        $signs_rows = query($query);
+
+        if ($signs_rows) {
+          $info['signs_rows'] = $signs_rows;
+          $info['signs_rows_success'] = true;
+        }
+
+		$query = "select * from std_preventions where std_id = '$std_id'";
+        $preventions_rows = query($query);
+
+        if ($preventions_rows) {
+          $info['preventions_rows'] = $preventions_rows;
+          $info['preventions_rows_success'] = true;
+        }
+	}
+	else
 	if ($_POST['data_type'] == 'load_chart') 
 	{
         $query = "select * from birth_controls_chart";
