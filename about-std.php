@@ -2,7 +2,6 @@
     require("connect.php");
     require('functions.php');
     
-    //echo $_SESSION['USER']['user_id'];
 ?>
 
 <!DOCTYPE html>
@@ -29,6 +28,10 @@
         visibility: hidden !important;
         }
         
+        tr:hover {
+            background-color: #FFF2EB;
+            cursor: pointer; /* Change the cursor to a pointer on hover for better UX */
+        }
         
 
         
@@ -62,7 +65,7 @@
      <div class="std-desc-container">
         <p>STDs are infections that are spread from one person to another, usually during vaginal, anal, and oral sex. They’re really common, and lots of people who have them don’t have any symptoms. Without treatment, STDs can lead to serious health problems. But the good news is that getting tested is no big deal, and most STDs are easy to treat.</p>
      </div>
-    <div class="button-container">
+    <div class="button-container" id="button-container">
         <button id="show-table-button">Compare different types of STDs</button>
     </div>
      <div class="std-img-container">
@@ -89,7 +92,7 @@
 
 <!-- HTML template for table rows -->
 <template id="row-template">
-    <tr>
+    <tr data-std-id="">
         <td class="js-type">
             <img src="" alt="std" width="100"><br>
             <span></span>
@@ -116,6 +119,8 @@
 
             data.forEach(function (row) {
                 var clone = document.importNode(template.content, true);
+                var rowElement = clone.querySelector("tr");
+                rowElement.dataset.stdId = row.std_id; // Set the std_id as a data attribute
                 clone.querySelector(".js-type img").src = row.std_img;
                 clone.querySelector(".js-type img").alt = row.std_name;
                 clone.querySelector(".js-type span").textContent = row.std_name;
@@ -123,6 +128,13 @@
                 clone.querySelector(".js-cause").textContent = row.std_cause;
                 clone.querySelector(".js-treatment").textContent = row.std_treatment;
                 clone.querySelector(".js-treatment-cost").textContent = row.std_treatment_cost;
+                
+                // Add an event listener to the row for redirection
+                rowElement.addEventListener("click", function () {
+                    var stdId = this.dataset.stdId;
+                    window.location.href = "about-std-info.php?id=" + stdId;
+                });
+
                 tbody.appendChild(clone);
             });
         }
@@ -144,23 +156,28 @@
         // Function to show/hide the table
         function toggleTableVisibility() {
             var tableContainer = document.getElementById("table-container");
+            var buttonContainer = document.getElementById("button-container");
             var showTableButton = document.getElementById("show-table-button");
 
                 if (tableContainer.style.display === "none") {
                     // Show the table and change the button text
                     tableContainer.style.display = "block";
-                    showTableButton.textContent = "Hide STDs";
-                } else {
-                    // Hide the table and change the button text
-                    tableContainer.style.display = "none";
-                    showTableButton.textContent = "Compare different types of STDs";
-                }
+                    buttonContainer.style.display = "none";
+                } 
+        }
+        
+        // Function to scroll to the table
+        function scrollToTable() {
+            var tableContainer = document.getElementById("table-container");
+            tableContainer.scrollIntoView({ behavior: "smooth" }); // This will scroll to the table with smooth animation
         }
 
 
         // Add an event listener to the button to toggle the table visibility
         var showTableButton = document.getElementById("show-table-button");
         showTableButton.addEventListener("click", toggleTableVisibility);
+        showTableButton.addEventListener("click", scrollToTable);
+
     </script>
 
 </html>
