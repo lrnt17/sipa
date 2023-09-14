@@ -50,7 +50,9 @@
             </div>
         </div>
         <div class="row mt-3">
-            <p class="text-center" style="color:#525252;">Share your own experiences and ask questions on</p>
+            <div class="d-flex justify-content-center mt-2" style="text-align: center;">
+                <p tyle="color:#525252;">Share your own experiences and ask questions on</p>
+            </div>
         </div>
         <div class="row">
             <h2 class="d-flex justify-content-center" style="color:#383838;">Community Forum</h2>

@@ -19,12 +19,12 @@
     border:none;
     }
     /* Default style for anchor tags */
-    .nav-link {
+    .links {
         font-weight: normal; /* Use the default font weight */
     }
 
     /* Style for active anchor tags (text will be bold) */
-    .nav-link.active {
+    .links.active {
         font-weight: bold;
     }
 </style>
@@ -61,11 +61,11 @@
 
     <div class="container">
         <div class="row-auto">
-            <div class="col-auto p-1">
-                <a href="community-topics.php" class="js-link nav-link active col-2" ><i class="fa-regular fa-comments" style="display:inline;"></i>&nbsp; Community Topics</a>
+            <div class="col-auto p-1" style="width: fit-content;">
+                <a href="community-topics.php" class="js-link nav-link links active" ><i class="fa-regular fa-comments" style="display:inline;"></i>&nbsp; Community Topics</a>
             </div>
-            <div class="col p-1 mb-4">
-                <a href="my-topics.php" class="js-link nav-link col-2"><i class="fa-solid fa-question" style="display:inline;"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;My Topics</a>
+            <div class="col p-1 mb-4" style="width: fit-content;">
+                <a href="my-topics.php" class="js-link nav-link links"><i class="fa-solid fa-question" style="display:inline;"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;My Topics</a>
             </div>
         </div>
         
