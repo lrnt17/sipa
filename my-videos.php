@@ -180,5 +180,5 @@
     </template>
 
 </body>
-<script src="my-videos.js?v2"></script>
+<script src="my-videos.js?v3"></script>
 </html>

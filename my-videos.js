@@ -423,6 +423,10 @@ var manage_my_videos = {
     hide_edit_modal: function(){
         document.querySelector(".js-edit-video").classList.add('hide');
     },
+
+    login_alert: function(){
+        alert("You must be logged in to upload a videos");
+    },
 };
 
 manage_my_videos.load_my_videos();
