@@ -1,7 +1,7 @@
 <?php
 require("connect.php");
 
-$query = "SELECT std_img, std_name, std_symptom, std_cause, std_treatment, std_treatment_cost FROM std";
+$query = "SELECT std_id, std_img, std_name, std_symptom, std_cause, std_treatment, std_treatment_cost FROM std";
 $result = mysqli_query($conn, $query);
 
 if (!$result) {

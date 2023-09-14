@@ -987,7 +987,7 @@
             });
 
             // Show all contraceptive methods with their scores in the alert | para macheck if working
-            alert("Recommendations: " + recommendations + "\n\nAll Methods with Scores: \n" + allMethodsScores.join("\n"));
+            //alert("Recommendations: " + recommendations + "\n\nAll Methods with Scores: \n" + allMethodsScores.join("\n"));
 
             // Set the value of the hidden input field to the recommendations
             var recommendationsInput = document.getElementById("recommendations_input");
