@@ -235,6 +235,8 @@ var allvideos = {
         if (typeof videos === 'undefined') {
             let messageElement = document.createElement('p');
             messageElement.textContent = "No videos found";
+            messageElement.style.textAlign="center";
+            messageElement.classList.add('my-4');
             videoContainer.insertBefore(messageElement, loadMoreBtn);
             return;
         }
@@ -366,6 +368,8 @@ var allvideos = {
 
                         let all_button = document.createElement('button');
                         all_button.textContent = 'All';
+                        all_button.classList.add('btn','shadow-sm','m-1');
+                        all_button.style.backgroundColor="white";
                         all_button.setAttribute('onclick',`allvideos.sort_birth_control_id(0)`);
                         scrollMenu.appendChild(all_button);
 
@@ -376,6 +380,8 @@ var allvideos = {
                             option.setAttribute("contraceptive-name", contraceptive.birth_control_name);
                             selectElement.appendChild(option);*/
                             let button = document.createElement('button');
+                            button.classList.add('btn','shadow-sm','m-1');
+                            button.style.backgroundColor="white";
                             button.textContent = contraceptive.birth_control_name;
                             button.setAttribute('onclick',`allvideos.sort_birth_control_id('${contraceptive.birth_control_id}')`);
                             scrollMenu.appendChild(button);
@@ -408,11 +414,17 @@ var allvideos = {
                         });
 
                         prevBtn.addEventListener('click', () => {
-                            scrollMenu.scrollLeft -= 100;
+                            scrollMenu.scrollBy({
+                                left: -400,
+                                behavior: 'smooth'
+                            });
                         });
 
                         nextBtn.addEventListener('click', () => {
-                            scrollMenu.scrollLeft += 100;
+                            scrollMenu.scrollBy({
+                                left: 400,
+                                behavior: 'smooth'
+                            });
                         });
 
                         function checkArrows() {
@@ -520,7 +532,7 @@ var allvideos = {
                         // Display an error message
                         let videoContainer = document.getElementById("videoContainer");
                         let loadMoreBtn = document.getElementById("loadMoreBtn");
-                        videoContainer.innerHTML = '<p>No videos found</p>';
+                        videoContainer.innerHTML = '<p class="p m-5">No videos found</p>';
                         loadMoreBtn.style.display = "none";
                         videoContainer.appendChild(loadMoreBtn);
                         
