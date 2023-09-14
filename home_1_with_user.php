@@ -49,6 +49,10 @@
             color: white !important; 
         }
 
+        .sign-in{
+            color: white !important; 
+        }
+
         .main {
         width: 100%;
         max-height: 300px;
@@ -225,7 +229,7 @@
             <div class="row mt-5">
                 <div class="col-12 col-lg-5 me-auto">
                     <br>
-                <h1 class="mt-3 mb-3"style="font-weight:500;">Is it right for me?</h1>
+                <h1 class="mt-3 mb-3"style="font-weight:500;">Siguradong Pagpaplano</h1>
                 <p style="font-size:1rem; font-weight:300;">
                     Choosing the appropriate contraceptive method is essential for maintaining 
                     reproductive health and preventing unwanted pregnancy.

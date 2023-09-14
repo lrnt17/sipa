@@ -173,19 +173,26 @@ var single_video = {
         let editTextarea = document.createElement('textarea');
         editTextarea.classList.add('js-comment-input');
         editTextarea.value = commentText;
+        editTextarea.classList.add('form-control');
+        editTextarea.style.resize = 'none';
+        editTextarea.rows = 2; // Set the number of rows to 5
 
         // Replace the reply content with the input field
         commentElement.parentNode.replaceChild(editTextarea, commentElement);
 
         // Add a Save button for submitting the edited reply
         let saveButton = document.createElement('button');
-        saveButton.classList.add('js-save-button');
+        saveButton.classList.add('js-save-button', 'btn' , 'px-3', 'mr-3');
         saveButton.innerHTML = 'Save';
+
+        saveButton.style.backgroundColor = '#F2C1A7';
+        saveButton.style.fontSize="12px";
 
         // Add a Cancel button for canceling the edit
         let cancelButton = document.createElement('button');
-        cancelButton.classList.add('js-cancel-button');
+        cancelButton.classList.add('js-cancel-button', 'btn', 'btn-outline-danger', 'm-3');
         cancelButton.innerHTML = 'Cancel';
+        cancelButton.style.fontSize="12px";
 
         // Attach event listener to the Save button
         saveButton.addEventListener('click', function() {
@@ -356,37 +363,96 @@ var single_video = {
                     if (typeof data.rows == 'object' && data.rows.length > 0) {
                         // Loop through replies data and create elements for each reply
                         for (let i = data.rows.length - 1; i >= 0; i--) {
-                            //Outer div
+                            //Outer div ROW (pic, reply, edit)
                             let replyWrapper = document.createElement('div');
-                            replyWrapper.classList.add('reply-wrapper');
+                            replyWrapper.classList.add('reply-wrapper', 'row', 'pt-4');
+                            replyWrapper.style.background='';
+
+                                //Inner divs (madami ako in-add na div, para madesign)
+
+                                //<!--COL profile pic-->
+                                let col1 = document.createElement('div');
+                                col1.classList.add('col-auto');
+                                col1.style.padding="0";
+
+                                //<!--COL name, comment, time, like -->
+                                let col2 = document.createElement('div');
+                                col2.classList.add('col');
+
+                                //<!--div for name, comment-->
+                                let divname_com = document.createElement('div');
+                                divname_com.classList.add('p-2', 'rounded-3');
+                                divname_com.style.background='#f2f2f2';
+
+                                //<!--row for like, time-->
+                                let divlike_time = document.createElement('div');
+                                divlike_time.classList.add('row');
+                                divlike_time.style.display="flex";
+                                divlike_time.style.alignItems="center";
+
+                                //<!--col like, like span-->
+                                let divlike_time_col1 = document.createElement('div');
+                                divlike_time_col1.classList.add('col-auto', 'time');
+                                divlike_time_col1.style.padding="0";
+
+                                //<!--col time-->
+                                let divlike_time_col2 = document.createElement('div');
+                                divlike_time_col2.classList.add('col-auto');
+                                divlike_time_col2.style.padding="0";
+
+                                //<!--COL edit,del-->
+                                let col3 = document.createElement('div');
+                                col3.classList.add('js-action-button','col-2');
+                                
+                                //<!--3 dot btn-->
+                                let aTagbtn = document.createElement('a');
+                                aTagbtn.classList.add('btn');
+                                aTagbtn.setAttribute("data-toggle", "dropdown");
+                                aTagbtn.innerHTML = '<i class="fa-solid fa-ellipsis" style="font-size:13px;"></i>';
+                                
+                                //<!--edit,del container-->
+                                let col3_container = document.createElement('div');
+                                col3_container.classList.add('container');
+
+                                //<!--edit,del dropdown ( NANDITO NAKALAGAY YUNG EDIT AND DELETE BUTTON )-->
+                                let btn_dropdown = document.createElement('ul');
+                                btn_dropdown.classList.add('dropdown-menu','dropdown-menu-right');
+
 
                                 //Inner divs
                                 let userimageElement = document.createElement('img');
                                 userimageElement.src = 'assets/images/57.png'; // Default image source
-                                userimageElement.classList.add('js-userimage-reply');
+                                userimageElement.classList.add('js-userimage-reply','my-2');
                                 userimageElement.src = data.rows[i].user_img;
                                 
                                 let usernameElement = document.createElement('div');
                                 usernameElement.classList.add('js-username-reply');
                                 //usernameElement.innerHTML = (data.rows[i].user_fname) ? data.rows[i].user_fname : 'User';
                                 usernameElement.innerHTML = data.rows[i].user_fname;
+                                usernameElement.style.color='blue';
+                                usernameElement.style.display='inline';
                                 
                                 let dateTimeElement = document.createElement('div');
-                                dateTimeElement.classList.add('js-date');
+                                dateTimeElement.classList.add('js-date','mx-3');
                                 //dateTimeElement.innerHTML = data.rows[i].date;
+                                dateTimeElement.style.display='inline';
+                                dateTimeElement.style.fontSize='11px';
+                                dateTimeElement.style.color='gray';
 
                                 let replyElement = document.createElement('div');
                                 replyElement.classList.add('reply');
+                                replyElement.style.fontSize='14px';
                                 replyElement.innerHTML = data.rows[i].video_desc;
 
                                 let likeButtonElement = document.createElement('button');
                                 likeButtonElement.classList.add('js-like-button');
                                 likeButtonElement.setAttribute('video_id', data.rows[i].video_id);
                                 likeButtonElement.style.cursor = 'pointer';
-                                likeButtonElement.innerHTML = 'Like';
+                                likeButtonElement.innerHTML = '<i class="fa-solid fa-heart" style="font-size:13px; pointer-events: none;"></i>';
 
                                 let numlikeElement = document.createElement('span');
                                 numlikeElement.classList.add('js-num-likes');
+                                numlikeElement.style.fontSize="13px";
                                 numlikeElement.setAttribute('video_id', data.rows[i].video_id);
                                 
                                 //counting the number of likes
@@ -400,13 +466,35 @@ var single_video = {
                                 let actionButtonsContainer = document.createElement('div');
                                 actionButtonsContainer.classList.add('js-action-buttons', 'class_51');
 
-                            replyWrapper.appendChild(userimageElement);
-                            replyWrapper.appendChild(usernameElement);
-                            replyWrapper.appendChild(dateTimeElement);
-                            replyWrapper.appendChild(replyElement);
-                            replyWrapper.appendChild(likeButtonElement);
-                            replyWrapper.appendChild(numlikeElement);
-                            replyWrapper.appendChild(actionButtonsContainer);
+                            //<!--profile pic-->
+                            col1.appendChild(userimageElement);
+                            replyWrapper.appendChild(col1); //col1
+
+                            //<!--name, comment-->
+                            divname_com.appendChild(usernameElement);
+                            divname_com.appendChild(replyElement);
+                            col2.appendChild(divname_com); // div
+                            replyWrapper.appendChild(col2); //col2
+
+                            //<!--like, like span-->
+                            divlike_time_col1.appendChild(likeButtonElement);
+                            divlike_time_col1.appendChild(numlikeElement);
+                            divlike_time.appendChild(divlike_time_col1); // col
+                            col2.appendChild(divlike_time); //row
+                            replyWrapper.appendChild(col2); //col2
+
+                            //<!--time-->
+                            divlike_time_col2.appendChild(dateTimeElement);
+                            divlike_time.appendChild(divlike_time_col2); // col
+                            col2.appendChild(divlike_time); //row
+                            replyWrapper.appendChild(col2); //col2
+
+                            //<!--edit, del-->
+                            col3.appendChild(aTagbtn); // 3dot button
+                            btn_dropdown.appendChild(actionButtonsContainer); // EDIT, DELETE button
+                            col3_container.appendChild(btn_dropdown); //container div
+                            col3.appendChild(col3_container); //col3
+                            replyWrapper.appendChild(col3); //col3
 
                             let clone = replyWrapper.cloneNode(true);
                             clone.setAttribute('id','video_'+data.rows[i].video_id);
@@ -439,20 +527,22 @@ var single_video = {
 
                             // Create edit button bago to!!!!!!!!!!!!!!!!!!!!!!!!!
                             let editButton = document.createElement('div');
-                            editButton.classList.add('js-edit-button', 'class_53');
+                            editButton.classList.add('js-edit-button', 'class_53', 'dropdown-item');
                             editButton.style.color = 'blue';
                             editButton.style.cursor = 'pointer';
                             editButton.innerHTML = 'Edit';
+                            editButton.style.fontSize='14px';
 
                             // Attach event listener to the edit button
                             editButton.addEventListener('click', single_video.edit_reply);
 
                             // Create delete button
                             let deleteButton = document.createElement('div');
-                            deleteButton.classList.add('js-delete-button', 'class_53');
+                            deleteButton.classList.add('js-delete-button', 'class_53', 'dropdown-item');
                             deleteButton.style.color = 'red';
                             deleteButton.style.cursor = 'pointer';
                             deleteButton.innerHTML = 'Delete';
+                            deleteButton.style.fontSize='14px';
 
                             // Attach event listener to the edit button
                             deleteButton.addEventListener('click', single_video.delete_reply);
@@ -462,7 +552,7 @@ var single_video = {
                             clonedActionButtonsContainer.appendChild(editButton);
                             clonedActionButtonsContainer.appendChild(deleteButton);
 
-                            let action_buttons = clone.querySelector(".js-action-buttons");
+                            let action_buttons = clone.querySelector(".js-action-button");
                             if(!data.rows[i].user_owns){
                                 action_buttons.remove();
                             }
@@ -475,6 +565,9 @@ var single_video = {
                         let noRepliesMessage = document.createElement('p');
                         noRepliesMessage.innerHTML = 'No replies yet';
                         repliesContainer.appendChild(noRepliesMessage);
+                        noRepliesMessage.classList.add('p-2');
+                        noRepliesMessage.style.textAlign='center';
+                        noRepliesMessage.style.color='gray';
                     }
                     
                     // Create form element for adding new reply
@@ -483,25 +576,46 @@ var single_video = {
                     replyForm.classList = 'js-replied';
                     replyForm.method = 'post';
                     replyForm.setAttribute('video_id', video_id);
+                    replyForm.classList.add('p-2', 'rounded-4','my-3');
+                    replyForm.style.background ='#ebebeb';
                     
+                    let textArea = document.createElement('div');
+                    textArea.classList.add("d-grid");
                     // Create textarea element for reply input
                     let replyInput = document.createElement('textarea');
                     replyInput.placeholder = 'Add a reply...';
                     replyInput.classList = 'js-reply-input';
                     replyInput.name = 'reply_text';
                     replyForm.appendChild(replyInput);
+                    replyInput.classList.add('form-control');
+                    replyInput.style.resize = 'none';
+                    replyInput.rows = 2; 
+                    replyInput.style.background ='transparent';
+                    replyInput.style.border ='none';
+                    replyInput.style.fontSize='14px';
                     
-                    let breakTag1 = document.createElement('br');
-                    replyForm.appendChild(breakTag1);
+
+                    textArea.appendChild(replyInput);
+                    replyForm.appendChild(textArea);
+                    
+                    let hr1 = document.createElement('hr');
+                    replyForm.appendChild(hr1);
+
+                    // Create div element for anonymous checkbox
+                    let anonymousDivRow = document.createElement('div');
+                    anonymousDivRow.classList.add("row", "mx-1", "my-2");
                     
                     // Create div element for anonymous checkbox
                     let anonymousDiv = document.createElement('div');
+                    anonymousDiv.classList.add("col-auto", "me-auto");
 
-                        // Create label element for anonymous checkbox
-                        let anonymousLabel = document.createElement('label');
-                        anonymousLabel.setAttribute('for', 'anonymous');
-                        anonymousLabel.textContent = 'Post anonymously:';
-                        anonymousDiv.appendChild(anonymousLabel);
+                        // Create p element for anonymous checkbox
+                        let anonymousP = document.createElement('p');
+                        anonymousP.setAttribute('for', 'anonymous');
+                        anonymousP.textContent = 'Anonymous:';
+                        anonymousP.style.color = '#5582da';
+                        anonymousP.style.display = 'inline';
+                        anonymousDiv.appendChild(anonymousP);
 
                         // Create input element for anonymous checkbox
                         let anonymousInput = document.createElement('input');
@@ -511,16 +625,29 @@ var single_video = {
                         anonymousInput.classList.add('js-anonymous-reply');
                         anonymousDiv.appendChild(anonymousInput);
 
-                    // Append div element to form
-                    replyForm.appendChild(anonymousDiv);
-                    
-                    let breakTag2 = document.createElement('br');
-                    replyForm.appendChild(breakTag2);
+                        // Create p element for anonymous checkbox
+                        let anonymousLabel = document.createElement('label');
+                        anonymousLabel.setAttribute('for', 'anonymous');
+                        anonymousLabel.textContent = 'Post anonymously:';
+                        anonymousLabel.style.color = '#5582da';
+                        anonymousDiv.appendChild(anonymousLabel);
 
-                    // Create button element for submitting form
-                    let replyButton = document.createElement('button');
-                    replyButton.innerHTML = 'Reply';
-                    replyForm.appendChild(replyButton);
+
+                    // Append div element to form
+                    anonymousDivRow.appendChild(anonymousDiv);
+                    
+                    // Create div element for anonymous reply btn
+                    let anonymousDiv2 = document.createElement('div');
+                    anonymousDiv2.classList.add("col-auto");
+
+                        // Create button element for submitting form
+                        let replyButton = document.createElement('button');
+                        replyButton.innerHTML = '<i class="fa-solid fa-reply" style="pointer-events: none;"> </i>';
+                        replyButton.classList.add('btn');
+                        anonymousDiv2.appendChild(replyButton);
+                    
+                    // Append div element to form
+                    anonymousDivRow.appendChild(anonymousDiv2);
                     
                     // Append form element to replies container
                     repliesContainer.appendChild(replyForm);
@@ -531,6 +658,8 @@ var single_video = {
                         replyButtonElement.parentNode.appendChild(repliesContainer);
                     }
 
+                    // Append div element to form
+                    replyForm.appendChild(anonymousDivRow);
                 }
             }
         });
@@ -593,6 +722,9 @@ var single_video = {
         let replyWrapper = e.target.closest('.reply-wrapper');
 
         // Get the existing reply content
+        // Get the existing reply content from col2, divname_com
+        let col2 = replyWrapper.querySelector('.col');
+        let divname_com = col2.querySelector('.p-2');
         let replyElement = replyWrapper.querySelector('.reply');
         
         let replyText = replyElement.innerHTML;
@@ -601,39 +733,46 @@ var single_video = {
         let editInput = document.createElement('input');
         editInput.type = 'text';
         editInput.value = replyText;
+        editInput.classList.add('form-control');
+        editInput.style.resize = 'none';
+        editInput.rows = 2; // Set the number of rows to 5
 
         // Replace the reply content with the input field
-        replyWrapper.replaceChild(editInput, replyElement);
+        divname_com.replaceChild(editInput, replyElement);
 
         // Add a Save button for submitting the edited reply
         let saveButton = document.createElement('button');
-        saveButton.classList.add('js-save-edit');
+        saveButton.classList.add('js-save-edit','btn' , 'px-3', 'me-3','mt-1');
         saveButton.innerHTML = 'Save';
+        
+        saveButton.style.backgroundColor = '#F2C1A7';
+        saveButton.style.fontSize='14px';
 
         // Attach event listener to the Save button
         saveButton.addEventListener('click', single_video.save_edited_reply);
 
         // Append the Save button to the replyWrapper element
-        replyWrapper.appendChild(saveButton);
+        divname_com.appendChild(saveButton);
 
         // Add a Cancel button for canceling the edit
         let cancelButton = document.createElement('button');
-        cancelButton.classList.add('js-cancel-edit');
+        cancelButton.classList.add('js-cancel-edit', 'btn', 'btn-outline-danger','mt-1');
         cancelButton.innerHTML = 'Cancel';
+        cancelButton.style.fontSize='14px';
 
         // Attach event listener to the Cancel button
         cancelButton.addEventListener('click', function() {
             // Replace editInput and saveButton with original replyElement
-            replyWrapper.replaceChild(replyElement, editInput);
-            replyWrapper.removeChild(saveButton);
-            replyWrapper.removeChild(cancelButton);
+            divname_com.replaceChild(replyElement, editInput);
+            divname_com.removeChild(saveButton);
+            divname_com.removeChild(cancelButton);
             // Show the edit and delete buttons
-            replyWrapper.querySelector('.js-edit-button').classList.remove('hide');
-            replyWrapper.querySelector('.js-delete-button').classList.remove('hide');
+            divname_com.querySelector('.js-edit-button').classList.remove('hide');
+            divname_com.querySelector('.js-delete-button').classList.remove('hide');
         });
 
         // Append the Cancel button to the replyWrapper element
-        replyWrapper.appendChild(cancelButton);
+        divname_com.appendChild(cancelButton);
 
         // Hide the edit and delete buttons
         replyWrapper.querySelector('.js-edit-button').classList.add('hide');
@@ -643,12 +782,15 @@ var single_video = {
     save_edited_reply: function(e) {
 
         let replyWrapper = e.target.closest('.reply-wrapper');
-        
+        console.log(replyWrapper);
         // Get the edited reply input field
+        let col2 = replyWrapper.querySelector('.col');
+        let divname_com = col2.querySelector('.p-2');
         let editInput = replyWrapper.querySelector('input');
-        
+        console.log(editInput);
         // Get the edited reply content
         let editedReplyText = editInput.value;
+        console.log(editedReplyText);
         let video_id = replyWrapper.id.replace('video_', '');
 
         let form = new FormData();
@@ -680,8 +822,8 @@ var single_video = {
 
                         // Replace editInput and saveButton with replyElement
                         let saveButton = replyWrapper.querySelector('.js-save-edit');
-                        replyWrapper.replaceChild(replyElement, editInput);
-                        replyWrapper.removeChild(saveButton);
+                        divname_com.replaceChild(replyElement, editInput);
+                        divname_com.removeChild(saveButton);
 
                         // Show the edit and delete buttons
                         replyWrapper.querySelector('.js-edit-button').classList.remove('hide');
@@ -689,7 +831,7 @@ var single_video = {
                         
                         // Remove the cancel button
                         let cancelButton = replyWrapper.querySelector('.js-cancel-edit');
-                        replyWrapper.removeChild(cancelButton);
+                        divname_com.removeChild(cancelButton);
                     }
                         
                 }else{

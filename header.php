@@ -84,7 +84,7 @@
 
                       </a>
                   <?php else:?>
-                      <span class="js-link navbar-brand d-none d-lg-block d-lx-none" style="cursor:pointer; font-size: 16px; font-weight:normal; color:white;" onclick="user.login()">Sign in</span>
+                      <span class="js-link navbar-brand d-none d-lg-block d-lx-none sign-in" style="cursor:pointer; font-size: 16px; font-weight:normal;" onclick="user.login()">Sign in</span>
                   <?php endif;?>
             
       </nav>

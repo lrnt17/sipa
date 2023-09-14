@@ -38,16 +38,16 @@
             <p style="color:#383838;">Choose a method:</p>
         </div>
 
-    <form onclick="method_display.updateDisplay(event)" class="js-method-buttons centered-form">
+    <form class="js-method-buttons centered-form">
         <!--<button name="method" value="1">Patch</button>
         <button name="method" value="2">Implant</button>
         <button name="method" value="3">Condom</button>-->
     </form>
 
-    <div class="my-4"> 
-        <p class="text-center" style="color:#525252;">Using the <span class="js-method-name"></span>, 
+    <div class="my-4" style="display: flex; justify-content: center;"> 
+        <p class="text-center" style="color:#525252;">Using the <span class="js-method-name" id="js-method-name"></span>, 
         typically <span class="js-preggy"></span> in 
-        <b>10</b> women will get pregnant in one year. </p>
+        <b>100</b> women will get pregnant in one year. </p>
     </div>
 
     <div id="women-container" class="row justify-content-center">
@@ -58,7 +58,7 @@
 
 <!-- contraceptive method buttons template -->
 <template class="js-method-buttons-template">
-    <button name="method" value="1" class="js-each-method-buttons btn mx-3 my-2 px-4 py-2 rounded-4 shadow-sm rounded" style="min-width:235px;">Patch</button>
+    <button  onclick="method_display.updateDisplay(event)" name="method" value="1" class="js-each-method-buttons btn mx-3 my-2 px-4 py-2 rounded-4 shadow-sm rounded" style="min-width:235px;">Patch</button>
 </template>
 <!-- end contraceptive method buttons template -->
 
@@ -134,7 +134,7 @@
                         
                         let pregnantWomenContainer = document.getElementById('women-container');
                         let nonPregnantWomenContainer = document.getElementById('women-container');
-                        let methodName = document.querySelector(".js-method-name");
+                        let methodName = document.querySelector("#js-method-name");
                         let numOfPreggy = document.querySelector(".js-preggy");
 
                         // Clear the containers
@@ -144,7 +144,7 @@
                         numOfPreggy.innerHTML = '';
 
                         // Calculate the number of non-pregnant women icons
-                        let numNonPreggy = Math.max(0, 10 - obj.preggy);
+                        let numNonPreggy = Math.max(0, 100 - obj.preggy);
 
                         for (let i = 0; i < obj.preggy; i++) {
                             let col = document.createElement('div');
@@ -152,8 +152,8 @@
                             
                             let preggyImg = document.createElement('img');
                             preggyImg.src = 'assets/images/preggy-1.png'; // Use the correct path for preggy image
-                            preggyImg.style.height = "110px";
-                            preggyImg.style.width = "50px";
+                            preggyImg.style.height = "40px";
+                            preggyImg.style.width = "20px";
                             preggyImg.classList.add('mx-3', 'my-2');
                             
                             col.appendChild(preggyImg);
@@ -166,8 +166,8 @@
                             
                             let nonPreggyImg = document.createElement('img');
                             nonPreggyImg.src = 'assets/images/not-preggy.png'; // Use the correct path for non-preggy image
-                            nonPreggyImg.style.height = "110px";
-                            nonPreggyImg.style.width = "60px";
+                            nonPreggyImg.style.height = "40px";
+                            nonPreggyImg.style.width = "25px";
                             nonPreggyImg.classList.add('mx-2', 'my-2');
                             
                             col.appendChild(nonPreggyImg);
