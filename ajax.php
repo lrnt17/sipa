@@ -488,21 +488,22 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 					authenticate($row);
 					$info['message'] = "Admin Successful login";
 
-				} elseif ($row['user_role'] == 'head_admin') {
+				} else if ($row['user_role'] == 'head_admin') {
 					$info['head_admin_success'] = true;
 					authenticate($row);
 					$info['message'] = "Head Admin Successful login";
 
-				} else {
+				} else if ($row['user_role'] == 'user') {
 					/*$info['success'] = true;
 					authenticate($row);
 					$info['message'] = "Successful login";*/
 					if ($row['privacy_policy'] == 'I agree' && $row['terms_conditions'] == 'I agree') {
-						$info['success'] = true;
+						$info['user_success'] = true;
 						authenticate($row);
 						$info['message'] = "Successful login";
 
 					} else {
+						$info['user_success'] = false;
 						$info['message'] = "You must agree to the privacy policy and terms and conditions";
 					
 					}

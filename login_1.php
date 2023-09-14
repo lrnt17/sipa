@@ -16,6 +16,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/324d76b648.js" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        function preventBack() {
+            window.history.forward()
+        };
+        setTimeout("preventBack()", 0);
+        window.onunload=function(){null;}
+    </script>
     <title>Sign in | SiPa</title>
     <style>
         /* The Modal (background) */
@@ -280,14 +287,26 @@
                         let obj = JSON.parse(ajax.responseText);
                         alert(obj.message);
 
-                        if(obj.success){
+                        if(obj.user_success){
+                            
                             window.location.href = "home_1_with_user.php";
-                        }else if (!obj.success) {
-                            document.getElementById("myModal").style.display = "block";
+                            login.password = null;
+                            login.password = null;
                         }else if (obj.admin_success) {
+                            
                             window.location.href = "admin/index.php";
+                            login.password = null;
+                            login.password = null;
                         }else if (obj.head_admin_success) {
+                            
                             window.location.href = "admin/index.php";
+                            login.password = null;
+                            login.password = null;
+                        }else if (typeof obj.user_success != 'undefined' && !obj.user_success) {
+                            console.log('hoy', obj.user_success);
+                            document.getElementById("myModal").style.display = "block";
+                        }else if (!obj.success) {
+                            return;
                         }
                     }else{
                         alert("Please check your internet connection");
@@ -332,6 +351,8 @@
                         alert(obj.message);
 
                         if(obj.success){
+                            login.password = null;
+                            login.password = null;
                             window.location.href = "home_1_with_user.php";
                         }
                     }else{
