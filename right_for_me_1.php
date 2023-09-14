@@ -3,12 +3,10 @@
     require("connect.php");
     require('functions.php');
 
-    /*if(!logged_in()){
-		header("Location: home_1_with_user.php");
-		die;
-	}*/
-    
+
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -176,12 +174,23 @@
             <div class="circle shadow-sm" id="circle2" style="background-color: #CAA4D0; position: absolute; width: 3.9em; height: 3.9em; left: 51%;
             transform: translate(-55%, 5%); z-index: -1;"></div>
         </div>
-        <div class="circle d-flex justify-content-center">
-            <a href="right_for_me_quiz.php" style="
-            font-size: 24px;
-            text-decoration: none;
-            font-weight: 600; color:#383838;">Take the quiz</a>
-        </div>
+        
+        <?php if(logged_in()):?>
+            <div class="circle d-flex justify-content-center">
+                <a href="right_for_me_quiz.php" style="
+                font-size: 24px;
+                text-decoration: none;
+                font-weight: 600; color:#383838;">Take the quiz</a>
+            </div>
+        <?php else:?>
+            <div onclick="contra_method.take_quiz_prohibited()" class="circle d-flex justify-content-center">
+                <button class="btn" style="
+                font-size: 24px;
+                text-decoration: none;
+                font-weight: 600; color:#383838;">Take the quiz</button>
+            </div>
+        <?php endif;?>
+
         </br></br></br>
 
         <div class="row">
@@ -403,8 +412,14 @@
             ajax.open('post', 'ajax.php', true);
             ajax.send(form);
         },
+
+        take_quiz_prohibited: function() {
+            alert("You're not yet signed in. Sign in to have access to the Take the Quiz Section.");
+        },
     };
 
     contra_method.load_methods();
 </script>
+
+
 </html>
