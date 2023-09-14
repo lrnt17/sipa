@@ -625,8 +625,8 @@ function checkShowSaveButton() {
         if (xhr.status === 200) {
           alert("Selected contraceptive method, start date, and usage saved to the database.");
 
-          // Schedule the SMS reminders based on the selected method
-          //scheduleSMS(selectedMethod);
+          // Redirect to right_for_me_1.php
+          window.location.href = 'right_for_me_1.php';
 
         } else {
           alert("Error updating selected contraceptive method and start date in the database.");
