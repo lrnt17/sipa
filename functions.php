@@ -442,3 +442,11 @@ function sendSMS($number, $message) {
 
     //echo $output;
 }
+
+function admin_get_image($path)
+{
+	if(!empty($path) && file_exists($path))
+		return $path;
+
+	return '../assets/images/user.jpg?v1';
+}

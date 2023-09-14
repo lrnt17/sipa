@@ -31,6 +31,10 @@
                 <a href="contraceptive-chart.php">Contraceptive Chart</a>
             </div>
         <?php endif;?>
+        <a href="admin-account-settings.php">
+            <img src="<?= admin_get_image($_SESSION['USER']['user_image'])?>" title="SiPa" width="25" height="25">
+            <span>Hi, <?= $_SESSION['USER']['user_fname']?></span>
+        </a>
     </div>
 </section>
 
