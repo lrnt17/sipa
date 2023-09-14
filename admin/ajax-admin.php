@@ -585,6 +585,14 @@
                 }
             }
 
+        }else
+        if($_POST['data_type'] == 'load_city_and_health_facility')
+        {
+            $query = "select * from partner_facility";
+            $rows = query($query);
+            $info['rows'] = $rows;
+            $info['success'] = true;
+    
         }
     }
   

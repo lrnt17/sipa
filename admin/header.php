@@ -31,10 +31,17 @@
                 <a href="contraceptive-chart.php">Contraceptive Chart</a>
             </div>
         <?php endif;?>
-        <a href="admin-account-settings.php">
+        <button class="dropdown-btn">
+            Administrator
             <img src="<?= admin_get_image($_SESSION['USER']['user_image'])?>" title="SiPa" width="25" height="25">
             <span>Hi, <?= $_SESSION['USER']['user_fname']?></span>
-        </a>
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-container">
+            <a href="admin-account-settings.php">Account Settings</a>
+            <a href="#" onclick="admin.logout()">Log out</a>
+        </div>
+        
     </div>
 </section>
 
@@ -54,4 +61,32 @@
             }
         });
     }
+
+    var admin = {
+
+        logout: function(){
+
+            let form = new FormData();
+            form.append('data_type', 'logout');
+            var ajax = new XMLHttpRequest();
+
+            ajax.addEventListener('readystatechange',function(){
+
+                if(ajax.readyState == 4)
+                {
+                    if(ajax.status == 200){
+                        let obj = JSON.parse(ajax.responseText);
+                        alert(obj.message);
+
+                        window.location.href = "../login_1.php";
+                    }else{
+                        alert("Please check your internet connection");
+                    }
+                }
+            });
+
+            ajax.open('post','../ajax.php', true);
+            ajax.send(form);
+        },
+    };
 </script>
