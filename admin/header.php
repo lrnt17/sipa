@@ -1,6 +1,11 @@
 <?php 
     defined('APP') or die('direct script access denied!');
     
+    if(!logged_in()){
+		header("Location: ../login_1.php");
+		die;
+	}
+    
     $user_role = $_SESSION['USER']['user_role'];
     $user_fname = $_SESSION['USER']['user_fname'];
 ?>

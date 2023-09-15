@@ -1,6 +1,7 @@
 var single_video = {
 
     video_id: (typeof video_id == 'undefined') ? 0 : video_id,
+    userId: (typeof userId == 'undefined') ? null : userId,
 
     add_comment: function(e){
 
@@ -569,97 +570,132 @@ var single_video = {
                         noRepliesMessage.style.textAlign='center';
                         noRepliesMessage.style.color='gray';
                     }
-                    
-                    // Create form element for adding new reply
-                    let replyForm = document.createElement('form');
-                    replyForm.onsubmit = single_video.add_reply;
-                    replyForm.classList = 'js-replied';
-                    replyForm.method = 'post';
-                    replyForm.setAttribute('video_id', video_id);
-                    replyForm.classList.add('p-2', 'rounded-4','my-3');
-                    replyForm.style.background ='#ebebeb';
-                    
-                    let textArea = document.createElement('div');
-                    textArea.classList.add("d-grid");
-                    // Create textarea element for reply input
-                    let replyInput = document.createElement('textarea');
-                    replyInput.placeholder = 'Add a reply...';
-                    replyInput.classList = 'js-reply-input';
-                    replyInput.name = 'reply_text';
-                    replyForm.appendChild(replyInput);
-                    replyInput.classList.add('form-control');
-                    replyInput.style.resize = 'none';
-                    replyInput.rows = 2; 
-                    replyInput.style.background ='transparent';
-                    replyInput.style.border ='none';
-                    replyInput.style.fontSize='14px';
-                    
 
-                    textArea.appendChild(replyInput);
-                    replyForm.appendChild(textArea);
+                    if (single_video.userId) {
+                        // Create form element for adding new reply
+                        let replyForm = document.createElement('form');
+                        replyForm.onsubmit = single_video.add_reply;
+                        replyForm.classList = 'js-replied';
+                        replyForm.method = 'post';
+                        replyForm.setAttribute('video_id', video_id);
+                        replyForm.classList.add('p-2', 'rounded-4','my-3');
+                        replyForm.style.background ='#ebebeb';
+                        
+                        let textArea = document.createElement('div');
+                        textArea.classList.add("d-grid");
+                        // Create textarea element for reply input
+                        let replyInput = document.createElement('textarea');
+                        replyInput.placeholder = 'Add a reply...';
+                        replyInput.classList = 'js-reply-input';
+                        replyInput.name = 'reply_text';
+                        replyForm.appendChild(replyInput);
+                        replyInput.classList.add('form-control');
+                        replyInput.style.resize = 'none';
+                        replyInput.rows = 2; 
+                        replyInput.style.background ='transparent';
+                        replyInput.style.border ='none';
+                        replyInput.style.fontSize='14px';
+                        
+
+                        textArea.appendChild(replyInput);
+                        replyForm.appendChild(textArea);
+                        
+                        let hr1 = document.createElement('hr');
+                        replyForm.appendChild(hr1);
+
+                        // Create div element for anonymous checkbox
+                        let anonymousDivRow = document.createElement('div');
+                        anonymousDivRow.classList.add("row", "mx-1", "my-2");
+                        
+                        // Create div element for anonymous checkbox
+                        let anonymousDiv = document.createElement('div');
+                        anonymousDiv.classList.add("col-auto", "me-auto");
+
+                            // Create p element for anonymous checkbox
+                            let anonymousP = document.createElement('p');
+                            anonymousP.setAttribute('for', 'anonymous');
+                            anonymousP.textContent = 'Anonymous:';
+                            anonymousP.style.color = '#5582da';
+                            anonymousP.style.display = 'inline';
+                            anonymousDiv.appendChild(anonymousP);
+
+                            // Create input element for anonymous checkbox
+                            let anonymousInput = document.createElement('input');
+                            anonymousInput.setAttribute('type', 'checkbox');
+                            anonymousInput.setAttribute('id', 'anonymous');
+                            anonymousInput.setAttribute('name', 'anonymous_reply');
+                            anonymousInput.classList.add('js-anonymous-reply');
+                            anonymousDiv.appendChild(anonymousInput);
+
+                            // Create p element for anonymous checkbox
+                            let anonymousLabel = document.createElement('label');
+                            anonymousLabel.setAttribute('for', 'anonymous');
+                            anonymousLabel.textContent = 'Post anonymously:';
+                            anonymousLabel.style.color = '#5582da';
+                            anonymousDiv.appendChild(anonymousLabel);
+
+
+                        // Append div element to form
+                        anonymousDivRow.appendChild(anonymousDiv);
+                        
+                        // Create div element for anonymous reply btn
+                        let anonymousDiv2 = document.createElement('div');
+                        anonymousDiv2.classList.add("col-auto");
+
+                            // Create button element for submitting form
+                            let replyButton = document.createElement('button');
+                            replyButton.innerHTML = '<i class="fa-solid fa-reply" style="pointer-events: none;"> </i>';
+                            replyButton.classList.add('btn');
+                            anonymousDiv2.appendChild(replyButton);
+                        
+                        // Append div element to form
+                        anonymousDivRow.appendChild(anonymousDiv2);
+                        
+                        // Append form element to replies container
+                        repliesContainer.appendChild(replyForm);
+                        
+
+                        // Append div element to form
+                        replyForm.appendChild(anonymousDivRow);
+                    } else {
+                        
+                        // Create the outer div
+                        let outerDiv = document.createElement('div');
+                        outerDiv.setAttribute('class', 'class_13');
+
+                        // Create the inner div
+                        let innerDiv = document.createElement('div');
+                        innerDiv.setAttribute('class', 'class_15');
+                        innerDiv.setAttribute('style', 'cursor:pointer;text-align: center;');
+                        innerDiv.setAttribute('onclick', 'user.login()');
+
+                        // Create the i element
+                        let iElement = document.createElement('i');
+                        iElement.setAttribute('class', 'fa-solid fa-circle-exclamation');
+                        innerDiv.appendChild(iElement);
+
+                        // Add text node to inner div
+                        let textNode = document.createTextNode(" You're not signed in. ");
+                        innerDiv.appendChild(textNode);
+
+                        // Create the p element
+                        let pElement = document.createElement('p');
+                        pElement.setAttribute('style', 'color: blue;');
+                        pElement.textContent = 'Click here to sign in and reply';
+                        innerDiv.appendChild(pElement);
+
+                        // Append inner div to outer div
+                        outerDiv.appendChild(innerDiv);
+
+                        repliesContainer.appendChild(outerDiv);
+                    }
                     
-                    let hr1 = document.createElement('hr');
-                    replyForm.appendChild(hr1);
-
-                    // Create div element for anonymous checkbox
-                    let anonymousDivRow = document.createElement('div');
-                    anonymousDivRow.classList.add("row", "mx-1", "my-2");
-                    
-                    // Create div element for anonymous checkbox
-                    let anonymousDiv = document.createElement('div');
-                    anonymousDiv.classList.add("col-auto", "me-auto");
-
-                        // Create p element for anonymous checkbox
-                        let anonymousP = document.createElement('p');
-                        anonymousP.setAttribute('for', 'anonymous');
-                        anonymousP.textContent = 'Anonymous:';
-                        anonymousP.style.color = '#5582da';
-                        anonymousP.style.display = 'inline';
-                        anonymousDiv.appendChild(anonymousP);
-
-                        // Create input element for anonymous checkbox
-                        let anonymousInput = document.createElement('input');
-                        anonymousInput.setAttribute('type', 'checkbox');
-                        anonymousInput.setAttribute('id', 'anonymous');
-                        anonymousInput.setAttribute('name', 'anonymous_reply');
-                        anonymousInput.classList.add('js-anonymous-reply');
-                        anonymousDiv.appendChild(anonymousInput);
-
-                        // Create p element for anonymous checkbox
-                        let anonymousLabel = document.createElement('label');
-                        anonymousLabel.setAttribute('for', 'anonymous');
-                        anonymousLabel.textContent = 'Post anonymously:';
-                        anonymousLabel.style.color = '#5582da';
-                        anonymousDiv.appendChild(anonymousLabel);
-
-
-                    // Append div element to form
-                    anonymousDivRow.appendChild(anonymousDiv);
-                    
-                    // Create div element for anonymous reply btn
-                    let anonymousDiv2 = document.createElement('div');
-                    anonymousDiv2.classList.add("col-auto");
-
-                        // Create button element for submitting form
-                        let replyButton = document.createElement('button');
-                        replyButton.innerHTML = '<i class="fa-solid fa-reply" style="pointer-events: none;"> </i>';
-                        replyButton.classList.add('btn');
-                        anonymousDiv2.appendChild(replyButton);
-                    
-                    // Append div element to form
-                    anonymousDivRow.appendChild(anonymousDiv2);
-                    
-                    // Append form element to replies container
-                    repliesContainer.appendChild(replyForm);
                     // Insert or replace replies container after reply button element
                     if (replyButtonElement.nextSibling) {
                         replyButtonElement.parentNode.replaceChild(repliesContainer, replyButtonElement.nextSibling);
                     } else {
                         replyButtonElement.parentNode.appendChild(repliesContainer);
                     }
-
-                    // Append div element to form
-                    replyForm.appendChild(anonymousDivRow);
                 }
             }
         });

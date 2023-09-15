@@ -2,6 +2,12 @@
 	require('connect.php');
 	require('functions.php');
 
+    if (isset($_SESSION['USER']['user_id'])) {
+        $user_id = $_SESSION['USER']['user_id'];
+    } else {
+        $user_id = null;
+    }
+
 	$video_id = $_GET['id'] ?? 0;
 
 	//dito kinukuha yung data depende sa video_id
@@ -408,13 +414,14 @@
 
 <script>
     var video_id = <?=$video_id?>;
+    var userId = <?php echo json_encode($user_id); ?>;
 </script>
 <!--<script src="allposts.js?v1"></script>-->
 <!--<script src="mypost.js?v11"></script>-->
 <script src="time.js?v1"></script>
 <script src="like-rating-video.js?v2"></script>
 <!--<script src="community-topics.js?v6"></script>-->
-<script src="video.js?v5"></script>
+<script src="video.js?v6"></script>
 
 <script>
     // Call the updateTimestamps function initially when the page loads

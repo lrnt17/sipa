@@ -2,13 +2,6 @@
     require("connect.php");
     require('functions.php');
 
-    if(!logged_in()){
-		header("Location: home_1_with_user.php");
-		die;
-	}
-
-    //echo $_SESSION['USER']['user_id']."<br>";
-
     $birth_control_id = $_GET['id'];
     
     $query = "select * from birth_controls where birth_control_id = '$birth_control_id' limit 1";

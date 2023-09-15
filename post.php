@@ -3,7 +3,13 @@
 	require('connect.php');
 	require('functions.php');
 
-	$post_id = $_GET['id'] ?? 0;
+	if (isset($_SESSION['USER']['user_id'])) {
+        $user_id = $_SESSION['USER']['user_id'];
+    } else {
+        $user_id = null;
+    }
+
+    $post_id = $_GET['id'] ?? 0;
 
 	//dito kinukuha yung data depende sa post_id
 	$query = "select * from forum where forum_id = '$post_id' limit 1";
@@ -173,7 +179,7 @@
 
                             <div class="row m-1" style="align-items: center;">
                                 <div class="col-5">
-                                    <img src="<?=$row['user_img']?>" class="class_47" style="width:40px; height:40px; border-radius:50%; border-style: solid;" >
+                                    <img src="<?=get_image($row['user_img'])?>" class="class_47" style="width:40px; height:40px; border-radius:50%; border-style: solid;" >
                                     <span style="font-size:14px; color:gray;"> Posted by</span> 
                                     <h2 class="class_48" style="font-size:14px; display:inline; color:blue;" >
                                         <?//=$row['user']['user_fname'] ?? 'Unknown'?>
@@ -400,6 +406,7 @@
 
 <script>
     //var page_number = <?=$page?>;
+    var userId = <?php echo json_encode($user_id); ?>;
     var post_id = <?=$post_id?>;
     
 </script>
@@ -408,7 +415,7 @@
 <script src="time.js?v1"></script>
 <script src="like-rating.js?v3"></script>
 <script src="community-topics.js?v6"></script>
-<script src="mycomment.js?v46"></script>
+<script src="mycomment.js?v47"></script>
 
 <script>
     // Call the updateTimestamps function initially when the page loads
