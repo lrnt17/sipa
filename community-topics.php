@@ -250,12 +250,14 @@
 
 <script>
 //-----------------------------------------------------------------------------------------------------
-
+    //FOR MIKA:
+    /* yung sa may start new topic yung + magiging - pag open yung forum then yung 
+    "click here to sign in and reply" masyadong nakadikit sa reply */
     // hide start new topic button
-    const btn = document.getElementById('btn');
+    /*const btn = document.getElementById('btn');
         btn.addEventListener('click', () => {
         btn.style.display = 'none';
-    });
+    });*/
 
     // Check if the page is being loaded as a result of a refresh
     if (performance.navigation.type === performance.navigation.TYPE_RELOAD) {
@@ -268,7 +270,7 @@
 
     // Check if there are any stored search results in sessionStorage
     let storedSearchResults = sessionStorage.getItem('searchResults');
-    console.log(storedSearchResults);
+    //console.log(storedSearchResults);
     // Add an event listener to the input field to handle user input
     searchInput.addEventListener('input', function(event) {
         // Get the user's search query
@@ -276,13 +278,13 @@
 
         if (query !== '') {
             document.getElementById("loadMoreBtn").style.display = "none";
-
+            //console.log(query);
             // Call the allposts.search method with the user's query
             allposts.search(query);
         } else {
             // Clear any stored search results from sessionStorage
             sessionStorage.removeItem('searchResults');
-            
+            //console.log('test');
             // Clear any existing posts and load the first 5 posts from the database
             allposts.start = 0;
             allposts.loadMorePosts(null, true);

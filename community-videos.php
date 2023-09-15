@@ -122,7 +122,7 @@
                         <div id="VideosSection">
                             <div class="row" style="justify-content: space-evenly;" id="videoContainer">
                                 <!-- Existing videos go here -->
-                                <button id="loadMoreBtn" onclick="allvideos.loadMoreVideos()" class="js-loadmore-btn btn mt-3" style=" color: #424242;">View More</button>
+                                <button id="loadMoreBtn" onclick="allvideos.loadMoreVideos()" class="js-loadmore-btn mt-3" style=" color: #424242;">View More</button>
                             </div>
                         </div>
                     </div>

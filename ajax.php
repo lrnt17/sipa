@@ -629,6 +629,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 			foreach ($rows as $key => $row) {
 				$rows[$key]['date'] = date('Y-m-d\TH:i:s', strtotime($row['forum_timestamp']));
 				$rows[$key]['forum_desc'] = nl2br(htmlspecialchars($row['forum_desc']));
+				$rows[$key]['user_img'] = get_image($row['user_img']);
 				
 				$rows[$key]['user_owns'] = false;
 				if ($user_id == $row['user_id']) {
