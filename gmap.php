@@ -35,7 +35,7 @@ $conn->close();
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Mapbox Hospital Finder</title>
+    <title>SiPa | Hospital Finder</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js"></script>
     <link rel="icon" href="favicon.ico" type="image/x-ico">
@@ -86,13 +86,6 @@ $conn->close();
 		  border-radius: 5px;
 		  background-color: #fff;
 		}
-		#results {
-		position: absolute;
-		top: 150px;
-		left: 378px;
-		z-index: 1;
-		padding-bottom: 20px; /* Add some padding to create space below the results */
-	  }
     </style>
 </head>
 <body style="background: #F2F5FF;">
@@ -112,18 +105,28 @@ $conn->close();
         <p>Showing results</p>
         <p>Maps</p>
             <div id="map-container">
-            <div id="map"></div>
-
+                <div id="map"></div>
+            </div>
         <div id="hospital-info-container"> <!-- Wrap the hospital info in a container -->
             <div id="hospital-list">
                 <!-- Hospital details will be displayed here -->
             </div>
+            
         </div>
     </div>
 
 
 <script>
     mapboxgl.accessToken = 'pk.eyJ1Ijoicm9seWZsb3JlbnRpbm82IiwiYSI6ImNsbHFpcDFoNzBlOHYza3BpMzN3NnRyb2EifQ.n12r_Sm2lQGDPXAXB9l9uQ';
+
+    //pag nag enter key yung user, masesearch na yung tinype if ever natamad pindutin button
+    document.getElementById('search-input').addEventListener('keydown', function (event) {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Prevent the default form submission
+            document.getElementById('search-button').click(); // Trigger the button click event
+        }
+    });
+
 
     var defaultLocation = [120.884452, 14.96654]; // Baliuag, Bulacan, Philippines
 
@@ -233,21 +236,31 @@ $conn->close();
         marker.remove();
     });
 
+    // Create a variable for the hospital list container
+    var hospitalListContainer = document.getElementById('hospital-list');
 
-    if (filteredHospitals.length > 0) {
-        // Display hospitals in the selected location on the map
-        displayHospitals(filteredHospitals);
+        if (filteredHospitals.length > 0) {
+            // Display hospitals in the selected location on the map
+            displayHospitals(filteredHospitals);
 
-        // Display hospital details in the #hospital-list element
-        displayHospitalDetails(filteredHospitals);
+            // Display hospital details in the #hospital-list element
+            displayHospitalDetails(filteredHospitals);
 
-        // Center the map on the first hospital in the filtered list
-        map.flyTo({
-            center: [filteredHospitals[0].Longitude, filteredHospitals[0].Latitude],
-            zoom: 15
-        });
-    }
-});
+            // Center the map on the first hospital in the filtered list
+            map.flyTo({
+                center: [filteredHospitals[0].Longitude, filteredHospitals[0].Latitude],
+                zoom: 15
+            });
+        } else {
+            // Create a "No record found" message as a hospital-item
+            var noResultsMessage = document.createElement('div');
+            noResultsMessage.classList.add('hospital-item');
+            noResultsMessage.innerHTML = '<h3>No results found.</h3>';
+
+            // Append the "No record found" message to the hospital list container
+            hospitalListContainer.appendChild(noResultsMessage);
+        }
+    });
 
 	
 	document.getElementById('search-button').addEventListener('click', function () {
