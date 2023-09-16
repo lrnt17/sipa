@@ -43,6 +43,7 @@ $conn->close();
     <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js"></script>
     <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
+    <script src="https://kit.fontawesome.com/324d76b648.js" crossorigin="anonymous"></script>
     <style>
         body {
             overflow-x: hidden;
@@ -53,39 +54,17 @@ $conn->close();
         visibility: hidden !important;
         }
 		
-    #map { position: absolute; left: 60%; top: 25%; bottom: 20%; width: 26%; height: 40%; } /* Adjusted width and centered */
+    /*#map { position: absolute; left: 60%; top: 25%; bottom: 20%; width: 26%; height: 40%; } Adjusted width and centered */
+    #map {
+        min-height: 306px;
+        min-width: 330px;
+        width:600px;
+        object-fit: cover;
+    }
 	
-    #search-container { position: absolute; top: 100px; left: 550px; z-index: 1; display: flex; align-items: center; }
-    #search-input { width: 300px; padding: 10px; border-radius: 20px 0 0 20px; border: none; }
-    #search-button { background-color: #0074D9; color: white; border: none; padding: 10px 20px; border-radius: 0 20px 20px 0; cursor: pointer; }
-    .mapboxgl-ctrl-geocoder { position: absolute; top: 73px; left: 500px; width: 400px; border-radius: 20px; } /* Adjusted positioning */
-    .container {
-          margin-top: 270px;
-		  margin: 20px;
-		  height: 700px;
-		  background-color: #d2e1f8;
-		  border-radius: 10px;
-            }
-        #hospital-list {
-             position: absolute;
-		  top: 180px; /* Adjust the top position as needed */
-		  left: 100px; /* Adjust the left position as needed */
-		  width: 700px;
-		  height: 950px;
-		  padding: 10px;
-		  background-color: #f0f0f0;
-		  border: 1px solid #ccc;
-		  border-radius: 5px;
-		  overflow-y: scroll;
-            max-height: 437px; /* Add a max height to enable scrolling if many hospitals are displayed */
-        }
-       .hospital-item {
-		  margin-bottom: 10px;
-		  padding: 5px;
-		  border: 1px solid #ddd;
-		  border-radius: 5px;
-		  background-color: #fff;
-		}
+    textarea:focus, input:focus{
+        outline: none;
+    }
     </style>
 </head>
 <body style="background: #F2F5FF;">
@@ -93,27 +72,108 @@ $conn->close();
  <!-- navigation bar with logo -->
  <?php include('header.php') ?>
 
+    <div class="container rounded-5" style="background: #D2E0F8;">
+            <div class="row mx-5 justify-content-center" style="text-align:center; padding: 4%;">
+            
+                <div class="col-auto"><p style="font-size: 3.5rem;">Find</p></div>
+                <div class="col-auto"><p style="font-size: 3.5rem; font-weight:bolder;" >Heath Care</p></div>
+            </div>
+        </div>
 
-    <div id="search-container">
-        <input type="text" id="search-input" placeholder="Enter address, city or zip code">
-        <button id="search-button">Find</button>
-    </div>
+    <div class="container">
+
+                <div class="row height d-flex justify-content-center align-items-center">
+
+                <div class="col-md-6">
+
+                    <div class="cap p-3 rounded-4 shadow-sm rounded" style="position: relative; top: -40px; background:#ffff; text-align:center;">
+                       Access the care you neeed.
+                    </div>
+                    
+                </div>
+                </div>
+        
+
+            <div class="row" style="align-items: center;">
+                <div class="col-auto">
+                    <div class="vl" style="width: 10px;
+                    background-color: #1F6CB5;
+                    border-radius: 99px;
+                    height: 70px;
+                    display: -webkit-inline-box;"></div>
+                </div>
+            
+                <div class="col-auto mt-3">
+                    <div class="row">
+                        <div class="col-auto">
+                            <h2 style="font-weight: 400;"><b>Find</b> a health care</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row ms-1">
+                <p class="ms-4">We will assist you in finding a nearby healthcare facility whether you require new birth control prescription, STI testing, or any other reproductive health service.</p>
+            </div>
+
+
+    <div class="container my-4" style="display: flex; justify-content: center;">
+        <div id="search-container" class="row rounded-pill shadow-sm" style="background: #B6CCF5;width: 70%;">
+            <div class="col-auto ms-3 mt-3 mb-3">
+            <i class="fa-solid fa-location-dot" style="font-size: larger; color: #2B436F; "></i>
+            </div>
+
+            <div class="col me-auto">
+            <input type="text" id="search-input" placeholder="Enter address, city or zip code" style=" width: 90%; border: none; background: transparent;" class="p-3">
+
+            </div>
+
+            <div class="col-auto">
+            <button class="btn rounded-pill p-3 px-5" style="background-color:#5887DE; color:white; margin-right: -13px;"id="search-button">Find</button>
+
+            </div>
+        </div>
+    </div>        
+    
 
     
 
-    <div class="container" id ="container" style="display: none;">
-        <p>Showing results</p>
-        <p>Maps</p>
-            <div id="map-container">
-                <div id="map"></div>
-            </div>
+    <div class="container rounded-5 mt-5 mb-3 p-5" id ="container" style="display: none; background: #D2E0F8;">
+
+    <div class="row">
+        <div class="col-lg-6">
+        <p style="text-align: center; font-weight:500;">Showing results</p>
+
         <div id="hospital-info-container"> <!-- Wrap the hospital info in a container -->
             <div id="hospital-list">
                 <!-- Hospital details will be displayed here -->
             </div>
             
         </div>
+
+        </div>
+        <div class="col-lg-6">
+            <div class="row">
+                <div class="col-12">
+                <p style="text-align: center; font-weight:500;">Maps</p>
+                </div>
+                <div class="col">
+                    <div id="map-container" style="display: flex;
+                justify-content: center;">
+                        <div id="map" class="rounded-5 shadow-sm"></div>
+                    </div>
+                    
+                </div>
+            </div>
+
+
+        </div>
     </div>
+       
+    </div>
+
+    <br><br><br>
+    <!-- footer -->
+    <?php include('footer.php') ?>
 
 
 <script>
@@ -176,12 +236,15 @@ $conn->close();
             // Create a new div element to display hospital details
             var hospitalDiv = document.createElement('div');
             hospitalDiv.classList.add('hospital-item');
+            hospitalDiv.style.minWidth="360px";
 
             // Fill the div with hospital information
             hospitalDiv.innerHTML = `
-                <h3>${hospital.Hospitalname}</h3>
+            <div class="p-3 rounded-4 my-4 shadow-sm" style="background-color: white;">
+                <h5> <i class="fa-solid fa-location-dot me-2" style="color: #2B436F;"> </i> ${hospital.Hospitalname}</h5>
                 <p>${hospital.Address}</p>
-                <p>${hospital.ContactNumber}</p>
+                <p><i class="fa-solid fa-phone" style="color: #2B436F;"> </i> +63${hospital.ContactNumber}</p>
+            </div>
             `;
 
             // Append the hospital div to the #hospital-list element
