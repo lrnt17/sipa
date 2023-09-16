@@ -410,6 +410,8 @@
 
 	</div>
 	<!--end comment card template-->
+
+    <?php include('footer.php') ?>
 </body>
 
 <script>
@@ -421,7 +423,7 @@
 <script src="time.js?v1"></script>
 <script src="like-rating-video.js?v2"></script>
 <!--<script src="community-topics.js?v6"></script>-->
-<script src="video.js?v6"></script>
+<script src="video.js?v7"></script>
 
 <script>
     // Call the updateTimestamps function initially when the page loads

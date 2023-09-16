@@ -106,7 +106,7 @@
                     <div class="js-personal-post ">
                         <?php if(logged_in()):?>
                             <div class="d-grid">
-                                <button onclick="allposts.new_topic()" class="btn text-start p-3 rounded-4" style="background: #F2C1A7;" id="btn"> <i class="fa-solid fa-plus"></i> &nbsp; Start New Topic</button>
+                                <button onclick="allposts.new_topic()" class="btn text-start p-3 rounded-4" style="background: #F2C1A7;" id="btn"> <i class="fa-solid fa-plus js-toggle-icon"></i> &nbsp; Start New Topic</button>
                             </div>
 
                             <form onsubmit="allposts.submit(event)" method="post" class="js-start-topic class_42 hide p-4 rounded-5 shadow-sm" style="background: #fff;" >
@@ -144,8 +144,8 @@
                         <div id="postsSection">
                             <div id="postContainer">
                                 <!-- Existing posts go here -->
-                                <button id="loadMoreBtn" onclick="allposts.loadMorePosts()" class="js-loadmore-btn btn" style="position: absolute;
-                                left: 50%; transform: translateX(-50%); color: #424242;">View More</button>
+                                <button id="loadMoreBtn" onclick="allposts.loadMorePosts()" class="js-loadmore-btn mb-3" style="position: absolute;
+                                left: 50%; transform: translateX(-50%); color: #424242; border: none; background: transparent">View More</button>
                             </div>
                         </div>
 
@@ -236,6 +236,9 @@
         </div>
     </div>
 
+<br><br><br>
+<?php include('footer.php') ?>
+
 </body>
 
 <script>
@@ -245,7 +248,7 @@
 </script>
 <script src="like-rating.js?v4"></script>
 <script src="time.js?v1"></script>
-<script src="community-topics.js?v10"></script>
+<script src="community-topics.js?v11"></script>
 
 
 <script>

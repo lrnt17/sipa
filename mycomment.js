@@ -700,6 +700,7 @@ var mycomment = {
                         // Create the inner div
                         let innerDiv = document.createElement('div');
                         innerDiv.setAttribute('class', 'class_15');
+                        innerDiv.classList.add('mt-4','mb-3');
                         innerDiv.setAttribute('style', 'cursor:pointer;text-align: center;');
                         innerDiv.setAttribute('onclick', 'user.login()');
 

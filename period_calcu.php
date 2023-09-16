@@ -99,7 +99,7 @@
     <div class="text-center"id="form-container">
         <form onsubmit="period_calcu.submit(event)" method="post" class="form-con">
 
-            <div class="row align-items-start mt-4">
+            <div class="row align-items-start mt-4" style="text-align: center;">
                 <div class="col">
                     <div class="container">
                         <label for="last-period" style="font-weight: bold; color:#5A5A5A;">First day of last period</label>
@@ -117,10 +117,10 @@
                 </div>
             </div>
             
-            <div class="row align-items-start my-4">
+            <div class="row align-items-start my-4" style="text-align: center;">
                 <div class="col">
                     <div class="container p-3 rounded-4 shadow-sm rounded" style="background:#ffff;">
-                    <input class="py-3" type="text" id="last-period" placeholder="Select date" style="border: none; outline: none; font-size:20px; color:#5A5A5A;" required>
+                    <input class="py-3" type="text" id="last-period" placeholder="Select date" style="border: none; outline: none; font-size:20px; color:#5A5A5A; text-align: center;" required>
                     </div>
                 </div>
                 <div class="col">
@@ -139,7 +139,7 @@
 
             <div class="row">
                 <div class="col">
-                    <div class="">
+                    <div class="" style="display: flex; justify-content: center;">
                         <button class="btn my-3 px-5 py-3 rounded-pill shadow-sm rounded" style="background: #D2E0F8;">Calculate my period</button>
                     </div>
                 </div>
@@ -264,5 +264,8 @@
         var currentDate = new Date().toISOString().slice(0, 10);
         document.getElementById('last-period').value = currentDate;
     </script>
+
+<br><br><br>
+<?php include('footer.php') ?>
 </body>
 </html>
