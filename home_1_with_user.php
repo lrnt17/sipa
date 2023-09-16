@@ -330,7 +330,7 @@
                 border-radius: 99px;
                 height: 6px;"></div>
             </div>
-        </div>
+    </div>
         <div class="row my-1 mb-3 custom-width-hidden" >
             <h2 style="color:#383838;">Frequently<br>asked questions</h2>
         </div>
@@ -345,6 +345,14 @@
                     <div class="faq-row"></div>
                 </div>
         </div>
+
+        <div class="row">
+        <div class="col mt-3 d-flex justify-content-center">
+            <a class="js-link" href="faqs.php" style=" text-decoration: none; color:black;">
+                <button class="btn my-3 px-4 py-2 rounded-3 shadow-sm rounded" style="background: #ffff;">View all FAQs</button>
+            </a>
+        </div>
+    </div>
 
 
     <?php // pang kuha ng question and answer sa db
