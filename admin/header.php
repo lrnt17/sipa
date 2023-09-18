@@ -8,22 +8,25 @@
     
     $user_role = $_SESSION['USER']['user_role'];
     $user_fname = $_SESSION['USER']['user_fname'];
+    $facility_name = $_SESSION['USER']['health_facility_name'];
 ?>
 <section>
     <div class="sidenav">
         <h1 style="color:white;">SiPa</h1>
         <a href="index.php">Dashboard</a>
-        <a href="appointment-list.php">Appointment List</a>
-        <a href="schedule-settings.php">Schedule Settings</a>
-        <a href="#contact">Contact</a>
-        <button class="dropdown-btn">Dropdown 
+        <?php if(check_admin($user_role)):?>
+            <a href="appointment-list.php">Appointment List</a>
+            <a href="schedule-settings.php">Schedule Settings</a>
+            <a href="local-admins.php">Admin List (<?= $facility_name?>)</a>
+        <?php endif;?>
+        <!--<button class="dropdown-btn">Dropdown 
             <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-container">
             <a href="#">Link 1</a>
             <a href="#">Link 2</a>
             <a href="#">Link 3</a>
-        </div>
+        </div>-->
         <?php if(check_head_admin($user_role)):?>
             <a href="#about">Head Administrators</a>
             <a href="manage-admins.php">Administrators</a>

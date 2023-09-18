@@ -683,6 +683,23 @@
             } else {
                 $info['message'] = "Error renaming column: ". $column_name ."";
             }
+        }else
+        if ($_POST['data_type'] == 'load_local_admins') 
+        {
+            $city_municipality = $_POST['city_municipality'];
+            $health_facility_name = $_POST['health_facility_name'];
+
+            $query = "select * from users where user_role = 'admin' and city_municipality = '$city_municipality' and health_facility_name = '$health_facility_name'";
+            $rows = query($query);
+            
+            if($rows){
+                foreach ($rows as $key => $row) {
+
+                    $rows[$key]['user_image'] = get_admin_image($row['user_image']);
+                }
+                $info['rows'] = $rows;
+                $info['success'] = true;
+            }
         }
     }
   

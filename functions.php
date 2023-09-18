@@ -123,6 +123,15 @@ function check_head_admin($user_role) {
     return false;
 }
 
+function check_admin($user_role) {
+	
+    if ($user_role === 'admin') {
+        return true;
+    }
+
+    return false;
+}
+
 function period_calendar($startMonth, $startYear, $periodDays, $ovulationDays, $numOfMonths) {
     // Get the selected date of the first day of the last period
     $startDate = $startYear . '-' . str_pad($startMonth, 2, '0', STR_PAD_LEFT) . '-01';

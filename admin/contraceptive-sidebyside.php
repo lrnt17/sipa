@@ -133,6 +133,21 @@
             </form>
         </div>
 
+        <div>
+            <h1>Delete a Factor</h1>
+            <form onsubmit="contraceptive_alongside.delete_column(event)" method="post">
+                <div class="">
+                    <label class="">
+                        Factor Name:
+                    </label>
+                    <input type="text" name="delete_factor_name" class="js-delete-factor-name" required="true">
+                </div>
+                <div class="">
+                    <button class="">Delete Factor</button>
+                </div>
+            </form>
+        </div>
+
         <div class="js-edit-alongside-row hide">
             <div class="" style="float:right;cursor:pointer;margin:10px;padding:5px;padding-left:10px;padding-right:10px;" onclick="contraceptive_alongside.close_modal()">X</div>
             <h1>Edit Contraceptive Chart</h1>
