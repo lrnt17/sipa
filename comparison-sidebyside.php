@@ -559,8 +559,8 @@
             compare_sidebyside.enable_second_div_click();
 
             // Make the corresponding div element unclickable
-            compare_sidebyside.birth_control_id = birth_control_id;
-            compare_sidebyside.add_pointer_event(compare_sidebyside.birth_control_id);
+            //compare_sidebyside.birth_control_id = birth_control_id;
+            //compare_sidebyside.add_pointer_event(compare_sidebyside.birth_control_id);
 
             let select_method_holder = document.querySelector('.js-select_2');
             select_method_holder.innerHTML = "";
@@ -587,7 +587,7 @@
                             
                             let div = document.createElement("div");
                             div.classList = 'js-close-selected2';
-                            div.style = "float:right;cursor:pointer;";
+                            div.style = "float:right;cursor:pointer;pointer-events: auto;";
                             div.setAttribute('onclick',`compare_sidebyside.close_selected_contraceptive(this)`);
                             div.innerHTML = '<i class="fa-solid fa-xmark"></i>';
                             select_method_holder.appendChild(div);

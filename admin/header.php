@@ -34,6 +34,7 @@
                 <a href="#">Contraceptive Methods</a>
                 <a href="contraceptive-details.php">Contraceptive Details</a>
                 <a href="contraceptive-chart.php">Contraceptive Chart</a>
+                <a href="contraceptive-sidebyside.php">Contraceptive Side-by-Side</a>
             </div>
         <?php endif;?>
         <button class="dropdown-btn">

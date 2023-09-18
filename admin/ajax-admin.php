@@ -593,6 +593,96 @@
             $info['rows'] = $rows;
             $info['success'] = true;
     
+        }else
+        if ($_POST['data_type'] == 'load_contraceptive_sidebyside')
+        {
+            $query = "SELECT * FROM birth_controls_sidebyside";
+            $rows = query($query);
+            
+            $info = array();
+            $info['columns'] = array();
+            $info['rows'] = array();
+
+            if ($rows) {
+
+                foreach ($rows as $row) {
+                    $info['rows'][] = $row;
+                }
+
+                $info['columns'] = array_keys($info['rows'][0]);
+                $info['success'] = true;
+                // Exclude columns
+                $columns_to_exclude = ['sidebyside_id', 'birth_control_icon'];
+                foreach ($columns_to_exclude as $column_to_exclude) {
+                    if (($key = array_search($column_to_exclude, $info['columns'])) !== false) {
+                        unset($info['columns'][$key]);
+                    }
+                }
+            }
+        }else
+        if ($_POST['data_type'] == 'add_new_column_sidebyside')
+        {
+            $column_name = addslashes($_POST['column_name']);
+  
+            $query = "ALTER TABLE birth_controls_sidebyside ADD COLUMN $column_name VARCHAR(100) NOT NULL DEFAULT 'No data'";
+            $row = alter_table_query($query);
+            
+            if ($row) {
+                $info['success'] = true;
+                $info['message'] = "Column ". $column_name ." is successfully created";
+            } else {
+                $info['message'] = "Column ". $column_name ." failed to create";
+            }
+        }else
+        if ($_POST['data_type'] == 'load_data_edit_sidebyside')
+        {
+            $id = $_POST['sidebyside_id'];
+
+            $query = "SELECT * FROM birth_controls_sidebyside WHERE sidebyside_id = '$id' LIMIT 1";
+            $rows = query($query);
+
+            if ($rows) {
+
+                $info['sidebyside_row_data'] = $rows;
+                $info['success'] = true;
+                
+            }
+        }else
+        if ($_POST['data_type'] == 'update_sidebyside_row')
+        {
+            $id = $_POST['sidebyside_id'];
+            $query = "UPDATE birth_controls_sidebyside SET ";
+            $values = [];
+            foreach ($_POST as $key => $value) {
+                if ($key != 'sidebyside_id' && $key != 'data_type') {
+                    $values[] = "$key='$value'";
+                }
+            }
+            $query .= implode(", ", $values);
+            //$query .= implode($values, ", ");
+            $query .= " WHERE sidebyside_id = '$id'";
+            query($query);
+
+            //if ($check) {
+                $info['success'] = true;
+                $info['message'] = "edited successfully";
+            //}
+        }else
+        if ($_POST['data_type'] == 'modify_column_name_sidebyside')
+        {
+            $old_column_name = addslashes($_POST['old_column_name']);
+            $new_column_name = addslashes($_POST['new_column_name']);
+            
+            $query = "ALTER TABLE birth_controls_sidebyside CHANGE COLUMN `$old_column_name` $new_column_name VARCHAR(100) NOT NULL DEFAULT 'No data'";
+            //echo $query;
+            $row = alter_table_query($query);
+            
+            if ($row) {
+                $info['success'] = true;
+                $info['message'] = "Column ". $old_column_name ." to ". $new_column_name ." renamed successfully";
+            } else {
+                $info['message'] = "Error renaming column: ". $column_name ."";
+            }
         }
     }
   
