@@ -233,6 +233,9 @@
         </div>
     </div>
 
+ <br><br><br>
+<?php include('footer.php') ?>
+
 </body>
 
 <script>
@@ -242,7 +245,7 @@
 </script>
 <script src="like-rating.js?v5"></script>
 <script src="time.js?v1"></script>
-<script src="my-topics.js?v6"></script>
+<script src="my-topics.js?v7"></script>
 
 
 <script>

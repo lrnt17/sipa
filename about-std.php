@@ -22,19 +22,67 @@
             top:0!important;
         }
 
-        
-        
         .skiptranslate iframe  {
         visibility: hidden !important;
         }
-        
+
         tr:hover {
-            background-color: #FFF2EB;
+            background-color: #FFF2EB !important;
             cursor: pointer; /* Change the cursor to a pointer on hover for better UX */
+            border-radius: 10px;
+        }
+
+        .horizontal-scroll {
+            overflow-x: auto;
+        }
+
+        #table-container {
+            width: 100%; /* Set the width to 100% to match the table */
+            display: block; /* Ensure it takes up the full width */
+            overflow-x: auto; /* Add horizontal scrolling if needed */
+        }
+
+        #table-container{
+            position: relative; /* Make sure the shadows are positioned correctly */
+            overflow: auto;
+            background-image:
+                /* Shadows */
+                linear-gradient(to right, #D2E0F8, #D2E0F8),
+                linear-gradient(to right, #D2E0F8, #D2E0F8),
+            
+            /* Shadow covers */
+                linear-gradient(to right, rgba(0,0,0,.25), rgba(255,255,255,0)),
+                linear-gradient(to left, rgba(0,0,0,.25), rgba(255,255,255,0));
+
+            background-position: left center, right center, left center, right center;
+            background-repeat: no-repeat;
+            background-color: #D2E0F8;
+            background-size: 20px 100%, 20px 100%, 10px 100%, 10px 100%;
+            background-attachment: local, local, scroll, scroll;
+            
+            z-index: 1; /* Ensure the shadows are on top of the table content */
         }
         
+        @media (max-width: 768px) {
+            .std-img-container {
+            display: none; 
+            }
 
-        
+            #mytable {
+                width: 100%; 
+                white-space: nowrap; 
+            }
+            
+
+            #mytable td.my-table-cell  {
+                max-width: 150px; 
+            }
+            
+            #mytable td.my-table-cell p {
+                max-width: 100%; 
+                white-space: normal;
+            }
+        }
     </style>
   
 </head>
@@ -44,39 +92,48 @@
     <?php include('header.php') ?>
 
 
-    
+    <div class="container">
+        <div class="row my-5">
+            <div class="col">
+                <div class="row mt-3 mb-5" style="align-items: center;">
+                    <div class="col-auto">
+                        <div class="vl" style="width: 10px;
+                        background-color: #1F6CB5;
+                        border-radius: 99px;
+                        height: 70px;
+                        display: -webkit-inline-box;">
+                        </div>
+                    </div>
+                
+                    <div class="col-auto">
+                            <div class="col-auto"><p style="font-size: 2rem;  font-weight:bolder;">About <span style="font-weight:normal;">STDs</span></p></div>
+                    </div>
+                </div>
 
-    <div class="row" style="align-items: center;">
-            <div class="col-auto">
-                <div class="vl" style="width: 10px;
-                background-color: #1F6CB5;
-                border-radius: 99px;
-                height: 75px;
-                display: -webkit-inline-box;">
+
+                <div class="std-desc-container mt-2">
+                    <p>STDs are infections that are spread from one person to another, usually during vaginal, anal, and oral sex. They’re really common, and lots of people who have them don’t have any symptoms. Without treatment, STDs can lead to serious health problems. But the good news is that getting tested is no big deal, and most STDs are easy to treat.</p>
+                </div>
+
+                <div class="button-container" id="button-container">
+                    <button class="btn shadow-sm rounded-pill py-2 px-3" style="background-color:#5887DE; color:white;" id="show-table-button">Compare different types of STDs</button>
+                </div>
+                
+            </div>
+            <div class="col-auto mb-5">
+                <div class="std-img-container">
+                    <img src="assets/images/stds/std-illustration.png" alt="about_std" width="400px"></src>
                 </div>
             </div>
-        
-            <div class="col-auto mt-3">
-                    <div class="col-auto"><p style="font-size: 2rem;  font-weight:bolder;">About <span style="font-weight:normal;">STDs</span></p></div>
-            </div>
-     </div>
-
-
-     <div class="std-desc-container">
-        <p>STDs are infections that are spread from one person to another, usually during vaginal, anal, and oral sex. They’re really common, and lots of people who have them don’t have any symptoms. Without treatment, STDs can lead to serious health problems. But the good news is that getting tested is no big deal, and most STDs are easy to treat.</p>
-     </div>
-    <div class="button-container" id="button-container">
-        <button id="show-table-button">Compare different types of STDs</button>
+        </div>
     </div>
-     <div class="std-img-container">
-        <img src="assets/images/stds/std-illustration.png" alt="about_std" width="400px"></src>
-    </div>
+
 
     <section class="js-about-std">
-        <div id="table-container" style="display: none;">
-            <table border ="1" cellspacing="0" cellpadding="10" id="mytable">
+        <div class="container rounded-4 shadow-sm p-5 mb-5" id="table-container" style="display: none; background-color:#D2E0F8;">
+            <table class="horizontal-scroll" cellpadding="15" id="mytable">
                 <thead>
-                    <tr>
+                    <tr style="background-color:#D2E0F8; pointer-events:none; text-align: center;">
                         <th>Type</th>
                         <th>Symptoms</th>
                         <th>Causes</th>
@@ -92,16 +149,25 @@
 
 <!-- HTML template for table rows -->
 <template id="row-template">
-    <tr data-std-id="">
-        <td class="js-type">
-            <img src="" alt="std" width="100"><br>
-            <span></span>
+    <tr data-std-id="" style="background-color:white;">
+        <td class="js-type my-table-cell" style="text-align: center;">
+            <img src="" alt="std" width="100" class="m-3"><br>
+            <span style="font-weight:500;"></span>
         </td>
-        <td class="js-symptom"></td>
-        <td class="js-cause"></td>
-        <td class="js-treatment"></td>
-        <td class="js-treatment-cost"></td>
+        <td class="my-table-cell">
+            <p class="js-symptom"></p>
+        </td>
+        <td class="my-table-cell">
+            <p class="js-cause"></p>
+        </td>
+        <td class="my-table-cell">
+            <p class="js-treatment"></p>
+        </td>
+        <td class="my-table-cell">
+            <p class="js-treatment-cost me-4"></p>
+        </td>
     </tr>
+    <div class="m-4"></div>
 </template>
     
     

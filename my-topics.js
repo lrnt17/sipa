@@ -196,6 +196,7 @@ var myposts = {
         if (typeof posts === 'undefined') {
             let messageElement = document.createElement('p');
             messageElement.textContent = "No discussions found";
+            messageElement.style.textAlign="center";
             postContainer.insertBefore(messageElement, loadMoreBtn);
             return;
         }

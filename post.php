@@ -402,6 +402,9 @@
             </div>
         </div>
     </div>
+
+<br><br><br>
+<?php include('footer.php') ?>
 </body>
 
 <script>
@@ -415,7 +418,7 @@
 <script src="time.js?v1"></script>
 <script src="like-rating.js?v3"></script>
 <script src="community-topics.js?v6"></script>
-<script src="mycomment.js?v47"></script>
+<script src="mycomment.js?v48"></script>
 
 <script>
     // Call the updateTimestamps function initially when the page loads

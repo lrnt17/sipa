@@ -286,51 +286,7 @@
     <br><br>
     
     <!-- footer -->
-    <footer>
-        <div>
-            <img src="" alt="">
-
-                <a href="#">Home</a>
-                <a href="#">FAQs</a>
-                <a href="#">Services</a>
-                <a href="#">Contraceptive Method</a>
-                <a href="#">Videos</a>
-                <a href="#">Period Calculator</a>
-                <a href="#">Community Forum</a>
-                <a href="#">About STDs</a>
-
-                <p>Our Partner</p>
-                <img src="" alt="">
-
-                <h3>+63 912 345 6789</h3>
-                <!-- icon -->
-                <!-- icon -->
-            </div>
-            
-            <div>
-                <!-- Translation Code here -->
-                <span>
-                    <div class="translate" id="google_translate_element"></div>
-
-                    <script type="text/javascript">
-                            function googleTranslateElementInit() {
-                            new google.translate.TranslateElement({
-                                pageLanguage: 'en',
-                                includedLanguages: 'en,tl',
-                                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-                                autoDisplay: false,
-                                multilanguagePage: true
-                            }, 'google_translate_element');
-                            }
-                        </script>
-                        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-                </span>
-                <!-- Translation Code End here -->
-                <a href="">Privacy Policy</a>
-                <a href="">Terms of Use</a>
-            </div>
-        </footer>
-    </section>
+    <?php include('footer.php') ?>
 
    <!-- <div class='newsCard news-Slide-up rounded-4'>
         <img src="assets/images/contraceptive.png">

@@ -241,8 +241,9 @@
         <?php include('forum-carousel.php') ?>
 
 </div>
+<br><br>
     <!-- footer -->
-
+    <?php include('footer.php') ?>
     
 <script>
         //pang lagay ng data sa FAQs-container from faqData(na finetch from db)

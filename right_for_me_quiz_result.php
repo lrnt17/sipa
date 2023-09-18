@@ -685,8 +685,8 @@ function checkShowSaveButton() {
 </script>
 
 
-
-
+<br><br><br>
+<?php include('footer.php') ?>
 
 </body>
 
