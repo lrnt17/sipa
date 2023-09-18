@@ -459,3 +459,19 @@ function admin_get_image($path)
 
 	return '../assets/images/user.jpg?v1';
 }
+
+function containsProhibitedWord($content) {
+    // List of prohibited words or phrases
+    $prohibitedWords = array("/\bb.*o.*b.*o\b/i", "/\bt.*a.*n.*g.*a\b/i", "/\bt.*a.*n.*g.*i.*n.*a\b/i", "/\bt.*a.*n.*g.*i.*n.*a.*m.*o\b/i", "/\bi.*n.*a.*m.*o\b/i", "/\bp.*u.*t.*a.*n.*g.*i.*n.*a\b/i", "/\bp.*u.*t.*a.*n.*g.*i.*n.*a.*m.*o\b/i", "/\bk.*i.*n.*g.*i.*n.*a\b/i", "/\bp.*o.*t.*a\b/i", "/\bputa\b/i", "/\bg.*a.*g.*o\b/i",  "/\bo.*g.*a.*g\b/i",  "/\bu.*l.*o.*l\b/i", "/\ba.*d.*i.*k\b/i", "/\bk.*u.*p.*a.*l\b/i",  "/\bi.*n.*u.*t.*i.*l\b/i",  "/\bb.*a.*l.*i.*w\b/i",  "\be.*n.*g.*o.*t\b/i" );
+    
+    // Convert content and prohibited words to lowercase for case-insensitive comparison
+    $contentLower = strtolower($content);
+
+    foreach ($prohibitedWords as $pattern) {
+        if (preg_match($pattern, $content)) {
+            return true; // Prohibited word found
+        }
+    }
+
+    return false; // No prohibited words found
+}
