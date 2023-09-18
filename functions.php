@@ -461,17 +461,37 @@ function admin_get_image($path)
 }
 
 function containsProhibitedWord($content) {
-    // List of prohibited words or phrases
-    $prohibitedWords = array("/\bb.*o.*b.*o\b/i", "/\bt.*a.*n.*g.*a\b/i", "/\bt.*a.*n.*g.*i.*n.*a\b/i", "/\bt.*a.*n.*g.*i.*n.*a.*m.*o\b/i", "/\bi.*n.*a.*m.*o\b/i", "/\bp.*u.*t.*a.*n.*g.*i.*n.*a\b/i", "/\bp.*u.*t.*a.*n.*g.*i.*n.*a.*m.*o\b/i", "/\bk.*i.*n.*g.*i.*n.*a\b/i", "/\bp.*o.*t.*a\b/i", "/\bputa\b/i", "/\bg.*a.*g.*o\b/i",  "/\bo.*g.*a.*g\b/i",  "/\bu.*l.*o.*l\b/i", "/\ba.*d.*i.*k\b/i", "/\bk.*u.*p.*a.*l\b/i",  "/\bi.*n.*u.*t.*i.*l\b/i",  "/\bb.*a.*l.*i.*w\b/i",  "\be.*n.*g.*o.*t\b/i" );
+    // List of prohibited words or phrases with variations
+    $prohibitedWords = array(
+        "~\bb.*o.*b.*o\b~i",         // Matches variations of "bobo"
+        "~\bt.*a.*n.*g.*a\b~i",     // Matches variations of "tanga"
+        "~\bt.*a.*n.*g.*i.*n.*a\b~i", // Matches variations of "tangina"
+        "~\bt.*a.*n.*g.*i.*n.*a.*m.*o\b~i", // Matches variations of "tanginamo"
+        "~\bi.*n.*a.*m.*o\b~i",     // Matches variations of "inamo"
+        "~\bp.*u.*t.*a.*n.*g.*i.*n.*a\b~i", // Matches variations of "putangina"
+        "~\bp.*u.*t.*a.*n.*g.*i.*n.*a.*m.*o\b~i", // Matches variations of "putanginamo"
+        "~\bk.*i.*n.*g.*i.*n.*a\b~i", // Matches variations of "kingina"
+        "~\bp.*o.*t.*a\b~i",         // Matches variations of "pota"
+        "~\bputa\b~i",              // Matches "puta"
+        "~\bg.*a.*g.*o\b~i",         // Matches variations of "gago"
+        "~\bo.*g.*a.*g\b~i",         // Matches variations of "ogag"
+        "~\bu.*l.*o.*l\b~i",         // Matches variations of "ulol"
+        "~\ba.*d.*i.*k\b~i",         // Matches variations of "adik"
+        "~\bk.*u.*p.*a.*l\b~i",      // Matches variations of "kupal"
+        "~\bi.*n.*u.*t.*i.*l\b~i",   // Matches variations of "inutil"
+        "~\bb.*a.*l.*i.*w\b~i",      // Matches variations of "baliw"
+        "~\be.*n.*g.*o.*t\b~i"       // Matches variations of "engot"
+    );
     
     // Convert content and prohibited words to lowercase for case-insensitive comparison
     $contentLower = strtolower($content);
 
     foreach ($prohibitedWords as $pattern) {
-        if (preg_match($pattern, $content)) {
+        if (preg_match($pattern, $contentLower)) {
             return true; // Prohibited word found
         }
     }
 
     return false; // No prohibited words found
 }
+
