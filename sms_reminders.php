@@ -64,8 +64,8 @@ $userIDResult = mysqli_query($conn, $userIDQuery);
                                 $message = "Hi there! Here's a reminder for you to get your $method today.";
                                 break;
         
-                            case 'The Shot':
-                                $message = "Hi there! Here's a reminder for you to get your Shot today.";
+                            case 'Injection':
+                                $message = "Hi there! Here's a reminder for you to get your $method today.";
                                 break;
         
                             case 'Hormonal Vaginal Ring':
