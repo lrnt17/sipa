@@ -208,6 +208,13 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 		$id = (int)($_POST['id']);
 		$user_id = $_SESSION['USER']['user_id'];
 		$date = date("Y-m-d H:i:s");
+
+		// Add word filtering logic here
+		if (containsProhibitedWord($post)) {
+			$info['success'] = false;
+			$info['message'] = "Cannot edit your reply because it contains prohibited words or phrases.";
+		}
+		else{
 	
 		$query = "update forum set forum_desc = '$post', forum_timestamp = '$date' where user_id = '$user_id' && forum_id = '$id' limit 1";
 		$info['message'] = "Your reply was edited successfully";
@@ -215,6 +222,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 		
 		query($query);
 		$info['success'] = true;
+		}
 	}else
 	if($_POST['data_type'] == 'delete_post') //ito na yung sa post, naway makuha mo na lorent yung logic
 	{
@@ -703,6 +711,13 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 			$user_img = $_SESSION['USER']['user_image'];
 		}
 
+		// Add word filtering logic here
+		if (containsProhibitedWord($reply_text)) {
+			$info['success'] = false;
+			$info['message'] = "Cannot post your reply because it contains prohibited words or phrases.";
+		}
+		else{
+
 		$date = date("Y-m-d H:i:s");
 
 		// Insert new row into forum table with comment_parent_id set to forum_id
@@ -727,6 +742,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 			$query = "update forum set reply_count = '$num' where forum_id = '$forum_id' limit 1";
 			query($query);
 		}
+	}
 	}else
 	if($_POST['data_type'] == 'delete_reply') //ito na yung sa post, naway makuha mo na lorent yung logic
 	{
@@ -1569,6 +1585,13 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 
 		$date = date("Y-m-d H:i:s");
 
+		// Add word filtering logic here
+		if (containsProhibitedWord($reply_text)) {
+			$info['success'] = false;
+			$info['message'] = "Cannot post your reply because it contains prohibited words or phrases.";
+		}
+		else{
+
 		// Insert new row into forum table with comment_parent_id set to video_id
 		$query = "INSERT INTO videos (user_img, user_id, user_fname, video_timestamp, video_desc, reply_parent_id) VALUES ('$user_img', '$user_id', '$user_fname', '$date', '$reply_text', '$video_id')";
 		query($query);
@@ -1591,6 +1614,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 			$query = "update videos set reply_count = '$num' where video_id = '$video_id' limit 1";
 			query($query);
 		}
+	}
 	}else
 	if($_POST['data_type'] == 'my_edit_reply_video') 
 	{
@@ -1599,12 +1623,19 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 		$user_id = $_SESSION['USER']['user_id'];
 		$date = date("Y-m-d H:i:s");
 	
+		// Add word filtering logic here
+		if (containsProhibitedWord($edited_reply_text)) {
+			$info['success'] = false;
+			$info['message'] = "Cannot edit your reply because it contains prohibited words or phrases.";
+		}
+		else{
 		$query = "update videos set video_desc = '$edited_reply_text', video_timestamp = '$date' where user_id = '$user_id' && video_id = '$video_id' limit 1";
 		$info['message'] = "Your reply was edited successfully";
 		$info['updated_date'] = date('Y-m-d\TH:i:s', strtotime($date));
 		
 		query($query);
 		$info['success'] = true;
+		}
 	}else
 	if($_POST['data_type'] == 'delete_reply_video') //ito na yung sa post, naway makuha mo na lorent yung logic
 	{
