@@ -261,7 +261,7 @@ function calculateAndInsertReminderDates($method, $startDate, $usage, $user_id, 
         'Hormonal IUD' => 30 * 12 * 5, // 5 years
         'Copper IUD' => 30 * 12 * 10, // 10 years
         'Implant' => 30 * 12 * 3, // 3 years
-        'The Shot' => 30 * 3, // 3 months
+        'Injection' => 30 * 3, // 3 months
         'Hormonal Vaginal Ring' => 30, // 1 month sms reminder, on 4th week, the vaginal ring should be removed 
         'Hormonal Patch' => 7, // 1 week, if usage is more than 3, there is a 1 week rest before the sms starts again
         'Mini Pill' => 1, // everyday reminder for 21 days and a rest week after it. if the usage is more than or equal to 2, the sms should only resume after the rest week.
@@ -370,8 +370,8 @@ function sendInstantSMS($conn, $user_id) {
                         $message = "Hi there! You will receive an SMS reminder for your Implant schedule on $startDate. Stay on track!";
                         break;
 
-                    case 'The Shot':
-                        $message = "Hi there! You will receive an SMS reminder for your the Shot schedule on $startDate. Stay on track!";
+                    case 'Injection':
+                        $message = "Hi there! You will receive an SMS reminder for your Injection schedule on $startDate. Stay on track!";
                         break;
 
                     case 'Hormonal Vaginal Ring':
@@ -403,8 +403,8 @@ function sendInstantSMS($conn, $user_id) {
                         $message = "Hi there! Your SMS reminder for your Implant schedule starts on $startDate and ends on $endDate, for a $cycle cycle. Stay on track!";
                         break;
                     
-                    case 'The Shot':
-                        $message = "Hi there! Your SMS reminder for The Shot begins on $startDate and lasts until $endDate, for a $cycle cycle. Stay on track!";
+                    case 'Injection':
+                        $message = "Hi there! Your SMS reminder for your Injection begins on $startDate and lasts until $endDate, for a $cycle cycle. Stay on track!";
                         break;
                     
                     case 'Hormonal Vaginal Ring':
