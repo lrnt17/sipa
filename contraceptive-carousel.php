@@ -133,7 +133,7 @@
                     <img src="assets/images/contraceptive.png" alt="sample" class="js-method-image" style="width:300px;">
                 <div class='newsCaption rounded-4 shadow-sm'>
                     <div style="display: flow;">
-                        <p class="js-method-name newsCaption-title pt-1 pb-2" style="text-align:center; font-size: 1rem; font-weight:600;">Pill</p>
+                        <span translate="no"><p class="js-method-name newsCaption-title pt-1 pb-2" style="text-align:center; font-size: 1rem; font-weight:600;">Pill</p></span>
                         <div class="js-method-desc newsCaption-content px-1" style="font-size:1rem;" >
                             is simply dummy text of the printing and typesetting industry. 
                             Lorem Ipsum has been the industry's standard dummy text ever 

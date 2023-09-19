@@ -45,7 +45,7 @@
     </form>
 
     <div class="my-4" style="display: flex; justify-content: center;"> 
-        <p class="text-center" style="color:#525252;">Using the <span class="js-method-name-display" id="js-method-name-display"></span>, 
+        <p class="text-center" style="color:#525252;">Using the <span translate="no"> <span class="js-method-name-display" id="js-method-name-display"></span></span>,
         typically <span class="js-preggy"></span> in 
         <b>100</b> women will get pregnant in one year. </p>
     </div>
@@ -58,7 +58,7 @@
 
 <!-- contraceptive method buttons template -->
 <template class="js-method-buttons-template">
-    <button  onclick="method_display.updateDisplay(event)" name="method" value="1" class="js-each-method-buttons btn mx-3 my-2 px-4 py-2 rounded-4 shadow-sm rounded" style="min-width:235px;">Patch</button>
+    <span translate="no"><button  onclick="method_display.updateDisplay(event)" name="method" value="1" class="js-each-method-buttons btn mx-3 my-2 px-4 py-2 rounded-4 shadow-sm rounded" style="min-width:235px;">Patch</button></span>
 </template>
 <!-- end contraceptive method buttons template -->
 

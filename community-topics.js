@@ -15,6 +15,12 @@ var allposts = {
             return;
         }
 
+	        // Add your word filtering logic here
+        if (containsProhibitedWord(text) || containsProhibitedWord(title)) {
+            alert("Your post contains prohibited words or phrases. Please be kind to others and refrain from using those words.");
+            return;
+        }
+
         let form = new FormData(); //new form within javascript
 
         form.append('post', text);
@@ -729,5 +735,37 @@ if (typeof all_topics_page != 'undefined') {
     } else {
         allposts.loadMorePosts();
     }
+}
+
+function containsProhibitedWord(content) {
+    // List of prohibited words or phrases with variations
+    const prohibitedWords = [
+        /\bb.*o.*b.*o\b/i,         // Matches variations of "bobo"
+        /\bt.*a.*n.*g.*a\b/i,     // Matches variations of "tanga"
+        /\bt.*a.*n.*g.*i.*n.*a\b/i, // Matches variations of "tangina"
+        /\bt.*a.*n.*g.*i.*n.*a.*m.*o\b/i, // Matches variations of "tanginamo"
+        /\bi.*n.*a.*m.*o\b/i,     // Matches variations of "inamo"
+        /\bp.*u.*t.*a.*n.*g.*i.*n.*a\b/i, // Matches variations of "putangina"
+        /\bp.*u.*t.*a.*n.*g.*i.*n.*a.*m.*o\b/i, // Matches variations of "putanginamo"
+        /\bk.*i.*n.*g.*i.*n.*a\b/i, // Matches variations of "kingina"
+        /\bp.*o.*t.*a\b/i,         // Matches variations of "pota"
+        /\bputa\b/i,              // Matches "puta"
+        /\bg.*a.*g.*o\b/i,         // Matches variations of "gago"
+        /\bo.*g.*a.*g\b/i,         // Matches variations of "ogag"
+        /\bu.*l.*o.*l\b/i,         // Matches variations of "ulol"
+        /\ba.*d.*i.*k\b/i,         // Matches variations of "adik"
+        /\bk.*u.*p.*a.*l\b/i,      // Matches variations of "kupal"
+        /\bi.*n.*u.*t.*i.*l\b/i,   // Matches variations of "inutil"
+        /\bb.*a.*l.*i.*w\b/i,      // Matches variations of "baliw"
+        /\be.*n.*g.*o.*t\b/i       // Matches variations of "engot"
+    ];
+
+    for (const pattern of prohibitedWords) {
+        if (pattern.test(content)) {
+            return true; // Prohibited word found
+        }
+    }
+
+    return false; // No prohibited words found
 }
 

@@ -661,7 +661,7 @@
             'hormonalIUD',
             'copperIUD',
             'implant',
-            'theShot',
+            'injection',
             'hormonalVaginalRing',
             'hormonalPatch',
             'combinedPill',
@@ -725,7 +725,7 @@
             'miniPill',
             'hormonalVaginalRing',
             'hormonalPatch',
-            'theShot',
+            'injection',
             'implant',
             'copperIUD',
             'hormonalIUD',
@@ -739,7 +739,7 @@
             'implant',
             'hormonalIUD',
             'hormonalPatch',
-            'theShot'
+            'injection'
             ];
             var gainingWeightMethods = [
             'condom',
@@ -825,13 +825,13 @@
 
             // Define the methods associated with each question
             var foreignObjectMethods = ['hormonalIUD', 'copperIUD', 'diaphragm', 'hormonalVaginalRing'];
-            var hormoneLevelMethods = ['condom', 'withdrawalMethod', 'temperatureMethod', 'calendarMethod', 'diaphragm', 'spermicide', 'vasectomy', 'tubalLigation', 'copperIUD', 'implant', 'miniPill', 'theShot', 'hormonalIUD', 'patch', 'combinedPill', 'emergencyContraception', 'hormonalVaginalRing'];
+            var hormoneLevelMethods = ['condom', 'withdrawalMethod', 'temperatureMethod', 'calendarMethod', 'diaphragm', 'spermicide', 'vasectomy', 'tubalLigation', 'copperIUD', 'implant', 'miniPill', 'injection', 'hormonalIUD', 'patch', 'combinedPill', 'emergencyContraception', 'hormonalVaginalRing'];
             var frequencyMethods = ['condom', 'diaphragm', 'spermicide', 'withdrawalMethod', 'calendarMethod', 'temperatureMethod', 'miniPill', 'combinedPill', 'patch', 'shot', 'implant', 'copperIUD', 'hormonalIUD'];
             var permanentMethods = ['vasectomy', 'tubalLigation'];
 
             // Define the relevant methods for each hormone level category
             var noHormonesMethods = ['condom', 'withdrawalMethod', 'temperatureMethod', 'calendarMethod', 'diaphragm', 'spermicide', 'vasectomy', 'tubalLigation', 'copperIUD'];
-            var oneHormoneMethods = ['implant', 'miniPill', 'theShot', 'hormonalIUD'];
+            var oneHormoneMethods = ['implant', 'miniPill', 'injection', 'hormonalIUD'];
             var twoHormonesMethods = ['patch', 'combinedPill', 'emergencyContraception', 'hormonalVaginalRing'];
 
             // Get the user's answers for each question

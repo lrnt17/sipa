@@ -581,9 +581,9 @@
                 updateDurationDropdown(numericValue, label); // Pass both numeric value and label
 
 
-            // Update the cost duration input and dropdown values kakadagdag lang
-            const longevityInputValue = document.getElementById('longevity-input').value;
-            const durationDropdownValue = document.getElementById('duration-dropdown').value;
+                // Set initial values when a button is clicked
+            initialLongevityInputValue = longevityInput.value;
+            initialLongevityDropdownValue = durationDropdown.value;
 
             const costDurationInput = document.getElementById('cost-duration-input');
             const costDurationDropdown = document.getElementById('cost-duration-dropdown');
@@ -601,8 +601,8 @@
             } else { //else yung dropdown at input text field is same muna as default sa longevity ng method
                 console.log('Selected method is not Vasectomy or Tubal Ligation');
                 // Set the values to be the same as longevity and duration
-                costDurationInput.value = longevityInputValue;
-                costDurationDropdown.value = durationDropdownValue;
+                costDurationInput.value = initialLongevityInputValue;
+                costDurationDropdown.value = initialLongevityDropdownValue;
                 costDurationInput.disabled = false;
                 costDurationDropdown.disabled = false;
             }
@@ -611,7 +611,7 @@
 
         // Update condomAmount-dropdown based on duration-dropdown value para sync ng longevity and condom per day/week/month/year depending sa longevity
         const condomAmountDropdown = document.getElementById('condomAmount-dropdown');
-        switch (durationDropdownValue) {
+        switch (initialLongevityDropdownValue) {
             case 'day':
                 condomAmountDropdown.value = 'condomday';
                 break;
@@ -945,6 +945,20 @@
 
 
 
+        // Global variables to store initial values
+        let initialLongevityInputValue;
+        let initialLongevityDropdownValue;
+
+        // Add an event listener to capture initial values when the page loads
+        window.addEventListener('load', function () {
+            const longevityInput = document.getElementById('longevity-input');
+            const longevityDropdown = document.getElementById('duration-dropdown');
+
+            initialLongevityInputValue = longevityInput.value;
+            initialLongevityDropdownValue = longevityDropdown.value;
+        });
+
+
     function updateEstimatedTotalPrice() {
         const estimatedPriceInput = document.getElementById('estimated-price-input');
         const estimatedCondomPriceInput = document.getElementById('estimated-condom-price-input');
@@ -953,24 +967,24 @@
         const condomAmountPackageInput = document.getElementById('condom-amount-package-input');
         const costDurationDropdown = document.getElementById('cost-duration-dropdown');
         const estimatedTotalPriceInput = document.getElementById('estimated-total-price-input');
-        const longevityInput = document.getElementById('longevity-input');
-        const longevityDropdown = document.getElementById('duration-dropdown');
+        // Use the initial values here
+    const initialLongevityValue = parseFloat(initialLongevityInputValue);
+    const initialDropdownValue = initialLongevityDropdownValue;
 
         // Parse input values
         const durationValue = parseFloat(costDurationInput.value);
-        const longevityValue = parseFloat(longevityInput.value);
         const estimatedPrice = parseFloat(estimatedPriceInput.value.replace('₱', '').replace('.00', ''));
         const condomPricePerPackage = parseFloat(estimatedCondomPriceInput.value.replace('₱', '').replace('.00', ''));
         const condomAmount = parseFloat(condomAmountInput.value);
         const amountInPackage = parseFloat(condomAmountPackageInput.value);
             const totalPackagesNeeded = Math.ceil(condomAmount / amountInPackage);
             console.log("ilan kelangang condom pack", totalPackagesNeeded);
-            const condomPrice = condomPricePerPackage * totalPackagesNeeded * longevityValue ;
+            const condomPrice = condomPricePerPackage * totalPackagesNeeded * initialLongevityValue ;
              
 
         let newEstimatedTotalPrice;
 
-        if (longevityValue === durationValue && longevityDropdown.value === costDurationDropdown.value){
+        if (initialLongevityValue === durationValue && initialDropdownValue === costDurationDropdown.value){
 
             if (answerDropdown.value === 'yes'){
                 newEstimatedTotalPrice = ((estimatedPrice + condomPrice )).toFixed(2);
@@ -984,7 +998,7 @@
 
         else if (answerDropdown.value === 'yes'){
 
-            if (longevityDropdown.value === 'day') { 
+            if (initialDropdownValue === 'day') { 
                 if (costDurationDropdown.value === 'week') {
                     newEstimatedTotalPrice = ((estimatedPrice + condomPrice )* 7 * durationValue).toFixed(2);
                 } else if (costDurationDropdown.value === 'month') {
@@ -995,7 +1009,7 @@
                     newEstimatedTotalPrice = ((estimatedPrice + condomPrice )* durationValue).toFixed(2);
                 }
             }  
-            else if (longevityDropdown.value === 'week') {
+            else if (initialDropdownValue === 'week') {
                 if (costDurationDropdown.value === 'day') {
                     newEstimatedTotalPrice = ((estimatedPrice + condomPrice )/ 7 * durationValue).toFixed(2);
                 } else if (costDurationDropdown.value === 'month') {
@@ -1003,10 +1017,10 @@
                 } else if (costDurationDropdown.value === 'year') {
                     newEstimatedTotalPrice = ((estimatedPrice + condomPrice )* 52 / durationValue).toFixed(2);
                 } else {
-                    newEstimatedTotalPrice = ((estimatedPrice + condomPrice )/ longevityValue* durationValue).toFixed(2);
+                    newEstimatedTotalPrice = ((estimatedPrice + condomPrice )/ initialLongevityValue* durationValue).toFixed(2);
                 }
             } 
-            else if (longevityDropdown.value === 'month') {
+            else if (initialDropdownValue === 'month') {
                 if (costDurationDropdown.value === 'day') {
                     newEstimatedTotalPrice = ((estimatedPrice + condomPrice )/ 30 * durationValue).toFixed(2);
                 } else if (costDurationDropdown.value === 'week') {
@@ -1014,26 +1028,26 @@
                 } else if (costDurationDropdown.value === 'year') {
                     newEstimatedTotalPrice = ((estimatedPrice + condomPrice )* 12 * durationValue).toFixed(2);
                 } else {
-                    newEstimatedTotalPrice = ((estimatedPrice + condomPrice )/ longevityValue* durationValue).toFixed(2);
+                    newEstimatedTotalPrice = ((estimatedPrice + condomPrice )/ initialLongevityValue* durationValue).toFixed(2);
                 }
             } 
-            else if (longevityDropdown.value === 'year') {
+            else if (initialDropdownValue === 'year') {
                 if (costDurationDropdown.value === 'day') {
-                    newEstimatedTotalPrice = (((estimatedPrice + condomPrice )/ 365 * durationValue)/longevityValue).toFixed(2);
+                    newEstimatedTotalPrice = (((estimatedPrice + condomPrice )/ 365 * durationValue)/initialLongevityValue).toFixed(2);
                 } else if (costDurationDropdown.value === 'month') {
-                    newEstimatedTotalPrice = (((estimatedPrice + condomPrice )/ 12 * durationValue)/longevityValue).toFixed(2);
+                    newEstimatedTotalPrice = (((estimatedPrice + condomPrice )/ 12 * durationValue)/initialLongevityValue).toFixed(2);
                 } else if (costDurationDropdown.value === 'week') {
-                    newEstimatedTotalPrice = (((estimatedPrice + condomPrice )/ 52 * durationValue)/longevityValue).toFixed(2);
+                    newEstimatedTotalPrice = (((estimatedPrice + condomPrice )/ 52 * durationValue)/initialLongevityValue).toFixed(2);
                 } else {
 
-                    newEstimatedTotalPrice = ((estimatedPrice + condomPrice )/ longevityValue * durationValue).toFixed(2);
+                    newEstimatedTotalPrice = ((estimatedPrice + condomPrice )/ initialLongevityValue * durationValue).toFixed(2);
                 }
             }
         }
 
 
         else { 
-            if (longevityDropdown.value === 'day') { 
+            if (initialDropdownValue === 'day') { 
                 if (costDurationDropdown.value === 'week') {
                     newEstimatedTotalPrice = (estimatedPrice* 7 * durationValue).toFixed(2);
                 } else if (costDurationDropdown.value === 'month') {
@@ -1041,10 +1055,10 @@
                 } else if (costDurationDropdown.value === 'year') {
                     newEstimatedTotalPrice = (estimatedPrice* 365 * durationValue).toFixed(2);
                 } else {
-                    newEstimatedTotalPrice = ((estimatedPrice/ longevityValue)* durationValue).toFixed(2);
+                    newEstimatedTotalPrice = ((estimatedPrice/ initialLongevityValue)* durationValue).toFixed(2);
                 }
             }  
-            else if (longevityDropdown.value === 'week') {
+            else if (initialDropdownValue === 'week') {
                     if (costDurationDropdown.value === 'day') {
                         newEstimatedTotalPrice = (estimatedPrice/ 7 * durationValue).toFixed(2);
                     } else if (costDurationDropdown.value === 'month') {
@@ -1052,10 +1066,10 @@
                     } else if (costDurationDropdown.value === 'year') {
                         newEstimatedTotalPrice = (estimatedPrice* 52 / durationValue).toFixed(2);
                     } else {
-                        newEstimatedTotalPrice = ((estimatedPrice/ longevityValue)* durationValue).toFixed(2);
+                        newEstimatedTotalPrice = ((estimatedPrice/ initialLongevityValue)* durationValue).toFixed(2);
                     }
             } 
-            else if (longevityDropdown.value === 'month') {
+            else if (initialDropdownValue === 'month') {
                     if (costDurationDropdown.value === 'day') {
                         newEstimatedTotalPrice = (estimatedPrice/ 30 * durationValue).toFixed(2);
                     } else if (costDurationDropdown.value === 'week') {
@@ -1063,18 +1077,18 @@
                     } else if (costDurationDropdown.value === 'year') {
                         newEstimatedTotalPrice = (estimatedPrice* 12 * durationValue).toFixed(2);
                     } else {
-                        newEstimatedTotalPrice = ((estimatedPrice/ longevityValue)* durationValue).toFixed(2);
+                        newEstimatedTotalPrice = ((estimatedPrice/ initialLongevityValue)* durationValue).toFixed(2);
                     }
             } 
-            else if (longevityDropdown.value === 'year') {
+            else if (initialDropdownValue === 'year') {
                     if (costDurationDropdown.value === 'day') {
-                        newEstimatedTotalPrice = (estimatedPrice/ (365* longevityValue) * durationValue).toFixed(2);
+                        newEstimatedTotalPrice = (estimatedPrice/ (365* initialLongevityValue) * durationValue).toFixed(2);
                     } else if (costDurationDropdown.value === 'month') {
-                        newEstimatedTotalPrice = (estimatedPrice/ (12 * longevityValue) * durationValue).toFixed(2);
+                        newEstimatedTotalPrice = (estimatedPrice/ (12 * initialLongevityValue) * durationValue).toFixed(2);
                     } else if (costDurationDropdown.value === 'week') {
-                        newEstimatedTotalPrice = (estimatedPrice/ (52 * longevityValue)* durationValue).toFixed(2);
+                        newEstimatedTotalPrice = (estimatedPrice/ (52 * initialLongevityValue)* durationValue).toFixed(2);
                     } else {
-                        newEstimatedTotalPrice = ((estimatedPrice/ longevityValue) * durationValue).toFixed(2);
+                        newEstimatedTotalPrice = ((estimatedPrice/ initialLongevityValue) * durationValue).toFixed(2);
                     }
             }
         }
