@@ -123,6 +123,17 @@ var sched_appointment = {
                 alert('Please fill up all the fields');
                 return false;
             }
+
+            if (field.id === 'contact') {
+                if (!/^\d+$/.test(field.value)) {
+                    alert('Contact number should only contain numbers');
+                    return false;
+                }
+                if (field.value.trim().length < 10) {
+                    alert('Contact number should be 10 digits');
+                    return false;
+                }
+            }
         }
 
         sched_appointment.get_selected_health_facility();

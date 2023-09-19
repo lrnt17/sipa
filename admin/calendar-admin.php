@@ -133,7 +133,7 @@
                 break;
             }
 
-            $slots[] = $intStart->format("H:iA")."-".$endPeriod->format("H:iA");
+            $slots[] = $intStart->format("h:iA")."-".$endPeriod->format("h:iA");
         }
 
         return $slots;
