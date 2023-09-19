@@ -58,7 +58,7 @@
 
 <!-- contraceptive method buttons template -->
 <template class="js-method-buttons-template">
-    <button  onclick="method_display.updateDisplay(event)" name="method" value="1" class="js-each-method-buttons btn mx-3 my-2 px-4 py-2 rounded-4 shadow-sm rounded" style="min-width:235px;">Patch</button>
+    <span translate="no"><button  onclick="method_display.updateDisplay(event)" name="method" value="1" class="js-each-method-buttons btn mx-3 my-2 px-4 py-2 rounded-4 shadow-sm rounded" style="min-width:235px;">Patch</button></span>
 </template>
 <!-- end contraceptive method buttons template -->
 
