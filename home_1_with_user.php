@@ -9,8 +9,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <link
+        href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css"
+        rel="stylesheet"
+    />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
+
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <script src="https://kit.fontawesome.com/324d76b648.js" crossorigin="anonymous"></script>
     <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
@@ -20,6 +27,8 @@
         rel="stylesheet"
         href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.css"
         type="text/css"
+
+
     />
     <link rel="stylesheet" href="carousel.css">
     <title>SiPa | Contraceptive Decision Support System</title>
@@ -229,7 +238,7 @@
             <div class="row mt-5">
                 <div class="col-12 col-lg-5 me-auto">
                     <br>
-                <h1 class="mt-3 mb-3"style="font-weight:500;"><span translate="no" style="font-weight:normal;">Siguradong Pagpaplano</span></h1>
+                <h1 class="mt-3 mb-3"style="font-weight:500;"><span translate="no">Siguradong Pagpaplano</span></h1>
                 <p style="font-size:1rem; font-weight:300;">
                     Choosing the appropriate contraceptive method is essential for maintaining 
                     reproductive health and preventing unwanted pregnancy.
