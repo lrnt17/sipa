@@ -253,9 +253,9 @@
                 flex-wrap: wrap;
                 justify-content: center;
                 align-items: center;"></div>
-                <div class="appointment_data_privacy">
-                    <label for="appointment_data_privacy">I have read and agree to the Privacy Policy in accordance with the Data Privacy Act of 2012.</label>
-                    <input type="checkbox" name="appointment_data_privacy" id="appointment_data_privacy" value="I agree" required>
+                <div class="appointment_data_privacy" style="margin-top: 30px;">
+                    <input type="checkbox" name="appointment_data_privacy" id="appointment_data_privacy" value="I agree" required style="width: 15px;">
+                    <label for="appointment_data_privacy" style="position:relative;font-size: 15px;font-weight: 500;">I have read and agree to the Privacy Policy in accordance with the Data Privacy Act of 2012.</label>  
                 </div>
                 <!--<button type="button" onclick="sched_appointment.prevPage()">Previous</button>-->
                 <div class="btn-div"style="display: flex; justify-content: flex-end;">
