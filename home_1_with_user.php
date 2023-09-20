@@ -238,7 +238,7 @@
             <div class="row mt-5">
                 <div class="col-12 col-lg-5 me-auto">
                     <br>
-                <h1 class="mt-3 mb-3"style="font-weight:500;"><span translate="no">Siguradong Pagpaplano</span></h1>
+                <h1 class="mt-3 mb-3"style="font-weight:500;"><span translate="no" style="font-weight:normal;">Siguradong Pagpaplano</span></h1>
                 <p style="font-size:1rem; font-weight:300;">
                     Choosing the appropriate contraceptive method is essential for maintaining 
                     reproductive health and preventing unwanted pregnancy.
