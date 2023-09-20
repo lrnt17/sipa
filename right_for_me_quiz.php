@@ -41,7 +41,11 @@
         </div>
     </div>
     <br><br>
+    
     <div class="container mt-3">
+    <p align="justify" class="mb-5" style="font-weight:300;"> 
+        <b>Disclaimer</b> : Our recommendations are intended to inform you about potential contraception methods based on your provided information. They do not replace professional medical advice. Consult a qualified healthcare provider for personalized guidance on contraception choices. Your healthcare provider should make the final decision on the most appropriate method. You are responsible for the accuracy of the information provided. We are not liable for any damages or losses resulting from website use or reliance on the recommendations.
+    </p>
         <div class="row flex-nowrap" style="align-items: center;">
             <div class="col-auto">
                 <div class="vl" style="width: 10px;

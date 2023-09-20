@@ -201,7 +201,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 ?>
 
-
+<p align="justify" class="mb-5 mt-3" style="font-weight:300; font-size:15px;"> 
+        <b>Disclaimer</b> : Our recommendations are intended to inform you about potential contraception methods based on your provided information. They do not replace professional medical advice. Consult a qualified healthcare provider for personalized guidance on contraception choices. Your healthcare provider should make the final decision on the most appropriate method. You are responsible for the accuracy of the information provided. We are not liable for any damages or losses resulting from website use or reliance on the recommendations.
+    </p>
 
         <form id= "back_btn" action="right_for_me_quiz.php" method="post">
             <div class="row mt-2" >

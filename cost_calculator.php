@@ -170,8 +170,15 @@
                     $method_name = $row['birth_control_name'];
                     $method_img = $row['birth_control_img'];
                     echo '<button class="contraceptive-button btn mx-3 my-3 btn-light shadow-sm hover" style="width: 110px;height: 120px;" data-method="' . $method_name . '">';
+                    echo '<div class="mb-1" style="min-height: 36px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;">';
                     echo '<span translate="no">' . $method_name . '</span>';
-                    echo '<img src="' . $method_img . '" alt="' . $method_name . '" style="max-width: 100%; max-height: 100%; object-fit: contain;">';
+                    echo '</div>';
+                    echo '<div class="rounded-1 justify-content-center" style="text-align: center;background: white;width: 100%;max-height: 100px;position: relative;overflow: hidden;/* border: 4px solid #F2F5FF; */z-index: 1;padding: 0;">';
+                    echo '<img src="' . $method_img . '" alt="' . $method_name . '" style="width: 100%; height: auto; object-fit: cover;">';
+                    echo '</div>';
                     echo '</button>';
         
                     //$count++; //counter para 7 lang kada row ang buttons 

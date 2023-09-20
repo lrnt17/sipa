@@ -16,6 +16,21 @@
             </script>
             <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     </span>
-    <a href="">Privacy Policy</a>
-    <a href="">Terms of Use</a>
+    <button id="myBtn2" style="
+        background: transparent;
+        color: white;
+        border: none;
+    ">
+        Privacy Policy
+    </button>
+    <button id="myBtn3" style="
+        background: transparent;
+        color: white;
+        border: none;
+    ">
+        Terms of Use
+    </button>
+
+    <?php include('privacy-policy.php') ?>
+    <?php include('terms-and-conditions.php') ?>
 </div>

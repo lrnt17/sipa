@@ -10,7 +10,17 @@
       }
     }
 ?>
+ <style>
+  .dropdown-item {
+    color: var(--bs-dropdown-link-color) !important;
+    text-decoration: none;
+    background-color: transparent !important;
+  }
+  .dropdown-item:hover {
+    background-color: #D3D3D3 !important;
+  }
 
+ </style>
 <head>
 <link rel="stylesheet" href="main.css">
 </head>
@@ -28,13 +38,13 @@
                   <a class="js-link nav-link" href="home_1_with_user.php"><span translate="no" style="font-weight:normal;">Home <span class="sr-only"></span></span></a>
                 </li>
                 <li class="nav-item mx-2">
-                  <a class="js-link nav-link" href="community-videos.php">Videos</a>
+                  <a class="js-link nav-link video_link" href="community-videos.php">Videos</a>
                 </li>
                 <li class="nav-item mx-2">
-                  <a class="js-link nav-link" href="right_for_me_1.php">Right for me</a>
+                  <a class="js-link nav-link rfm_link" href="right_for_me_1.php">Right for me</a>
                 </li>
                 <li class="nav-item mx-2">
-                  <a class="nav-link" href="faqs.php">FAQs</a>
+                  <a class="js-link nav-link faqs_link" href="faqs.php">FAQs</a>
                 </li>
                 <li class="nav-item dropdown mx-2">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

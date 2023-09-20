@@ -37,6 +37,10 @@
         border:none;
         }
 
+        .rfm_link{
+            color: var(--bs-navbar-active-color) !important;
+        }
+
         .vl {
             width: 10px;
             background-color: #1F6CB5;
