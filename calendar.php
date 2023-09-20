@@ -108,17 +108,17 @@
             $isWeekend = ($dayOfWeek == 0 || $dayOfWeek == 6); // Check if it's Saturday (0) or Sunday (6)
             
             if ($date < date('Y-m-d')) {
-                $calendar.="<td class='old-dates'><h4>$currentDay</h4>";
+                $calendar.="<td class='old-dates'><h5>$currentDay</h5>";
             } elseif ($fully_booked) {
-                $calendar.="<td class='fullybooked-dates'><h4>$currentDay</h4>";
+                $calendar.="<td class='fullybooked-dates'><h5>$currentDay</h5>";
             } /*elseif (in_array($date, $holidays)) {
                 $calendar .= "<td class='holiday-dates'><h4>$currentDay</h4>";
             }*/ elseif ($isWeekend && $today == "today") {
-                $calendar .= "<td class='weekend-dates current-date'><h4>$currentDay</h4>";
+                $calendar .= "<td class='weekend-dates current-date'><h5>$currentDay</h5>";
             } elseif ($isWeekend) {
-                $calendar .= "<td class='weekend-dates'><h4>$currentDay</h4>";
+                $calendar .= "<td class='weekend-dates'><h5>$currentDay</h5>";
             } else {
-                $calendar.="<td class='$today new-dates' onclick='sched_appointment.selectDate(\"$date\")'><h4>$currentDay</h4>";
+                $calendar.="<td class='$today new-dates' onclick='sched_appointment.selectDate(\"$date\")'><h5>$currentDay</h5>";
             }
             
 
