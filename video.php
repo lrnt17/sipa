@@ -186,7 +186,7 @@
 
                                 
                                 <p class="my-2" style="font-size: 13px; color: green;">
-                                    <?=$rows['birth_control']['name']?>
+                                <span translate="no"><?=$rows['birth_control']['name']?></span>
                                 </p>  
                                 
                                 <div class="row">

@@ -239,7 +239,7 @@
                     <img src="<?php //echo $row["birth_control_img"]; ?>" class="card-img-top" alt="...">
                     <img src="<?php //echo $row["birth_control_img"]; ?>" class="card-img-top" alt="...">
                     <div class="card-body" style="background-color:#BDD8F0; min-height:12rem;">
-                        <h5 class="card-title"><a href="https://example.com" class="" style="text-decoration:none"><?php echo $row["birth_control_name"]; ?></a></h5>
+                        <h5 class="card-title"><a href="https://example.com" class="" style="text-decoration:none"><span translate="no"><?php echo $row["birth_control_name"]; ?></a></h5><span translate="no">
                         <p class="card-text"><?php //echo $row["birth_control_desc"]; ?></p>
                         <p class="card-text"><?php //echo $row["birth_control_desc"]; ?></p>
                     </div>
@@ -304,7 +304,7 @@
         <div class='newsCard news-Slide-up rounded-4'>
                     <img src="assets/images/contraceptive.png" alt="sample" class="js-method-image" style="width:300px;">
                 <div class='newsCaption rounded-4 shadow-sm'>
-                    <h5 class="js-method-name newsCaption-title py-2" style="text-align:center;">Pill</h5 >
+                <span translate="no"><h5 class="js-method-name newsCaption-title py-2" style="text-align:center;">Pill</h5 ></span>
                     <div class="js-method-desc newsCaption-content px-2"  >
                         is simply dummy text of the printing and typesetting industry. 
                         Lorem Ipsum has been the industry's standard dummy text ever 

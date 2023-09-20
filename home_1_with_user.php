@@ -229,7 +229,7 @@
             <div class="row mt-5">
                 <div class="col-12 col-lg-5 me-auto">
                     <br>
-                <h1 class="mt-3 mb-3"style="font-weight:500;">Siguradong Pagpaplano</h1>
+                <h1 class="mt-3 mb-3"style="font-weight:500;"><span translate="no" style="font-weight:normal;">Siguradong Pagpaplano</span></h1>
                 <p style="font-size:1rem; font-weight:300;">
                     Choosing the appropriate contraceptive method is essential for maintaining 
                     reproductive health and preventing unwanted pregnancy.
@@ -393,7 +393,7 @@
                     </div>
                     <div class="col-auto">
                         <p style="color:#383838;">Email</p>
-                        <h5>sipa@gmail.com</h5>
+                        <h5>siguradongpagpaplano@gmail.com</h5>
                     </div>
                 </div>
 
@@ -405,11 +405,11 @@
                             </div>
                             <div class="col-auto" style="display: flex;
                             align-items: center;">
-                                <a href="#"><i class="fa-brands fa-facebook my-2" style="font-size:45px; color:#2736A5;"></i></a>
+                                <a href="https://www.facebook.com/profile.php?id=61551116383814"><i class="fa-brands fa-facebook my-2" style="font-size:45px; color:#2736A5;"></i></a>
                             </div>
                             <div class="col-auto"style="display: flex;
                             align-items: center;">
-                                <a href="#"><i class="fa-brands fa-instagram my-2" style="font-size:45px; color:#6626CC;"></i></a>
+                                <a href="https://www.instagram.com/siguradongpagpaplano/"><i class="fa-brands fa-instagram my-2" style="font-size:45px; color:#6626CC;"></i></a>
                             </div>
                         </div>
                     </div>

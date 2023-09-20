@@ -170,7 +170,7 @@
                     $method_name = $row['birth_control_name'];
                     $method_img = $row['birth_control_img'];
                     echo '<button class="contraceptive-button btn mx-3 my-3 btn-light shadow-sm hover" style="width: 110px;height: 120px;" data-method="' . $method_name . '">';
-                    echo '<span>' . $method_name . '</span>';
+                    echo '<span translate="no">' . $method_name . '</span>';
                     echo '<img src="' . $method_img . '" alt="' . $method_name . '" style="max-width: 100%; max-height: 100%; object-fit: contain;">';
                     echo '</button>';
         
