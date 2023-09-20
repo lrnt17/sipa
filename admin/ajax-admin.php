@@ -480,6 +480,10 @@
         }else
         if ($_POST['data_type'] == 'load_appointments') 
         {
+            // Update status of past appointments to 'Cancelled' if they are not 'Confirmed'
+            $query = "UPDATE appointments SET status = 'Cancelled' WHERE app_date < CURDATE() AND status != 'Confirmed'";
+            query($query);
+
             $city_municipality = $_POST['city_municipality'];
             $health_facility = $_POST['health_facility'];
             $page = $_POST['page'];
@@ -559,6 +563,15 @@
                 } else {
                     $info['success'] = false;
                     $info['message'] = "Cannot update appointment because its status is already 'Confirmed'";
+                }
+            } else if ($current_status === 'Cancelled') {
+                // If the current status is 'cancelled', do not allow it to be changed to 'confirmed' or 'pending'
+                if ($status === 'Confirmed' || $status === 'Pending') {
+                    $info['success'] = false;
+                    $info['message'] = "Cannot change status from Cancelled to '$status'";
+                } else {
+                    $info['success'] = false;
+                    $info['message'] = "Cannot update appointment because its status is already 'Cancelled'";
                 }
             } else {
 

@@ -16,7 +16,8 @@ var appointment_list = {
 
         let city_municipality = appointment_list.location;
         let health_facility = appointment_list.health_facility;
-        //console.log(appointment_list.city_municipality);return;
+        let current_date = appointment_list.current_date;
+        //console.log(appointment_list.current_date);//return;
         let form = new FormData();
 
         form.append('city_municipality', city_municipality);
@@ -52,7 +53,6 @@ var appointment_list = {
                             row.querySelector(".js-appointment-date").textContent = data.rows[i].app_date;
                             row.querySelector(".js-appointment-timeslot").textContent = data.rows[i].app_timeslot;
                             row.querySelector(".js-appointment-status").textContent = data.rows[i].status;
-                            row.querySelector(".js-appointment-privacy-policy").textContent = data.rows[i].appointment_data_privacy;
                             row.querySelector(".js-appointment-details-btn").setAttribute('onclick',`appointment_list.view_appointment('${data.rows[i].app_id}')`);
                             row.querySelector(".js-appointment-edit-btn").setAttribute('onclick',`appointment_list.edit_appointment('${data.rows[i].app_id}')`);
                             

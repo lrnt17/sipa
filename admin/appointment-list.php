@@ -168,7 +168,6 @@
                         <th>Last Name</th>
                         <th>Schedule</th>
                         <th>Status</th>
-                        <th>Privacy Policy</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -289,7 +288,6 @@
                 <div class="js-appointment-timeslot"></div>
             </td>
             <td class="js-appointment-status"></td>
-            <td class="js-appointment-privacy-policy"></td>
             <td>
                 <div class="js-appointment-details-btn" style="cursor:pointer;">View Details</div>
                 <div class="js-appointment-edit-btn" style="cursor:pointer;color:blue;">Edit</div>
@@ -613,7 +611,7 @@
 
     appointment_list.load_appointments();*/
 </script>
-<script src="appointment-list.js?v4"></script>
+<script src="appointment-list.js?v5"></script>
 <script>
     let searchInput = document.getElementById('search-username');
     
