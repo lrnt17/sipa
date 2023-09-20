@@ -226,7 +226,7 @@
         }
     </style>
   
-    <script src="script.js" defer></script>
+    <script src="script.js?v1" defer></script>
 </head>
 <body style="background: #F2F5FF;">
  
