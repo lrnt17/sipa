@@ -21,30 +21,30 @@
 
                 <div class="col-12 col-md-auto mx-auto text-md-left text-center ">
                     <div class="row my-2">
-                        <a href="home_1_with_user.php"><span translate="no" style="font-weight:normal;">Home</span></a>
+                        <a class="js-link" href="home_1_with_user.php"><span translate="no" style="font-weight:normal;">Home</span></a>
                     </div>
                     <div class="row my-2">
-                        <a href="faqs.php">FAQs</a>
+                        <a class="js-link" href="faqs.php">FAQs</a>
                     </div>
                     <div class="row my-2">
-                        <a href="right_for_me_1.php">Right for me</a>
+                        <a class="js-link" href="right_for_me_1.php">Right for me</a>
                     </div>
                     <div class="row my-2">
-                        <a href="#">Health care provider</a>
+                        <a class="js-link" href="gmap.php">Health care provider</a>
                     </div>
                 </div>
                 <div class="col-12 col-md-auto mx-auto text-center">
                      <div class="row my-2">
-                        <a href="community-videos.php">Videos</a>
+                        <a class="js-link" href="community-videos.php">Videos</a>
                     </div>
                     <div class="row my-2">
-                        <a href="period_calcu.php"><span translate="no" style="font-weight:normal;">Period</span>  Calculator</a>
+                        <a class="js-link" href="period_calcu.php"><span translate="no" style="font-weight:normal;">Period</span>  Calculator</a>
                     </div>
                     <div class="row my-2">
-                        <a href="community-topics.php">Community Forum</a>
+                        <a class="js-link" href="community-topics.php">Community Forum</a>
                     </div>
                     <div class="row my-2">
-                        <a href="#">About STDs</a>
+                        <a class="js-link" href="about-std.php">About STDs</a>
                     </div>
                 </div>
                 <div class="col-12 col-md-auto mx-auto text-center">

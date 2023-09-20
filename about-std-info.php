@@ -78,7 +78,7 @@
                             <div class="col-md-6 mt-4">
                                 <div class="row">
                                     <div class="col-auto">
-                                        <i class="fa-regular fa-circle-check" style="font-size: 24px; color: #618858;"></i>
+                                        <i class="fa-regular fa-lightbulb" style="font-size:24px; color:#AFA966;"></i>
                                     </div>
                                     <div class="col">
                                         <h5 style="font-weight: bold;">Symptoms</h5>
@@ -91,7 +91,7 @@
                             <div class="col-md-6 mt-4">
                                 <div class="row">
                                     <div class="col-auto">
-                                        <i class="fa-regular fa-circle-xmark" style="font-size: 24px; color: #9D3737;"></i>
+                                        <i class="fa-regular fa-circle-check" style="font-size: 24px; color: #618858;"></i>
                                     </div>
                                     <div class="col">
                                         <h5 style="font-weight: bold;">Signs</h5>

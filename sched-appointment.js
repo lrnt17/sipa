@@ -310,18 +310,24 @@ var sched_appointment = {
 
                 for (var i = 0; i < timeslots.length; i++) {
                     var div_timeslot = document.createElement('div');
+                    div_timeslot.style.minWidth="300px";
+                    div_timeslot.style.marginBlockStart="10px";
+                    div_timeslot.style.marginInlineStart="20px";
                     //div_timeslot.textContent = timeslots[i].time;
 
                     // create a span element to display the time of the timeslot
                     var span_time = document.createElement('span');
+                    span_time.classList.add("span_time");
                     span_time.textContent = timeslots[i].time;
                     timeslot_value = timeslots[i].time;
-
+                    
                     // create a span element to display the number of available slots for the timeslot
                     var span_slots = document.createElement('span');
+                    span_slots.classList.add("span_slots");
                     span_slots.textContent = ' (' + timeslots[i].availableSlots + ' slots available)';
                     
-                    
+                    // create a line break element
+                    var lineBreak = document.createElement('br');
 
                     div_timeslot.className = 'btn btn-success';
 
@@ -347,6 +353,7 @@ var sched_appointment = {
                     }
                     // append the span elements to the div_timeslot element
                     div_timeslot.appendChild(span_time);
+                    div_timeslot.appendChild(lineBreak); 
                     div_timeslot.appendChild(span_slots);
                     timeslotsContainer.appendChild(div_timeslot);
                 }
