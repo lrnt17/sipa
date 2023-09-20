@@ -96,7 +96,7 @@
                 </td>
                 </tr>
                 <tr>
-                <td><input type="checkbox" name="user-exp-chckbx" id="implant" onchange="toggleRadioButtons('implant')"> <label for="implant">Implant</label></td>
+                <td><input type="checkbox" name="user-exp-chckbx" id="implant" onchange="toggleRadioButtons('implant')"> <label for="implant"><span translate="no">Implant</span></label></td>
                 <td>
                     <label><input type="radio" class="user-exp-radio" id="implantExperience" name="implantExperience" value="good" disabled required> Good</label>
                     <label><input type="radio" class="user-exp-radio" id="implantExperience" name="implantExperience" value="neutral" disabled required> Neutral</label>
@@ -148,7 +148,7 @@
                 </td>
                 </tr>
                 <tr>
-                <td><input type="checkbox" name="user-exp-chckbx" id="combinedPill" onchange="toggleRadioButtons('combinedPill')"> <label for="combinedPill">Combined Pill</label></td>
+                <td><input type="checkbox" name="user-exp-chckbx" id="combinedPill" onchange="toggleRadioButtons('combinedPill')"> <label for="combinedPill"><span translate="no">Combined Pill</span></label></td>
                 <td>
                     <label><input type="radio" class="user-exp-radio" id="combinedPillExperience" name="combinedPillExperience" value="good" disabled required> Good</label>
                     <label><input type="radio" class="user-exp-radio" id="combinedPillExperience" name="combinedPillExperience" value="neutral" disabled required> Neutral</label>

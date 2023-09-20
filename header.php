@@ -25,7 +25,7 @@
             <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
               <ul class="navbar-nav">
                 <li class="nav-item active mx-2">
-                  <a class="js-link nav-link" href="home_1_with_user.php">Home <span class="sr-only"></span></a>
+                  <a class="js-link nav-link" href="home_1_with_user.php"><span translate="no" style="font-weight:normal;">Home <span class="sr-only"></span></span></a>
                 </li>
                 <li class="nav-item mx-2">
                   <a class="js-link nav-link" href="community-videos.php">Videos</a>
@@ -41,7 +41,7 @@
                     Services
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                      <a class="js-link dropdown-item" href="period_calcu.php">Period Calculator</a>
+                      <a class="js-link dropdown-item" href="period_calcu.php"><span translate="no" style="font-weight:normal;">Period </span> Calculator</a>
                       <a class="js-link dropdown-item" href="cost_calculator.php">Contraceptive Cost Calculator</a>
                       <a class="js-link dropdown-item" href="community-topics.php">Community Forum</a>
                       <a class="dropdown-item" href="about-std.php">About STDs</a>

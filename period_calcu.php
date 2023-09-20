@@ -58,7 +58,7 @@
     <div class="container rounded-5" style="background: #D2E0F8;">
         <div class="row mx-5 justify-content-center" style="text-align:center; padding: 4%;">
         
-            <div class="col-auto"><p style="font-size: 3.5rem;">Period</p></div>
+            <div class="col-auto"><p style="font-size: 3.5rem;"><span translate="no">Period</span></p></div>
             <div class="col-auto"><p style="font-size: 3.5rem; font-weight:bolder;" >Calculator</p></div>
         </div>
     </div>
@@ -107,7 +107,7 @@
                 </div>
                 <div class="col">
                     <div class="container">
-                        <label for="period-length" style="font-weight: bold; color:#5A5A5A;">Length of last period (in days)</label>
+                        <label for="period-length" style="font-weight: bold; color:#5A5A5A;">Length of last <span translate="no"> period</span> (in days)</label>
                     </div>
                 </div>
                 <div class="col">
@@ -156,7 +156,7 @@
         
             <div class="col-auto mt-2">
                 <div class="row">
-                    <div class="col-auto"><p style="color:#5A5A5A;">Period days</p></div>
+                    <div class="col-auto"><p style="color:#5A5A5A;"><span translate="no">Period days</span></p></div>
                 </div>
             </div>
         </div>

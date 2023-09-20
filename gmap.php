@@ -75,8 +75,8 @@ $conn->close();
     <div class="container rounded-5" style="background: #D2E0F8;">
             <div class="row mx-5 justify-content-center" style="text-align:center; padding: 4%;">
             
-                <div class="col-auto"><p style="font-size: 3.5rem;">Find</p></div>
-                <div class="col-auto"><p style="font-size: 3.5rem; font-weight:bolder;" >Heath Care</p></div>
+                <div class="col-auto"><p style="font-size: 3.5rem;">Find a</p></div>
+                <div class="col-auto"><p style="font-size: 3.5rem; font-weight:bolder;" >Health Care</p></div>
             </div>
         </div>
 
@@ -87,7 +87,7 @@ $conn->close();
                 <div class="col-md-6">
 
                     <div class="cap p-3 rounded-4 shadow-sm rounded" style="position: relative; top: -40px; background:#ffff; text-align:center;">
-                       Access the care you neeed.
+                       Access the care you need.
                     </div>
                     
                 </div>

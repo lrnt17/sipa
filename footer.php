@@ -21,7 +21,7 @@
 
                 <div class="col-12 col-md-auto mx-auto text-md-left text-center ">
                     <div class="row my-2">
-                        <a href="home_1_with_user.php">Home</a>
+                        <a href="home_1_with_user.php"><span translate="no" style="font-weight:normal;">Home</span></a>
                     </div>
                     <div class="row my-2">
                         <a href="faqs.php">FAQs</a>
@@ -38,7 +38,7 @@
                         <a href="community-videos.php">Videos</a>
                     </div>
                     <div class="row my-2">
-                        <a href="period_calcu.php">Period Calculator</a>
+                        <a href="period_calcu.php"><span translate="no" style="font-weight:normal;">Period</span>  Calculator</a>
                     </div>
                     <div class="row my-2">
                         <a href="community-topics.php">Community Forum</a>

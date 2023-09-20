@@ -266,7 +266,13 @@ var allvideos = {
             }
             videoCard.querySelector(".js-video-title-display").innerHTML = videoTitle;
             videoCard.querySelector(".js-video-display").src = videos[i].video;
-            videoCard.querySelector(".js-video-category").innerHTML = videos[i].birth_control.name;
+            let span = document.createElement('span');
+            span.setAttribute('translate', 'no');
+            span.textContent = videos[i].birth_control.name;
+
+            videoCard.querySelector(".js-video-category").innerHTML = '';
+            videoCard.querySelector(".js-video-category").appendChild(span);
+
             //videoCard.querySelector(".js-post").textContent = videos[i].forum_desc;
             // Highlight matching words in the post text WAG ISAMA
             /*let videoDesc = videos[i].forum_desc;
@@ -382,7 +388,12 @@ var allvideos = {
                             let button = document.createElement('button');
                             button.classList.add('btn','shadow-sm','m-1');
                             button.style.backgroundColor="white";
-                            button.textContent = contraceptive.birth_control_name;
+
+                            let span = document.createElement('span');
+                            span.setAttribute('translate', 'no');
+                            span.textContent = contraceptive.birth_control_name;
+
+                            button.appendChild(span);
                             button.setAttribute('onclick',`allvideos.sort_birth_control_id('${contraceptive.birth_control_id}')`);
                             scrollMenu.appendChild(button);
                         });

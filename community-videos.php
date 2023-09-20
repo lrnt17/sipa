@@ -14,6 +14,16 @@
     <title>Community Videos | SiPa</title>
 </head>
 <style>
+    body {
+            overflow-x: hidden;
+            margin: 0;
+            top:0!important;
+        }
+        
+    .skiptranslate iframe  {
+        visibility: hidden !important;
+    }
+
     @keyframes appear{
         0%{
             opacity: 0;

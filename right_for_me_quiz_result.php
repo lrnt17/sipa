@@ -503,7 +503,7 @@ function showDatePicker() {
   datePickerContainer.classList.add("m-4");
 
   const datePickerLabel = document.createElement("label");
-  datePickerLabel.textContent = "Select the start date for the contraceptive method: ";
+  datePickerLabel.textContent = "Select the date on when you want to begin your contraceptive method: ";
 
    // Create and append the provided HTML content
    const additionalContent = document.createElement("div");
