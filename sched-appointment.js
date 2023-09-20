@@ -453,6 +453,7 @@ var sched_appointment = {
                             option.value = location.city_municipality;
                             option.text = location.city_municipality;
                             option.setAttribute("city-municipality-name", location.city_municipality);
+                            option.setAttribute("translate", "no");
                             selectElement.appendChild(option);
                         });
                     }
