@@ -33,9 +33,9 @@ var sched_appointment = {
 
         for (var i = inputs.length - 1; i >= 0; i--) {
             form.append(inputs[i].name, inputs[i].value);
-            //console.log(inputs[i].name, inputs[i].value);
+            console.log(inputs[i].name, inputs[i].value);
         }
-        
+        //return;
         form.append('selected_municipality', selected_municipality);
         form.append('selected_health_facility', selected_health_facility);
         form.append('selected_gender', selected_gender);
@@ -114,7 +114,7 @@ var sched_appointment = {
         sched_appointment.showPage(sched_appointment.currentPage);
     },
 
-    validatePage1: function(){
+    validatePage1: async function(){
         
         let fields = document.querySelectorAll('#page-1 select, #page-1 input');
 
@@ -123,7 +123,7 @@ var sched_appointment = {
                 alert('Please fill up all the fields');
                 return false;
             }
-
+            
             if (field.id === 'contact') {
                 if (!/^\d+$/.test(field.value)) {
                     alert('Contact number should only contain numbers');
@@ -133,6 +133,63 @@ var sched_appointment = {
                     alert('Contact number should be 10 digits');
                     return false;
                 }
+
+                // Send AJAX request to check if contact number already exists
+                /*let form = new FormData();
+                form.append('contact_number', field.value);
+                form.append('data_type', 'check_contact_number');
+                
+                var ajax = new XMLHttpRequest();
+
+                ajax.addEventListener('readystatechange', function() {
+                    if(ajax.readyState == 4) {
+                        if(ajax.status == 200){
+                            let obj = JSON.parse(ajax.responseText);
+                            
+                            if(obj.success){
+                                alert(obj.message);
+                                return false;
+                            }
+                        } else {
+                            alert("Please check your internet connection");
+                        }
+                    }
+                });
+
+                ajax.open('post','ajax.php', true);
+                ajax.send(form);*/
+                
+                // Send AJAX request to check if contact number already exists
+                let form = new FormData();
+                form.append('contact_number', field.value);
+                form.append('data_type', 'check_contact_number');
+
+                let response = await new Promise((resolve, reject) => {
+                    var ajax = new XMLHttpRequest();
+
+                    ajax.addEventListener('readystatechange', function() {
+                        if(ajax.readyState == 4) {
+                            if(ajax.status == 200){
+                                let obj = JSON.parse(ajax.responseText);
+
+                                if(obj.success){
+                                    alert(obj.message);
+                                    reject();
+                                } else {
+                                    resolve();
+                                }
+                            } else {
+                                alert("Please check your internet connection");
+                                reject();
+                            }
+                        }
+                    });
+
+                    ajax.open('post','ajax.php', true);
+                    ajax.send(form);
+                }).catch(() => { return false; });
+
+                if(response === false) return false;
             }
         }
 
@@ -170,10 +227,14 @@ var sched_appointment = {
         pageToShow.style.display = "block";
     },
 
-    nextPage: function () {
+    nextPage: async function () {
 
         // check if the user is allowed to move to the next page
-        if (sched_appointment.currentPage === 1 && !sched_appointment.validatePage1()) {
+        /*if (sched_appointment.currentPage === 1 && !sched_appointment.validatePage1()) {
+            return;
+        }*/
+
+        if (sched_appointment.currentPage === 1 && !(await sched_appointment.validatePage1())) {
             return;
         }
 

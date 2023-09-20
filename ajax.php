@@ -1865,6 +1865,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
         $dob = $_POST['dob'];
         $appointment_date = $_POST['appointment_date'];
         $appointment_timeslot = $_POST['appointment_timeslot'];
+		$appointment_data_privacy = $_POST['appointment_data_privacy'];
 
 		// Check if contact number already exists
 		$checkQuery = "SELECT * FROM appointments WHERE app_pnum = '$contact'";
@@ -1874,15 +1875,29 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 			$info['message'] = "Your contact number already exists.";
 		} else {
 			// Insert the new record
-			$query = "INSERT INTO appointments (app_fname,app_lname,app_address,app_email,city_municipality,health_facility,app_pnum,app_gender,app_bdate,app_date,app_timeslot) 
-			VALUES ('$fname','$lname','$address','$email','$municipality','$health_facility','$contact','$gender','$dob','$appointment_date','$appointment_timeslot')";
+			$query = "INSERT INTO appointments (app_fname,app_lname,app_address,app_email,city_municipality,health_facility,app_pnum,app_gender,app_bdate,app_date,app_timeslot,appointment_data_privacy) 
+			VALUES ('$fname','$lname','$address','$email','$municipality','$health_facility','$contact','$gender','$dob','$appointment_date','$appointment_timeslot','$appointment_data_privacy')";
 			query($query);
 
-			appointment_confirmation($contact, $fname, $municipality, $health_facility, $appointment_date, $appointment_timeslot);
+			//appointment_confirmation($contact, $fname, $municipality, $health_facility, $appointment_date, $appointment_timeslot);
 
 			$info['success'] = true;
 			$info['message'] = "Your appointment was successfully created";
 		}
+	}else
+	if($_POST['data_type'] == 'check_contact_number')
+	{
+		$contact = (int)($_POST['contact_number']);
+		
+		// Check if contact number already exists
+		$checkQuery = "SELECT * FROM appointments WHERE app_pnum = '$contact'";
+		$result = query($checkQuery);
+
+		if($result){
+			$info['message'] = "Your contact number already exists.";
+			$info['success'] = true;
+		}
+
 	}
 	
 }

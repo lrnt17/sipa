@@ -71,6 +71,10 @@
                 <h1 class="js-selected-date"></h1>
                 <!-- Your form fields for page 3 here -->
                 <div class="timeslots"></div>
+                <div class="appointment_data_privacy">
+                    <label for="appointment_data_privacy">I have read and agree to the Privacy Policy in accordance with the Data Privacy Act of 2012.</label>
+                    <input type="checkbox" name="appointment_data_privacy" id="appointment_data_privacy" value="I agree" required>
+                </div>
                 <!--<button type="button" onclick="sched_appointment.prevPage()">Previous</button>-->
                 <button>Submit</button>
             </div>
@@ -96,4 +100,4 @@
         }
     }*/
 </script>
-<script src="sched-appointment.js?v9"></script>
+<script src="sched-appointment.js?v10"></script>
