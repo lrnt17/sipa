@@ -52,6 +52,7 @@ var appointment_list = {
                             row.querySelector(".js-appointment-date").textContent = data.rows[i].app_date;
                             row.querySelector(".js-appointment-timeslot").textContent = data.rows[i].app_timeslot;
                             row.querySelector(".js-appointment-status").textContent = data.rows[i].status;
+                            row.querySelector(".js-appointment-privacy-policy").textContent = data.rows[i].appointment_data_privacy;
                             row.querySelector(".js-appointment-details-btn").setAttribute('onclick',`appointment_list.view_appointment('${data.rows[i].app_id}')`);
                             row.querySelector(".js-appointment-edit-btn").setAttribute('onclick',`appointment_list.edit_appointment('${data.rows[i].app_id}')`);
                             
@@ -191,6 +192,7 @@ var appointment_list = {
             document.querySelector(".js-view-gmail").innerHTML = data.app_email;
             document.querySelector(".js-view-address").innerHTML = data.app_address;
             document.querySelector(".js-view-status").innerHTML = data.status;
+            document.querySelector(".js-view-privacy-policy").innerHTML = data.appointment_data_privacy;
 
         } else {
             alert("Invalid data");

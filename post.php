@@ -317,9 +317,9 @@
     <div class="row">
          <!--profile pic-->
          <div class="col-auto">
-            <a href="#" class="js-profile-link class_45" style="text-decoration:none;">
+            <!--<a href="#" class="js-profile-link class_45" style="text-decoration:none;">-->
                 <img src="assets/images/57.png" class="js-photo class_47" style="width:40px; height:40px; border-radius:50%; border-style: solid;"  >
-            </a>
+            <!--</a>-->
         </div>
 		
         <!--reply--> <!--NAME, COMMENT, TIME, LIKE -->
@@ -328,11 +328,11 @@
             <div class="cont p-3 rounded-4" style="background-color:#f2f2f2;">
                 <div class="row">
                     <div class="col-auto me-auto">
-                        <a href="#" class="js-profile-link class_45" style="text-decoration:none;">
+                        <!--<a href="#" class="js-profile-link class_45" style="text-decoration:none;">-->
                             <h2 class="js-username class_48" style="font-size:16px" >
                                 Jane Name
                             </h2>
-                        </a>
+                        <!--</a>-->
                     </div>
 
                     <!--time-->
@@ -418,7 +418,7 @@
 <script src="time.js?v1"></script>
 <script src="like-rating.js?v3"></script>
 <script src="community-topics.js?v6"></script>
-<script src="mycomment.js?v48"></script>
+<script src="mycomment.js?v49"></script>
 
 <script>
     // Call the updateTimestamps function initially when the page loads

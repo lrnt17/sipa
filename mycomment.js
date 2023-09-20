@@ -89,7 +89,7 @@ var mycomment = {
                                 template.querySelector(".js-reply-link").setAttribute('onclick',`mycomment.view_replies(${obj.rows[i].forum_id})`);
                                 //template.querySelector(".js-username").innerHTML = (typeof obj.rows[i].user == 'object') ? obj.rows[i].user.user_fname : 'User';
                                 template.querySelector(".js-username").innerHTML = obj.rows[i].user_fname;
-                                template.querySelector(".js-profile-link").href = (typeof obj.rows[i].user == 'object') ? 'profile.php?id='+obj.rows[i].user.user_id : '#';
+                                //template.querySelector(".js-profile-link").href = (typeof obj.rows[i].user == 'object') ? 'profile.php?id='+obj.rows[i].user.user_id : '#';
                                 template.querySelector(".js-like-button").setAttribute('forum_id', obj.rows[i].forum_id);
                                 template.querySelector(".js-num-likes").setAttribute('forum_id', obj.rows[i].forum_id);
                                 
