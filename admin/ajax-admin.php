@@ -125,7 +125,6 @@
         }else
         if ($_POST['data_type'] == 'edit_admin')
         {
-            
             $image = $_FILES['edit_image'];
 
             if ($image['name']) {
@@ -176,6 +175,72 @@
         
             $info['success'] = true;
             $info['message'] = "Admin details was edited successfully";
+        }else
+        if ($_POST['data_type'] == 'edit_local_admin')
+        {
+            $image = $_FILES['edit_image'];
+            $image_string = "";
+
+            if (!empty($image)) {
+
+                if ($image['name']) {
+                    $allowed = ['image/jpeg', 'image/png', 'image/webp'];
+                
+                    if (!in_array($image['type'], $allowed)) {
+                        $info['message'] = "Image type not supported";
+                    } else {
+                        $folder = "../uploads/";
+                
+                        if (!file_exists($folder)) {
+                            mkdir($folder, 0777, true);
+                        }
+                
+                        $targetPath = $folder . $image['name'];
+                        move_uploaded_file($image['tmp_name'], $targetPath);
+                
+                        $imageFilename = $targetPath;
+                        $image_string = ", user_image = '$imageFilename' ";
+                    }
+                } /*else {
+                    $imageFilename = '';
+                }*/
+            }
+
+            $fname = addslashes($_POST['edit_fname']);
+            $lname = addslashes($_POST['edit_lname']);
+            $dob = $_POST['edit_dob'];
+            $gender = $_POST['selected_gender'];
+            $gmail = addslashes($_POST['edit_gmail']);
+            $city_municipality = $_POST['selected_city_municipality'];
+            $health_facility = $_POST['selected_health_facility'];
+            $specialization = $_POST['selected_specialization'];
+            $pnum = (int)($_POST['edit_pnum']);
+            $user_id = $_POST['user_id'];
+        
+            $query = "update users set 
+            user_fname = '$fname',
+            user_lname = '$lname',
+            user_dob = '$dob',
+            user_sex = '$gender',
+            user_email = '$gmail',
+            user_pnum = '$pnum',
+            health_facility_name = '$health_facility', 
+            specialization = '$specialization',
+            city_municipality = '$city_municipality'
+            $image_string 
+            where user_id = '$user_id' limit 1";
+            query($query);
+            
+            $query = "select * from users where user_id = '$user_id' limit 1";
+			$row = query($query);
+
+			if($row)
+			{
+				authenticate($row[0]);
+			}
+
+            $info['success'] = true;
+            $info['message'] = "Your Admin details was edited successfully";
         }else
         if ($_POST['data_type'] == 'delete_admin')
         {
@@ -686,6 +751,7 @@
         }else
         if ($_POST['data_type'] == 'load_local_admins') 
         {
+            $user_id = $_SESSION['USER']['user_id'] ?? 0;
             $city_municipality = $_POST['city_municipality'];
             $health_facility_name = $_POST['health_facility_name'];
 
@@ -696,6 +762,10 @@
                 foreach ($rows as $key => $row) {
 
                     $rows[$key]['user_image'] = get_admin_image($row['user_image']);
+
+                    $rows[$key]['user_owns'] = false;
+                    if($user_id == $row['user_id'])
+                        $rows[$key]['user_owns'] = true;
                 }
                 $info['rows'] = $rows;
                 $info['success'] = true;
