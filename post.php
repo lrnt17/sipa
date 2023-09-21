@@ -429,7 +429,7 @@
 <script src="time.js?v1"></script>
 <script src="like-rating.js?v3"></script>
 <script src="community-topics.js?v7"></script>
-<script src="mycomment.js?v49"></script>
+<script src="mycomment.js?v50"></script>
 
 <script>
     // Call the updateTimestamps function initially when the page loads

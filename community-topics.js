@@ -10,7 +10,7 @@ var allposts = {
         let title = document.getElementById("post_title").value;
         let anonymous = document.querySelector(".js-anonymous").checked;
         //console.log(anonymous);
-        if(text == "" && title == ""){
+        if(text == "" || title == ""){
             alert("Please type something");
             return;
         }
@@ -538,6 +538,11 @@ var allposts = {
 
     savePost: function(forum_id, editedTitle, editedContent) {
 
+        if(editedTitle == "" || editedContent == ""){
+            alert("Please type something");
+            return;
+        }
+        
         // Create a FormData object to send the data to the server
         let form = new FormData();
         form.append('forum_id', forum_id);

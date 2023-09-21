@@ -87,8 +87,8 @@ var mycomment = {
 								//template.querySelector(".js-edit-button").setAttribute('onclick',`my_edit_comment.show_me(${obj.rows[i].forum_id})`);
                                 template.querySelector(".js-edit-button").setAttribute('onclick',`mycomment.editComment(${obj.rows[i].forum_id})`);
                                 template.querySelector(".js-reply-link").setAttribute('onclick',`mycomment.view_replies(${obj.rows[i].forum_id})`);
-                                //template.querySelector(".js-username").innerHTML = (typeof obj.rows[i].user == 'object') ? obj.rows[i].user.user_fname : 'User';
-                                template.querySelector(".js-username").innerHTML = obj.rows[i].user_fname;
+                                template.querySelector(".js-username").innerHTML = (typeof obj.rows[i].user == 'object') ? obj.rows[i].user.name : 'User';
+                                //template.querySelector(".js-username").innerHTML = obj.rows[i].user_fname;
                                 //template.querySelector(".js-profile-link").href = (typeof obj.rows[i].user == 'object') ? 'profile.php?id='+obj.rows[i].user.user_id : '#';
                                 template.querySelector(".js-like-button").setAttribute('forum_id', obj.rows[i].forum_id);
                                 template.querySelector(".js-num-likes").setAttribute('forum_id', obj.rows[i].forum_id);
@@ -110,9 +110,9 @@ var mycomment = {
                                 } else {
                                     template.querySelector(".js-num-likes").innerHTML = obj.rows[i].getlikes['count(*)'];
                                 }
-                                template.querySelector(".js-photo").src = obj.rows[i].user_img;
-                                /*if(typeof obj.rows[i].user == 'object')
-                                    template.querySelector(".js-photo").src = obj.rows[i].user.user_image;*/
+                                //template.querySelector(".js-photo").src = obj.rows[i].user_img;
+                                if(typeof obj.rows[i].user == 'object')
+                                    template.querySelector(".js-photo").src = obj.rows[i].user.image;
 
                                 let clone = template.cloneNode(true);
                                 clone.setAttribute('id','post_'+obj.rows[i].forum_id);
@@ -246,6 +246,11 @@ var mycomment = {
     },
 
     saveComment: function(forum_id, editedContent) {
+
+        if(editedContent == ""){
+            alert("Please type something");
+            return;
+        }
 
         // Create a FormData object to send the data to the server
         let form = new FormData();
@@ -435,19 +440,18 @@ var mycomment = {
 
 
                                 let userimageElement = document.createElement('img');
-                                userimageElement.src = 'assets/images/57.png'; // Default image source
+                                //userimageElement.src = 'assets/images/57.png'; // Default image source
                                 userimageElement.classList.add('js-userimage-reply','m-2');
-                                userimageElement.src = data.rows[i].user_img;
+                                //userimageElement.src = data.rows[i].user_img;
 
-                                /*if (typeof data.rows[i].user == 'object') {
+                                if (typeof data.rows[i].user == 'object') {
                                     userimageElement.src = data.rows[i].user.image;
-                                }*/
+                                }
                                 
                                 let usernameElement = document.createElement('div');
                                 usernameElement.classList.add('js-username-reply');
-                                //usernameElement.innerHTML = (data.rows[i].user_fname) ? data.rows[i].user_fname : 'User';
-                                usernameElement.innerHTML = data.rows[i].user_fname;
-                                usernameElement.style.color='blue';
+                                usernameElement.innerHTML = (typeof data.rows[i].user == 'object') ? data.rows[i].user.name : 'User';
+                                //usernameElement.innerHTML = data.rows[i].user_fname;
                                 usernameElement.style.display='inline';
                                 
                                 let dateTimeElement = document.createElement('div');
@@ -872,8 +876,8 @@ var mycomment = {
             divname_com.removeChild(saveButton);
             divname_com.removeChild(cancelButton);
             // Show the edit and delete buttons
-            divname_com.querySelector('.js-edit-button').classList.remove('hide');
-            divname_com.querySelector('.js-delete-button').classList.remove('hide');
+            //divname_com.querySelector('.js-edit-button').classList.remove('hide');
+            //divname_com.querySelector('.js-delete-button').classList.remove('hide');
         });
 
         // Append the Cancel button to the replyWrapper element
@@ -897,6 +901,11 @@ var mycomment = {
         // Get the edited reply content
         let editedReplyText = editInput.value;
         console.log(editedReplyText);
+
+        if(editedReplyText == ""){
+            alert("Please type something");
+            return;
+        }
         // Send the updated reply content to the server using AJAX
         // You can use the fetch API or other AJAX libraries for this
         // Example using fetch API:
