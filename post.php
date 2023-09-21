@@ -23,9 +23,20 @@
 		$user_row = query($query);
 		
 		if($user_row){
-			$row['user'] = $user_row[0];
-			$row['user']['user_image'] = get_image($user_row[0]['user_image']);
-		}
+            if ($row['forum_anonimity'] == 1) {
+                $row['user'] = $user_row[0];
+                $row['user']['image'] = "assets/images/user.jpg?v1";
+                // Anonymize the user's name
+                $fname = substr($user_row[0]['user_fname'], 0, 1) . str_repeat("*", strlen($user_row[0]['user_fname']) - 2) . substr($user_row[0]['user_fname'], -1);
+                $lname = substr($user_row[0]['user_lname'], 0, 1) . ".";
+                $row['user']['name'] = "$fname $lname";
+            } else {
+                $row['user'] = $user_row[0];
+                $row['user']['image'] = get_image($user_row[0]['user_image']);
+                // Display the full name
+                $row['user']['name'] = $user_row[0]['user_fname'] . " " . $user_row[0]['user_lname'];
+            }
+        }
 
         $forum_id = $row['forum_id'];
         $query = "select count(*) from rating_info where post_id = $forum_id AND rating_action = 'like' limit 1";
@@ -179,11 +190,11 @@
 
                             <div class="row m-1" style="align-items: center;">
                                 <div class="col-5">
-                                    <img src="<?=get_image($row['user_img'])?>" class="class_47" style="width:40px; height:40px; border-radius:50%; border-style: solid;" >
+                                    <img src="<?=$row['user']['image']?>" class="class_47" style="width:40px; height:40px; border-radius:50%; border-style: solid;" >
                                     <span style="font-size:14px; color:gray;"> Posted by</span> 
-                                    <h2 class="class_48" style="font-size:14px; display:inline; color:blue;" >
+                                    <h2 class="class_48" style="font-size:14px; display:inline;" >
                                         <?//=$row['user']['user_fname'] ?? 'Unknown'?>
-                                        <?=$row['user_fname']?>
+                                        <?=$row['user']['name']?>
                                     </h2>
                                 </div>
 
@@ -417,8 +428,8 @@
 <!--<script src="mypost.js?v11"></script>-->
 <script src="time.js?v1"></script>
 <script src="like-rating.js?v3"></script>
-<script src="community-topics.js?v6"></script>
-<script src="mycomment.js?v49"></script>
+<script src="community-topics.js?v7"></script>
+<script src="mycomment.js?v50"></script>
 
 <script>
     // Call the updateTimestamps function initially when the page loads
@@ -443,6 +454,13 @@ clearSessionStorageLinks.forEach(function(link) {
     // Additional actions or code after clearing sessionStorage, if needed
   });
 });
+
+// Get the input element by its id
+var searchinputElement = document.querySelector(".js-search-input");
+
+// Disable the input element
+searchinputElement.disabled = true;
+
 </script>
 
 </html>

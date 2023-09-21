@@ -245,16 +245,16 @@
 </script>
 <script src="like-rating.js?v5"></script>
 <script src="time.js?v1"></script>
-<script src="my-topics.js?v7"></script>
+<script src="my-topics.js?v8"></script>
 
 
 <script>
 //-----------------------------------------------------------------------------------------------------
     // hide start new topic button
-    const btn = document.getElementById('btn');
+    /*const btn = document.getElementById('btn');
         btn.addEventListener('click', () => {
         btn.style.display = 'none';
-    });
+    });*/
 
     // Check if the page is being loaded as a result of a refresh
     if (performance.navigation.type === performance.navigation.TYPE_RELOAD) {

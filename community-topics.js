@@ -10,7 +10,7 @@ var allposts = {
         let title = document.getElementById("post_title").value;
         let anonymous = document.querySelector(".js-anonymous").checked;
         //console.log(anonymous);
-        if(text == "" && title == ""){
+        if(text == "" || title == ""){
             alert("Please type something");
             return;
         }
@@ -297,8 +297,13 @@ var allposts = {
             /*if(typeof posts[i].user == 'object'){
                 postCard.querySelector(".js-image").src = posts[i].user.image;
             }*/
-            postCard.querySelector(".js-image").src = posts[i].user_img;
-            postCard.querySelector(".js-username").textContent = posts[i].user_fname;
+            //postCard.querySelector(".js-image").src = posts[i].user_img;
+            if(typeof posts[i].user == 'object'){
+                postCard.querySelector(".js-image").src = posts[i].user.image;
+            }
+									
+            //postCard.querySelector(".js-username").textContent = posts[i].user_fname;
+            postCard.querySelector(".js-username").textContent = (typeof posts[i].user == 'object') ? posts[i].user.name : 'User';
             //postCard.querySelector(".js-date").textContent = posts[i].date;
             //postCard.querySelector(".js-title").textContent = posts[i].forum_title;
             // Highlight matching words in the post title
@@ -533,6 +538,11 @@ var allposts = {
 
     savePost: function(forum_id, editedTitle, editedContent) {
 
+        if(editedTitle == "" || editedContent == ""){
+            alert("Please type something");
+            return;
+        }
+        
         // Create a FormData object to send the data to the server
         let form = new FormData();
         form.append('forum_id', forum_id);
