@@ -1898,6 +1898,30 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 			$info['success'] = true;
 		}
 
+	}else if($_POST['data_type'] == 'delete_method'){
+		$user_id = $_SESSION['USER']['user_id'];
+ 
+		//si limit 1 is parang pag may nakita na syang match sa data, iistop na sya
+		//para rin tipid sa memory
+		$query = "UPDATE users SET birth_control_name = NULL, birth_control_startdate = NULL, birth_control_enddate = NULL, birth_control_usage = NULL, isMessaged = NULL WHERE user_id = '$user_id'";
+		query($query);
+		
+		$info['success'] = true;
+		$info['message'] = "The old saved method has been deleted successfully";
+		
+	}else if($_POST['data_type'] == 'delete_remdates'){
+		$user_id = $_SESSION['USER']['user_id'];
+ 
+		//si limit 1 is parang pag may nakita na syang match sa data, iistop na sya
+		//para rin tipid sa memory
+		$query = "UPDATE users SET birth_control_name = NULL, birth_control_startdate = NULL, birth_control_enddate = NULL, birth_control_usage = NULL, isMessaged = NULL WHERE user_id = '$user_id'";
+		query($query);
+
+		$query2 = "delete from reminder WHERE user_id = '$user_id'";
+		query($query2);
+		
+		$info['success'] = true;
+		$info['message'] = "The old saved method has been deleted successfully";
 	}
 	
 }

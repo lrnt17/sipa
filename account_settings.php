@@ -275,6 +275,15 @@
                     <div class="col d-none md-none d-lg-block"><p class ="text-desc-a">Change your password anytime.</p></div>
                 </div>
 
+                <div onclick="account.show('.js-view-saved-method-modal', '.js-saved-met')" class="js-settings class_15 row" style="cursor:pointer;" >
+                    <div class="col-2 "><i class="fa-solid fa-pills" style="font-size:20px;"></i> </div>
+                    <div class="col d-none md-none d-lg-block"><p class="js-saved-met" style="display:inline">Saved Contraceptive Method</p></div>
+                </div>
+                <div class="row">
+                    <div class="col-2"> </div>
+                    <div class="col d-none md-none d-lg-block"><p class ="text-desc-a">Manage saved contraception or unsubscribe to SMS.</p></div>
+                </div>
+
                 <div onclick="account.show('.js-delete-account-modal', '.js-del-acc')" class="js-settings class_15 row" style="cursor:pointer;" >
                     <div class="col-2 "><i class="fa-solid fa-heart-crack" style="font-size:20px;"></i> </div>
                     <div class="col d-none md-none d-lg-block"><p class="js-del-acc" style="display:inline">Delete your account</p></div>
@@ -283,6 +292,7 @@
                     <div class="col-2"> </div>
                     <div class="col d-none md-none d-lg-block"><p class ="text-desc-a">Deletion of your account.</p></div>
                 </div>
+
 
                 <div class="row" style="align-items: center;">
                     <div class="col-2"><i class="fa-solid fa-arrow-right-from-bracket" onclick="user.logout()" style="font-size:20px; cursor: pointer;"></i></div>
@@ -463,8 +473,71 @@
                     
                 </div>
             </div>
-        </div>
-        <!-- end of delete account modal -->
+             <!-- end of delete account modal -->
+
+
+            <!-- view saved method modal -->
+            <div class="js-view-saved-method-modal hide">
+                <h2 style="color: #2F2F2F; font-weight: 500;">Saved Contraceptive Method</h2>
+                <div class="class_30">
+                    <p class="text-desc">
+                        <!-- pang short desc -->
+                    </p>
+                    <hr>
+
+                    <div class="class_30">
+                        <div class="class_31">
+                            <label>
+                                Method Name
+                            </label>
+                            <div class="class_311">
+                                <input value="<?=$row['birth_control_name']?>" placeholder="No method saved yet!" type="text" name="method-name" disabled class="class_33">
+                            </div>
+                            <?php if (!empty($row['birth_control_startdate']) || !empty($row['birth_control_enddate'])) : ?>
+                                <div class="class_31">
+                                    <?php if (!empty($row['birth_control_startdate'])) : ?>
+                                        <label>
+                                            Start Date
+                                        </label><br>
+                                        <input value="<?=$row['birth_control_startdate']?>" placeholder="No start date saved!" type="text" name="method-startdate" class="class_33">
+                                    <?php endif; ?>
+                                    <?php if (!empty($row['birth_control_enddate'])) : ?>
+                                        <label>
+                                            End Date
+                                        </label><br>
+                                        <input value="<?=$row['birth_control_enddate']?>" placeholder="No end date saved!" type="text" name="method-enddate" class="class_33">
+                                    <?php endif; ?>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+
+                    <?php if (!empty($row['birth_control_name'])) : ?>
+                        <button onclick="account.deletemethod()" class="del-method-btn btn" style="color: #ab0f15; font-weight: bold;">
+                            Delete method
+                        </button>
+                    <?php endif; ?>
+
+                    <button onclick="account.newmethod()" class="new-method-btn btn" style=" color: #74C0FC; font-weight: bold;">
+                        New method
+                    </button>
+
+                    <?php if (!empty($row['birth_control_name'])) : ?>
+                    <div class="class_31">
+                        <button onclick="account.deleteremdates()" class="del-remdates-btn btn" style=" color: #74C0FC; font-weight: bold;">
+                            <u>Click here to unsubscribe from our SMS notifications</u>
+                        </button>
+                    </div>
+                    <?php endif; ?>
+
+                </div>
+            </div>
+            <!-- end of view saved method modal -->
+            </div>
+
+       
+
+        
     <?php else:?>
         <div class="class_16" >
             <i class="bi bi-exclamation-circle-fill class_14">
@@ -486,11 +559,13 @@
             document.querySelector(".js-account-info-modal").classList.add('hide');
             document.querySelector(".js-change-password-modal").classList.add('hide');
             document.querySelector(".js-delete-account-modal").classList.add('hide');
+            document.querySelector(".js-view-saved-method-modal").classList.add('hide');
 
             // Remove bold class from all links
             document.querySelector(".js-acc-info").classList.remove('bold');
             document.querySelector(".js-cha-pass").classList.remove('bold');
             document.querySelector(".js-del-acc").classList.remove('bold');
+            document.querySelector(".js-saved-met").classList.remove('bold');
 
             // Show the specified modal
             document.querySelector(modalClass).classList.remove('hide');
@@ -520,6 +595,70 @@
                         alert(obj.message);
 
                         window.location.href = "home_1_with_user.php";
+                    }else{
+                        alert("Please check your internet connection");
+                    }
+                }
+            });
+
+            ajax.open('post','ajax.php', true);
+            ajax.send(form);
+        },
+
+        deletemethod: function(){
+            if (!confirm("Are you sure you want to delete your saved method?")) {
+                //alert(forum_id);
+                return;
+            }  
+
+            let form = new FormData();
+            form.append('data_type', 'delete_method');
+            
+            var ajax = new XMLHttpRequest();
+
+            ajax.addEventListener('readystatechange',function(){
+
+                if(ajax.readyState == 4)
+                {
+                    if(ajax.status == 200){
+                        let obj = JSON.parse(ajax.responseText);
+                        alert(obj.message);
+
+                        window.location.href = "account_settings.php";
+                    }else{
+                        alert("Please check your internet connection");
+                    }
+                }
+            });
+
+            ajax.open('post','ajax.php', true);
+            ajax.send(form);
+        },
+
+        newmethod: function(){
+            window.location.href = "right_for_me_quiz.php";
+        },
+
+        deleteremdates: function(){
+            if (!confirm("Are you sure you want to stop receiving sms reminders from us about your chosen method? Unsubscribing deletes the saved method and reminder dates from the database.")) {
+                //alert(forum_id);
+                return;
+            }  
+
+            let form = new FormData();
+            form.append('data_type', 'delete_remdates');
+            
+            var ajax = new XMLHttpRequest();
+
+            ajax.addEventListener('readystatechange',function(){
+
+                if(ajax.readyState == 4)
+                {
+                    if(ajax.status == 200){
+                        let obj = JSON.parse(ajax.responseText);
+                        alert(obj.message);
+
+                        window.location.href = "account_settings.php";
                     }else{
                         alert("Please check your internet connection");
                     }
