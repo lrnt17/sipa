@@ -199,11 +199,11 @@
                                 <img src="assets/images/user.jpg" class="js-image class_47" style="width:40px; height:40px; border-radius:50%; border-style: solid;" >
                             
                                 <span style="font-size:14px; color:gray;"> Posted by</span> 
-                                <a href="#" class="js-profile-link class_45 py-2" style="text-decoration:none;">
+                                <!--<a href="#" class="js-profile-link class_45 py-2" style="text-decoration:none;">-->
                                     <h2 class="js-username class_48" style="font-size:14px; display:inline;" >
                                         Jane Name
                                     </h2>
-                                </a>
+                                <!--</a>-->
                             </div>
 
                             <div class="col-3 py-2">
@@ -248,7 +248,7 @@
 </script>
 <script src="like-rating.js?v4"></script>
 <script src="time.js?v1"></script>
-<script src="community-topics.js?v11"></script>
+<script src="community-topics.js?v12"></script>
 
 
 <script>

@@ -68,13 +68,15 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 		$user_id = $_SESSION['USER']['user_id'];
 		
 		if($anonymous == 'true'){
-			$userfname = $_SESSION['USER']['user_fname'];
-			$user_fname = substr($userfname, 0, 1) . str_repeat('*', strlen($userfname) - 2) . substr($userfname, -1);
+			//$userfname = $_SESSION['USER']['user_fname'];
+			//$user_fname = substr($userfname, 0, 1) . str_repeat('*', strlen($userfname) - 2) . substr($userfname, -1);
 			//$userimg = $_SESSION['USER']['user_image'];
-			$user_img = 'assets/images/user.jpg?v1';
+			//$user_img = 'assets/images/user.jpg?v1';
+			$anonimity = 1;
 		}else{
-			$user_fname = $_SESSION['USER']['user_fname'];
-			$user_img = $_SESSION['USER']['user_image'];
+			//$user_fname = $_SESSION['USER']['user_fname'];
+			//$user_img = $_SESSION['USER']['user_image'];
+			$anonimity = 0;
 		}
 
 		$date = date("Y-m-d H:i:s");
@@ -85,20 +87,20 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 			$info['message'] = "Cannot add your post because it contains prohibited words or phrases.";
 		}
 		else {
-			$query = "insert into forum (user_img,user_id,user_fname,forum_timestamp,forum_title,forum_desc) values ('$user_img','$user_id','$user_fname','$date','$post_title','$post')";
-		query($query);
+			$query = "insert into forum (user_id,forum_timestamp,forum_title,forum_desc,forum_anonimity) values ('$user_id','$date','$post_title','$post','$anonimity')";
+			query($query);
 
-		$query = "select * from forum where user_id = '$user_id' order by forum_id desc limit 1";
-		$row = query($query);
-		
-		if($row){
-
-			$row = $row[0];
-			$info['success'] = true;
-			$info['message'] = "Your post was created successfully";
-			$info['row'] = $row;
+			$query = "select * from forum where user_id = '$user_id' order by forum_id desc limit 1";
+			$row = query($query);
 			
-		}
+			if($row){
+
+				$row = $row[0];
+				$info['success'] = true;
+				$info['message'] = "Your post was created successfully";
+				$info['row'] = $row;
+				
+			}
 		}
 		
 
@@ -338,19 +340,32 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 			foreach ($rows as $key => $row) {
 				$rows[$key]['date'] = date('Y-m-d\TH:i:s', strtotime($row['forum_timestamp']));
 				$rows[$key]['forum_desc'] = nl2br(htmlspecialchars($row['forum_desc']));
-				$rows[$key]['user_img'] = get_image($row['user_img']);
+				//$rows[$key]['user_img'] = get_image($row['user_img']);
 	
 				$rows[$key]['user_owns'] = false;
 				if($user_id == $row['user_id'])
 					$rows[$key]['user_owns'] = true;
 	
-				/*$id = $row['user_id'];
+				$id = $row['user_id'];
 				$query = "select * from users where user_id = '$id' limit 1";
 				$user_row = query($query);
 				
 				if($user_row){
-					$rows[$key]['user']['image'] = get_image($user_row[0]['user_image']);
-				}*/
+
+					if ($row['forum_anonimity'] == 1) {
+						$rows[$key]['user'] = $user_row[0];
+						$rows[$key]['user']['image'] = "assets/images/user.jpg?v1";
+						// Anonymize the user's name
+						$fname = substr($user_row[0]['user_fname'], 0, 1) . str_repeat("*", strlen($user_row[0]['user_fname']) - 2) . substr($user_row[0]['user_fname'], -1);
+						$lname = substr($user_row[0]['user_lname'], 0, 1) . ".";
+						$rows[$key]['user']['name'] = "$fname $lname";
+					} else {
+						$rows[$key]['user'] = $user_row[0];
+						$rows[$key]['user']['image'] = get_image($user_row[0]['user_image']);
+						// Display the full name
+						$rows[$key]['user']['name'] = $user_row[0]['user_fname'] . " " . $user_row[0]['user_lname'];
+					}
+				}
 	
 				$forum_id = $row['forum_id'];
 				$query = "select count(*) from rating_info where post_id = $forum_id AND rating_action = 'like' limit 1";
@@ -414,6 +429,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 				//nl2br - pwede kang mag new line sa textarea tas ganun din output
 				//htmlspecialchars - lahat ng characters sa keyboard ginagawang string 
 				$rows[$key]['forum_desc'] = nl2br(htmlspecialchars($row['forum_desc']));
+				$rows[$key]['user_img'] = get_image($row['user_img']);
 
 				$rows[$key]['user_owns'] = false;
 				if($user_id == $row['user_id'])
@@ -460,12 +476,33 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 			foreach ($rows as $key => $row) {
 				$rows[$key]['date'] = date('Y-m-d\TH:i:s', strtotime($row['forum_timestamp']));
 				$rows[$key]['forum_desc'] = nl2br(htmlspecialchars($row['forum_desc']));
-				$rows[$key]['user_img'] = get_image($row['user_img']);
+				//$rows[$key]['user_img'] = get_image($row['user_img']);
 	
 				$rows[$key]['user_owns'] = false;
 				if($user_id == $row['user_id'])
 					$rows[$key]['user_owns'] = true;
 	
+				$id = $row['user_id'];
+				$query = "select * from users where user_id = '$id' limit 1";
+				$user_row = query($query);
+				
+				if($user_row){
+
+					if ($row['forum_anonimity'] == 1) {
+						$rows[$key]['user'] = $user_row[0];
+						$rows[$key]['user']['image'] = "assets/images/user.jpg?v1";
+						// Anonymize the user's name
+						$fname = substr($user_row[0]['user_fname'], 0, 1) . str_repeat("*", strlen($user_row[0]['user_fname']) - 2) . substr($user_row[0]['user_fname'], -1);
+						$lname = substr($user_row[0]['user_lname'], 0, 1) . ".";
+						$rows[$key]['user']['name'] = "$fname $lname";
+					} else {
+						$rows[$key]['user'] = $user_row[0];
+						$rows[$key]['user']['image'] = get_image($user_row[0]['user_image']);
+						// Display the full name
+						$rows[$key]['user']['name'] = $user_row[0]['user_fname'] . " " . $user_row[0]['user_lname'];
+					}
+				}
+
 				$forum_id = $row['forum_id'];
 				$query = "select count(*) from rating_info where post_id = $forum_id AND rating_action = 'like' limit 1";
 				$rating_row = query($query);
@@ -852,6 +889,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 			foreach ($rows as $key => $row) {
 				$rows[$key]['date'] = date('Y-m-d\TH:i:s', strtotime($row['forum_timestamp']));
 				$rows[$key]['forum_desc'] = nl2br(htmlspecialchars($row['forum_desc']));
+				//$rows[$key]['user_img'] = get_image($row['user_img']);
 	
 				$rows[$key]['user_owns'] = false;
 				if($user_id == $row['user_id'])
@@ -862,7 +900,20 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 				$user_row = query($query);
 				
 				if($user_row){
-					$rows[$key]['user']['image'] = get_image($user_row[0]['user_image']);
+
+					if ($row['forum_anonimity'] == 1) {
+						$rows[$key]['user'] = $user_row[0];
+						$rows[$key]['user']['image'] = "assets/images/user.jpg?v1";
+						// Anonymize the user's name
+						$fname = substr($user_row[0]['user_fname'], 0, 1) . str_repeat("*", strlen($user_row[0]['user_fname']) - 2) . substr($user_row[0]['user_fname'], -1);
+						$lname = substr($user_row[0]['user_lname'], 0, 1) . ".";
+						$rows[$key]['user']['name'] = "$fname $lname";
+					} else {
+						$rows[$key]['user'] = $user_row[0];
+						$rows[$key]['user']['image'] = get_image($user_row[0]['user_image']);
+						// Display the full name
+						$rows[$key]['user']['name'] = $user_row[0]['user_fname'] . " " . $user_row[0]['user_lname'];
+					}
 				}
 	
 				$forum_id = $row['forum_id'];
@@ -968,7 +1019,20 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 				$user_row = query($query);
 				
 				if($user_row){
-					$rows[$key]['user']['image'] = get_image($user_row[0]['user_image']);
+
+					if ($row['forum_anonimity'] == 1) {
+						$rows[$key]['user'] = $user_row[0];
+						$rows[$key]['user']['image'] = "assets/images/user.jpg?v1";
+						// Anonymize the user's name
+						$fname = substr($user_row[0]['user_fname'], 0, 1) . str_repeat("*", strlen($user_row[0]['user_fname']) - 2) . substr($user_row[0]['user_fname'], -1);
+						$lname = substr($user_row[0]['user_lname'], 0, 1) . ".";
+						$rows[$key]['user']['name'] = "$fname $lname";
+					} else {
+						$rows[$key]['user'] = $user_row[0];
+						$rows[$key]['user']['image'] = get_image($user_row[0]['user_image']);
+						// Display the full name
+						$rows[$key]['user']['name'] = $user_row[0]['user_fname'] . " " . $user_row[0]['user_lname'];
+					}
 				}
 	
 				$forum_id = $row['forum_id'];
@@ -1397,6 +1461,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 			foreach ($rows as $key => $row) {
 				$rows[$key]['date'] = date('Y-m-d\TH:i:s',strtotime($row['video_timestamp']));
 				$rows[$key]['video_desc'] = nl2br(htmlspecialchars($row['video_desc']));
+				$rows[$key]['user_img'] = get_image($row['user_img']);
 
 				$rows[$key]['user_owns'] = false;
 				if($user_id == $row['user_id'])
@@ -1539,6 +1604,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 			foreach ($rows as $key => $row) {
 				$rows[$key]['date'] = date('Y-m-d\TH:i:s', strtotime($row['video_timestamp']));
 				$rows[$key]['video_desc'] = nl2br(htmlspecialchars($row['video_desc']));
+				$rows[$key]['user_img'] = get_image($row['user_img']);
 				
 				$rows[$key]['user_owns'] = false;
 				if ($user_id == $row['user_id']) {

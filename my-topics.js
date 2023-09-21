@@ -221,8 +221,13 @@ var myposts = {
             /*if(typeof posts[i].user == 'object'){
                 postCard.querySelector(".js-image").src = posts[i].user.image;
             }*/
-            postCard.querySelector(".js-image").src = posts[i].user_img;
-            postCard.querySelector(".js-username").textContent = posts[i].user_fname;
+            //postCard.querySelector(".js-image").src = posts[i].user_img;
+            if(typeof posts[i].user == 'object'){
+                postCard.querySelector(".js-image").src = posts[i].user.image;
+            }
+
+            //postCard.querySelector(".js-username").textContent = posts[i].user_fname;
+            postCard.querySelector(".js-username").textContent = (typeof posts[i].user == 'object') ? posts[i].user.name : 'User';
             //postCard.querySelector(".js-date").textContent = posts[i].date;
             //postCard.querySelector(".js-title").textContent = posts[i].forum_title;
             // Highlight matching words in the post title
