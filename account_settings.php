@@ -205,7 +205,7 @@
 		}
 
         .bold{
-            font-weight: 900;
+            font-weight: 700;
         }
 
         *{
@@ -252,58 +252,65 @@
 
         <!-- your account -->
         <div class="parent text-left py-4 col-lg-10 col-md-15">
-        <div class="container d-lg-flex flex-row d-md-block" style="height: 550px;">
+        <div class="container d-lg-flex flex-row d-md-block" style="min-height: 550px;">
         <div class="rounded-start-5 p-5 shadow-sm rounded col-xxl-4 col-xl-5 col-lg-6 col-sm-fluid" style="background: #D2E0F8;">
             <h2 style="color: #2F2F2F;
             font-weight: 500;">Your Account</h2>
             <p class ="text-desc d-none md-none d-lg-block" style="font-size: 14px; color: #575757; width:100%;
             word-wrap: break-word; white-space: normal; position: relative; top: -5px;">See information about your account, password, or about your account deletion.</p>
-            <br>
+
         
             <div class="row row-cols-6 gx-10 row-cols-lg-1 d-m-fluid" style="justify-content: space-between;">
-                <div onclick="account.show('.js-account-info-modal', '.js-acc-info')" class="js-settings class_15 row" style="cursor:pointer;" >
-                    <div class="col-2"><i class="fa-solid fa-user" style="font-size:20px;"></i> </div>
-                    <div class="col d-none md-none d-lg-block"> <p class="js-acc-info bold" style="display: inline;">Account information</p></div>
+            
+                <div class="col-lg-12">
+                    <div onclick="account.show('.js-account-info-modal', '.js-acc-info')" class="js-settings class_15 row" style="cursor:pointer;" >
+                        <div class="col-2"><i class="fa-solid fa-user" style="font-size:20px;"></i> </div>
+                        <div class="col d-none md-none d-lg-block"> <p class="js-acc-info bold" style="display: inline;">Account information</p></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2"> </div>
+                        <div class="col d-none md-none d-lg-block"><p class ="text-desc-a">See your account information like your name and email address.</p></div>
+                    </div>
                 </div>
-                <div class="row">
-                    <div class="col-2"> </div>
-                    <div class="col d-none md-none d-lg-block"><p class ="text-desc-a">See your account information like your name and email address.</p></div>
+                <div class="col-lg-12">
+                    <div onclick="account.show('.js-change-password-modal', '.js-cha-pass')" class="js-settings class_15 row" style="cursor:pointer;" >
+                        <div class="col-2 "><i class="fa-solid fa-lock" style="font-size:20px;"></i></div>
+                        <div class="col d-none md-none d-lg-block"><p class="js-cha-pass" style="display:inline">Change your password</p></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2"> </div>
+                        <div class="col d-none md-none d-lg-block"><p class ="text-desc-a">Change your password anytime.</p></div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div onclick="account.show('.js-view-saved-method-modal', '.js-saved-met')" class="js-settings class_15 row" style="cursor:pointer;" >
+                        <div class="col-2 "><i class="fa-solid fa-pills" style="font-size:20px;"></i> </div>
+                        <div class="col d-none md-none d-lg-block"><p class="js-saved-met" style="display:inline">Saved Contraceptive Method</p></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2"> </div>
+                        <div class="col d-none md-none d-lg-block"><p class ="text-desc-a">Manage saved contraception or unsubscribe to SMS.</p></div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div onclick="account.show('.js-delete-account-modal', '.js-del-acc')" class="js-settings class_15 row" style="cursor:pointer;" >
+                        <div class="col-2 "><i class="fa-solid fa-heart-crack" style="font-size:20px;"></i> </div>
+                        <div class="col d-none md-none d-lg-block"><p class="js-del-acc" style="display:inline">Delete your account</p></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2"> </div>
+                        <div class="col d-none md-none d-lg-block"><p class ="text-desc-a">Deletion of your account.</p></div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="row" style="align-items: center;">
+                        <div class="col-2"><i class="fa-solid fa-arrow-right-from-bracket" onclick="user.logout()" style="font-size:20px; cursor: pointer;"></i></div>
+                        <div class="col d-none md-none d-lg-block"><button onclick="user.logout()" class="class_39 btn btn-link" style="text-decoration: none; color:black;"  >
+                            Logout
+                        </button></div>
+                    </div>
                 </div>
 
-                <div onclick="account.show('.js-change-password-modal', '.js-cha-pass')" class="js-settings class_15 row" style="cursor:pointer;" >
-                    <div class="col-2 "><i class="fa-solid fa-lock" style="font-size:20px;"></i></div>
-                    <div class="col d-none md-none d-lg-block"><p class="js-cha-pass" style="display:inline">Change your password</p></div>
-                </div>
-                <div class="row">
-                    <div class="col-2"> </div>
-                    <div class="col d-none md-none d-lg-block"><p class ="text-desc-a">Change your password anytime.</p></div>
-                </div>
-
-                <div onclick="account.show('.js-view-saved-method-modal', '.js-saved-met')" class="js-settings class_15 row" style="cursor:pointer;" >
-                    <div class="col-2 "><i class="fa-solid fa-pills" style="font-size:20px;"></i> </div>
-                    <div class="col d-none md-none d-lg-block"><p class="js-saved-met" style="display:inline">Saved Contraceptive Method</p></div>
-                </div>
-                <div class="row">
-                    <div class="col-2"> </div>
-                    <div class="col d-none md-none d-lg-block"><p class ="text-desc-a">Manage saved contraception or unsubscribe to SMS.</p></div>
-                </div>
-
-                <div onclick="account.show('.js-delete-account-modal', '.js-del-acc')" class="js-settings class_15 row" style="cursor:pointer;" >
-                    <div class="col-2 "><i class="fa-solid fa-heart-crack" style="font-size:20px;"></i> </div>
-                    <div class="col d-none md-none d-lg-block"><p class="js-del-acc" style="display:inline">Delete your account</p></div>
-                </div>
-                <div class="row">
-                    <div class="col-2"> </div>
-                    <div class="col d-none md-none d-lg-block"><p class ="text-desc-a">Deletion of your account.</p></div>
-                </div>
-
-
-                <div class="row" style="align-items: center;">
-                    <div class="col-2"><i class="fa-solid fa-arrow-right-from-bracket" onclick="user.logout()" style="font-size:20px; cursor: pointer;"></i></div>
-                    <div class="col d-none md-none d-lg-block"><button onclick="user.logout()" class="class_39 btn btn-link" style="text-decoration: none; color:black;"  >
-                        Logout
-                    </button></div>
-                </div>
                
             </div>
 
@@ -330,14 +337,16 @@
     
     <?php if(!empty($row)):?>
         <div class="conclass_26  p-5 rounded-end-5 shadow-sm rounded 
-        col-xxl-8 col-xl-9 col-lg-9 col-sm-fluid" style="height: 550px; background-color: #ffff;">
+        col-xxl-8 col-xl-9 col-lg-9 col-sm-fluid" style="min-height: 550px; background-color: #ffff;">
             <form method="post" enctype="multipart/form-data" >
                 <!-- account information modal -->
                     <div class="js-account-info-modal">
                         <h2 style="color: #2F2F2F;
                         font-weight: 500;">Account information</h2>
                         <label>
-                            <img src="<?=get_image($row['user_image'])?>" class="js-image rounded-circle class_28" style="cursor: pointer; height:50px; border-style: solid;" >
+                            <div class="img-con" style="width:50px; height:50px; border-radius:50%; border-style: solid; position: relative; overflow: hidden; padding: 0;"> 
+                                <img src="<?=get_image($row['user_image'])?>" class="js-image rounded-circle class_28"  style=" width: 100%; height: auto; object-fit: cover; cursor: pointer;" >
+                            </div>
                             <input onchange="display_image(this.files[0])" type="file" name="image" class="class_29" style="display:none;">
 
                             <script>
@@ -495,44 +504,51 @@
                                 Method Name
                             </label>
                             <div class="class_311">
-                                <input value="<?=$row['birth_control_name']?>" placeholder="No method saved yet!" type="text" name="method-name" disabled class="class_33">
+                                <input value="<?=$row['birth_control_name']?>" placeholder="No method saved yet!" type="text" name="method-name" disabled class="class_33" style="margin-right: 0px;">
                             </div>
                             <?php if (!empty($row['birth_control_startdate']) || !empty($row['birth_control_enddate'])) : ?>
-                                <div class="class_31">
+                                <div class="row">
                                     <?php if (!empty($row['birth_control_startdate'])) : ?>
-                                        <label>
-                                            Start Date
-                                        </label><br>
-                                        <input value="<?=$row['birth_control_startdate']?>" placeholder="No start date saved!" type="text" name="method-startdate" class="class_33">
+                                        <div class="col">
+                                            <label>
+                                                Start Date
+                                            </label><br>
+                                            <input value="<?=$row['birth_control_startdate']?>" placeholder="No start date saved!" type="text" name="method-startdate" disabled class="class_33">
+                                        </div>
                                     <?php endif; ?>
                                     <?php if (!empty($row['birth_control_enddate'])) : ?>
-                                        <label>
-                                            End Date
-                                        </label><br>
-                                        <input value="<?=$row['birth_control_enddate']?>" placeholder="No end date saved!" type="text" name="method-enddate" class="class_33">
+                                        <div class="col">
+                                            <label>
+                                                End Date
+                                            </label><br>
+                                            <input value="<?=$row['birth_control_enddate']?>" placeholder="No end date saved!" type="text" name="method-enddate" disabled class="class_33">
+                                        </div>
                                     <?php endif; ?>
                                 </div>
                             <?php endif; ?>
                         </div>
                     </div>
 
-                    <?php if (!empty($row['birth_control_name'])) : ?>
-                        <button onclick="account.deletemethod()" class="del-method-btn btn" style="color: #ab0f15; font-weight: bold;">
-                            Delete method
-                        </button>
-                    <?php endif; ?>
-
-                    <button onclick="account.newmethod()" class="new-method-btn btn" style=" color: #74C0FC; font-weight: bold;">
-                        New method
-                    </button>
-
                     <?php if (!empty($row['birth_control_startdate'])) : ?>
                     <div class="class_31">
-                        <button onclick="account.deleteremdates()" class="del-remdates-btn btn" style=" color: #74C0FC; font-weight: bold;">
-                            <u>Click here to unsubscribe from our SMS notifications</u>
+                        <button onclick="account.deleteremdates()" class="del-remdates-btn btn" style=" color: #1b4ca1; font-weight: 300; padding-left:0px;">
+                            Click here to unsubscribe from our SMS notifications
                         </button>
+                        <hr>
                     </div>
                     <?php endif; ?>
+                    
+                    <div class="mt-3" style="display: flex; justify-content: flex-end;">
+                        <?php if (!empty($row['birth_control_name'])) : ?>
+                            <button onclick="account.deletemethod()" class="del-method-btn btn" style="color: #ab0f15; font-weight: 500;">
+                                Delete method
+                            </button>
+                        <?php endif; ?>
+
+                        <button onclick="account.newmethod()" class="new-method-btn btn" style=" color: #4087bf; font-weight: 500; padding-right:0px;">
+                            New method
+                        </button>
+                    </div>
 
                 </div>
             </div>
