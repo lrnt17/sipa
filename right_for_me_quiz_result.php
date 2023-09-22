@@ -247,6 +247,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <i class="fa-solid fa-prescription mb-4" style="font-size:30px;"></i>
     </div>Your selected method does not need SMS reminder as it is used every time you need it. Make sure to follow the directions on how to use it to ensure its effectiveness!</p>
   </div>
+        <div class="col mt-3 d-flex justify-content-center">
+            <a class="js-link" href="right_for_me_1.php" style=" text-decoration: none; color:black;">
+                <button class="btn my-3 px-4 py-2 rounded-3 shadow-sm rounded" style="background: #ffff;">Continue</button>
+            </a>
+        </div>
 </div>
 
 <div id="sms_reminder_btn" style="display: none;">
