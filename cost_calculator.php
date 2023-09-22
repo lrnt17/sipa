@@ -169,7 +169,7 @@
                 while ($row = mysqli_fetch_assoc($result)) {
                     $method_name = $row['birth_control_name'];
                     $method_img = $row['birth_control_img'];
-                    echo '<button class="contraceptive-button btn mx-3 my-3 btn-light shadow-sm hover" style="width: 110px;height: 120px;" data-method="' . $method_name . '">';
+                    echo '<button class="contraceptive-button btn mx-3 my-3 btn-light shadow-sm hover" style="width: 110px; height: auto;" data-method="' . $method_name . '">';
                     echo '<div class="mb-1" style="min-height: 36px;
                     display: flex;
                     justify-content: center;
