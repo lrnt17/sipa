@@ -319,7 +319,7 @@
                             for (var i = 0; i < obj.rows.length; i++) {
                                 let forumCard = carouselCardTemplate.content.cloneNode(true);
                                 forumCard.querySelector(".js-method-name").innerHTML = obj.rows[i].birth_control_name;
-                                forumCard.querySelector(".js-method-desc").innerHTML = `${obj.rows[i].birth_control_desc}`;
+                                forumCard.querySelector(".js-method-desc").innerHTML = `${obj.rows[i].birth_control_short_desc}`;
                                 forumCard.querySelector(".js-method-link").href = 'about-contraceptive.php?id=' + obj.rows[i].birth_control_id;
                                 
                                 carouselContainer.appendChild(forumCard);

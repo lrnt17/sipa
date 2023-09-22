@@ -463,24 +463,23 @@ function admin_get_image($path)
 function containsProhibitedWord($content) {
     // List of prohibited words or phrases with variations
     $prohibitedWords = array(
-        "~\bb.*o.*b.*o\b~i",         // Matches variations of "bobo"
-        "~\bt.*a.*n.*g.*a\b~i",     // Matches variations of "tanga"
-        "~\bt.*a.*n.*g.*i.*n.*a\b~i", // Matches variations of "tangina"
-        "~\bt.*a.*n.*g.*i.*n.*a.*m.*o\b~i", // Matches variations of "tanginamo"
-        "~\bi.*n.*a.*m.*o\b~i",     // Matches variations of "inamo"
-        "~\bp.*u.*t.*a.*n.*g.*i.*n.*a\b~i", // Matches variations of "putangina"
-        "~\bp.*u.*t.*a.*n.*g.*i.*n.*a.*m.*o\b~i", // Matches variations of "putanginamo"
-        "~\bk.*i.*n.*g.*i.*n.*a\b~i", // Matches variations of "kingina"
-        "~\bp.*o.*t.*a\b~i",         // Matches variations of "pota"
-        "~\bputa\b~i",              // Matches "puta"
-        "~\bg.*a.*g.*o\b~i",         // Matches variations of "gago"
-        "~\bo.*g.*a.*g\b~i",         // Matches variations of "ogag"
-        "~\bu.*l.*o.*l\b~i",         // Matches variations of "ulol"
-        "~\ba.*d.*i.*k\b~i",         // Matches variations of "adik"
-        "~\bk.*u.*p.*a.*l\b~i",      // Matches variations of "kupal"
-        "~\bi.*n.*u.*t.*i.*l\b~i",   // Matches variations of "inutil"
-        "~\bb.*a.*l.*i.*w\b~i",      // Matches variations of "baliw"
-        "~\be.*n.*g.*o.*t\b~i"       // Matches variations of "engot"
+        " /\bbobo\b/i",         // Matches variations of "bobo"
+        " /\btangina\b/i",         // Matches variations of "bobo"
+        " /\btanga\b/i",         // Matches variations of "bobo"
+        " /\btanginamo\b/i",         // Matches variations of "bobo"
+        " /\binamo\b/i",         // Matches variations of "bobo"
+        " /\bputangina\b/i",         // Matches variations of "bobo"
+        " /\bputanginamo\b/i",         // Matches variations of "bobo"
+        " /\bkingina\b/i",         // Matches variations of "bobo"
+        " /\bpota\b/i",         // Matches variations of "bobo"
+        " /\bputa\b/i",         // Matches variations of "bobo"
+        " /\bgago\b/i",         // Matches variations of "bobo"
+        " /\bogag\b/i",         // Matches variations of "bobo"
+        " /\bulol\b/i",         // Matches variations of "bobo"
+        " /\badik\b/i",         // Matches variations of "bobo"
+        " /\bkupal\b/i",         // Matches variations of "bobo"
+        " /\binutil\b/i",         // Matches variations of "bobo"
+
     );
     
     // Convert content and prohibited words to lowercase for case-insensitive comparison

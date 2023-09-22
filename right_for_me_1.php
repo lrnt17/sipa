@@ -355,7 +355,7 @@
                                     let clone_template = document.querySelector(".js-method-template").content.cloneNode(true);
 
                                     clone_template.querySelector(".js-method-name").innerHTML = obj.rows[i].birth_control_name;
-                                    clone_template.querySelector(".js-method-desc").innerHTML = obj.rows[i].birth_control_desc;
+                                    clone_template.querySelector(".js-method-desc").innerHTML = obj.rows[i].birth_control_short_desc;
                                     clone_template.querySelector(".js-method-link").href = 'about-contraceptive.php?id=' + obj.rows[i].birth_control_id;
 
                                     colDiv.appendChild(clone_template); // Append cloned template to the column
