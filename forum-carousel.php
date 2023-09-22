@@ -204,7 +204,15 @@
                                 //forumCard.querySelector(".js-username").textContent = obj.rows[i].user_fname;
                                 forumCard.querySelector(".js-username").textContent = (typeof obj.rows[i].user == 'object') ? obj.rows[i].user.name : 'User';
                                 forumCard.querySelector(".js-title").innerHTML = obj.rows[i].forum_title;
-                                forumCard.querySelector(".js-post").innerHTML = `${obj.rows[i].forum_desc}`;
+                                //forumCard.querySelector(".js-post").innerHTML = `${obj.rows[i].forum_desc}`;
+                                // Truncate the post text
+                                let postText = obj.rows[i].forum_desc;
+                                let maxLength = 5; // Maximum number of characters to display
+                                if (postText.length > maxLength) {
+                                    postText = postText.substring(0, maxLength) + '... <p>see more</p>';
+                                }
+                                
+                                forumCard.querySelector(".js-post").innerHTML = postText;
 
                                 //counting the number of comments
                                 if(obj.rows[i].comment_count > 0){

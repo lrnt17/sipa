@@ -1272,16 +1272,16 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 		$video_desc = addslashes($_POST['video_desc_input']);
 		$birth_control_id = (int)$_POST['selected_method'];
 		$user_id = $_SESSION['USER']['user_id'];
-		$anonymous = $_POST['anonymous'];
+		//$anonymous = $_POST['anonymous'];
 		
-		if($anonymous == 'true'){
+		/*if($anonymous == 'true'){
 			$userfname = $_SESSION['USER']['user_fname'];
 			$user_fname = substr($userfname, 0, 1) . str_repeat('*', strlen($userfname) - 2) . substr($userfname, -1);
 			$user_img = 'assets/images/user.jpg?v1';
 		}else{
 			$user_fname = $_SESSION['USER']['user_fname'];
 			$user_img = $_SESSION['USER']['user_image'];
-		}
+		}*/
 
 		$date = date("Y-m-d H:i:s");
 
@@ -1304,8 +1304,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 				
 				$vdeoFilename = $video_upload_path;
 
-				$query = "insert into videos (birth_control_id,user_id,user_img,user_fname,video_timestamp,video,video_title,video_desc) 
-				values ('$birth_control_id','$user_id','$user_img','$user_fname','$date','$vdeoFilename','$video_title','$video_desc')";
+				$query = "insert into videos (birth_control_id,user_id,video_timestamp,video,video_title,video_desc) 
+				values ('$birth_control_id','$user_id','$date','$vdeoFilename','$video_title','$video_desc')";
 				query($query);
 
 				/*$query = "select * from forum where user_id = '$user_id' order by forum_id desc limit 1";
@@ -1317,7 +1317,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 					$info['success'] = true;
 					$info['message'] = "Your post was created successfully";
 					$info['row'] = $row;
-				}*/
+				}*///naka comment to
 
 				$info['success'] = true;
 				$info['message'] = "Your video was uploaded successfully";
@@ -1686,29 +1686,29 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 		}
 		else{
 
-		// Insert new row into forum table with comment_parent_id set to video_id
-		$query = "INSERT INTO videos (user_img, user_id, user_fname, video_timestamp, video_desc, reply_parent_id) VALUES ('$user_img', '$user_id', '$user_fname', '$date', '$reply_text', '$video_id')";
-		query($query);
-		
-		// Return success message and data for new reply
-		$query = "SELECT * FROM videos WHERE user_id = '$user_id' AND reply_parent_id = '$video_id' ORDER BY video_id DESC LIMIT 1";
-		$row = query($query);
-		if ($row) {
-			$row = $row[0];
-			$info['success'] = true;
-			$info['message'] = "Your reply was added successfully";
-			$info['row'] = $row;
-		}
-
-		//count how many reply on this post
-		$query = "select count(*) as num from videos where reply_parent_id = '$video_id'";
-		$res = query($query);
-		if($res){
-			$num = $res[0]['num'];
-			$query = "update videos set reply_count = '$num' where video_id = '$video_id' limit 1";
+			// Insert new row into forum table with comment_parent_id set to video_id
+			$query = "INSERT INTO videos (user_img, user_id, user_fname, video_timestamp, video_desc, reply_parent_id) VALUES ('$user_img', '$user_id', '$user_fname', '$date', '$reply_text', '$video_id')";
 			query($query);
+			
+			// Return success message and data for new reply
+			$query = "SELECT * FROM videos WHERE user_id = '$user_id' AND reply_parent_id = '$video_id' ORDER BY video_id DESC LIMIT 1";
+			$row = query($query);
+			if ($row) {
+				$row = $row[0];
+				$info['success'] = true;
+				$info['message'] = "Your reply was added successfully";
+				$info['row'] = $row;
+			}
+
+			//count how many reply on this post
+			$query = "select count(*) as num from videos where reply_parent_id = '$video_id'";
+			$res = query($query);
+			if($res){
+				$num = $res[0]['num'];
+				$query = "update videos set reply_count = '$num' where video_id = '$video_id' limit 1";
+				query($query);
+			}
 		}
-	}
 	}else
 	if($_POST['data_type'] == 'my_edit_reply_video') 
 	{
@@ -1766,6 +1766,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 		if($rows){
 			foreach ($rows as $key => $row) {
 
+				$rows[$key]['video'] = "../" . $row['video'];
 				$datetime = new DateTime($row['video_timestamp']);
 				$date = $datetime->format('m-d-Y');
 				$rows[$key]['date'] = $date;

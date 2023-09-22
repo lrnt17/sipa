@@ -66,13 +66,13 @@
             <div class="col-auto p-1" style="width: fit-content;">
                 <a href="community-videos.php" class="js-link nav-link links active">
                     <i class="fa-regular fa-comments" style="display:inline;"></i>&nbsp;
-                    <span class="clickable-text">Community Videos</span>
+                    <!--<span class="clickable-text">Community Videos</span>-->
                 </a>
             </div>
             <div class="col p-1 mb-4" style="width: fit-content;">
                 <a href="my-videos.php" class="js-link nav-link links">
                     <i class="fa-solid fa-question" style="display:inline;"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <span class="clickable-text">My Videos</span>
+                    <!--<span class="clickable-text">My Videos</span>-->
                 </a>
             </div>
         </div>

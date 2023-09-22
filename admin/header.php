@@ -14,6 +14,7 @@
     <div class="sidenav">
         <h1 style="color:white;">SiPa</h1>
         <a href="index.php">Dashboard</a>
+        <a href="my-videos.php">Videos</a>
         <?php if(check_admin($user_role)):?>
             <a href="appointment-list.php">Appointment List</a>
             <a href="schedule-settings.php">Schedule Settings</a>
