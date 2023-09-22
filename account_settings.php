@@ -526,7 +526,7 @@
                         New method
                     </button>
 
-                    <?php if (!empty($row['birth_control_name'])) : ?>
+                    <?php if (!empty($row['birth_control_startdate'])) : ?>
                     <div class="class_31">
                         <button onclick="account.deleteremdates()" class="del-remdates-btn btn" style=" color: #74C0FC; font-weight: bold;">
                             <u>Click here to unsubscribe from our SMS notifications</u>
