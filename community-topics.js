@@ -446,6 +446,7 @@ var allposts = {
         editTitleInput.classList.add('form-control', 'fs-3'); // Add Bootstrap class 'form-control' for styling
         editTitleInput.classList.add('js-title');
         editTitleInput.value = replyTitleText;
+        editTitleInput.setAttribute('maxlength', '30');
         
         // Custom style
         editTitleInput.style.borderBottom = '1px light gray'; 
@@ -463,6 +464,7 @@ var allposts = {
         editInput.value = replyText;
         editInput.style.resize = 'none';
         editInput.rows = 5; // Set the number of rows to 5
+        editInput.setAttribute('maxlength', '500');
 
         // Custom style
         editInput.style.border = 'none';

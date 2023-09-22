@@ -207,9 +207,9 @@
                                 //forumCard.querySelector(".js-post").innerHTML = `${obj.rows[i].forum_desc}`;
                                 // Truncate the post text
                                 let postText = obj.rows[i].forum_desc;
-                                let maxLength = 5; // Maximum number of characters to display
+                                let maxLength = 100; // Maximum number of characters to display
                                 if (postText.length > maxLength) {
-                                    postText = postText.substring(0, maxLength) + '... <p>see more</p>';
+                                    postText = postText.substring(0, maxLength) + '...see more';
                                 }
                                 
                                 forumCard.querySelector(".js-post").innerHTML = postText;

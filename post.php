@@ -198,11 +198,11 @@
                                         </div>
                                         <div class="col py-2">
                                             <span style="font-size:14px; color:gray;"> Posted by </span> 
-                                            <a href="#" class="js-profile-link class_45 py-2" style="text-decoration:none;">
-                                                <h2 class="js-username class_48" style="font-size:14px; display:inline; color:blue;" >
+                                            <!--<a href="#" class="js-profile-link class_45 py-2" style="text-decoration:none;">-->
+                                                <h2 class="js-username class_48" style="font-size:14px; display:inline;" >
                                                     <?=$row['user']['name']?>
                                                 </h2>
-                                            </a>
+                                            <!--</a>-->
                                         </div>
                                     </div>
                                 </div>
@@ -275,7 +275,7 @@
                         <?php if(logged_in()):?>
                             <form onsubmit="mycomment.submit(event)" method="post" class="class_42 p-2 rounded-4" style="background-color:#ebebeb;" >
                                 <div class="d-grid" >
-                                    <textarea placeholder="Write a comment" rows="2" name="post" class="js-comment-input class_44 p-3" style="background-color: transparent; border:none; resize: none;" ></textarea>
+                                    <textarea placeholder="Write a comment" rows="2" name="post" class="js-comment-input class_44 p-3" style="background-color: transparent; border:none; resize: none;" maxlength="500"></textarea>
                                 </div>
                                 <hr>
                                 <div class="row mx-1 my-2">
@@ -437,8 +437,8 @@
 <!--<script src="mypost.js?v11"></script>-->
 <script src="time.js?v1"></script>
 <script src="like-rating.js?v3"></script>
-<script src="community-topics.js?v7"></script>
-<script src="mycomment.js?v50"></script>
+<script src="community-topics.js?v8"></script>
+<script src="mycomment.js?v51"></script>
 
 <script>
     // Call the updateTimestamps function initially when the page loads

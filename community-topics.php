@@ -111,10 +111,10 @@
 
                             <form onsubmit="allposts.submit(event)" method="post" class="js-start-topic class_42 hide p-4 rounded-5 shadow-sm" style="background: #fff;" >
                                 <div class="d-grid">
-                                    <input type="text" placeholder="Title" name="post_title" id="post_title" class="js-post-title fs-5 m-2" style="border: none; border-bottom: 1px solid gray;">
+                                    <input type="text" placeholder="Title" name="post_title" id="post_title" class="js-post-title fs-5 m-2" style="border: none; border-bottom: 1px solid gray;" maxlength="30">
                                 </div>
                                 <div class="class_43 d-grid" >
-                                    <textarea placeholder="Whats on your mind?" rows="5" name="post" class="js-post-input class_44 mx-2" style="border: none; border-bottom: 1px solid gray;resize: none;"></textarea>
+                                    <textarea placeholder="Whats on your mind?" rows="5" name="post" class="js-post-input class_44 mx-2" style="border: none; border-bottom: 1px solid gray;resize: none;" maxlength="500"></textarea>
                                 </div>
                             
                             <div class="row mx-1 my-2">
@@ -255,7 +255,7 @@
 </script>
 <script src="like-rating.js?v4"></script>
 <script src="time.js?v1"></script>
-<script src="community-topics.js?v12"></script>
+<script src="community-topics.js?v13"></script>
 
 
 <script>

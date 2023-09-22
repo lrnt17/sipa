@@ -188,6 +188,7 @@ var mycomment = {
         editTextarea.classList.add('form-control');
         editTextarea.style.resize = 'none';
         editTextarea.rows = 2; // Set the number of rows to 5
+        editTextarea.setAttribute('maxlength', '500');
 
 
         // Replace the reply content with the input field
@@ -633,6 +634,7 @@ var mycomment = {
                         replyInput.rows = 2; 
                         replyInput.style.background ='transparent';
                         replyInput.style.border ='none';
+                        replyInput.setAttribute('maxlength', '500');
 
                         textArea.appendChild(replyInput);
                         replyForm.appendChild(textArea);
@@ -841,12 +843,13 @@ var mycomment = {
         let replyText = replyElement.innerHTML;
         //console.log(replyText);
         // Create an input field for editing the reply
-        let editInput = document.createElement('input');
-        editInput.type = 'text';
+        let editInput = document.createElement('textarea');
+        //editInput.type = 'text';
         editInput.value = replyText;
         editInput.classList.add('form-control');
         editInput.style.resize = 'none';
         editInput.rows = 2; // Set the number of rows to 5
+        editInput.setAttribute('maxlength', '500');
 
         // Replace the reply content with the input field
         divname_com.replaceChild(editInput, replyElement);
