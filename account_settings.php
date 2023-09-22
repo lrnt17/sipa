@@ -120,7 +120,11 @@
 					mkdir($folder,0777,true);
 				}
 
-				$image = $folder . $_FILES['image']['name'];
+				//$image = $folder . $_FILES['image']['name'];
+                // Sanitize the filename
+                $filename = preg_replace("/[^a-zA-Z0-9.]/", "_", $_FILES['image']['name']);
+
+                $image = $folder . $filename;
 				
 			}
 

@@ -1873,7 +1873,28 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 			foreach ($rows as $key => $row) {
 				$rows[$key]['date'] = date('Y-m-d\TH:i:s', strtotime($row['forum_timestamp']));
 				$rows[$key]['forum_desc'] = nl2br(htmlspecialchars($row['forum_desc']));
-				$rows[$key]['user_img'] = get_image($row['user_img']);
+				//$rows[$key]['user_img'] = get_image($row['user_img']);
+
+				$id = $row['user_id'];
+				$query = "select * from users where user_id = '$id' limit 1";
+				$user_row = query($query);
+				
+				if($user_row){
+
+					if ($row['forum_anonimity'] == 1) {
+						$rows[$key]['user'] = $user_row[0];
+						$rows[$key]['user']['image'] = "assets/images/user.jpg?v1";
+						// Anonymize the user's name
+						$fname = substr($user_row[0]['user_fname'], 0, 1) . str_repeat("*", strlen($user_row[0]['user_fname']) - 2) . substr($user_row[0]['user_fname'], -1);
+						$lname = substr($user_row[0]['user_lname'], 0, 1) . ".";
+						$rows[$key]['user']['name'] = "$fname $lname";
+					} else {
+						$rows[$key]['user'] = $user_row[0];
+						$rows[$key]['user']['image'] = get_image($user_row[0]['user_image']);
+						// Display the full name
+						$rows[$key]['user']['name'] = $user_row[0]['user_fname'] . " " . $user_row[0]['user_lname'];
+					}
+				}
 	
 				$forum_id = $row['forum_id'];
 				$query = "select count(*) from rating_info where post_id = $forum_id AND rating_action = 'like' limit 1";
@@ -1992,7 +2013,9 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 			$info['success'] = true;
 		}
 
-	}else if($_POST['data_type'] == 'delete_method'){
+	}else 
+	if($_POST['data_type'] == 'delete_method')
+	{
 		$user_id = $_SESSION['USER']['user_id'];
  
 		//si limit 1 is parang pag may nakita na syang match sa data, iistop na sya
@@ -2003,7 +2026,9 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 		$info['success'] = true;
 		$info['message'] = "The old saved method has been deleted successfully";
 		
-	}else if($_POST['data_type'] == 'delete_remdates'){
+	}else 
+	if($_POST['data_type'] == 'delete_remdates')
+	{
 		$user_id = $_SESSION['USER']['user_id'];
  
 		//si limit 1 is parang pag may nakita na syang match sa data, iistop na sya

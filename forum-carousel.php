@@ -197,9 +197,12 @@
                                 let forumCard = carouselCardTemplate.content.cloneNode(true);
 
                                 forumCard.querySelector(".js-forum-link").setAttribute('onclick',`forum_carousel.view_forum_post(${obj.rows[i].forum_id})`);
-                                forumCard.querySelector(".js-image").src = obj.rows[i].user_img;
-                                forumCard.querySelector(".js-username").textContent = obj.rows[i].user_fname;
-
+                                //forumCard.querySelector(".js-image").src = obj.rows[i].user_img;
+                                if(typeof obj.rows[i].user == 'object'){
+                                    forumCard.querySelector(".js-image").src = obj.rows[i].user.image;
+                                }
+                                //forumCard.querySelector(".js-username").textContent = obj.rows[i].user_fname;
+                                forumCard.querySelector(".js-username").textContent = (typeof obj.rows[i].user == 'object') ? obj.rows[i].user.name : 'User';
                                 forumCard.querySelector(".js-title").innerHTML = obj.rows[i].forum_title;
                                 forumCard.querySelector(".js-post").innerHTML = `${obj.rows[i].forum_desc}`;
 
