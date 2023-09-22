@@ -161,7 +161,7 @@ function period_calendar($startMonth, $startYear, $periodDays, $ovulationDays, $
         $calendar .= "<tr>";
         $daysOfWeek = array('<span class="day">Sun</span>', '<span class="day">Mon</span>', '<span class="day">Tue</span>', '<span class="day">Wed</span>', '<span class="day">Thu</span>', '<span class="day">Fri</span>', '<span class="day">Sat</span>');
         foreach ($daysOfWeek as $day) {
-            $calendar .= "<th class='header'>$day</th>";
+            $calendar .= "<th class='header'><span translate='no'>$day</span></th>";
         }
         $calendar .= "</tr><tr>";
         for ($i = 0; $i < $dayOfWeek; $i++) {

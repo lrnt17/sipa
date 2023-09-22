@@ -103,7 +103,7 @@
                     <div class="js-personal-post ">
                         <?php if(logged_in()):?>
                             <div class="d-grid">
-                                <button onclick="myposts.new_topic()" class="btn text-start p-3 rounded-4" style="background: #F2C1A7;" id="btn"> <i class="fa-solid fa-plus"></i> &nbsp; Start New Topic</button>
+                                <button onclick="myposts.new_topic()" class="btn text-start p-3 rounded-4" style="background: #F2C1A7;" id="btn"> <i class="fa-solid fa-plus js-toggle-icon"></i> &nbsp; Start New Topic</button>
                             </div>
 
                             <form onsubmit="myposts.submit(event)" method="post" class="js-start-topic class_42 hide p-4 rounded-5 shadow-sm" style="background: #fff;" >
@@ -193,14 +193,21 @@
                         <hr>
                         <div class="row">
                             <div class="col-4">
-                                <img src="assets/images/user.jpg" class="js-image class_47" style="width:40px; height:40px; border-radius:50%; border-style: solid;" >
-                            
-                                <span style="font-size:14px; color:gray;"> Posted by</span> 
-                                <a href="#" class="js-profile-link class_45 py-2" style="text-decoration:none;">
-                                    <h2 class="js-username class_48" style="font-size:14px; display:inline;" >
-                                        Jane Name
-                                    </h2>
-                                </a>
+                                <div class="row">
+                                    <div class="col-auto" style="padding-right:0px; display: flex; align-items: center;">
+                                        <div class="img-con" style="width:40px; height:40px; border-radius:50%; border-style: solid; position: relative; overflow: hidden; padding: 0;"> 
+                                            <img src="assets/images/user.jpg" class="js-image class_47" style=" width: 100%; height: auto; object-fit: cover;" >
+                                        </div>
+                                    </div>
+                                    <div class="col py-2">
+                                        <span style="font-size:14px; color:gray;"> Posted by </span> 
+                                        <a href="#" class="js-profile-link class_45 py-2" style="text-decoration:none;">
+                                            <h2 class="js-username class_48" style="font-size:14px; display:inline;" >
+                                                Jane Name
+                                            </h2>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="col-3 py-2">
@@ -216,7 +223,7 @@
                             </div>
 
                             <div class="col-2 py-2">
-                                <button class="js-like-button class_53 " style="cursor: pointer;"  >
+                                <button class="js-like-button class_53 " style="cursor: pointer; padding:0px; margin-right:2px;outline:none; border: none;"  >
                                 <i class="fa-solid fa-heart" style="pointer-events: none;"></i>
                                 </button>
                                 
@@ -251,10 +258,10 @@
 <script>
 //-----------------------------------------------------------------------------------------------------
     // hide start new topic button
-    /*const btn = document.getElementById('btn');
-        btn.addEventListener('click', () => {
-        btn.style.display = 'none';
-    });*/
+    const btn = document.getElementById('btn');
+    //    btn.addEventListener('click', () => {
+    //    btn.style.display = 'none';
+    //});
 
     // Check if the page is being loaded as a result of a refresh
     if (performance.navigation.type === performance.navigation.TYPE_RELOAD) {

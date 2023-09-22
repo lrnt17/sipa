@@ -1,5 +1,7 @@
 <?php 
     defined('APP') or die('direct script access denied!'); 
+
+    $currentPage = basename($_SERVER['PHP_SELF']);
 ?>
 <style>
         .label {
@@ -28,10 +30,10 @@
 <section>
     <div class="container mt-5">
         <div class="row">
-            <div class="col py-4 rounded-top-4 col-custom" data-target="chart" id="chartDiv">
+            <div class="col py-4 rounded-top-4 col-custom <?php echo ($currentPage == 'comparison-chart.php') ? 'active' : ''; ?>" id="chartDiv" style="cursor:pointer;">
                 <a href="comparison-chart.php" class="label">Comparison Chart</a>
             </div>
-            <div class="col py-4 rounded-top-4 col-custom" data-target="sidebyside" id="sidebysideDiv">
+            <div class="col py-4 rounded-top-4 col-custom <?php echo ($currentPage == 'comparison-sidebyside.php') ? 'active' : ''; ?>" id="sidebysideDiv" style="cursor:pointer;">
                 <a href="comparison-sidebyside.php" class="label">Side-by-side Comparison</a>
             </div>
         </div>
@@ -62,30 +64,6 @@
         },
     };
 </script>-->
-
-<script>
-    // Check if there's an active link stored in local storage
-    const activeLink = localStorage.getItem('activeLink');
-
-    if (activeLink) {
-        const activeCol = document.querySelector(`[data-target="${activeLink}"]`);
-        activeCol.classList.add('active');
-    }
-
-    // Add click event listeners to each link
-    const cols = document.querySelectorAll('.col-custom');
-
-    cols.forEach(col => {
-        col.addEventListener('click', () => {
-            const target = col.getAttribute('data-target');
-            cols.forEach(c => c.classList.remove('active'));
-            col.classList.add('active');
-            
-            // Store the active link in local storage
-            localStorage.setItem('activeLink', target);
-        });
-    });
-</script>
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {

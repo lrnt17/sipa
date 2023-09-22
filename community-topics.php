@@ -196,14 +196,21 @@
                         <hr>
                         <div class="row">
                             <div class="col-4">
-                                <img src="assets/images/user.jpg" class="js-image class_47" style="width:40px; height:40px; border-radius:50%; border-style: solid;" >
-                            
-                                <span style="font-size:14px; color:gray;"> Posted by</span> 
-                                <!--<a href="#" class="js-profile-link class_45 py-2" style="text-decoration:none;">-->
-                                    <h2 class="js-username class_48" style="font-size:14px; display:inline;" >
-                                        Jane Name
-                                    </h2>
-                                <!--</a>-->
+                                <div class="row">
+                                    <div class="col-auto" style="padding-right:0px; display: flex; align-items: center;">
+                                        <div class="img-con" style="width:40px; height:40px; border-radius:50%; border-style: solid; position: relative; overflow: hidden; padding: 0;"> 
+                                            <img src="assets/images/user.jpg" class="js-image class_47" style=" width: 100%; height: auto; object-fit: cover;" >
+                                        </div>
+                                    </div>
+                                    <div class="col py-2">
+                                        <span style="font-size:14px; color:gray;"> Posted by </span> 
+                                        <!--<a href="#" class="js-profile-link class_45 py-2" style="text-decoration:none;">-->
+                                            <h2 class="js-username class_48" style="font-size:14px; display:inline;" >
+                                                Jane Name
+                                            </h2>
+                                        <!--</a>-->
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="col-3 py-2">
@@ -219,7 +226,7 @@
                             </div>
 
                             <div class="col-2 py-2">
-                                <button class="js-like-button class_53 " style="cursor: pointer;"  >
+                                <button class="js-like-button class_53 " style="cursor: pointer; padding:0px; margin-right:2px;outline:none; border: none;"  >
                                 <i class="fa-solid fa-heart" style="pointer-events: none;"></i>
                                 </button>
                                 

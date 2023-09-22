@@ -59,7 +59,12 @@ $conn->close();
         min-height: 306px;
         min-width: 330px;
         width:600px;
-        object-fit: cover;
+    }
+
+    .mapboxgl-canvas-container.mapboxgl-touch-zoom-rotate.mapboxgl-touch-drag-pan .mapboxgl-canvas {
+        object-fit: cover !important;
+        width: 100% !important;
+        height: 100% !important;
     }
 	
     textarea:focus, input:focus{
@@ -116,29 +121,21 @@ $conn->close();
             </div>
 
 
-    <div class="container my-4" style="display: flex; justify-content: center;">
-        <div id="search-container" class="row rounded-pill shadow-sm" style="background: #B6CCF5;width: 70%;">
-            <div class="col-auto ms-3 mt-3 mb-3">
-            <i class="fa-solid fa-location-dot" style="font-size: larger; color: #2B436F; "></i>
-            </div>
-
-            <div class="col me-auto">
-            <input type="text" id="search-input" placeholder="Enter address, city or zip code" style=" width: 90%; border: none; background: transparent;" class="p-3">
-
-            </div>
-
-            <div class="col-auto">
-            <button class="btn rounded-pill p-3 px-5" style="background-color:#5887DE; color:white; margin-right: -13px;"id="search-button">Find</button>
-
-            </div>
+            <div class="container my-4" style="display: flex; justify-content: center;">
+    <div id="search-container" class="row rounded-pill shadow-sm" style="background: #B6CCF5;width: 70%;">
+        <div class="col-auto ms-3 mt-3 mb-3">
+            <i class="fa-solid fa-location-dot" style="font-size: larger; color: #2B436F;"></i>
         </div>
-    </div>        
-    
+        <div class="col me-auto">
+            <input type="text" id="search-input" placeholder="Enter address, city or zip code" style="width: 90%; border: none; background: transparent;" class="p-3" required>
+        </div>
+        <div class="col-auto">
+            <button class="btn rounded-pill p-3 px-5" style="background-color:#5887DE; color:white; margin-right: -13px;" id="search-button">Find</button>
+        </div>
+    </div>
+</div>
 
-    
-
-    <div class="container rounded-5 mt-5 mb-3 p-5" id ="container" style="display: none; background: #D2E0F8;">
-
+<div class="container rounded-5 mt-5 mb-3 p-5" id="container" style="background: #D2E0F8; display: none;">
     <div class="row">
         <div class="col-lg-6">
         <p style="text-align: center; font-weight:500;">Showing results</p>
@@ -217,6 +214,15 @@ $conn->close();
 
     marker.setPopup(popup);
 
+    // Add a click event listener to the marker
+    marker.getElement().addEventListener('click', function () {
+        // Zoom the map to level 17 when the marker is clicked
+        map.flyTo({
+            center: [hospital.Longitude, hospital.Latitude],
+            zoom: 17
+        });
+    });
+
     return marker;
 }
 
@@ -281,26 +287,37 @@ $conn->close();
     }
 
 
+    // Add a click event listener to the "Find" button
     document.getElementById('search-button').addEventListener('click', function () {
-    var searchTerm = document.getElementById('search-input').value.toLowerCase(); // Convert input to lowercase
+        var searchTerm = document.getElementById('search-input').value.toLowerCase(); // Convert input to lowercase
 
-    // Filter hospitals by location (City, Address, or Hospitalname)
-    var filteredHospitals = hospitalsData.filter(function (hospital) {
-        return (
-            hospital.City.toLowerCase().includes(searchTerm) ||
-            hospital.Address.toLowerCase().includes(searchTerm) ||
-            hospital.Hospitalname.toLowerCase().includes(searchTerm)
-        );
-    });
+        // Check if the input field is empty
+        if (searchTerm.trim() === "") {
+            alert("Please enter address, city, or zip code."); // Display an alert or handle the empty input in your preferred way
+            return; // Exit the function early if the input is empty
+        }
 
-    // Clear previous hospital list and hide all hospitals on the map
-    document.getElementById('hospital-list').innerHTML = '';
-    hospitalMarkers.forEach(function (marker) {
-        marker.remove();
-    });
+        // Display the map and search results
+        var mapContainer = document.getElementById('container');
+        mapContainer.style.display = 'block';
 
-    // Create a variable for the hospital list container
-    var hospitalListContainer = document.getElementById('hospital-list');
+        // Filter hospitals by location (City, Address, or Hospitalname)
+        var filteredHospitals = hospitalsData.filter(function (hospital) {
+            return (
+                hospital.City.toLowerCase().includes(searchTerm) ||
+                hospital.Address.toLowerCase().includes(searchTerm) ||
+                hospital.Hospitalname.toLowerCase().includes(searchTerm)
+            );
+        });
+
+        // Clear previous hospital list and hide all hospitals on the map
+        document.getElementById('hospital-list').innerHTML = '';
+        hospitalMarkers.forEach(function (marker) {
+            marker.remove();
+        });
+
+        // Create a variable for the hospital list container
+        var hospitalListContainer = document.getElementById('hospital-list');
 
         if (filteredHospitals.length > 0) {
             // Display hospitals in the selected location on the map
@@ -318,18 +335,12 @@ $conn->close();
             // Create a "No record found" message as a hospital-item
             var noResultsMessage = document.createElement('div');
             noResultsMessage.classList.add('hospital-item');
-            noResultsMessage.innerHTML = '<h3>No results found.</h3>';
+            noResultsMessage.innerHTML = '<center><h5 class="mt-5">No results found.</h5></center>';
 
             // Append the "No record found" message to the hospital list container
             hospitalListContainer.appendChild(noResultsMessage);
         }
     });
-
-	
-	document.getElementById('search-button').addEventListener('click', function () {
-    var Container = document.getElementById('container');
-   Container.style.display = 'block'; // Always show the map
-  });
 
 
 

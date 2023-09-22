@@ -70,7 +70,7 @@
               <div class="col-md-6">
 
                 <div class="cap p-3 rounded-4 shadow-sm rounded" style="position: relative; top: -40px; background:#ffff; text-align:center;">
-                    Wondering, “When will I get my period?” ALWAYS knows! Our easy tracking tool helps map out your cycle for months.
+                    Wondering, “When will I get my period?” ALWAYS know! Our easy tracking tool helps map out your cycle for months.
                 </div>
                 
               </div>
@@ -107,7 +107,7 @@
                 </div>
                 <div class="col">
                     <div class="container">
-                        <label for="period-length" style="font-weight: bold; color:#5A5A5A;">Length of last <span translate="no"> period</span> (in days)</label>
+                        <label for="period-length" style="font-weight: bold; color:#5A5A5A;">Length of last <span translate="no"> period </span> (in days)</label>
                     </div>
                 </div>
                 <div class="col">
@@ -140,7 +140,8 @@
             <div class="row">
                 <div class="col">
                     <div class="" style="display: flex; justify-content: center;">
-                        <button class="btn my-3 px-5 py-3 rounded-pill shadow-sm rounded" style="background: #D2E0F8;">Calculate my period</button>
+                        <style> font{ vertical-align: initial !important;}</style>
+                        <button class="btn my-3 px-5 py-3 rounded-pill shadow-sm rounded" style="background: #D2E0F8;">Calculate my <span translate="no"> period</span></button>
                     </div>
                 </div>
             </div>

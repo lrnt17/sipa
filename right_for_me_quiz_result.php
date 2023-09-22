@@ -105,6 +105,10 @@ select {
     margin-bottom: 1.5%; 
   }
 
+  .continue_btn:hover{
+    background-color: #D2E0F8 !important;
+  }
+
    </style>
    
 
@@ -181,10 +185,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                   <div class="container rounded-4 justify-content-center" style="text-align: center; background: white; width: 100%; max-height: 200px; position: relative; overflow: hidden; padding: 0;">
                           <img src="<?php echo $row["birth_control_img"]; ?>" class="card-img-top"style="width: 100%; height: auto; object-fit: cover;"alt="...">
                   </div>
-                          <div class="card-body" style=" min-height:14rem;">
+                          <div class="card-body" style=" min-height:14rem; overflow:hidden;">
                           <h5 class="card-title" style="text-align:center; color:#3B3B3B;"><?php echo $row["birth_control_name"]; ?></h5>
                           <p class="card-text mt-3">What it is?</p>
-                          <p class="card-text" style="margin-top: -3%;"><?php echo $row["birth_control_desc"]; ?></p>
+                          <p class="card-text" style="overflow: hidden;margin-top: -3%;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 5;text-overflow: ellipsis;"><?php echo $row["birth_control_desc"]; ?></p>
                       </div>
                   </div>
               </div>
@@ -247,6 +251,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <i class="fa-solid fa-prescription mb-4" style="font-size:30px;"></i>
     </div>Your selected method does not need SMS reminder as it is used every time you need it. Make sure to follow the directions on how to use it to ensure its effectiveness!</p>
   </div>
+        <div class="col mt-3 d-flex justify-content-center">
+            <a class="js-link" href="right_for_me_1.php" style=" text-decoration: none; color:black;">
+                <button class="btn my-3 px-4 py-2 rounded-3 shadow-sm rounded continue_btn" style="background: #ffff;">Continue</button>
+            </a>
+        </div>
 </div>
 
 <div id="sms_reminder_btn" style="display: none;">
@@ -398,13 +407,17 @@ function fetchMethodDetails(method, container) {
 
                 // Set the width and height of the button
                 button.style.width = "150px"; // Adjust the width as needed
-                button.style.height = "150px"; // Adjust the height as needed
+                button.style.height = "auto"; // Adjust the height as needed
 
                 button.classList.add("hover");
 
                 const methodNameDiv = document.createElement("div");
                 methodNameDiv.textContent = methodDetails.birth_control_name;
                 methodNameDiv.classList.add("method_name");
+                methodNameDiv.style.minHeight="50px";
+                methodNameDiv.style.display="flex";
+                methodNameDiv.style.justifyContent="center";
+                methodNameDiv.style.alignItems="center";
                 button.appendChild(methodNameDiv);
 
                 const imgDiv = document.createElement("div");
