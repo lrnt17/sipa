@@ -105,6 +105,10 @@ select {
     margin-bottom: 1.5%; 
   }
 
+  .continue_btn:hover{
+    background-color: #D2E0F8 !important;
+  }
+
    </style>
    
 
@@ -249,7 +253,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   </div>
         <div class="col mt-3 d-flex justify-content-center">
             <a class="js-link" href="right_for_me_1.php" style=" text-decoration: none; color:black;">
-                <button class="btn my-3 px-4 py-2 rounded-3 shadow-sm rounded" style="background: #ffff;">Continue</button>
+                <button class="btn my-3 px-4 py-2 rounded-3 shadow-sm rounded continue_btn" style="background: #ffff;">Continue</button>
             </a>
         </div>
 </div>
