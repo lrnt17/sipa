@@ -190,12 +190,21 @@
 
                             <div class="row m-1" style="align-items: center;">
                                 <div class="col-5">
-                                    <img src="<?=$row['user']['image']?>" class="class_47" style="width:40px; height:40px; border-radius:50%; border-style: solid;" >
-                                    <span style="font-size:14px; color:gray;"> Posted by</span> 
-                                    <h2 class="class_48" style="font-size:14px; display:inline;" >
-                                        <?//=$row['user']['user_fname'] ?? 'Unknown'?>
-                                        <?=$row['user']['name']?>
-                                    </h2>
+                                    <div class="row">
+                                        <div class="col-auto" style="padding-right:0px; display: flex; align-items: center;">
+                                            <div class="img-con" style="width:40px; height:40px; border-radius:50%; border-style: solid; position: relative; overflow: hidden; padding: 0;"> 
+                                                <img src="<?=$row['user']['image']?>" class="js-image class_47" style=" width: 100%; height: auto; object-fit: cover;" >
+                                            </div>
+                                        </div>
+                                        <div class="col py-2">
+                                            <span style="font-size:14px; color:gray;"> Posted by </span> 
+                                            <a href="#" class="js-profile-link class_45 py-2" style="text-decoration:none;">
+                                                <h2 class="js-username class_48" style="font-size:14px; display:inline; color:blue;" >
+                                                    <?=$row['user']['name']?>
+                                                </h2>
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <!-- time -->
@@ -209,7 +218,7 @@
 
                                 <!-- Display Like button and number of likes -->
                                 <div class="col-2 pt-2">
-                                    <button class="single-post js-like-button " forum_id="<?=$row['forum_id']?>" style="cursor: pointer;">
+                                    <button class="single-post js-like-button " forum_id="<?=$row['forum_id']?>" style="cursor: pointer; padding:0px; margin-right:2px;outline:none; border: none;">
                                         <i class="fa-solid fa-heart" style="pointer-events: none;"></i>
                                     </button>
                                     <span class="single-post js-num-likes" style="display:inline;" forum_id="<?=$row['forum_id']?>">
@@ -364,10 +373,10 @@
             <div class="row mt-3">
                 <!--like, like span-->
                 <div class="js-like-section col-auto">
-                    <button class="js-like-button class_53" style="font-size:14px; cursor: pointer;"  >
+                    <button class="js-like-button class_53" style="font-size:14px; cursor: pointer;  padding:0px; margin-right:2px;outline:none; border: none;"  >
                        <i class="fa-solid fa-heart" style="pointer-events: none;"></i>
                     </button>
-                    <span class="js-num-likes"></span>
+                    <span class="js-num-likes" style="font-size:14px; "></span>
                 </div>
                 
                 <div class="js-reply-section class_51 col" >

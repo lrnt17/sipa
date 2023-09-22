@@ -206,7 +206,7 @@
             </div>
         </div>
         <div class="row mt-4">
-            <p class="text-center" style="color:#525252;">Empower yourself with the freedom to choose: Use a contraceptive method</p>
+            <center><p style="color:#525252;">Empower yourself with the freedom to choose: Use a contraceptive method</p></center>
         </div>
         <div class="row">
             <h2 class="d-flex justify-content-center" style="color:#383838;">Contraceptive Methods</h2>

@@ -134,11 +134,26 @@ var myposts = {
         
         // Get reference to the form element
         var form = document.querySelector('.js-start-topic');
+
+        var icon = document.querySelector('.js-toggle-icon');
+
         if (form.classList.contains('hide')) {
             form.classList.remove('hide');
+
+            // Update the icon to minus when the form is visible
+            if (icon) {
+                icon.classList.remove('fa-plus');
+                icon.classList.add('fa-minus');
+            }
         } else {
             form.classList.add('hide');
-            
+
+            // Update the icon to plus when the form is hidden
+        if (icon) {
+            icon.classList.remove('fa-minus');
+            icon.classList.add('fa-plus');
+        }
+             
         }
     },
 

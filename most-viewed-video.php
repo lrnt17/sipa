@@ -31,16 +31,18 @@
 
 <template id="videoCardTemplate" class="js-video-template">
     <div class="col-lg-3 js-video-card m-3 rounded-4 shadow-sm" style="animation: appear 3s ease; background-color:white; width:320px; padding: 0;">
-    <div class="container shadow-sm rounded-4" style="position: relative; height:10.5rem; overflow: hidden; border: 8px solid #D2E0F8; padding: 0;">
+            
+            <div class="container js-video-link shadow-sm rounded-4" style="cursor: pointer; position: relative; height:10.5rem; overflow: hidden; border: 8px solid #D2E0F8; padding: 0;">
                 <!--<video src="uploads/<?//=$video['video_url']?>" controls></video>-->
                 <video src=""class="js-video-display"style="width: 100%;  object-fit: cover;"></video>
             </div>
-        <div class="js-video-link" style="cursor: pointer;">
+
+        <div class="js-video-link" style="pointer-events: none;">
             
             <div>
                 <div class="row py-3 px-2">
                     <div class="col-auto">
-                        <div class="rounded-circle" style="background: white; width: 3rem; height: auto; border: 2px solid #F2F5FF; max-height: auto; position: relative; overflow: hidden; padding: 0;">
+                        <div class="rounded-circle" style="background: white; width: 3rem; height: 3rem; border: 2px solid #F2F5FF; max-height: auto; position: relative; overflow: hidden; padding: 0;">
                             <img src="assets/images/user.jpg" class="js-image" style="width: 100%; height: auto; object-fit: cover;">
                         </div>
                     </div>
