@@ -208,10 +208,6 @@
             font-weight: 700;
         }
 
-        *{
-            color:black;
-        }
-
         .text-desc-a{
             font-size: 13px;
             color: #575757;
@@ -338,7 +334,7 @@
     <?php if(!empty($row)):?>
         <div class="conclass_26  p-5 rounded-end-5 shadow-sm rounded 
         col-xxl-8 col-xl-9 col-lg-9 col-sm-fluid" style="min-height: 550px; background-color: #ffff;">
-            <form method="post" enctype="multipart/form-data" >
+            <form method="post" enctype="multipart/form-data" style="margin: 0;">
                 <!-- account information modal -->
                     <div class="js-account-info-modal">
                         <h2 style="color: #2F2F2F;
@@ -496,7 +492,7 @@
                     <p class="text-desc">
                         <!-- pang short desc -->
                     </p>
-                    <hr>
+                    <br>
 
                     <div class="class_30">
                         <div class="class_31">
