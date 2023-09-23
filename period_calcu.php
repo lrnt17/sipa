@@ -141,7 +141,7 @@
                 <div class="col">
                     <div class="" style="display: flex; justify-content: center;">
                         <style> font{ vertical-align: initial !important;}</style>
-                        <button class="btn my-3 px-5 py-3 rounded-pill shadow-sm rounded" style="background: #D2E0F8;">Calculate my <span translate="no"> period</span></button>
+                        <button class="btn my-3 px-5 py-3 rounded-pill shadow-sm rounded" id="js-calc-period-btn" style="background: #D2E0F8;">Calculate my <span translate="no"> period</span></button>
                     </div>
                 </div>
             </div>
@@ -264,6 +264,18 @@
 
         var currentDate = new Date().toISOString().slice(0, 10);
         document.getElementById('last-period').value = currentDate;
+
+
+        // Function to scroll to the calendar
+        function scrollToCalendar() {
+            var calendarContainer = document.getElementById("result");
+            calendarContainer.scrollIntoView({ behavior: "smooth" }); // This will scroll to the calendar with smooth animation
+        }
+
+        // Add an event listener to the button to go to the calendar div
+        var showCalendarButton = document.getElementById("js-calc-period-btn");
+        showCalendarButton.addEventListener("click", scrollToCalendar);
+
     </script>
 
 <br><br><br>

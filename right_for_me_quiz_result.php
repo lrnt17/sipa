@@ -638,7 +638,7 @@ function checkShowSaveButton() {
     xhr.onreadystatechange = function () {
       if (xhr.readyState === XMLHttpRequest.DONE) {
         if (xhr.status === 200) {
-          alert("Selected contraceptive method, start date, and usage saved to the database.");
+          alert("Selected contraceptive method, start date, and usage saved to the database. Please check the SMS we sent you for more details about your SMS reminders. Thank you!");
 
           // Redirect to right_for_me_1.php
           window.location.href = 'right_for_me_1.php';
