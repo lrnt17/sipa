@@ -17,6 +17,19 @@
 	if($row)
 	{
         $row = $row[0];
+
+        $id = $row['partner_facility_id'];
+        $query = "select * from partner_facility where partner_facility_id = '$id' limit 1";
+        $user_row = query($query);
+
+        if ($user_row) {
+            $row['partner_facility'] = $user_row[0];
+            $row['partner_facility']['logo'] = get_image($user_row[0]['facility_logo']);
+            // Display the full name
+            $row['partner_facility']['location'] = $user_row[0]['city_municipality'];
+            $row['partner_facility']['name'] = $user_row[0]['health_facility_name'];
+        }
+
         $video_id = $row['video_id'];
         $query = "select count(*) from rating_video where video_id = $video_id AND rating_action = 'like' limit 1";
         $rating_row = query($query);
@@ -201,11 +214,11 @@
                                 <div class="row mt-1 mb-4">
                                     <div class="col">
                                         <div>
-                                            <img src="<?=$row['user_img']?>" class="" style="width:40px; height:40px; border-radius:50%; border-style: solid;">
+                                            <img src="<?=$row['partner_facility']['logo']?>" class="" style="width:40px; height:40px; border-radius:50%; border-style: solid;">
                                             <span style="font-size:14px; color:gray;"> Posted by</span>
                                             <h2 class="" style="font-size:14px; display:inline; color: #1b4ca1;">
                                                 <?//=$row['user']['user_fname'] ?? 'Unknown'?>
-                                                <?=$row['user_fname']?>
+                                                <?=$row['partner_facility']['name']?>
                                             </h2>
                                         </div>
                                     </div>
@@ -277,7 +290,7 @@
                                 <?php if(logged_in()):?>
                                     <form onsubmit="single_video.add_comment(event)" method="post" class="class_42 p-2 rounded-4" style="background-color:#ebebeb;">
                                     <div class="d-grid" >
-                                    <textarea placeholder="Write a comment" rows="2" name="post" class="js-comment-input class_44 p-3" style="background-color: transparent; border:none; resize: none;" ></textarea>
+                                    <textarea placeholder="Write a comment" rows="2" name="post" class="js-comment-input class_44 p-3" style="background-color: transparent; border:none; resize: none;" maxlength="500"></textarea>
                                 </div>
                                 <hr>
                                 <div class="row mx-1 my-2">
@@ -423,7 +436,7 @@
 <script src="time.js?v1"></script>
 <script src="like-rating-video.js?v2"></script>
 <!--<script src="community-topics.js?v6"></script>-->
-<script src="video.js?v7"></script>
+<script src="video.js?v8"></script>
 
 <script>
     // Call the updateTimestamps function initially when the page loads

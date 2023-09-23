@@ -260,12 +260,20 @@ var allvideos = {
             //videoCard.querySelector(".js-title").textContent = videos[i].video_title;
             // Highlight matching words in the post title
             let videoTitle = videos[i].video_title;
+
+            let maxLength = 45;
+            if (videoTitle.length > maxLength) {
+                videoTitle = videoTitle.substring(0, maxLength) + '...';
+            }
+
             for (let j = 0; j < searchWords.length; j++) {
                 let searchWord = searchWords[j];
                 let searchWordRegex = new RegExp(searchWord, 'gi');
                 videoTitle = videoTitle.replace(searchWordRegex, '<span class="highlight">$&</span>');
             }
+    
             videoCard.querySelector(".js-video-title-display").innerHTML = videoTitle;
+
             videoCard.querySelector(".js-video-display").src = videos[i].video;
             let span = document.createElement('span');
             span.setAttribute('translate', 'no');
@@ -285,6 +293,7 @@ var allvideos = {
             videoCard.querySelector(".js-post").innerHTML = videoDesc;*/
 
             videoCard.querySelector(".js-video-link").setAttribute('onclick',`allvideos.view_video_comments(${videos[i].video_id})`);
+            videoCard.querySelector(".js-video-link-body").setAttribute('onclick',`allvideos.view_video_comments(${videos[i].video_id})`);
             //videoCard.querySelector(".js-like-button").setAttribute('video_id', videos[i].video_id);
             //videoCard.querySelector(".js-num-likes").setAttribute('video_id', videos[i].video_id);
 

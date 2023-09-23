@@ -899,7 +899,7 @@ var mycomment = {
         // Get the edited reply input field
         let col2 = replyWrapper.querySelector('.col');
         let divname_com = col2.querySelector('.p-3');
-        let editInput = replyWrapper.querySelector('input');
+        let editInput = replyWrapper.querySelector('textarea');
         console.log(editInput);
         // Get the edited reply content
         let editedReplyText = editInput.value;

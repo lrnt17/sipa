@@ -1354,7 +1354,6 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 				$rows[$key]['date'] = date('Y-m-d\TH:i:s', strtotime($row['video_timestamp']));
 				$rows[$key]['video_title'] = htmlspecialchars($row['video_title']);
 				$rows[$key]['video_desc'] = nl2br(htmlspecialchars($row['video_desc']));
-				$rows[$key]['user_img'] = get_image($row['user_img']);
 	
 				$rows[$key]['user_owns'] = false;
 				if($user_id == $row['user_id'])
@@ -1444,13 +1443,15 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 		$user_id = $_SESSION['USER']['user_id'];
 
 		if($anonymous == 'true'){
-			$userfname = $_SESSION['USER']['user_fname'];
-			$user_fname = substr($userfname, 0, 1) . str_repeat('*', strlen($userfname) - 2) . substr($userfname, -1);
+			//$userfname = $_SESSION['USER']['user_fname'];
+			//$user_fname = substr($userfname, 0, 1) . str_repeat('*', strlen($userfname) - 2) . substr($userfname, -1);
 			//$userimg = $_SESSION['USER']['user_image'];
-			$user_img = 'assets/images/user.jpg?v1';
+			//$user_img = 'assets/images/user.jpg?v1';
+			$anonimity = 1;
 		}else{
-			$user_fname = $_SESSION['USER']['user_fname'];
-			$user_img = $_SESSION['USER']['user_image'];
+			//$user_fname = $_SESSION['USER']['user_fname'];
+			//$user_img = $_SESSION['USER']['user_image'];
+			$anonimity = 0;
 		}
 
 		$date = date("Y-m-d H:i:s");
@@ -1461,7 +1462,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 			$info['message'] = "Cannot post your comment because it contains prohibited words or phrases.";
 		}
 		else {
-			$query = "insert into videos (user_img,user_id,user_fname,video_timestamp,video_desc,comment_parent_id) values ('$user_img','$user_id','$user_fname','$date','$comment','$video_id')";
+			$query = "insert into videos (user_id,video_timestamp,video_desc,comment_parent_id,comment_anonimity) values ('$user_id','$date','$comment','$video_id','$anonimity')";
 			query($query);
 
 			$query = "select * from videos where user_id = '$user_id' && comment_parent_id = '$video_id' order by video_id desc limit 1";
@@ -1502,20 +1503,31 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 			foreach ($rows as $key => $row) {
 				$rows[$key]['date'] = date('Y-m-d\TH:i:s',strtotime($row['video_timestamp']));
 				$rows[$key]['video_desc'] = nl2br(htmlspecialchars($row['video_desc']));
-				$rows[$key]['user_img'] = get_image($row['user_img']);
 
 				$rows[$key]['user_owns'] = false;
 				if($user_id == $row['user_id'])
 					$rows[$key]['user_owns'] = true;
 
-				/*$id = $row['user_id'];
+				$id = $row['user_id'];
 				$query = "select * from users where user_id = '$id' limit 1";
 				$user_row = query($query);
 				
 				if($user_row){
-					$rows[$key]['user'] = $user_row[0]; //ito yung may .user
-					$rows[$key]['user']['image'] = get_image($user_row[0]['user_image']);
-				}*/
+
+					if ($row['comment_anonimity'] == 1) {
+						$rows[$key]['user'] = $user_row[0];
+						$rows[$key]['user']['image'] = "assets/images/user.jpg?v1";
+						// Anonymize the user's name
+						$fname = substr($user_row[0]['user_fname'], 0, 1) . str_repeat("*", strlen($user_row[0]['user_fname']) - 2) . substr($user_row[0]['user_fname'], -1);
+						$lname = substr($user_row[0]['user_lname'], 0, 1) . ".";
+						$rows[$key]['user']['name'] = "$fname $lname";
+					} else {
+						$rows[$key]['user'] = $user_row[0];
+						$rows[$key]['user']['image'] = get_image($user_row[0]['user_image']);
+						// Display the full name
+						$rows[$key]['user']['name'] = $user_row[0]['user_fname'] . " " . $user_row[0]['user_lname'];
+					}
+				}
 
 				$video_id = $row['video_id'];
 				$query = "select count(*) from rating_video where video_id = $video_id AND rating_action = 'like' limit 1";
@@ -1592,7 +1604,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 		$date = date("Y-m-d H:i:s");
 	
 		// Add word filtering logic here
-		if (containsProhibitedWord($poedited_commentst)) {
+		if (containsProhibitedWord($edited_comment)) {
 			$info['success'] = false;
 			$info['message'] = "Cannot edit your comment because it contains prohibited words or phrases.";
 		}
@@ -1645,7 +1657,6 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 			foreach ($rows as $key => $row) {
 				$rows[$key]['date'] = date('Y-m-d\TH:i:s', strtotime($row['video_timestamp']));
 				$rows[$key]['video_desc'] = nl2br(htmlspecialchars($row['video_desc']));
-				$rows[$key]['user_img'] = get_image($row['user_img']);
 				
 				$rows[$key]['user_owns'] = false;
 				if ($user_id == $row['user_id']) {
@@ -1653,11 +1664,24 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 				}
 
 				$id = $row['user_id'];
-				$query = "SELECT * FROM users WHERE user_id = '$id' LIMIT 1";
+				$query = "select * from users where user_id = '$id' limit 1";
 				$user_row = query($query);
-				if ($user_row) {
-					//$rows[$key]['user'] = $user_row[0];
-					$rows[$key]['user']['image'] = get_image($user_row[0]['user_image']);
+				
+				if($user_row){
+
+					if ($row['reply_anonimity'] == 1) {
+						$rows[$key]['user'] = $user_row[0];
+						$rows[$key]['user']['image'] = "assets/images/user.jpg?v1";
+						// Anonymize the user's name
+						$fname = substr($user_row[0]['user_fname'], 0, 1) . str_repeat("*", strlen($user_row[0]['user_fname']) - 2) . substr($user_row[0]['user_fname'], -1);
+						$lname = substr($user_row[0]['user_lname'], 0, 1) . ".";
+						$rows[$key]['user']['name'] = "$fname $lname";
+					} else {
+						$rows[$key]['user'] = $user_row[0];
+						$rows[$key]['user']['image'] = get_image($user_row[0]['user_image']);
+						// Display the full name
+						$rows[$key]['user']['name'] = $user_row[0]['user_fname'] . " " . $user_row[0]['user_lname'];
+					}
 				}
 
 				$video_id = $row['video_id'];
@@ -1681,13 +1705,15 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 		$user_id = $_SESSION['USER']['user_id'];
 
 		if($anonymous == 'true'){
-			$userfname = $_SESSION['USER']['user_fname'];
-			$user_fname = substr($userfname, 0, 1) . str_repeat('*', strlen($userfname) - 2) . substr($userfname, -1);
+			//$userfname = $_SESSION['USER']['user_fname'];
+			//$user_fname = substr($userfname, 0, 1) . str_repeat('*', strlen($userfname) - 2) . substr($userfname, -1);
 			//$userimg = $_SESSION['USER']['user_image'];
-			$user_img = 'assets/images/user.jpg?v1';
+			//$user_img = 'assets/images/user.jpg?v1';
+			$anonimity = 1;
 		}else{
-			$user_fname = $_SESSION['USER']['user_fname'];
-			$user_img = $_SESSION['USER']['user_image'];
+			//$user_fname = $_SESSION['USER']['user_fname'];
+			//$user_img = $_SESSION['USER']['user_image'];
+			$anonimity = 0;
 		}
 
 		$date = date("Y-m-d H:i:s");
@@ -1700,7 +1726,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 		else{
 
 			// Insert new row into forum table with comment_parent_id set to video_id
-			$query = "INSERT INTO videos (user_img, user_id, user_fname, video_timestamp, video_desc, reply_parent_id) VALUES ('$user_img', '$user_id', '$user_fname', '$date', '$reply_text', '$video_id')";
+			$query = "INSERT INTO videos (user_id, video_timestamp, video_desc, reply_parent_id, reply_anonimity) VALUES ('$user_id', '$date', '$reply_text', '$video_id', '$anonimity')";
 			query($query);
 			
 			// Return success message and data for new reply
@@ -1813,10 +1839,10 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 		$edited_title = addslashes($_POST['edited_title']);
 		$edited_desc = addslashes($_POST['edited_desc']);
 		$birth_control_id = (int)$_POST['birth_control_id'];
-		$user_id = $_SESSION['USER']['user_id'];
+		//$user_id = $_SESSION['USER']['user_id'];
 		//$date = date("Y-m-d H:i:s");
 		
-		$query = "update videos set video_desc = '$edited_desc', video_title = '$edited_title', birth_control_id = '$birth_control_id' where user_id = '$user_id' && partner_facility_id = '$partner_facility_id' && video_id = '$video_id' limit 1";
+		$query = "update videos set video_desc = '$edited_desc', video_title = '$edited_title', birth_control_id = '$birth_control_id' where partner_facility_id = '$partner_facility_id' && video_id = '$video_id' limit 1";
 		query($query);
 
 		$info['success'] = true;
@@ -1855,7 +1881,6 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 				$rows[$key]['date'] = date('Y-m-d\TH:i:s', strtotime($row['video_timestamp']));
 				$rows[$key]['video_title'] = htmlspecialchars($row['video_title']);
 				$rows[$key]['video_desc'] = nl2br(htmlspecialchars($row['video_desc']));
-				$rows[$key]['user_img'] = get_image($row['user_img']);
 	
 				$rows[$key]['user_owns'] = false;
 				if($user_id == $row['user_id'])
@@ -1954,7 +1979,18 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 				$rows[$key]['date'] = date('Y-m-d\TH:i:s', strtotime($row['video_timestamp']));
 				$rows[$key]['video_title'] = htmlspecialchars($row['video_title']);
 				$rows[$key]['video_desc'] = nl2br(htmlspecialchars($row['video_desc']));
-				$rows[$key]['user_img'] = get_image($row['user_img']);
+
+				$id = $row['partner_facility_id'];
+				$query = "select * from partner_facility where partner_facility_id = '$id' limit 1";
+				$user_row = query($query);
+
+				if ($user_row) {
+					$rows[$key]['partner_facility'] = $user_row[0];
+					$rows[$key]['partner_facility']['logo'] = get_image($user_row[0]['facility_logo']);
+					// Display the full name
+					$rows[$key]['partner_facility']['location'] = $user_row[0]['city_municipality'];
+					$rows[$key]['partner_facility']['name'] = $user_row[0]['health_facility_name'];
+				}
 	
 				$birth_control_id = $row['birth_control_id'];
 				$query = "select * from birth_controls where birth_control_id = '$birth_control_id' limit 1";

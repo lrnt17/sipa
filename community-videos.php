@@ -182,7 +182,7 @@
                             <video src=""class="js-video-display"style="width: 100%;  object-fit: cover;"></video>
                         </div>
 
-                    <div class="js-video-link" style="cursor: pointer;">
+                    <div class="js-video-link-body" style="cursor: pointer;">
 
                         <div>
                             <div class="row py-3 px-2">
@@ -255,7 +255,7 @@
     let limit = 6;
 </script>
 <script src="time.js?v1"></script>
-<script src="community-videos.js?v15"></script>
+<script src="community-videos.js?v16"></script>
 
 <script>
 

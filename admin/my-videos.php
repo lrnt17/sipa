@@ -160,10 +160,10 @@
                     <span id="file-name"></span>
                 </div>
                 <div class="">
-                    <input type="text" placeholder="Title" name="video_title" id="video_title" class="js-video-title-input" required>
+                    <input type="text" placeholder="Title" name="video_title" id="video_title" class="js-video-title-input" maxlength="100" required>
                 </div>
                 <div class="">
-                    <textarea placeholder="Description" name="post" class="js-video-desc-input" required></textarea>
+                    <textarea placeholder="Description" name="post" class="js-video-desc-input" maxlength="500" required></textarea>
                 </div>
                 <div>
                     <b>Select a Contraceptive Category: </b>
@@ -190,12 +190,12 @@
             <form onsubmit="manage_my_videos.save_edited_details(event)" method="post">
                 <div class="form">
                     <label for="edit_video_title">Video Title</label>
-                    <input type="text" name="edit_video_title" class="js-edit-title edit-video" required>
+                    <input type="text" name="edit_video_title" class="js-edit-title edit-video" maxlength="100" required>
                 </div>
                 <div class="form">
                     <label for="edit_video_desc">Video Description</label>
                     <!--<input type="text" name="edit_video_desc" class="js-edit-desc edit-video" required>-->
-                    <textarea name="edit_video_desc" id="edit_video_desc" class="js-edit-desc edit-video" cols="30" rows="10" required></textarea>
+                    <textarea name="edit_video_desc" id="edit_video_desc" class="js-edit-desc edit-video" cols="30" rows="10" maxlength="500" required></textarea>
                 </div>
                 <div class="form">
                     <label for="edit_category">Contraceptive Category</label>

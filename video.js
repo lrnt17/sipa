@@ -82,8 +82,8 @@ var single_video = {
                                 template.querySelector(".js-delete-button").setAttribute('onclick',`single_video.delete_comment(${obj.rows[i].video_id})`);
                                 template.querySelector(".js-edit-button").setAttribute('onclick',`single_video.edit_comment_video(${obj.rows[i].video_id})`);
                                 template.querySelector(".js-reply-link").setAttribute('onclick',`single_video.view_replies(${obj.rows[i].video_id})`);
-                                //template.querySelector(".js-username").innerHTML = (typeof obj.rows[i].user == 'object') ? obj.rows[i].user.user_fname : 'User';
-                                template.querySelector(".js-username").innerHTML = obj.rows[i].user_fname;
+                                template.querySelector(".js-username").innerHTML = (typeof obj.rows[i].user == 'object') ? obj.rows[i].user.name : 'User';
+                                //template.querySelector(".js-username").innerHTML = obj.rows[i].user_fname;
                                 //template.querySelector(".js-profile-link").href = (typeof obj.rows[i].user == 'object') ? 'profile.php?id='+obj.rows[i].user.user_id : '#';
                                 template.querySelector(".js-like-button").setAttribute('video_id', obj.rows[i].video_id);
                                 template.querySelector(".js-num-likes").setAttribute('video_id', obj.rows[i].video_id);
@@ -105,9 +105,9 @@ var single_video = {
                                 } else {
                                     template.querySelector(".js-num-likes").innerHTML = obj.rows[i].getlikes['count(*)'];
                                 }
-                                template.querySelector(".js-photo").src = obj.rows[i].user_img;
-                                /*if(typeof obj.rows[i].user == 'object')
-                                    template.querySelector(".js-photo").src = obj.rows[i].user.user_image;*/
+                                //template.querySelector(".js-photo").src = obj.rows[i].user_img;
+                                if(typeof obj.rows[i].user == 'object')
+                                    template.querySelector(".js-photo").src = obj.rows[i].user.image;
 
                                 let clone = template.cloneNode(true);
                                 clone.setAttribute('id','video_'+obj.rows[i].video_id);
@@ -177,6 +177,7 @@ var single_video = {
         editTextarea.classList.add('form-control');
         editTextarea.style.resize = 'none';
         editTextarea.rows = 2; // Set the number of rows to 5
+        editTextarea.setAttribute('maxlength', '500');
 
         // Replace the reply content with the input field
         commentElement.parentNode.replaceChild(editTextarea, commentElement);
@@ -422,15 +423,18 @@ var single_video = {
 
                                 //Inner divs
                                 let userimageElement = document.createElement('img');
-                                userimageElement.src = 'assets/images/57.png'; // Default image source
+                                //userimageElement.src = 'assets/images/57.png'; // Default image source
                                 userimageElement.classList.add('js-userimage-reply','my-2');
-                                userimageElement.src = data.rows[i].user_img;
+                                //userimageElement.src = data.rows[i].user_img;
+                                if (typeof data.rows[i].user == 'object') {
+                                    userimageElement.src = data.rows[i].user.image;
+                                }
                                 
                                 let usernameElement = document.createElement('div');
                                 usernameElement.classList.add('js-username-reply');
-                                //usernameElement.innerHTML = (data.rows[i].user_fname) ? data.rows[i].user_fname : 'User';
-                                usernameElement.innerHTML = data.rows[i].user_fname;
-                                usernameElement.style.color='blue';
+                                usernameElement.innerHTML = (typeof data.rows[i].user == 'object') ? data.rows[i].user.name : 'User';
+                                //usernameElement.innerHTML = data.rows[i].user_fname;
+                                //usernameElement.style.color='blue';
                                 usernameElement.style.display='inline';
                                 
                                 let dateTimeElement = document.createElement('div');
@@ -595,6 +599,7 @@ var single_video = {
                         replyInput.style.background ='transparent';
                         replyInput.style.border ='none';
                         replyInput.style.fontSize='14px';
+                        replyInput.setAttribute('maxlength', '500');
                         
 
                         textArea.appendChild(replyInput);
@@ -767,12 +772,13 @@ var single_video = {
         let replyText = replyElement.innerHTML;
 
         // Create an input field for editing the reply
-        let editInput = document.createElement('input');
-        editInput.type = 'text';
+        let editInput = document.createElement('textarea');
+        //editInput.type = 'text';
         editInput.value = replyText;
         editInput.classList.add('form-control');
         editInput.style.resize = 'none';
         editInput.rows = 2; // Set the number of rows to 5
+        editInput.setAttribute('maxlength', '500');
 
         // Replace the reply content with the input field
         divname_com.replaceChild(editInput, replyElement);
@@ -804,8 +810,8 @@ var single_video = {
             divname_com.removeChild(saveButton);
             divname_com.removeChild(cancelButton);
             // Show the edit and delete buttons
-            divname_com.querySelector('.js-edit-button').classList.remove('hide');
-            divname_com.querySelector('.js-delete-button').classList.remove('hide');
+            //divname_com.querySelector('.js-edit-button').classList.remove('hide');
+            //divname_com.querySelector('.js-delete-button').classList.remove('hide');
         });
 
         // Append the Cancel button to the replyWrapper element
@@ -823,7 +829,7 @@ var single_video = {
         // Get the edited reply input field
         let col2 = replyWrapper.querySelector('.col');
         let divname_com = col2.querySelector('.p-2');
-        let editInput = replyWrapper.querySelector('input');
+        let editInput = replyWrapper.querySelector('textarea');
         console.log(editInput);
         // Get the edited reply content
         let editedReplyText = editInput.value;

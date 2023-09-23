@@ -37,7 +37,8 @@
                 <video src=""class="js-video-display"style="width: 100%;  object-fit: cover;"></video>
             </div>
 
-        <div class="js-video-link" style="pointer-events: none;">
+        <!-- <div class="js-video-link-body" style="pointer-events: none;"> -->
+        <div class="js-video-link-body" style="cursor: pointer;">
             
             <div>
                 <div class="row py-3 px-2">
@@ -111,10 +112,22 @@
                                 let videoCard = videoCardTemplate.content.cloneNode(true);
 
                                 videoCard.querySelector(".js-video-link").setAttribute('onclick',`most_viewed_video.view_video_post(${obj.rows[i].video_id})`);
-                                videoCard.querySelector(".js-image").src = obj.rows[i].user_img;
-                                videoCard.querySelector(".js-username").textContent = obj.rows[i].user_fname;
+                                videoCard.querySelector(".js-video-link-body").setAttribute('onclick',`most_viewed_video.view_video_post(${obj.rows[i].video_id})`);
+                                //videoCard.querySelector(".js-image").src = obj.rows[i].user_img;
+                                if(typeof obj.rows[i].partner_facility == 'object'){
+                                    videoCard.querySelector(".js-image").src = obj.rows[i].partner_facility.logo;
+                                }
+                                //videoCard.querySelector(".js-username").textContent = obj.rows[i].user_fname;
+                                videoCard.querySelector(".js-username").textContent = (typeof obj.rows[i].partner_facility == 'object') ? obj.rows[i].partner_facility.name : 'User';
 
-                                videoCard.querySelector(".js-video-title-display").innerHTML = obj.rows[i].video_title;
+                                //videoCard.querySelector(".js-video-title-display").innerHTML = obj.rows[i].video_title;
+                                let videoTitle = obj.rows[i].video_title;
+                                let maxLength = 45; // Maximum number of characters to display
+                                if (videoTitle.length > maxLength) {
+                                    videoTitle = videoTitle.substring(0, maxLength) + '...';
+                                }
+                                videoCard.querySelector(".js-video-title-display").innerHTML = videoTitle;
+
                                 videoCard.querySelector(".js-video-display").src = obj.rows[i].video;
                                 videoCard.querySelector(".js-video-category").innerHTML = obj.rows[i].birth_control.name;
 

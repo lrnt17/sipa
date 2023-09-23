@@ -26,7 +26,7 @@
 </head>
     <div class="con-nav py-3">
       <nav class="navbar navbar-expand-lg navbar-light mx-5">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="home_1_with_user.php">
               <img class="rounded-circle" src="<?php echo getLogoPath(); ?>" alt="SiPa" width="55" height="55" >
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
