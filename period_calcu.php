@@ -15,6 +15,16 @@
     <title>SiPa | Period Tracker</title>
     
     <style>
+        body {
+            overflow-x: hidden;
+            margin: 0;
+            top:0!important;
+        }
+
+        .skiptranslate iframe  {
+        visibility: hidden !important;
+        }
+        
         .period-day {
             background-color: #CAA4D0;
             color:#ffff;
