@@ -1360,6 +1360,18 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 				if($user_id == $row['user_id'])
 					$rows[$key]['user_owns'] = true;
 	
+				$id = $row['partner_facility_id'];
+				$query = "select * from partner_facility where partner_facility_id = '$id' limit 1";
+				$user_row = query($query);
+
+				if ($user_row) {
+					$rows[$key]['partner_facility'] = $user_row[0];
+					$rows[$key]['partner_facility']['logo'] = get_image($user_row[0]['facility_logo']);
+					// Display the full name
+					$rows[$key]['partner_facility']['location'] = $user_row[0]['city_municipality'];
+					$rows[$key]['partner_facility']['name'] = $user_row[0]['health_facility_name'];
+				}
+				
 				$birth_control_id = $row['birth_control_id'];
 				$query = "select * from birth_controls where birth_control_id = '$birth_control_id' limit 1";
 				$birth_control_row = query($query);
@@ -1849,6 +1861,18 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 				if($user_id == $row['user_id'])
 					$rows[$key]['user_owns'] = true;
 	
+				$id = $row['partner_facility_id'];
+				$query = "select * from partner_facility where partner_facility_id = '$id' limit 1";
+				$user_row = query($query);
+
+				if ($user_row) {
+					$rows[$key]['partner_facility'] = $user_row[0];
+					$rows[$key]['partner_facility']['logo'] = get_image($user_row[0]['facility_logo']);
+					// Display the full name
+					$rows[$key]['partner_facility']['location'] = $user_row[0]['city_municipality'];
+					$rows[$key]['partner_facility']['name'] = $user_row[0]['health_facility_name'];
+				}
+				
 				$birth_control_id = $row['birth_control_id'];
 				$query = "select * from birth_controls where birth_control_id = '$birth_control_id' limit 1";
 				$birth_control_row = query($query);

@@ -250,11 +250,12 @@ var allvideos = {
         for (var i = 0; i < videos.length; i++) {
             let videoCard = videoCardTemplate.content.cloneNode(true);
 
-            /*if(typeof videos[i].user == 'object'){
-                videoCard.querySelector(".js-image").src = videos[i].user.image;
-            }*/
-            videoCard.querySelector(".js-image").src = videos[i].user_img;
-            videoCard.querySelector(".js-username").textContent = videos[i].user_fname;
+            if(typeof videos[i].partner_facility == 'object'){
+                videoCard.querySelector(".js-image").src = videos[i].partner_facility.logo;
+            }
+            //videoCard.querySelector(".js-image").src = videos[i].user_img;
+            //videoCard.querySelector(".js-username").textContent = videos[i].user_fname;
+            videoCard.querySelector(".js-username").textContent = (typeof videos[i].partner_facility == 'object') ? videos[i].partner_facility.name : 'User';
             //videoCard.querySelector(".js-date").textContent = videos[i].date;
             //videoCard.querySelector(".js-title").textContent = videos[i].video_title;
             // Highlight matching words in the post title
