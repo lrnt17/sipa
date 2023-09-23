@@ -1,6 +1,7 @@
 <?php 
     require('../connect.php');
     require('../functions.php');
+    require('fetch_user_and_partner_info.php');
 ?>
 
 <!DOCTYPE html>
@@ -141,6 +142,12 @@
                     <input type="email" name="gmail" id="gmail" required>
                 </div>
                 <div class="form">
+                    <label for="partner_facility">Partner Facilities</label>
+                    <select name="partner_facility" id="partner_facility" required>
+
+                    </select>
+                </div>
+                <!--<div class="form">
                     <label for="city_municipality">City or Municipality</label>
                     <select name="city_municipality" id="city_municipality" required>
                         <option value="" disabled selected>Select City/Municipality</option>
@@ -154,7 +161,7 @@
                         <option value="" disabled selected>Select Health Facility Name</option>
                         <option value="Bustos RHU">Bustos RHU</option>
                     </select>
-                </div>
+                </div>-->
                 <div class="form">
                     <label for="specialization">Specialization *</label>
                     <select name="specialization" id="specialization" required>
@@ -236,6 +243,12 @@
                     <input type="email" name="edit_gmail" class="js-edit-gmail edit-admin" required>
                 </div>
                 <div class="form">
+                    <label for="edit_partner_facility">Partner Facilities</label>
+                    <select name="edit_partner_facility" id="edit_partner_facility" class="js-edit-partner-facility edit-admin" required>
+                        
+                    </select>
+                </div>
+                <!--<div class="form">
                     <label for="edit_city_municipality">City or Municipality</label>
                     <select name="edit_city_municipality" id="edit_city_municipality" class="js-edit-city-municipality edit-admin" required>
                         <option value="" disabled selected>Select City/Municipality</option>
@@ -249,7 +262,7 @@
                         <option value="" disabled selected>Select Health Facility Name</option>
                         <option value="Bustos RHU">Bustos RHU</option>
                     </select>
-                </div>
+                </div>-->
                 <div class="form">
                     <label for="edit_specialization">Specialization *</label>
                     <select name="edit_specialization" id="edit_specialization" class="js-edit-specialization edit-admin" required>
@@ -358,8 +371,8 @@
                                 row.querySelector(".js-admin-image").src = data.rows[i].user_image;
                                 row.querySelector(".js-admin-fullname").textContent = data.rows[i].user_fname + ' ' + data.rows[i].user_lname;
                                 row.querySelector(".js-admin-email").textContent = data.rows[i].user_email;
-                                row.querySelector(".js-city-municipality").textContent = data.rows[i].city_municipality;
-                                row.querySelector(".js-health-facility").textContent = data.rows[i].health_facility_name;
+                                row.querySelector(".js-city-municipality").textContent = (typeof data.rows[i].partner_facility == 'object') ? data.rows[i].partner_facility.location : 'Place';
+                                row.querySelector(".js-health-facility").textContent = (typeof data.rows[i].partner_facility == 'object') ? data.rows[i].partner_facility.name : 'Name';
                                 row.querySelector(".js-specialization").textContent = data.rows[i].specialization;
                                 row.querySelector(".js-admin-pnum").textContent = data.rows[i].user_pnum;
                                 row.querySelector(".js-admin-edit-btn").setAttribute('onclick',`manage_admins.edit_admin('${data.rows[i].user_id}')`);
@@ -387,7 +400,7 @@
         },
 
         add_admin: function(e){
-
+            
             e.preventDefault();
             let inputs = e.currentTarget.querySelectorAll("input");
 
@@ -398,8 +411,9 @@
 
             let selected_gender = getSelectedValue("gender");
             let selected_specialization = getSelectedValue("specialization");
-            let selected_city_municipality = getSelectedValue("city_municipality");
-            let selected_health_facility = getSelectedValue("health_facility");
+            let selected_partner_facility = getSelectedValue("partner_facility");
+            //let selected_city_municipality = getSelectedValue("city_municipality");
+            //let selected_health_facility = getSelectedValue("health_facility");
 
             let form = new FormData();
             for (var i = inputs.length - 1; i >= 0; i--) {
@@ -407,8 +421,9 @@
             }
             form.append('selected_gender', selected_gender);
             form.append('selected_specialization', selected_specialization);
-            form.append('selected_city_municipality', selected_city_municipality);
-            form.append('selected_health_facility', selected_health_facility);
+            form.append('selected_partner_facility', selected_partner_facility);
+            //form.append('selected_city_municipality', selected_city_municipality);
+            //form.append('selected_health_facility', selected_health_facility);
             form.append('data_type', 'admin_registration');
 
             var ajax = new XMLHttpRequest();
@@ -427,8 +442,9 @@
                             inputs.forEach(input => input.value = "");
                             document.getElementById("gender").selectedIndex = 0;
                             document.getElementById("specialization").selectedIndex = 0;
-                            document.getElementById("city_municipality").selectedIndex = 0;
-                            document.getElementById("health_facility").selectedIndex = 0;
+                            document.getElementById("partner_facility").selectedIndex = 0;
+                            //document.getElementById("city_municipality").selectedIndex = 0;
+                            //document.getElementById("health_facility").selectedIndex = 0;
 
                             manage_admins.hide();
                             
@@ -449,13 +465,15 @@
 
         edit_admin: function(id){
 
+            manage_admins.load_partner_facilities_for_editing();
+
             document.querySelector(".js-edit-admin").classList.remove('hide');
             manage_admins.edit_id = id;
 
             let data = document.querySelector("#admin_"+id).getAttribute("row");
             data = data.replaceAll('\\"','"');
             data = JSON.parse(data);
-            
+            console.log(data);
             if(typeof data == 'object') {
 
                 document.querySelector(".js-edit-image").src = data.user_image;
@@ -464,8 +482,9 @@
                 document.querySelector(".js-edit-dob").value = data.user_dob;
                 document.querySelector(".js-edit-gender").value = data.user_sex;
                 document.querySelector(".js-edit-gmail").value = data.user_email;
-                document.querySelector(".js-edit-city-municipality").value = data.city_municipality;
-                document.querySelector(".js-edit-health-facility").value = data.health_facility_name;
+                //document.querySelector(".js-edit-city-municipality").value = data.city_municipality;
+                //document.querySelector(".js-edit-health-facility").value = data.health_facility_name;
+                document.querySelector(".js-edit-partner-facility").value = data.partner_facility_id;
                 document.querySelector(".js-edit-specialization").value = data.specialization;
                 document.querySelector(".js-edit-pnum").value = data.user_pnum;
 
@@ -485,8 +504,9 @@
 
             let selected_gender = getSelectedValue("edit_gender");
             let selected_specialization = getSelectedValue("edit_specialization");
-            let selected_city_municipality = getSelectedValue("edit_city_municipality");
-            let selected_health_facility = getSelectedValue("edit_health_facility");
+            let selected_partner_facility = getSelectedValue("edit_partner_facility");
+            //let selected_city_municipality = getSelectedValue("edit_city_municipality");
+            //let selected_health_facility = getSelectedValue("edit_health_facility");
             let fileInput = document.querySelector('.js-image');
             let file = fileInput.files[0];
             console.log(file);
@@ -500,8 +520,9 @@
             form.append('edit_image', file);
             form.append('selected_gender', selected_gender);
             form.append('selected_specialization', selected_specialization);
-            form.append('selected_city_municipality', selected_city_municipality);
-            form.append('selected_health_facility', selected_health_facility);
+            form.append('selected_partner_facility', selected_partner_facility);
+            //form.append('selected_city_municipality', selected_city_municipality);
+            //form.append('selected_health_facility', selected_health_facility);
             form.append('data_type', 'edit_admin');
 
             var ajax = new XMLHttpRequest();
@@ -601,12 +622,12 @@
                     month: 'long',
                     day: 'numeric'
                 });
-
                 document.querySelector(".js-view-dob").innerHTML = formattedDate;
+
                 document.querySelector(".js-view-gender").innerHTML = data.user_sex;
                 document.querySelector(".js-view-gmail").innerHTML = data.user_email;
-                document.querySelector(".js-view-city-municipality").innerHTML = data.city_municipality;
-                document.querySelector(".js-view-health-facility").innerHTML = data.health_facility_name;
+                document.querySelector(".js-view-city-municipality").innerHTML = data.partner_facility.location;
+                document.querySelector(".js-view-health-facility").innerHTML = data.partner_facility.name;
                 document.querySelector(".js-view-specialization").innerHTML = data.specialization;
                 document.querySelector(".js-view-pnum").innerHTML = data.user_pnum;
 
@@ -618,6 +639,7 @@
         show_add_admin: function(){
 
             document.querySelector(".js-add-admin").classList.remove('hide');
+            manage_admins.load_partner_facilities();
         },
 
         hide: function(){
@@ -633,8 +655,108 @@
                     checkboxes[i].checked = source.checked;
             }
         },
+
+        load_partner_facilities: function(){
+
+            let form = new FormData();
+
+            form.append('data_type', 'load_partner_facilities');
+            var ajax = new XMLHttpRequest();
+
+            ajax.addEventListener('readystatechange',function(){
+
+                if(ajax.readyState == 4)
+                {
+                    if(ajax.status == 200){
+
+                        let obj = JSON.parse(ajax.responseText);
+
+                        if(obj.success){
+                            
+                            let selectElement = document.getElementById("partner_facility");
+                            selectElement.innerHTML = "";
+
+                            let blankOption = document.createElement("option");
+                            blankOption.selected = true;
+                            blankOption.value = "";
+                            blankOption.text = "Select a Partner Facility";
+                            blankOption.disabled = true;
+                            selectElement.appendChild(blankOption);
+
+                            obj.rows.forEach(function(partner) {
+                                let option = document.createElement("option");
+                                //option.value = partner.partner_facility_id;
+                                option.value = partner.partner_facility_id;
+                                option.text = partner.city_municipality + " - " + partner.health_facility_name;
+                                //option.setAttribute("city-municipality-name", partner.city_municipality);
+                                
+                                // If the city/municipality matches the value from PHP, select this option
+                                /*if (partner.city_municipality == "<?//=$row['city_municipality']?>") {
+                                    option.selected = true;
+                                }*/
+
+                                selectElement.appendChild(option);
+                            });
+                        }
+                    }
+                }
+            });
+
+            ajax.open('post','ajax-admin.php', true);
+            ajax.send(form);
+        },
+
+        load_partner_facilities_for_editing: function(){
+
+            let form = new FormData();
+
+            form.append('data_type', 'load_partner_facilities');
+            var ajax = new XMLHttpRequest();
+
+            ajax.addEventListener('readystatechange',function(){
+
+                if(ajax.readyState == 4)
+                {
+                    if(ajax.status == 200){
+
+                        let obj = JSON.parse(ajax.responseText);
+
+                        if(obj.success){
+                            
+                            let selectElement = document.getElementById("edit_partner_facility");
+                            selectElement.innerHTML = "";
+
+                            let blankOption = document.createElement("option");
+                            blankOption.value = "";
+                            blankOption.text = "Select a Partner Facility";
+                            blankOption.disabled = true;
+                            selectElement.appendChild(blankOption);
+
+                            obj.rows.forEach(function(partner) {
+                                let option = document.createElement("option");
+                                //option.value = partner.partner_facility_id;
+                                option.value = partner.partner_facility_id;
+                                option.text = partner.city_municipality + " - " + partner.health_facility_name;
+                                //option.setAttribute("city-municipality-name", partner.city_municipality);
+                                
+                                // If the city/municipality matches the value from PHP, select this option
+                                /*if (partner.city_municipality == "<?//=$row['city_municipality']?>") {
+                                    option.selected = true;
+                                }*/
+
+                                selectElement.appendChild(option);
+                            });
+                        }
+                    }
+                }
+            });
+
+            ajax.open('post','ajax-admin.php', true);
+            ajax.send(form);
+        },
     };
 
-    manage_admins.load_admins()
+    manage_admins.load_admins();
+    //manage_admins.load_partner_facilities();
 </script>
 </html>

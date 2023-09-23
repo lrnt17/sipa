@@ -1,11 +1,12 @@
 <?php 
     require('../connect.php');
     require('../functions.php');
+    require('fetch_user_and_partner_info.php');
 
-    $user_place = $_SESSION['USER']['city_municipality'];
-    $user_work_at = $_SESSION['USER']['health_facility_name'];
+    //$city = $_SESSION['USER']['city_municipality'];
+    //$facility_name = $_SESSION['USER']['health_facility_name'];
 
-    $query = "select * from schedule_settings where city_municipality = '$user_place' && health_facility_name = '$user_work_at' limit 1";
+    $query = "select * from schedule_settings where city_municipality = '$city' && health_facility_name = '$facility_name' limit 1";
 	$row = query($query);
 
 	if($row)
@@ -121,14 +122,6 @@
     
     <section class="main">
         <?php include('header.php') ?>
-        <?=$_SESSION['USER']['health_facility_name']; ?><br>
-        <?=$row['schedule_settings_id']?>
-        <?=$row['city_municipality']?>
-        <?=$row['health_facility_name']?>
-        <?=$row['duration']?>
-        <?=$row['start_at']?>
-        <?=$row['end_at']?>
-        <?=$row['max_slot']?>
 
         <form method="post">
             <div>

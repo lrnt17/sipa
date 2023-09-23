@@ -1,6 +1,7 @@
 <?php 
     require('../connect.php');
     require('../functions.php');
+    require('fetch_user_and_partner_info.php');
 ?>
 
 <!DOCTYPE html>

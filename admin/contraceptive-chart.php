@@ -1,6 +1,7 @@
 <?php 
     require('../connect.php');
     require('../functions.php');
+    require('fetch_user_and_partner_info.php');
 ?>
 
 <!DOCTYPE html>
@@ -87,7 +88,6 @@
 </style>
 <body>
     <section class="main">
-        <?=$_SESSION['USER']['user_id']; ?>
         <?php include('header.php') ?>
 
         <div>

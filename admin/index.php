@@ -1,9 +1,32 @@
 <?php 
     require('../connect.php');
     require('../functions.php');
+    require('fetch_user_and_partner_info.php');
+    /*$user_role = $_SESSION['USER']['user_role'];
+    $user_fname = $_SESSION['USER']['user_fname'];*/
 
-    $user_role = $_SESSION['USER']['user_role'];
-    $user_fname = $_SESSION['USER']['user_fname'];
+    /*$user_id = $_SESSION['USER']['user_id'];
+
+    $query = "select * from users where user_id = '$user_id' limit 1";
+	$row = query($query);
+
+	if($row)
+	{
+		$row = $row[0];
+        $user_fname = $row['user_fname'];
+        $id = $row['partner_facility_id'];
+        $user_role = $row['user_role'];
+
+        $query = "select * from partner_facility where partner_facility_id = '$id' limit 1";
+        $user_row = query($query);
+
+        if ($user_row) {
+            $user_row = $user_row[0];
+            $partner_facility_id = $user_row['partner_facility_id'];
+            $city = $user_row['city_municipality'];
+            $facility_name = $user_row['health_facility_name'];
+        }
+	}*/
 ?>
 
 <!DOCTYPE html>
@@ -84,12 +107,10 @@
     }
 </style>
 <body>
-
-    <?php include('header.php') ?>
     <section class="main">
+        <?php include('header.php') ?>
         <h1>SiPa <?=$user_role?></h1>
         <h2><?=$user_fname?></h2>
     </section>
-
 </body>
 </html>

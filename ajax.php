@@ -1272,6 +1272,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 		$video_desc = addslashes($_POST['video_desc_input']);
 		$birth_control_id = (int)$_POST['selected_method'];
 		$user_id = $_SESSION['USER']['user_id'];
+		$partner_facility_id = $_POST['partner_facility_id'];
 		//$anonymous = $_POST['anonymous'];
 		
 		/*if($anonymous == 'true'){
@@ -1304,8 +1305,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 				
 				$vdeoFilename = $video_upload_path;
 
-				$query = "insert into videos (birth_control_id,user_id,video_timestamp,video,video_title,video_desc) 
-				values ('$birth_control_id','$user_id','$date','$vdeoFilename','$video_title','$video_desc')";
+				$query = "insert into videos (birth_control_id,user_id,partner_facility_id,video_timestamp,video,video_title,video_desc) 
+				values ('$birth_control_id','$user_id','$partner_facility_id','$date','$vdeoFilename','$video_title','$video_desc')";
 				query($query);
 
 				/*$query = "select * from forum where user_id = '$user_id' order by forum_id desc limit 1";
@@ -1758,9 +1759,11 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 	}else
 	if($_POST['data_type'] == 'load_my_videos') 
 	{
-		$user_id = $_SESSION['USER']['user_id'] ?? 0;
-
-		$query = "select * from videos where user_id = $user_id && comment_parent_id = 0 && reply_parent_id = 0 order by video_id desc";
+		//$user_id = $_SESSION['USER']['user_id'] ?? 0;
+		$partner_facility_id = $_POST['partner_facility_id'];
+		//$partner_facility_id = $_SESSION['USER']['partner_facility_id'];
+		
+		$query = "select * from videos where partner_facility_id = $partner_facility_id && comment_parent_id = 0 && reply_parent_id = 0 order by video_id desc";
 		$rows = query($query);
 		
 		if($rows){
@@ -1793,7 +1796,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 	}else
 	if($_POST['data_type'] == 'edit_video_details') 
 	{
-		
+		$partner_facility_id = $_POST['partner_facility_id'];
 		$video_id = (int)($_POST['video_id']);
 		$edited_title = addslashes($_POST['edited_title']);
 		$edited_desc = addslashes($_POST['edited_desc']);
@@ -1801,7 +1804,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 		$user_id = $_SESSION['USER']['user_id'];
 		//$date = date("Y-m-d H:i:s");
 		
-		$query = "update videos set video_desc = '$edited_desc', video_title = '$edited_title', birth_control_id = '$birth_control_id' where user_id = '$user_id' && video_id = '$video_id' limit 1";
+		$query = "update videos set video_desc = '$edited_desc', video_title = '$edited_title', birth_control_id = '$birth_control_id' where user_id = '$user_id' && partner_facility_id = '$partner_facility_id' && video_id = '$video_id' limit 1";
 		query($query);
 
 		$info['success'] = true;

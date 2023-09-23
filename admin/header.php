@@ -1,14 +1,33 @@
 <?php 
     defined('APP') or die('direct script access denied!');
     
-    if(!logged_in()){
+    /*if(!logged_in()){
 		header("Location: ../login_1.php");
 		die;
 	}
     
-    $user_role = $_SESSION['USER']['user_role'];
-    $user_fname = $_SESSION['USER']['user_fname'];
-    $facility_name = $_SESSION['USER']['health_facility_name'];
+    $user_id = $_SESSION['USER']['user_id'];
+
+    $query = "select * from users where user_id = '$user_id' limit 1";
+	$row = query($query);
+
+	if($row)
+	{
+		$row = $row[0];
+        $user_fname = $row['user_fname'];
+        $id = $row['partner_facility_id'];
+        $user_role = $row['user_role'];
+
+        $query = "select * from partner_facility where partner_facility_id = '$id' limit 1";
+        $user_row = query($query);
+
+        if ($user_row) {
+            $user_row = $user_row[0];
+            $partner_facility_id = $user_row['partner_facility_id'];
+            $city = $user_row['city_municipality'];
+            $facility_name = $user_row['health_facility_name'];
+        }
+	}*/
 ?>
 <section>
     <div class="sidenav">
@@ -18,7 +37,7 @@
         <?php if(check_admin($user_role)):?>
             <a href="appointment-list.php">Appointment List</a>
             <a href="schedule-settings.php">Schedule Settings</a>
-            <a href="local-admins.php">Admin List (<?= $facility_name?>)</a>
+            <a href="local-admins.php">Admin List (<?=$facility_name?>)</a>
         <?php endif;?>
         <!--<button class="dropdown-btn">Dropdown 
             <i class="fa fa-caret-down"></i>
@@ -31,6 +50,7 @@
         <?php if(check_head_admin($user_role)):?>
             <a href="#about">Head Administrators</a>
             <a href="manage-admins.php">Administrators</a>
+            <a href="partner-facilities.php">Partner Facilities</a>
             <button class="dropdown-btn">Contraceptives 
                 <i class="fa fa-caret-down"></i>
             </button>
@@ -42,7 +62,11 @@
             </div>
         <?php endif;?>
         <button class="dropdown-btn">
-            Administrator
+            <?php if(check_head_admin($user_role)):?>
+                Head Administrator
+            <?php else:?>
+                Administrator
+            <?php endif;?>  
             <img src="<?= admin_get_image($_SESSION['USER']['user_image'])?>" title="SiPa" width="25" height="25">
             <span>Hi, <?= $_SESSION['USER']['user_fname']?></span>
             <i class="fa fa-caret-down"></i>

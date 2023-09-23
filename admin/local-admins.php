@@ -1,9 +1,33 @@
 <?php 
     require('../connect.php');
     require('../functions.php');
+    require('fetch_user_and_partner_info.php');
 
-    $city = $_SESSION['USER']['city_municipality'];
-    $facility_name = $_SESSION['USER']['health_facility_name'];
+    //$city = $_SESSION['USER']['city_municipality'];
+    //$facility_name = $_SESSION['USER']['health_facility_name'];
+    
+    /*$user_id = $_SESSION['USER']['user_id'];
+
+    $query = "select * from users where user_id = '$user_id' limit 1";
+	$row = query($query);
+
+	if($row)
+	{
+		$row = $row[0];
+        $user_fname = $row['user_fname'];
+        $id = $row['partner_facility_id'];
+        $user_role = $row['user_role'];
+
+        $query = "select * from partner_facility where partner_facility_id = '$id' limit 1";
+        $user_row = query($query);
+
+        if ($user_row) {
+            $user_row = $user_row[0];
+            $partner_facility_id = $user_row['partner_facility_id'];
+            $city = $user_row['city_municipality'];
+            $facility_name = $user_row['health_facility_name'];
+        }
+	}*/
 ?>
 
 <!DOCTYPE html>
@@ -255,11 +279,13 @@
 
             let form = new FormData();
 
-            let city = '<?= $city?>';
-            let facility_name = '<?= $facility_name?>';
+            //let city = '<?//= $city?>';
+            //let facility_name = '<?//= $facility_name?>';
+            let partner_facility_id = '<?= $partner_facility_id?>';
             //console.log(city, facility_name);return;
-            form.append('city_municipality', city);
-            form.append('health_facility_name', facility_name);
+            //form.append('city_municipality', city);
+            //form.append('health_facility_name', facility_name);
+            form.append('partner_facility_id', partner_facility_id);
             form.append('data_type', 'load_local_admins');
             
             var ajax = new XMLHttpRequest();
@@ -341,8 +367,8 @@
                 document.querySelector(".js-view-dob").innerHTML = formattedDate;
                 document.querySelector(".js-view-gender").innerHTML = data.user_sex;
                 document.querySelector(".js-view-gmail").innerHTML = data.user_email;
-                document.querySelector(".js-view-city-municipality").innerHTML = data.city_municipality;
-                document.querySelector(".js-view-health-facility").innerHTML = data.health_facility_name;
+                document.querySelector(".js-view-city-municipality").innerHTML = data.partner_facility.location;;
+                document.querySelector(".js-view-health-facility").innerHTML = data.partner_facility.name;
                 document.querySelector(".js-view-specialization").innerHTML = data.specialization;
                 document.querySelector(".js-view-pnum").innerHTML = data.user_pnum;
 

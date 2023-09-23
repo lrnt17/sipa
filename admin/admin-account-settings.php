@@ -7,17 +7,17 @@
 		die;
 	}
 
-    include('header.php');
+    //include('header.php');
 
     $user_id = $_SESSION['USER']['user_id'];
 
-    $query = "select * from users where user_id = '$user_id' limit 1";
+    /*$query = "select * from users where user_id = '$user_id' limit 1";
 	$row = query($query);
 
 	if($row)
 	{
 		$row = $row[0];
-	}
+	}*/
 
     //update if statement
     if($_SERVER['REQUEST_METHOD'] == "POST")
@@ -141,6 +141,29 @@
 			die;
 		}
 	}
+
+    //$user_id = $_SESSION['USER']['user_id'];
+
+    $query = "select * from users where user_id = '$user_id' limit 1";
+	$row = query($query);
+
+	if($row)
+	{
+		$row = $row[0];
+        $user_fname = $row['user_fname'];
+        $id = $row['partner_facility_id'];
+        $user_role = $row['user_role'];
+
+        $query = "select * from partner_facility where partner_facility_id = '$id' limit 1";
+        $user_row = query($query);
+
+        if ($user_row) {
+            $user_row = $user_row[0];
+            $partner_facility_id = $user_row['partner_facility_id'];
+            $city = $user_row['city_municipality'];
+            $facility_name = $user_row['health_facility_name'];
+        }
+	}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -221,7 +244,7 @@
 </head>
 <body>
     <section class="main">
-        
+        <?php include('header.php') ?>
         <?php if(!empty($errors)):?>
             <script>
                 alert("<?php echo implode("\n", $errors); ?>");

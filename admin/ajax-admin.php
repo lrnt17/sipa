@@ -25,10 +25,24 @@
             $rows = query($query);
             
             if($rows){
+
                 foreach ($rows as $key => $row) {
 
                     $rows[$key]['user_image'] = get_admin_image($row['user_image']);
+
+                    $id = $row['partner_facility_id'];
+                    $query = "select * from partner_facility where partner_facility_id = '$id' limit 1";
+                    $user_row = query($query);
+
+                    if ($user_row) {
+                        $rows[$key]['partner_facility'] = $user_row[0];
+						//$rows[$key]['user']['image'] = get_image($user_row[0]['user_image']);
+						// Display the full name
+						$rows[$key]['partner_facility']['location'] = $user_row[0]['city_municipality'];
+                        $rows[$key]['partner_facility']['name'] = $user_row[0]['health_facility_name'];
+                    }
                 }
+
                 $info['rows'] = $rows;
                 $info['success'] = true;
             }
@@ -38,9 +52,10 @@
             $fname = addslashes($_POST['fname']);
             $lname = addslashes($_POST['lname']);
             $gmail = addslashes($_POST['gmail']);
-            $health_facility = $_POST['selected_health_facility'];
+            //$health_facility = $_POST['selected_health_facility'];
+            $partner_facility = $_POST['selected_partner_facility'];
             $specialization = $_POST['selected_specialization'];
-            $city_municipality = $_POST['selected_city_municipality'];
+            //$city_municipality = $_POST['selected_city_municipality'];
             $gender = $_POST['selected_gender'];
             $role = 'admin';
             $pnum = (int)($_POST['pnum']);
@@ -108,8 +123,8 @@
                     //$sql = "INSERT INTO email_verification(gmail, verification_code, verified_at) VALUES ('" . $gmail . "', '" . $verification_code . "', NULL)";
                     //query($sql);
                     $password = password_hash($password, PASSWORD_DEFAULT);
-                    $query = "INSERT INTO users(user_role, user_fname, user_lname, user_dob, user_sex, user_email, user_pnum, health_facility_name, specialization, city_municipality, user_name, user_password) 
-                    VALUES ('" . $role . "', '" . $fname . "', '" . $lname . "', '" . $dob . "', '" . $gender . "', '" . $gmail . "', '" . $pnum . "', '" . $health_facility . "', '" . $specialization . "', '" . $city_municipality . "', '" . $username . "', '" . $password . "')";
+                    $query = "INSERT INTO users(user_role, user_fname, user_lname, user_dob, user_sex, user_email, user_pnum, partner_facility_id, specialization, user_name, user_password) 
+                    VALUES ('" . $role . "', '" . $fname . "', '" . $lname . "', '" . $dob . "', '" . $gender . "', '" . $gmail . "', '" . $pnum . "', '" . $partner_facility . "', '" . $specialization . "', '" . $username . "', '" . $password . "')";
                     query($query);
                     //header("Location: sign_up_completed.php?email=" . $gmail);
 
@@ -153,8 +168,9 @@
             $dob = $_POST['edit_dob'];
             $gender = $_POST['selected_gender'];
             $gmail = addslashes($_POST['edit_gmail']);
-            $city_municipality = $_POST['selected_city_municipality'];
-            $health_facility = $_POST['selected_health_facility'];
+            //$city_municipality = $_POST['selected_city_municipality'];
+            //$health_facility = $_POST['selected_health_facility'];
+            $partner_facility = $_POST['selected_partner_facility'];
             $specialization = $_POST['selected_specialization'];
             $pnum = (int)($_POST['edit_pnum']);
             $user_id = $_POST['user_id'];
@@ -167,9 +183,8 @@
             user_image = '$imageFilename', 
             user_email = '$gmail',
             user_pnum = '$pnum',
-            health_facility_name = '$health_facility', 
             specialization = '$specialization',
-            city_municipality = '$city_municipality' 
+            partner_facility_id = '$partner_facility' 
             where user_id = '$user_id' limit 1";
             query($query);
         
@@ -765,10 +780,11 @@
         if ($_POST['data_type'] == 'load_local_admins') 
         {
             $user_id = $_SESSION['USER']['user_id'] ?? 0;
-            $city_municipality = $_POST['city_municipality'];
-            $health_facility_name = $_POST['health_facility_name'];
+            $partner_facility_id = $_POST['partner_facility_id'];
+            //$health_facility_name = $_POST['health_facility_name'];
 
-            $query = "select * from users where user_role = 'admin' and city_municipality = '$city_municipality' and health_facility_name = '$health_facility_name'";
+            //$query = "select * from users where user_role = 'admin' and city_municipality = '$city_municipality' and health_facility_name = '$health_facility_name'";
+            $query = "select * from users where user_role = 'admin' and partner_facility_id = '$partner_facility_id'";
             $rows = query($query);
             
             if($rows){
@@ -779,10 +795,30 @@
                     $rows[$key]['user_owns'] = false;
                     if($user_id == $row['user_id'])
                         $rows[$key]['user_owns'] = true;
+                
+                    $id = $row['partner_facility_id'];
+                    $query = "select * from partner_facility where partner_facility_id = '$id' limit 1";
+                    $user_row = query($query);
+
+                    if ($user_row) {
+                        $rows[$key]['partner_facility'] = $user_row[0];
+                        //$rows[$key]['user']['image'] = get_image($user_row[0]['user_image']);
+                        // Display the full name
+                        $rows[$key]['partner_facility']['location'] = $user_row[0]['city_municipality'];
+                        $rows[$key]['partner_facility']['name'] = $user_row[0]['health_facility_name'];
+                    }
                 }
                 $info['rows'] = $rows;
                 $info['success'] = true;
             }
+        }else
+        if($_POST['data_type'] == 'load_partner_facilities')
+        {
+            $query = "select * from partner_facility";
+            $rows = query($query);
+            $info['rows'] = $rows;
+            $info['success'] = true;
+    
         }
     }
   

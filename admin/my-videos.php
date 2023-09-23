@@ -1,7 +1,7 @@
 <?php
     require('../connect.php');
     require('../functions.php');
-
+    require('fetch_user_and_partner_info.php');
 ?>
 
 <!DOCTYPE html>
@@ -211,7 +211,7 @@
                 </div>
             </form>
         </div>
-
+    
     </section>
 
     <template id="row-template">
@@ -248,7 +248,10 @@
             </td>
         </tr>
     </template>
-
+    
 </body>
-<script src="my-videos.js?v6"></script>
+<script>
+    let partner_facility_id = '<?=$partner_facility_id?>';
+</script>
+<script src="my-videos.js?v7"></script>
 </html>

@@ -1,10 +1,13 @@
 var manage_my_videos = {
 
+    partner_facility_id: (typeof partner_facility_id == 'undefined') ? 0 : partner_facility_id,
     edit_id: '',
 
     load_my_videos: function(){
 
         let form = new FormData();
+        console.log(manage_my_videos.partner_facility_id);
+        form.append('partner_facility_id', manage_my_videos.partner_facility_id);
         form.append('data_type', 'load_my_videos');
         var ajax = new XMLHttpRequest();
 
@@ -180,6 +183,7 @@ var manage_my_videos = {
         form.append('video_title_input', video_title_input);
         form.append('video_desc_input', video_desc_input);
         form.append('selected_method', selected_method);
+        form.append('partner_facility_id', manage_my_videos.partner_facility_id);
         //form.append('anonymous', anonymous);
         form.append('user_video', file);
         form.append('data_type', 'add_video');
@@ -344,6 +348,7 @@ var manage_my_videos = {
         let form = new FormData();
 
         form.append('video_id', manage_my_videos.edit_id);
+        form.append('partner_facility_id', manage_my_videos.partner_facility_id);
         form.append('edited_title', edited_title);
         form.append('edited_desc', edited_desc);
         form.append('birth_control_id', selected_method);

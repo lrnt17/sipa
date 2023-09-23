@@ -1,9 +1,10 @@
 <?php 
     require('../connect.php');
     require('../functions.php');
+    require('fetch_user_and_partner_info.php');
 
-    $user_place = $_SESSION['USER']['city_municipality'];
-    $user_work_at = $_SESSION['USER']['health_facility_name'];
+    //$city = $_SESSION['USER']['city_municipality'];
+    //$facility_name = $_SESSION['USER']['health_facility_name'];
 
 ?>
 
@@ -297,8 +298,8 @@
 
 <script>
     var appointment_admin_list = true;
-    let city_municipality = '<?php echo $user_place; ?>';
-    let health_facility = '<?php echo $user_work_at; ?>';
+    let city_municipality = '<?php echo $city; ?>';
+    let health_facility = '<?php echo $facility_name; ?>';
     let current_page = 1;
     let last_page = 0;
     let dateComponents = new Date();
@@ -312,8 +313,8 @@
 
         load_appointments: function(e){
 
-            let city_municipality = '<?php echo $user_place; ?>';
-            let health_facility = '<?php echo $user_work_at; ?>';
+            let city_municipality = '<?php //echo $city; ?>';
+            let health_facility = '<?php //echo $facility_name; ?>';
             //console.log(city_municipality);return;
             let form = new FormData();
 
@@ -395,8 +396,8 @@
             let table = document.querySelector("#appointment_table tbody");
             let template = document.querySelector("#appointments-template");
 
-            let city_municipality = '<?php echo $user_place; ?>';
-            let health_facility = '<?php echo $user_work_at; ?>';
+            let city_municipality = '<?php// echo $city; ?>';
+            let health_facility = '<?php //echo $facility_name; ?>';
 
             let form = new FormData();
 
