@@ -93,11 +93,8 @@
 
     <div class="container">
         <div class="row px-5">
-            <div class="col-2 d-none d-lg-block">
-                <!-- sa column 'tong div --> 
-            </div>
 
-            <div class="col col-lg-10" style="margin-top:-9.8%;">
+            <div class="col">
                     <!-- community video content -->
                 <section>
                     <div class="js-personal-videos ">
@@ -110,7 +107,7 @@
                         -->
                         
                         <div class="js-method-buttons">
-                            <div class="row">
+                            <div class="row" style="display: flex; justify-content: center;">
                                 <div class="col-auto d-none d-sm-block">
                                     <button class="arrow arrow-left my-3 btn pt-2" id="prevBtn"><i class="fa-solid fa-chevron-left"></i></button>
                                 </div>

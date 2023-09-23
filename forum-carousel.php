@@ -90,7 +90,7 @@
             
             <div class="container">
                     <div class="d-flex justify-content-center ">
-                        <h4 class="row js-title" style="color:#383838;" >
+                        <h4 class="row js-title" style="color:#383838; overflow: hidden;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;text-overflow: ellipsis;">
                             Contraception
                         </h4>
 

@@ -35,7 +35,7 @@
             <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
               <ul class="navbar-nav">
                 <li class="nav-item active mx-2">
-                  <a class="js-link nav-link" href="home_1_with_user.php"><span translate="no" style="font-weight:normal;">Home <span class="sr-only"></span></span></a>
+                  <a class="js-link nav-link home_link" href="home_1_with_user.php"><span translate="no" style="font-weight:normal;">Home <span class="sr-only"></span></span></a>
                 </li>
                 <li class="nav-item mx-2">
                   <a class="js-link nav-link video_link" href="community-videos.php">Videos</a>
