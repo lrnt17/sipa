@@ -139,7 +139,15 @@
             width: 20px;
         }
 
-        
+        .js-like-button{
+            cursor: pointer; 
+            padding: 0px; 
+            outline: none; 
+            border: none; 
+            margin-right: 4px; 
+            font-size: 14px;
+            background-color: transparent;
+        }
 	</style>
 </head>
 <body style="background: #F2F5FF;">
