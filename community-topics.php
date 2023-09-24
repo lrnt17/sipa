@@ -14,6 +14,16 @@
 </head>
 <body style="background: #F2F5FF;">
     <style>
+        body {
+            overflow-x: hidden;
+            margin: 0;
+            top:0!important;
+        }
+
+        .skiptranslate iframe  {
+        visibility: hidden !important;
+        }
+        
         @keyframes appear{
 			0%{
 				opacity: 0;

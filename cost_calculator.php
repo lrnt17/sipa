@@ -274,7 +274,7 @@
     <div class="condom-if-yes-container" id="condom-if-yes-container" style="display:none">
 
         <div class="amount-needed-input-container  mx-5 rounded-3 shadow-sm px-4 py-3" style="background-color: white; max-width: max-content;">
-            <label for="need">How many do you usually need?</label>
+            <label for="need">How many do you usually need?<span style="color: red;"> *</span></label>
             <span style="width: 4px;
                     background-color: #7B7777;
                     border-radius: 99px;

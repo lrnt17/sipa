@@ -13,6 +13,17 @@
     <title>Comparison Chart | SiPa</title>
 </head>
 <style>
+
+    body {
+            overflow-x: hidden;
+            margin: 0;
+            top:0!important;
+        }
+
+    .skiptranslate iframe  {
+        visibility: hidden !important;
+        }
+        
     .column-1 {
         background-color: lightblue;
     }
