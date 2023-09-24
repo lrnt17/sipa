@@ -27,7 +27,7 @@
 
 
     //Show the server response
-    echo $output;
+    //echo $output;
     
     // insert in users table
     $sql = "INSERT INTO verification_codes(user_pnum, verification_code, pnum_verified_at) VALUES ('" . $_SESSION["pnum"] . "', '" . $verification_code . "', NULL)";

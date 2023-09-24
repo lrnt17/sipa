@@ -74,7 +74,7 @@
                         <div class="fonticon">
                             <i class="fa-solid fa-lock" style="font-size:15px;"></i>
                             <label for="new_pass">New password</label>
-                            <input type="password" name="new_pass" id="new_pass" required>
+                            <input type="password" name="new_pass" id="new_pass" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}" title="Must contain at least one number, one uppercase and lowercase letter, one special character, and at least 8 or more characters" required>
                         </div>
                     </div>
                     <div class="form">

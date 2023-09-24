@@ -2,7 +2,7 @@
     include("connect.php");
     session_start();
     $pnum=$_SESSION["pnum"];
-    $new_pass = $_POST["con_pass"];
+    $new_pass = password_hash($_POST["con_pass"], PASSWORD_DEFAULT);
     $sql=("UPDATE users set user_password = '$new_pass' where user_pnum = '$pnum'");
     mysqli_query($conn,$sql);
 ?>

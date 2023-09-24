@@ -19,6 +19,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/324d76b648.js" crossorigin="anonymous"></script>
     <title>Password Recovery | SiPa</title>
+    <script>
+        function check() {
+            let code = document.getElementById('code').value;
+
+            if (!/^\d+$/.test(code)) {
+                alert('Verification code should only contain numbers');
+                return false;
+            }
+        }
+    </script>
 </head>
 <body>
 
@@ -43,12 +53,12 @@
                 <h1>Password Recovery?</h1>
                 <p class="text-rem" id="sub">An SMS message with a verification code was just sent to your number</p></br><br>
 
-                <form action="forgot_pass_4_reset_pass.php" method="post">
+                <form action="forgot_pass_4_reset_pass.php" method="post" onsubmit="return check(event);">
                     <div class="form">
                     <div class="fonticon">
                             <i class="fa-sharp fa-solid fa-shield-halved" style="font-size:15px;"></i>
                             <label for="code">Verification code</label>
-                            <input type="text" name="code" id="code" required>
+                            <input type="text" name="code" id="code" minlength="6" maxlength="6" required>
                         </div>
                     </div>
                     <button type="submit" name="verify" class="class_60 log-btn" value="Verify code">Verify Code</button>

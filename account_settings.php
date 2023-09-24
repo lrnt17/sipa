@@ -434,7 +434,7 @@
                             <label class="class_32">
                                 New Password
                             </label>
-                            <input type="password" name="new_password" class="class_33">
+                            <input type="password" name="new_password" class="class_33" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}" title="Must contain at least one number, one uppercase and lowercase letter, one special character, and at least 8 or more characters">
                         </div></br>
                         <div class="class_31">
                             <label class="class_36">

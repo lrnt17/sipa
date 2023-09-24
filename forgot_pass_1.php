@@ -13,6 +13,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/324d76b648.js" crossorigin="anonymous"></script>
     <title>Forgot Password | SiPa</title>
+    <script>
+        function check() {
+            let pnum = document.getElementById('pnum').value;
+
+            if (!/^\d+$/.test(pnum)) {
+                alert('Contact number should only contain numbers');
+                return false;
+            }
+        }
+    </script>
 </head>
 <body>
 
@@ -38,12 +48,12 @@
                 <h1>Forgot Password?</h1>
                 <p class="text-rem" id="sub">Enter your phone number and we will send you a code to reset your password.<br><br>
                 You will receive instructions for resetting your password.</p><br><br>
-                <form action="forgot_pass_1.php" method="post">
+                <form action="forgot_pass_1.php" method="post" onsubmit="return check(event);">
                     <div class="form">
                         <div class="fonticon">
-                            <i class="fa-solid fa-phone" style="font-size:15px;"></i>
+                            <i class="fa-solid fa-phone" style="font-size:15px;"></i> 
                             <label for="pnum">Phone number</label>
-                            <input type="text" name="pnum" id="pnum" required>
+                            +63 <input type="text" name="pnum" id="pnum" minlength="10" maxlength="10" required>
                         </div>
                     </div>
                     <button type="submit" name="submit" class="class_60 log-btn" value="Send code">Send Code</button>
@@ -65,10 +75,8 @@
 <?php 
     if (isset($_POST["submit"])) {
         $_SESSION["pnum"] = $_POST['pnum'];
-
-    echo "<script>
-            window.location.href='forgot_pass_2_send.php';
-            </script>";
+        //echo "<script>alert('goods');</script>";
+        echo "<script>window.location.href='forgot_pass_2_send.php';</script>";
     }
 ?>
 
