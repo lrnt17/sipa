@@ -11,17 +11,20 @@ var appointment_list = {
     appointmentTimeslot: null,
     selectedDate: null,
     selectedTimeslot: null,
+    showEntryNum: 10,
 
     load_appointments: function(e){
 
         let city_municipality = appointment_list.location;
         let health_facility = appointment_list.health_facility;
-        let current_date = appointment_list.current_date;
-        //console.log(appointment_list.current_date);//return;
+        let show_entry = appointment_list.showEntryNum;
+        //let current_date = appointment_list.current_date;
+        console.log(appointment_list.showEntryNum);//return;
         let form = new FormData();
 
         form.append('city_municipality', city_municipality);
         form.append('health_facility', health_facility);
+        form.append('show_entry', show_entry);
         form.append('page', this.current_page);
         form.append('data_type', 'load_appointments');
         var ajax = new XMLHttpRequest();
@@ -41,6 +44,14 @@ var appointment_list = {
 
                         // Clear existing rows
                         table.innerHTML = "";
+
+                        // Calculate starting and ending indices
+                        let startIndex = (data.current_page - 1) * data.rows_per_page + 1;
+                        let endIndex = Math.min(data.current_page * data.rows_per_page, data.total_rows);
+
+                        // Display range of entries
+                        let rangeElement = document.querySelector(".js-entry-range");
+                        rangeElement.textContent = "Showing " + startIndex + " to " + endIndex + " of " + data.total_rows + " entries";
 
                         // Generate table rows
                         for (let i = 0; i < data.rows.length; i++) {
@@ -533,7 +544,9 @@ var appointment_list = {
 
     num_rows_displayed: function(num_value){
 
-        console.log(num_value);
+        //console.log(num_value);
+        appointment_list.showEntryNum = num_value;
+        appointment_list.load_appointments();
     },
 };
 

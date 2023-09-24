@@ -192,6 +192,8 @@
                 </thead>
                 <tbody></tbody>
             </table>
+            <br>
+            <div class="js-entry-range"></div>
 
             <br>
             <div id="pagination">
@@ -630,7 +632,7 @@
 
     appointment_list.load_appointments();*/
 </script>
-<script src="appointment-list.js?v6"></script>
+<script src="appointment-list.js?v7"></script>
 <script>
     let searchInput = document.getElementById('search-username');
     

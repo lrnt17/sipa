@@ -503,7 +503,7 @@
             $health_facility = $_POST['health_facility'];
             $page = $_POST['page'];
             //$rows_per_page = 10;
-            $rows_per_page = 2;
+            $rows_per_page = (int)$_POST['show_entry'];
             $offset = ($page - 1) * $rows_per_page;
 
             $query = "SELECT COUNT(*) FROM appointments WHERE city_municipality = '$city_municipality' AND health_facility = '$health_facility'";
@@ -519,6 +519,9 @@
 
                     $rows[$key]['user_image'] = get_admin_image($row['user_image']);
                 }*/
+                $info['current_page'] = $page;
+                $info['rows_per_page'] = $rows_per_page;
+                $info['total_rows'] = $total_rows;
                 $info['rows'] = $rows;
                 $info['last_page'] = $last_page;
                 $info['success'] = true;
