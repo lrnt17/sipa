@@ -134,30 +134,7 @@ var sched_appointment = {
                     return false;
                 }
 
-                // Send AJAX request to check if contact number already exists
-                /*let form = new FormData();
-                form.append('contact_number', field.value);
-                form.append('data_type', 'check_contact_number');
                 
-                var ajax = new XMLHttpRequest();
-
-                ajax.addEventListener('readystatechange', function() {
-                    if(ajax.readyState == 4) {
-                        if(ajax.status == 200){
-                            let obj = JSON.parse(ajax.responseText);
-                            
-                            if(obj.success){
-                                alert(obj.message);
-                                return false;
-                            }
-                        } else {
-                            alert("Please check your internet connection");
-                        }
-                    }
-                });
-
-                ajax.open('post','ajax.php', true);
-                ajax.send(form);*/
                 
                 // Send AJAX request to check if contact number already exists
                 let form = new FormData();
@@ -190,6 +167,18 @@ var sched_appointment = {
                 }).catch(() => { return false; });
 
                 if(response === false) return false;
+            }
+
+            if (field.id === 'dob') {
+                // Check if the user is 18 years old or older
+                const selectedDate = new Date(field.value);
+                const today = new Date();
+                const age = today.getFullYear() - selectedDate.getFullYear();
+                
+                if (age < 18) {
+                    alert('You should be at least 18 years old to make an appointment.');
+                    return false;
+                }
             }
         }
 
