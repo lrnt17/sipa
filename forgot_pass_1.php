@@ -1,4 +1,8 @@
-<?php include("connect.php"); session_start();?>
+<?php 
+    include("connect.php");
+    require('functions.php'); 
+    //session_start();
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -75,8 +79,20 @@
 <?php 
     if (isset($_POST["submit"])) {
         $_SESSION["pnum"] = $_POST['pnum'];
+
         //echo "<script>alert('goods');</script>";
-        echo "<script>window.location.href='forgot_pass_2_send.php';</script>";
+        //echo "<script>window.location.href='forgot_pass_2_send.php';</script>";
+        // Check if contact number already exists
+        $contact = $_SESSION["pnum"];
+        $checkQuery = "SELECT * FROM users WHERE user_pnum = '$contact'";
+        $result = query($checkQuery);
+
+        if($result){
+            //echo "<script>alert('Your contact number already exists.');</script>";
+            echo "<script>window.location.href='forgot_pass_2_send.php';</script>";
+        } else {
+            echo "<script>alert('Contact number does not exist.');</script>";
+        }
     }
 ?>
 
