@@ -511,7 +511,7 @@
             $total_rows = $result[0]['COUNT(*)'];
             $last_page = ceil($total_rows / $rows_per_page);
             
-            $query = "SELECT * FROM appointments WHERE city_municipality = '$city_municipality' AND health_facility = '$health_facility' ORDER BY app_id LIMIT $rows_per_page OFFSET $offset";
+            $query = "SELECT * FROM appointments WHERE city_municipality = '$city_municipality' AND health_facility = '$health_facility' ORDER BY app_id DESC LIMIT $rows_per_page OFFSET $offset";
             $rows = query($query);
             
             if($rows){

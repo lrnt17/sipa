@@ -530,6 +530,11 @@ var appointment_list = {
                 checkboxes[i].checked = source.checked;
         }
     },
+
+    num_rows_displayed: function(num_value){
+
+        console.log(num_value);
+    },
 };
 
 if (typeof appointment_admin_list != 'undefined') {

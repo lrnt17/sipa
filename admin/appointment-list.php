@@ -87,6 +87,15 @@
         }
     </style>
     <style>
+        @keyframes appear{
+			0%{
+				opacity: 0;
+			}
+			100%{
+				opacity: 1;
+			}
+		}
+
         .block{
             display: block;
         }
@@ -159,6 +168,15 @@
             <label for="search-username">Search by username:</label>
             <!--<input type="text" id="search-username" oninput="appointment_list.search_appointments(this.value)">-->
             <input type="text" id="search-username">
+            <br><br>
+
+            Show <select id="num_rows_displayed" onchange="appointment_list.num_rows_displayed(this.value)">
+                <option value="10">10</option>
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+            </select> entries
+            
             <br>
             <table border ="1" cellspacing="0" cellpadding="10" id="appointment_table">
                 <thead>
@@ -274,7 +292,7 @@
     </section>
 
     <template id="appointments-template">
-        <tr>
+        <tr style="animation: appear 3s ease;">
             <td align="center" id="checkbox">
                 <label class="container">
                     <input type="checkbox" class="js-select-appointment" name="all_appointments[]">
@@ -612,7 +630,7 @@
 
     appointment_list.load_appointments();*/
 </script>
-<script src="appointment-list.js?v5"></script>
+<script src="appointment-list.js?v6"></script>
 <script>
     let searchInput = document.getElementById('search-username');
     
