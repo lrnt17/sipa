@@ -57,7 +57,8 @@
                         <div class="fonticon">
                             <i class="fa-solid fa-phone" style="font-size:15px;"></i> 
                             <label for="pnum">Phone number</label>
-                            +63 <input type="text" name="pnum" id="pnum" minlength="10" maxlength="10" required>
+                            <p style="position: absolute;margin-left: 33px;font-size: 1rem;">+63</p> 
+                            <input type="text" name="pnum" id="pnum" minlength="10" maxlength="10" required style="padding: 17px 0px 5px 70px;">
                         </div>
                     </div>
                     <button type="submit" name="submit" class="class_60 log-btn" value="Send code">Send Code</button>
