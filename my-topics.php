@@ -196,7 +196,7 @@
                                 <div class="row">
                                     <div class="col-auto" style="padding-right:0px; display: flex; align-items: center;">
                                         <div class="img-con" style="width:40px; height:40px; border-radius:50%; border-style: solid; position: relative; overflow: hidden; padding: 0;"> 
-                                            <img src="assets/images/user.jpg" class="js-image class_47" style=" width: 100%; height: auto; object-fit: cover;" >
+                                            <img src="assets/images/user.jpg" class="js-image class_47" style=" width: 100%; height: 100%; object-fit: cover;" >
                                         </div>
                                     </div>
                                     <div class="col py-2">

@@ -44,12 +44,12 @@
                 <div class="row py-3 px-2">
                     <div class="col-auto">
                         <div class="rounded-circle" style="background: white; width: 3rem; height: 3rem; border: 2px solid #F2F5FF; max-height: auto; position: relative; overflow: hidden; padding: 0;">
-                            <img src="assets/images/user.jpg" class="js-image" style="width: 100%; height: auto; object-fit: cover;">
+                            <img src="assets/images/user.jpg" class="js-image" style="width: 100%; height: 100%; object-fit: cover;">
                         </div>
                     </div>
                     <div class="col ps-1">
                         <div class="row">
-                            <h5 class="js-video-title-display" style="margin: 0;">
+                            <h5 class="js-video-title-display" style="margin: 0; overflow: hidden;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;text-overflow: ellipsis;">
                                 Contraception
                             </h5>
                         </div>

@@ -69,23 +69,12 @@
     outline: none;
     }
 
-    /* On mouse-over */
+    /* On mouse-over 
     .sidenav a:hover, .dropdown-btn:hover {
     color: #f1f1f1;
-    }
+    }*/
 
-    /* Main content */
-    .main {
-    margin-left: 200px; /* Same as the width of the sidenav */
-    font-size: 20px; /* Increased text to enable scrolling */
-    padding: 0px 10px;
-    }
 
-    /* Add an active class to the active dropdown button */
-    .active {
-    background-color: green;
-    color: white;
-    }
 
     /* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
     .dropdown-container {
@@ -106,11 +95,13 @@
     .sidenav a {font-size: 18px;}
     }
 </style>
-<body>
+<body style="background: #F2F5FF;">
+
+<?php include('admin-header.php') ?>
     <section class="main">
-        <?php include('header.php') ?>
-        <h1>SiPa <?=$user_role?></h1>
-        <h2><?=$user_fname?></h2>
+        <!--<h1>SiPa <?=$user_role?></h1>
+        <h2><?=$user_fname?></h2>-->
     </section>
 </body>
 </html>
+

@@ -75,17 +75,6 @@
         }
 
         /* Main content */
-        .main {
-        margin-left: 200px; /* Same as the width of the sidenav */
-        font-size: 13px; /* Increased text to enable scrolling */
-        padding: 0px 10px;
-        }
-
-        /* Add an active class to the active dropdown button */
-        .active {
-        background-color: green;
-        color: white;
-        }
 
         /* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
         .dropdown-container {
@@ -105,6 +94,71 @@
         .sidenav {padding-top: 15px;}
         .sidenav a {font-size: 18px;}
         }
+
+        .edit-admin{
+            width: 100%;
+            padding: 0px 0px 2px 0px;
+            border: none;
+            border-bottom: 2.2px solid #B9B9B9;
+            font-size: 15px;
+            outline: none;
+            margin: 10px 30px 15px 0px;
+        }
+
+        tr{
+            border-bottom: 1px solid black !important;
+        }
+        td{
+            font-size: 14px !important;
+            padding-left: 15px !important;
+            padding-right: 15px !important;
+        }
+        th{
+            padding-left: 15px !important;
+            padding-bottom: 5px !important;
+        }
+
+        .js-admin-details-btn:hover{
+            color:black;
+        }
+
+        .js-edit-admin, .js-view-admin {
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 50px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        /* Modal Content */
+        .edit-container, .view-container {
+            background-color: #fefefe;
+            margin: auto;
+            width: 50%;
+            border-radius: 25px;
+            box-shadow: 0 0 5px rgba(0,0,0,.3);
+            padding: 3%;
+        }
+
+        /* The Close Button */
+        .close-btn {
+        color: black;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        }
+
+        @media (max-width: 850px){
+            .edit-container, .view-container {
+            width: 90% !important;
+            
+            }
+        }
     </style>
     <style>
         .hide{
@@ -112,15 +166,45 @@
         }
     </style>
 </head>
-<body>
+<body style="background: #F2F5FF;">
+<?php include('admin-header.php') ?>
     <section class="main">
-        <?php include('header.php') ?>
+        <div class="topbar row">
+                <div class="toggle col-5">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+                <!--<div class="img-con col">
+                    <img class="rounded-circle" src="logo-colored.png" alt="SiPa" width="45" height="45" >
+                </div>-->
+
+            </div>
+        
 
         <!-- List of admins -->
-        <div>
-            <h1><?= $city?> Administrators</h1>
-            <table border ="1" cellspacing="0" cellpadding="10" id="admin_table">
-                <thead>
+        <div class="container">
+
+                <div class="row flex-nowrap" style="align-items: center; margin-top:85px;">
+                    <div class="col-auto">
+                        <div class="vl" style="width: 10px;
+                        background-color: #1F6CB5;
+                        border-radius: 99px;
+                        height: 60px;
+                        display: -webkit-inline-box;"></div>
+                    </div>
+                
+                    <div class="col-auto mt-1">
+                        <div class="row">
+                            <div class="col-auto">
+                                <h2 style="font-weight: 400;"><b><?= $city?></b> Administrators</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+
+            <table cellspacing="0" cellpadding="10" id="admin_table">
+                <thead style="border-bottom: 1px solid black;
+                font-size: 15px;">
                     <tr>
                         <th>Administrators</th>
                         <th>Email</th>
@@ -136,126 +220,253 @@
 
         <!-- View admin details modal -->
         <div class="js-view-admin hide">
-            <div class="" style="float:right;cursor:pointer; margin: 10px;padding:5px;padding-left:10px;padding-right:10px;" onclick="bustos_admins.hide()">X</div>
-            <h1>Administrator Details</h1>
-            <div>
-                <div>User Role: <span class="js-view-role"></span></div>
-                <div>Username: <span class="js-view-username"></span></div>
-                <br>
-                <img src="../assets/images/user.jpg" class="js-view-image" style="cursor: pointer;" width="25" height="25">
-                <div>First Name: <span class="js-view-fname"></span></div>
-                <div>Last Name: <span class="js-view-lname"></span></div>
-                <div>Date of Birth: <span class="js-view-dob"></span></div>
-                <div>Gender: <span class="js-view-gender"></span></div>
-                <div>Gmail Address: <span class="js-view-gmail"></span></div>
-                <div>City or Municipality: <span class="js-view-city-municipality"></span></div>
-                <div>Health Facility Name: <span class="js-view-health-facility"></span></div>
-                <div>Specialization: <span class="js-view-specialization"></span></div>
-                <div>Phone Number: <span class="js-view-pnum"></span></div>
+            <div class="view-container">
+                <div class="close-btn" style="float:right;cursor:pointer; margin: 10px;padding:5px;padding-left:10px;padding-right:10px;" onclick="closeModal()">
+                &times;
+                </div>
+                <div class="row flex-nowrap" style="align-items: center;">
+                    <div class="col-auto">
+                        <div class="vl" style="width: 10px;
+                        background-color: #1F6CB5;
+                        border-radius: 99px;
+                        height: 60px;
+                        display: -webkit-inline-box;"></div>
+                    </div>
+                
+                    <div class="col-auto mt-1">
+                        <div class="row">
+                            <div class="col-auto">
+                                <h2 style="font-weight: 400;">Administrator Details</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container ms-4 ps-4">
+                    <div class="row" style="display: flex; align-items: center;">
+                        <div class="col-auto" style="padding:0px;">
+                            <div class="img-con" style="width:50px; height:50px; border-radius:50%; border-style: solid; position: ; overflow: hidden; padding: 0;"> 
+                                <img src="../assets/images/user.jpg" class="js-view-image"  style=" width: 100%; height: 100%; object-fit: cover;" >
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div>User Role: <span class="js-view-role"></span></div>
+                            <div>Username: <span class="js-view-username"></span></div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4 mb-2">
+                        <div class="col">
+                            <div style="font-size:18px;"><i class="fa-solid fa-user-doctor"></i> Specialization: <span style="color: #1F6CB5;"class="js-view-specialization"></span></div>
+                        </div>
+                    </div>
+                    <div class="row my-3">
+                        <div class="col">
+                            <div style="font-size: 15px;">First Name <br><span class="js-view-fname" style="font-size: 16px;color: #1F6CB5;"></span></div>
+                        </div>
+                        <div class="col">
+                            <div style="font-size: 15px;">Last Name<br> <span class="js-view-lname" style="font-size: 16px;color: #1F6CB5;"></span></div>
+                        </div>
+                    </div>
+                    <div class="row my-3">
+                        <div class="col">
+                            <div style="font-size: 15px;">Date of Birth <br> <span class="js-view-dob" style="font-size: 16px;color: #1F6CB5;"></span></div>
+                        </div>
+                        <div class="col">
+                            <div style="font-size: 15px;">Gender <br> <span class="js-view-gender" style="font-size: 16px;color: #1F6CB5;"></span></div>
+                        </div>
+                    </div>
+                    <div class="row my-3">
+                        <div class="col">
+                            <div style="font-size: 15px;">Gmail Address <br> <span class="js-view-gmail" style="font-size: 16px;color: #1F6CB5;"></span></div>
+                        </div>
+                        <div class="col">
+                            <div style="font-size: 15px;">Phone Number <br> <span style="font-size: 16px;color: #1F6CB5;">+63</span><span class="js-view-pnum" style="font-size: 16px;color: #1F6CB5;"></span></div>
+                        </div>
+                    </div>
+                    <div class="row my-3">
+                        <div class="col">
+                            <div style="font-size: 15px;">City or Municipality <br> <span class="js-view-city-municipality" style="font-size: 16px;color: #1F6CB5;"></span></div>
+                        </div>
+                        <div class="col">
+                            <div style="font-size: 15px;">Health Facility Name <br> <span class="js-view-health-facility" style="font-size: 16px;color: #1F6CB5;"></span></div>
+                        </div>
+                    </div>
+                </div>
             </div>
+            
         </div>
 
         <!-- Editing admin modal -->
         <div class="js-edit-admin hide">
-            <div class="" style="float:right;cursor:pointer; margin: 10px;padding:5px;padding-left:10px;padding-right:10px;" onclick="bustos_admins.hide()">X</div>
-            <h1>Edit Administrator</h1>
-            <form onsubmit="bustos_admins.save(event)" method="post">
-                <div class="form">
-                    <label>
-                        <img src="../assets/images/user.jpg" class="js-edit-image" style="cursor: pointer;" width="25" height="25">
-                        <input onchange="display_image(this.files[0])" type="file" name="edit_image" class="js-image">
+            <div class="edit-container">
+                <div class="close-btn" style="float:right;cursor:pointer; margin: 10px;padding:5px;padding-left:10px;padding-right:10px;" onclick="closeEditModal()">
+                    &times;
+                </div>
+                <div class="row flex-nowrap" style="align-items: center;">
+                    <div class="col-auto">
+                        <div class="vl" style="width: 10px;
+                        background-color: #1F6CB5;
+                        border-radius: 99px;
+                        height: 60px;
+                        display: -webkit-inline-box;"></div>
+                    </div>
+                
+                    <div class="col-auto mt-1">
+                        <div class="row">
+                            <div class="col-auto">
+                                <h2 style="font-weight: 400;">Edit Administrator</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    <form class="container ms-4 ps-4" onsubmit="bustos_admins.save(event)" method="post" style="width: 94%;">
 
-                        <script>
-                            
-                            function display_image(file)
-                            {
-                                let allowed = ['image/jpeg','image/png','image/webp'];
+                        <div class="container" style="display: flex;justify-content: center;">
+                            <div class="form">
+                                <label>
+                                    <div class="img-con" style="width:60px; height:60px; border-radius:50%; border-style: solid; position: cursor: pointer; overflow: hidden; padding: 0;"> 
+                                        <img src="../assets/images/user.jpg" class="js-edit-image" title="Upload new profile photo" style=" width: 100%; height: 100%; object-fit: cover; cursor: pointer;" >
+                                    </div>
+                                    <input onchange="display_image(this.files[0])" type="file" name="edit_image" class="js-image"  style="display:none;">
 
-                                if(!allowed.includes(file.type)){
-                                    alert("That file type is not allowed!");
-                                    return;
-                                }
+                                    <script>
+                                        
+                                        function display_image(file)
+                                        {
+                                            let allowed = ['image/jpeg','image/png','image/webp'];
 
-                                let img = document.querySelector(".js-edit-image");
-                                img.src = URL.createObjectURL(file);
-                            }
-                        </script>
-                    </label>
-                </div>
-                <div class="form">
-                    <label for="edit_fname">First Name *</label>
-                    <input type="text" name="edit_fname" class="js-edit-fname edit-admin" required>
-                </div>
-                <div class="form">
-                    <label for="edit_lname">Last Name *</label>
-                    <input type="text" name="edit_lname" class="js-edit-lname edit-admin" required>
-                </div>
-                <div class="form">
-                    <label for="edit_dob">Date of Birth</label>
-                    <input type="date" name="edit_dob" class="js-edit-dob edit-admin">
-                </div>
-                <div class="form">
-                    <label for="edit_gender">Gender</label>
-                    <select name="edit_gender" id="edit_gender" class="js-edit-gender edit-admin" required>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                    </select>
-                </div>
-                <div class="form">
-                    <label for="edit_gmail">Gmail Address *</label>
-                    <input type="email" name="edit_gmail" class="js-edit-gmail edit-admin" required>
-                </div>
-                <div class="form">
-                    <label for="edit_city_municipality">City or Municipality</label>
-                    <select name="edit_city_municipality" id="edit_city_municipality" disabled class="js-edit-city-municipality edit-admin" required>
-                        <!--<option value="" disabled selected>Select City/Municipality</option>
-                        <option value="Baliwag">Baliwag</option>
-                        <option value="Bustos">Bustos</option>-->
-                    </select>
-                </div>
-                <div class="form">
-                    <label for="edit_health_facility">Health Facility Name:*</label>
-                    <select name="edit_health_facility" id="edit_health_facility" disabled class="js-edit-health-facility edit-admin" required>
-                        <!--<option value="" disabled selected>Select Health Facility Name</option>
-                        <option value="Bustos RHU">Bustos RHU</option>-->
-                    </select>
-                </div>
-                <div class="form">
-                    <label for="edit_specialization">Specialization *</label>
-                    <select name="edit_specialization" id="edit_specialization" disabled class="js-edit-specialization edit-admin" required>
-                        <option value="" disabled selected>Select Specialization</option>
-                        <option value="Obstetrician-Gynecologist (OB-GYN)">Obstetrician-Gynecologist (OB-GYN)</option>
-                        <option value="Obstetrician">Obstetrician</option>
-                        <option value="Gynecologist">Gynecologist</option>
-                        <option value="Family Medicine Physician">Family Medicine Physician</option>
-                        <option value="Nurse Practitioner">Nurse Practitioner</option>
-                        <option value="Nurse-Midwife">Nurse-Midwife</option>
-                        <option value="Sexual Health Specialist">Sexual Health Specialist</option>
-                        <option value="Urologist">Urologist</option>
-                        <option value="Adolescent Medicine Specialist">Adolescent Medicine Specialist</option>
-                        <option value="Planned Parenthood Clinician">Planned Parenthood Clinician</option>
-                        <option value="Reproductive Health Counselor">Reproductive Health Counselor</option>
-                    </select>
-                </div>
-                <div class="form">
-                    <label for="edit_pnum">Phone Number *</label>
-                    <input type="number" name="edit_pnum" class="js-edit-pnum edit-admin" required>
-                </div>
+                                            if(!allowed.includes(file.type)){
+                                                alert("That file type is not allowed!");
+                                                return;
+                                            }
 
-                <div class="class_45" >
-                    <button class="class_46">
-                        Save
-                    </button>
-                </div>
-            </form>
+                                            let img = document.querySelector(".js-edit-image");
+                                            img.src = URL.createObjectURL(file);
+                                        }
+                                    </script>
+                                </label>
+                            </div>
+                        </div>
+                        
+
+                        <div class="row">
+                            <div class="col mt-3">
+                                <div class="form">
+                                    <label for="edit_specialization"> <i class="fa-solid fa-user-doctor"></i> Specialization <span style="color:red;">*</span></label>
+                                    <select name="edit_specialization" id="edit_specialization" disabled class="js-edit-specialization edit-admin" required>
+                                        <option value="" disabled selected>Select Specialization</option>
+                                        <option value="Obstetrician-Gynecologist (OB-GYN)">Obstetrician-Gynecologist (OB-GYN)</option>
+                                        <option value="Obstetrician">Obstetrician</option>
+                                        <option value="Gynecologist">Gynecologist</option>
+                                        <option value="Family Medicine Physician">Family Medicine Physician</option>
+                                        <option value="Nurse Practitioner">Nurse Practitioner</option>
+                                        <option value="Nurse-Midwife">Nurse-Midwife</option>
+                                        <option value="Sexual Health Specialist">Sexual Health Specialist</option>
+                                        <option value="Urologist">Urologist</option>
+                                        <option value="Adolescent Medicine Specialist">Adolescent Medicine Specialist</option>
+                                        <option value="Planned Parenthood Clinician">Planned Parenthood Clinician</option>
+                                        <option value="Reproductive Health Counselor">Reproductive Health Counselor</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="form">
+                                    <label for="edit_fname" style="font-size: 15px;">First Name <span style="color:red;">*</span></label>
+                                    <input type="text" name="edit_fname" class="js-edit-fname edit-admin" required>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form">
+                                    <label for="edit_lname" style="font-size: 15px;">Last Name <span style="color:red;">*</span></label>
+                                    <input type="text" name="edit_lname" class="js-edit-lname edit-admin" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="form">
+                                    <label for="edit_dob" style="font-size: 15px;">Date of Birth</label>
+                                    <input type="date" name="edit_dob" class="js-edit-dob edit-admin">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form">
+                                    <label for="edit_gender" style="font-size: 15px;">Gender</label>
+                                    <select name="edit_gender" id="edit_gender" class="js-edit-gender edit-admin" required>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="form">
+                                    <label for="edit_gmail" style="font-size: 15px;">Gmail Address <span style="color:red;">*</span></label>
+                                    <input type="email" name="edit_gmail" class="js-edit-gmail edit-admin" required>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form">
+                                    <label for="edit_pnum" style="font-size: 15px;">Phone Number <span style="color:red;">*</span></label>
+                                    <p style="position: absolute;margin-top: 10px;font-size: 15px;">+63</p>
+                                    <input type="number" name="edit_pnum" class="js-edit-pnum edit-admin" required style="padding-left: 31px;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="form">
+                                    <label for="edit_city_municipality" style="font-size: 15px;">City or Municipality</label>
+                                    <select name="edit_city_municipality" id="edit_city_municipality" disabled class="js-edit-city-municipality edit-admin" required>
+                                        <!--<option value="" disabled selected>Select City/Municipality</option>
+                                        <option value="Baliwag">Baliwag</option>
+                                        <option value="Bustos">Bustos</option>-->
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form">
+                                    <label for="edit_health_facility" style="font-size: 15px;">Health Facility Name <span style="color:red;">*</span></label>
+                                    <select name="edit_health_facility" id="edit_health_facility" disabled class="js-edit-health-facility edit-admin" required>
+                                        <!--<option value="" disabled selected>Select Health Facility Name</option>
+                                        <option value="Bustos RHU">Bustos RHU</option>-->
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="class_45 d-flex flex-row-reverse" >
+                            <button class="class_46 btn px-5" style="background-color: #F2C1A7; color:#ffff;">
+                                Save
+                            </button>
+                        </div>
+                    </form>
+            </div>
+            
         </div>
     </section>
 
     <template id="row-template">
         <tr>
             <td>
-                <img src="../assets/images/user.jpg" class="js-admin-image" width="25" height="25">
-                <p class="js-admin-fullname"></p>
+                <div class="row my-3" style="display: flex;align-items: center;">
+                    <div class="col-auto">
+                        <div class="img-con" style="width:40px; height:40px; border-radius:50%; border-style: solid; position: ; overflow: hidden; padding: 0;"> 
+                            <img src="../assets/images/user.jpg" class="js-admin-image"   style=" width: 100%; height: 100%; object-fit: cover;" >
+                        </div>
+                    </div>
+                    <div class="col">
+                        <p class="js-admin-fullname" style="margin: 0px;"></p>
+                    </div>
+                </div>
+                
             </td>
             <td class="js-admin-email"></td>
             <td class="js-specialization"></td>
@@ -264,11 +475,47 @@
                 <div class="js-edit-btn">
                     <div class="js-admin-edit-btn" style="cursor:pointer;color:blue;">Edit</div>
                 </div>
-                <div class="js-admin-details-btn" style="cursor:pointer;">View Details</div>
+                <div class="js-admin-details-btn" style="cursor:pointer; font-size:12px;">View Details</div>
             </td>
         </tr>
     </template>
 </body>
+
+<script>
+    // Function to show the edit modal when the button is clicked
+    function showEditModal() {
+        document.querySelector(".js-edit-admin").classList.remove("hide");
+    }
+
+    // Attach a click event listener to the "js-admin-edit-btn" element
+    //document.querySelector(".js-admin-edit-btn").addEventListener("click", showEditModal);
+
+    // Function to hide the edit modal when the close button is clicked
+    function closeEditModal() {
+        document.querySelector(".js-edit-admin").classList.add("hide");
+    }
+
+    // Attach a click event listener to the close button inside the edit modal
+    //document.querySelector(".js-edit-admin .close-btn").addEventListener("click", closeEditModal);
+    
+
+    // Function to show the modal when the button is clicked
+    function showModal() {
+        document.querySelector(".js-view-admin").classList.remove("hide");
+    }
+
+    // Attach a click event listener to the "js-admin-details-btn" element
+    //document.querySelector(".js-admin-details-btn").addEventListener("click", showModal);
+
+    // Function to hide the modal when the close button is clicked
+    function closeModal() {
+        document.querySelector(".js-view-admin").classList.add("hide");
+    }
+
+    // Attach a click event listener to the close button inside the modal
+    //document.querySelector(".js-view-admin .close-btn").addEventListener("click", closeModal);
+</script>
+
 <script>
 
     var bustos_admins = {
@@ -421,7 +668,14 @@
             let selected_health_facility = getSelectedValue("edit_health_facility");
             let fileInput = document.querySelector('.js-image');
             let file = fileInput.files[0];
-            console.log(file);
+            if (file) {
+                // If a file is selected, you can proceed with further actions
+                console.log(file);
+            } else {
+                // Handle the case where no file is selected
+                console.log("No file selected");
+            }
+            console.log(fileInput);
             //return;
             let form = new FormData();
 
@@ -564,5 +818,16 @@
     };
 
     bustos_admins.load_admins();
+</script>
+
+<script>
+    let toggle = document.querySelector(".toggle");
+    let navigation = document.querySelector(".navigation");
+    let main = document.querySelector(".main");
+
+    toggle.onclick = function () {
+    navigation.classList.toggle("active");
+    main.classList.toggle("active");
+    };
 </script>
 </html>

@@ -81,17 +81,6 @@
         }
 
         /* Main content */
-        .main {
-        margin-left: 200px; /* Same as the width of the sidenav */
-        font-size: 13px; /* Increased text to enable scrolling */
-        padding: 0px 10px;
-        }
-
-        /* Add an active class to the active dropdown button */
-        .active {
-        background-color: green;
-        color: white;
-        }
 
         /* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
         .dropdown-container {
@@ -111,6 +100,26 @@
         .sidenav {padding-top: 15px;}
         .sidenav a {font-size: 18px;}
         }
+
+        select{
+            padding: 50px 0px 50px 20px;
+            border: 2.2px solid #B9B9B9;
+            font-size: 20px !important;
+            outline: none;
+            background:transparent;
+            width: 200px;
+        }
+
+        .js-num-slots{
+            width: 100px;
+            padding: 0px 0px 2px 40px;
+            border:none;
+            border-bottom: 2.2px solid #B9B9B9;
+            font-size: 16px;
+            outline: none;
+            background:transparent;
+
+        }
     </style>
     <style>
         .hide{
@@ -118,28 +127,78 @@
         }
     </style>
 </head>
-<body>
-    
+<body style="background: #F2F5FF;">
+    <?php include('admin-header.php') ?>
     <section class="main">
-        <?php include('header.php') ?>
+            <div class="topbar row">
+                <div class="toggle col-5">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+                <!--<div class="img-con col">
+                    <img class="rounded-circle" src="logo-colored.png" alt="SiPa" width="45" height="45" >
+                </div>-->
+
+            </div>
+        
 
         <form method="post">
-            <div>
-                <h1>Time Schedule</h1>
-                <!--<label for="startHourSelector">Select a start hour:</label>-->
-                <select id="startHourSelector" name="start_at">
-                    <!-- Options for the start hour -->
-                </select> AM -
-
-                <!--<label for="endHourSelector">Select an end hour:</label>-->
-                <select id="endHourSelector" name="end_at">
-                    <!-- Options for the end hour -->
-                </select> PM
-
+            <div class="container">
+                <div class="row flex-nowrap" style="align-items: center; margin-top:85px;">
+                    <div class="col-auto">
+                        <div class="vl" style="width: 10px;
+                        background-color: #1F6CB5;
+                        border-radius: 99px;
+                        height: 60px;
+                        display: -webkit-inline-box;"></div>
+                    </div>
+                
+                    <div class="col-auto mt-1">
+                        <div class="row">
+                            <div class="col-auto">
+                                <h2 style="font-weight: 400;"><b>Time</b> Schedule</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <br>
-                <label for="max_slots">Maximum number of slots per Hour:</label>
-                <input type="number" name="max_slots" class="js-num-slots" min="0" value="<?=$row['max_slot']?>">
-                <button>Save</button>
+                <div class="container" >
+                    
+                    <div class="con p-4 rounded-4 shadow-sm" style="background-color:white; width: 60%;     min-width: 258px;">
+                        <!--<label for="startHourSelector">Select a start hour:</label>-->
+                        
+
+                        <div class="row" style="justify-content:center;">
+                            <div class="col-auto">
+                                <h4 style="text-align: center;">AM</h4>
+                                <select class="mb-2 rounded-5 shadow-sm" id="startHourSelector" name="start_at">
+                                    <!-- Options for the start hour -->
+                                </select>
+                            </div>
+                            <div class="col-xl-auto" style="
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                            "><h6 class="my-4" style="text-align: center;">TO</h6></div>
+                            <div class="col-auto">
+                                <h4 style="text-align: center;">PM</h4>
+                                <select class="mb-2 rounded-5 shadow-sm" id="endHourSelector" name="end_at">
+                                    <!-- Options for the end hour -->
+                                </select>
+                            </div>
+                        </div>
+
+                        <br>
+                        <label for="max_slots">Maximum number of slots per Hour:</label>
+                        <input type="number" name="max_slots" class="js-num-slots" min="0" value="<?=$row['max_slot']?>">
+                        <br>
+                        <div class="class_37 d-flex flex-row-reverse">
+                            <button class="class_38 btn px-5 my-3" style="background-color: #F2C1A7; color:#ffff;">Save</button>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                
             </div>
         </form>
     </section>
@@ -199,5 +258,15 @@
     };
 
     sched_settings.time_schedule();
+</script>
+<script>
+    let toggle = document.querySelector(".toggle");
+    let navigation = document.querySelector(".navigation");
+    let main = document.querySelector(".main");
+
+    toggle.onclick = function () {
+    navigation.classList.toggle("active");
+    main.classList.toggle("active");
+    };
 </script>
 </html>

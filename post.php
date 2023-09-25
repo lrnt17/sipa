@@ -75,9 +75,11 @@
 		}
 
         .js-userimage-reply{
-            width: 40px;
-            height: 40px;
-            border-radius:50%; border-style: solid;
+            width: 100%; height: 100%; object-fit: cover;
+        }
+
+        .img-con{
+            width:40px; height:40px; border-radius:50%; border-style: solid; position: relative; overflow: hidden; padding: 0;
         }
 
         .replies-container{
@@ -203,7 +205,7 @@
                                     <div class="row">
                                         <div class="col-auto" style="padding-right:0px; display: flex; align-items: center;">
                                             <div class="img-con" style="width:40px; height:40px; border-radius:50%; border-style: solid; position: relative; overflow: hidden; padding: 0;"> 
-                                                <img src="<?=$row['user']['image']?>" class="js-image class_47" style=" width: 100%; height: auto; object-fit: cover;" >
+                                                <img src="<?=$row['user']['image']?>" class="js-image class_47" style=" width: 100%; height: 100%; object-fit: cover;" >
                                             </div>
                                         </div>
                                         <div class="col py-2">
@@ -348,7 +350,9 @@
          <!--profile pic-->
          <div class="col-auto">
             <!--<a href="#" class="js-profile-link class_45" style="text-decoration:none;">-->
-                <img src="assets/images/57.png" class="js-photo class_47" style="width:40px; height:40px; border-radius:50%; border-style: solid;"  >
+            <div class="img-con" style="width:40px; height:40px; border-radius:50%; border-style: solid; position: relative; overflow: hidden; padding: 0;"> 
+                <img src="assets/images/57.png" class="js-photo class_47" style=" width: 100%; height: 100%; object-fit: cover;" >
+            </div>
             <!--</a>-->
         </div>
 		

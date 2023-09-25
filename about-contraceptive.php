@@ -62,7 +62,7 @@
                     <div class="row mx-3 mt-5 mb-4">
                         <div class="container rounded-4 shadow-sm p-4" style="background:#ffff;">
                             <h4>What is <span><?=$row['birth_control_name']?></span>?</h4>
-                            <p class="mt-3" style="color:#383838;"><?=$row['birth_control_desc']?></p>
+                            <p class="mt-3" style="color:#383838;" align="justify"><?=$data = nl2br($row['birth_control_desc'])?></p>
                         </div>
                     </div>
 
@@ -213,7 +213,9 @@
 
                             for (let i = 0; i < data.positive_rows.length; i++) {
                                 let row = document.importNode(template.content, true);
-                                row.querySelector(".js-positive-info-list").textContent = data.positive_rows[i].positive_effect_desc;
+                            let text = data.positive_rows[i].positive_effect_desc;
+                            text = text.replace(/\n/g, "<br>");
+                            row.querySelector(".js-positive-info-list").innerHTML = text;
                                 
                                 positive_table_list.appendChild(row);
                             }
@@ -226,11 +228,14 @@
                             let template = document.querySelector("#negative-info-template");
 
                             for (let i = 0; i < data.negative_rows.length; i++) {
-                                let row = document.importNode(template.content, true);
-                                row.querySelector(".js-negative-info-list").textContent = data.negative_rows[i].negative_effect_desc;
+                            let row = document.importNode(template.content, true);
+                            let text = data.negative_rows[i].negative_effect_desc;
+                            text = text.replace(/\n/g, "<br>");
+                            row.querySelector(".js-negative-info-list").innerHTML = text;
 
-                                negative_table_list.appendChild(row);
-                            }
+                            negative_table_list.appendChild(row);
+                        }
+
                         } else {
                             negative_table_list.innerHTML = "No data found";
                         }
