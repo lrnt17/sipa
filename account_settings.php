@@ -424,28 +424,30 @@
                 <h2 style="color: #2F2F2F;
                 font-weight: 500;">Change your password</h2></br>
                     <div class="class_30">
-                        <div class="class_31">
+                        <div class="class_31" style="position: relative;">
                             <label class="class_32">
                                 Current Password
                             </label>
-                            <i class="fas fa-eye" style="font-size:15px; cursor: pointer; color: gray;" id="togglePassword1"></i>
                             <input type="password" name="current_password" id="cpass" class="class_33">
-                        </div></br>
-                        <div class="class_31">
+                            <i class="fas fa-eye" style="font-size: 15px; cursor: pointer; color: gray; position: absolute; right: 10px; top: 50%; transform: translateY(-50%);" id="togglePassword1"></i>
+                        </div>
+                        </br>
+                        <div class="class_31" style="position: relative;">
                             <label class="class_32">
                                 New Password
                             </label>
-                            <i class="fas fa-eye" style="font-size:15px; cursor: pointer; color: gray;" id="togglePassword2"></i>
-                            <input type="password" name="new_password" id="npass"class="class_33" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}" title="Must contain at least one number, one uppercase and lowercase letter, one special character, and at least 8 or more characters">
-
-                        </div></br>
-                        <div class="class_31">
-                            <label class="class_36">
+                            <input type="password" name="new_password" id="npass" class="class_33" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}" title="Must contain at least one number, one uppercase and lowercase letter, one special character, and at least 8 or more characters">
+                            <i class="fas fa-eye" style="font-size: 15px; cursor: pointer; color: gray; position: absolute; right: 10px; top: 50%; transform: translateY(-50%);" id="togglePassword2"></i>
+                        </div>
+                        </br>
+                        <div class="class_31" style="position: relative;">
+                            <label class="class_32">
                                 Retype New Password
                             </label>
-                            <i class="fas fa-eye" style="font-size:15px; cursor: pointer; color: gray;" id="togglePassword3"></i>
                             <input type="password" name="retype_password" id="rnpass" class="class_33">
+                            <i class="fas fa-eye" style="font-size: 15px; cursor: pointer; color: gray; position: absolute; right: 10px; top: 50%; transform: translateY(-50%);" id="togglePassword3"></i>
                         </div>
+
                         <p class="chan-text" style="
                         bottom: 21px;
                         font-size: 12px;
