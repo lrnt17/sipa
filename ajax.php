@@ -1141,7 +1141,17 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 		$user_id = $_SESSION['USER']['user_id'] ?? 0;
 		$query = "select * from std";
 		$rows = query($query);
-		$info['rows'] = $rows;
+
+		if($rows){
+
+			foreach ($rows as $key => $row) {
+				
+				$rows[$key]['std_img'] = get_std_img($row['std_img']);
+			}
+			
+			$info['rows'] = $rows;
+		}
+
 		$info['success'] = true;
 
 	}

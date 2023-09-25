@@ -216,6 +216,7 @@
 
                             for (var i = 0; i < obj.rows.length; i++) {
                                 let forumCard = carouselCardTemplate.content.cloneNode(true);
+                                forumCard.querySelector(".js-std-image").src = obj.rows[i].std_img;
                                 forumCard.querySelector(".js-std-name").innerHTML = obj.rows[i].std_name;
                                 forumCard.querySelector(".js-std-desc").innerHTML = `${obj.rows[i].std_short_desc}`;
                                 forumCard.querySelector(".js-std-link").href = 'about-std-info.php?id=' + obj.rows[i].std_id;
