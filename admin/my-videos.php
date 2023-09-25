@@ -49,17 +49,7 @@
         }
 
         /* Main content */
-        .main {
-        margin-left: 200px; /* Same as the width of the sidenav */
-        font-size: 13px; /* Increased text to enable scrolling */
-        padding: 0px 10px;
-        }
 
-        /* Add an active class to the active dropdown button */
-        .active {
-        background-color: green;
-        color: white;
-        }
 
         /* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
         .dropdown-container {
@@ -107,12 +97,18 @@
         background-color: yellow;
     }*/
 </style>
-<body>
+<body style="background: #F2F5FF;">
+
+<?php include('admin-header.php') ?>
 
     <!-- community video content -->
     <section class="main">
+            <div class="topbar">
+                <div class="toggle">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+            </div>
         <!-- navigation bar with logo -->
-        <?php include('header.php') ?>
         <div class="js-personal-videos ">
             <?php //if(logged_in()):?>
                 <!--<div onclick="manage_my_videos.open_upload_video()" style="cursor:pointer;">Upload Video</div>-->
@@ -124,7 +120,7 @@
         <br>
 
         <!-- List of videos -->
-        <div>
+        <div class="container" style="margin-top:75px;">
             <h1>Your Videos</h1>
             <table border ="1" cellspacing="0" cellpadding="10" id="video_table">
                 <thead>
@@ -255,3 +251,14 @@
 </script>
 <script src="my-videos.js?v7"></script>
 </html>
+
+<script>
+    let toggle = document.querySelector(".toggle");
+    let navigation = document.querySelector(".navigation");
+    let main = document.querySelector(".main");
+
+    toggle.onclick = function () {
+    navigation.classList.toggle("active");
+    main.classList.toggle("active");
+    };
+</script>

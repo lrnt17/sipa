@@ -211,16 +211,10 @@
 
         /* Main content */
         .main {
-        margin-left: 200px; /* Same as the width of the sidenav */
         font-size: 13px; /* Increased text to enable scrolling */
-        padding: 0px 10px;
         }
 
-        /* Add an active class to the active dropdown button */
-        .active {
-        background-color: green;
-        color: white;
-        }
+
 
         /* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
         .dropdown-container {
@@ -240,23 +234,48 @@
         .sidenav {padding-top: 15px;}
         .sidenav a {font-size: 18px;}
         }
+
+        .inputs{
+            width: 100%;
+            padding: 0px 0px 2px 0px;
+            border: none;
+            border-bottom: 2.2px solid #B9B9B9;
+            font-size: 15px;
+            outline: none;
+            margin: 10px 30px 15px 0px;
+            background:transparent;
+        }
     </style>
 </head>
-<body>
+<body style="background: #F2F5FF;">
+    <?php include('admin-header.php') ?>
     <section class="main">
-        <?php include('header.php') ?>
+            <div class="topbar row">
+                <div class="toggle col-5">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+                <!--<div class="img-con col">
+                    <img class="rounded-circle" src="logo-colored.png" alt="SiPa" width="45" height="45" >
+                </div>-->
+
+            </div>
+        <?php //include('header.php') ?>
         <?php if(!empty($errors)):?>
             <script>
                 alert("<?php echo implode("\n", $errors); ?>");
             </script>
         <?php endif;?>
 
-        <h1>Account Settings</h1>
+        <div class="container px-5" style="margin-top:75px;">
+        <h4>Account Settings</h4>
+        <br>
         <?php if(!empty($row)):?>
-            <form method="post" enctype="multipart/form-data">
+            <form method="post" enctype="multipart/form-data" class="" style="background-color: ;">
                 <div>
                     <label>
-                        <img src="<?=get_admin_image($row['user_image'])?>" class="js-admin-image rounded-circle" style="cursor: pointer; height:50px; border-style: solid;" >
+                        <div class="img-con" style="width:50px; height:50px; border-radius:50%; border-style: solid; position: ; overflow: hidden; padding: 0;"> 
+                            <img src="<?=get_admin_image($row['user_image'])?>"  class="js-image class_28"  style=" width: 100%; height: 100%; object-fit: cover; cursor: pointer;" >
+                        </div>
                         <input onchange="display_image(this.files[0])" type="file" name="image" style="display:none;">
 
                         <script>
@@ -276,29 +295,43 @@
                         </script>
                     </label>
                 </div>
-                <div>
-                    <label for="admin_fname">First Name</label>
-                    <input value="<?=$row['user_fname']?>" type="text" name="admin_fname" required>
-                </div>
-                <div>
-                    <label for="admin_lname">Last Name</label>
-                    <input value="<?=$row['user_lname']?>" type="text" name="admin_lname" required>
-                </div>
-                <div>
-                    <label for="admin_dob">Date of Birth</label>
-                    <input value="<?=$row['user_dob']?>" type="date" name="admin_dob" required>
-                </div>
-                <div>
-                    <label for="admin_gender">Gender</label>
-                    <select name="admin_gender" id="admin_gender" required>
-                        <option value="Male" <?= $row['user_sex'] == 'Male' ? 'selected' : '' ?>>Male</option>
-                        <option value="Female" <?= $row['user_sex'] == 'Female' ? 'selected' : '' ?>>Female</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="admin_gmail">Gmail Address</label>
-                    <input value="<?=$row['user_email']?>" type="email" name="admin_gmail" required>
-                </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="admin_fname">First Name</label>
+                            <input value="<?=$row['user_fname']?>" type="text" name="admin_fname" class="inputs" required>
+                        </div>
+                        <div class="col-md-6"> 
+                            <label for="admin_lname">Last Name</label>
+                            <input value="<?=$row['user_lname']?>" type="text" name="admin_lname" class="inputs" required>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="admin_dob">Date of Birth</label>
+                            <input value="<?=$row['user_dob']?>" type="date" name="admin_dob" class="inputs" required>
+                        </div>
+                        <div class="col-md-6"> 
+                            <label for="admin_gender">Gender</label>
+                            <select name="admin_gender" id="admin_gender"class="inputs" required>
+                                <option value="Male" <?= $row['user_sex'] == 'Male' ? 'selected' : '' ?>>Male</option>
+                                <option value="Female" <?= $row['user_sex'] == 'Female' ? 'selected' : '' ?>>Female</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="admin_gmail">Gmail Address</label>
+                            <input value="<?=$row['user_email']?>" type="email" name="admin_gmail" class="inputs" required>
+                        </div>
+                        <div class="col-md-6"> 
+                            <label for="admin_pnum">Phone Number</label>
+                            <input value="<?=$row['user_pnum']?>" type="text" name="admin_pnum" maxlength="10" class="inputs" required>
+                        </div>
+                    </div>
+                
                 <!--<div>
                     <label for="admin_city">City or Municipality</label>
                     <select name="admin_city" id="admin_city" required>
@@ -311,50 +344,69 @@
 
                     </select>
                 </div>-->
-                <div>
-                    <label for="admin_specialization">Specialization</label>
-                    <select name="admin_specialization" id="admin_specialization" required>
-                        <option value="" disabled>Select Specialization</option>
-                        <option value="Obstetrician-Gynecologist (OB-GYN)" <?= $row['specialization'] == 'Obstetrician-Gynecologist (OB-GYN)' ? 'selected' : '' ?>>Obstetrician-Gynecologist (OB-GYN)</option>
-                        <option value="Obstetrician" <?= $row['specialization'] == 'Obstetrician' ? 'selected' : '' ?>>Obstetrician</option>
-                        <option value="Gynecologist" <?= $row['specialization'] == 'Gynecologist' ? 'selected' : '' ?>>Gynecologist</option>
-                        <option value="Family Medicine Physician" <?= $row['specialization'] == 'Family Medicine Physician' ? 'selected' : '' ?>>Family Medicine Physician</option>
-                        <option value="Nurse Practitioner" <?= $row['specialization'] == 'Nurse Practitioner' ? 'selected' : '' ?>>Nurse Practitioner</option>
-                        <option value="Nurse-Midwife" <?= $row['specialization'] == 'Nurse-Midwife' ? 'selected' : '' ?>>Nurse-Midwife</option>
-                        <option value="Sexual Health Specialist" <?= $row['specialization'] == 'Sexual Health Specialist' ? 'selected' : '' ?>>Sexual Health Specialist</option>
-                        <option value="Urologist" <?= $row['specialization'] == 'Urologist' ? 'selected' : '' ?>>Urologist</option>
-                        <option value="Adolescent Medicine Specialist" <?= $row['specialization'] == 'Adolescent Medicine Specialist' ? 'selected' : '' ?>>Adolescent Medicine Specialist</option>
-                        <option value="Planned Parenthood Clinician" <?= $row['specialization'] == 'Planned Parenthood Clinician' ? 'selected' : '' ?>>Planned Parenthood Clinician</option>
-                        <option value="Reproductive Health Counselor" <?= $row['specialization'] == 'Reproductive Health Counselor' ? 'selected' : '' ?>>Reproductive Health Counselor</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="admin_pnum">Phone Number</label>
-                    <input value="<?=$row['user_pnum']?>" type="text" name="admin_pnum" maxlength="10" required>
+                <div class="row">
+                        <div class="col-md-6">
+                            <label for="admin_specialization">Specialization</label></br>
+                            <select name="admin_specialization" id="admin_specialization" class="inputs" required>
+                                <option value="" disabled>Select Specialization</option>
+                                <option value="Obstetrician-Gynecologist (OB-GYN)" <?= $row['specialization'] == 'Obstetrician-Gynecologist (OB-GYN)' ? 'selected' : '' ?>>Obstetrician-Gynecologist (OB-GYN)</option>
+                                <option value="Obstetrician" <?= $row['specialization'] == 'Obstetrician' ? 'selected' : '' ?>>Obstetrician</option>
+                                <option value="Gynecologist" <?= $row['specialization'] == 'Gynecologist' ? 'selected' : '' ?>>Gynecologist</option>
+                                <option value="Family Medicine Physician" <?= $row['specialization'] == 'Family Medicine Physician' ? 'selected' : '' ?>>Family Medicine Physician</option>
+                                <option value="Nurse Practitioner" <?= $row['specialization'] == 'Nurse Practitioner' ? 'selected' : '' ?>>Nurse Practitioner</option>
+                                <option value="Nurse-Midwife" <?= $row['specialization'] == 'Nurse-Midwife' ? 'selected' : '' ?>>Nurse-Midwife</option>
+                                <option value="Sexual Health Specialist" <?= $row['specialization'] == 'Sexual Health Specialist' ? 'selected' : '' ?>>Sexual Health Specialist</option>
+                                <option value="Urologist" <?= $row['specialization'] == 'Urologist' ? 'selected' : '' ?>>Urologist</option>
+                                <option value="Adolescent Medicine Specialist" <?= $row['specialization'] == 'Adolescent Medicine Specialist' ? 'selected' : '' ?>>Adolescent Medicine Specialist</option>
+                                <option value="Planned Parenthood Clinician" <?= $row['specialization'] == 'Planned Parenthood Clinician' ? 'selected' : '' ?>>Planned Parenthood Clinician</option>
+                                <option value="Reproductive Health Counselor" <?= $row['specialization'] == 'Reproductive Health Counselor' ? 'selected' : '' ?>>Reproductive Health Counselor</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6"> 
+                            
+                        </div>
                 </div>
                 
                 <br>
-                <div>
-                    <label>Current Password</label>
-                    <input type="password" name="current_password">
-                </div>
-                <div>
-                    <label>New Password</label>
-                    <input placeholder="Leave empty to keep old password" type="password" name="new_password">
-                </div>
-                <div>
-                    <label>Retype New Password</label>
-                    <input type="password" name="retype_password">
-                </div>
+                <br>
+                <h4>Change Password</h4>
                 <br>
 
-                <button>Save</button>
+                <div class="row">
+                        <div class="col-md-6">
+                            <label>Current Password</label>
+                            <input type="password" name="current_password" class="inputs">
+                        </div>
+                        <div class="col-md-6"> 
+                        
+                        </div>
+                </div>
+
+                <div class="row">
+                        <div class="col-md-6">
+                            <label>New Password</label>
+                            <input placeholder="Leave empty to keep old password" type="password" name="new_password" class="inputs">
+                        </div>
+                        <div class="col-md-6"> 
+                            <label>Retype New Password</label>
+                            <input type="password" name="retype_password" class="inputs">
+                        </div>
+                </div>
+                <br>
+                <div class="class_37 d-flex flex-row-reverse">
+                    <button class="class_38 btn px-5" style="background-color: #F2C1A7; color:#ffff;">Save</button>
+                </div>
+                <br><br>
             </form>
         <?php else:?>
             <div class="">
                 <div class="">Profile not found!</div>
             </div>
         <?php endif;?>
+
+        </div>
+
+        
     </section>
 
 </body>
@@ -461,5 +513,16 @@
 
     admin_account_settings.load_city_municipality_list();
     admin_account_settings.load_health_facility_list();*/
+</script>
+
+<script>
+    let toggle = document.querySelector(".toggle");
+    let navigation = document.querySelector(".navigation");
+    let main = document.querySelector(".main");
+
+    toggle.onclick = function () {
+    navigation.classList.toggle("active");
+    main.classList.toggle("active");
+    };
 </script>
 </html>
