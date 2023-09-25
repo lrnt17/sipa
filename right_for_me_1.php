@@ -306,7 +306,10 @@
     <!-- contraceptive method template -->
     <template class="js-method-template">
         <div class='newsCard news-Slide-up rounded-4'>
-                    <img src="assets/images/contraceptive.png" alt="sample" class="js-method-image" style="width:300px;">
+                <div class="img-container" style="width:auto; height:100%;">
+                    <img src="assets/images/contraceptive.png" alt="sample" class="js-method-image" style="width:100%; height:100%; width:100%;height:100%;object-fit: cover;">
+                </div>
+                   
                 <div class='newsCaption rounded-4 shadow-sm'>
                 <span translate="no"><h5 class="js-method-name newsCaption-title py-2" style="text-align:center;">Pill</h5 ></span>
                     <div class="js-method-desc newsCaption-content px-2"  >

@@ -129,8 +129,10 @@
 
     <!-- contraceptive method template -->
     <template class="js-method-template" id="methodCarouselTemplate">
-        <div class='newsCard news-Slide-up rounded-4 m-4'>
-                    <img src="assets/images/contraceptive.png" alt="sample" class="js-method-image" style="width:300px;">
+        <div class='newsCard news-Slide-up rounded-4 m-4' style="width: 232px;height: 300px;padding: 0px;">
+                <div class="img-container" style="width:auto; height:100%;">
+                    <img src="assets/images/contraceptive.png" alt="sample" class="js-method-image" style="width:100%; height:100%; width:100%;height:100%;object-fit: cover;">
+                </div>
                 <div class='newsCaption rounded-4 shadow-sm'>
                     <div style="display: flow;">
                         <span translate="no"><p class="js-method-name newsCaption-title pt-1 pb-2" style="text-align:center; font-size: 1rem; font-weight:600;">Pill</p></span>

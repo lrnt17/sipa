@@ -259,13 +259,15 @@
                         imageCol.style.height="60px";
                         imageCol.style.position="relative";
                         imageCol.style.overflow="hidden";
-                        imageCol.style.padding="0";
+                        imageCol.style.padding="10px";
+                        imageCol.style.display="flex";
+                        imageCol.style.justifyContent="center";
 
                         // Create an image element
                         let imageElement = document.createElement('img');
                         imageElement.src = birthControlImage;
-                        imageElement.style.width="100%";
-                        imageElement.style.height="auto";
+                        imageElement.style.width="auto";
+                        imageElement.style.height="100%";
                         imageElement.style.objectFit="cover";
 
                         // Append the image to the image column
@@ -376,13 +378,15 @@
                                 imageCol.style.height="60px";
                                 imageCol.style.position="relative";
                                 imageCol.style.overflow="hidden";
-                                imageCol.style.padding="0";
+                                imageCol.style.padding="10px";
+                                imageCol.style.display="flex";
+                                imageCol.style.justifyContent="center";
 
                                 // Create an image element
                                 let imageElement = document.createElement('img');
                                 imageElement.src = birthControlImage;
-                                imageElement.style.width="100%";
-                                imageElement.style.height="auto";
+                                imageElement.style.width="auto";
+                                imageElement.style.height="100%";
                                 imageElement.style.objectFit="cover";
 
                                 // Append the image to the image column
@@ -495,8 +499,8 @@
                                 // Create an img element and set its source to the value of birth_control_icon
                                 let img = document.createElement('img');
                                 img.src = row['birth_control_icon'];
-                                img.style.width="100%";
-                                img.style.height="auto";
+                                img.style.width="auto";
+                                img.style.height="100%";
                                 img.style.objectFit="cover";
 
                                 // Create a new div inside the imgCol for the image
@@ -507,7 +511,9 @@
                                 imgContainerDiv.style.height="60px";
                                 imgContainerDiv.style.position="relative";
                                 imgContainerDiv.style.overflow="hidden";
-                                imgContainerDiv.style.padding="0";
+                                imgContainerDiv.style.padding="10px";
+                                imgContainerDiv.style.display="flex";
+                                imgContainerDiv.style.justifyContent="center";
 
                                 // Append the img element to the imgContainerDiv
                                 imgContainerDiv.appendChild(img);
@@ -619,8 +625,8 @@
                                 // Create an img element and set its source to the value of birth_control_icon
                                 let img = document.createElement('img');
                                 img.src = row['birth_control_icon'];
-                                img.style.width="100%";
-                                img.style.height="auto";
+                                img.style.width="auto";
+                                img.style.height="100%";
                                 img.style.objectFit="cover";
 
                                 // Create a new div inside the imgCol for the image
@@ -631,7 +637,9 @@
                                 imgContainerDiv.style.height="60px";
                                 imgContainerDiv.style.position="relative";
                                 imgContainerDiv.style.overflow="hidden";
-                                imgContainerDiv.style.padding="0";
+                                imgContainerDiv.style.padding="10px";
+                                imgContainerDiv.style.display="flex";
+                                imgContainerDiv.style.justifyContent="center";
 
                                 // Append the img element to the imgContainerDiv
                                 imgContainerDiv.appendChild(img);
