@@ -129,8 +129,10 @@
 
     <!-- std template -->
     <template class="js-std-template" id="stdCarouselTemplate">
-        <div class='newsCard news-Slide-up rounded-4 m-4'>
-                    <img src="assets/images/stds/std.jpg" alt="sample" class="js-std-image" style="width:500px;">
+        <div class='newsCard news-Slide-up rounded-4 m-4' style="width: 232px;height: 300px;padding: 0px;">
+                <div class="img-container" style="width:auto; height:100%;">
+                    <img src="assets/images/stds/std.jpg" alt="sample" class="js-std-image" style="width:100%; height:100%; width:100%;height:100%;object-fit: cover;">
+                </div>
                 <div class='newsCaption rounded-4 shadow-sm'>
                     <div style="display: flow;">
                         <p class="js-std-name newsCaption-title pt-1 pb-2" style="text-align:center; font-size: 1rem; font-weight:600;">Herpes</p>
