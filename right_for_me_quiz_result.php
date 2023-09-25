@@ -109,6 +109,10 @@ select {
     background-color: #D2E0F8 !important;
   }
 
+  .read:hover {
+            opacity: 0.6;
+  }
+
    </style>
    
 
@@ -189,6 +193,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                           <h5 class="card-title" style="text-align:center; color:#3B3B3B; cursor:pointer;"><a href="about-contraceptive.php?id=<?php echo $row['birth_control_id']; ?>" style="text-decoration: none;"><?php echo $row["birth_control_name"]; ?></h5></a>
                           <p class="card-text mt-3">What it is?</p>
                           <p class="card-text" style="overflow: hidden;margin-top: -3%;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 5;text-overflow: ellipsis;"><?php echo $row["birth_control_short_desc"]; ?></p>
+                          <p class="read px-2 mt-2"><a class='js-method-link' href='about-contraceptive.php?id=<?php echo $row['birth_control_id']; ?>' style="text-decoration: none; color: black; font-size:13px;"><i class="fa-solid fa-circle-info"> </i> READ MORE</a></p>
                       </div>
                   </div>
               </div>
