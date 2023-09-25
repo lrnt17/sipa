@@ -354,6 +354,8 @@
 
                                     let clone_template = document.querySelector(".js-method-template").content.cloneNode(true);
 
+                                    clone_template.querySelector(".js-method-image").src = obj.rows[i].birth_control_img;
+									
                                     clone_template.querySelector(".js-method-name").innerHTML = obj.rows[i].birth_control_name;
                                     clone_template.querySelector(".js-method-desc").innerHTML = obj.rows[i].birth_control_short_desc;
                                     clone_template.querySelector(".js-method-link").href = 'about-contraceptive.php?id=' + obj.rows[i].birth_control_id;

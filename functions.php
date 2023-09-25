@@ -78,6 +78,14 @@ function get_image($path)
 	return 'assets/images/user.jpg?v1';
 }
 
+function get_birth_control_img($path)
+{
+	if(!empty($path) && file_exists($path))
+		return $path;
+
+	return 'assets/images/contraceptive.png?v1';
+}
+
 function get_admin_image($path)
 {
 	//kapag may laman yung picture, magiging true itong condition

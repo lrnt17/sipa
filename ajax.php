@@ -302,6 +302,24 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 		if($res){
 			$comment_parent_id = $res[0]['comment_parent_id'];
 		}
+		
+		// First, fetch all forum_ids of the replies
+		$query = "SELECT forum_id FROM forum WHERE reply_parent_id = '$id'";
+		$reply_ids = query($query);
+
+		// Then, delete ratings of the replies
+		foreach ($reply_ids as $reply_id) {
+			$query = "DELETE FROM rating_info WHERE post_id = '{$reply_id['forum_id']}'";
+			query($query);
+		}
+
+		// Delete ratings of the comment
+		$query = "DELETE FROM rating_info WHERE post_id = '$id'";
+		query($query);
+
+		// Delete all replies of the comment
+		$query = "DELETE FROM forum WHERE reply_parent_id = '$id'";
+		query($query);
 	
 		$query = "delete from forum where forum_id = '$id' && user_id = '$user_id' limit 1";
 		query($query);
@@ -1104,7 +1122,17 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 		$user_id = $_SESSION['USER']['user_id'] ?? 0;
 		$query = "select * from birth_controls";
 		$rows = query($query);
-		$info['rows'] = $rows;
+
+		if($rows){
+
+			foreach ($rows as $key => $row) {
+				
+				$rows[$key]['birth_control_img'] = get_birth_control_img($row['birth_control_img']);
+			}
+			
+			$info['rows'] = $rows;
+		}
+
 		$info['success'] = true;
 
 	}else
