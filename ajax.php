@@ -233,6 +233,38 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 		
 		$id = (int)($_POST['id']);
 		$user_id = $_SESSION['USER']['user_id'];
+
+		// First, fetch all forum_ids of the comments
+		$query = "SELECT forum_id FROM forum WHERE comment_parent_id = '$id'";
+		$comment_ids = query($query);
+
+		if ($comment_ids) {
+			// Then, delete ratings of the comments and their replies
+			foreach ($comment_ids as $comment_id) {
+				// Delete ratings of the replies
+				$query = "SELECT forum_id FROM forum WHERE reply_parent_id = '{$comment_id['forum_id']}'";
+				$reply_ids = query($query);
+				
+				if ($reply_ids) {
+					foreach ($reply_ids as $reply_id) {
+						$query = "DELETE FROM rating_info WHERE post_id = '{$reply_id['forum_id']}'";
+						query($query);
+					}
+				}
+
+				// Delete ratings of the comment
+				$query = "DELETE FROM rating_info WHERE post_id = '{$comment_id['forum_id']}'";
+				query($query);
+			}
+		}
+
+		// Delete ratings of the forum
+		$query = "DELETE FROM rating_info WHERE post_id = '$id'";
+		query($query);
+
+		// Delete all comments and replies of the forum
+		$query = "DELETE FROM forum WHERE comment_parent_id = '$id' OR reply_parent_id IN (SELECT forum_id FROM forum WHERE comment_parent_id = '$id')";
+		query($query);
  
 		//si limit 1 is parang pag may nakita na syang match sa data, iistop na sya
 		//para rin tipid sa memory
