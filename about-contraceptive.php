@@ -62,7 +62,7 @@
                     <div class="row mx-3 mt-5 mb-4">
                         <div class="container rounded-4 shadow-sm p-4" style="background:#ffff;">
                             <h4>What is <span><?=$row['birth_control_name']?></span>?</h4>
-                            <p class="mt-3" style="color:#383838;"><?=$data = nl2br($row['birth_control_desc'])?></p>
+                            <p class="mt-3" style="color:#383838;" align="justify"><?=$data = nl2br($row['birth_control_desc'])?></p>
                         </div>
                     </div>
 
