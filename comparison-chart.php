@@ -167,6 +167,22 @@
                 <div class="col-auto mx-3">
                     <div class="row" style="display: flex;align-items: center !important;">
                         <div class="col" style="padding: 0px;">
+                            <i class="fa-solid fa-star" style="color: #DBDBDB;"></i>
+                        </div>
+                        <div class="col" style="padding: 0px;">
+                            <i class="fa-solid fa-star" style="color: #DBDBDB;"></i>
+                        </div>
+                        <div class="col" style="padding: 0px;">
+                            <i class="fa-solid fa-star" style="color: #DBDBDB;"></i>
+                        </div>
+                        <div class="col">
+                            <p style="margin-top: 1rem;">Bad</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-auto mx-3">
+                    <div class="row" style="display: flex;align-items: center !important;">
+                        <div class="col" style="padding: 0px;">
                             <i class="fa-solid fa-star" style="color: #915E98;"></i>
                         </div>
                         <div class="col" style="padding: 0px;">

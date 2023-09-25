@@ -412,7 +412,7 @@ function fetchMethodDetails(method, container) {
 
                 // Set the width and height of the button
                 button.style.width = "150px"; // Adjust the width as needed
-                button.style.height = "auto"; // Adjust the height as needed
+                button.style.minHeight = "190px"; // Adjust the height as needed
 
                 button.classList.add("hover");
 
