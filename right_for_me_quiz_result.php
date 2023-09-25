@@ -185,10 +185,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                   <div class="container rounded-4 justify-content-center" style="text-align: center; background: white; width: 100%; max-height: 200px; position: relative; overflow: hidden; padding: 0;">
                           <img src="<?php echo $row["birth_control_img"]; ?>" class="card-img-top"style="width: 100%; height: auto; object-fit: cover;"alt="...">
                   </div>
-                          <div class="card-body" style=" min-height:14rem; overflow:hidden;">
-                          <h5 class="card-title" style="text-align:center; color:#3B3B3B;"><?php echo $row["birth_control_name"]; ?></h5>
+                          <div class="card-body" style=" min-height:14rem; overflow:hidden;"> 
+                          <h5 class="card-title" style="text-align:center; color:#3B3B3B; cursor:pointer;"><a href="about-contraceptive.php?id=<?php echo $row['birth_control_id']; ?>" style="text-decoration: none;"><?php echo $row["birth_control_name"]; ?></h5></a>
                           <p class="card-text mt-3">What it is?</p>
-                          <p class="card-text" style="overflow: hidden;margin-top: -3%;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 5;text-overflow: ellipsis;"><?php echo $row["birth_control_desc"]; ?></p>
+                          <p class="card-text" style="overflow: hidden;margin-top: -3%;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 5;text-overflow: ellipsis;"><?php echo $row["birth_control_short_desc"]; ?></p>
                       </div>
                   </div>
               </div>
@@ -528,7 +528,7 @@ function showDatePicker() {
         <div class="vl" style="width: 20px; background-color: #F2C1A7; border-radius: 99px; height: 20px; display: -webkit-inline-box;"></div>
       </div>
       <div class="col mt-2">
-        <p style="color:#5A5A5A;">Select the start date for the contraceptive method: </p>
+        <p style="color:#5A5A5A;">Select the date on when you want to begin your contraceptive method: </p>
       </div>
     </div>
   `;
