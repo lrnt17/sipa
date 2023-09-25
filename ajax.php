@@ -2058,7 +2058,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 			VALUES ('$fname','$lname','$address','$email','$municipality','$health_facility','$contact','$gender','$dob','$appointment_date','$appointment_timeslot','$appointment_data_privacy')";
 			query($query);
 
-			//appointment_confirmation($contact, $fname, $municipality, $health_facility, $appointment_date, $appointment_timeslot);
+			appointment_confirmation($contact, $fname, $municipality, $health_facility, $appointment_date, $appointment_timeslot);
 
 			$info['success'] = true;
 			$info['message'] = "Your appointment was successfully created";
