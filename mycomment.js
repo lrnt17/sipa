@@ -399,6 +399,10 @@ var mycomment = {
                                 let col1 = document.createElement('div');
                                 col1.classList.add('col-auto');
 
+                                //<!--div for image-->
+                                let imgcon = document.createElement('div');
+                                imgcon.classList.add('img-con');
+
                                 //<!--COL name, comment, time, like -->
                                 let col2 = document.createElement('div');
                                 col2.classList.add('col');
@@ -442,7 +446,7 @@ var mycomment = {
 
                                 let userimageElement = document.createElement('img');
                                 //userimageElement.src = 'assets/images/57.png'; // Default image source
-                                userimageElement.classList.add('js-userimage-reply','m-2');
+                                userimageElement.classList.add('js-userimage-reply');
                                 //userimageElement.src = data.rows[i].user_img;
 
                                 if (typeof data.rows[i].user == 'object') {
@@ -471,10 +475,16 @@ var mycomment = {
                                 likeButtonElement.classList.add('js-like-button');
                                 likeButtonElement.setAttribute('forum_id', data.rows[i].forum_id);
                                 likeButtonElement.style.cursor = 'pointer';
+                                likeButtonElement.style.padding= '0px';
+                                likeButtonElement.style.outline='none';
+                                likeButtonElement.style.border = 'none';
+                                likeButtonElement.style.marginRight='4px';
+                                likeButtonElement.style.fontSize='14px';
                                 likeButtonElement.innerHTML = '<i class="fa-solid fa-heart" style="pointer-events: none;"></i>';
 
                                 let numlikeElement = document.createElement('span');
                                 numlikeElement.classList.add('js-num-likes');
+                                numlikeElement.style.fontSize='14px'
                                 numlikeElement.setAttribute('forum_id', data.rows[i].forum_id);
                                 
                                 //counting the number of likes
@@ -508,7 +518,8 @@ var mycomment = {
                                 actionButtonsContainer.appendChild(deleteButton);*/
                             
                             //<!--profile pic-->
-                            col1.appendChild(userimageElement);
+                            imgcon.appendChild(userimageElement);
+                            col1.appendChild(imgcon);
                             replyWrapper.appendChild(col1); //col1
 
                             //<!--name, comment-->
@@ -634,6 +645,7 @@ var mycomment = {
                         replyInput.rows = 2; 
                         replyInput.style.background ='transparent';
                         replyInput.style.border ='none';
+                        replyInput.style.boxShadow="none";
                         replyInput.setAttribute('maxlength', '500');
 
                         textArea.appendChild(replyInput);

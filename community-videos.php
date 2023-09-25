@@ -175,7 +175,7 @@
 
                 <!-- video card template-->
                 <template id="videoCardTemplate" class="js-videoCardTemplate">
-                    <div class="js-video-card m-3 rounded-4 shadow-sm" style="animation: appear 3s ease; background-color:white; width:320px; padding: 0;">
+                    <div class="js-video-card m-3 mb-5 rounded-4 shadow-sm" style="animation: appear 3s ease; background-color:white; width:290px; padding: 0;">
                     
                         <div class="container  js-video-link shadow-sm rounded-4" style="cursor: pointer; position: relative; height:10.5rem; overflow: hidden; border: 8px solid #D2E0F8; padding: 0;">
                             <!--<video src="uploads/<?//=$video['video_url']?>" controls></video>-->
@@ -193,7 +193,7 @@
                                 </div>
                                 <div class="col ps-1">
                                     <div class="row">
-                                        <h5 class="js-video-title-display" style="margin: 0;">
+                                        <h5 class="js-video-title-display" style="margin: 0; overflow: hidden;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;text-overflow: ellipsis;">
                                             Contraception
                                         </h5>
                                     </div>

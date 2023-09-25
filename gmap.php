@@ -56,16 +56,12 @@ $conn->close();
 		
     /*#map { position: absolute; left: 60%; top: 25%; bottom: 20%; width: 26%; height: 40%; } Adjusted width and centered */
     #map {
-        min-height: 306px;
+        min-height: 300px;
         min-width: 330px;
         width:600px;
     }
 
-    .mapboxgl-canvas-container.mapboxgl-touch-zoom-rotate.mapboxgl-touch-drag-pan .mapboxgl-canvas {
-        object-fit: cover !important;
-        width: 100% !important;
-        height: 100% !important;
-    }
+
 	
     textarea:focus, input:focus{
         outline: none;
@@ -153,9 +149,9 @@ $conn->close();
                 <div class="col-12">
                 <p style="text-align: center; font-weight:500;">Maps</p>
                 </div>
-                <div class="col">
+                <div class="col" style="display: flex;justify-content: center;">
                     <div id="map-container" style="display: flex;
-                justify-content: center;">
+                justify-content: center; width:400px;">
                         <div id="map" class="rounded-5 shadow-sm"></div>
                     </div>
                     

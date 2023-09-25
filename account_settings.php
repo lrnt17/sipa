@@ -341,7 +341,7 @@
                         font-weight: 500;">Account information</h2>
                         <label>
                             <div class="img-con" style="width:50px; height:50px; border-radius:50%; border-style: solid; position: relative; overflow: hidden; padding: 0;"> 
-                                <img src="<?=get_image($row['user_image'])?>" class="js-image rounded-circle class_28"  style=" width: 100%; height: auto; object-fit: cover; cursor: pointer;" >
+                                <img src="<?=get_image($row['user_image'])?>" class="js-image class_28"  style=" width: 100%; height: 100%; object-fit: cover; cursor: pointer;" >
                             </div>
                             <input onchange="display_image(this.files[0])" type="file" name="image" class="class_29" style="display:none;">
 
@@ -428,19 +428,23 @@
                             <label class="class_32">
                                 Current Password
                             </label>
-                            <input type="password" name="current_password" class="class_33">
+                            <i class="fas fa-eye" style="font-size:15px; cursor: pointer; color: gray;" id="togglePassword1"></i>
+                            <input type="password" name="current_password" id="cpass" class="class_33">
                         </div></br>
                         <div class="class_31">
                             <label class="class_32">
                                 New Password
                             </label>
-                            <input type="password" name="new_password" class="class_33" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}" title="Must contain at least one number, one uppercase and lowercase letter, one special character, and at least 8 or more characters">
+                            <i class="fas fa-eye" style="font-size:15px; cursor: pointer; color: gray;" id="togglePassword2"></i>
+                            <input type="password" name="new_password" id="npass"class="class_33" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}" title="Must contain at least one number, one uppercase and lowercase letter, one special character, and at least 8 or more characters">
+
                         </div></br>
                         <div class="class_31">
                             <label class="class_36">
                                 Retype New Password
                             </label>
-                            <input type="password" name="retype_password" class="class_33">
+                            <i class="fas fa-eye" style="font-size:15px; cursor: pointer; color: gray;" id="togglePassword3"></i>
+                            <input type="password" name="retype_password" id="rnpass" class="class_33">
                         </div>
                         <p class="chan-text" style="
                         bottom: 21px;
@@ -704,5 +708,49 @@
     });
 
 //-----------------------------------------------------------------------------------------------------
+
+
 </script>
+
+                <script>
+                    const togglePassword2 = document.querySelector("#togglePassword2");
+                    const password2 = document.querySelector("#npass");
+
+                    togglePassword2.addEventListener("click", function () {
+                        this.classList.toggle("fa-eye-slash");
+                        // toggle the type attribute
+                        const type = password2.getAttribute("type") === "password" ? "text" : "password";
+                        password2.setAttribute("type", type);
+
+                        // toggle the icon
+                    });
+                </script>
+
+                <script>
+                    const togglePassword1 = document.querySelector("#togglePassword1");
+                    const password1 = document.querySelector("#cpass");
+
+                    togglePassword1.addEventListener("click", function () {
+                        this.classList.toggle("fa-eye-slash");
+                        // toggle the type attribute
+                        const type = password1.getAttribute("type") === "password" ? "text" : "password";
+                        password1.setAttribute("type", type);
+
+                        // toggle the icon
+                    });
+                </script>
+
+                <script>
+                    const togglePassword3 = document.querySelector("#togglePassword3");
+                    const password3 = document.querySelector("#rnpass");
+
+                    togglePassword3.addEventListener("click", function () {
+                        this.classList.toggle("fa-eye-slash");
+                        // toggle the type attribute
+                        const type = password3.getAttribute("type") === "password" ? "text" : "password";
+                        password3.setAttribute("type", type);
+
+                        // toggle the icon
+                    });
+                </script>
 </html>

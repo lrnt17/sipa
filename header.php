@@ -64,7 +64,11 @@
                 <?php if(logged_in()):?>
                   <div class="row mt-2" style="align-items: center;">
                       <div class="col-auto">
-                        <a class="js-link navbar-brand d-md-block d-lg-none" href="account_settings.php"><img class="border border-dark rounded-circle" src="<?= get_image($_SESSION['USER']['user_image'])?>" title="SiPa"  width="40" height="40;"></a>
+                        <a class="js-link navbar-brand d-md-block d-lg-none" href="account_settings.php">
+                            <div class="img-con" style="width:50px; height:50px; border-radius:50%; border-style: solid; position: relative; overflow: hidden; padding: 0;"> 
+                                <img src="<?= get_image($_SESSION['USER']['user_image'])?>" title="SiPa" class="js-image class_28"  style=" width: 100%; height: 100%; object-fit: cover; cursor: pointer;" >
+                            </div>
+                        </a>
                       </div>
                       <div class="col-auto">
                         <a class="js-link navbar-brand d-md-block d-lg-none" href="account_settings.php" style="display: inline;">
@@ -88,7 +92,10 @@
               </ul>
             </div>
             <?php if(logged_in()):?>
-                      <a class="js-link navbar-brand d-none d-lg-block d-lx-none" href="account_settings.php"><img class="border border-dark rounded-circle" src="<?= get_image($_SESSION['USER']['user_image'])?>" title="SiPa"  width="40" height="40;"></a>
+                      <a class="js-link navbar-brand d-none d-lg-block d-lx-none" href="account_settings.php">
+                            <div class="img-con" style="width:40px; height:40px; border-radius:50%; border-style: solid; position: relative; overflow: hidden; padding: 0;"> 
+                                <img src="<?= get_image($_SESSION['USER']['user_image'])?>" title="<?= $_SESSION['USER']['user_fname']?>" class="js-image class_28"  style=" width: 100%; height: 100%; object-fit: cover; cursor: pointer;" >
+                            </div>                      </a>
                       <a class="js-link navbar-brand d-none d-lg-block d-lx-none" href="account_settings.php">
                           <span class="user-fname" style="font-size: 16px; font-weight:normal;">Hi, <?= $_SESSION['USER']['user_fname']?></span>
 

@@ -69,8 +69,8 @@
     <div class="js-carousel-card " style="animation: appear 3s ease;">
         <div class="js-forum-link container p-4 rounded-4 shadow-sm hover" style="background-color:white; min-height:350px; max-width:330px;">
             <div class="con d-flex justify-content-center ">
-                <div class="rounded-circle" style="background: white; width: 25%; border: 2px solid #F2F5FF; max-height: auto; position: relative; overflow: hidden; padding: 0;">
-                    <img src="assets/images/user.jpg" class="js-image" style="width: 100%; height: auto; object-fit: cover;">
+                <div class="rounded-circle" style="background: white; width: 55px; border: 2px solid #F2F5FF; height: 55px; position: relative; overflow: hidden; padding: 0;">
+                    <img src="assets/images/user.jpg" class="js-image" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
             </div>
             <div class="d-flex justify-content-center mt-3">

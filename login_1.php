@@ -310,11 +310,11 @@
                 margin-top: 18px;">Welcome back to</p>
                 <p class = "header2" style="font-size: 40px;
                 color:#FFFFFF;
-                margin-top: -28px;
-                font-weight: 400;">SiPa Siguradong Pagpipilian</p>
+                margin-top: -29px;
+                font-weight: 400;">SiPa Siguradong Pagpaplano</p>
                 <p class = "info" style="font-size: 15px;
                 color:#FFFFFF;
-                margin-top: -18px;
+                margin-top: -16px;
                 font-weight: 300;">Find out your top contraceptive methods.</p>
             </div>
         </div>

@@ -83,17 +83,17 @@
 
       @keyframes slideUpFadeOut {
           from {
-              max-height: 500px;
-              opacity: 1;
+              max-height: 500px !important;
+              opacity: 1 !important;
           }
           to {
-              max-height: 0;
-              opacity: 0;
+              max-height: 0 !important;
+              opacity: 0 !important;
           }
       }
 
       .faq-item.slide-up .item-answer {
-          animation: slideUpFadeOut 1s ease; 
+          animation: slideUpFadeOut 1s ease !important; 
       }
 
       .faq-item {
@@ -176,7 +176,7 @@
         }
 
     .form-input:focus{
-        box-shadow: none;
+        box-shadow: none !important;
         border:none;
     }
     /* Default style for anchor tags */

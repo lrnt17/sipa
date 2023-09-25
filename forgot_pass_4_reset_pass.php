@@ -58,7 +58,7 @@
             <img class="doctor" src="doctor.png" alt=""><!-- background photo-->
             <div class = "text"><!-- texts -->
                 <p class = "header-text">Welcome back to</p>
-                <p class = "header-text2">SiPa Siguradong Pagpipilian</p>
+                <p class = "header-text2">SiPa Siguradong Pagpaplano</p>
                 <p class = "info-text">Find out your top contraceptive methods.</p>
             </div>
         </div>
