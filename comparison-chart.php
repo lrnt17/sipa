@@ -10,6 +10,7 @@
     <meta charset="UTF-8">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/324d76b648.js" crossorigin="anonymous"></script>
     <title>Comparison Chart | SiPa</title>
 </head>
 <style>
@@ -116,7 +117,7 @@
     table td.fixed {
     position: sticky;
     left: 0;
-    background-color: #D2E0F8; /* You can adjust the background color */
+    background-color: #D2E0F8 !important; /* You can adjust the background color */
     z-index: 2; /* Ensure the fixed cell is above the scrollable content */
     border: #D2E0F8;
 }
@@ -146,7 +147,7 @@
         <?php include('compare-methods.php') ?>
     
         <!-- ///////////////////////////////////////////////////////////////////// -->
-        <div class="container table-con pt-4 pb-2 rounded-bottom-4 mb-5" style="
+        <div class="container table-con pt-4 pb-2 rounded-bottom-4 mb-4" style="
             padding: 0;
             margin: 0;">
                 <table class="js-chart table">
@@ -158,6 +159,67 @@
                 </table>
         </div>
     </section>
+
+    <div class="container">
+    <div class="d-flex flex-row-reverse">
+        <div class="stars px-3 rounded-4 mb-5 shadow-sm" style="background-color: white;">
+            <div class="row">
+                <div class="col-auto mx-3">
+                    <div class="row" style="display: flex;align-items: center !important;">
+                        <div class="col" style="padding: 0px;">
+                            <i class="fa-solid fa-star" style="color: #915E98;"></i>
+                        </div>
+                        <div class="col" style="padding: 0px;">
+                            <i class="fa-solid fa-star" style="color: #DBDBDB;"></i>
+                        </div>
+                        <div class="col" style="padding: 0px;">
+                            <i class="fa-solid fa-star" style="color: #DBDBDB;"></i>
+                        </div>
+                        <div class="col">
+                            <p style="margin-top: 1rem;">Good</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-auto mx-3">
+                    <div class="row" style="display: flex;align-items: center !important;">
+                        <div class="col" style="padding: 0px;">
+                            <i class="fa-solid fa-star" style="color: #915E98;"></i>
+                        </div>
+                        <div class="col" style="padding: 0px;">
+                            <i class="fa-solid fa-star" style="color: #915E98;"></i>
+                        </div>
+                        <div class="col" style="padding: 0px;">
+                            <i class="fa-solid fa-star" style="color: #DBDBDB;"></i>
+                        </div>
+                        <div class="col">
+                            <p style="margin-top: 1rem;">Better</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-auto mx-3">
+                    <div class="row" style="display: flex;align-items: center !important;">
+                        <div class="col" style="padding: 0px;">
+                            <i class="fa-solid fa-star" style="color: #915E98;"></i>
+                        </div>
+                        <div class="col" style="padding: 0px;">
+                            <i class="fa-solid fa-star" style="color: #915E98;"></i>
+                        </div>
+                        <div class="col" style="padding: 0px;">
+                            <i class="fa-solid fa-star" style="color: #915E98;"></i>
+                        </div>
+                        <div class="col">
+                            <p style="margin-top: 1rem;">Best</p>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+
+        </div>
+     
+    </div>
+  </div>
+</div>
 
 
     <!-- Template for table row -->
