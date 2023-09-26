@@ -506,7 +506,7 @@
                                 // Create a new div inside the imgCol for the image
                                 let imgContainerDiv = document.createElement('div');
                                 imgContainerDiv.classList.add("col-auto","rounded-4", "shadow-sm");
-                                imgContainerDiv.style.background="gray";
+                                imgContainerDiv.style.background="white";
                                 imgContainerDiv.style.width="100px";
                                 imgContainerDiv.style.height="60px";
                                 imgContainerDiv.style.position="relative";
@@ -632,7 +632,7 @@
                                 // Create a new div inside the imgCol for the image
                                 let imgContainerDiv = document.createElement('div');
                                 imgContainerDiv.classList.add("col-auto","rounded-4", "shadow-sm");
-                                imgContainerDiv.style.background="gray";
+                                imgContainerDiv.style.background="white";
                                 imgContainerDiv.style.width="100px";
                                 imgContainerDiv.style.height="60px";
                                 imgContainerDiv.style.position="relative";
