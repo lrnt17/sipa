@@ -254,7 +254,7 @@
                         // Create a div with class "col" for the image
                         let imageCol = document.createElement('div');
                         imageCol.classList.add("col-auto","rounded-4", "ms-2", "shadow-sm");
-                        imageCol.style.background="gray";
+                        imageCol.style.background="white";
                         imageCol.style.width="100px";
                         imageCol.style.height="60px";
                         imageCol.style.position="relative";
@@ -373,7 +373,7 @@
                                 // Create a div with class "col" for the image
                                 let imageCol = document.createElement('div');
                                 imageCol.classList.add("col-auto","rounded-4", "ms-2", "shadow-sm");
-                                imageCol.style.background="gray";
+                                imageCol.style.background="white";
                                 imageCol.style.width="100px";
                                 imageCol.style.height="60px";
                                 imageCol.style.position="relative";
