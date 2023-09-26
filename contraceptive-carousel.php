@@ -136,7 +136,7 @@
                 <div class='newsCaption rounded-4 shadow-sm'>
                     <div style="display: flow;">
                         <span translate="no"><p class="js-method-name newsCaption-title pt-1 pb-2" style="text-align:center; font-size: 1rem; font-weight:600;">Pill</p></span>
-                        <div class="js-method-desc newsCaption-content px-1" style="font-size:1rem;" >
+                        <div class="js-method-desc newsCaption-content px-1" style="font-size:1rem; overflow: hidden;margin-top: -3%;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 4;text-overflow: ellipsis;" >
                             is simply dummy text of the printing and typesetting industry. 
                             Lorem Ipsum has been the industry's standard dummy text ever 
                             since the 1500s, when an unknown printer took a galley of 

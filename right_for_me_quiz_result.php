@@ -109,6 +109,10 @@ select {
     background-color: #D2E0F8 !important;
   }
 
+  .read:hover {
+            opacity: 0.6;
+  }
+
    </style>
    
 
@@ -181,14 +185,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
           <div class="col-sm-12 col-lg-4">
               <div class="container d-flex justify-content-center">
-                  <div class="card mx-1 my-5 rounded-4" style="width: 80%; background-color:#BDD8F0;">
+                  <div class="card mx-1 my-5 rounded-4" style="width: 80%; min-height: 450px; background-color:#BDD8F0;">
                   <div class="container rounded-4 justify-content-center" style="text-align: center; background: white; width: 100%; max-height: 200px; position: relative; overflow: hidden; padding: 0;">
                           <img src="<?php echo $row["birth_control_img"]; ?>" class="card-img-top"style="width: 100%; height: auto; object-fit: cover;"alt="...">
                   </div>
-                          <div class="card-body" style=" min-height:14rem; overflow:hidden;">
-                          <h5 class="card-title" style="text-align:center; color:#3B3B3B;"><?php echo $row["birth_control_name"]; ?></h5>
+                          <div class="card-body" style=" min-height:14rem; overflow:hidden;"> 
+                          <h5 class="card-title" style="text-align:center; color:#3B3B3B; cursor:pointer;"><a href="about-contraceptive.php?id=<?php echo $row['birth_control_id']; ?>" style="text-decoration: none;"><?php echo $row["birth_control_name"]; ?></h5></a>
                           <p class="card-text mt-3">What it is?</p>
-                          <p class="card-text" style="overflow: hidden;margin-top: -3%;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 5;text-overflow: ellipsis;"><?php echo $row["birth_control_desc"]; ?></p>
+                          <p class="card-text" style="overflow: hidden;margin-top: -3%;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 4;text-overflow: ellipsis;"><?php echo $row["birth_control_short_desc"]; ?></p>
+                          <p class="read px-2 mt-2"><a class='js-method-link' href='about-contraceptive.php?id=<?php echo $row['birth_control_id']; ?>' style="text-decoration: none; color: black; font-size:13px;"><i class="fa-solid fa-circle-info"> </i> READ MORE</a></p>
                       </div>
                   </div>
               </div>
@@ -407,7 +412,7 @@ function fetchMethodDetails(method, container) {
 
                 // Set the width and height of the button
                 button.style.width = "150px"; // Adjust the width as needed
-                button.style.height = "auto"; // Adjust the height as needed
+                button.style.minHeight = "190px"; // Adjust the height as needed
 
                 button.classList.add("hover");
 
@@ -528,7 +533,7 @@ function showDatePicker() {
         <div class="vl" style="width: 20px; background-color: #F2C1A7; border-radius: 99px; height: 20px; display: -webkit-inline-box;"></div>
       </div>
       <div class="col mt-2">
-        <p style="color:#5A5A5A;">Select the start date for the contraceptive method: </p>
+        <p style="color:#5A5A5A;">Select the date on when you want to begin your contraceptive method: </p>
       </div>
     </div>
   `;
