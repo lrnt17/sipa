@@ -185,14 +185,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
           <div class="col-sm-12 col-lg-4">
               <div class="container d-flex justify-content-center">
-                  <div class="card mx-1 my-5 rounded-4" style="width: 80%; background-color:#BDD8F0;">
+                  <div class="card mx-1 my-5 rounded-4" style="width: 80%; min-height: 450px; background-color:#BDD8F0;">
                   <div class="container rounded-4 justify-content-center" style="text-align: center; background: white; width: 100%; max-height: 200px; position: relative; overflow: hidden; padding: 0;">
                           <img src="<?php echo $row["birth_control_img"]; ?>" class="card-img-top"style="width: 100%; height: auto; object-fit: cover;"alt="...">
                   </div>
                           <div class="card-body" style=" min-height:14rem; overflow:hidden;"> 
                           <h5 class="card-title" style="text-align:center; color:#3B3B3B; cursor:pointer;"><a href="about-contraceptive.php?id=<?php echo $row['birth_control_id']; ?>" style="text-decoration: none;"><?php echo $row["birth_control_name"]; ?></h5></a>
                           <p class="card-text mt-3">What it is?</p>
-                          <p class="card-text" style="overflow: hidden;margin-top: -3%;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 5;text-overflow: ellipsis;"><?php echo $row["birth_control_short_desc"]; ?></p>
+                          <p class="card-text" style="overflow: hidden;margin-top: -3%;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 4;text-overflow: ellipsis;"><?php echo $row["birth_control_short_desc"]; ?></p>
                           <p class="read px-2 mt-2"><a class='js-method-link' href='about-contraceptive.php?id=<?php echo $row['birth_control_id']; ?>' style="text-decoration: none; color: black; font-size:13px;"><i class="fa-solid fa-circle-info"> </i> READ MORE</a></p>
                       </div>
                   </div>
