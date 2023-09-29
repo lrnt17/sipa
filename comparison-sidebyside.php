@@ -104,6 +104,23 @@
         padding:0 !important;
         max-width: 350px;
     }
+
+
+    .rating {
+    font-size: 30px;
+    }
+
+    .star {
+    color: #DBDBDB;
+    transition: color 0.2s;
+    font-size:20px;
+    }
+
+    .star.active {
+    color: #915E98;
+    font-size:20px;
+    }
+
 </style>
 <body style="background: #F2F5FF;">
  
@@ -470,7 +487,7 @@
 
                         let obj = JSON.parse(ajax.responseText);
                         
-                        let excludedColumns = ["sidebyside_id", "birth_control_id"];
+                        let excludedColumns = ["sidebyside_id", "birth_control_id", "birth_control_chart_id"];
                         let ul = document.createElement("ul");
                         ul.classList = 'js-list2';
 
@@ -482,6 +499,7 @@
                             div.setAttribute('onclick',`compare_sidebyside.close_selected_contraceptive(this)`);
                             div.innerHTML = '<i class="fa-solid fa-xmark"></i>';
                             select_method_holder.appendChild(div);
+                            console.log(obj.chart);
 
                             for (let i = 0; i < obj.rows.length; i++) {
                                 
@@ -552,6 +570,55 @@
                                         let li = document.createElement('li');
                                         li.textContent = value;
 
+                                        let div = document.createElement('div');
+                                        div.classList.add("rating");
+
+                                        // Check if chart data exists for this row
+                                        if (obj.chart && obj.chart[i]) {
+                                            let chartValue = obj.chart[i][key];
+                                            if (chartValue) {
+                                                //div.textContent = chartValue;
+                                                // Create the star elements
+                                                for (let j = 0; j < 3; j++) {
+                                                    let starSpan = document.createElement("span");
+                                                    starSpan.classList.add("star");
+
+                                                    let starIcon = document.createElement("i");
+                                                    starIcon.classList.add("fas", "fa-star");
+
+                                                    // Fill up stars based on the value
+                                                    if (j < chartValue) {
+                                                        starSpan.classList.add("active");
+                                                    }
+
+                                                    starSpan.appendChild(starIcon);
+                                                    div.appendChild(starSpan);
+                                                }
+
+                                                // Create a div to hold the rating text
+                                                let ratingDiv = document.createElement('div');
+                                                ratingDiv.classList.add("rating-div");
+                                                console.log(chartValue);
+                                                switch(+chartValue) {
+                                                    case 0:
+                                                        ratingDiv.textContent = "Bad";
+                                                        break;
+                                                    case 1:
+                                                        ratingDiv.textContent = "Good";
+                                                        break;
+                                                    case 2:
+                                                        ratingDiv.textContent = "Better";
+                                                        break;
+                                                    case 3:
+                                                        ratingDiv.textContent = "Best";
+                                                        break;
+                                                }
+
+                                                div.appendChild(ratingDiv);
+                                            }
+                                        }
+
+                                        li.appendChild(div);
                                         ul.appendChild(li);
                                     }
                                 }
@@ -596,7 +663,7 @@
 
                         let obj = JSON.parse(ajax.responseText);
                         
-                        let excludedColumns = ["sidebyside_id", "birth_control_id"];
+                        let excludedColumns = ["sidebyside_id", "birth_control_id", "birth_control_chart_id"];
                         let ul = document.createElement("ul");
                         ul.classList = 'js-list3';
 
@@ -676,6 +743,56 @@
 
                                         let li = document.createElement('li');
                                         li.textContent = value;
+
+                                        let div = document.createElement('div');
+                                        div.classList.add("rating");
+
+                                        // Check if chart data exists for this row
+                                        if (obj.chart && obj.chart[i]) {
+                                            let chartValue = obj.chart[i][key];
+                                            if (chartValue) {
+                                                //div.textContent = chartValue;
+                                                // Create the star elements
+                                                for (let j = 0; j < 3; j++) {
+                                                    let starSpan = document.createElement("span");
+                                                    starSpan.classList.add("star");
+
+                                                    let starIcon = document.createElement("i");
+                                                    starIcon.classList.add("fas", "fa-star");
+
+                                                    // Fill up stars based on the value
+                                                    if (j < chartValue) {
+                                                        starSpan.classList.add("active");
+                                                    }
+
+                                                    starSpan.appendChild(starIcon);
+                                                    div.appendChild(starSpan);
+                                                }
+
+                                                // Create a div to hold the rating text
+                                                let ratingDiv = document.createElement('div');
+                                                ratingDiv.classList.add("rating-div");
+                                                console.log(chartValue);
+                                                switch(+chartValue) {
+                                                    case 0:
+                                                        ratingDiv.textContent = "Bad";
+                                                        break;
+                                                    case 1:
+                                                        ratingDiv.textContent = "Good";
+                                                        break;
+                                                    case 2:
+                                                        ratingDiv.textContent = "Better";
+                                                        break;
+                                                    case 3:
+                                                        ratingDiv.textContent = "Best";
+                                                        break;
+                                                }
+
+                                                div.appendChild(ratingDiv);
+                                            }
+                                        }
+
+                                        li.appendChild(div);
                                         ul.appendChild(li);
                                     }
                                 }
