@@ -1335,6 +1335,19 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 				}
 			}
 		}
+		//---------------------
+		// New query
+		$query_chart = "SELECT * FROM birth_controls_chart WHERE birth_control_id = '$birth_control_id'";
+		$chart = query($query_chart);
+
+		// Include chart data in the info array
+		$info['chart'] = array();
+		if ($chart) {
+			foreach ($chart as $row_chart) {
+				$info['chart'][] = $row_chart;
+			}
+		}
+
 	}else
 	if($_POST['data_type'] == 'add_video') //ito na yung sa post, naway makuha mo na lorent yung logic
 	{
