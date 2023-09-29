@@ -2,31 +2,16 @@
     require('../connect.php');
     require('../functions.php');
     require('fetch_user_and_partner_info.php');
-    /*$user_role = $_SESSION['USER']['user_role'];
-    $user_fname = $_SESSION['USER']['user_fname'];*/
+    
+    
+    // Assuming you already have the connection set up
+    $query = "SELECT IFNULL(birth_control_name, 'No method selected yet') as birth_control_name, COUNT(*) as count FROM users GROUP BY birth_control_name";
+    $result = mysqli_query($conn, $query);
+    $data = array();
+    while ($row = mysqli_fetch_assoc($result)) {
+        $data[] = $row;
+    }
 
-    /*$user_id = $_SESSION['USER']['user_id'];
-
-    $query = "select * from users where user_id = '$user_id' limit 1";
-	$row = query($query);
-
-	if($row)
-	{
-		$row = $row[0];
-        $user_fname = $row['user_fname'];
-        $id = $row['partner_facility_id'];
-        $user_role = $row['user_role'];
-
-        $query = "select * from partner_facility where partner_facility_id = '$id' limit 1";
-        $user_row = query($query);
-
-        if ($user_row) {
-            $user_row = $user_row[0];
-            $partner_facility_id = $user_row['partner_facility_id'];
-            $city = $user_row['city_municipality'];
-            $facility_name = $user_row['health_facility_name'];
-        }
-	}*/
 ?>
 
 <!DOCTYPE html>
@@ -34,6 +19,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
     <title>SiPa <?=$user_role?></title>
 </head>
 <style>
@@ -94,14 +82,197 @@
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
     }
+
+    /* Styles for the container */
+    .container {
+            padding: 20px; /* Add padding for spacing */
+            display: flex; /* Use flexbox to align items horizontally */
+            align-items: center; /* Center vertically */
+        }
+
+    #pieChart {
+        width: 500px;
+        height: 500px;
+    }
+
+    /*sa pagprint para macrop */
+    @media print {
+        body * {
+            visibility: hidden;
+        }
+        #printableArea, #printableArea * {
+            visibility: visible;
+        }
+        #printableArea {
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        .printBtnContainer {
+            display: none;
+        }
+    }
+
+
 </style>
 <body style="background: #F2F5FF;">
 
 <?php include('admin-header.php') ?>
-    <section class="main">
+    <section class="main" id="printableArea">
         <!--<h1>SiPa <?=$user_role?></h1>
         <h2><?=$user_fname?></h2>-->
+        <div class="topbar" style="width:auto;">
+                <div class="toggle">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+        </div>
+
+        <div class="container">
+            <!-- <div id="chartTitle" style="text-align: left; font-weight: bold;">Selected Method of Users Chart</div> -->
+            <canvas id="pieChart"><!-- Your canvas for the pie chart --></canvas>
+        </div>
+        <div id="result" style="background-color:#D2E0F8;"></div>
+        <div class ="printBtnContainer" ><button onclick="window.print()">Print Result</button></div>
     </section>
+    
+
 </body>
+
+<script type="text/javascript">
+    
+    // Parse PHP array to JavaScript array
+    var data = <?php echo json_encode($data); ?>;
+
+    // Sort the data by count in descending order
+    data.sort(function(a, b) {
+        return b.count - a.count;
+    });
+
+    var ctx = document.getElementById('pieChart').getContext('2d');
+    var labels = data.map(function(e) {
+    return e.birth_control_name;
+    });
+    var count = data.map(function(e) {
+    return Number(e.count);
+    });
+
+Chart.register(ChartDataLabels);
+Chart.defaults.font.size = 14;
+
+new Chart(ctx, {
+    type: 'pie',
+    data: {
+        labels: labels,
+        datasets: [{
+            label: 'Demographics',
+            data: count,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)', //pwede ibahin ng hex code colors, 17 to kasi 17 yung method 
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(255, 99, 64, 0.2)',
+                'rgba(255, 159, 132, 0.2)',
+                'rgba(54, 162, 86, 0.2)',
+                'rgba(75, 192, 255, 0.2)',
+                'rgba(153, 102, 86, 0.2)',
+                'rgba(255, 206, 132, 0.2)',
+                'rgba(75, 192, 64, 0.2)',
+                'rgba(153, 102, 235, 0.2)',
+                'rgba(54, 162, 192, 0.2)',
+                'rgba(255,99 ,206 ,0.2)',
+                'rgba(75 ,192 ,235 ,0.2)'
+            ],
+            borderColor: [
+                'rgba(255 ,99 ,132 ,1)',
+                'rgba(54 ,162 ,235 ,1)',
+                'rgba(255 ,206 ,86 ,1)',
+                'rgba(75 ,192 ,192 ,1)',
+                'rgba(153 ,102 ,255 ,1)',
+                'rgba(255 ,159 ,64 ,1)',
+                'rgba(255 ,99 ,64 ,1)',
+                'rgba(255 ,159 ,132 ,1)',
+                'rgba(54 ,162 ,86 ,1)',
+                'rgba(75 ,192 ,255 ,1)',
+                'rgba(153 ,102 ,86 ,1)',
+                'rgba(255 ,206 ,132 ,1)',
+                'rgba(75 ,192 ,64 ,1)',
+                'rgba(153 ,102 ,235 ,1)',
+                'rgba(54 ,162 ,192 ,1)',
+                'rgba(255 ,99 ,206 ,1)',
+                'rgba(75 ,192 ,235 ,1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'right',
+                align: 'center',
+                font: {
+                    family: "'Lato', sans-serif"
+                }
+            },
+            title: {
+                display: true, //comment mo nalang to mika, buong title simula display gang align, tas paayos nalang nung div id na 'chartTitle' na nakacomment pa
+                text: 'Users\' Selected Method Chart', //comment mo nalang to mika tas paayos nalang nung div id na 'chartTitle' na nakacomment pa
+                font: {
+                    family: "'Lato', sans-serif"
+                },
+                position: 'top',
+                align:'center',
+            },
+            tooltip: {
+                callbacks: {
+                    label: function(tooltipItem) {
+                        var total = count.reduce(function(a, b) { return a + b;}, 0);
+                        var value = count[tooltipItem.dataIndex];
+                        var percentage = ((value / total) * 100).toFixed(2);
+                        return labels[tooltipItem.dataIndex] + ': ' + percentage + '%';
+                    }
+                }
+            },
+            datalabels: {
+                display: true,
+                formatter: function(value) {
+                    var total = count.reduce(function(a,b){ return a + b; },0);
+                    var percentage = ((value / total) *100).toFixed(2);
+                    return percentage + '%';
+                },
+                color: 'black'
+                
+            }
+        }
+    },
+});
+
+
+    let toggle = document.querySelector(".toggle");
+    let navigation = document.querySelector(".navigation");
+    let main = document.querySelector(".main");
+
+    toggle.onclick = function () {
+    navigation.classList.toggle("active");
+    main.classList.toggle("active");
+    };
+
+    var totalUsers = count.reduce(function(a, b) { return a + b;}, 0);
+    var resultTitle = '<h4>RESULT</h4>';
+    var resultText = '<b>Out of ' + totalUsers + ' registered users, these are the number of people who chose these methods:</b> ';
+    labels.forEach(function(label, index) {
+        var value = count[index];
+        resultText += '<br>' + label + ': ' + value;
+    });
+    document.getElementById('result').innerHTML = resultTitle + resultText;
+
+
+</script>
+
+
 </html>
 
