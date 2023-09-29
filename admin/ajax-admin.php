@@ -505,22 +505,44 @@
             //$rows_per_page = 10;
             $rows_per_page = (int)$_POST['show_entry'];
             $offset = ($page - 1) * $rows_per_page;
+            $column = $_POST['column'];
+            $order = $_POST['order'];
+            //$search_query = $_POST['search_query'];
+            //echo $_POST['search_query'];
+            if ($_POST['search_query'] == 'null') {
 
-            $query = "SELECT COUNT(*) FROM appointments WHERE city_municipality = '$city_municipality' AND health_facility = '$health_facility'";
-            $result = query($query);
-            $total_rows = $result[0]['COUNT(*)'];
-            $last_page = ceil($total_rows / $rows_per_page);
-            
-            $query = "SELECT * FROM appointments WHERE city_municipality = '$city_municipality' AND health_facility = '$health_facility' ORDER BY app_id DESC LIMIT $rows_per_page OFFSET $offset";
-            $rows = query($query);
+                $query = "SELECT COUNT(*) FROM appointments WHERE city_municipality = '$city_municipality' AND health_facility = '$health_facility'";
+                $result = query($query);
+                $total_rows = $result[0]['COUNT(*)'];
+                $last_page = ceil($total_rows / $rows_per_page);
+                
+                //$query = "SELECT * FROM appointments WHERE city_municipality = '$city_municipality' AND health_facility = '$health_facility' ORDER BY app_id DESC LIMIT $rows_per_page OFFSET $offset";
+                $query = "SELECT * FROM appointments WHERE city_municipality = '$city_municipality' AND health_facility = '$health_facility' ORDER BY $column $order LIMIT $rows_per_page OFFSET $offset";
+                $rows = query($query);
+
+            } else {
+
+                $search_term = $_POST['search_query'];
+
+                $query = "SELECT COUNT(*) FROM appointments WHERE city_municipality = '$city_municipality' AND health_facility = '$health_facility'";
+                $result = query($query);
+                $constant_total_rows = $result[0]['COUNT(*)'];
+
+                $query = "SELECT COUNT(*) FROM appointments WHERE (app_fname LIKE '%$search_term%' OR app_lname LIKE '%$search_term%' OR app_date LIKE '%$search_term%' OR status LIKE '%$search_term%') AND city_municipality = '$city_municipality' AND health_facility = '$health_facility'";
+                $result = query($query);
+                $total_rows = $result[0]['COUNT(*)'];
+                $last_page = ceil($total_rows / $rows_per_page);
+
+                $query = "SELECT * FROM appointments WHERE (app_fname LIKE '%$search_term%' OR app_lname LIKE '%$search_term%' OR app_date LIKE '%$search_term%' OR status LIKE '%$search_term%') AND city_municipality = '$city_municipality' AND health_facility = '$health_facility' ORDER BY $column $order LIMIT $rows_per_page OFFSET $offset";
+                $rows = query($query);
+
+            }
             
             if($rows){
-                /*foreach ($rows as $key => $row) {
 
-                    $rows[$key]['user_image'] = get_admin_image($row['user_image']);
-                }*/
                 $info['current_page'] = $page;
                 $info['rows_per_page'] = $rows_per_page;
+                $info['constant_total_rows'] = $constant_total_rows;
                 $info['total_rows'] = $total_rows;
                 $info['rows'] = $rows;
                 $info['last_page'] = $last_page;
@@ -532,9 +554,11 @@
             $city_municipality = $_POST['city_municipality'];
             $health_facility = $_POST['health_facility'];
             $query = $_POST['query'];
+
             //$sql = "SELECT * FROM appointments WHERE city_municipality = '$city_municipality' AND app_name LIKE '%$query%' ORDER BY app_id";
             $sql = "SELECT * FROM appointments WHERE (app_fname LIKE '%$query%' OR app_lname LIKE '%$query%') AND city_municipality = '$city_municipality' AND health_facility = '$health_facility' ORDER BY app_id";
             $rows = query($sql);
+
             if ($rows) {
                 $info['rows'] = $rows;
                 $info['success'] = true;

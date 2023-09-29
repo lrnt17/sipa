@@ -12,20 +12,29 @@ var appointment_list = {
     selectedDate: null,
     selectedTimeslot: null,
     showEntryNum: 10,
+    column: 'app_id',
+    order: 'desc',
+    searchQuery: null,
 
     load_appointments: function(e){
 
         let city_municipality = appointment_list.location;
         let health_facility = appointment_list.health_facility;
         let show_entry = appointment_list.showEntryNum;
+        let column = appointment_list.column;
+        let order = appointment_list.order;
+        let searchQuery = appointment_list.searchQuery;
         //let current_date = appointment_list.current_date;
-        console.log(appointment_list.showEntryNum);//return;
+        console.log(searchQuery);//return;
         let form = new FormData();
 
         form.append('city_municipality', city_municipality);
         form.append('health_facility', health_facility);
         form.append('show_entry', show_entry);
+        form.append('column', column);
+        form.append('order', order);
         form.append('page', this.current_page);
+        form.append('search_query', searchQuery);
         form.append('data_type', 'load_appointments');
         var ajax = new XMLHttpRequest();
 
@@ -35,12 +44,16 @@ var appointment_list = {
             {
                 if(ajax.status == 200){
 
+                    console.log(ajax.responseText);
                     let data = JSON.parse(ajax.responseText);
+
+                    let table = document.querySelector("#appointment_table tbody");
+                    let template = document.querySelector("#appointments-template");
 
                     if(data.success){
                         // Get table and template elements
-                        let table = document.querySelector("#appointment_table tbody");
-                        let template = document.querySelector("#appointments-template");
+                        //let table = document.querySelector("#appointment_table tbody");
+                        //let template = document.querySelector("#appointments-template");
 
                         // Clear existing rows
                         table.innerHTML = "";
@@ -51,7 +64,8 @@ var appointment_list = {
 
                         // Display range of entries
                         let rangeElement = document.querySelector(".js-entry-range");
-                        rangeElement.textContent = "Showing " + startIndex + " to " + endIndex + " of " + data.total_rows + " entries";
+                        let constant_total_rows = data.constant_total_rows ? " (filtered from " + data.constant_total_rows + " total entries)" : "";
+                        rangeElement.textContent = "Showing " + startIndex + " to " + endIndex + " of " + data.total_rows + " entries" + constant_total_rows;
 
                         // Generate table rows
                         for (let i = 0; i < data.rows.length; i++) {
@@ -95,6 +109,15 @@ var appointment_list = {
                             }
                             current_page_select.appendChild(option);
                         }
+
+                    } else {
+                        
+                        let row = document.createElement("tr");
+                        let cell = document.createElement("td");
+                        cell.colSpan = 7;
+                        cell.textContent = "No match found";
+                        row.appendChild(cell);
+                        table.appendChild(row);
                     }
                 }
             }
@@ -106,7 +129,9 @@ var appointment_list = {
 
     search_appointments: function(query) {
 
-        let table = document.querySelector("#appointment_table tbody");
+        appointment_list.searchQuery = query;
+        appointment_list.load_appointments();
+        /*let table = document.querySelector("#appointment_table tbody");
         let template = document.querySelector("#appointments-template");
 
         let city_municipality = appointment_list.location;
@@ -172,7 +197,7 @@ var appointment_list = {
         });
 
         ajax.open('post', 'ajax-admin.php', true);
-        ajax.send(form);
+        ajax.send(form);*/
     },
 
     view_appointment: function(id){
@@ -337,6 +362,14 @@ var appointment_list = {
         });
         ajax.open('post', 'ajax-admin.php', true);
         ajax.send(form);
+    },
+
+    sortTable: function(column, order) {
+
+        console.log(column, order);
+        appointment_list.column = column;
+        appointment_list.order = order;
+        appointment_list.load_appointments();
     },
 
     loadCalendar: function (month, year, location, health_facility) {

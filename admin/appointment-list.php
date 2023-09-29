@@ -182,11 +182,11 @@
                 <thead>
                     <tr>
                         <th><input type="checkbox" id="select-all-appointment" onclick="appointment_list.select_all_appointments(this);"></th>
-                        <th>ID</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Schedule</th>
-                        <th>Status</th>
+                        <th>ID <button onclick="appointment_list.sortTable('app_id', 'asc')">Asc</button> <button onclick="appointment_list.sortTable('app_id', 'desc')">Desc</button></th>
+                        <th>First Name <button onclick="appointment_list.sortTable('app_fname', 'asc')">Asc</button> <button onclick="appointment_list.sortTable('app_fname', 'desc')">Desc</button></th>
+                        <th>Last Name <button onclick="appointment_list.sortTable('app_lname', 'asc')">Asc</button> <button onclick="appointment_list.sortTable('app_lname', 'desc')">Desc</button></th>
+                        <th>Schedule <button onclick="appointment_list.sortTable('app_date', 'asc')">Asc</button> <button onclick="appointment_list.sortTable('app_date', 'desc')">Desc</button></th>
+                        <th>Status <button onclick="appointment_list.sortTable('status', 'asc')">Asc</button> <button onclick="appointment_list.sortTable('status', 'desc')">Desc</button></th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -236,34 +236,34 @@
             <form onsubmit="appointment_list.save_updated_appointment(event)" method="post">
                 <div class="form">
                     <label for="edit_fname">First Name *</label>
-                    <input type="text" name="edit_fname" class="js-edit-fname edit-appointment" required>
+                    <input type="text" name="edit_fname" class="js-edit-fname edit-appointment" disabled required>
                 </div>
                 <div class="form">
                     <label for="edit_lname">Last Name *</label>
-                    <input type="text" name="edit_lname" class="js-edit-lname edit-appointment" required>
+                    <input type="text" name="edit_lname" class="js-edit-lname edit-appointment" disabled required>
                 </div>
                 <div class="form">
-                    <label for="edit_gmail">Gmail Address *</label>
-                    <input type="email" name="edit_gmail" class="js-edit-gmail edit-appointment" required>
+                    <label for="edit_gmail">Email Address *</label>
+                    <input type="email" name="edit_gmail" class="js-edit-gmail edit-appointment" disabled required>
                 </div>
                 <div class="form">
                     <label for="edit_pnum">Phone Number *</label>
-                    <input type="number" name="edit_pnum" class="js-edit-pnum edit-appointment" required>
+                    <input type="number" name="edit_pnum" class="js-edit-pnum edit-appointment" disabled required>
                 </div>
                 <div class="form">
                     <label for="edit_gender">Gender</label>
-                    <select name="edit_gender" id="edit_gender" class="js-edit-gender edit-appointment" required>
+                    <select name="edit_gender" id="edit_gender" class="js-edit-gender edit-appointment" disabled required>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                     </select>
                 </div>
                 <div class="form">
                     <label for="edit_dob">Date of Birth</label>
-                    <input type="date" name="edit_dob" class="js-edit-dob edit-appointment">
+                    <input type="date" name="edit_dob" class="js-edit-dob edit-appointment" disabled>
                 </div>
                 <div class="form">
                     <label for="edit_address">Address</label>
-                    <input type="text" name="edit_address" class="js-edit-address edit-appointment">
+                    <input type="text" name="edit_address" class="js-edit-address edit-appointment" disabled>
                 </div>
                 <div class="form">
                     <label for="edit_status">Status</label>
@@ -632,7 +632,7 @@
 
     appointment_list.load_appointments();*/
 </script>
-<script src="appointment-list.js?v7"></script>
+<script src="appointment-list.js?v10"></script>
 <script>
     let searchInput = document.getElementById('search-username');
     
@@ -641,13 +641,14 @@
         let query = event.target.value;
         
         if (query !== '') {
-            document.getElementById('pagination').style.display = "none";
+            //document.getElementById('pagination').style.display = "none";
 
             // Call the allposts.search method with the user's query
             appointment_list.search_appointments(query);
         } else {
-            document.getElementById('pagination').style.display = "";
+            //document.getElementById('pagination').style.display = "";
             // Clear any existing posts and load the first 5 posts from the database
+            appointment_list.search_appointments(null);
             appointment_list.current_page = 1;
             appointment_list.load_appointments();
         }
