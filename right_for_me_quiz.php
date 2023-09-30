@@ -67,13 +67,16 @@
 
     <div class="container p-5 rounded-2 shadow-sm rounded" style="background:white;">
         <div class="user-experience-container" id="user-experience-container">
-            <table class="table table-hover">
-                <tr>
-                    <th>Contraceptive Method</th>
-                    <th>How was your Experience?</th>
-                    <th>Would you consider using this again?</th>
-                </tr>
-                <tr>
+            <table class="table table-hover" id="user-exp-method-table">
+                <thead>
+                    <tr>
+                        <th>Contraceptive Method</th>
+                        <th>How was your Experience?</th>
+                        <th>Would you consider using this again?</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+                <!--<tr>
                     <td><input type="checkbox" name="user-exp-chckbx" id="hormonalIUD" onchange="toggleRadioButtons('hormonalIUD')"> <label for="hormonalIUD">Hormonal IUD</label></td>
                     <td>
                         <label><input type="radio" class="user-exp-radio" id="hormonalIUDExperience" name="hormonalIUDExperience" value="good"disabled required> Good</label>
@@ -293,7 +296,7 @@
                     <label><input type="radio" class="user-exp-radio" id="tubalLigationConsider" name="tubalLigationConsider" value="no" disabled required> No</label>
                     <label><input type="radio" class="user-exp-radio" id="tubalLigationConsider" name="tubalLigationConsider" value="dontKnow" disabled required> I don't know</label>
                 </td>
-                </tr>
+                </tr>-->
             </table>
             <br>
             <input type="checkbox" id="user-experience-checkbox-none"> <label for="user-experience-checkbox-none">I have not used any of these methods</label>
@@ -514,6 +517,22 @@
     <br><br>
     <?php include('footer.php') ?>
 
+    <template id="user-exp-template">
+        <tr>
+            <td><input type="checkbox" name="user-exp-chckbx" id="" onchange=""> <label class="js-user-exp-label" for="">Hormonal IUD</label></td>
+            <td>
+                <label><input type="radio" class="user-exp-radio js-method-exp" id="" name="" value="good"disabled required> Good</label>
+                <label><input type="radio" class="user-exp-radio js-method-exp" id="" name="" value="neutral"disabled required> Neutral</label>
+                <label><input type="radio" class="user-exp-radio js-method-exp" id="" name="" value="bad"disabled required> Bad</label>
+            </td>
+            <td>
+                <label><input type="radio" class="user-exp-radio js-method-consider" id="" name="" value="yes"disabled required> Yes</label>
+                <label><input type="radio" class="user-exp-radio js-method-consider" id="" name="" value="no"disabled required> No</label>
+                <label><input type="radio" class="user-exp-radio js-method-consider" id="" name="" value="dontKnow" disabled required> I don't know</label>
+            </td>
+        </tr>
+    </template>
+
     <script>
         //if the user ticked the None of the Above or the I have not used any of these methods
         const noneCheckbox = document.getElementById('none-of-the-above');
@@ -566,62 +585,62 @@
 
         // Attach event listener to each radio button
         radioButtons.forEach(radioButton => {
-        radioButton.addEventListener('change', handleRadioButtonChange);
+            radioButton.addEventListener('change', handleRadioButtonChange);
         });
 
         function handleRadioButtonChange(event) {
-        const selectedRadioButton = event.target;
-        const radioGroupName = selectedRadioButton.name;
+            const selectedRadioButton = event.target;
+            const radioGroupName = selectedRadioButton.name;
 
-        // Reset styles for all radio buttons in the same group
-        radioButtons.forEach(radioButton => {
-            if (radioButton.name === radioGroupName) {
-            radioButton.parentElement.style.fontWeight = 'normal';
-            radioButton.parentElement.style.color = 'lightgray';
-            }
-        });
+            // Reset styles for all radio buttons in the same group
+            radioButtons.forEach(radioButton => {
+                if (radioButton.name === radioGroupName) {
+                radioButton.parentElement.style.fontWeight = 'normal';
+                radioButton.parentElement.style.color = 'lightgray';
+                }
+            });
 
-        // Apply styles to the selected radio button
-        selectedRadioButton.parentElement.style.fontWeight = 'bold';
-        selectedRadioButton.parentElement.style.color = 'black';
+            // Apply styles to the selected radio button
+            selectedRadioButton.parentElement.style.fontWeight = 'bold';
+            selectedRadioButton.parentElement.style.color = 'black';
         }
 
         //enable the radiobuttons when a checkbox is selected
         
         function toggleRadioButtons(method) {
-        var checkbox = document.getElementById(method);
-        var experienceRadios = document.getElementsByName(method + "Experience");
-        var considerRadios = document.getElementsByName(method + "Consider");
+            var checkbox = document.getElementById(method);
+            var experienceRadios = document.getElementsByName(method + "Experience");
+            var considerRadios = document.getElementsByName(method + "Consider");
 
-        if (checkbox.checked) {
-            for (var i = 0; i < experienceRadios.length; i++) {
-            experienceRadios[i].disabled = false;
+            if (checkbox.checked) {
+                for (var i = 0; i < experienceRadios.length; i++) {
+                experienceRadios[i].disabled = false;
+                }
+                for (var j = 0; j < considerRadios.length; j++) {
+                considerRadios[j].disabled = false;
+                }
+            } else {
+                for (var i = 0; i < experienceRadios.length; i++) {
+                experienceRadios[i].disabled = true;
+                experienceRadios[i].checked = false;
+                }
+                for (var j = 0; j < considerRadios.length; j++) {
+                considerRadios[j].disabled = true;
+                considerRadios[j].checked = false;
+                }
             }
-            for (var j = 0; j < considerRadios.length; j++) {
-            considerRadios[j].disabled = false;
-            }
-        } else {
-            for (var i = 0; i < experienceRadios.length; i++) {
-            experienceRadios[i].disabled = true;
-            experienceRadios[i].checked = false;
-            }
-            for (var j = 0; j < considerRadios.length; j++) {
-            considerRadios[j].disabled = true;
-            considerRadios[j].checked = false;
-            }
-        }
         }
 
         //validate the radiobuttons before submitting
         
         function validateForm(event) {
-        var radioGroups = document.querySelectorAll('input[type="radio"][name^="costEffectiveness"], input[type="radio"][name^="managingPeriods"], input[type="radio"][name^="preventingPregnancy"], input[type="radio"][name^="gainingWeight"], input[type="radio"][name^="answer1"], input[type="radio"][name^="answer2"], input[type="radio"][name^="answer3"], input[type="radio"][name^="answer4"]');
-        var checkboxesMedHist = document.querySelectorAll('input[type="checkbox"][name="med-hist-chckbx"]');
-        var checkboxesUserExp = document.querySelectorAll('input[type="checkbox"][name="user-exp-chckbx"]');
-        var noneOfTheAboveCheckbox = document.getElementById('none-of-the-above');
-        var noneOfTheAboveCheckboxUserExp = document.getElementById('user-experience-checkbox-none');
+            var radioGroups = document.querySelectorAll('input[type="radio"][name^="costEffectiveness"], input[type="radio"][name^="managingPeriods"], input[type="radio"][name^="preventingPregnancy"], input[type="radio"][name^="gainingWeight"], input[type="radio"][name^="answer1"], input[type="radio"][name^="answer2"], input[type="radio"][name^="answer3"], input[type="radio"][name^="answer4"]');
+            var checkboxesMedHist = document.querySelectorAll('input[type="checkbox"][name="med-hist-chckbx"]');
+            var checkboxesUserExp = document.querySelectorAll('input[type="checkbox"][name="user-exp-chckbx"]');
+            var noneOfTheAboveCheckbox = document.getElementById('none-of-the-above');
+            var noneOfTheAboveCheckboxUserExp = document.getElementById('user-experience-checkbox-none');
 
-        var radioChecked = false;
+            var radioChecked = false;
             for (var i = 0; i < radioGroups.length; i++) {
                 if (radioGroups[i].checked) {
                     radioChecked = true;
@@ -629,7 +648,7 @@
                 }
             }
 
-        var medHistCheckboxChecked = false;
+            var medHistCheckboxChecked = false;
             for (var k = 0; k < checkboxesMedHist.length; k++) {
                 if (checkboxesMedHist[k].checked) {
                     medHistCheckboxChecked = true;
@@ -637,7 +656,7 @@
                 }
             }
 
-        var userExpCheckboxChecked = false;
+            var userExpCheckboxChecked = false;
             for (var l = 0; l < checkboxesUserExp.length; l++) {
                 if (checkboxesUserExp[l].checked) {
                     userExpCheckboxChecked = true;
@@ -957,7 +976,66 @@
                 }
         };
 
+        var load_user_exp_methods = {
 
+            load_user_exp_methods: function(){
+
+                let form = new FormData();
+
+                form.append('data_type', 'load_user_exp_methods');
+
+                var ajax = new XMLHttpRequest();
+
+                ajax.addEventListener('readystatechange',function(){
+
+                    if(ajax.readyState == 4)
+                    {
+                        if(ajax.status == 200){
+
+                            //console.log(ajax.responseText);return;
+                            let obj = JSON.parse(ajax.responseText);
+
+                            if(obj.success){
+                                let user_exp_table = document.querySelector("#user-exp-method-table tbody");
+                                let user_exp_template = document.querySelector("#user-exp-template");
+                                console.log(user_exp_template);
+                                for (var i = 0; i < obj.rows.length; i++) {
+                                    let user_exp_card = user_exp_template.content.cloneNode(true);
+
+                                    let userExpChckbx = user_exp_card.querySelector("[name='user-exp-chckbx']");
+                                    userExpChckbx.id = obj.rows[i].birth_control_name_no_space;
+                                    userExpChckbx.setAttribute('onchange',`toggleRadioButtons('${obj.rows[i].birth_control_name_no_space}')`);
+
+                                    let userExpLabel = user_exp_card.querySelector(".js-user-exp-label");
+                                    userExpLabel.for = obj.rows[i].birth_control_name_no_space;
+                                    userExpLabel.innerHTML = obj.rows[i].birth_control_name;
+
+                                    let methodExp = user_exp_card.querySelectorAll(".js-method-exp");
+                                    for(let j = 0; j < methodExp.length; j++) {
+                                        methodExp[j].id = obj.rows[i].birth_control_name_no_space + "Experience";
+                                        methodExp[j].name = obj.rows[i].birth_control_name_no_space + "Experience";
+                                    }
+
+                                    let methodConsider = user_exp_card.querySelectorAll(".js-method-consider");
+                                    for(let k = 0; k < methodConsider.length; k++) {
+                                        methodConsider[k].id = obj.rows[i].birth_control_name_no_space + "Consider";
+                                        methodConsider[k].name = obj.rows[i].birth_control_name_no_space + "Consider";
+                                    }                                    
+                                    
+                                    user_exp_table.appendChild(user_exp_card);
+                                }
+
+                            }
+                        }
+                    }
+                    });
+
+                ajax.open('post','ajax.php', true);
+                ajax.send(form);
+            },
+        };
+
+        load_user_exp_methods.load_user_exp_methods();
     </script>
 
     <div id="recommendation">

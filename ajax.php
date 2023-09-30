@@ -2239,8 +2239,28 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 			$info['success'] = true;
 		}
 		
+	}else
+	if($_POST['data_type'] == 'load_user_exp_methods')
+	{
+		//$user_id = $_SESSION['USER']['user_id'] ?? 0;
+		$query = "select * from birth_controls";
+		$rows = query($query);
+
+		if($rows){
+
+			foreach ($rows as $key => $row) {
+				
+				//$rows[$key]['birth_control_img'] = get_birth_control_img($row['birth_control_img']);
+				$rows[$key]['birth_control_name_no_space'] = str_replace(' ', '', $row['birth_control_name']);
+				$rows[$key]['birth_control_name'] = $row['birth_control_name'];
+			}
+			
+			$info['rows'] = $rows;
+		}
+
+		$info['success'] = true;
+
 	}
-	
 }
 // kinoconvert to json string si "$info", nag ooutput to ng variable $info
 echo json_encode($info);
