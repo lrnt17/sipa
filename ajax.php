@@ -2188,6 +2188,31 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 		
 		$info['success'] = true;
 		$info['message'] = "The old saved method has been deleted successfully";
+	}else
+	if($_POST['data_type'] == 'load_most_used_contraceptives')
+	{
+		$query = "SELECT birth_control_name, COUNT(birth_control_name) AS usage_count FROM users GROUP BY birth_control_name ORDER BY usage_count DESC LIMIT 3";
+		$rows = query($query);
+
+		if($rows){
+
+			foreach ($rows as $key => $row) {
+				
+				$birth_control_name = $row['birth_control_name'];
+				$query = "select * from birth_controls where birth_control_name = '$birth_control_name' limit 1";
+				$birth_control_row = query($query);
+				
+				if($birth_control_row){
+					$rows[$key]['birth_control'] = $birth_control_row[0];
+					$rows[$key]['birth_control']['id'] = $birth_control_row[0]['birth_control_id'];
+					$rows[$key]['birth_control']['short_desc'] = $birth_control_row[0]['birth_control_short_desc'];
+					$rows[$key]['birth_control']['icon'] = $birth_control_row[0]['birth_control_icon'];
+				}
+			}
+			
+			$info['rows'] = $rows;
+		}
+		$info['success'] = true;
 	}
 	
 }

@@ -259,6 +259,9 @@
 
 
 <div class="container">
+
+        <?php include('most-used-contraceptives.php') ?>
+        
         <div class="d-flex justify-content-center mt-5" style="text-align: center;">  
             <p class="mt-4"style="font-size:14px; color:#5A5A5A; width: 400px;">
                 There are many types of contraception available and none are perfect. The 
