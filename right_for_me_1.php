@@ -288,7 +288,7 @@
         <div style="padding:10px;text-align:center;">Loading contraceptive methods....</div>
     </section>
     <br><br>
-    
+    <a href="list-of-rrls.php">References</a>
     <!-- footer -->
     <?php include('footer.php') ?>
 

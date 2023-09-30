@@ -5,7 +5,7 @@
     
     
     // Assuming you already have the connection set up
-    $query = "SELECT IFNULL(birth_control_name, 'No method selected yet') as birth_control_name, COUNT(*) as count FROM users GROUP BY birth_control_name";
+    $query = "SELECT IFNULL(birth_control_name, 'No method selected yet') as birth_control_name, COUNT(*) as count FROM users WHERE user_role = 'user' GROUP BY birth_control_name";
     $result = mysqli_query($conn, $query);
     $data = array();
     while ($row = mysqli_fetch_assoc($result)) {
