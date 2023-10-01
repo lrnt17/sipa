@@ -61,13 +61,14 @@ body {
 }
 
 .signout{
-    position: relative;
+    position: fixed;
     display: block;
     height: 60px;
     line-height: 60px;
     text-align: start;
     white-space: nowrap;
-    margin-top:120px;
+    bottom: 0;
+    padding-left:4px;
 }
 
 .admin{

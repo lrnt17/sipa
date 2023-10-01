@@ -143,6 +143,8 @@
             border-radius: 25px;
             box-shadow: 0 0 5px rgba(0,0,0,.3);
             padding: 3%;
+            max-height: 89vh; /* Set a maximum height for the container (adjust as needed) */
+            overflow-y: auto; 
         }
 
         /* The Close Button */
@@ -169,7 +171,7 @@
 <body style="background: #F2F5FF;">
 <?php include('admin-header.php') ?>
     <section class="main">
-        <div class="topbar row">
+            <div class="topbar row">
                 <div class="toggle col-5">
                     <i class="fa-solid fa-bars"></i>
                 </div>
@@ -256,7 +258,7 @@
 
                     <div class="row mt-4 mb-2">
                         <div class="col">
-                            <div style="font-size:18px;"><i class="fa-solid fa-user-doctor"></i> Specialization: <span style="color: #1F6CB5;"class="js-view-specialization"></span></div>
+                            <div style="font-size:18px;"><i class="fa-solid fa-user-doctor"></i> Specialization: <span style="color: #1F6CB5; font-weight:500;"class="js-view-specialization"></span></div>
                         </div>
                     </div>
                     <div class="row my-3">
@@ -414,8 +416,10 @@
                             <div class="col">
                                 <div class="form">
                                     <label for="edit_pnum" style="font-size: 15px;">Phone Number <span style="color:red;">*</span></label>
-                                    <p style="position: absolute;margin-top: 10px;font-size: 15px;">+63</p>
-                                    <input type="number" name="edit_pnum" class="js-edit-pnum edit-admin" required style="padding-left: 31px;">
+                                    <div style="display: flex; align-items: center;">
+                                        <p style="font-size: 15px; margin-right: 5px; margin-top: 7px;">+63</p>
+                                        <input type="number" name="edit_pnum" class="js-edit-pnum edit-admin" required >
+                                    </div>
                                 </div>
                             </div>
                         </div>
