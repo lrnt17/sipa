@@ -85,8 +85,7 @@
         }
 
         .old-dates {
-            /* Style for dates that are less than the current date */
-            color: gray;
+            color: gray !important;
         }
 
         .fullybooked-dates {
@@ -94,13 +93,13 @@
         }
 
         .selected {
-            color: white;
-            background-color: #CAA4D0;
+            color: white !important;
+            background-color: #b88fbf !important;
         }
 
         .selected-timeslot{
-            color: white;
-            background-color: #CAA4D0;
+            color: white !important;
+            background-color: #b88fbf !important;
         }
 
         .weekend-dates{
@@ -109,7 +108,8 @@
         }
 
         .current-date{
-            color: orange;
+            color: orange !important;
+            opacity: 10;
         }
 
         .booked{
