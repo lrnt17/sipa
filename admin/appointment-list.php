@@ -189,7 +189,7 @@
 
                     <div class="row height d-flex justify-content-center align-items-center">
 
-                        <div class="d-flex flex-row-reverse">
+                        <div class="d-flex mb-3 mt-4">
                             <div class="form" style="position: relative;">
                             <i class="fa-solid fa-magnifying-glass"></i>
                             <input type="text" id="search-username"  class="form-input rounded-pill shadow-sm" placeholder="Search by first name, last name, schedule, or status" style="height: 57px; text-indent: 52px;width: 455px; border: none;">
@@ -352,10 +352,12 @@
                             </div>
                         </div>
                     </div>
-                <div class="container ms-4 ps-4">
-                    <div style="font-size:17px;"><i class="fa-solid fa-clipboard-check me-2"></i> Appointment Schedule: <span class="js-view-appointment-schedule" style="color: #1F6CB5; font-weight:500;"></span></div>
-                    <div style="font-size:17px;"> <i class="fa-solid fa-clock me-1"></i> Timeslot: <span class="js-view-timeslot" style="color: #1F6CB5; font-weight:500;"></span></div>
-                    <div class="row my-3">
+                <div class="container ms-4 ps-4 mt-4">
+                    <div style="font-size:17px;"><i class="fa-solid fa-clipboard-check me-2 my-2" style="padding-left: 2px;"></i> Appointment Schedule: <span class="js-view-appointment-schedule" style="color: #1F6CB5; font-weight:500;"></span></div>
+                    <div style="font-size:17px;"> <i class="fa-solid fa-clock me-1 my-2"></i> Timeslot: <span class="js-view-timeslot" style="color: #1F6CB5; font-weight:500;"></span></div>
+                    <div style="font-size: 17px;"><i class="fa-solid fa-check-to-slot my-2" style="padding-right: 2px;"></i> Status: <span class="js-view-status" style="color: #1F6CB5; font-weight:500;"></span></div>
+
+                    <div class="row my-3 mt-4">
                         <div class="col">
                             <div style="font-size: 15px;">Patient Name <br><span class="js-view-patient-name" style="font-size: 16px;color: #1F6CB5;"></span></div>
                         </div>
@@ -373,9 +375,6 @@
                     </div>
                     <div class="row my-3">
                         <div class="col">
-                            <div style="font-size: 15px;">Gmail Address <br> <span class="js-view-gmail" style="font-size: 16px;color: #1F6CB5;"></span></div>
-                        </div>
-                        <div class="col">
                             <div style="font-size: 15px;">Address <br><span class="js-view-address" style="font-size: 16px;color: #1F6CB5;"></span></div>
                         </div>
                         <div class="col">
@@ -384,7 +383,7 @@
                     </div>
                     <div class="row my-3">
                         <div class="col">
-                            <div style="font-size: 15px;">Status <br> <span class="js-view-status" style="font-size: 16px;color: #1F6CB5;"></span></div>
+                            <div style="font-size: 15px;">Gmail Address <br> <span class="js-view-gmail" style="font-size: 16px;color: #1F6CB5;"></span></div>
                         </div>
                         <div class="col">
                             <div style="font-size: 15px;">Privacy Policy <br> <span class="js-view-privacy-policy" style="font-size: 16px;color: #1F6CB5;"></span></div>
@@ -484,6 +483,9 @@
                                     <input type="text" name="edit_barangay" class="js-edit-barangay edit-appointment" disabled>
                                 </div>
                             </div>
+                        </div>
+
+                        <div class="row">
                             <div class="col">
                                 <div class="form">
                                     <label for="edit_status" style="font-size: 15px;">Status </label>
@@ -493,6 +495,9 @@
                                         <option value="Cancelled">Cancelled</option>
                                     </select>
                                 </div>
+                            </div>
+                            <div class="col-6">
+
                             </div>
                         </div>
 
