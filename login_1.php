@@ -132,7 +132,7 @@
         display: none; /* Hidden by default */
         position: fixed; /* Stay in place */
         z-index: 1; /* Sit on top */
-        padding-top: 50px; /* Location of the box */
+        padding-top: 35px; /* Location of the box */
         left: 0;
         top: 0;
         width: 100%; /* Full width */
@@ -150,6 +150,8 @@
             border-radius: 40px;
             box-shadow: 0 0 5px rgba(0,0,0,.3);
             padding: 3%;
+            max-height: 89vh; /* Set a maximum height for the container (adjust as needed) */
+            overflow-y: auto; 
         }
 
         /* The Close Button */

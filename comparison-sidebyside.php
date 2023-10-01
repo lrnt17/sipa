@@ -567,17 +567,28 @@
                                         //console.log(key);
                                         let value = row[key];
 
-                                        let li = document.createElement('li');
-                                        li.textContent = value;
+                                        // Create a new row for each item
+                                        let rowDiv = document.createElement('div');
+                                        rowDiv.classList.add("row");
+                                        rowDiv.style.alignItems="center";
 
-                                        let div = document.createElement('div');
-                                        div.classList.add("rating");
+                                        // Create the column for the stars
+                                        let starsDiv = document.createElement('div');
+                                        starsDiv.classList.add("col-auto");
+
+                                        // Create the column for the rating text
+                                        let ratingDiv = document.createElement('div');
+                                        ratingDiv.classList.add("col-auto");
+                                        ratingDiv.style.paddingTop="5px";
+                                        ratingDiv.style.fontWeight="700";
+
+                                        let additionalContentDiv = document.createElement('div');
+                                        additionalContentDiv.classList.add("col-1","mt-3");
 
                                         // Check if chart data exists for this row
                                         if (obj.chart && obj.chart[i]) {
                                             let chartValue = obj.chart[i][key];
-                                            if (chartValue) {
-                                                //div.textContent = chartValue;
+                                            if (chartValue !== undefined) {
                                                 // Create the star elements
                                                 for (let j = 0; j < 3; j++) {
                                                     let starSpan = document.createElement("span");
@@ -592,14 +603,11 @@
                                                     }
 
                                                     starSpan.appendChild(starIcon);
-                                                    div.appendChild(starSpan);
+                                                    starsDiv.appendChild(starSpan);
                                                 }
 
-                                                // Create a div to hold the rating text
-                                                let ratingDiv = document.createElement('div');
-                                                ratingDiv.classList.add("rating-div");
-                                                console.log(chartValue);
-                                                switch(+chartValue) {
+                                                // Set the text for the rating text column
+                                                switch (+chartValue) {
                                                     case 0:
                                                         ratingDiv.textContent = "Bad";
                                                         break;
@@ -613,12 +621,26 @@
                                                         ratingDiv.textContent = "Best";
                                                         break;
                                                 }
-
-                                                div.appendChild(ratingDiv);
                                             }
                                         }
 
-                                        li.appendChild(div);
+                                        // Add the additional content column
+                                        let additionalContent = document.createElement('p');
+                                        additionalContent.innerHTML = "&mdash;"; // Adding "—" using HTML entity
+                                        additionalContentDiv.appendChild(additionalContent);
+
+                                        // Append the stars column and rating text column to the row
+                                        rowDiv.appendChild(starsDiv);
+                                        rowDiv.appendChild(additionalContentDiv);
+                                        rowDiv.appendChild(ratingDiv);
+                                        
+
+                                        // Create a list item and append the row to it
+                                        let li = document.createElement('li');
+                                        li.textContent = value;
+                                        li.appendChild(rowDiv);
+
+                                        // Append the list item to the ul
                                         ul.appendChild(li);
                                     }
                                 }
@@ -736,22 +758,31 @@
                                 ul.appendChild(li);
 
                                 for (let key in row) {
-
                                     if (!excludedColumns.includes(key) && key !== 'birth_control_name' && key !== 'birth_control_icon') {
-                                        //console.log(key);
                                         let value = row[key];
 
-                                        let li = document.createElement('li');
-                                        li.textContent = value;
+                                        // Create a new row for each item
+                                        let rowDiv = document.createElement('div');
+                                        rowDiv.classList.add("row");
+                                        rowDiv.style.alignItems="center";
 
-                                        let div = document.createElement('div');
-                                        div.classList.add("rating");
+                                        // Create the column for the stars
+                                        let starsDiv = document.createElement('div');
+                                        starsDiv.classList.add("col-auto");
+
+                                        // Create the column for the rating text
+                                        let ratingDiv = document.createElement('div');
+                                        ratingDiv.classList.add("col-auto");
+                                        ratingDiv.style.paddingTop="5px";
+                                        ratingDiv.style.fontWeight="700";
+
+                                        let additionalContentDiv = document.createElement('div');
+                                        additionalContentDiv.classList.add("col-1","mt-3");
 
                                         // Check if chart data exists for this row
                                         if (obj.chart && obj.chart[i]) {
                                             let chartValue = obj.chart[i][key];
-                                            if (chartValue) {
-                                                //div.textContent = chartValue;
+                                            if (chartValue !== undefined) {
                                                 // Create the star elements
                                                 for (let j = 0; j < 3; j++) {
                                                     let starSpan = document.createElement("span");
@@ -766,14 +797,11 @@
                                                     }
 
                                                     starSpan.appendChild(starIcon);
-                                                    div.appendChild(starSpan);
+                                                    starsDiv.appendChild(starSpan);
                                                 }
 
-                                                // Create a div to hold the rating text
-                                                let ratingDiv = document.createElement('div');
-                                                ratingDiv.classList.add("rating-div");
-                                                console.log(chartValue);
-                                                switch(+chartValue) {
+                                                // Set the text for the rating text column
+                                                switch (+chartValue) {
                                                     case 0:
                                                         ratingDiv.textContent = "Bad";
                                                         break;
@@ -787,15 +815,30 @@
                                                         ratingDiv.textContent = "Best";
                                                         break;
                                                 }
-
-                                                div.appendChild(ratingDiv);
                                             }
                                         }
 
-                                        li.appendChild(div);
+                                        // Add the additional content column
+                                        let additionalContent = document.createElement('p');
+                                        additionalContent.innerHTML = "&mdash;"; // Adding "—" using HTML entity
+                                        additionalContentDiv.appendChild(additionalContent);
+
+                                        // Append the stars column and rating text column to the row
+                                        rowDiv.appendChild(starsDiv);
+                                        rowDiv.appendChild(additionalContentDiv);
+                                        rowDiv.appendChild(ratingDiv);
+                                        
+
+                                        // Create a list item and append the row to it
+                                        let li = document.createElement('li');
+                                        li.textContent = value;
+                                        li.appendChild(rowDiv);
+
+                                        // Append the list item to the ul
                                         ul.appendChild(li);
                                     }
                                 }
+
                             }
                             select_method_holder.appendChild(ul);
                             compare_sidebyside.list_height_adjust();
