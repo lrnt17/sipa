@@ -28,21 +28,21 @@
 
         //Now creating the HTML table
         $calendar = "<table class='table table-bordered'>";
-        $calendar.="<center><h2>$monthName $year</h2>";
+        $calendar.="<center><h4>$monthName $year</h4>";
  
-        $calendar.="<tr>";
+        $calendar.="<tr style='height:40px;'>";
 
         //Creating the calendars headers
         foreach($daysOfWeek as $day){
             $calendar.="<th class='header'>$day</th>";
         }
 
-        $calendar.= "</tr><tr>";
+        $calendar.= "</tr><tr style='height:40px;'>";
 
         //The variable $dayOfWeek will make sure that there must be only 7 columns on our table
         if($dayOfWeek > 0){
             for($k=0; $k<$dayOfWeek;$k++){
-                $calendar.="<td></td>";
+                $calendar.="<td style='padding-top: 20px;'></td>";
             }
         }
 
@@ -57,7 +57,7 @@
             //If seventh column (Saturday) reached, start a new row
             if ($dayOfWeek==7) {
                 $dayOfWeek=0;
-                $calendar.="</tr><tr>";
+                $calendar.="</tr><tr style='height:40px;'>";
             }
             $currentDayRel = str_pad($currentDay, 2, "0", STR_PAD_LEFT);
             $date = "$year-$month-$currentDayRel";
@@ -78,17 +78,17 @@
             $isWeekend = ($dayOfWeek == 0 || $dayOfWeek == 6); // Check if it's Saturday (0) or Sunday (6)
             
             if ($date < date('Y-m-d')) {
-                $calendar.="<td class='old-dates'><h4>$currentDay</h4>";
+                $calendar.="<td class='old-dates' style='padding-top: 20px;'><h6>$currentDay</h6>";
             } elseif ($fully_booked) {
-                $calendar.="<td class='fullybooked-dates'><h4>$currentDay</h4>";
+                $calendar.="<td class='fullybooked-dates' style='padding-top: 20px;'><h6>$currentDay</h6>";
             } /*elseif (in_array($date, $holidays)) {
                 $calendar .= "<td class='holiday-dates'><h4>$currentDay</h4>";
             }*/ elseif ($isWeekend && $today == "today") {
-                $calendar .= "<td class='weekend-dates current-date'><h4>$currentDay</h4>";
+                $calendar .= "<td class='weekend-dates current-date' style='padding-top: 20px;'><h6>$currentDay</h6>";
             } elseif ($isWeekend) {
-                $calendar .= "<td class='weekend-dates'><h4>$currentDay</h4>";
+                $calendar .= "<td class='weekend-dates' style='padding-top: 20px;'><h6>$currentDay</h6>";
             } else {
-                $calendar.="<td class='$today new-dates' onclick='appointment_list.selectDate(\"$date\")'><h4>$currentDay</h4>";
+                $calendar.="<td class='$today new-dates' style='padding-top: 20px;' onclick='appointment_list.selectDate(\"$date\")'><h6>$currentDay</h6>";
             }
             
 
@@ -104,7 +104,7 @@
             $remainingDays = 7-$dayOfWeek;
 
             for ($i=0; $i<$remainingDays; $i++) { 
-                $calendar.="<td></td>";
+                $calendar.="<td style='padding-top: 20px;'></td>";
             }
         }
 

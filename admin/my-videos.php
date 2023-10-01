@@ -69,6 +69,9 @@
         .sidenav {padding-top: 15px;}
         .sidenav a {font-size: 18px;}
         }
+        td{
+            font-size:14px;
+        }
     </style>
 </head>
 <style>
@@ -96,6 +99,56 @@
     .highlight {
         background-color: yellow;
     }*/
+
+    tr {
+    border-bottom: 1px solid black !important;
+    }
+</style>
+
+<style>
+            .js-upload-video, .js-edit-video {
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            padding-top: 35px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            }
+
+            /* Modal Content */
+            .upload-container, .edit-container {
+                background-color: #fefefe;
+                margin: auto;
+                width: 70%;
+                border-radius: 25px;
+                box-shadow: 0 0 5px rgba(0,0,0,.3);
+                padding: 3%;
+                max-height: 89vh; /* Set a maximum height for the container (adjust as needed) */
+                overflow-y: auto; 
+            }
+
+            /* The Close Button */
+            .close-btn {
+            color: black;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            }
+
+            @media (max-width: 850px){
+                .upload-container, .edit-container {
+                width: 90% !important;
+                
+                }
+            }
+
+            input:focus, textarea:focus{
+                outline: none;
+            }
 </style>
 <body style="background: #F2F5FF;">
 
@@ -120,92 +173,156 @@
         <br>
 
         <!-- List of videos -->
-        <div class="container" style="margin-top:75px;">
-            <h1>Your Videos</h1>
-            <table border ="1" cellspacing="0" cellpadding="10" id="video_table">
-                <thead>
+        <div class="container">
+
+            <div class="row flex-nowrap" style="align-items: center; margin-top:61px;">
+                <div class="col-auto">
+                    <div class="vl" style="width: 10px;
+                    background-color: #1F6CB5;
+                    border-radius: 99px;
+                    height: 60px;
+                    display: -webkit-inline-box;"></div>
+                </div>
+                
+                <div class="col-auto mt-1">
+                    <div class="row">
+                        <div class="col-auto">
+                            <h2 style="font-weight: 400;"><b>Your</b> Videos</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="px-4 py-2 my-4 rounded-4 shadow-sm" onclick="manage_my_videos.open_upload_video()" style="cursor:pointer; background-color:white; width: max-content;"> <i class="fa-solid fa-video me-2"></i> Upload Video</div>
+            
+            <table border ="0" cellspacing="0" cellpadding="10" id="video_table">
+                <thead style="text-align: center; height:40px;">
                     <tr>
                         <th><input type="checkbox" id="select-all-videos" onclick="manage_my_videos.select_all_videos(this);" /></th>
-                        <th>Videos</th>
-                        <th>Date</th>
-                        <th>Views</th>
-                        <th>Comments</th>
-                        <th>Likes</th>
-                        <th>Categories</th>
-                        <th>Actions</th>
+                        <th title="Videos"><i class="fa-solid fa-video"></i></th>
+                        <th title="Date"><i class="fa-solid fa-calendar-days"></i></th>
+                        <th title="Views"><i class="fa-solid fa-eye"></i></th>
+                        <th title="Comments"><i class="fa-solid fa-comment"></i></th>
+                        <th title="Likes"><i class="fa-solid fa-heart"></i></th>
+                        <th title="Categories"><i class="fa-solid fa-grip"></i></th>
+                        <th title="Action"><i class="fa-solid fa-pencil"></i></th>
                     </tr>
                 </thead>
                 <tbody></tbody>
             </table>
             <br>
-            <div onclick="manage_my_videos.open_upload_video()" style="cursor:pointer;">Upload Video</div>
+            
             <div onclick="manage_my_videos.delete_video()" style="cursor:pointer;color:red;" id="delete-admin">Delete</div>
         </div>
         <br><br>
 
+
         <!-- upload video modal -->
         <div class="js-upload-video hide">
-            <div class="" style="float:right;cursor:pointer;" onclick="manage_my_videos.open_upload_video()">X</div>
-            <form onsubmit="manage_my_videos.upload_video(event)" method="post" enctype="multipart/form-data">
-                <div>
-                    <div id="drop_zone">Drop & drop video to upload or</div>
-                    <input type="file" name="video_to_upload" id="video_to_upload" class="hide" onchange="manage_my_videos.display_video_to_upload(event)" required>
-                    <label for="video_to_upload" style="cursor:pointer;">Select File</label>
-                    <br>
-                    <video class="js-display-video hide" width="200" controls></video>
-                    <span id="file-name"></span>
-                </div>
-                <div class="">
-                    <input type="text" placeholder="Title" name="video_title" id="video_title" class="js-video-title-input" maxlength="100" required>
-                </div>
-                <div class="">
-                    <textarea placeholder="Description" name="post" class="js-video-desc-input" maxlength="500" required></textarea>
-                </div>
-                <div>
-                    <b>Select a Contraceptive Category: </b>
-                    <select class="js-select-contraceptive" required>
-                        <!-- The options will be dynamically populated with JavaScript -->
-                    </select>
-                </div>
-                
-                
-                <!--<div>
-                    <label for="anonymous">Upload anonymously:</label>
-                    <input type="checkbox" id="anonymous" name="anonymous" class="js-anonymous-video">
-                </div>-->
-                <div class="">
-                    <button class="">Post</button>
-                </div>
-            </form>
+            <div class="upload-container">
+                <div class="close-btn" style="float:right;cursor:pointer;" onclick="manage_my_videos.open_upload_video()">&times;</div>
+                <form onsubmit="manage_my_videos.upload_video(event)" method="post" enctype="multipart/form-data">
+                    <div class="rounded-4 container my-4 p-4 shadow-sm" style="background: #F0F0F0;display: flex;justify-content: center; flex-wrap: wrap;">
+                        <div class="row">
+                            <div class="col-12">
+                                <center><i class="fa-brands fa-dropbox mt-4 mb-2" style="font-size: 2.3rem;"></i></center>
+                                <center><div id="drop_zone">Drop & drop video to upload</div></center>
+                            </div>
+                            <div class="col">
+                                <input type="file" name="video_to_upload" id="video_to_upload" class="hide" onchange="manage_my_videos.display_video_to_upload(event)" required>
+                                <center><label for="video_to_upload" class="px-3 py-2 mb-4 mt-2 rounded-pill shadow-sm" style="cursor:pointer; background-color:#5887DE; color:white;">Select File</label></center>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <video class="js-display-video hide" width="200" controls></video>
+                        </div>
+                        <div class="row mt-4">
+                            <span id="file-name"></span>
+                        </div>
+                    </div>
+                    <div class="">
+                        <input type="text" placeholder="Title" name="video_title" id="video_title" class="js-video-title-input fs-5 m-2" style="border: none; border-bottom: 1px solid gray;width: 98%;" maxlength="100" required>
+                    </div>
+                    <div class="">
+                        <textarea placeholder="Description" name="post" class="js-video-desc-input mx-2" rows="4" style="border: none; border-bottom: 1px solid gray;resize: none; width: 98%;" maxlength="500" required></textarea>
+                    </div>
+                    <div class="ms-2 mt-3">
+                        <div class="row">
+                            <div class="col-auto">
+                                <p style="font-size: 16px;color: #1F6CB5;">Select a Contraceptive Category: </p>
+                            </div>
+                            <div class="col">
+                                <select class="js-select-contraceptive" required>
+                                    <!-- The options will be dynamically populated with JavaScript -->
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <!--<div>
+                        <label for="anonymous">Upload anonymously:</label>
+                        <input type="checkbox" id="anonymous" name="anonymous" class="js-anonymous-video">
+                    </div>-->
+                    <div class="class_45 d-flex flex-row-reverse">
+                        <button class="btn"><b>Post</b></button>
+                    </div>
+                </form>
+            </div>
         </div>
 
         <!-- Editing admin modal -->
         <div class="js-edit-video hide">
-            <div class="" style="float:right;cursor:pointer; margin: 10px;padding:5px;padding-left:10px;padding-right:10px;" onclick="manage_my_videos.hide_edit_modal()">X</div>
-            <h1>Edit Title & Description</h1>
-            <form onsubmit="manage_my_videos.save_edited_details(event)" method="post">
-                <div class="form">
-                    <label for="edit_video_title">Video Title</label>
-                    <input type="text" name="edit_video_title" class="js-edit-title edit-video" maxlength="100" required>
+            <div class="edit-container">
+            <div class="close-btn" style="float:right;cursor:pointer; margin: 10px;padding:5px;padding-left:10px;padding-right:10px;" onclick="manage_my_videos.hide_edit_modal()">&times;</div>
+                <div class="row flex-nowrap mt-4" style="align-items: center;">
+                    <div class="col-auto">
+                        <div class="vl" style="width: 10px;
+                        background-color: #1F6CB5;
+                        border-radius: 99px;
+                        height: 60px;
+                        display: -webkit-inline-box;"></div>
+                    </div>
+                
+                    <div class="col-auto mt-1">
+                        <div class="row">
+                            <div class="col-auto">
+                                <h2 style="font-weight: 400;">Edit Title & Description</h2>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="form">
-                    <label for="edit_video_desc">Video Description</label>
-                    <!--<input type="text" name="edit_video_desc" class="js-edit-desc edit-video" required>-->
-                    <textarea name="edit_video_desc" id="edit_video_desc" class="js-edit-desc edit-video" cols="30" rows="10" maxlength="500" required></textarea>
-                </div>
-                <div class="form">
-                    <label for="edit_category">Contraceptive Category</label>
-                    <select name="edit_category" id="edit_category" class="js-edit-category edit-video" required>
-                        
-                    </select>
-                </div>
+                <form onsubmit="manage_my_videos.save_edited_details(event)" method="post" class="px-5 mt-4">
+                    <div class="form">
+                        <label for="edit_video_title" style="font-size: 17px;color: #1F6CB5;">Video Title</label></br>
+                        <input type="text" name="edit_video_title" class="js-edit-title edit-video fs-5" style="border: none; border-bottom: 1px solid gray;width: 98%;" maxlength="100" required>
+                    </div>
+                    <div class="form mt-4">
+                        <label for="edit_video_desc" style="font-size: 17px;color: #1F6CB5;">Video Description</label><br>
+                        <!--<input type="text" name="edit_video_desc" class="js-edit-desc edit-video" required>-->
+                        <textarea name="edit_video_desc" id="edit_video_desc" class="js-edit-desc edit-video" cols="30" rows="5" style="border: none; border-bottom: 1px solid gray;resize: none; width: 98%;" maxlength="500" required></textarea>
+                    </div>
+                    <div class="form mt-3">
+                        <div class="row">
+                            <div class="col-auto">
+                                <label for="edit_category" style="font-size: 16px;color: #1F6CB5;">Contraceptive Category</label>
+                            </div>
+                            <div class="col">
+                                <select name="edit_category" id="edit_category" class="js-edit-category edit-video" required>
+                                    <!-- The options will be dynamically populated with JavaScript -->
+                                </select>
+                            </div>
+                        </div>
+                            
+                    </div>
 
-                <div class="" >
-                    <button class="">
-                        Save
-                    </button>
-                </div>
-            </form>
+                    <div class="class_45 d-flex flex-row-reverse" >
+                        <button class="btn px-5 mt-3 me-3" style="background-color: #F2C1A7; color:#ffff;">
+                            Save
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     
     </section>
@@ -218,10 +335,15 @@
                     <span class="checkmark"></span>
                 </label>
             </td>
-            <td>
-                <video src="" width="200" class="js-video-display"></video>
-                <div>
-                    <h3 class="js-video-title">Video Title</h3>
+            <td style="width: 40%;">
+            <div class="row" style="align-items: center;">
+                <div class="col-auto" style="width:120px;">
+                    <div class="rounded-3" style="cursor: pointer; position: relative; height:3.5rem; overflow: hidden; border: 4px solid #D2E0F8; padding: 0;">
+                        <video src="" class="js-video-display" style="width: 100%;  object-fit: cover;"></video>
+                    </div>
+                </div>
+                <div class="col">
+                    <h6 class="js-video-title pt-2">Video Title</h6>
                     <p class="js-video-desc">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
                         sed do eiusmod tempor incididunt ut labore et dolore magna 
@@ -233,14 +355,16 @@
                         eserunt mollit anim id est laborum
                     </p>
                 </div>
+            </div>
+
             </td>
-            <td class="js-video-date"></td>
-            <td class="js-video-views"></td>
-            <td class="js-video-comments"></td>
-            <td class="js-video-likes"></td>
-            <td class="js-video-category"></td>
-            <td>
-                <div class="js-video-edit-btn" style="cursor:pointer;color:blue;">Edit Details</div>
+            <td class="js-video-date" style="text-align: center; width: 10%;"></td>
+            <td class="js-video-views" style="text-align: center; width: 10%;"></td>
+            <td class="js-video-comments" style="text-align: center; width: 10%;"></td>
+            <td class="js-video-likes" style="text-align: center; width: 10%;"></td>
+            <td class="js-video-category" style="text-align: center; width: 10%;"></td>
+            <td style="text-align: center;">
+                <div class="js-video-edit-btn" style="cursor:pointer;color:blue; width: 10%; padding: 20px;">Edit</div>
             </td>
         </tr>
     </template>
