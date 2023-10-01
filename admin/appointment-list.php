@@ -378,6 +378,9 @@
                         <div class="col">
                             <div style="font-size: 15px;">Address <br><span class="js-view-address" style="font-size: 16px;color: #1F6CB5;"></span></div>
                         </div>
+                        <div class="col">
+                            <div style="font-size: 15px;">Barangay <br><span class="js-view-barangay" style="font-size: 16px;color: #1F6CB5;"></span></div>
+                        </div>
                     </div>
                     <div class="row my-3">
                         <div class="col">
@@ -473,6 +476,12 @@
                                 <div class="form">
                                     <label for="edit_address" style="font-size: 15px;">Address</label>
                                     <input type="text" name="edit_address" class="js-edit-address edit-appointment" disabled>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form">
+                                    <label for="edit_barangay" style="font-size: 15px;">Barangay</label>
+                                    <input type="text" name="edit_barangay" class="js-edit-barangay edit-appointment" disabled>
                                 </div>
                             </div>
                             <div class="col">
@@ -865,7 +874,7 @@
 
     appointment_list.load_appointments();*/
 </script>
-<script src="appointment-list.js?v12"></script>
+<script src="appointment-list.js?v13"></script>
 <script>
     let searchInput = document.getElementById('search-username');
     
