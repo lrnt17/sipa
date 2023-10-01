@@ -132,6 +132,17 @@
         </div>
     </div>
 
+    <div class="row height d-flex justify-content-center align-items-center">
+
+              <div class="col-md-6">
+
+                <div class="cap p-3 rounded-4 shadow-sm rounded" style="position: relative; top: -40px; background:#ffff; text-align:center;">
+                    Stop wondering, start knowing! Take the test to discover your perfect contraceptive match.               
+                </div>
+                
+              </div>
+            </div>
+
     <!-- Search Bar-->
     <!--<div class="container"> 
 
@@ -160,7 +171,7 @@
             </form>
         </div>
     </div>-->
-    <div class="container mt-5"> <!-- mt-3-->
+    <div class="container mt-2"> <!-- mt-3-->
         <div class="row" style="align-items: center;">
             <div class="col-auto">
                 <div class="vl"></div>
@@ -184,14 +195,14 @@
                 <a href="right_for_me_quiz.php" style="
                 font-size: 24px;
                 text-decoration: none;
-                font-weight: 600; color:#383838;">Take the quiz</a>
+                font-weight: 600; color:#383838;">Take the test</a>
             </div>
         <?php else:?>
             <div onclick="contra_method.take_quiz_prohibited()" class="circle d-flex justify-content-center">
                 <button class="btn" style="
                 font-size: 24px;
                 text-decoration: none;
-                font-weight: 600; color:#383838;">Take the quiz</button>
+                font-weight: 600; color:#383838;">Take the test</button>
             </div>
         <?php endif;?>
 
