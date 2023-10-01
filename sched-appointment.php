@@ -131,13 +131,13 @@
                             </select><br>
                         </div>
 
-                        <div class="row" style="margin-bottom:10px;">
+                        <!--<div class="row" style="margin-bottom:10px;">
                             <div class="js-select-health-facility hide">
                                 <label class="label-1" for="health_facility">Health Facility <span style="color: #B12229;">*</span></label><br>
                                 <select name="health_facility" id="health_facility" required class="minimal">
                                 </select>
                             </div>
-                        </div>
+                        </div>-->
 
                         <div class="row" style="margin-bottom:10px;">
                             <div class="js-select-barangay hide">
@@ -170,9 +170,17 @@
                             <input type="date" id="dob" name="dob"><br>
                         </div>
 
-                        <div class="row" style="margin-bottom:10px;">
+                        <div class="row">
                             <label class="label-1" for="municipality">City/Municapality <span style="color: #B12229;">*</span></label><br>
                             <select name="municipality" id="municipality" required class="minimal"> </select>
+                        </div>
+
+                        <div class="row" style="margin-bottom:10px;">
+                            <div class="js-select-health-facility hide">
+                                <label class="label-1" for="health_facility">Health Facility <span style="color: #B12229;">*</span></label><br>
+                                <select name="health_facility" id="health_facility" required class="minimal">
+                                </select>
+                            </div>
                         </div>
                         
                     </div>

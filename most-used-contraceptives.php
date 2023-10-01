@@ -52,12 +52,12 @@
                                 
                                 if(typeof obj.rows[i].birth_control == 'object'){
                                     most_used_card.querySelector(".js-contraceptive-icon").src = obj.rows[i].birth_control.icon;
+                                    most_used_card.querySelector(".js-contraceptive-link").href = 'about-contraceptive.php?id=' + obj.rows[i].birth_control.id;
                                 }
 
                                 most_used_card.querySelector(".js-contraceptive-name").innerHTML = obj.rows[i].birth_control_name;
                                 most_used_card.querySelector(".js-contraceptive-short-description").innerHTML = (typeof obj.rows[i].birth_control == 'object') ? obj.rows[i].birth_control.short_desc : 'No Data';
                                 most_used_card.querySelector(".js-contraceptive-number-of-users").innerHTML = obj.rows[i].usage_count;
-                                most_used_card.querySelector(".js-contraceptive-link").href = 'about-contraceptive.php?id=' + obj.rows[i].birth_control.id;
                                 
                                 most_used_container.appendChild(most_used_card);
                             }

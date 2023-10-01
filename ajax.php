@@ -2275,6 +2275,19 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 
 		$info['success'] = true;
 
+	}else
+	if($_POST['data_type'] == 'load_barangay_info')
+	{
+		$user_barangay = $_SESSION['USER']['user_barangay'] ?? 0;
+		$query = "SELECT * FROM barangays WHERE barangay_name = '$user_barangay'";
+		$rows = query($query);
+
+		if($rows){
+		
+			$info['rows'] = $rows;
+			$info['success'] = true;
+		}
+		
 	}
 }
 // kinoconvert to json string si "$info", nag ooutput to ng variable $info

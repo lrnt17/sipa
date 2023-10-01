@@ -260,7 +260,13 @@
 
 <div class="container">
 
-        <?php include('most-used-contraceptives.php') ?>
+        <?php 
+            if(logged_in()):
+                include('barangay-contact-info.php');
+            endif;
+
+            include('most-used-contraceptives.php') 
+        ?>
         
         <div class="d-flex justify-content-center mt-5" style="text-align: center;">  
             <p class="mt-4"style="font-size:14px; color:#5A5A5A; width: 400px;">
