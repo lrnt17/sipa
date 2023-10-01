@@ -583,6 +583,7 @@
             $fname = addslashes($_POST['edit_fname']);
             $lname = addslashes($_POST['edit_lname']);
             $address = addslashes($_POST['edit_address']);
+            $barangay = addslashes($_POST['edit_barangay']);
             $email = addslashes($_POST['edit_gmail']);
             $contact = (int)($_POST['edit_pnum']);
             $gender = $_POST['edit_gender'];
@@ -667,7 +668,8 @@
                     app_gender = '$gender',
                     app_email = '$email',
                     app_pnum = '$contact',
-                    app_address = '$address', 
+                    app_address = '$address',
+                    barangay = '$barangay', 
                     status = '$status',
                     app_date = '$appointment_date',
                     app_timeslot = '$appointment_timeslot' 
@@ -677,8 +679,8 @@
                     // Insert the user details into the users table
                     $password_hash = password_hash($password, PASSWORD_DEFAULT); // Hash the password before storing it in the database
                     $user_role = 'user';
-                    $query = "INSERT INTO users (user_role, user_fname, user_lname, user_dob, user_sex, user_email, user_pnum, user_name, user_password) 
-                    VALUES ('$user_role', '$fname', '$lname', '$dob', '$gender', '$email', '$contact', '$username', '$password_hash')";
+                    $query = "INSERT INTO users (user_role, user_fname, user_lname, user_dob, user_sex, user_email, user_barangay, user_pnum, user_name, user_password) 
+                    VALUES ('$user_role', '$fname', '$lname', '$dob', '$gender', '$email', '$barangay', '$contact', '$username', '$password_hash')";
                     query($query);
 
                     $info['success'] = true;
@@ -693,7 +695,8 @@
                     app_gender = '$gender',
                     app_email = '$email',
                     app_pnum = '$contact',
-                    app_address = '$address', 
+                    app_address = '$address',
+                    barangay = '$barangay', 
                     status = '$status',
                     app_date = '$appointment_date',
                     app_timeslot = '$appointment_timeslot' 

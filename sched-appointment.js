@@ -8,6 +8,7 @@ var sched_appointment = {
     selectedTimeslot: null,
     location: null,
     health_facility: null,
+    barangay: null,
 
     submit_appointment: function(e){
         
@@ -22,6 +23,8 @@ var sched_appointment = {
         let inputs = e.currentTarget.querySelectorAll('.modal-content input');
         let select_municipality = document.getElementById("municipality");
         let selected_municipality = select_municipality.options[select_municipality.selectedIndex].value;
+        let select_barangay = document.getElementById("barangay");
+        let selected_barangay = select_barangay.options[select_barangay.selectedIndex].value;
         let select_health_facility = document.getElementById("health_facility");
         let selected_health_facility = select_health_facility.options[select_health_facility.selectedIndex].value;
         let select_gender = document.getElementById("gender");
@@ -37,6 +40,7 @@ var sched_appointment = {
         }
         //return;
         form.append('selected_municipality', selected_municipality);
+        form.append('selected_barangay', selected_barangay);
         form.append('selected_health_facility', selected_health_facility);
         form.append('selected_gender', selected_gender);
         form.append('appointment_date', appointment_date);
@@ -88,6 +92,10 @@ var sched_appointment = {
 
         let select_municipality = document.getElementById("municipality");
         select_municipality.selectedIndex = 0;
+
+        let select_barangay = document.getElementById("barangay");
+        select_barangay.selectedIndex = 0;
+        document.querySelector(".js-select-barangay").classList.add('hide');
 
         let select_health_facility = document.getElementById("health_facility");
         select_health_facility.selectedIndex = 0;
@@ -182,6 +190,7 @@ var sched_appointment = {
             }
         }
 
+        sched_appointment.get_selected_barangay();
         sched_appointment.get_selected_health_facility();
         console.log(sched_appointment.health_facility);
         sched_appointment.loadCalendar(sched_appointment.month, sched_appointment.year, sched_appointment.location, sched_appointment.health_facility);
@@ -444,12 +453,61 @@ var sched_appointment = {
                         selectElement.appendChild(blankOption);
 
                         obj.rows.forEach(function(location) {
+                            if (location.city_municipality !== "SiPa") {
+                                let option = document.createElement("option");
+                                //option.value = location.partner_facility_id;
+                                option.value = location.city_municipality;
+                                option.text = location.city_municipality;
+                                option.setAttribute("city-municipality-name", location.city_municipality);
+                                option.setAttribute("translate", "no");
+                                selectElement.appendChild(option);
+                            }
+                        });
+                    }
+                }
+            }
+        });
+
+        ajax.open('post','ajax.php', true);
+        ajax.send(form);
+    },
+
+    load_barangay_list: function(){
+
+        let city_municipality = sched_appointment.location;
+
+        let form = new FormData();
+
+        form.append('city_municipality', city_municipality);
+        form.append('data_type', 'load_barangay_list');
+        var ajax = new XMLHttpRequest();
+
+        ajax.addEventListener('readystatechange',function(){
+
+            if(ajax.readyState == 4)
+            {
+                if(ajax.status == 200){
+                    
+                    let obj = JSON.parse(ajax.responseText);
+
+                    if(obj.success){
+                        
+                        let selectElement = document.getElementById("barangay");
+                        selectElement.innerHTML = "";
+
+                        let blankOption = document.createElement("option");
+                        blankOption.value = "";
+                        blankOption.text = "Select a Barangay";
+                        blankOption.disabled = true;
+                        blankOption.selected = true;
+                        selectElement.appendChild(blankOption);
+
+                        obj.rows.forEach(function(barangay_healthcare_provider) {
                             let option = document.createElement("option");
-                            //option.value = location.partner_facility_id;
-                            option.value = location.city_municipality;
-                            option.text = location.city_municipality;
-                            option.setAttribute("city-municipality-name", location.city_municipality);
-                            option.setAttribute("translate", "no");
+                            //option.value = barangay_healthcare_provider.partner_facility_id;
+                            option.value = barangay_healthcare_provider.barangay_name;
+                            option.text = barangay_healthcare_provider.barangay_name;
+                            option.setAttribute("barangay-health-facility-name", barangay_healthcare_provider.barangay_name);
                             selectElement.appendChild(option);
                         });
                     }
@@ -519,6 +577,7 @@ var sched_appointment = {
             if (this.value !== '') {
                 //select_health_facility.disabled = false;
                 document.querySelector(".js-select-health-facility").classList.remove('hide');
+                document.querySelector(".js-select-barangay").classList.remove('hide');
             } else {
                 //select_health_facility.disabled = true;
             }
@@ -526,8 +585,15 @@ var sched_appointment = {
             let selected_city_municipality = select_city_municipality.value;
             sched_appointment.location = selected_city_municipality;
             console.log(sched_appointment.location);
+            sched_appointment.load_barangay_list();
             sched_appointment.load_health_facility_list();
         });
+    },
+
+    get_selected_barangay: function () {
+        
+        let selected_barangay = document.getElementById("barangay").value;
+        sched_appointment.barangay = selected_barangay;
     },
 
     get_selected_health_facility: function () {

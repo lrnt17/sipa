@@ -2114,6 +2114,20 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 		
 
 	}else
+	if($_POST['data_type'] == 'load_barangay_list')
+	{
+		$city_municipality = $_POST['city_municipality'];
+
+		$query = "select * from barangays where city_municipality = '$city_municipality'";
+		$rows = query($query);
+
+		if ($rows) {
+			$info['rows'] = $rows;
+			$info['success'] = true;
+		}
+		
+
+	}else
 	if($_POST['data_type'] == 'add_appointment')
 	{
 		$fname = addslashes($_POST['fname']);
@@ -2121,6 +2135,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
         $address = addslashes($_POST['address']);
         $email = addslashes($_POST['email']);
         $municipality = addslashes($_POST['selected_municipality']);
+		$barangay = addslashes($_POST['selected_barangay']);
 		$health_facility = addslashes($_POST['selected_health_facility']);
         $contact = (int)($_POST['contact']);
         $gender = $_POST['selected_gender'];
@@ -2137,11 +2152,11 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 			$info['message'] = "Your contact number already exists.";
 		} else {
 			// Insert the new record
-			$query = "INSERT INTO appointments (app_fname,app_lname,app_address,app_email,city_municipality,health_facility,app_pnum,app_gender,app_bdate,app_date,app_timeslot,appointment_data_privacy) 
-			VALUES ('$fname','$lname','$address','$email','$municipality','$health_facility','$contact','$gender','$dob','$appointment_date','$appointment_timeslot','$appointment_data_privacy')";
+			$query = "INSERT INTO appointments (app_fname,app_lname,app_address,app_email,city_municipality,barangay,health_facility,app_pnum,app_gender,app_bdate,app_date,app_timeslot,appointment_data_privacy) 
+			VALUES ('$fname','$lname','$address','$email','$municipality','$barangay','$health_facility','$contact','$gender','$dob','$appointment_date','$appointment_timeslot','$appointment_data_privacy')";
 			query($query);
 
-			appointment_confirmation($contact, $fname, $municipality, $health_facility, $appointment_date, $appointment_timeslot);
+			//appointment_confirmation($contact, $fname, $municipality, $health_facility, $appointment_date, $appointment_timeslot);
 
 			$info['success'] = true;
 			$info['message'] = "Your appointment was successfully created";

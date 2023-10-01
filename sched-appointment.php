@@ -138,6 +138,14 @@
                                 </select>
                             </div>
                         </div>
+
+                        <div class="row" style="margin-bottom:10px;">
+                            <div class="js-select-barangay hide">
+                                <label class="label-1" for="barangay">Barangay <span style="color: #B12229;">*</span></label><br>
+                                <select name="barangay" id="barangay" required class="minimal">
+                                </select>
+                            </div>
+                        </div>
                             
                     </div>
 
@@ -297,4 +305,4 @@
         }
     }*/
 </script>
-<script src="sched-appointment.js?v11"></script>
+<script src="sched-appointment.js?v12"></script>

@@ -222,8 +222,9 @@
                 <div>Gender: <span class="js-view-gender"></span></div>
                 <div>Date of Birth: <span class="js-view-dob"></span></div>
                 <div>Phone No.: <span class="js-view-pnum"></span></div>
-                <div>Gmail Address: <span class="js-view-gmail"></span></div>
+                <div>Email Address: <span class="js-view-gmail"></span></div>
                 <div>Address: <span class="js-view-address"></span></div>
+                <div>Barangay: <span class="js-view-barangay"></span></div>
                 <div>Status: <span class="js-view-status"></span></div>
                 <div>Privacy Policy: <span class="js-view-privacy-policy"></span></div>
             </div>
@@ -264,6 +265,10 @@
                 <div class="form">
                     <label for="edit_address">Address</label>
                     <input type="text" name="edit_address" class="js-edit-address edit-appointment" disabled>
+                </div>
+                <div class="form">
+                    <label for="edit_barangay">Barangay</label>
+                    <input type="text" name="edit_barangay" class="js-edit-barangay edit-appointment" disabled>
                 </div>
                 <div class="form">
                     <label for="edit_status">Status</label>
@@ -632,7 +637,7 @@
 
     appointment_list.load_appointments();*/
 </script>
-<script src="appointment-list.js?v10"></script>
+<script src="appointment-list.js?v11"></script>
 <script>
     let searchInput = document.getElementById('search-username');
     

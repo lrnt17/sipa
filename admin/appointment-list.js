@@ -227,6 +227,7 @@ var appointment_list = {
             document.querySelector(".js-view-pnum").innerHTML = data.app_pnum;
             document.querySelector(".js-view-gmail").innerHTML = data.app_email;
             document.querySelector(".js-view-address").innerHTML = data.app_address;
+            document.querySelector(".js-view-barangay").innerHTML = data.barangay;
             document.querySelector(".js-view-status").innerHTML = data.status;
             document.querySelector(".js-view-privacy-policy").innerHTML = data.appointment_data_privacy;
 
@@ -253,6 +254,7 @@ var appointment_list = {
             document.querySelector(".js-edit-gender").value = data.app_gender;
             document.querySelector(".js-edit-dob").value = data.app_bdate;
             document.querySelector(".js-edit-address").value = data.app_address;
+            document.querySelector(".js-edit-barangay").value = data.barangay;
             document.querySelector(".js-edit-status").value = data.status;
             appointment_list.selectedDate = data.app_date;
             appointment_list.appointmentDate = data.app_date;
