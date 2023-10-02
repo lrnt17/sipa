@@ -83,10 +83,10 @@
                 <a class="js-link nav-link video_link" href="community-videos.php">Videos</a>
               </li>
               <li class="nav-item mx-2">
-                <a class="js-link nav-link rfm_link" href="right_for_me_1.php">Right for me</a>
+                <a class="js-link nav-link rfm_link" href="right_for_me_1.php">Match my Method</a>
               </li>
               <li class="nav-item mx-2">
-                <a class="js-link nav-link faqs_link" href="faqs.php">FAQs</a>
+                <a class="js-link nav-link faqs_link" href="comparison-chart.php">Comparison Chart</a>
               </li>
               <li class="nav-item dropdown mx-2">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -97,7 +97,7 @@
                     <a class="js-link dropdown-item" href="cost_calculator.php">Contraceptive Cost Calculator</a>
                     <a class="js-link dropdown-item" href="community-topics.php">Community Forum</a>
                     <a class="dropdown-item" href="about-std.php">About STDs</a>
-                    <a class="js-link dropdown-item" href="comparison-chart.php">Contraception Method Comparison</a>
+                    <a class="js-link dropdown-item" href="faqs.php">FAQs</a>
                     <a class="dropdown-item" href="gmap.php">Find a health care provider</a>
                     <!--<a class="dropdown-item" href="">Contraceptive Reviews</a>-->
                 </div>
