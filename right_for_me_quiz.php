@@ -31,7 +31,7 @@
 </head>
 <body style="background: #F2F5FF;">
     <!-- navigation bar with logo -->
-    <?php include('header.php') ?>
+    <?php include('header.php'); ?>
 
     <div class="container rounded-5" style="background: #D2E0F8;">
         <div class="row mx-5 justify-content-center" style="text-align:center; padding: 2%;">

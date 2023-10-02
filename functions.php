@@ -510,3 +510,12 @@ function containsProhibitedWord($content) {
     return false; // No prohibited words found
 }
 
+function first_logged_in() {
+	
+    if(!empty($_SESSION['USER']) && $_SESSION['USER']['first_logged_in'] == 0){
+		return true;
+    }
+
+    return false;
+}
+

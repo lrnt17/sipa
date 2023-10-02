@@ -490,7 +490,7 @@
                         if(obj.success){
                             login.password = null;
                             login.password = null;
-                            window.location.href = "home_1_with_user.php";
+                            window.location.href = "right_for_me_quiz.php";
                         }
                     }else{
                         alert("Please check your internet connection");
