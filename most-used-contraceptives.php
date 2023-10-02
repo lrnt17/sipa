@@ -2,10 +2,52 @@
     defined('APP') or die('direct script access denied!'); 
 ?>
 
+<style>.lines{
+    width: 100%;
+    height: 28px;
+    position: relative;
+}
+
+.lines::after, .lines::before{
+    content: '';
+    position: absolute;
+    height: 2.5px;
+    margin: auto;
+    background: #F2C1A7;
+    width: 25%;
+    top: 45%;
+}
+
+.lines::after{
+    left: 0;
+}
+
+.lines::before{
+    right: 0;
+}</style>
+
 <section>
     <div>
-        <h1>Top 3 Most Used Contraceptives</h1>
-        <div class="js-most-used-contraceptives" id="most-used-contraceptives">
+
+        <div class="d-flex justify-content-center mt-5" style="text-align: center;">  
+            <p class="mt-4"style="font-size:14px; color:#5A5A5A; width: 400px;">
+            Discover the Top 3 Most Used Contraceptives! Explore the preferred methods 
+            chosen by our users on the 'SIPA' website to make informed decisions about birth control.
+            </p>
+        </div>
+
+        <div class="row">
+            <div class="d-flex justify-content-center mt-2 mb-3">
+                <div style="width: 10%;
+                background-color: #1F6CB5;
+                border-radius: 99px;
+                height: 6px;"></div>
+            </div>
+        </div>
+
+
+        <h2 class="d-flex justify-content-center mb-3" style="color:#383838;">Top 3 Most Used Contraceptives</h2>
+        <div class="row js-most-used-contraceptives" id="most-used-contraceptives" style="justify-content: center;">
 
         </div>
     </div>
@@ -13,14 +55,20 @@
 </section>
 
 <template class="js-most-used-template" id="most-used-template">
-    <div class="contraceptive-item">
-        Used by <p class="js-contraceptive-number-of-users">Number of users: ...</p>
-        <h3 class="js-contraceptive-name">Contraceptive Name</h3>
-        <div class="contraceptive-icon">
-            <img src="" alt="" class="js-contraceptive-icon" width="25" height="25">
+
+    <div class="col-lg-3 contraceptive-item my-3 mx-4 rounded-3 p-4 shadow-sm" style="background:white;">
+        <div class="contraceptive-icon p-3 rounded-3 shadow-sm" style="display: flex;justify-content: center; background:#979797;">
+            <img src="" alt="" class="js-contraceptive-icon" width="60" height="60">
         </div>
-        <p class="js-contraceptive-short-description">Description of the contraceptive...</p>
-        <p class="read px-2 mt-2"><a class='js-contraceptive-link' href='#' style="text-decoration: none; color: black; font-size:13px;"><i class="fa-solid fa-circle-info"> </i> READ MORE</a></p>
+        <center><h3 class="js-contraceptive-name p-3">Contraceptive Name</h3></center>
+        <div class="lines">
+            <p style="text-align: center;">Used by <span class="js-contraceptive-number-of-users">Number of users: ...</span></p>
+        </div>
+        
+        
+        
+        <p class="js-contraceptive-short-description mt-3">Description of the contraceptive...</p>
+        <p class="read px-2 mt-2"><a class='js-contraceptive-link' href='#' style="text-decoration: none; color: #1F6CB5; font-size:13px;"><i class="fa-solid fa-circle-info"> </i> READ MORE</a></p>
     </div>
 </template>
 

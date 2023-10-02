@@ -325,7 +325,7 @@
         <div class="container-box">
             <!-- signing in -->
             <div class = "sign-in" style="width: 510px;">
-                <h1>Sign in</h1>
+                <h1>Login</h1>
                 <!--<form action="login_2_successfull.php" method="post">-->
                 <form onsubmit="login.submit(event)" method="post">
                     <div class="form">
@@ -355,8 +355,10 @@
                     <div class="lines">
                         <p class="text-dha" id="dont_have_account">Don't have an account?</p>
                     </div>
-                    <center><div onclick="sched_appointment.show()" class="sched" style="cursor:pointer; margin: 8px; color:blue;">Schedule an Appoitment</div></center>
-                    <center><p class="visit" style="font-size: 13px;">or Visit the nearest health facility in your area</p></center>
+                    <center><div onclick="sched_appointment.show()" class="sched" style="cursor:pointer; margin: 3px; color:#1F6CB5;">Click here to Schedule an Appointment</div></center>
+                    <center><p class="visit" style="font-size: 13px; margin: 0;">to your nearest health facility in your area</p></center>
+                    <center><p class="visit" style="font-size: 13px; margin: 0;">or</p></center>
+                    <center><a href="home_1_with_user.php" class="visit" style="cursor:pointer; color:#1F6CB5; text-decoration:none; font-weight:400;">Continue as Guest</a></center>
                 </div>
                 
                 <!-- show password toggle script -->
