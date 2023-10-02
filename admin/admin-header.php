@@ -61,14 +61,13 @@ body {
 }
 
 .signout{
-    position: fixed;
+    position: relative;
     display: block;
     height: 60px;
     line-height: 60px;
     text-align: start;
     white-space: nowrap;
-    bottom: 0;
-    padding-left:4px;
+    margin-top: 100px;
 }
 
 .admin{
@@ -185,6 +184,7 @@ body {
     padding: 0 10px;
     position:fixed;
     background: #F2F5FF;
+    z-index:1;
     }
 
     .toggle {
@@ -210,7 +210,9 @@ body {
                     <div class="mb-3" style="display: flex; align-items: center;">
                         <div class="col-auto" style="padding-right: 15px;">
                             <div class="img-con" style="width:50px; height:50px; border-radius:50%; border-style: solid; position: relative; overflow: hidden; padding: 0;"> 
-                                <img src="<?= admin_get_image($_SESSION['USER']['user_image'])?>" title="SiPa" class="rounded-circle class_28"  style=" width: 100%; height: 100%; object-fit: cover;" >
+                                <a href="admin-account-settings.php">
+                                    <img src="<?= admin_get_image($_SESSION['USER']['user_image'])?>" title="Account Settings" class="rounded-circle class_28"  style=" width: 100%; height: 100%; object-fit: cover;" >
+                                </a>
                             </div>
                         </div>
 

@@ -556,10 +556,29 @@
                 <div class="js-appointment-timeslot"></div>
             </td>
             <td class="js-appointment-status" style="width: 15%;"></td>
-            <td style="width: 15%;">
-                <div class="js-appointment-edit-btn" style="cursor:pointer;color:blue;">Edit</div>
-                <div class="js-appointment-details-btn" style="cursor:pointer; font-size: 12px;">View Details</div>
-            </td>
+                <td style="width: 15%;">
+                    <div class="js-action-buttons class_51" >
+
+                    <!--3 dots-->
+                    <a data-toggle="dropdown" class="btn"><i class="fa-solid fa-ellipsis" style="font-size:14px;"></i></i></a>
+                        
+                        <!--div edit,del-->
+                        <div class="container">
+                            
+                            <!--ul element-->
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <div class="js-appointment-edit-btn dropdown-item" style="color:blue;cursor: pointer; font-size:14px;"  >
+                                    Edit
+                                </div>
+                                <div class="js-appointment-details-btn dropdown-item" style="cursor: pointer; font-size:14px;"  >
+                                    View Details
+                                </div>
+                            </ul>
+
+                        </div>
+
+                    </div>
+                </td>
         </tr>
     </template>
 

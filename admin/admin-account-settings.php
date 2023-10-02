@@ -266,8 +266,24 @@
             </script>
         <?php endif;?>
 
-        <div class="container px-5" style="margin-top:75px;">
-        <h4>Account Settings</h4>
+        <div class="container" style="margin-top:75px;">
+        <div class="row flex-nowrap" style="align-items: center; margin-top:85px;">
+                    <div class="col-auto">
+                        <div class="vl" style="width: 10px;
+                        background-color: #1F6CB5;
+                        border-radius: 99px;
+                        height: 60px;
+                        display: -webkit-inline-box;"></div>
+                    </div>
+                
+                    <div class="col-auto mt-1">
+                        <div class="row">
+                            <div class="col-auto">
+                                <h2 style="font-weight: 400;"><b>Account</b> Settings</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         <br>
         <?php if(!empty($row)):?>
             <form method="post" enctype="multipart/form-data" class="" style="background-color: ;">
@@ -373,9 +389,10 @@
                 <br>
 
                 <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-6" style="position: relative;">
                             <label>Current Password</label>
-                            <input type="password" name="current_password" class="inputs">
+                            <input type="password" name="current_password" id="cpass" class="inputs">
+                            <i class="fas fa-eye" style="font-size: 15px; cursor: pointer; color: gray; position: absolute; right: 27px; top: 50%; transform: translateY(-50%);" id="togglePassword1"></i>
                         </div>
                         <div class="col-md-6"> 
                         
@@ -383,13 +400,15 @@
                 </div>
 
                 <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-6" style="position: relative;">
                             <label>New Password</label>
-                            <input placeholder="Leave empty to keep old password" type="password" name="new_password" class="inputs">
+                            <input placeholder="Leave empty to keep old password" type="password" name="new_password" id="npass" class="inputs">
+                            <i class="fas fa-eye" style="font-size: 15px; cursor: pointer; color: gray; position: absolute; right: 27px; top: 50%; transform: translateY(-50%);" id="togglePassword2"></i>
                         </div>
-                        <div class="col-md-6"> 
+                        <div class="col-md-6" style="position: relative;"> 
                             <label>Retype New Password</label>
-                            <input type="password" name="retype_password" class="inputs">
+                            <input type="password" name="retype_password" id="rnpass" class="inputs">
+                            <i class="fas fa-eye" style="font-size: 15px; cursor: pointer; color: gray; position: absolute; right: 27px; top: 50%; transform: translateY(-50%);" id="togglePassword3"></i>
                         </div>
                 </div>
                 <br>
@@ -524,5 +543,49 @@
     navigation.classList.toggle("active");
     main.classList.toggle("active");
     };
+</script>
+
+</script>
+
+                <script>
+                    const togglePassword2 = document.querySelector("#togglePassword2");
+                    const password2 = document.querySelector("#npass");
+
+                    togglePassword2.addEventListener("click", function () {
+                        this.classList.toggle("fa-eye-slash");
+                        // toggle the type attribute
+                        const type = password2.getAttribute("type") === "password" ? "text" : "password";
+                        password2.setAttribute("type", type);
+
+                        // toggle the icon
+                    });
+                </script>
+
+                <script>
+                    const togglePassword1 = document.querySelector("#togglePassword1");
+                    const password1 = document.querySelector("#cpass");
+
+                    togglePassword1.addEventListener("click", function () {
+                        this.classList.toggle("fa-eye-slash");
+                        // toggle the type attribute
+                        const type = password1.getAttribute("type") === "password" ? "text" : "password";
+                        password1.setAttribute("type", type);
+
+                        // toggle the icon
+                    });
+                </script>
+
+                <script>
+                    const togglePassword3 = document.querySelector("#togglePassword3");
+                    const password3 = document.querySelector("#rnpass");
+
+                    togglePassword3.addEventListener("click", function () {
+                        this.classList.toggle("fa-eye-slash");
+                        // toggle the type attribute
+                        const type = password3.getAttribute("type") === "password" ? "text" : "password";
+                        password3.setAttribute("type", type);
+
+                        // toggle the icon
+                    });
 </script>
 </html>

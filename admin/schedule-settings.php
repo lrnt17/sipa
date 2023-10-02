@@ -169,7 +169,7 @@
 
                         <div class="row" style="justify-content:center;">
                             <div class="col-auto">
-                                <h4 style="text-align: center;">AM</h4>
+                                <h4 style="text-align: center;"></h4>
                                 <select class="mb-2 rounded-5 shadow-sm" id="startHourSelector" name="start_at">
                                     <!-- Options for the start hour -->
                                 </select>
@@ -178,9 +178,9 @@
                                 display: flex;
                                 align-items: center;
                                 justify-content: center;
-                            "><h6 class="my-4" style="text-align: center;">TO</h6></div>
+                            "><h6 class="my-4" style="text-align: center;"></h6></div>
                             <div class="col-auto">
-                                <h4 style="text-align: center;">PM</h4>
+                                <h4 style="text-align: center;"></h4>
                                 <select class="mb-2 rounded-5 shadow-sm" id="endHourSelector" name="end_at">
                                     <!-- Options for the end hour -->
                                 </select>
