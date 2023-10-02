@@ -468,6 +468,7 @@ function fetchMethodDetails(method, container) {
         if (xhr.status === 200) {
           const response = JSON.parse(xhr.responseText);
           if (response.success) {
+            change_first_logged_in();
             alert("Contraceptive method successfully saved!");
           } else {
             alert("Error saving contraceptive method. Please try again.");
@@ -662,6 +663,38 @@ function checkShowSaveButton() {
       "user_id=" + encodeURIComponent(user_id) + "&selected_method=" + encodeURIComponent(selectedMethod) + "&selected_date=" + encodeURIComponent(formattedDate) + "&birth_control_usage=" + encodeURIComponent(usageValue)
     );
   }
+
+  //var change_first_logged_in = {
+
+    //change_first_logged_in: function(){
+      function change_first_logged_in(){
+
+          let form = new FormData();
+
+          form.append('data_type', 'change_first_logged_in');
+
+          var ajax = new XMLHttpRequest();
+
+          ajax.addEventListener('readystatechange',function(){
+
+              if(ajax.readyState == 4)
+              {
+                  if(ajax.status == 200){
+
+                      //console.log(ajax.responseText);return;
+                      let obj = JSON.parse(ajax.responseText);
+
+                      if(obj.success){
+                          console.log('first logged changed');
+                      }
+                  }
+              }
+              });
+
+          ajax.open('post','ajax.php', true);
+          ajax.send(form);
+      }
+  //};
 </script>
 
 

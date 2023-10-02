@@ -2266,7 +2266,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 			foreach ($rows as $key => $row) {
 				
 				//$rows[$key]['birth_control_img'] = get_birth_control_img($row['birth_control_img']);
-				$rows[$key]['birth_control_name_no_space'] = str_replace(' ', '', $row['birth_control_name']);
+				//$rows[$key]['birth_control_name_no_space'] = str_replace(' ', '', $row['birth_control_name']);
+				$rows[$key]['birth_control_name_no_space'] = lcfirst(str_replace(' ', '', $row['birth_control_name']));
 				$rows[$key]['birth_control_name'] = $row['birth_control_name'];
 			}
 			
@@ -2287,6 +2288,20 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 			$info['rows'] = $rows;
 			$info['success'] = true;
 		}
+		
+	}else
+	if($_POST['data_type'] == 'change_first_logged_in') 
+	{
+		$user_id = $_SESSION['USER']['user_id'] ?? 0;
+		$first_logged_in = 1;
+		
+		$query = "update users set first_logged_in = '$first_logged_in' where user_id = '$user_id' limit 1";
+		query($query);
+
+		// Update the session value after the database update
+		$_SESSION['USER']['first_logged_in'] = $first_logged_in;
+
+		$info['success'] = true;
 		
 	}
 }
