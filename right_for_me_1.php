@@ -127,8 +127,8 @@
     <div class="container rounded-5" style="background: #D2E0F8;">
         <div class="row mx-5 justify-content-center" style="text-align:center; padding: 4%;">
         
-            <div class="col-auto"><p style="font-size: 3.5rem;">Is it</p></div>
-            <div class="col-auto"><p style="font-size: 3.5rem; font-weight:bolder;" >right for me?</p></div>
+            <div class="col-auto"><p style="font-size: 3.5rem;">Find the</p></div>
+            <div class="col-auto"><p style="font-size: 3.5rem; font-weight:bolder;" >match for you</p></div>
         </div>
     </div>
 

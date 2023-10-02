@@ -476,10 +476,27 @@
             <td class="js-specialization"></td>
             <td class="js-admin-pnum"></td>
             <td>
-                <div class="js-edit-btn">
-                    <div class="js-admin-edit-btn" style="cursor:pointer;color:blue;">Edit</div>
-                </div>
-                <div class="js-admin-details-btn" style="cursor:pointer; font-size:12px;">View Details</div>
+
+                <a data-toggle="dropdown" class="btn"><i class="fa-solid fa-ellipsis" style="font-size:14px;"></i></i></a>
+                        
+                        <!--div edit,del-->
+                        <div class="container">
+                            
+                            <!--ul element-->
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                
+                                <div class="js-admin-edit-btn dropdown-item"  >
+                                    <div class="js-edit-btn" style="color:blue;cursor: pointer; font-size: 14.5px;" >
+                                        Edit
+                                    </div>
+                                </div>
+
+                                <div class="js-admin-details-btn dropdown-item" style="cursor: pointer; font-size:14px;"  >
+                                    View Details
+                                </div>
+                            </ul>
+
+                        </div>
             </td>
         </tr>
     </template>

@@ -111,8 +111,20 @@
         .printBtnContainer {
             display: none;
         }
+
+        .topbar, .dash{
+            display: none !important;
+        }
+
+
+        #buttons{
+            display: none !important;
+        }
     }
 
+    .dashboard:hover{
+        background: #D2E0F8 !important;
+    }
 
 </style>
 <body style="background: #F2F5FF;">
@@ -121,18 +133,91 @@
     <section class="main" id="printableArea">
         <!--<h1>SiPa <?=$user_role?></h1>
         <h2><?=$user_fname?></h2>-->
-        <div class="topbar" style="width:auto;">
+        <div class="topbar" style="width:100%;">
                 <div class="toggle">
                     <i class="fa-solid fa-bars"></i>
                 </div>
         </div>
 
+        <div class="container dash">
+        <div class="row flex-nowrap mt-5" style="align-items: center;">
+                        <div class="col-auto mt-3">
+                            <div class="vl" style="width: 10px;
+                            background-color: #1F6CB5;
+                            border-radius: 99px;
+                            height: 60px;
+                            display: -webkit-inline-box;"></div>
+                        </div>
+                    
+                        <div class="col-auto mt-4">
+                            <div class="row">
+                                <div class="col-auto">
+                                    <h2 style="font-weight: 600;">Dashboard</h2>
+                                </div>
+                            </div>
+                        </div>
+        </div>
+        </div>
+
+        <div class="container" id="buttons" style="display: flex; justify-content: center;">
+            <div class="row mt-2">
+                <div class="col-auto">
+                <a href="my-videos.php" style="text-decoration: none;">
+                    <div class="py-4 rounded-4 shadow-sm dashboard" style="background: white; width: 220px;text-align: center;">
+                            <i class="fa-solid fa-film mb-3" style="font-size: 30px;"></i></br>
+                            <span class="title">Videos</span>
+                    </div>
+                </a>
+                </div>
+
+                <div class="col-auto">
+                    <a href="appointment-list.php" style="text-decoration: none;">
+                        <div class=" py-4 rounded-4 shadow-sm dashboard" style="background: white; width: 220px;text-align: center;">
+                            <i class="fa-solid fa-clipboard-list mb-3" style="font-size: 30px;"></i></br>
+                                <span class="title">Appointment List</span>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-auto">
+                    <a href="schedule-settings.php" style="text-decoration: none;">
+                        <div class="py-4 rounded-4 shadow-sm dashboard" style="background: white; width: 220px;text-align: center;">
+                                <i class="fa-solid fa-calendar-day mb-3" style="font-size: 30px;"></i></br>
+                                <span class="title">Schedule Settings</span>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-auto" <?php if ($currentPage === 'local-admins.php') echo 'class="active-link"';  ?>>
+                    <a href="local-admins.php" style="text-decoration: none;">
+                        <div class="py-4 rounded-4 shadow-sm dashboard" style="background: white; width: 220px;text-align: center;">
+                                <i class="fa-solid fa-user-group mb-3" style="font-size: 30px;"></i></br>
+                                <span class="title">Admin List (<?=$facility_name?>)</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+            
         <div class="container">
             <!-- <div id="chartTitle" style="text-align: left; font-weight: bold;">Selected Method of Users Chart</div> -->
-            <canvas id="pieChart"><!-- Your canvas for the pie chart --></canvas>
+            <div class="row">
+                <div class="row p-3 rounded-4 shadow-sm" style="background: white; align-items: center;">
+                    <div class="col-auto">
+                        <div class="p-3 " style="width: 400px;height: 400px;">
+                            <canvas id="pieChart"><!-- Your canvas for the pie chart --></canvas>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div id="result" class="p-3 rounded-4 shadow-sm" style="background-color:#D2E0F8;"></div>
+                        <div class ="printBtnContainer" ><button onclick="window.print()" class="btn px-5 my-3" style="background-color: #F2C1A7; color:#ffff;"> Print Result </button></div>
+
+                    </div>
+                </div>
+            </div>
+            
         </div>
-        <div id="result" style="background-color:#D2E0F8;"></div>
-        <div class ="printBtnContainer" ><button onclick="window.print()">Print Result</button></div>
     </section>
     
 
