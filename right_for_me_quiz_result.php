@@ -130,7 +130,7 @@ select {
     </div>
     <br><br>
     <div class="container mt-3">
-        <div class="row flex-nowrap" style="align-items: center;">
+        <div class="row flex-nowrap" id="reco-title" style="align-items: center;">
             <div class="col-auto">
                 <div class="vl" style="width: 10px;
                 background-color: #1F6CB5;
@@ -146,69 +146,96 @@ select {
         </div>
 
     
-<?php
+  <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get the recommendations from the POST data
     $recommendationsJson = $_POST['recommendations'];
-  
+
     // Convert the JSON string back to a PHP array
     $recommendations = json_decode($recommendationsJson, true);
 
-     // Start a flex container to display items horizontally
-     //try lang to sa css para makita yung pagdisplay ng pahorizontal..pwede mo pa iedit hehe 
-  echo '<div class="container d-flex justify-content-center">';
-  echo '<div class="row" style="justify-content: space-evenly;">';
-  
-    // Now, you can use the $recommendations array as needed
-    // For example, you can loop through the recommended contraceptive methods:
-    // Loop through the recommendations and fetch the corresponding contraceptive method information
-  foreach ($recommendations as $method) {
+    // Check if $recommendations is not empty
+    if (!empty($recommendations)) {
+        // Start a flex container to display items horizontally
+        echo '<div class="container d-flex justify-content-center">';
+        echo '<div class="row" style="justify-content: space-evenly;">';
 
-    $methodSafe = mysqli_real_escape_string($conn, $method);
+        // Now, you can use the $recommendations array as needed
+        // For example, you can loop through the recommended contraceptive methods:
+        // Loop through the recommendations and fetch the corresponding contraceptive method information
+        foreach ($recommendations as $method) {
+            $methodSafe = mysqli_real_escape_string($conn, $method);
+            // Remove spaces from the method name and convert to lowercase
+            $methodSafeFormatted = strtolower(str_replace(' ', '', $methodSafe));
+            // Query the database to fetch the contraceptive method information
+            $query = "SELECT * FROM birth_controls WHERE LOWER(REPLACE(birth_control_name, ' ', '')) = '$methodSafeFormatted'";
+            $result = mysqli_query($conn, $query);
 
-    // Remove spaces from the method name and convert to lowercase
-    $methodSafeFormatted = strtolower(str_replace(' ', '', $methodSafe));
+            // Check if the method exists in the birth_controls table
+            if (mysqli_num_rows($result) > 0) {
+                // Fetch all rows corresponding to the contraceptive method (in case there are multiple matches)
+                while ($row = mysqli_fetch_assoc($result)) {
+                    // Display the contraceptive method information
+                    // Insert the missing HTML code here
+                    echo '<div class="col-sm-12 col-lg-4">';
+                    echo '<div class="container d-flex justify-content-center">';
+                    echo '<div class="card mx-1 my-5 rounded-4" style="width: 80%; min-height: 450px; background-color:#BDD8F0;">';
+                    echo '<div class="container rounded-4 justify-content-center" style="text-align: center; background: white; width: 100%; max-height: 200px; position: relative; overflow: hidden; padding: 0;">';
+                    echo '<img src="' . $row["birth_control_img"] . '" class="card-img-top" style="width: 100%; height: auto; object-fit: cover;" alt="...">';
+                    echo '</div>';
+                    echo '<div class="card-body" style=" min-height:14rem; overflow:hidden;">';
+                    echo '<h5 class="card-title" style="text-align:center; color:#3B3B3B; cursor:pointer;"><a href="about-contraceptive.php?id=' . $row['birth_control_id'] . '" style="text-decoration: none;">' . $row["birth_control_name"] . '</h5></a>';
+                    echo '<p class="card-text mt-3">What it is?</p>';
+                    echo '<p class="card-text" style="overflow: hidden;margin-top: -3%;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 4;text-overflow: ellipsis;">' . $row["birth_control_short_desc"] . '</p>';
+                    echo '<p class="read px-2 mt-2"><a class="js-method-link" href="about-contraceptive.php?id=' . $row['birth_control_id'] . '" style="text-decoration: none; color: black; font-size:13px;"><i class="fa-solid fa-circle-info"> </i> READ MORE</a></p>';
+                    echo '</div>';
+                    echo '</div>';
+                    echo '</div>';
+                    echo '</div>';
+                }
+            } else {
+                // Handle the case where the method name is not found in the birth_controls table
+                echo "<p>Contraceptive method '$method' not found.</p>";
+            }
+        }
 
-    // Query the database to fetch the contraceptive method information
-    $query = "SELECT * FROM birth_controls WHERE LOWER(REPLACE(birth_control_name, ' ', '')) = '$methodSafeFormatted'";
-    $result = mysqli_query($conn, $query);
-
-    // Check if the method exists in the birth_controls table
-    if (mysqli_num_rows($result) > 0) {
-
-        // Fetch all rows corresponding to the contraceptive method (in case there are multiple matches)
-      while ($row = mysqli_fetch_assoc($result)) {
-        // Display the contraceptive method information
-
-            //paalis nalang tong css na i2 if gagawan mo na pu ng css
-            ?>
-
-          <div class="col-sm-12 col-lg-4">
-              <div class="container d-flex justify-content-center">
-                  <div class="card mx-1 my-5 rounded-4" style="width: 80%; min-height: 450px; background-color:#BDD8F0;">
-                  <div class="container rounded-4 justify-content-center" style="text-align: center; background: white; width: 100%; max-height: 200px; position: relative; overflow: hidden; padding: 0;">
-                          <img src="<?php echo $row["birth_control_img"]; ?>" class="card-img-top"style="width: 100%; height: auto; object-fit: cover;"alt="...">
-                  </div>
-                          <div class="card-body" style=" min-height:14rem; overflow:hidden;"> 
-                          <h5 class="card-title" style="text-align:center; color:#3B3B3B; cursor:pointer;"><a href="about-contraceptive.php?id=<?php echo $row['birth_control_id']; ?>" style="text-decoration: none;"><?php echo $row["birth_control_name"]; ?></h5></a>
-                          <p class="card-text mt-3">What it is?</p>
-                          <p class="card-text" style="overflow: hidden;margin-top: -3%;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 4;text-overflow: ellipsis;"><?php echo $row["birth_control_short_desc"]; ?></p>
-                          <p class="read px-2 mt-2"><a class='js-method-link' href='about-contraceptive.php?id=<?php echo $row['birth_control_id']; ?>' style="text-decoration: none; color: black; font-size:13px;"><i class="fa-solid fa-circle-info"> </i> READ MORE</a></p>
-                      </div>
-                  </div>
-              </div>
-          </div>
-        <?php 
-      }
-    } else {
-      // Handle the case where the method name is not found in the birth_controls table
-      echo "<p>Contraceptive method '$method' not found.</p>";
+        // Close the div tags for the flex container
+        echo "</div>";
+        echo "</div>";
     }
-  }echo "</div>";
-  echo "</div>";
-};
+     
+    else {
+        // Handle the case where $recommendations is empty, ***IF ALANG MARERECOMMEND DAHIL NAUBOS NA SCORE OR NADISABLE NA YUNG METHOD, ETO LALABAS NA MESSAGE WITH CONTINUE BUTTON****
+        //------------------------------Pacss nalang po ito ng mas maayos ---------------------------------------
+        echo "<h4>We're sorry but based on the result of your test, there is no method that we can recommend to you as of the moment. Consider consulting to a doctor to help you choose what is the best method for you.</h4>";
+        echo "<div class='col mt-3 d-flex justify-content-center'>";
+        echo "<a class='js-link' href='right_for_me_1.php' style=' text-decoration: none; color:black;'>";
+        echo "<button class='btn my-3 px-4 py-2 rounded-3 shadow-sm rounded continue_btn' style='background: #ffff;'>Continue</button>";
+        echo "</a>";
+        echo "</div>"; //-------------gang dito langs------------------
+        
+        echo '<form id= "back_btn" action="right_for_me_quiz.php" method="post">';
+        echo  '<div class="row mt-2" >';
+        echo '<div class="col-auto">';
+        echo '<button id="next-3-months" class="btn" style="font-size:20px; color:#1F6CB5; float:right;"><i class="fa-solid fa-circle-chevron-left"></i></button>';
+        echo ' </div>';       
+        echo '<div class="col-auto">';         
+        echo '<p style="margin-top:10px;">Back</p>';            
+        echo '</div>';       
+        echo '</div>'; 
+        echo '</form>';
 
+        // JavaScript code to hide the reco-title div if recommendations are empty
+        echo '<script type="text/javascript">';
+        echo '    document.getElementById("reco-title").style.display = "none";';
+        echo '</script>';
+       include('footer.php');
+        return;
+    }
+}
 ?>
+
+
 
 <p align="justify" class="mb-5 mt-3" style="font-weight:300; font-size:15px;"> 
         <b>Disclaimer</b> : Our recommendations are intended to inform you about potential contraception methods based on your provided information. They do not replace professional medical advice. Consult a qualified healthcare provider for personalized guidance on contraception choices. Your healthcare provider should make the final decision on the most appropriate method. You are responsible for the accuracy of the information provided. We are not liable for any damages or losses resulting from website use or reliance on the recommendations.
@@ -468,7 +495,6 @@ function fetchMethodDetails(method, container) {
         if (xhr.status === 200) {
           const response = JSON.parse(xhr.responseText);
           if (response.success) {
-            change_first_logged_in();
             alert("Contraceptive method successfully saved!");
           } else {
             alert("Error saving contraceptive method. Please try again.");
@@ -663,38 +689,6 @@ function checkShowSaveButton() {
       "user_id=" + encodeURIComponent(user_id) + "&selected_method=" + encodeURIComponent(selectedMethod) + "&selected_date=" + encodeURIComponent(formattedDate) + "&birth_control_usage=" + encodeURIComponent(usageValue)
     );
   }
-
-  //var change_first_logged_in = {
-
-    //change_first_logged_in: function(){
-      function change_first_logged_in(){
-
-          let form = new FormData();
-
-          form.append('data_type', 'change_first_logged_in');
-
-          var ajax = new XMLHttpRequest();
-
-          ajax.addEventListener('readystatechange',function(){
-
-              if(ajax.readyState == 4)
-              {
-                  if(ajax.status == 200){
-
-                      //console.log(ajax.responseText);return;
-                      let obj = JSON.parse(ajax.responseText);
-
-                      if(obj.success){
-                          console.log('first logged changed');
-                      }
-                  }
-              }
-              });
-
-          ajax.open('post','ajax.php', true);
-          ajax.send(form);
-      }
-  //};
 </script>
 
 
