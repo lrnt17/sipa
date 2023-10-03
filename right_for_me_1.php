@@ -3,8 +3,14 @@
     require("connect.php");
     require('functions.php');
 
-
-
+    $loggedIn = logged_in();
+    if ($loggedIn) {
+        //echo 'test1';
+        $userLoggedIn = 'true';
+    } else {
+        $userLoggedIn = '';
+        //echo 'test2' . $userLoggedIn;
+    }
 ?>
 
 
@@ -338,6 +344,9 @@
 <script>
     var contra_method = {
         load_methods: function(e) {
+
+            let userLoggedIn = '<?php echo $userLoggedIn ? 1 : 0; ?>' === "1";
+            console.log(userLoggedIn);
             let form = new FormData();
             form.append('data_type', 'load_all_available_methods');
 
@@ -352,7 +361,7 @@
                             let method_holder = document.querySelector(".js-display-methods");
                             method_holder.innerHTML = ""; // Clear existing content
 
-                            if (typeof obj.rows == 'object') {
+                            /*if (typeof obj.rows == 'object') {
                                 for (var i = 0; i < obj.rows.length; i++) {
                                     if (i % 3 === 0) {
                                         // Create a new row for every 3rd iteration
@@ -377,6 +386,51 @@
                                     colDiv.appendChild(clone_template); // Append cloned template to the column
                                     rowDiv.appendChild(colDiv); // Append column to the current row
                                 }
+                            } else {
+                                method_holder.innerHTML = "<div>No data found</div>";
+                            }*/
+
+                            if (typeof obj.grouped_methods == 'object') {
+                                
+                                for (var health_facility in obj.grouped_methods) {
+
+                                    var healthFacilityDiv = document.createElement('div');
+                                    //healthFacilityDiv.innerHTML = city + ": ";
+                                    if (health_facility !== 'Others' || userLoggedIn) {
+                                        healthFacilityDiv.innerHTML = health_facility + ": ";
+                                    }
+                                    if (health_facility !== 'Others') {
+                                        healthFacilityDiv.innerHTML = "Available at " + health_facility + ": ";
+                                    }
+
+                                    method_holder.appendChild(healthFacilityDiv);
+
+                                    for (var i = 0; i < obj.grouped_methods[health_facility].length; i++) {
+
+                                        if (i % 3 === 0) {
+                                            // Create a new row for every 3rd iteration
+                                            var rowDiv = document.createElement('div');
+                                            rowDiv.className = "row";
+                                            rowDiv.classList.add("mx-5", "my-5");
+                                            rowDiv.style.justifyContent = "space-evenly";
+                                            method_holder.appendChild(rowDiv);
+                                        }
+
+                                        let colDiv = document.createElement('div');
+                                        colDiv.className = "col-lg-3"; // Display three columns per row
+
+                                        let clone_template = document.querySelector(".js-method-template").content.cloneNode(true);
+
+                                        clone_template.querySelector(".js-method-image").src = obj.grouped_methods[health_facility][i].birth_control_img;
+                                        clone_template.querySelector(".js-method-name").innerHTML = obj.grouped_methods[health_facility][i].birth_control_name;
+                                        clone_template.querySelector(".js-method-desc").innerHTML = obj.grouped_methods[health_facility][i].birth_control_short_desc;
+                                        clone_template.querySelector(".js-method-link").href = 'about-contraceptive.php?id=' + obj.grouped_methods[health_facility][i].birth_control_id;
+
+                                        colDiv.appendChild(clone_template); // Append cloned template to the column
+                                        healthFacilityDiv.appendChild(colDiv); // Append column to the current row
+                                    }
+                                }
+
                             } else {
                                 method_holder.innerHTML = "<div>No posts found</div>";
                             }

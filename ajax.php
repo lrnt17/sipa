@@ -2307,7 +2307,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 	}else
 	if($_POST['data_type'] == 'load_all_available_methods')
 	{
-		$user_id = $_SESSION['USER']['user_id'] ?? 0;
+		/*$user_id = $_SESSION['USER']['user_id'] ?? 0;
 		$query = "select * from birth_controls";
 		$rows = query($query);
 
@@ -2317,16 +2317,30 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 				
 				$rows[$key]['birth_control_img'] = get_birth_control_img($row['birth_control_img']);
 
-				$id = $row['birth_control_id'];
-				$query = "select * from available_birth_controls where birth_control_id = '$id' limit 1";
-				$user_row = query($query);
-				
-				if($user_row){
-
-				}
 			}
 			
 			$info['rows'] = $rows;
+		}
+
+		$info['success'] = true;*/
+
+		$user_id = $_SESSION['USER']['user_id'] ?? 0;
+		$user_partner_facility_id = $_SESSION['USER']['partner_facility_id'] ?? 0;
+
+		$query = "SELECT birth_controls.*, partner_facility.health_facility_name FROM birth_controls LEFT JOIN available_birth_controls ON birth_controls.birth_control_id = available_birth_controls.birth_control_id AND available_birth_controls.partner_facility_id = '$user_partner_facility_id' LEFT JOIN partner_facility ON available_birth_controls.partner_facility_id = partner_facility.partner_facility_id";
+		$rows = query($query);
+		$grouped_methods = [];
+
+		if($rows){
+			foreach ($rows as $key => $row) {
+				$rows[$key]['birth_control_img'] = get_birth_control_img($row['birth_control_img']);
+				$health_facility = $row['health_facility_name'] ?? 'Others';
+				if (!isset($grouped_methods[$health_facility])) {
+					$grouped_methods[$health_facility] = [];
+				}
+				array_push($grouped_methods[$health_facility], $row);
+			}
+			$info['grouped_methods'] = $grouped_methods;
 		}
 
 		$info['success'] = true;
