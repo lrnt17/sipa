@@ -341,7 +341,7 @@
                         font-weight: 500;">Account information</h2>
                         <label>
                             <div class="img-con" style="width:50px; height:50px; border-radius:50%; border-style: solid; position: relative; overflow: hidden; padding: 0;"> 
-                                <img src="<?=get_image($row['user_image'])?>" class="js-image class_28"  style=" width: 100%; height: 100%; object-fit: cover; cursor: pointer;" >
+                                <img src="<?=get_image($row['user_image'])?>" class="js-input-image class_28"  style=" width: 100%; height: 100%; object-fit: cover; cursor: pointer;" >
                             </div>
                             <input onchange="display_image(this.files[0])" type="file" name="image" class="class_29" style="display:none;">
 
@@ -356,7 +356,9 @@
                                         return;
                                     }
 
-                                    let img = document.querySelector(".js-image");
+                                    let img = document.querySelector(".js-input-image");
+                                    console.log(img);
+                                    console.log(file);
                                     img.src = URL.createObjectURL(file);
                                 }
                             </script>
@@ -393,7 +395,6 @@
                             <div class="class_312" >
                                 <input type="radio" name="sex" value="Male" <?php if ($user_sex === "Male") echo "checked"; ?>>Male
                                 <input type="radio" name="sex" value="Female" <?php if ($user_sex === "Female") echo "checked"; ?>>Female
-                                <input type="radio" name="sex" value="Other" <?php if ($user_sex === "Other") echo "checked"; ?>>Other
                             </div>
                             </div>
                             <div class="class_31" >
