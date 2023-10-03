@@ -339,7 +339,7 @@
     var contra_method = {
         load_methods: function(e) {
             let form = new FormData();
-            form.append('data_type', 'load_all_methods');
+            form.append('data_type', 'load_all_available_methods');
 
             var ajax = new XMLHttpRequest();
 

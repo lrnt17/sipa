@@ -418,7 +418,8 @@
                         </div>
                     </div>
                 <form class="container ms-4 ps-4 pe-4"  style="width: 94%;" onsubmit="appointment_list.save_updated_appointment(event)" method="post">
-
+                    <input type="hidden" name="edit_city_municipality" class="js-edit-city-municipality edit-appointment">
+                    <input type="hidden" name="edit_health_facility" class="js-edit-health-facility edit-appointment">
                 <div class="row">
                             <div class="col">
                                 <div class="form">
@@ -898,7 +899,7 @@
 
     appointment_list.load_appointments();*/
 </script>
-<script src="appointment-list.js?v13"></script>
+<script src="appointment-list.js?v14"></script>
 <script>
     let searchInput = document.getElementById('search-username');
     

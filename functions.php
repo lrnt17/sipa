@@ -244,10 +244,14 @@ function period_calendar($startMonth, $startYear, $periodDays, $ovulationDays, $
     return $calendar;
 }
 
-function appointment_confirmation($contact, $fname, $municipality, $health_facility, $appointment_date, $appointment_timeslot) 
+function appointment_confirmation($contact, $fname, $municipality, $health_facility, $appointment_date, $appointment_timeslot, $appointment_moved) 
 {
-    $message = "Hi $fname, your appointment at $health_facility, $municipality is set on $appointment_date at $appointment_timeslot. Thanks, SiPa!";
-
+    if ($appointment_moved) {
+        $message = "Hi $fname, your appointment at $health_facility, $municipality has been moved on $appointment_date at $appointment_timeslot. Thanks, SiPa!";
+    } else {
+        $message = "Hi $fname, your appointment at $health_facility, $municipality is set on $appointment_date at $appointment_timeslot. Thanks, SiPa!";
+    }
+    
     $ch = curl_init();
     $parameters = array(
         'apikey' => 'c17f81a2eb07d0ad839118cad67d2c55', //Your API KEY

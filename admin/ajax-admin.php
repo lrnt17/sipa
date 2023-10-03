@@ -583,6 +583,8 @@
             $fname = addslashes($_POST['edit_fname']);
             $lname = addslashes($_POST['edit_lname']);
             $address = addslashes($_POST['edit_address']);
+            $health_facility = addslashes($_POST['edit_health_facility']);
+            $city_municipality = addslashes($_POST['edit_city_municipality']);
             $barangay = addslashes($_POST['edit_barangay']);
             $email = addslashes($_POST['edit_gmail']);
             $contact = (int)($_POST['edit_pnum']);
@@ -593,9 +595,11 @@
             $appointment_timeslot = $_POST['appointment_timeslot'];
             
             // Fetch the current status of the appointment
-            $query = "SELECT status FROM appointments WHERE app_id = '$app_id' LIMIT 1";
+            $query = "SELECT * FROM appointments WHERE app_id = '$app_id' LIMIT 1";
             $result = query($query);
             $current_status = $result[0]['status'];
+            $current_app_date = $result[0]['app_date'];
+            $current_app_timeslot = $result[0]['app_timeslot'];
 
             // Check if the current status is 'confirmed'
             if ($current_status === 'Confirmed') {
@@ -640,6 +644,11 @@
                         $i++;
                     }
 
+                    // Check if the generated username already exists in the database
+                    $query = "select partner_facility_id from partner_facility where city_municipality = '$city_municipality' && health_facility_name = '$health_facility' limit 1";
+                    $row = query($query);
+                    $partner_facility_id = $row[0]['partner_facility_id'];
+
                     $message = "Welcome to SiPa, Siguradong Pagpaplano! Your username is: $username and your password is: $password. Please change your password after your first login for security purposes.";
 
                     $ch = curl_init();
@@ -679,13 +688,35 @@
                     // Insert the user details into the users table
                     $password_hash = password_hash($password, PASSWORD_DEFAULT); // Hash the password before storing it in the database
                     $user_role = 'user';
-                    $query = "INSERT INTO users (user_role, user_fname, user_lname, user_dob, user_sex, user_email, user_barangay, user_pnum, user_name, user_password) 
-                    VALUES ('$user_role', '$fname', '$lname', '$dob', '$gender', '$email', '$barangay', '$contact', '$username', '$password_hash')";
+                    $query = "INSERT INTO users (user_role, user_fname, user_lname, user_dob, user_sex, user_email, user_barangay, user_pnum, partner_facility_id, user_name, user_password) 
+                    VALUES ('$user_role', '$fname', '$lname', '$dob', '$gender', '$email', '$barangay', '$contact', '$partner_facility_id', '$username', '$password_hash')";
                     query($query);
 
                     $info['success'] = true;
                     $info['message'] = "Appointment was confirmed successfully";
 
+                } else if ($current_app_date !== $appointment_date || $current_app_timeslot !== $appointment_timeslot) {
+                    
+                    $query = "update appointments set 
+                    app_fname = '$fname',
+                    app_lname = '$lname',
+                    app_bdate = '$dob',
+                    app_gender = '$gender',
+                    app_email = '$email',
+                    app_pnum = '$contact',
+                    app_address = '$address',
+                    barangay = '$barangay', 
+                    status = '$status',
+                    app_date = '$appointment_date',
+                    app_timeslot = '$appointment_timeslot' 
+                    where app_id = '$app_id' limit 1";
+                    query($query);
+                    
+                    $appointment_moved = true;
+			        appointment_confirmation($contact, $fname, $municipality, $health_facility, $appointment_date, $appointment_timeslot, $appointment_moved);
+
+                    $info['success'] = true;
+                    $info['message'] = "Appointment has been moved successfully";
                 } else {
 
                     $query = "update appointments set 

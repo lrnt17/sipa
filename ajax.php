@@ -2156,7 +2156,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 			VALUES ('$fname','$lname','$address','$email','$municipality','$barangay','$health_facility','$contact','$gender','$dob','$appointment_date','$appointment_timeslot','$appointment_data_privacy')";
 			query($query);
 
-			//appointment_confirmation($contact, $fname, $municipality, $health_facility, $appointment_date, $appointment_timeslot);
+			$appointment_moved = false;
+			appointment_confirmation($contact, $fname, $municipality, $health_facility, $appointment_date, $appointment_timeslot, $appointment_moved);
 
 			$info['success'] = true;
 			$info['message'] = "Your appointment was successfully created";
@@ -2303,6 +2304,33 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 
 		$info['success'] = true;
 		
+	}else
+	if($_POST['data_type'] == 'load_all_available_methods')
+	{
+		$user_id = $_SESSION['USER']['user_id'] ?? 0;
+		$query = "select * from birth_controls";
+		$rows = query($query);
+
+		if($rows){
+
+			foreach ($rows as $key => $row) {
+				
+				$rows[$key]['birth_control_img'] = get_birth_control_img($row['birth_control_img']);
+
+				$id = $row['birth_control_id'];
+				$query = "select * from available_birth_controls where birth_control_id = '$id' limit 1";
+				$user_row = query($query);
+				
+				if($user_row){
+
+				}
+			}
+			
+			$info['rows'] = $rows;
+		}
+
+		$info['success'] = true;
+
 	}
 }
 // kinoconvert to json string si "$info", nag ooutput to ng variable $info
