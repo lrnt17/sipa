@@ -14,7 +14,9 @@
     <title>Comparison Chart | SiPa</title>
 </head>
 <style>
-
+    .chart_link{
+        color: var(--bs-navbar-active-color) !important;
+      }
     body {
             overflow-x: hidden;
             margin: 0;
@@ -455,7 +457,13 @@
                                     }
 
                                     var columnName = document.createElement('p');
-                                    columnName.textContent = key;
+                                    //columnName.textContent = key;
+                                    // Check if the key is 'birth control icons'
+                                    if (key === 'birth control icon') {
+                                        columnName.textContent = 'birth controls';
+                                    } else {
+                                        columnName.textContent = key;
+                                    }
                                     columnName.classList.add("py-4", "mb-3",);
                                     columnName.style.textAlign = "right";
                                     nameDiv.appendChild(columnName);

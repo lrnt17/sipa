@@ -16,6 +16,9 @@
 </head>
 <style>
 
+    .chart_link{
+            color: var(--bs-navbar-active-color) !important;
+        }
     body {
             overflow-x: hidden;
             margin: 0;
