@@ -107,6 +107,8 @@
             position: absolute;
             left: 0;
             top: 0;
+            width: 100%;
+            height: 100%;
         }
         .printBtnContainer {
             display: none;
@@ -160,10 +162,10 @@
         </div>
 
         <div class="container" id="buttons" style="display: flex; justify-content: center;">
-            <div class="row mt-2">
+            <div class="row">
                 <div class="col-auto">
                 <a href="my-videos.php" style="text-decoration: none;">
-                    <div class="py-4 rounded-4 shadow-sm dashboard" style="background: white; width: 220px;text-align: center;">
+                    <div class="py-4 mt-3 rounded-4 shadow-sm dashboard" style="background: white; width: 200px;text-align: center;">
                             <i class="fa-solid fa-film mb-3" style="font-size: 30px;"></i></br>
                             <span class="title">Videos</span>
                     </div>
@@ -172,7 +174,7 @@
 
                 <div class="col-auto">
                     <a href="appointment-list.php" style="text-decoration: none;">
-                        <div class=" py-4 rounded-4 shadow-sm dashboard" style="background: white; width: 220px;text-align: center;">
+                        <div class=" py-4 mt-3 rounded-4 shadow-sm dashboard" style="background: white; width: 200px;text-align: center;">
                             <i class="fa-solid fa-clipboard-list mb-3" style="font-size: 30px;"></i></br>
                                 <span class="title">Appointment List</span>
                         </div>
@@ -181,7 +183,7 @@
 
                 <div class="col-auto">
                     <a href="schedule-settings.php" style="text-decoration: none;">
-                        <div class="py-4 rounded-4 shadow-sm dashboard" style="background: white; width: 220px;text-align: center;">
+                        <div class="py-4 mt-3 rounded-4 shadow-sm dashboard" style="background: white; width: 200px;text-align: center;">
                                 <i class="fa-solid fa-calendar-day mb-3" style="font-size: 30px;"></i></br>
                                 <span class="title">Schedule Settings</span>
                         </div>
@@ -190,7 +192,7 @@
 
                 <div class="col-auto" <?php if ($currentPage === 'local-admins.php') echo 'class="active-link"';  ?>>
                     <a href="local-admins.php" style="text-decoration: none;">
-                        <div class="py-4 rounded-4 shadow-sm dashboard" style="background: white; width: 220px;text-align: center;">
+                        <div class="py-4 mt-3 rounded-4 shadow-sm dashboard" style="background: white; width: 200px;text-align: center;">
                                 <i class="fa-solid fa-user-group mb-3" style="font-size: 30px;"></i></br>
                                 <span class="title">Admin List (<?=$facility_name?>)</span>
                         </div>
