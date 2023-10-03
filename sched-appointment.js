@@ -104,6 +104,9 @@ var sched_appointment = {
         let select_gender = document.getElementById("gender");
         select_gender.selectedIndex = 0;
 
+        let data_privacy = document.getElementById('appointment_data_privacy');
+        data_privacy.checked = false;
+
         // remove the selected date
         sched_appointment.selectedDate = null;
         const selectedDates = document.querySelectorAll('.selected');
