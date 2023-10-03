@@ -86,7 +86,7 @@
                 <a class="js-link nav-link rfm_link" href="right_for_me_1.php">Match my Method</a>
               </li>
               <li class="nav-item mx-2">
-                <a class="js-link nav-link faqs_link" href="comparison-chart.php">Comparison Chart</a>
+                <a class="js-link nav-link chart_link" href="comparison-chart.php">Comparison Chart</a>
               </li>
               <li class="nav-item dropdown mx-2">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

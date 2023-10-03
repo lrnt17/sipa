@@ -49,9 +49,7 @@
         display: -webkit-inline-box;
       }
 
-      .faqs_link{
-        color: var(--bs-navbar-active-color) !important;
-      }
+      
 
       .faq-container {
         display: flex;
