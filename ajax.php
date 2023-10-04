@@ -2345,6 +2345,44 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 
 		$info['success'] = true;
 
+	}else
+	if($_POST['data_type'] == 'load_top_three_results')
+	{
+		$method_ids = json_decode($_POST['method_ids']);
+
+		if (is_array($method_ids)) {
+			foreach ($method_ids as $method_id) {
+
+				$query = "select * from birth_controls where birth_control_id = " . intval($method_id);
+				$rows = query($query);
+
+				if($rows){
+					foreach ($rows as $key => $row) {
+
+						$rows[$key]['birth_control_img'] = get_birth_control_img($row['birth_control_img']);
+
+						$id = $row['birth_control_id'];
+						$query = "SELECT * FROM birth_controls_sidebyside WHERE birth_control_id = '$id'";
+						$sidebyside_rows = query($query);
+
+						if($sidebyside_rows){
+							foreach ($sidebyside_rows as $key => $row) {
+								// Exclude unwanted columns
+								unset($row['sidebyside_id'], $row['birth_control_id'], $row['birth_control_name'], $row['birth_control_icon']);
+						
+								// Add remaining columns to $rows
+								$rows[$key]['sidebyside_data'] = $row;
+							}
+						}
+					}
+
+					$info['rows'][$method_id] = $rows;
+				}
+			}
+		}
+
+		$info['success'] = true;
+		
 	}
 }
 // kinoconvert to json string si "$info", nag ooutput to ng variable $info

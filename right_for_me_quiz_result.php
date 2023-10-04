@@ -153,13 +153,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Convert the JSON string back to a PHP array
     $recommendations = json_decode($recommendationsJson, true);
-
+    //print_r($recommendations);
+    //$recommendationsJson = json_encode($recommendations);
     // Check if $recommendations is not empty
     if (!empty($recommendations)) {
         // Start a flex container to display items horizontally
         echo '<div class="container d-flex justify-content-center">';
         echo '<div class="row" style="justify-content: space-evenly;">';
-
+        $birthControlIds = array();
         // Now, you can use the $recommendations array as needed
         // For example, you can loop through the recommended contraceptive methods:
         // Loop through the recommendations and fetch the corresponding contraceptive method information
@@ -167,14 +168,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $methodSafe = mysqli_real_escape_string($conn, $method);
             // Remove spaces from the method name and convert to lowercase
             $methodSafeFormatted = strtolower(str_replace(' ', '', $methodSafe));
+            //print_r($methodSafeFormatted);
             // Query the database to fetch the contraceptive method information
             $query = "SELECT * FROM birth_controls WHERE LOWER(REPLACE(birth_control_name, ' ', '')) = '$methodSafeFormatted'";
             $result = mysqli_query($conn, $query);
-
+            
             // Check if the method exists in the birth_controls table
             if (mysqli_num_rows($result) > 0) {
                 // Fetch all rows corresponding to the contraceptive method (in case there are multiple matches)
                 while ($row = mysqli_fetch_assoc($result)) {
+                    //print_r($row['birth_control_id']);
+                    $birthControlIds[] = $row['birth_control_id'];
                     // Display the contraceptive method information
                     // Insert the missing HTML code here
                     echo '<div class="col-sm-12 col-lg-4">';
@@ -199,6 +203,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
+        $top_three_method_ids = json_encode($birthControlIds);
         // Close the div tags for the flex container
         echo "</div>";
         echo "</div>";
@@ -235,7 +240,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-
+<?php include('quiz-result-dss.php') ?>
 
 <p align="justify" class="mb-5 mt-3" style="font-weight:300; font-size:15px;"> 
         <b>Disclaimer</b> : Our recommendations are intended to inform you about potential contraception methods based on your provided information. They do not replace professional medical advice. Consult a qualified healthcare provider for personalized guidance on contraception choices. Your healthcare provider should make the final decision on the most appropriate method. You are responsible for the accuracy of the information provided. We are not liable for any damages or losses resulting from website use or reliance on the recommendations.
