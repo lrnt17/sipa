@@ -243,7 +243,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php include('quiz-result-dss.php') ?>
 
 <p align="justify" class="mb-5 mt-3" style="font-weight:300; font-size:15px;"> 
-        <b>Disclaimer</b> : Our recommendations are intended to inform you about potential contraception methods based on your provided information. They do not replace professional medical advice. Consult a qualified healthcare provider for personalized guidance on contraception choices. Your healthcare provider should make the final decision on the most appropriate method. You are responsible for the accuracy of the information provided. We are not liable for any damages or losses resulting from website use or reliance on the recommendations.
+        <b>Disclaimer</b> : Our recommendations are intended to inform you about potential contraception methods based on your provided information. This test is crafted with the guidance of qualified healthcare provider for personalized guidance on contraception choices. However, they do not replace professional medical advice. You are the one to make the final decision on the what you think is the most appropriate method for yourself. You are responsible for the accuracy of the information provided. We are not liable for any damages or losses resulting from website use or reliance on the recommendations.
     </p>
 
         <form id= "back_btn" action="right_for_me_quiz.php" method="post">
@@ -274,12 +274,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
             <div class="col">
                 <h5>Select a contraceptive method based on the result of your assessment.</h5>
+                <p>If unsure, you can click the skip button below.</p>
             </div>
     </div>
   <!-- New Save Button -->
   <!-- Note: Removed the inline "display: none" style from the button -->
   <button id="save_method_button" style="display:none;">Save Method Only</button>
 </div>
+
+<form id= "skip_btn" action="right_for_me_1.php" method="post">
+            <div class="row mt-2" >
+                <div class="col-auto">
+                          <p style="margin-top:10px;">Skip</p>
+                </div>
+                <div class="col-auto">
+                        <button id="next-3-months" class="btn" style="font-size:20px; color:#1F6CB5; float:right;"><i class="fa-solid fa-circle-chevron-right"></i></button>
+                </div>
+            </div>
+</form>
 
 <div id="not_applicable_div" style="display:none;">
   <div class="d-grid  p-3  px-3 rounded-4 my-4 mb-5" style="background: #F2C1A7;" >
@@ -339,6 +351,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <input type="submit" value="Remind Me!" name="submit_remind" id="remind_me_btn" class="btn" style="font-weight: 600;">
   </form>
 
+
+  <div class="col mt-3 d-flex justify-content-center">
+            <a class="js-link" href="right_for_me_1.php" style=" text-decoration: none; color:black;">
+                <button class="btn my-3 px-4 py-2 rounded-3 shadow-sm rounded continue_btn" style="background: #ffff;">No Thanks</button>
+            </a>
+        </div>
+
 </div>
 
 
@@ -365,7 +384,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <div class="mx-3">
     <div class="input-container mx-5 my-3 rounded-3 shadow-sm px-4 py-3" style="background-color: white; width: 250px;">
       <label for="usage">Usage </label>
-      <!-- etong separator guide lang hahaha palitan mo nalangg -->
       <span style="width: 4px;
         background-color: #7B7777;
         border-radius: 99px;
@@ -477,6 +495,8 @@ function fetchMethodDetails(method, container) {
           button.addEventListener("click", function () {
             selectedMethod = methodDetails.birth_control_name; // Store the selected method
             const isSelected = button.getAttribute("data-selected") === "true";
+            
+            const skipbutton = document.getElementById("skip_btn");
 
             // If the button is already selected, remove it from the view
             if (isSelected) {
@@ -486,6 +506,7 @@ function fetchMethodDetails(method, container) {
               methodButtons.forEach(function (otherButton) {
                 if (otherButton !== button) {
                   otherButton.style.display = "none";
+              skipbutton.style.display = "none";
                 }
               });
 
@@ -501,7 +522,7 @@ function fetchMethodDetails(method, container) {
           const response = JSON.parse(xhr.responseText);
           if (response.success) {
             change_first_logged_in();
-            alert("Contraceptive method successfully saved!");
+            alert("Contraceptive method successfully saved!\n\n[Reminder]:\nYou should stick with your chosen contraceptive method until the end of its cycle.\n\nIf you ever plan to change methods, it is advisable to wait for a year if the previous method is a hormonal type. Thank you!");
           } else {
             alert("Error saving contraceptive method. Please try again.");
           }
