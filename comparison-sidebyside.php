@@ -129,19 +129,40 @@
  
  <!-- navigation bar with logo -->
  <?php include('header.php') ?>
+<div class="container rounded-5" style="background: #D2E0F8;">
+        <div class="row mx-5 justify-content-center" style="text-align:center; padding: 4%;">
+        
+            <div class="col-auto"><p style="font-size: 3.5rem;">Comparison</p></div>
+            <div class="col-auto"><p style="font-size: 3.5rem; font-weight:bolder;" >Chart</p></div>
+        </div>
+    </div>
 
- <div class="container mt-5"> <!-- mt-3-->
+    <div class="row height d-flex justify-content-center align-items-center">
+
+              <div class="col-md-6">
+
+                <div class="cap p-3 rounded-4 shadow-sm rounded" style="position: relative; top: -40px; background:#ffff; text-align:center;">
+                   Compare and contrast different contraceptive methods with just a glimpse!               
+                </div>
+                
+              </div>
+            </div>
+    </div>
+
+    <div class="container mt-5"> <!-- mt-3-->
         <div class="row" style="align-items: center;">
             <div class="col-auto">
                 <div class="vl" style="width: 10px;
                 background-color: #1F6CB5;
                 border-radius: 99px;
                 height: 75px;
-                display: -webkit-inline-box;"></div>
+                display: -webkit-inline-box;">
+                </div>
             </div>
         
             <div class="col-auto">
                 <h3 style="font-weight:400;"><b>Compare</b> contraceptive methods</h3>
+                <p>Hover over the birth control icon to view its name.</p>
             </div>
         </div>
 
