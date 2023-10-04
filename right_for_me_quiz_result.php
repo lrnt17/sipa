@@ -365,7 +365,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   <div class="col mt-3 d-flex justify-content-center">
             <a class="js-link" href="right_for_me_1.php" style=" text-decoration: none; color:black;">
-                <button class="btn my-3 px-4 py-2 rounded-3 shadow-sm rounded continue_btn" style="background: #ffff;">No Thanks</button>
+                <button class="btn my-3 px-4 py-2 rounded-3 shadow-sm rounded continue_btn" id="no-tnx-btn" style="background: #ffff;">No Thanks</button>
             </a>
         </div>
 
@@ -455,6 +455,8 @@ document.getElementById("remind_me_btn").addEventListener("click", function (eve
   remindCon.style.display = "none";
   cir1.style.display = "none";
   cir2.style.display = "none";
+  const noThanksBtn = document.getElementById("no-tnx-btn");
+  noThanksBtn.style.display = "none";
 
   showDatePicker();
 });
