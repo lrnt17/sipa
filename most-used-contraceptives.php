@@ -57,6 +57,7 @@
 <template class="js-most-used-template" id="most-used-template">
 
     <div class="col-lg-3 contraceptive-item my-3 mx-4 rounded-3 p-4 shadow-sm" style="background:white;">
+        <h1 class="js-contraceptive-rank"></h1>
         <div class="contraceptive-icon p-3 rounded-3 shadow-sm" style="display: flex;justify-content: center; background:#979797;">
             <img src="" alt="" class="js-contraceptive-icon" width="60" height="60">
         </div>
@@ -94,10 +95,13 @@
                         if(obj.success){
                             let most_used_container = document.getElementById("most-used-contraceptives");
                             let most_used_template = document.getElementById("most-used-template");
+                            let rank = 1; // Initialize rank counter
 
                             for (var i = 0; i < obj.rows.length; i++) {
                                 let most_used_card = most_used_template.content.cloneNode(true);
                                 
+                                most_used_card.querySelector(".js-contraceptive-rank").innerHTML = "#" + rank; // Set the rank
+
                                 if(typeof obj.rows[i].birth_control == 'object'){
                                     most_used_card.querySelector(".js-contraceptive-icon").src = obj.rows[i].birth_control.icon;
                                     most_used_card.querySelector(".js-contraceptive-link").href = 'about-contraceptive.php?id=' + obj.rows[i].birth_control.id;
@@ -108,6 +112,7 @@
                                 most_used_card.querySelector(".js-contraceptive-number-of-users").innerHTML = obj.rows[i].usage_count;
                                 
                                 most_used_container.appendChild(most_used_card);
+                                rank++; // Increment the rank counter
                             }
 
                         }

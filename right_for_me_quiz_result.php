@@ -113,6 +113,22 @@ select {
             opacity: 0.6;
   }
 
+
+  .rating {
+  font-size: 30px;
+  }
+
+  .star {
+  color: #DBDBDB;
+  transition: color 0.2s;
+  font-size:20px;
+  }
+
+  .star.active {
+  color: #915E98;
+  font-size:20px;
+  }
+
    </style>
    
 
@@ -288,7 +304,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                           <p style="margin-top:10px;">Skip</p>
                 </div>
                 <div class="col-auto">
-                        <button id="next-3-months" class="btn" style="font-size:20px; color:#1F6CB5; float:right;"><i class="fa-solid fa-circle-chevron-right"></i></button>
+                        <button id="next-3-months" class="btn" style="font-size:20px; color:#1F6CB5; float:right;" onclick="change_first_logged_in()"><i class="fa-solid fa-circle-chevron-right"></i></button>
                 </div>
             </div>
 </form>

@@ -12,24 +12,10 @@
     </div>
 </section>
 
-<!--<template id="top-three-thead-template">
-    <th class="js-birth-control-details">
-        <h2 class="js-birth-control-name"></h2>
-        <img src="assets/images/user.jpg" class="js-birth-control-image" width="50" height="50">
-    </th>
-</template>
-
-<template id="top-three-tbody-template">
-    <tr colspan="3">
-        <td class="js-column-name"></td>
-    </tr>
-    <tr>
-        <td class="js-column-data"></td>
-    </tr>
-</template>-->
 <template id="top-three-thead-template">
     <th>
-        <h2 class="js-birth-control-name"></h2>
+        <h3 class="js-birth-control-rank"></h3>
+        <p class="js-birth-control-name"></p>
         <img src="assets/images/user.jpg" class="js-birth-control-image" width="50" height="50">
     </th>
 </template>
@@ -40,30 +26,27 @@
     </tr>
 </template>
 
-<!--<template id="top-three-tbody-template-column-data">
-    <tr class="js-column-data-row">
-        <td class="js-column-data"></td>
-    </tr>
-</template>-->
 <template id="top-three-tbody-template-column-data-row">
     <tr class="js-column-data-row"></tr>
 </template>
 
 <template id="top-three-tbody-template-column-data-cell">
-    <td class="js-column-data"></td>
+    <td>
+        <p class="js-column-data"></p>
+        <div class="js-column-data-rating"></div>
+        <h3 class="js-column-data-range"></h3>
+    </td>
 </template>
 
 
 <script>
-    //let top_three_methods = JSON.parse('<?php //echo $recommendationsJson; ?>');
-    //console.log(top_three_methods);
 
     var top_three_dss = {
 
         load_top_three_results: function(){
 
             let top_three_methods = JSON.parse('<?php echo $top_three_method_ids; ?>');
-            //console.log(top_three_methods);
+            console.log(top_three_methods);
 
             let form = new FormData();
 
@@ -78,7 +61,7 @@
                 {
                     if(ajax.status == 200){
 
-                        console.log(ajax.responseText);
+                        //console.log(ajax.responseText);
                         let obj = JSON.parse(ajax.responseText);
                         
                         if(obj.success){
@@ -94,77 +77,92 @@
                             let tbodyTemplateColumnDataRow = document.querySelector("#top-three-tbody-template-column-data-row");
                             let tbodyTemplateColumnDataCell = document.querySelector("#top-three-tbody-template-column-data-cell");
                             
-                            // Iterate over each method_id in obj.rows
-                           /*for (let method_id in obj.rows) {
-                                console.log(obj.rows[method_id].length);
-
-                                // Generate table rows for each row of the current method_id
-                                for (let i = 0; i < obj.rows[method_id].length; i++) {
-                                    let row = document.importNode(theadTemplate.content, true);
-                                    row.querySelector(".js-birth-control-image").src = obj.rows[method_id][i].birth_control_img;
-                                    row.querySelector(".js-birth-control-name").textContent = obj.rows[method_id][i].birth_control_name;
-
-                                    theadTable.appendChild(row);
-
-                                    console.log(obj.rows[method_id][i].sidebyside_data);
-                                    let sidebyside_data = obj.rows[method_id][i].sidebyside_data;
-
-                                    for (let column_name in sidebyside_data) {
-                                        let row = document.importNode(tbodyTemplate.content, true);
-                                        row.querySelector(".js-column-name").textContent = column_name;
-                                        row.querySelector(".js-column-data").textContent = sidebyside_data[column_name];
-                                        tbodyTable.appendChild(row);
-                                    }
-                                }
-                            }*/
-                            
                             // Create table headers
                             let headerRow = document.createElement('tr');
+
+                            let rank = 1; // Initialize rank counter
+
                             for (let method_id in obj.rows) {
+                                
                                 let header = document.importNode(theadTemplate.content, true);
                                 header.querySelector(".js-birth-control-image").src = obj.rows[method_id][0].birth_control_img;
                                 header.querySelector(".js-birth-control-name").textContent = obj.rows[method_id][0].birth_control_name;
+                                header.querySelector(".js-birth-control-rank").textContent = "#" + rank; // Set the rank
                                 headerRow.appendChild(header);
+                                rank++; // Increment the rank counter
                             }
+                            
                             theadTable.appendChild(headerRow);
 
                             // Create table rows for each column of sidebyside_data
-                            /*let sidebyside_data = obj.rows[Object.keys(obj.rows)[0]][0].sidebyside_data; // get sidebyside_data of the first method
-                            for (let column_name in sidebyside_data) {
-                                //let columnNameRow = document.importNode(tbodyTemplate.content, true);
-                                let columnNameRow = document.importNode(tbodyTemplateColumnName.content, true);
-                                columnNameRow.querySelector(".js-column-name").textContent = column_name;
-                                tbodyTable.appendChild(columnNameRow.querySelector(".js-column-name-row"));
-
-                                let columnDataRow = document.importNode(tbodyTemplate.content, true);
-                                for (let method_id in obj.rows) {
-                                    //let columnDataCell = document.importNode(tbodyTemplate.content, true);
-                                    let columnDataCell = document.importNode(tbodyTemplateColumnData.content, true);
-                                    columnDataCell.querySelector(".js-column-data").textContent = obj.rows[method_id][0].sidebyside_data[column_name];
-                                    columnDataRow.querySelector(".js-column-data-row").appendChild(columnDataCell.querySelector(".js-column-data"));
-                                }
-                                tbodyTable.appendChild(columnDataRow.querySelector(".js-column-data-row"));
-                            }*/
-                            // Create table rows for each column of sidebyside_data
                             let sidebyside_data = obj.rows[Object.keys(obj.rows)[0]][0].sidebyside_data; // get sidebyside_data of the first method
+                            
                             for (let column_name in sidebyside_data) {
+                                
                                 let columnNameRow = document.importNode(tbodyTemplateColumnName.content, true);
-                                columnNameRow.querySelector(".js-column-name").textContent = column_name;
+                                //columnNameRow.querySelector(".js-column-name").textContent = column_name;
+                                let formattedColumnName = column_name.replace(/_/g, ' '); // replace underscore with space
+                                formattedColumnName = formattedColumnName.charAt(0).toUpperCase() + formattedColumnName.slice(1); // uppercase the first letter
+
+                                //columnNameRow.querySelector(".js-column-name").textContent = formattedColumnName;
+                                // Only set the text content if column_name is not "Birth control short desc"
+                                if (formattedColumnName !== "Birth control short desc") {
+                                    columnNameRow.querySelector(".js-column-name").textContent = formattedColumnName;
+                                }
+
                                 tbodyTable.appendChild(columnNameRow.querySelector(".js-column-name-row"));
 
-                                /*let columnDataRow = document.importNode(tbodyTemplateColumnData.content, true);
-                                for (let method_id in obj.rows) {
-                                    let columnDataCell = document.importNode(tbodyTemplateColumnData.content, true);
-                                    columnDataCell.querySelector(".js-column-data").textContent = obj.rows[method_id][0].sidebyside_data[column_name];
-                                    columnDataRow.querySelector(".js-column-data-row").appendChild(columnDataCell.querySelector(".js-column-data"));
-                                }
-                                tbodyTable.appendChild(columnDataRow.querySelector(".js-column-data-row"));*/
                                 let columnDataRow = document.importNode(tbodyTemplateColumnDataRow.content, true);
+                                
                                 for (let method_id in obj.rows) {
+                                    
                                     let columnDataCell = document.importNode(tbodyTemplateColumnDataCell.content, true);
                                     columnDataCell.querySelector(".js-column-data").textContent = obj.rows[method_id][0].sidebyside_data[column_name];
+                                    //columnDataCell.querySelector(".js-column-data-rating").textContent = obj.rows[method_id][0].chart_data[column_name];
+                                    //console.log(column_name);
+
+                                    let ratingDiv = columnDataCell.querySelector(".js-column-data-rating");
+
+                                    if (column_name !== "birth_control_short_desc") {
+                                        
+                                        // Create the star elements
+                                        for (let j = 0; j < 3; j++) {
+                                            let starSpan = document.createElement("span");
+                                            starSpan.classList.add("star");
+
+                                            let starIcon = document.createElement("i");
+                                            starIcon.classList.add("fas", "fa-star");
+
+                                            // Fill up stars based on the value
+                                            if (j < +obj.rows[method_id][0].chart_data[column_name]) {
+                                                starSpan.classList.add("active");
+                                            }
+
+                                            starSpan.appendChild(starIcon);
+                                            ratingDiv.appendChild(starSpan);
+                                        }
+
+                                        let rangeDiv = columnDataCell.querySelector(".js-column-data-range");
+                                        // Set the text for the rating text column
+                                        switch (+obj.rows[method_id][0].chart_data[column_name]) {
+                                            case 0:
+                                                rangeDiv.textContent = "Bad";
+                                                break;
+                                            case 1:
+                                                rangeDiv.textContent = "Good";
+                                                break;
+                                            case 2:
+                                                rangeDiv.textContent = "Better";
+                                                break;
+                                            case 3:
+                                                rangeDiv.textContent = "Best";
+                                                break;
+                                        }
+                                    }
+
                                     columnDataRow.querySelector(".js-column-data-row").appendChild(columnDataCell);
                                 }
+                                
                                 tbodyTable.appendChild(columnDataRow.querySelector(".js-column-data-row"));
                             }
                         }

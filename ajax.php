@@ -2351,6 +2351,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 		$method_ids = json_decode($_POST['method_ids']);
 
 		if (is_array($method_ids)) {
+			
 			foreach ($method_ids as $method_id) {
 
 				$query = "select * from birth_controls where birth_control_id = " . intval($method_id);
@@ -2371,7 +2372,27 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 								unset($row['sidebyside_id'], $row['birth_control_id'], $row['birth_control_name'], $row['birth_control_icon']);
 						
 								// Add remaining columns to $rows
-								$rows[$key]['sidebyside_data'] = $row;
+								//$rows[$key]['sidebyside_data'] = $row;
+								// Add birth_control_short_desc to sidebyside_data
+								$rows[$key]['sidebyside_data']['birth_control_short_desc'] = $rows[$key]['birth_control_short_desc'];
+                        
+								// Add remaining columns to sidebyside_data
+								foreach ($row as $column_name => $column_data) {
+									$rows[$key]['sidebyside_data'][$column_name] = $column_data;
+								}
+							}
+						}
+
+						$query_chart = "SELECT * FROM birth_controls_chart WHERE birth_control_id = '$id'";
+						$chart = query($query_chart);
+
+						if($chart){
+							foreach ($chart as $key => $row) {
+								// Exclude unwanted columns
+								unset($row['birth_control_chart_id'], $row['birth_control_id'], $row['birth_control_name'], $row['birth_control_icon']);
+						
+								// Add remaining columns to $rows
+								$rows[$key]['chart_data'] = $row;
 							}
 						}
 					}
@@ -2383,6 +2404,10 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 
 		$info['success'] = true;
 		
+		// Reorder the results to match the order of method_ids
+		usort($info['rows'], function($a, $b) use ($method_ids) {
+			return array_search($a[0]['birth_control_id'], $method_ids) - array_search($b[0]['birth_control_id'], $method_ids);
+		});
 	}
 }
 // kinoconvert to json string si "$info", nag ooutput to ng variable $info
