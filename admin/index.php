@@ -207,7 +207,7 @@
             <div class="row">
                 <div class="row p-3 rounded-4 shadow-sm" style="background: white; align-items: center;">
                     <div class="col-auto">
-                        <div class="p-3 " style="width: 400px;height: 400px;">
+                        <div class="p-3 " style="width: 600px;height: 500px;">
                             <canvas id="pieChart"><!-- Your canvas for the pie chart --></canvas>
                         </div>
                     </div>
