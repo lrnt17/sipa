@@ -58,13 +58,17 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-auto mx-auto text-center">
-                    <h6 class="my-2">+63 912 345 6789</h6>
-                    <!-- icon -->
-                    <!-- icon -->
+                    <div class="row">
+                        <h6 class="my-2">+63 912 345 6789</h6>
+                    </div>
+                    
+                    <div class="row my-2" id="references-div">
+                        <a href="list-of-rrls.php" style="font-weight:400;"><i class="fa-solid fa-rectangle-list"></i> References</a>
+                    </div>
                 </div>
             </div>
 
-            <div class="row d-flex justify-content-center justify-content-md-end">
+            <div class="row d-flex justify-content-center justify-content-md-end me-4">
                 <div class="col-auto">
                     <span>
                     <div class="translate" id="google_translate_element"></div>
@@ -92,3 +96,4 @@
             </div>
         </div>
     </footer>
+

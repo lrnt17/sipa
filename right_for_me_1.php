@@ -305,7 +305,7 @@
         <div style="padding:10px;text-align:center;">Loading contraceptive methods....</div>
     </section>
     <br><br>
-    <a href="list-of-rrls.php">References</a>
+    <!--<a href="list-of-rrls.php">References</a>-->
     <!-- footer -->
     <?php include('footer.php') ?>
 
@@ -395,6 +395,11 @@
                                 for (var health_facility in obj.grouped_methods) {
 
                                     var healthFacilityDiv = document.createElement('div');
+
+                                    healthFacilityDiv.className = "row";
+                                    healthFacilityDiv.classList.add("mx-5", "my-5");
+                                    healthFacilityDiv.style.justifyContent = "space-evenly";
+                                    
                                     //healthFacilityDiv.innerHTML = city + ": ";
                                     if (health_facility !== 'Others' || userLoggedIn) {
                                         healthFacilityDiv.innerHTML = health_facility + ": ";
@@ -427,7 +432,7 @@
                                         clone_template.querySelector(".js-method-link").href = 'about-contraceptive.php?id=' + obj.grouped_methods[health_facility][i].birth_control_id;
 
                                         colDiv.appendChild(clone_template); // Append cloned template to the column
-                                        healthFacilityDiv.appendChild(colDiv); // Append column to the current row
+                                        rowDiv.appendChild(colDiv); // Append column to the current row
                                     }
                                 }
 

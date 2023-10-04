@@ -67,7 +67,7 @@ body {
     line-height: 60px;
     text-align: start;
     white-space: nowrap;
-    margin-top: 100px;
+    margin-top: 70px;
 }
 
 .admin{
@@ -268,7 +268,7 @@ body {
 
                 <div class="signout ms-2" style="">
                     <a href="#" onclick="admin.logout()" style="text-decoration:none;">
-                        <i class="fa-solid fa-right-from-bracket me-3" style="font-size: 22px; margin-left: 13px;position: relative;margin-top: 22px;"></i>
+                        <i class="fa-solid fa-right-from-bracket me-3" style="font-size: 22px; margin-left: 13px;position: relative;"></i>
                         <span class="title">Sign Out</span>
                     </a>
                 </div>

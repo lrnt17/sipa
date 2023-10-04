@@ -106,7 +106,8 @@ select {
   }
 
   .continue_btn:hover{
-    background-color: #D2E0F8 !important;
+    background-color: #F2C1A7 !important;
+     color:#ffff !important;
   }
 
   .read:hover {
@@ -228,7 +229,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     else {
         // Handle the case where $recommendations is empty, ***IF ALANG MARERECOMMEND DAHIL NAUBOS NA SCORE OR NADISABLE NA YUNG METHOD, ETO LALABAS NA MESSAGE WITH CONTINUE BUTTON****
         //------------------------------Pacss nalang po ito ng mas maayos ---------------------------------------
-        echo "<h4>We're sorry but based on the result of your test, there is no method that we can recommend to you as of the moment. Consider consulting to a doctor to help you choose what is the best method for you.</h4>";
+        echo"<div class='row my-5' style='align-items: center;'>";
+          echo"<div class='col-md-7 py-3 px-4 mb-4 ' style='background:;'>";
+            echo"<center><h1><i class='fa-solid  fa-face-frown my-4' style='color:#4C5DA9; font-size:4rem;'></i></h1></center>";
+            echo "<h5 class='mb-4'>We're sorry but based on the result of your test, there is no method that we can recommend to you as of the moment. Consider consulting to a doctor to help you choose what is the best method for you.</h5>";
+          echo "</div>";
+
+          echo"<div class='col'>";
+            echo"<img class='' src='no_reco.png' alt='' width='100%' style=''>";
+          echo "</div>";
+        echo "</div>";
+
         echo "<div class='col mt-3 d-flex justify-content-center'>";
         echo "<a class='js-link' href='right_for_me_1.php' style=' text-decoration: none; color:black;'>";
         echo "<button class='btn my-3 px-4 py-2 rounded-3 shadow-sm rounded continue_btn' style='background: #ffff;'>Continue</button>";
@@ -239,7 +250,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo  '<div class="row mt-2" >';
         echo '<div class="col-auto">';
         echo '<button id="next-3-months" class="btn" style="font-size:20px; color:#1F6CB5; float:right;"><i class="fa-solid fa-circle-chevron-left"></i></button>';
-        echo ' </div>';       
+        echo '</div>';       
         echo '<div class="col-auto">';         
         echo '<p style="margin-top:10px;">Back</p>';            
         echo '</div>';       
@@ -370,7 +381,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   <div class="col mt-3 d-flex justify-content-center">
             <a class="js-link" href="right_for_me_1.php" style=" text-decoration: none; color:black;">
-                <button class="btn my-3 px-4 py-2 rounded-3 shadow-sm rounded continue_btn" style="background: #ffff;">No Thanks</button>
+                <button class="btn my-3 px-4 py-2 rounded-3 shadow-sm rounded continue_btn" id="no-tnx-btn" style="background: #ffff;">No Thanks</button>
             </a>
         </div>
 
@@ -460,6 +471,8 @@ document.getElementById("remind_me_btn").addEventListener("click", function (eve
   remindCon.style.display = "none";
   cir1.style.display = "none";
   cir2.style.display = "none";
+  const noThanksBtn = document.getElementById("no-tnx-btn");
+  noThanksBtn.style.display = "none";
 
   showDatePicker();
 });
@@ -493,11 +506,12 @@ function fetchMethodDetails(method, container) {
 
                 const imgDiv = document.createElement("div");
                 imgDiv.classList.add("img_container", "rounded-3", "shadow-sm"); // Add this class for styling
+                imgDiv.style.height="94px";
 
                 const img = document.createElement("img");
                 img.src = methodDetails.birth_control_img;
                 img.alt = methodDetails.birth_control_name;
-                img.style.maxWidth = "100%";
+                img.style.width = "auto";
                 img.style.maxHeight = "100%";
                 img.style.objectFit = "contain"; // Make the image fit within the container
                 imgDiv.appendChild(img);

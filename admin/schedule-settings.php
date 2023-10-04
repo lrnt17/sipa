@@ -102,9 +102,9 @@
         }
 
         select{
-            padding: 50px 0px 50px 20px;
+            padding: 20px 0px 20px 20px;
             border: 2.2px solid #B9B9B9;
-            font-size: 20px !important;
+            font-size: 17px !important;
             outline: none;
             background:transparent;
             width: 200px;
@@ -170,7 +170,7 @@
                         <div class="row" style="justify-content:center;">
                             <div class="col-auto">
                                 <h4 style="text-align: center;"></h4>
-                                <select class="mb-2 rounded-5 shadow-sm" id="startHourSelector" name="start_at">
+                                <select class="mb-2 rounded-4 shadow-sm" id="startHourSelector" name="start_at">
                                     <!-- Options for the start hour -->
                                 </select>
                             </div>
@@ -181,7 +181,7 @@
                             "><h6 class="my-4" style="text-align: center;"></h6></div>
                             <div class="col-auto">
                                 <h4 style="text-align: center;"></h4>
-                                <select class="mb-2 rounded-5 shadow-sm" id="endHourSelector" name="end_at">
+                                <select class="mb-2 rounded-4 shadow-sm" id="endHourSelector" name="end_at">
                                     <!-- Options for the end hour -->
                                 </select>
                             </div>
