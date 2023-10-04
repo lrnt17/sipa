@@ -85,7 +85,7 @@ if (mysqli_num_rows($result) > 0) {
     
     <div class="container mt-3">
     <p align="justify" class="mb-5" style="font-weight:300;"> 
-        <b>Disclaimer</b> : Our recommendations are intended to inform you about potential contraception methods based on your provided information. They do not replace professional medical advice. Consult a qualified healthcare provider for personalized guidance on contraception choices. Your healthcare provider should make the final decision on the most appropriate method. You are responsible for the accuracy of the information provided. We are not liable for any damages or losses resulting from website use or reliance on the recommendations.
+    <b>Disclaimer</b> : Our recommendations are intended to inform you about potential contraception methods based on your provided information. This test is crafted with the guidance of qualified healthcare provider for personalized guidance on contraception choices. However, they do not replace professional medical advice. You are the one to make the final decision on the what you think is the most appropriate method for yourself. You are responsible for the accuracy of the information provided. We are not liable for any damages or losses resulting from website use or reliance on the recommendations.
     </p>
         <div class="row flex-nowrap" style="align-items: center;">
             <div class="col-auto">
@@ -337,17 +337,25 @@ if (mysqli_num_rows($result) > 0) {
             </div>
             <br>
             <div class = "number-4-additional-factor" id="number-4-additional-factor">
-            <p><b>4. Do you want to permanently stop having children?<span style="color: red;"> *</span></b></p>
+            <p><b>4. Will you consider a permanent contraceptive method like the tubal ligation?<span style="color: red;"> *</span></b></p>
                 <label><input type="radio" class="additional-factors-radio" value="yes" id="yes" name="answer4"> Yes</label><br>
                 <label><input type="radio" class="additional-factors-radio" value="no" id="no" name="answer4"> No</label><br>
                 <label><input type="radio" class="additional-factors-radio" value="dontknow3" id="dontknow3" name="answer4"> I don't know/ no preference</label>
             </div>
             <br>
+            <div class = "number-5-additional-factor" id="number-5-additional-factor">
+                <p><b>5. How comfortable are you with methods that only require fertility awareness?<span style="color: red;"> *</span></b></p>
+                <label><input type="radio" class="additional-factors-radio" value= "veryComfortable" id="very-comfortable" name="answer5"> Very Comfortable</label><br>
+                <label><input type="radio" class="additional-factors-radio" value= "comfortable" id="comfortable" name="answer5"> Comfortable</label><br>
+                <label><input type="radio" class="additional-factors-radio" value= "neutral" id="neutral" name="answer5"> Neutral</label><br>
+                <label><input type="radio" class="additional-factors-radio" value= "uncomfortable" id="uncomfortable" name="answer5"> Uncomfortable</label><br>
+                <label><input type="radio" class="additional-factors-radio" value= "veryUncomfortable" id="very-uncomfortable" name="answer5"> Very Uncomfortable</label>
+            </div>
         </div>
 
         <div class="additional-factors-container" id="additional-factors-container-male" style="display:none;">
             <div class="number-1-additional-factor-male" id="number-1-additional-factor-male">
-                <p><b>1. How important is spontaneity in your contraceptive method?</b></p>
+                <p><b>1. How much does being unplanned matter in your choice of birth control?</b></p>
                 <label><input type="radio" class="additional-factors-radio" value="veryImportant" name="maleAnswer1"> Very Important</label><br>
                 <label><input type="radio" class="additional-factors-radio" value="important" name="maleAnswer1"> Important</label><br>
                 <label><input type="radio" class="additional-factors-radio" value="neutral" name="maleAnswer1"> Neutral</label><br>
@@ -404,11 +412,29 @@ if (mysqli_num_rows($result) > 0) {
     
     <br><br><br><br>
 
-    <!-- footer -->
+    
     <br><br>
-    <?php include('footer.php') ?>
+    <!-- check kung first time logged in, pag oo, wala muna footer -->
+    <?php
+    
+    $checkLoginQuery = "SELECT first_logged_in FROM users WHERE user_id = $user_id";
+    $checkLoginResult = mysqli_query($conn, $checkLoginQuery);
+
+    if (mysqli_num_rows($checkLoginResult) > 0) {
+        $row = mysqli_fetch_assoc($checkLoginResult);
+        $loggedin = $row['first_logged_in']; // Logged_in (1 if no, 0 if yes)
+    }
+    
+    if ($loggedin == 1){
+        include('footer.php');
+    }
+    
+    ?>
 
     <script>
+
+var loggedin = "<?php echo $loggedin; ?>";
+console.log(loggedin);
 
 var userSex = "<?php echo $userSex; ?>";
 console.log(userSex);
@@ -777,6 +803,8 @@ if (userSex === 'Male') {
             var oneHormoneMethods = ['implant', 'minipill', 'injection', 'hormonaliud'];
             var twoHormonesMethods = ['patch', 'combinedpill','hormonalvaginalring'];
 
+            var fertilityAwarenessMethods = ['temperaturemethod', 'calendarmethod'];
+
              // Define the methods associated with each male-specific question
             var question1Methods = ['withdrawalmethod', 'condom']; // Add the contraceptive methods relevant to question 1
             var question2Methods = ['withdrawalmethod', 'condom', 'vasectomy']; // Add the contraceptive methods relevant to question 2
@@ -789,6 +817,7 @@ if (userSex === 'Male') {
             var answer2Value = form.elements["answer2"].value;
             var answer3Value = form.elements["answer3"].value;
             var answer4Value = form.elements["answer4"].value;
+            var answer5Value = form.elements["answer5"].value;
 
             // Get the user's answers for each question for male
             var maleAnswer1Value = form.elements["maleAnswer1"].value;
@@ -825,8 +854,12 @@ if (userSex === 'Male') {
                         delete methodScores[method];
                     }
                 }
+                // Question 5: How comfortable are you with methods that only requires fertility awareness?
+                if (fertilityAwarenessMethods.includes(method)) {
+                    methodScores[method] += getScoreAF(answer5Value);
+                }
                 //FOR MALE QUESTIONS
-                 // Question 1: How important is spontaneity in your contraceptive method?
+                 // Question 1: 1. How much does being unplanned matter in your choice of birth control?
                  if (question1Methods.includes(method)) {
                     methodScores[method] += getScoreAF(maleAnswer1Value);
                 }
@@ -871,7 +904,7 @@ if (userSex === 'Male') {
             function getScoreAF(value) {
                 switch (value) {
                     case "veryComfortable":
-                        return 2;
+                        return 3;
                     case "comfortable":
                         return 1;
                     case "neutral":
@@ -954,7 +987,7 @@ if (userSex === 'Male') {
 
 
             // Show all contraceptive methods with their scores in the alert | para macheck if working
-            //alert("Recommendations: " + recommendations + "\n\nAll Methods with Scores: \n" + allMethodsScores.join("\n"));
+            alert("Recommendations: " + recommendations + "\n\nAll Methods with Scores: \n" + allMethodsScores.join("\n"));
 
             // Set the value of the hidden input field to the recommendations
             var recommendationsInput = document.getElementById("recommendations_input");
