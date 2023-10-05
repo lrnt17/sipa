@@ -688,8 +688,8 @@
                     // Insert the user details into the users table
                     $password_hash = password_hash($password, PASSWORD_DEFAULT); // Hash the password before storing it in the database
                     $user_role = 'user';
-                    $query = "INSERT INTO users (user_role, user_fname, user_lname, user_dob, user_sex, user_email, user_barangay, user_pnum, partner_facility_id, user_name, user_password) 
-                    VALUES ('$user_role', '$fname', '$lname', '$dob', '$gender', '$email', '$barangay', '$contact', '$partner_facility_id', '$username', '$password_hash')";
+                    $query = "INSERT INTO users (user_role, user_fname, user_lname, user_dob, user_sex, user_email, user_address, user_barangay, user_pnum, partner_facility_id, user_name, user_password) 
+                    VALUES ('$user_role', '$fname', '$lname', '$dob', '$gender', '$email', '$address', '$barangay', '$contact', '$partner_facility_id', '$username', '$password_hash')";
                     query($query);
 
                     $info['success'] = true;

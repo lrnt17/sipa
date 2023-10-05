@@ -28,12 +28,13 @@
 
 		//update
 		$errors = [];
-		$userfname 	= addslashes($_POST['userfname']);
-        $userlname 	= addslashes($_POST['userlname']);
-		$email 		= addslashes($_POST['email']);
-		$dob 		= $_POST['dob'];
-		$sex 		= $_POST['sex'];
-		$pnum 		= addslashes($_POST['pnum']);
+		$userfname 	    = addslashes($_POST['userfname']);
+        $userlname      = addslashes($_POST['userlname']);
+        $useraddress 	= addslashes($_POST['address']);
+		$email 		    = addslashes($_POST['email']);
+		$dob 		    = $_POST['dob'];
+		$sex 		    = $_POST['sex'];
+		$pnum 		    = addslashes($_POST['pnum']);
 		
 		/*if(!empty($_POST['password']))
 		{
@@ -144,7 +145,7 @@
 				$password_string = ", user_password = '$password' ";
 			
 
-			$query = "update users set user_fname = '$userfname', user_lname = '$userlname', user_dob = '$dob', user_sex = '$sex', user_email = '$email' $image_string $password_string where user_id = '$user_id' limit 1";
+			$query = "update users set user_fname = '$userfname', user_lname = '$userlname', user_dob = '$dob', user_sex = '$sex', user_email = '$email', user_address = '$useraddress' $image_string $password_string where user_id = '$user_id' limit 1";
 			query($query);
 			
 			$query = "select * from users where user_id = '$user_id' limit 1";
@@ -370,9 +371,15 @@
                                     Name
                                 </label>
                             <div class="class_311" >
-                                <input value="<?=$row['user_fname']?>" placeholder="First Name (Optional)" type="text" name="userfname" class="class_33">
-                                <input value="<?=$row['user_lname']?>" placeholder="Last Name (Optional)" type="text" name="userlname" class="class_33">
+                                <input value="<?=$row['user_fname']?>" placeholder="First Name" type="text" name="userfname" class="class_33" max="30" required="true">
+                                <input value="<?=$row['user_lname']?>" placeholder="Last Name" type="text" name="userlname" class="class_33" max="30" required="true">
                             </div>
+                            </div>
+                            <div class="class_31" >
+                                <label >
+                                    Address
+                                </label><br>
+                                <input value="<?=$row['user_address']?>" placeholder="Address" type="text" name="address" class="class_33" max="100" required="true">
                             </div>
                             <div class="class_31" >
                                 <label >
