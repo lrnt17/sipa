@@ -2408,6 +2408,30 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 		usort($info['rows'], function($a, $b) use ($method_ids) {
 			return array_search($a[0]['birth_control_id'], $method_ids) - array_search($b[0]['birth_control_id'], $method_ids);
 		});
+	}else
+	if($_POST['data_type'] == 'check_saved_contraceptive')
+	{
+		$user_id = $_SESSION['USER']['user_id'] ?? 0;
+		$query = "select * from users where user_id = $user_id limit 1";
+		$rows = query($query);
+		
+		if($rows){
+			
+			$row = $rows[0];
+			$user_birth_control = $row['birth_control_name'];
+
+			// Define the hormonal methods
+			$hormonalMethods = ['Implant', 'Mini Pill', 'Injection', 'Hormonal IUD', 'Hormonal Patch', 'Combined Pill', 'Hormonal Vaginal Ring'];
+
+			// Check if user_birth_control is a hormonal method
+			if (in_array($user_birth_control, $hormonalMethods)) {
+				$info['success'] = true;
+				$info['message'] = "WARNING: You already have a saved contraceptive method (" . $user_birth_control . ") which is a hormonal method. Doctors advised that you can only change your birth control method that is a hormonal type after a year. Do you want to still continue taking the test again?";
+			} else {
+				$info['success'] = false;
+			}
+		}
+
 	}
 }
 // kinoconvert to json string si "$info", nag ooutput to ng variable $info

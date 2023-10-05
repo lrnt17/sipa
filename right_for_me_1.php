@@ -11,6 +11,7 @@
         $userLoggedIn = '';
         //echo 'test2' . $userLoggedIn;
     }
+
 ?>
 
 
@@ -198,7 +199,7 @@
         
         <?php if(logged_in()):?>
             <div class="circle d-flex justify-content-center">
-                <a href="right_for_me_quiz.php" style="
+                <a href="right_for_me_quiz.php" onclick="contra_method.check_saved_contraceptive(event)" style="
                 font-size: 24px;
                 text-decoration: none;
                 font-weight: 600; color:#383838;">Take the test</a>
@@ -445,6 +446,44 @@
             });
 
             ajax.open('post', 'ajax.php', true);
+            ajax.send(form);
+        },
+
+        check_saved_contraceptive: function(e){
+            
+            e.preventDefault();
+            
+            let form = new FormData();
+
+            form.append('data_type', 'check_saved_contraceptive');
+
+            var ajax = new XMLHttpRequest();
+
+            ajax.addEventListener('readystatechange',function(){
+
+                if(ajax.readyState == 4)
+                {
+                    if(ajax.status == 200){
+
+                        let obj = JSON.parse(ajax.responseText);
+                        
+                        if(obj.success){
+
+                            if (confirm(obj.message)) {
+                                location.href = "right_for_me_quiz.php";
+                            }
+
+                        } else {
+                            location.href = "right_for_me_quiz.php";
+                        }
+                        
+                    }else{
+                        alert("Please check your internet connection");
+                    }
+                }
+            });
+
+            ajax.open('post','ajax.php', true);
             ajax.send(form);
         },
 
