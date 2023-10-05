@@ -44,28 +44,47 @@ var appointment_list = {
             {
                 if(ajax.status == 200){
 
-                    console.log(ajax.responseText);
+                    //console.log(ajax.responseText);
                     let data = JSON.parse(ajax.responseText);
 
                     let table = document.querySelector("#appointment_table tbody");
                     let template = document.querySelector("#appointments-template");
+                    table.innerHTML = "";
 
+                    console.log(data);
+
+                    // Calculate starting and ending indices
+                    let startIndex = (data.current_page - 1) * data.rows_per_page + 1;
+                    let endIndex = Math.min(data.current_page * data.rows_per_page, data.total_rows);
+
+                    // Display range of entries
+                    let rangeElement = document.querySelector(".js-entry-range");
+                    let constant_total_rows = data.constant_total_rows ? " (filtered from " + data.constant_total_rows + " total entries)" : "";
+                    //rangeElement.textContent = "Showing " + startIndex + " to " + endIndex + " of " + data.total_rows + " entries" + constant_total_rows;
+                    if (isNaN(startIndex) && isNaN(endIndex) && data.total_rows === undefined) {
+                        rangeElement.textContent = "No data entries to be found";
+                    } else {
+                        rangeElement.textContent = "Showing " + startIndex + " to " + endIndex + " of " + data.total_rows + " entries" + constant_total_rows;
+                    }
+                    
+                    console.log(startIndex, endIndex, data.total_rows);
+                    
                     if(data.success){
                         // Get table and template elements
                         //let table = document.querySelector("#appointment_table tbody");
                         //let template = document.querySelector("#appointments-template");
 
                         // Clear existing rows
-                        table.innerHTML = "";
+                        //table.innerHTML = "";
 
                         // Calculate starting and ending indices
-                        let startIndex = (data.current_page - 1) * data.rows_per_page + 1;
-                        let endIndex = Math.min(data.current_page * data.rows_per_page, data.total_rows);
+                        //let startIndex = (data.current_page - 1) * data.rows_per_page + 1;
+                        //let endIndex = Math.min(data.current_page * data.rows_per_page, data.total_rows);
 
                         // Display range of entries
-                        let rangeElement = document.querySelector(".js-entry-range");
-                        let constant_total_rows = data.constant_total_rows ? " (filtered from " + data.constant_total_rows + " total entries)" : "";
-                        rangeElement.textContent = "Showing " + startIndex + " to " + endIndex + " of " + data.total_rows + " entries" + constant_total_rows;
+                        //let rangeElement = document.querySelector(".js-entry-range");
+                        //let constant_total_rows = data.constant_total_rows ? " (filtered from " + data.constant_total_rows + " total entries)" : "";
+                        //rangeElement.textContent = "Showing " + startIndex + " to " + endIndex + " of " + data.total_rows + " entries" + constant_total_rows;
 
                         // Generate table rows
                         for (let i = 0; i < data.rows.length; i++) {
@@ -96,7 +115,7 @@ var appointment_list = {
                         }
                         
                         // Update pagination controls here
-                        appointment_list.last_page = data.last_page;
+                        /*appointment_list.last_page = data.last_page;
                         let current_page_select = document.querySelector("#current-page");
                         current_page_select.innerHTML = "";
 
@@ -108,7 +127,7 @@ var appointment_list = {
                                 option.selected = true;
                             }
                             current_page_select.appendChild(option);
-                        }
+                        }*/
 
                     } else {
                         
@@ -118,6 +137,21 @@ var appointment_list = {
                         cell.textContent = "No match found";
                         row.appendChild(cell);
                         table.appendChild(row);
+                    }
+
+                    // Update pagination controls here
+                    appointment_list.last_page = data.last_page;
+                    let current_page_select = document.querySelector("#current-page");
+                    current_page_select.innerHTML = "";
+
+                    for (let i = 1; i <= appointment_list.last_page; i++) {
+                        let option = document.createElement("option");
+                        option.value = i;
+                        option.textContent = i;
+                        if (i == appointment_list.current_page) {
+                            option.selected = true;
+                        }
+                        current_page_select.appendChild(option);
                     }
                 }
             }
@@ -130,6 +164,7 @@ var appointment_list = {
     search_appointments: function(query) {
 
         appointment_list.searchQuery = query;
+        appointment_list.current_page = 1;
         appointment_list.load_appointments();
         /*let table = document.querySelector("#appointment_table tbody");
         let template = document.querySelector("#appointments-template");
@@ -590,6 +625,7 @@ var appointment_list = {
 
         //console.log(num_value);
         appointment_list.showEntryNum = num_value;
+        appointment_list.current_page = 1;
         appointment_list.load_appointments();
     },
 };
