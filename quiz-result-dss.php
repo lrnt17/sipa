@@ -2,10 +2,49 @@
     defined('APP') or die('direct script access denied!'); 
 ?>
 
+<style>
+    table{
+        border:none;
+    }
+
+    .lines{
+    width: 95%;
+    height: 28px;
+    position: relative;
+    left: 28px;
+    }
+
+    .lines::after, .lines::before{
+        content: '';
+        position: absolute;
+        height: 2.5px;
+        margin: auto;
+        background: #1F6CB5;
+        width: 42%;
+        top: 45%;
+    }
+
+    .lines::after{
+        left: 0;
+    }
+
+    .lines::before{
+        right: 0;
+    }
+    .table-con {
+  width: 100%; /* Set the width of the container as needed */
+  overflow-x: auto; /* Enable horizontal scrolling */
+}
+
+table {
+  width: 100%; /* Make the table fill the container width */
+  /* Additional styling for your table if needed */
+}
+</style>
 <section>
 
-    <div>
-        <table cellspacing="0" cellpadding="10" id="top_three_table" border="1">
+    <div class="container table-con">
+        <table cellspacing="0" cellpadding="10" id="top_three_table" border="0" class="p-2 rounded-4 shadow-sm"style="background-color:white;">
             <thead> </thead>
             <tbody> </tbody>
         </table>
@@ -14,15 +53,24 @@
 
 <template id="top-three-thead-template">
     <th>
-        <h3 class="js-birth-control-rank"></h3>
-        <p class="js-birth-control-name"></p>
-        <img src="assets/images/user.jpg" class="js-birth-control-image" width="50" height="50">
+    <div style="text-align: center; position: relative;" class="container mb-4 mt-3">
+        <h3 class="js-birth-control-rank" style="display: inline-block; vertical-align: middle; position: absolute; margin-left: 28px; margin-top: 21px;">1</h3>
+        <i class="fa-solid fa-award" style="font-size: 100px; display: inline-block; vertical-align: middle;"></i>
+    </div>
+        <div class="container rounded-4 justify-content-center shadow-sm" style="text-align: center; background: white; width: 300px; max-height: 200px; position: relative; overflow: hidden; padding: 0;">
+            <img src="assets/images/user.jpg" class="js-birth-control-image" style="width: 100%; height: auto; object-fit: cover;" >
+        </div>
+        <center><p class="js-birth-control-name mt-4" style="font-weight: 500;"></p></center>
     </th>
 </template>
 
 <template id="top-three-tbody-template-column-name">
     <tr class="js-column-name-row">
-        <td colspan="3" class="js-column-name" style="text-align: center;"></td>
+        <td colspan="3" style="text-align: center;">
+            <div class="lines ">
+               <h5 class="js-column-name" style="font-weight:500;"></h5>
+            </div>
+        </td>
     </tr>
 </template>
 
@@ -31,10 +79,21 @@
 </template>
 
 <template id="top-three-tbody-template-column-data-cell">
-    <td>
+    <td class="p-5">
         <p class="js-column-data"></p>
-        <div class="js-column-data-rating"></div>
-        <h3 class="js-column-data-range"></h3>
+        <div class="row" style="align-items:center;">
+            <div class="col-auto">
+                <div class="js-column-data-rating"></div>
+            </div>
+            <div class="col-1 mt-3">
+                <p>
+                    &mdash;
+                </p>
+            </div>
+            <div class="col-auto">
+                <h6 class="js-column-data-range" style="margin: 0;"></h6>
+            </div>
+        </div>
     </td>
 </template>
 
@@ -87,7 +146,18 @@
                                 let header = document.importNode(theadTemplate.content, true);
                                 header.querySelector(".js-birth-control-image").src = obj.rows[method_id][0].birth_control_img;
                                 header.querySelector(".js-birth-control-name").textContent = obj.rows[method_id][0].birth_control_name;
-                                header.querySelector(".js-birth-control-rank").textContent = "#" + rank; // Set the rank
+                                header.querySelector(".js-birth-control-rank").textContent = "" + rank; // Set the rank
+
+                                // Set the color of the <i> tag based on rank
+                                let iconElement = header.querySelector(".fa-award");
+                                if (rank === 1) {
+                                    iconElement.style.color = "#ffd700"; // Change color for rank 1
+                                } else if (rank === 2) {
+                                    iconElement.style.color = "#929292"; // Change color for rank 2
+                                } else if (rank === 3) {
+                                    iconElement.style.color = "#CD7F32"; // Change color for rank 3
+                                }
+                                
                                 headerRow.appendChild(header);
                                 rank++; // Increment the rank counter
                             }
