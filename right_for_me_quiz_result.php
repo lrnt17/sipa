@@ -106,8 +106,8 @@ select {
   }
 
   .continue_btn:hover{
-    background-color: #F2C1A7 !important;
-     color:#ffff !important;
+    /*background-color: #F2C1A7 !important;*/
+     color:#1F6CB5 !important;
   }
 
   .read:hover {
@@ -310,7 +310,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
 
 <form id= "skip_btn" action="right_for_me_1.php" method="post">
-            <div class="row mt-2" >
+            <div class="row mt-2" style="justify-content: flex-end;">
                 <div class="col-auto">
                           <p style="margin-top:10px;">Skip</p>
                 </div>
@@ -381,7 +381,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   <div class="col mt-3 d-flex justify-content-center">
             <a class="js-link" href="right_for_me_1.php" style=" text-decoration: none; color:black;">
-                <button class="btn my-3 px-4 py-2 rounded-3 shadow-sm rounded continue_btn" id="no-tnx-btn" style="background: #ffff;">No Thanks</button>
+                <button class="btn my-3 px-4 py-2 continue_btn" style="background: transparent;">No Thanks</button>
             </a>
         </div>
 

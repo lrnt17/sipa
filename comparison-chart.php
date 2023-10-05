@@ -149,7 +149,7 @@
             </div>
     </div>
 
-    <div class="container mt-5"> <!-- mt-3-->
+    <div class="container mt-3"> <!-- mt-3-->
         <div class="row" style="align-items: center;">
             <div class="col-auto">
                 <div class="vl" style="width: 10px;
