@@ -107,19 +107,31 @@
             position: absolute;
             left: 0;
             top: 0;
+            right:0;
             width: 100%;
             height: 100%;
+            justify-content: center;
+            align-items: center;
         }
         .printBtnContainer {
             display: none;
         }
 
-        .topbar, .dash{
+        .topbar, .dash, .todays-appointment-section{
             display: none !important;
+        }
+
+        .sipa-logo-container{
+            display: block !important;
         }
 
 
         #buttons{
+            display: none !important;
+        }
+
+        #current-date-appointment
+        {
             display: none !important;
         }
     }
@@ -203,6 +215,10 @@
         </div>
             
         <?php include('current-date-appointments.php') ?>
+
+        <div class ="sipa-logo-container" style="display:none;">
+            <img class="rounded-circle" src="logo-colored.png" alt="SiPa" width="55" height="55" >
+        </div>
 
         <div class="container">
             <!-- <div id="chartTitle" style="text-align: left; font-weight: bold;">Selected Method of Users Chart</div> -->

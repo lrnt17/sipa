@@ -377,13 +377,13 @@
                             <div class="col">
                                 <div class="form">
                                     <label for="edit_fname" style="font-size: 15px;">First Name <span style="color:red;">*</span></label>
-                                    <input type="text" name="edit_fname" class="js-edit-fname edit-admin" required>
+                                    <input type="text" name="edit_fname" class="js-edit-fname edit-admin" minlength = "1" maxlength="40" required>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form">
                                     <label for="edit_lname" style="font-size: 15px;">Last Name <span style="color:red;">*</span></label>
-                                    <input type="text" name="edit_lname" class="js-edit-lname edit-admin" required>
+                                    <input type="text" name="edit_lname" class="js-edit-lname edit-admin" minlength = "1" maxlength="40" required>
                                 </div>
                             </div>
                         </div>
@@ -418,7 +418,7 @@
                                     <label for="edit_pnum" style="font-size: 15px;">Phone Number <span style="color:red;">*</span></label>
                                     <div style="display: flex; align-items: center;">
                                         <p style="font-size: 15px; margin-right: 5px; margin-top: 7px;">+63</p>
-                                        <input type="number" name="edit_pnum" class="js-edit-pnum edit-admin" required >
+                                        <input type="number" name="edit_pnum" class="js-edit-pnum edit-admin" minlength = "11" maxlength="11" required >
                                     </div>
                                 </div>
                             </div>
