@@ -202,6 +202,8 @@
 
         </div>
             
+        <?php include('current-date-appointments.php') ?>
+
         <div class="container">
             <!-- <div id="chartTitle" style="text-align: left; font-weight: bold;">Selected Method of Users Chart</div> -->
             <div class="row">
