@@ -2,7 +2,8 @@
     defined('APP') or die('direct script access denied!'); 
 ?>
 
-<style>.lines{
+<style>
+.lines{
     width: 100%;
     height: 28px;
     position: relative;
@@ -57,8 +58,12 @@
 <template class="js-most-used-template" id="most-used-template">
 
     <div class="col-lg-3 contraceptive-item my-3 mx-4 rounded-3 p-4 shadow-sm" style="background:white;">
-        <h1 class="js-contraceptive-rank"></h1>
-        <div class="contraceptive-icon p-3 rounded-3 shadow-sm" style="display: flex;justify-content: center; background:#979797;">
+        
+        <div style="text-align: center; position: relative;" class="container mb-4 mt-3">
+            <h3 class="js-contraceptive-rank" style="display: inline-block; vertical-align: middle; position: absolute; margin-left: 28px; margin-top: 21px;"></h3>
+            <i class="fa-solid fa-award" style="font-size: 100px; display: inline-block; vertical-align: middle;"></i>
+        </div>
+        <div class="contraceptive-icon p-3 rounded-3" style="display: flex;justify-content: center; background:white; box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
             <img src="" alt="" class="js-contraceptive-icon" width="60" height="60">
         </div>
         <center><h3 class="js-contraceptive-name p-3">Contraceptive Name</h3></center>
@@ -100,7 +105,17 @@
                             for (var i = 0; i < obj.rows.length; i++) {
                                 let most_used_card = most_used_template.content.cloneNode(true);
                                 
-                                most_used_card.querySelector(".js-contraceptive-rank").innerHTML = "#" + rank; // Set the rank
+                                most_used_card.querySelector(".js-contraceptive-rank").innerHTML = "" + rank; // Set the rank
+
+                                // Set the color of the <i> tag based on rank
+                                let iconElement = most_used_card.querySelector(".fa-award");
+                                if (rank === 1) {
+                                    iconElement.style.color = "#ffd700"; // Change color for rank 1
+                                } else if (rank === 2) {
+                                    iconElement.style.color = "#929292"; // Change color for rank 2
+                                } else if (rank === 3) {
+                                    iconElement.style.color = "#CD7F32"; // Change color for rank 3
+                                }
 
                                 if(typeof obj.rows[i].birth_control == 'object'){
                                     most_used_card.querySelector(".js-contraceptive-icon").src = obj.rows[i].birth_control.icon;

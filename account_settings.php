@@ -668,13 +668,20 @@
             ajax.send(form);
         },
 
-        newmethod: function(){
-            if (!confirm("[WARNING]:\nDoctors advised that if your current birth control method is a hormonal type, you can only change your contraceptive method after a year of discontinuity. Are you sure you want to take the quiz again?")) {
-                return;
-            }  else{
+        newmethod: function () {
+            var methodNameInput = document.querySelector('input[name="method-name"]');
+            if (methodNameInput && methodNameInput.value.trim() === "") {
                 window.location.href = "right_for_me_quiz.php";
+            } else {
+                if (!confirm("[WARNING]:\nDoctors advised that if your current birth control method is a hormonal type, you can only change your contraceptive method after a year of discontinuity. Are you sure you want to take the quiz again?")) {
+                    return;
+                } else {
+                    window.location.href = "right_for_me_quiz.php";
+                }
             }
         },
+
+
 
         deleteremdates: function(){
             if (!confirm("Are you sure you want to stop receiving sms reminders from us about your chosen method? Unsubscribing deletes the saved method and reminder dates from the database.")) {

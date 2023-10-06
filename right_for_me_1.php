@@ -227,7 +227,7 @@
             <center><p style="color:#525252;">Empower yourself with the freedom to choose: Use a contraceptive method</p></center>
         </div>
         <div class="row">
-            <h2 class="d-flex justify-content-center" style="color:#383838;">Contraceptive Methods</h2>
+            <h2 class="d-flex justify-content-center mb-4" style="color:#383838;">Contraceptive Methods</h2>
         </div>
         
     </div>
@@ -395,19 +395,63 @@
                                 
                                 for (var health_facility in obj.grouped_methods) {
 
-                                    var healthFacilityDiv = document.createElement('div');
+                                // Create a container div with class "container"
+                                var containerDiv = document.createElement('div');
+                                containerDiv.className = "container";
 
-                                    healthFacilityDiv.className = "row";
-                                    healthFacilityDiv.classList.add("mx-5", "my-5");
-                                    healthFacilityDiv.style.justifyContent = "space-evenly";
-                                    
-                                    //healthFacilityDiv.innerHTML = city + ": ";
-                                    if (health_facility !== 'Others' || userLoggedIn) {
-                                        healthFacilityDiv.innerHTML = health_facility + ": ";
-                                    }
+                                var healthFacilityDiv = document.createElement('div');
+
+                                // Set the class of healthFacilityDiv to "row"
+                                healthFacilityDiv.className = "row";
+                                healthFacilityDiv.classList.add("mx-5", "mt-5");
+                                healthFacilityDiv.style.justifyContent = "space-evenly";
+
+                                // Check if the health_facility is 'Others' or the user is not logged in
+                                if (health_facility !== 'Others' || userLoggedIn) {
+                                    // Create the main <div> element with class "row" and style attribute
+                                    const mainDiv = document.createElement("div");
+                                    mainDiv.className = "row";
+                                    mainDiv.style.alignItems = "center";
+
+                                    // Create the first <div> element with class "col-auto"
+                                    const colDiv1 = document.createElement("div");
+                                    colDiv1.className = "col-auto";
+
+                                    // Create the <div> element with class "vl" and add it to the first <div>
+                                    const vlDiv = document.createElement("div");
+                                    vlDiv.className = "vl";
+                                    colDiv1.appendChild(vlDiv);
+
+                                    // Create the second <div> element with class "col-auto"
+                                    const colDiv2 = document.createElement("div");
+                                    colDiv2.className = "col-auto";
+
+                                    // Create the <h3> element with the desired text
+                                    const h3Element = document.createElement("h3");
+
+                                    // Check if the health_facility is 'Others' or not
                                     if (health_facility !== 'Others') {
-                                        healthFacilityDiv.innerHTML = "Available at " + health_facility + ": ";
+                                        h3Element.textContent = "Available at " + health_facility + ": ";
+                                    } else {
+                                        h3Element.textContent = health_facility + ": ";
                                     }
+
+                                    // Append the <h3> element to the second <div>
+                                    colDiv2.appendChild(h3Element);
+
+                                    // Append the first and second <div> elements to the main <div>
+                                    mainDiv.appendChild(colDiv1);
+                                    mainDiv.appendChild(colDiv2);
+
+                                    // Append the main <div> to your healthFacilityDiv
+                                    healthFacilityDiv.appendChild(mainDiv);
+                                }
+
+                                // ...
+
+                                // Append the healthFacilityDiv to the containerDiv
+                                containerDiv.appendChild(healthFacilityDiv);
+
 
                                     method_holder.appendChild(healthFacilityDiv);
 
@@ -417,7 +461,7 @@
                                             // Create a new row for every 3rd iteration
                                             var rowDiv = document.createElement('div');
                                             rowDiv.className = "row";
-                                            rowDiv.classList.add("mx-5", "my-5");
+                                            rowDiv.classList.add("mx-5", "mb-5");
                                             rowDiv.style.justifyContent = "space-evenly";
                                             method_holder.appendChild(rowDiv);
                                         }

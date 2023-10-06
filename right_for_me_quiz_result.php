@@ -106,8 +106,8 @@ select {
   }
 
   .continue_btn:hover{
-    background-color: #F2C1A7 !important;
-     color:#ffff !important;
+    /*background-color: #F2C1A7 !important;*/
+     color:#1F6CB5 !important;
   }
 
   .read:hover {
@@ -147,7 +147,7 @@ select {
     </div>
     <br><br>
     <div class="container mt-3">
-        <div class="row flex-nowrap" id="reco-title" style="align-items: center;">
+        <div class="row flex-nowrap pb-4" id="reco-title" style="align-items: center;">
             <div class="col-auto">
                 <div class="vl" style="width: 10px;
                 background-color: #1F6CB5;
@@ -158,7 +158,7 @@ select {
         
             <div class="col mt-3">
                 <h5>Your recommendation</h5>
-                <p > Based on your answers, these are the methods to consider.</p>
+                <p > Based on your answers, these are the top 3 methods to consider.</p>
             </div>
         </div>
 
@@ -200,17 +200,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     // Insert the missing HTML code here
                     echo '<div class="col-sm-12 col-lg-4">';
                     echo '<div class="container d-flex justify-content-center">';
-                    echo '<div class="card mx-1 my-5 rounded-4" style="width: 80%; min-height: 450px; background-color:#BDD8F0;">';
-                    echo '<div class="container rounded-4 justify-content-center" style="text-align: center; background: white; width: 100%; max-height: 200px; position: relative; overflow: hidden; padding: 0;">';
-                    echo '<img src="' . $row["birth_control_img"] . '" class="card-img-top" style="width: 100%; height: auto; object-fit: cover;" alt="...">';
-                    echo '</div>';
-                    echo '<div class="card-body" style=" min-height:14rem; overflow:hidden;">';
-                    echo '<h5 class="card-title" style="text-align:center; color:#3B3B3B; cursor:pointer;"><a href="about-contraceptive.php?id=' . $row['birth_control_id'] . '" style="text-decoration: none;">' . $row["birth_control_name"] . '</h5></a>';
-                    echo '<p class="card-text mt-3">What it is?</p>';
-                    echo '<p class="card-text" style="overflow: hidden;margin-top: -3%;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 4;text-overflow: ellipsis;">' . $row["birth_control_short_desc"] . '</p>';
-                    echo '<p class="read px-2 mt-2"><a class="js-method-link" href="about-contraceptive.php?id=' . $row['birth_control_id'] . '" style="text-decoration: none; color: black; font-size:13px;"><i class="fa-solid fa-circle-info"> </i> READ MORE</a></p>';
-                    echo '</div>';
-                    echo '</div>';
+                   // echo '<div class="card mx-1 my-5 rounded-4" style="width: 80%; min-height: 450px; background-color:#BDD8F0;">';
+                   // echo '<div class="container rounded-4 justify-content-center" style="text-align: center; background: white; width: 100%; max-height: 200px; position: relative; overflow: hidden; padding: 0;">';
+                   // echo '<img src="' . $row["birth_control_img"] . '" class="card-img-top" style="width: 100%; height: auto; object-fit: cover;" alt="...">';
+                   // echo '</div>';
+                   // echo '<div class="card-body" style=" min-height:14rem; overflow:hidden;">';
+                   // echo '<h5 class="card-title" style="text-align:center; color:#3B3B3B; cursor:pointer;"><a href="about-contraceptive.php?id=' . $row['birth_control_id'] . '" style="text-decoration: none;">' . $row["birth_control_name"] . '</h5></a>';
+                   // echo '<p class="card-text mt-3">What it is?</p>';
+                   // echo '<p class="card-text" style="overflow: hidden;margin-top: -3%;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 4;text-overflow: ellipsis;">' . $row["birth_control_short_desc"] . '</p>';
+                   // echo '<p class="read px-2 mt-2"><a class="js-method-link" href="about-contraceptive.php?id=' . $row['birth_control_id'] . '" style="text-decoration: none; color: black; font-size:13px;"><i class="fa-solid fa-circle-info"> </i> READ MORE</a></p>';
+                   // echo '</div>';
+                   // echo '</div>';
                     echo '</div>';
                     echo '</div>';
                 }
@@ -269,7 +269,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <?php include('quiz-result-dss.php') ?>
 
-<p align="justify" class="mb-5 mt-3" style="font-weight:300; font-size:15px;"> 
+<p align="justify" class="mb-5 mt-5" style="font-weight:300; font-size:15px;"> 
         <b>Disclaimer</b> : Our recommendations are intended to inform you about potential contraception methods based on your provided information. This test is crafted with the guidance of qualified healthcare provider for personalized guidance on contraception choices. However, they do not replace professional medical advice. You are the one to make the final decision on the what you think is the most appropriate method for yourself. You are responsible for the accuracy of the information provided. We are not liable for any damages or losses resulting from website use or reliance on the recommendations.
     </p>
 
@@ -310,7 +310,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
 
 <form id= "skip_btn" action="right_for_me_1.php" method="post">
-            <div class="row mt-2" >
+            <div class="row mt-2" style="justify-content: flex-end;">
                 <div class="col-auto">
                           <p style="margin-top:10px;">Skip</p>
                 </div>
@@ -381,7 +381,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   <div class="col mt-3 d-flex justify-content-center">
             <a class="js-link" href="right_for_me_1.php" style=" text-decoration: none; color:black;">
-                <button class="btn my-3 px-4 py-2 rounded-3 shadow-sm rounded continue_btn" id="no-tnx-btn" style="background: #ffff;">No Thanks</button>
+                <button class="btn my-3 px-4 py-2 continue_btn" id="no-tnx-btn" style="background: transparent;">No Thanks</button>
             </a>
         </div>
 
