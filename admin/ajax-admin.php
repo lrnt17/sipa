@@ -1,11 +1,11 @@
 <?php
-    error_reporting(E_ERROR | E_PARSE);
+    //error_reporting(E_ERROR | E_PARSE);
     require('../connect.php');
     require('../functions.php');
     $info['data_type'] = "";
     $info['success'] = false;
     
-    use PHPMailer\PHPMailer\PHPMailer;
+    /*use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\SMTP;
     use PHPMailer\PHPMailer\Exception;
     
@@ -13,7 +13,7 @@
     require 'C:\xampp\htdocs\PHPMailer\PHPMailer\src\PHPMailer.php';
     require 'C:\xampp\htdocs\PHPMailer\PHPMailer\src\SMTP.php';
 
-    $mail = new PHPMailer(true);
+    $mail = new PHPMailer(true);*/
 
     if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
     {
@@ -88,7 +88,8 @@
                 $info['message'] = "Email account is already in used";
             } else {
 
-                try {
+                // PANG EMAIL ITO
+                /*try {
                     //Server settings
                     //$mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
                     $mail->SMTPDebug = 0;
@@ -133,7 +134,37 @@
                     //exit();
                 } catch (Exception $e) {
                     //$info['message'] = "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-                }
+                }*/
+
+
+                //PANG SMS
+                $message = "Welcome to SiPa, Siguradong Pagpaplano! Your admin account has been created with the following details:\n\nUsername: " . htmlspecialchars($username) . "\nPassword: " . htmlspecialchars($password) . "";
+
+                $ch = curl_init();
+                $parameters = array(
+                'apikey' => 'c17f81a2eb07d0ad839118cad67d2c55', //Your API KEY
+                'number' => $pnum,
+                'message' => $message,
+                'sendername' => 'SiPa'
+                );
+
+                curl_setopt( $ch, CURLOPT_URL,'https://semaphore.co/api/v4/messages' );
+                curl_setopt( $ch, CURLOPT_POST, 1 );
+
+                //Send the parameters set above with the request
+                curl_setopt( $ch, CURLOPT_POSTFIELDS, http_build_query( $parameters ) );
+
+                // Receive response from server
+                curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+                $output = curl_exec( $ch );
+                curl_close ($ch);
+
+                $password = password_hash($password, PASSWORD_DEFAULT);
+                $query = "INSERT INTO users(user_role, user_fname, user_lname, user_dob, user_sex, user_email, user_pnum, partner_facility_id, specialization, user_name, user_password) 
+                VALUES ('" . $role . "', '" . $fname . "', '" . $lname . "', '" . $dob . "', '" . $gender . "', '" . $gmail . "', '" . $pnum . "', '" . $partner_facility . "', '" . $specialization . "', '" . $username . "', '" . $password . "')";
+                query($query);
+                
+                
                 $info['message'] = 'Message has been sent';
                 $info['success'] = true;
             }

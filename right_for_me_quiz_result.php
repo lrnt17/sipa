@@ -158,7 +158,7 @@ select {
         
             <div class="col mt-3">
                 <h5>Your recommendation</h5>
-                <p > Based on your answers, these are the top 3 methods to consider.</p>
+                <p> Based on your answers, these are the top <span class="js-num-of-rank-methods"></span> methods to consider.</p>
             </div>
         </div>
 

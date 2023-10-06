@@ -162,6 +162,8 @@ table {
                                 rank++; // Increment the rank counter
                             }
                             
+                            document.querySelector(".js-num-of-rank-methods").innerHTML = rank - 1;
+
                             theadTable.appendChild(headerRow);
 
                             // Create table rows for each column of sidebyside_data
@@ -178,6 +180,8 @@ table {
                                 // Only set the text content if column_name is not "Birth control short desc"
                                 if (formattedColumnName !== "Birth control short desc") {
                                     columnNameRow.querySelector(".js-column-name").textContent = formattedColumnName;
+                                } else {
+                                    columnNameRow.querySelector(".js-column-name").textContent = "Description";
                                 }
 
                                 tbodyTable.appendChild(columnNameRow.querySelector(".js-column-name-row"));
