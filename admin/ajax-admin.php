@@ -538,6 +538,7 @@
             $offset = ($page - 1) * $rows_per_page;
             $column = $_POST['column'];
             $order = $_POST['order'];
+            $constant_total_rows = 0; // Initialize with a default value
             //$search_query = $_POST['search_query'];
             //echo $_POST['search_query'];
             if ($_POST['search_query'] == 'null') {
