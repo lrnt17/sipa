@@ -3,6 +3,7 @@
 ?>
 
 <head>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
     <style>
         @keyframes appear{
 			0%{
@@ -191,9 +192,9 @@
 </head>
 
 <section>
-    <div class="container">
+    <div class="container" style="flex-wrap: wrap;">
 
-        <div class="row flex-nowrap" style="align-items: center; margin-top:85px;">
+        <div class="row flex-nowrap" style="align-items: center;">
             <div class="col-auto">
                 <div class="vl" style="width: 10px;
                 background-color: #1F6CB5;
@@ -214,7 +215,7 @@
         <div class="container">
             <div class="row height d-flex justify-content-center align-items-center">
 
-                <div class="d-flex mb-3 mt-4">
+                <div class="d-flex mt-2">
                     <div class="form" style="position: relative;">
                     <i class="fa-solid fa-magnifying-glass"></i>
                     <input type="text" id="search-username"  class="form-input rounded-pill shadow-sm" placeholder="Search by first name, last name, schedule, or status" style="height: 57px; text-indent: 52px;width: 455px; border: none;">
@@ -224,49 +225,49 @@
             </div>
         </div>
 
-        <div class="container mt-3 mb-2">
-            <label for="">Show</label> 
+        <div class="container mt-1 mb-2">
+            <label for="" class="me-2">Show</label> 
                 <select id="num_rows_displayed" onchange="todays_appointment_list.num_rows_displayed(this.value)">
                     <option value="10">10</option>
                     <option value="25">25</option>
                     <option value="50">50</option>
                     <option value="100">100</option>
                 </select>
-            <label for="">entries</label>
+            <label for="" class="ms-2">entries</label>
         </div>
 
 
         <br>
-        <table cellspacing="0" cellpadding="10" id="appointment_table" style="border: none;">
+        <table cellspacing="0" cellpadding="10" id="appointment_table" style="border: none; width: 100%;">
             <thead style="text-align: ; height:50px; font-size: 15px;">
                 <tr class="edit">
-                    <th style="text-align: center;"><input type="checkbox" id="select-all-appointment" onclick="todays_appointment_list.select_all_appointments(this);"></th>
-                    <th>ID 
+                    <th style="text-align: center; width: 10%; "><input type="checkbox" id="select-all-appointment" onclick="todays_appointment_list.select_all_appointments(this);"></th>
+                    <th style="width: 10%;">ID 
                         <button onclick="todays_appointment_list.sortTable('app_id', 'asc')" class="btn" style="padding: 0px;"><i class="fa-regular fa-square-caret-up"></i></button>
                         <button onclick="todays_appointment_list.sortTable('app_id', 'desc')" class="btn" style="padding:0px;"><i class="fa-regular fa-square-caret-down"></i></button>
                     </th>
 
-                    <th>First Name 
+                    <th style="width: 20%;">First Name 
                         <button onclick="todays_appointment_list.sortTable('app_fname', 'asc')" class="btn" style="padding: 0px;"><i class="fa-regular fa-square-caret-up"></i></button> 
                         <button onclick="todays_appointment_list.sortTable('app_fname', 'desc')" class="btn" style="padding:0px;"><i class="fa-regular fa-square-caret-down"></i></button>
                     </th>
 
-                    <th>Last Name 
+                    <th style="width: 20%;">Last Name 
                         <button onclick="todays_appointment_list.sortTable('app_lname', 'asc')" class="btn" style="padding: 0px;"><i class="fa-regular fa-square-caret-up"></i></button> 
                         <button onclick="todays_appointment_list.sortTable('app_lname', 'desc')" class="btn" style="padding: 0px;"><i class="fa-regular fa-square-caret-down"></i></button>
                     </th>
 
-                    <th>Schedule 
+                    <th style="width: 20%;">Schedule 
                         <button onclick="todays_appointment_list.sortTable('app_date', 'asc')" class="btn" style="padding: 0px;"><i class="fa-regular fa-square-caret-up"></i></button> 
                         <button onclick="todays_appointment_list.sortTable('app_date', 'desc')" class="btn" style="padding: 0px;"><i class="fa-regular fa-square-caret-down"></i></button>
                     </th>
 
-                    <th>Status 
+                    <th style="width: 15%;">Status 
                         <button onclick="todays_appointment_list.sortTable('status', 'asc')" class="btn" style="padding: 0px;"><i class="fa-regular fa-square-caret-up"></i></button> 
                         <button onclick="todays_appointment_list.sortTable('status', 'desc')" class="btn" style="padding: 0px;"><i class="fa-regular fa-square-caret-down"></i></button>
                     </th>
 
-                    <th class="pe-3">Action</th>
+                    <th class="pe-3" style="width: 15%;">Action</th>
                 </tr>
             </thead>
             <tbody></tbody>
@@ -282,7 +283,7 @@
 
         <br>
 
-        <div class="btn-toolbar justify-content-between" style="align-items: baseline;">
+        <div class="btn-toolbar justify-content-between" style="align-items: baseline; width:100%;">
             <div class="btn-group" id="pagination" role="group" aria-label="First group">
                 <button type="button" onclick="todays_appointment_list.go_to_page(1)" class="btn btn-outline-secondary">First Page</button>
                 <button type="button" onclick="todays_appointment_list.previous_page()" class="btn btn-outline-secondary">Prev</button>
