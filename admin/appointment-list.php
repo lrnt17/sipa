@@ -213,35 +213,35 @@
             
             <br>
             <table cellspacing="0" cellpadding="10" id="appointment_table" style="border: none;">
-                <thead style="text-align: ; height:50px; font-size: 15px;">
+                <thead style="text-align: center; height:50px; font-size: 15px;">
                     <tr class="edit">
-                        <th style="text-align: center;"><input type="checkbox" id="select-all-appointment" onclick="appointment_list.select_all_appointments(this);"></th>
-                        <th>ID 
+                        <th style="text-align: center; width: 10%;"><input type="checkbox" id="select-all-appointment" onclick="appointment_list.select_all_appointments(this);"></th>
+                        <th style="width: 10%;">ID 
                             <button onclick="appointment_list.sortTable('app_id', 'asc')" class="btn" style="padding: 0px;"><i class="fa-regular fa-square-caret-up"></i></button>
                             <button onclick="appointment_list.sortTable('app_id', 'desc')" class="btn" style="padding:0px;"><i class="fa-regular fa-square-caret-down"></i></button>
                         </th>
 
-                        <th>First Name 
+                        <th style="width: 20%;">First Name 
                             <button onclick="appointment_list.sortTable('app_fname', 'asc')" class="btn" style="padding: 0px;"><i class="fa-regular fa-square-caret-up"></i></button> 
                             <button onclick="appointment_list.sortTable('app_fname', 'desc')" class="btn" style="padding:0px;"><i class="fa-regular fa-square-caret-down"></i></button>
                         </th>
 
-                        <th>Last Name 
+                        <th style="width: 20%;">Last Name 
                             <button onclick="appointment_list.sortTable('app_lname', 'asc')" class="btn" style="padding: 0px;"><i class="fa-regular fa-square-caret-up"></i></button> 
                             <button onclick="appointment_list.sortTable('app_lname', 'desc')" class="btn" style="padding: 0px;"><i class="fa-regular fa-square-caret-down"></i></button>
                         </th>
 
-                        <th>Schedule 
+                        <th style="width: 20%;">Schedule 
                             <button onclick="appointment_list.sortTable('app_date', 'asc')" class="btn" style="padding: 0px;"><i class="fa-regular fa-square-caret-up"></i></button> 
                             <button onclick="appointment_list.sortTable('app_date', 'desc')" class="btn" style="padding: 0px;"><i class="fa-regular fa-square-caret-down"></i></button>
                         </th>
 
-                        <th>Status 
+                        <th style="width: 15%;">Status 
                             <button onclick="appointment_list.sortTable('status', 'asc')" class="btn" style="padding: 0px;"><i class="fa-regular fa-square-caret-up"></i></button> 
                             <button onclick="appointment_list.sortTable('status', 'desc')" class="btn" style="padding: 0px;"><i class="fa-regular fa-square-caret-down"></i></button>
                         </th>
 
-                        <th class="pe-3">Action</th>
+                        <th class="pe-3" style="width: 15%;">Action</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
