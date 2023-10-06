@@ -355,7 +355,7 @@ if (mysqli_num_rows($result) > 0) {
 
         <div class="additional-factors-container" id="additional-factors-container-male" style="display:none;">
             <div class="number-1-additional-factor-male" id="number-1-additional-factor-male">
-                <p><b>1. How much does being unplanned matter in your choice of birth control?</b></p>
+                <p><b>1. How much does being unplanned matter in your choice of birth control?</b><span style="color: red;"> *</span></p>
                 <label><input type="radio" class="additional-factors-radio" value="veryImportant" name="maleAnswer1"> Very Important</label><br>
                 <label><input type="radio" class="additional-factors-radio" value="important" name="maleAnswer1"> Important</label><br>
                 <label><input type="radio" class="additional-factors-radio" value="neutral" name="maleAnswer1"> Neutral</label><br>
@@ -364,7 +364,7 @@ if (mysqli_num_rows($result) > 0) {
             </div>
             <br>
             <div class="number-2-additional-factor-male" id="number-2-additional-factor-male">
-                <p><b>2. How important is ease of use for you?</b></p>
+                <p><b>2. How important is ease of use for you?</b><span style="color: red;"> *</span></p>
                 <label><input type="radio" class="additional-factors-radio" value="veryImportant" name="maleAnswer2"> Very Important</label><br>
                 <label><input type="radio" class="additional-factors-radio" value="important" name="maleAnswer2"> Important</label><br>
                 <label><input type="radio" class="additional-factors-radio" value="neutral" name="maleAnswer2"> Neutral</label><br>
@@ -373,7 +373,7 @@ if (mysqli_num_rows($result) > 0) {
             </div>
             <br>
             <div class="number-3-additional-factor-male" id="number-3-additional-factor-male">
-                <p><b>3. How important is preventing sexually transmitted infections (STIs) for you?</b></p>
+                <p><b>3. How important is preventing sexually transmitted infections (STIs) for you?</b><span style="color: red;"> *</span></p>
                 <label><input type="radio" class="additional-factors-radio" value="veryImportant" name="maleAnswer3"> Very Important</label><br>
                 <label><input type="radio" class="additional-factors-radio" value="important" name="maleAnswer3"> Important</label><br>
                 <label><input type="radio" class="additional-factors-radio" value="neutral" name="maleAnswer3"> Neutral</label><br>
@@ -382,7 +382,7 @@ if (mysqli_num_rows($result) > 0) {
             </div>
         <br>
         <div class="number-4-additional-factor-male" id="number-4-additional-factor-male">
-                <p><b>4. How important is long-term contraception for you?</b></p>
+                <p><b>4. How important is long-term contraception for you?</b><span style="color: red;"> *</span></p>
                 <label><input type="radio" class="additional-factors-radio" value="veryImportant" name="maleAnswer4"> Very Important</label><br>
                 <label><input type="radio" class="additional-factors-radio" value="important" name="maleAnswer4"> Important</label><br>
                 <label><input type="radio" class="additional-factors-radio" value="neutral" name="maleAnswer4"> Neutral</label><br>
@@ -391,7 +391,7 @@ if (mysqli_num_rows($result) > 0) {
             </div>
             <br>
         <div class="number-5-additional-factor-male" id="number-5-additional-factor-male">
-                <p><b>5. How comfortable are you with the idea of a permanent contraceptive method?</b></p>
+                <p><b>5. How comfortable are you with the idea of a permanent contraceptive method?</b><span style="color: red;"> *</span></p>
                 <label><input type="radio" class="additional-factors-radio" value="veryComfortable" name="maleAnswer5"> Very Comfortable</label><br>
                 <label><input type="radio" class="additional-factors-radio" value="comfortable" name="maleAnswer5"> Important</label><br>
                 <label><input type="radio" class="additional-factors-radio" value="neutral" name="maleAnswer5"> Neutral</label><br>
@@ -433,37 +433,37 @@ if (mysqli_num_rows($result) > 0) {
 
     <script>
 
-var loggedin = "<?php echo $loggedin; ?>";
-console.log(loggedin);
+        var loggedin = "<?php echo $loggedin; ?>";
+        console.log(loggedin);
 
-var userSex = "<?php echo $userSex; ?>";
-console.log(userSex);
+        var userSex = "<?php echo $userSex; ?>";
+        console.log(userSex);
 
-// Get a collection of elements with the name "female-specific-section"
-const femaleSpecificSections = document.getElementsByName('female-specific-section');
+        // Get a collection of elements with the name "female-specific-section"
+        const femaleSpecificSections = document.getElementsByName('female-specific-section');
 
-// Loop through the collection and hide/show each element based on the user's sex
-for (let i = 0; i < femaleSpecificSections.length; i++) {
-    if (userSex === 'Male') {
-        // If the user is male, hide the female-specific section
-        femaleSpecificSections[i].style.display = 'none';
-    } else {
-        // If the user is female, show the female-specific section
-        femaleSpecificSections[i].style.display = 'block';
-    }
-}
-if (userSex === 'Male') {
-    const pcosSection = document.getElementById('pcosSection');
-    pcosSection.style.display = 'none';
-    const additionalFactorsMale = document.getElementById('additional-factors-container-male');
-    const additionalFactorsFemale = document.getElementById('additional-factors-container-female');
-    additionalFactorsMale.style.display = 'block';
-    additionalFactorsFemale.style.display = 'none';
+        // Loop through the collection and hide/show each element based on the user's sex
+        for (let i = 0; i < femaleSpecificSections.length; i++) {
+            if (userSex === 'Male') {
+                // If the user is male, hide the female-specific section
+                femaleSpecificSections[i].style.display = 'none';
+            } else {
+                // If the user is female, show the female-specific section
+                femaleSpecificSections[i].style.display = 'block';
+            }
+        }
+        if (userSex === 'Male') {
+            const pcosSection = document.getElementById('pcosSection');
+            pcosSection.style.display = 'none';
+            const additionalFactorsMale = document.getElementById('additional-factors-container-male');
+            const additionalFactorsFemale = document.getElementById('additional-factors-container-female');
+            additionalFactorsMale.style.display = 'block';
+            additionalFactorsFemale.style.display = 'none';
 
-    }
-    else{
+            }
+        else{
 
-    }
+        }
 
         //if the user ticked the None of the Above or the I have not used any of these methods
         const noneCheckbox = document.getElementById('none-of-the-above');
@@ -565,20 +565,124 @@ if (userSex === 'Male') {
         //validate the radiobuttons before submitting
         
         function validateForm(event) {
-        var radioGroups = document.querySelectorAll('input[type="radio"][name^="costEffectiveness"], input[type="radio"][name^="managingPeriods"], input[type="radio"][name^="preventingPregnancy"], input[type="radio"][name^="gainingWeight"], input[type="radio"][name^="answer1"], input[type="radio"][name^="answer2"], input[type="radio"][name^="answer3"], input[type="radio"][name^="answer4"]');
+        var radioGroupsPersonalPrefFemale = ["costEffectiveness", "managingPeriods", "preventingPregnancy", "gainingWeight"];
+        var radioGroupsPersonalPrefMale =["costEffectiveness", "preventingPregnancy"];
         var checkboxesMedHist = document.querySelectorAll('input[type="checkbox"][name="med-hist-chckbx"]');
         var checkboxesUserExp = document.querySelectorAll('input[type="checkbox"][name="user-exp-chckbx"]');
         var noneOfTheAboveCheckbox = document.getElementById('none-of-the-above');
         var noneOfTheAboveCheckboxUserExp = document.getElementById('user-experience-checkbox-none');
-
+        var radioGroupsAddFactorsFemale =["answer1", "answer2", "answer3", "answer4", "answer5"];
+        var radioGroupsAddFactorsMale = ["maleAnswer1", "maleAnswer2", "maleAnswer3", "maleAnswer4", "maleAnswer5"];
+        
+        
         var radioChecked = false;
-            for (var i = 0; i < radioGroups.length; i++) {
-                if (radioGroups[i].checked) {
-                    radioChecked = true;
+        //pang validate sa radiobuttons for additionalFactors Female
+        if (userSex =="Female"){
+
+            for (var i = 0; i < radioGroupsAddFactorsFemale.length; i++) {
+                var groupName = radioGroupsAddFactorsFemale[i];
+                var radioGroup = document.querySelectorAll('input[type="radio"][name^="' + groupName + '"]');
+                
+                // Check if at least one radio button in the group is checked
+                var groupChecked = false;
+                for (var j = 0; j < radioGroup.length; j++) {
+                    if (radioGroup[j].checked) {
+                        groupChecked = true;
+                        break;
+                    }
+                }
+                
+                // If any group is not checked, set radioChecked to false and break
+                if (!groupChecked) {
+                    radioChecked = false;
                     break;
                 }
+                
+                // Set radioChecked to true only if all groups are checked
+                radioChecked = true;
             }
+        }
+        //pang validate sa radiobuttons for additionalFactors Male
+        else if (userSex =="Male"){
+            for (var i = 0; i < radioGroupsAddFactorsMale.length; i++) {
+                var groupName = radioGroupsAddFactorsMale[i];
+                var radioGroup = document.querySelectorAll('input[type="radio"][name^="' + groupName + '"]');
+                
+                // Check if at least one radio button in the group is checked
+                var groupChecked = false;
+                for (var j = 0; j < radioGroup.length; j++) {
+                    if (radioGroup[j].checked) {
+                        groupChecked = true;
+                        break;
+                    }
+                }
+                
+                // If any group is not checked, set radioChecked to false and break
+                if (!groupChecked) {
+                    radioChecked = false;
+                    break;
+                }
+                
+                // Set radioChecked to true only if all groups are checked
+                radioChecked = true;
+            }
+        }
 
+        
+        var radioPersonalPrefChecked = false;
+        //pang validate sa radiobuttons for Personal Preferences Female
+        if (userSex =="Female"){
+
+            for (var i = 0; i < radioGroupsPersonalPrefFemale.length; i++) {
+                var groupName = radioGroupsPersonalPrefFemale[i];
+                var radioGroup = document.querySelectorAll('input[type="radio"][name^="' + groupName + '"]');
+                
+                // Check if at least one radio button in the group is checked
+                var groupChecked = false;
+                for (var j = 0; j < radioGroup.length; j++) {
+                    if (radioGroup[j].checked) {
+                        groupChecked = true;
+                        break;
+                    }
+                }
+                
+                // If any group is not checked, set radioPersonalPrefChecked to false and break
+                if (!groupChecked) {
+                    radioPersonalPrefChecked = false;
+                    break;
+                }
+                
+                // Set radioPersonalPrefChecked to true only if all groups are checked
+                radioPersonalPrefChecked = true;
+            }
+        }
+        //pang validate sa radiobuttons for Personal Preferences Male
+        else if (userSex =="Male"){
+            for (var i = 0; i < radioGroupsPersonalPrefMale.length; i++) {
+                var groupName = radioGroupsPersonalPrefMale[i];
+                var radioGroup = document.querySelectorAll('input[type="radio"][name^="' + groupName + '"]');
+                
+                // Check if at least one radio button in the group is checked
+                var groupChecked = false;
+                for (var j = 0; j < radioGroup.length; j++) {
+                    if (radioGroup[j].checked) {
+                        groupChecked = true;
+                        break;
+                    }
+                }
+                
+                // If any group is not checked, set radioPersonalPrefChecked to false and break
+                if (!groupChecked) {
+                    radioPersonalPrefChecked = false;
+                    break;
+                }
+                
+                // Set radioPersonalPrefChecked to true only if all groups are checked
+                radioPersonalPrefChecked = true;
+            }
+        }
+            
+        //pang check sa med history checkbox
         var medHistCheckboxChecked = false;
             for (var k = 0; k < checkboxesMedHist.length; k++) {
                 if (checkboxesMedHist[k].checked) {
@@ -586,7 +690,7 @@ if (userSex === 'Male') {
                     break;
                 }
             }
-
+        //pang check sa user experience checkbox
         var userExpCheckboxChecked = false;
             for (var l = 0; l < checkboxesUserExp.length; l++) {
                 if (checkboxesUserExp[l].checked) {
@@ -595,7 +699,8 @@ if (userSex === 'Male') {
                 }
             }
 
-            if ((!radioChecked || (!noneOfTheAboveCheckbox.checked && !medHistCheckboxChecked) || (!noneOfTheAboveCheckboxUserExp.checked && !userExpCheckboxChecked))) {
+
+            if ((!radioChecked || !radioPersonalPrefChecked || (!noneOfTheAboveCheckbox.checked && !medHistCheckboxChecked) || (!noneOfTheAboveCheckboxUserExp.checked && !userExpCheckboxChecked))) {
                 alert('Please select an option for each question or check at least one option on the checkboxes.');
                 event.preventDefault();
             } else {
