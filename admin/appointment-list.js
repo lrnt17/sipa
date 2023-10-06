@@ -134,7 +134,9 @@ var appointment_list = {
                         let row = document.createElement("tr");
                         let cell = document.createElement("td");
                         cell.colSpan = 7;
+                        cell.classList.add('pt-5','pb-3');
                         cell.textContent = "No match found";
+                        cell.style.fontWeight="600";
                         row.appendChild(cell);
                         table.appendChild(row);
                     }

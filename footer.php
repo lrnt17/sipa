@@ -88,12 +88,27 @@
                     </span>
                 </div>
                 <div class="col-auto">
-                    <a href="">Privacy Policy</a>
+                    <button id="myBtn2" style="
+                        background: transparent;
+                        color: black;
+                        border: none;
+                    ">
+                        Privacy Policy
+                    </button>
                 </div>
                 <div class="col-auto">
-                    <a href="">Terms of Use</a>
+                    <button id="myBtn3" style="
+                        background: transparent;
+                        color: black;
+                        border: none;
+                    ">
+                        Terms of Use
+                    </button>
                 </div>
             </div>
         </div>
     </footer>
+    
 
+    <?php include('privacy-policy.php') ?>
+    <?php include('terms-and-conditions.php') ?>
