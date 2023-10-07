@@ -31,6 +31,7 @@
 		$userfname 	    = addslashes($_POST['userfname']);
         $userlname      = addslashes($_POST['userlname']);
         $useraddress 	= addslashes($_POST['address']);
+        $userbarangay 	= addslashes($_POST['barangay']);
 		$email 		    = addslashes($_POST['email']);
 		$dob 		    = $_POST['dob'];
 		$sex 		    = $_POST['sex'];
@@ -145,7 +146,7 @@
 				$password_string = ", user_password = '$password' ";
 			
 
-			$query = "update users set user_fname = '$userfname', user_lname = '$userlname', user_dob = '$dob', user_sex = '$sex', user_email = '$email', user_address = '$useraddress' $image_string $password_string where user_id = '$user_id' limit 1";
+			$query = "update users set user_fname = '$userfname', user_lname = '$userlname', user_dob = '$dob', user_sex = '$sex', user_email = '$email', user_address = '$useraddress', user_barangay = '$userbarangay' $image_string $password_string where user_id = '$user_id' limit 1";
 			query($query);
 			
 			$query = "select * from users where user_id = '$user_id' limit 1";
@@ -394,15 +395,23 @@
                                 <label class="class_312"  >
                                     Sex
                                 </label>
+                                <label class="class_312" for="barangay">
+                                    Barangay
+                                </label>
                             </div>
                             <div class="class_311" >
-                            <div class="class_312" >
-                                <input value="<?=$row['user_dob']?>" placeholder="Email" type="date" name="dob" class="class_33"  required="true">
-                            </div>
-                            <div class="class_312" >
-                                <input type="radio" name="sex" value="Male" <?php if ($user_sex === "Male") echo "checked"; ?>>Male
-                                <input type="radio" name="sex" value="Female" <?php if ($user_sex === "Female") echo "checked"; ?>>Female
-                            </div>
+                                <div class="class_312" >
+                                    <input value="<?=$row['user_dob']?>" placeholder="Email" type="date" name="dob" class="class_33"  required="true">
+                                </div>
+                                <div class="class_312" >
+                                    <input type="radio" name="sex" value="Male" <?php if ($user_sex === "Male") echo "checked"; ?>>Male
+                                    <input type="radio" name="sex" value="Female" <?php if ($user_sex === "Female") echo "checked"; ?>>Female
+                                </div>
+                                <div class="class_312" >
+                                    <select name="barangay" id="barangay" required class="">
+                                        <!-- list of barangays -->
+                                    </select>
+                                </div>
                             </div>
                             <div class="class_31" >
                                 <label >
@@ -681,8 +690,6 @@
             }
         },
 
-
-
         deleteremdates: function(){
             if (!confirm("Are you sure you want to stop receiving sms reminders from us about your chosen method? Unsubscribing deletes the saved method and reminder dates from the database.")) {
                 
@@ -713,7 +720,64 @@
             ajax.send(form);
         },
 
+        load_user_barangay: function(){
+            
+            let partner_facility_id = "<?=$row['partner_facility_id']?>";
+            //console.log(partner_facility_id);
+            let form = new FormData();
+
+            form.append('partner_facility_id', partner_facility_id);
+            form.append('data_type', 'load_user_barangay');
+            var ajax = new XMLHttpRequest();
+
+            ajax.addEventListener('readystatechange',function(){
+
+                if(ajax.readyState == 4)
+                {
+                    if(ajax.status == 200){
+                        //console.log(ajax.responseText);
+                        let obj = JSON.parse(ajax.responseText);
+
+                        if(obj.success){
+                            
+                            let selectElement = document.getElementById("barangay");
+                            selectElement.innerHTML = "";
+
+                            let blankOption = document.createElement("option");
+                            blankOption.value = "";
+                            blankOption.text = "Select a Barangay";
+                            blankOption.disabled = true;
+                            blankOption.selected = true;
+                            selectElement.appendChild(blankOption);
+
+                            obj.rows.forEach(function(user_barangay) {
+                                user_barangay.barangay.forEach(function(barangay) {
+                                    let option = document.createElement("option");
+                                    option.value = barangay.barangay_name;
+                                    option.text = barangay.barangay_name;
+                                    option.setAttribute("user_barangay-name", barangay.barangay_name);
+
+                                    // Set selected value
+                                    if (option.value === "<?=$row['user_barangay']?>") {
+                                        option.selected = true;
+                                    }
+
+                                    selectElement.appendChild(option);
+                                });
+                            });
+
+                        }
+                    }
+                }
+            });
+
+            ajax.open('post','ajax.php', true);
+            ajax.send(form);
+        },
+
     };
+
+    account.load_user_barangay();
 </script>
 <script>
     //-----------------------------------------------------------------------------------------------------

@@ -2433,6 +2433,35 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 		}
 
 	}
+	else
+	if($_POST['data_type'] == 'load_user_barangay')
+	{
+		$partner_facility_id = (int)$_POST['partner_facility_id'];
+
+		$query = "select * from partner_facility where partner_facility_id = '$partner_facility_id'";
+		$rows = query($query);
+
+		if ($rows) {
+
+			foreach ($rows as $key => $row) {
+				
+				$city_municipality_name = $row['city_municipality'];
+
+				$query = "select * from barangays where city_municipality = '$city_municipality_name'";
+				$user_barangay = query($query);
+				
+				if($user_barangay){
+
+					$rows[$key]['barangay'] = $user_barangay;
+					//$rows[$key]['barangay']['name'] = $user_barangay['barangay_name'];
+				}
+			}
+			
+			$info['rows'] = $rows;
+		}
+		
+		$info['success'] = true;
+	}
 }
 // kinoconvert to json string si "$info", nag ooutput to ng variable $info
 echo json_encode($info);
