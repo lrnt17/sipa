@@ -59,6 +59,21 @@
         th, td {
             padding: 5px;
         }
+        .flatpickr-input{
+            border:none;
+            background:transparent;
+            width: inherit;
+        }
+
+        @media (max-width: 540px) {
+            .input-calcu{
+                height:185px !important;
+            }
+            .flatpickr-input {
+                width: inherit;
+            }
+        }
+
     </style>
 </head>
 <body style="background: #F2F5FF;">
@@ -66,7 +81,7 @@
     <?php include('header.php') ?>
 
     <div class="container rounded-5" style="background: #D2E0F8;">
-        <div class="row mx-5 justify-content-center" style="text-align:center; padding: 4%;">
+        <div class="row justify-content-center" style="text-align:center; padding: 4%;">
         
             <div class="col-auto"><p style="font-size: 3.5rem;"><span translate="no">Period</span></p></div>
             <div class="col-auto"><p style="font-size: 3.5rem; font-weight:bolder;" >Calculator</p></div>
@@ -108,41 +123,44 @@
     
     <div class="text-center"id="form-container">
         <form onsubmit="period_calcu.submit(event)" method="post" class="form-con">
-
-            <div class="row align-items-start mt-4" style="text-align: center;">
-                <div class="col">
-                    <div class="container">
-                        <label for="last-period" style="font-weight: bold; color:#5A5A5A;">First day of last period</label>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="container">
-                        <label for="period-length" style="font-weight: bold; color:#5A5A5A;">Length of last <span translate="no"> period </span> (in days)</label>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="container">
-                        <label for="cycle-length" style="font-weight: bold; color:#5A5A5A;">Length of menstrual cycle (in days)</label>
-                    </div>
-                </div>
-            </div>
-            
+    
             <div class="row align-items-start my-4" style="text-align: center;">
-                <div class="col">
+                <div class="col-4 input-calcu" style="
+                    height: 150px;
+                    display: flex;
+                    flex-wrap: wrap;
+                    align-content: space-between;
+                    justify-content: center;
+                ">
+                <label for="last-period" style="font-weight: bold; color:#5A5A5A;">First day of last period</label>
                     <div class="container p-3 rounded-4 shadow-sm rounded" style="background:#ffff;">
-                    <input class="py-3" type="text" id="last-period" placeholder="Select date" style="border: none; outline: none; font-size:20px; color:#5A5A5A; text-align: center;" required>
+                    <input class="py-3" type="text" id="last-period" placeholder="Select date" style="border: none; outline: none; color:#5A5A5A; text-align: center;" required>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-4 input-calcu" style="
+                    height: 150px;
+                    display: flex;
+                    flex-wrap: wrap;
+                    align-content: space-between;
+                    justify-content: center;
+                ">
+                <label for="period-length" style="font-weight: bold; color:#5A5A5A;">Length of last <span translate="no"> period </span> (in days)</label>
                     <div class="container p-3 rounded-4 shadow-sm rounded" style="background:#ffff;">
                         <input class="py-3" type="number" id="period-length" placeholder="ex. 7" min="1" max="10" value="5" style="border: none;
-                        outline: none; font-size:20px; color:#5A5A5A;" required>
+                        outline: none; color:#5A5A5A;" required>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-4 input-calcu" style="
+                    height: 150px;
+                    display: flex;
+                    flex-wrap: wrap;
+                    align-content: space-between;
+                    justify-content: center;
+                ">
+                <label for="cycle-length" style="font-weight: bold; color:#5A5A5A;">Length of menstrual cycle (in days)</label>
                     <div class="container p-3 rounded-4 shadow-sm rounded" style="background:#ffff;">
                         <input class="py-3" type="number" id="cycle-length" placeholder="ex. 28" min="21" max="35" value="28" style="border: none;
-                        outline: none; font-size:20px; color:#5A5A5A;" required>
+                        outline: none; color:#5A5A5A;" required>
                     </div>
                 </div>
             </div>

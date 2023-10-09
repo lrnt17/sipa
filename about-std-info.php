@@ -62,7 +62,7 @@
                         </div>
                     <div>
 
-                    <div class="row mx-3 mt-5 mb-4">
+                    <div class="row mt-5 mb-4">
                         <div class="container rounded-4 shadow-sm p-4" style="background:#ffff;">
                             <h4>What is <span><?=$row['std_name']?></span>?</h4>
                             <p class="mt-3" style="color:#383838;" align="justify"><?=$data = nl2br($row['std_desc'])?></p>

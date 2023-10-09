@@ -121,7 +121,7 @@ if (mysqli_num_rows($result) > 0) {
         foreach ($methods as $method) {
             // Generate HTML for each contraceptive method
             echo '<tr>';
-            echo '<td><input type="checkbox" name="user-exp-chckbx" id="' . strtolower(str_replace(' ', '', $method)) . '" onchange="toggleRadioButtons(\'' . strtolower(str_replace(' ', '', $method)) . '\')"> <label for="' . strtolower(str_replace(' ', '', $method)) . '">' . $method . '</label></td>';
+            echo '<td><input type="checkbox" name="user-exp-chckbx" id="' . strtolower(str_replace(' ', '', $method)) . '" onchange="toggleRadioButtons(\'' . strtolower(str_replace(' ', '', $method)) . '\')"> <label style="display: inline !important;" for="' . strtolower(str_replace(' ', '', $method)) . '">' . $method . '</label></td>';
             echo '<td>';
             echo '<label><input type="radio" class="user-exp-radio" id="' . strtolower(str_replace(' ', '', $method)) . 'Experience" name="' . strtolower(str_replace(' ', '', $method)) . 'Experience" value="good" disabled required> Good </label> ';
             echo '<label><input type="radio" class="user-exp-radio" id="' . strtolower(str_replace(' ', '', $method)) . 'Experience" name="' . strtolower(str_replace(' ', '', $method)) . 'Experience" value="neutral" disabled required> Neutral </label> ';
@@ -144,7 +144,7 @@ if (mysqli_num_rows($result) > 0) {
 
     
     <br><br><br>
-        <div class="row" style="align-items: center;">
+        <div class="row flex-nowrap" style="align-items: center;">
             <div class="col-auto">
                 <div class="vl" style="width: 10px;
                 background-color: #915E98;
@@ -258,7 +258,7 @@ if (mysqli_num_rows($result) > 0) {
 
     <br><br><br>
 
-        <div class="row" style="align-items: center;">
+        <div class="row flex-nowrap" style="align-items: center;">
             <div class="col-auto">
                 <div class="vl" style="width: 10px;
                 background-color: #1F6CB5;
@@ -278,13 +278,13 @@ if (mysqli_num_rows($result) > 0) {
     <div class="cont p-5 rounded-2 shadow-sm rounded" style="background:white;">
         <div class ="medical-history-container" id="medical-history-container">
             <p><b>Do you have a concern about any of the following conditions? (choose all that apply)<span style="color: red;"> *</span></b></p>
-            <input type="checkbox" name="med-hist-chckbx" id="depression"> <label for="depression"> Depression or anxiety</label><br>
-            <input type="checkbox" name="med-hist-chckbx" id="acne"> <label for="acne"> Acne and breakouts</label><br>
-            <input type="checkbox" name="med-hist-chckbx" id="blood-clotting-disorder"> <label for="blood-clotting-disorder"> Blood clotting disorder</label><br>
-            <div id="pcosSection"><input type="checkbox" name="med-hist-chckbx" id="pcos"> <label for="pcos"> Polycystic Ovary Syndrome (PCOS) or Endometriosis</label><br></div>
-            <input type="checkbox" name="med-hist-chckbx" id="hypertension"> <label for="hypertension"> Hypertension or highblood pressure</label><br>
-            <input type="checkbox" name="med-hist-chckbx" id="treatment-for-sti"> <label for="treatment-for-sti"> Treatment for Sexual Transmitted Infection (STIs)</label><br><br>
-            <input type="checkbox"  id="none-of-the-above"> <label for="none-of-the-above"><b> None of the above</b></n></label>
+            <input type="checkbox" name="med-hist-chckbx" id="depression"> <label style="display: inline !important;" for="depression"> Depression or anxiety</label><br>
+            <input type="checkbox" name="med-hist-chckbx" id="acne"> <label style="display: inline !important;" for="acne"> Acne and breakouts</label><br>
+            <input type="checkbox" name="med-hist-chckbx" id="blood-clotting-disorder"> <label style="display: inline !important;" for="blood-clotting-disorder"> Blood clotting disorder</label><br>
+            <div id="pcosSection"><input type="checkbox" name="med-hist-chckbx" id="pcos"> <label style="display: inline !important;" for="pcos"> Polycystic Ovary Syndrome (PCOS) or Endometriosis</label><br></div>
+            <input type="checkbox" name="med-hist-chckbx" id="hypertension"> <label style="display: inline !important;" for="hypertension"> Hypertension or highblood pressure</label><br>
+            <input type="checkbox" name="med-hist-chckbx" id="treatment-for-sti"> <label style="display: inline !important;" for="treatment-for-sti"> Treatment for Sexual Transmitted Infection (STIs)</label><br><br>
+            <input type="checkbox"  id="none-of-the-above"> <label style="display: inline !important;" for="none-of-the-above"><b> None of the above</b></n></label>
             
         </div>
     </div>
@@ -293,7 +293,7 @@ if (mysqli_num_rows($result) > 0) {
 
     <br><br><br>
 
-        <div class="row" style="align-items: center;">
+        <div class="row flex-nowrap" style="align-items: center;">
             <div class="col-auto">
                 <div class="vl" style="width: 10px;
                 background-color: #B6CCF5;

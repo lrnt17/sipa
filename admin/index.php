@@ -87,8 +87,6 @@
     /* Styles for the container */
     .container {
             padding: 20px; /* Add padding for spacing */
-            display: flex; /* Use flexbox to align items horizontally */
-            align-items: center; /* Center vertically */
         }
 
     #pieChart {
@@ -174,7 +172,7 @@
         </div>
         </div>
 
-        <div class="container" id="buttons" style="display: flex; justify-content: center;">
+        <div class="container" id="buttons" style="display: flex;">
             <div class="row">
                 <div class="col-auto">
                 <a href="my-videos.php" style="text-decoration: none;">

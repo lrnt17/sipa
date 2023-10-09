@@ -30,14 +30,14 @@
 
         .header2{
             text-align: center;
-            font-size: 30px !important; 
+            font-size: 25px !important; 
             margin-top: -23px !important;
         }
 
         .header1{
             margin-top: 0px !important;
             text-align: center;
-            font-size: 25px !important;
+            font-size: 22px !important;
         }
 
         .info{
@@ -66,7 +66,7 @@
             top: 47%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 460px !important;
+            width: 383px !important;
             min-height: auto;
         }
 
@@ -124,7 +124,11 @@
 
         }
 
-        
+        @media (max-width: 540px) {
+            .lines::after, .lines::before {
+                width: 20% !important;
+            }
+        }
     </style>
     <style>
         /* The Modal (background) */
@@ -165,10 +169,6 @@
         overflow: auto; /* Enable scroll if needed */
         background-color: rgb(0,0,0); /* Fallback color */
         background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-        }
-
-        .content-modal {
-            margin-top:75px !important;
         }
 
         /* The Close Button */

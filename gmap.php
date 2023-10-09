@@ -74,7 +74,7 @@ $conn->close();
  <?php include('header.php') ?>
 
     <div class="container rounded-5" style="background: #D2E0F8;">
-            <div class="row mx-5 justify-content-center" style="text-align:center; padding: 4%;">
+            <div class="row justify-content-center" style="text-align:center; padding: 4%;">
             
                 <div class="col-auto"><p style="font-size: 3.5rem;">Find a</p></div>
                 <div class="col-auto"><p style="font-size: 3.5rem; font-weight:bolder;" >Health Care</p></div>
@@ -113,7 +113,7 @@ $conn->close();
                 </div>
             </div>
             <div class="row ms-1">
-                <p class="ms-4">We will assist you in finding a nearby healthcare facility whether you require new birth control prescription, STI testing, or any other reproductive health service.</p>
+                <p class="ps-4 ms-2">We will assist you in finding a nearby healthcare facility whether you require new birth control prescription, STI testing, or any other reproductive health service.</p>
             </div>
 
 
@@ -122,17 +122,18 @@ $conn->close();
         <div class="col-auto ms-3 mt-3 mb-3">
             <i class="fa-solid fa-location-dot" style="font-size: larger; color: #2B436F;"></i>
         </div>
-        <div class="col me-auto">
+        <div class="col me-auto" style="padding: 0;">
             <input type="text" id="search-input" placeholder="Enter address, city or zip code" style="width: 90%; border: none; background: transparent;" class="p-3" required>
         </div>
-        <div class="col-auto">
-            <button class="btn rounded-pill p-3 px-5" style="background-color:#5887DE; color:white; margin-right: -13px;" id="search-button">Find</button>
+        <div class="col-auto" style="padding: 0;">
+            <button class="btn rounded-pill p-3" style="background-color:#5887DE; color:white; margin-right: -13px; padding-right: 2rem !important;
+            padding-left: 2rem !important;" id="search-button">Find</button>
         </div>
     </div>
 </div>
 
 <div class="container rounded-5 mt-5 mb-3 p-5" id="container" style="background: #D2E0F8; display: none;">
-    <div class="row">
+    <div class="row" style="padding-left: 0;">
         <div class="col-lg-6">
         <p style="text-align: center; font-weight:500;">Showing results</p>
 
@@ -238,7 +239,7 @@ $conn->close();
             // Create a new div element to display hospital details
             var hospitalDiv = document.createElement('div');
             hospitalDiv.classList.add('hospital-item');
-            hospitalDiv.style.minWidth="360px";
+            hospitalDiv.style.minWidth="290px";
 
             // Fill the div with hospital information
             hospitalDiv.innerHTML = `

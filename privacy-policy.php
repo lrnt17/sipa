@@ -49,6 +49,11 @@
     overflow-y: auto;
 }
 
+@media (max-width: 768px) {
+    .content-modal{
+        width:90% !important;
+    }
+}
 </style>
 
 <section id="myModal2" class="modal2">

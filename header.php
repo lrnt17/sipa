@@ -102,7 +102,7 @@
                     <!--<a class="dropdown-item" href="">Contraceptive Reviews</a>-->
                 </div>
               </li>
-              <li>
+              <li class="li">
               <?php if(logged_in()):?>
                 <div class="row mt-2" style="align-items: center;">
                     <div class="col-auto">
@@ -122,10 +122,10 @@
                 <?php else:?>
                   <div class="row mt-2" style="align-items: center;">
                     <div class="col-auto ms-2">
-                      <i class="fa-solid fa-arrow-right-to-bracket d-md-block d-lg-none" style="cursor:pointer; font-size: 20px; color:white;" onclick="user.login()"></i>
+                      <i class="fa-solid fa-arrow-right-to-bracket d-md-block d-lg-none sign-in" style="cursor:pointer; font-size: 20px;" onclick="user.login()"></i>
                     </div>
                     <div class="col-auto">
-                      <span class="js-link navbar-brand d-md-block d-lg-none" style="cursor:pointer; font-size: 17px; font-weight:normal; color:white;" onclick="user.login()">Sign in</span>
+                      <span class="js-link navbar-brand d-md-block d-lg-none sign-in" style="cursor:pointer; font-size: 17px; font-weight:normal;" onclick="user.login()">Sign in</span>
                     </div>
                   </div>
                 <?php endif;?>

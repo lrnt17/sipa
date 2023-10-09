@@ -211,7 +211,7 @@
             position: absolute;
             z-index: 1;
             right: 0;
-            top: 4.6%;
+            margin-top: 2.5%;
         }
         
         @media (max-width: 1200px) {
@@ -223,6 +223,13 @@
             .doctor {
             display: none; 
             }
+        }
+
+        @media (max-width: 540px) {
+            .email{
+                font-size: 1.1rem;
+            }
+            
         }
     </style>
   
@@ -411,7 +418,7 @@
                     </div>
                     <div class="col-auto">
                         <p style="color:#383838;">Email</p>
-                        <h5>siguradongpagpaplano@gmail.com</h5>
+                        <h5 class="email">siguradongpagpaplano@gmail.com</h5>
                     </div>
                 </div>
 

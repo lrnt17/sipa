@@ -172,7 +172,8 @@
                 font-size: 16px;
                 color: #575757;
                 margin-bottom: 0px; 
-                font-weight: 400;">I accept the <b>Terms and Conditions</b></label>
+                font-weight: 400;
+                display: inline !important;">I accept the <b>Terms and Conditions</b></label>
             </div>
             <div class="privacy_policy" style="margin: 8px 0px 8px 0px;">
                 <input type="checkbox" class="cbox" name="privacy_policy" id="privacy_policy" value="I agree" required>
@@ -180,7 +181,8 @@
                 font-size: 16px;
                 color: #575757;
                 margin-bottom: 0px; 
-                font-weight: 400;">I agree to <b>Privacy Policy</b></label>
+                font-weight: 400;
+                display: inline !important;">I agree to <b>Privacy Policy</b></label>
             </div>
 
             <div class="" style="display: flex; justify-content: flex-end;">

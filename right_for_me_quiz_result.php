@@ -139,7 +139,7 @@ select {
     <?php include('header.php') ?>
 
     <div class="container rounded-5" style="background: #D2E0F8;">
-        <div class="row mx-5 justify-content-center" style="text-align:center; padding: 2%;">
+        <div class="row justify-content-center" style="text-align:center; padding: 2%;">
         
             <div class="col-auto"><p style="font-size: 3.5rem;">Contraception Method</p></div>
             <div class="col-auto"><p style="font-size: 3.5rem; font-weight:bolder;" >Result</p></div>
@@ -147,7 +147,7 @@ select {
     </div>
     <br><br>
     <div class="container mt-3">
-        <div class="row flex-nowrap pb-4" id="reco-title" style="align-items: center;">
+        <div class="row flex-nowrap pb-4" id="reco-title" style="align-items: center;"> 
             <div class="col-auto">
                 <div class="vl" style="width: 10px;
                 background-color: #1F6CB5;
@@ -378,7 +378,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   </div>
 
   <form class="circle shadow-sm" id="sms_reminder_form" action="#" method="post" class="m-5">
-    <input type="submit" value="Remind Me!" name="submit_remind" id="remind_me_btn" class="btn" style="font-weight: 600;">
+    <input type="submit" value="Remind Me!" name="submit_remind" id="remind_me_btn" class="btn" style="font-weight: 600; margin-top: 10%;">
   </form>
 
 

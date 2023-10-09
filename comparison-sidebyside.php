@@ -124,13 +124,68 @@
     font-size:20px;
     }
 
+    .nav-item, .li{
+        padding:0 !important;
+    }
+
+    .horizontal-scroll {
+            overflow-x: auto;
+        }
+
+    #side_by_side {
+        width: 100%; /* Set the width to 100% to match the table */
+        display: block; /* Ensure it takes up the full width */
+        overflow-x: auto; /* Add horizontal scrolling if needed */
+    }
+
+    @media (max-width: 768px) {
+            .sidebyside_row{
+                width:700px !important;
+            }
+            
+        }
+
+    /* Apply shadows to the background of the table-con container */
+    .table-con {
+        position: relative; /* Make sure the shadows are positioned correctly */
+        overflow: auto;
+        background-image:
+            /* Shadows */
+            linear-gradient(to right, #D2E0F8, #D2E0F8),
+            linear-gradient(to right, #D2E0F8, #D2E0F8),
+        
+        /* Shadow covers */
+            linear-gradient(to right, rgba(0,0,0,.25), rgba(255,255,255,0)),
+            linear-gradient(to left, rgba(0,0,0,.25), rgba(255,255,255,0));
+
+        background-position: left center, right center, left center, right center;
+        background-repeat: no-repeat;
+        background-color: #D2E0F8;
+        background-size: 20px 100%, 20px 100%, 10px 100%, 10px 100%;
+        background-attachment: local, local, scroll, scroll;
+        
+        z-index: 1; /* Ensure the shadows are on top of the table content */
+    }
+
+    .rotate{
+        display:none;
+    }
+
+    @media (max-width: 450px) {
+            .rotate{
+                display: flex;
+            }
+            .vl-header{
+                height:143px !important;
+            }
+        }
 </style>
 <body style="background: #F2F5FF;">
  
  <!-- navigation bar with logo -->
  <?php include('header.php') ?>
 <div class="container rounded-5" style="background: #D2E0F8;">
-        <div class="row mx-5 justify-content-center" style="text-align:center; padding: 4%;">
+        <div class="row justify-content-center" style="text-align:center; padding: 4%;">
         
             <div class="col-auto"><p style="font-size: 3.5rem;">Comparison</p></div>
             <div class="col-auto"><p style="font-size: 3.5rem; font-weight:bolder;" >Chart</p></div>
@@ -149,10 +204,10 @@
             </div>
     </div>
 
-    <div class="container mt-5"> <!-- mt-3-->
-        <div class="row" style="align-items: center;">
+    <div class="container mt-3"> <!-- mt-3-->
+        <div class="row flex-nowrap" style="align-items: center;">
             <div class="col-auto">
-                <div class="vl" style="width: 10px;
+                <div class="vl-header" style="width: 10px;
                 background-color: #1F6CB5;
                 border-radius: 99px;
                 height: 75px;
@@ -163,6 +218,7 @@
             <div class="col-auto">
                 <h3 style="font-weight:400;"><b>Compare</b> contraceptive methods</h3>
                 <p>Hover over the birth control icon to view its name.</p>
+                <p class="rotate">Rotate your phone to landscape mode for a better view.</p>
             </div>
         </div>
 
@@ -170,20 +226,22 @@
     <section class="js-comparison-sidebyside hide">
         <?php include('compare-methods.php') ?>
 
-            <div class="container rounded-bottom-4" style="background-color:#D2E0F8;" id="side_by_side">
-                <div class="row pe-2 pb-4 pt-4 mb-5">
-                    <div class="col-2 js-table js-column-labels pt-4 mt-2">
-                        <ul class="js-list1">
+            <div class="container rounded-bottom-4 pb-5 mb-5" style="background-color:#D2E0F8;" id="side_by_side">
+                <div class="con horizontal-scroll table-con">
+                    <div class="row pe-2 pt-4 sidebyside_row">
+                        <div class="col-2 js-table js-column-labels pt-4 mt-2">
+                            <ul class="js-list1">
+                                
+                            </ul>
+                        </div>
+                        <div class="col js-table js-select_1 rounded-3 p-4 m-2 shadow-sm" style="background-color:#ffff; min-width: 10px;">
                             
-                        </ul>
-                    </div>
-                    <div class="col js-table js-select_1 rounded-3 p-4 m-2 shadow-sm" style="background-color:#ffff; min-width: 10px;">
-                        
-                    </div>
-                    <div class="col js-table js-select_2 rounded-3 p-4 m-2 shadow-sm">
+                        </div>
+                        <div class="col js-table js-select_2 rounded-3 p-4 m-2 shadow-sm">
+
+                        </div>
 
                     </div>
-
                 </div>
             </div>
     </section>   
@@ -296,7 +354,7 @@
                         let imageCol = document.createElement('div');
                         imageCol.classList.add("col-auto","rounded-4", "ms-2", "shadow-sm");
                         imageCol.style.background="white";
-                        imageCol.style.width="100px";
+                        imageCol.style.width="70px";
                         imageCol.style.height="60px";
                         imageCol.style.position="relative";
                         imageCol.style.overflow="hidden";
@@ -415,7 +473,7 @@
                                 let imageCol = document.createElement('div');
                                 imageCol.classList.add("col-auto","rounded-4", "ms-2", "shadow-sm");
                                 imageCol.style.background="white";
-                                imageCol.style.width="100px";
+                                imageCol.style.width="70px";
                                 imageCol.style.height="60px";
                                 imageCol.style.position="relative";
                                 imageCol.style.overflow="hidden";
@@ -549,7 +607,7 @@
                                 let imgContainerDiv = document.createElement('div');
                                 imgContainerDiv.classList.add("col-auto","rounded-4", "shadow-sm");
                                 imgContainerDiv.style.background="white";
-                                imgContainerDiv.style.width="100px";
+                                imgContainerDiv.style.width="70px";
                                 imgContainerDiv.style.height="60px";
                                 imgContainerDiv.style.position="relative";
                                 imgContainerDiv.style.overflow="hidden";
@@ -746,7 +804,7 @@
                                 let imgContainerDiv = document.createElement('div');
                                 imgContainerDiv.classList.add("col-auto","rounded-4", "shadow-sm");
                                 imgContainerDiv.style.background="white";
-                                imgContainerDiv.style.width="100px";
+                                imgContainerDiv.style.width="70px";
                                 imgContainerDiv.style.height="60px";
                                 imgContainerDiv.style.position="relative";
                                 imgContainerDiv.style.overflow="hidden";

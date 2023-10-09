@@ -61,6 +61,12 @@
         text-decoration: none;
         cursor: pointer;
         }
+
+    @media (max-width: 768px) {
+    .content-modal3{
+        width:90% !important;
+    }
+}
 </style>
 
 <section id="myModal3" class="modal3">

@@ -152,7 +152,7 @@
     <tr data-std-id="" style="background-color:white;">
         <td class="js-type my-table-cell" style="text-align: center;">
             <img src="" alt="std" width="100" class="m-3"><br>
-            <span style="font-weight:500;"></span>
+            <span style="font-weight:500; text-wrap: wrap;"></span>
         </td>
         <td class="my-table-cell">
             <p class="js-symptom"></p>

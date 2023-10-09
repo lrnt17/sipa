@@ -117,7 +117,7 @@
     <?php include('header.php') ?>
 
     <div class="container rounded-5" style="background: #D2E0F8;">
-        <div class="row mx-5 justify-content-center" style="text-align:center; padding: 4%;">
+        <div class="row justify-content-center" style="text-align:center; padding: 4%;">
         
             <div class="col-auto"><p style="font-size: 3.5rem;">Contraceptive Cost</p></div>
             <div class="col-auto"><p style="font-size: 3.5rem; font-weight:bolder;" >Calculator</p></div>
@@ -233,7 +233,7 @@
 
             <div class="col-auto">
 
-                <div class="estimated-price-input-container mx-5 mb-3 rounded-3 shadow-sm px-4 py-3" id="estimated-price-input-container" style="background-color: #EFEFEF; width: 320px; display:none">
+                <div class="estimated-price-input-container mx-5 mb-3 rounded-3 shadow-sm px-4 py-3" id="estimated-price-input-container" style="background-color: #EFEFEF; max-width: 320px; display:none">
                     <label class="pt-2" for="estimatePrice">Estimated Price</label>
                     <span style="width: 4px;
                     background-color: #7B7777;
@@ -309,7 +309,7 @@
             </div>
 
             <div class="col-auto mt-4 mb-4">
-                <div class="estimated-condom-price-input-container mx-5 rounded-3 shadow-sm px-4 py-3" style="background-color: #EFEFEF; width: 380px; ">
+                <div class="estimated-condom-price-input-container mx-5 rounded-3 shadow-sm px-4 py-3" style="background-color: #EFEFEF; max-width: 380px; ">
                     <label for="estimateCondomPrice">Estimated Price per Package</label>
                     <span style="width: 4px;
                     background-color: #7B7777;

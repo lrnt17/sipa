@@ -72,7 +72,10 @@ var manage_my_videos = {
                         let row = document.createElement("tr");
                         let cell = document.createElement("td");
                         cell.colSpan = 8;
+                        cell.classList.add('pt-5','pb-5');
                         cell.textContent = "No videos found";
+                        cell.style.fontWeight="600";
+                        cell.style.textAlign="center";
                         row.appendChild(cell);
                         table.appendChild(row);
                     }

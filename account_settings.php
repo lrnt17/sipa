@@ -388,31 +388,36 @@
                                 </label><br>
                                 <input value="<?=$row['user_email']?>" placeholder="Email" type="text" name="email" class="class_33"  required="true">
                             </div>
-                            <div class="class_311" >
-                                <label class="class_312"  >
-                                    Date of Birth
-                                </label>
-                                <label class="class_312"  >
-                                    Sex
-                                </label>
-                                <label class="class_312" for="barangay">
-                                    Barangay
-                                </label>
+                            <div class="row class_311" >
+                                <div class="col-sm-4">
+                                    <label class="class_312"  >
+                                        Date of Birth
+                                    </label>
+                                    <div class="class_312 mb-2" >
+                                        <input value="<?=$row['user_dob']?>" placeholder="Email" type="date" name="dob" class="class_33"  required="true">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label class="class_312 mb-2"  >
+                                        Sex
+                                    </label>
+                                    <div class="class_312 mb-2">
+                                        <input type="radio" name="sex" value="Male" <?php if ($user_sex === "Male") echo "checked"; ?>>Male
+                                        <input type="radio" name="sex" value="Female" <?php if ($user_sex === "Female") echo "checked"; ?>>Female
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label class="class_312" for="barangay">
+                                        Barangay
+                                    </label>
+                                    <div class="class_312 mb-2" >
+                                        <select name="barangay" id="barangay" required class="class_33">
+                                            <!-- list of barangays -->
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="class_311" >
-                                <div class="class_312" >
-                                    <input value="<?=$row['user_dob']?>" placeholder="Email" type="date" name="dob" class="class_33"  required="true">
-                                </div>
-                                <div class="class_312" >
-                                    <input type="radio" name="sex" value="Male" <?php if ($user_sex === "Male") echo "checked"; ?>>Male
-                                    <input type="radio" name="sex" value="Female" <?php if ($user_sex === "Female") echo "checked"; ?>>Female
-                                </div>
-                                <div class="class_312" >
-                                    <select name="barangay" id="barangay" required class="">
-                                        <!-- list of barangays -->
-                                    </select>
-                                </div>
-                            </div>
+                            
                             <div class="class_31" >
                                 <label >
                                     Phone Number

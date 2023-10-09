@@ -384,10 +384,11 @@
                             </div>
                         </div>
                     </div>
-                <form class="container ms-4 ps-4 pe-4"  style="width: 94%;" onsubmit="todays_appointment_list.save_updated_appointment(event)" method="post">
+                <form class="container ms-4 ps-4 pe-4"  style="width: 94%; display: flex;
+                flex-wrap: wrap;" onsubmit="todays_appointment_list.save_updated_appointment(event)" method="post">
                     <input type="hidden" name="edit_city_municipality" class="js-edit-city-municipality edit-appointment">
                     <input type="hidden" name="edit_health_facility" class="js-edit-health-facility edit-appointment">
-                <div class="row">
+                <div class="row" style="width: 100%;">
                             <div class="col">
                                 <div class="form">
                                     <label for="edit_fname" style="font-size: 15px;">First Name <span style="color:red;">*</span></label>
@@ -402,7 +403,7 @@
                             </div>
                         </div>
 
-                        <div class="row">
+                        <div class="row" style="width: 100%;">
                             <div class="col">
                                 <div class="form">
                                     <label for="edit_gmail" style="font-size: 15px;">Email Address  <span style="color:red;">*</span></label>
@@ -420,7 +421,7 @@
                             </div>
                         </div>
 
-                        <div class="row">
+                        <div class="row" style="width: 100%;">
                             <div class="col">
                                 <div class="form">
                                 <label for="edit_gender" style="font-size: 15px;">Gender</label>
@@ -438,7 +439,7 @@
                             </div>
                         </div>
 
-                        <div class="row">
+                        <div class="row" style="width: 100%;">
                             <div class="col">
                                 <div class="form">
                                     <label for="edit_address" style="font-size: 15px;">Address</label>
@@ -453,7 +454,7 @@
                             </div>
                         </div>
 
-                        <div class="row">
+                        <div class="row" style="width: 100%;">
                             <div class="col">
                                 <div class="form">
                                     <label for="edit_status" style="font-size: 15px;">Status </label>
@@ -499,7 +500,7 @@
                     <hr>
                     <div class="timeslots"></div>
 
-                    <div  class="class_45 d-flex flex-row-reverse">
+                    <div  class="class_45 d-flex flex-row-reverse" style="width: 94%;">
                         <button class=" btn px-5" style="background-color: #F2C1A7; color:#ffff;">Save</button>
                     </div>
                     

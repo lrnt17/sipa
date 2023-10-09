@@ -196,16 +196,16 @@
 
             <div class="px-4 py-2 my-4 rounded-4 shadow-sm" onclick="manage_my_videos.open_upload_video()" style="cursor:pointer; background-color:white; width: max-content;"> <i class="fa-solid fa-video me-2"></i> Upload Video</div>
             
-            <table border ="0" cellspacing="0" cellpadding="10" id="video_table">
+            <table border ="0" cellspacing="0" cellpadding="10" id="video_table" style="width: 100%;">
                 <thead style="text-align: center; height:40px;">
                     <tr>
                         <th><input type="checkbox" id="select-all-videos" onclick="manage_my_videos.select_all_videos(this);" /></th>
-                        <th title="Videos"><i class="fa-solid fa-video"></i></th>
-                        <th title="Date"><i class="fa-solid fa-calendar-days"></i></th>
-                        <th title="Views"><i class="fa-solid fa-eye"></i></th>
-                        <th title="Comments"><i class="fa-solid fa-comment"></i></th>
-                        <th title="Likes"><i class="fa-solid fa-heart"></i></th>
-                        <th title="Categories"><i class="fa-solid fa-grip"></i></th>
+                        <th title="Videos" style="width: 40%;"><i class="fa-solid fa-video"></i></th>
+                        <th title="Date" style="width: 10%;"><i class="fa-solid fa-calendar-days"></i></th>
+                        <th title="Views" style="width: 10%;"><i class="fa-solid fa-eye"></i></th>
+                        <th title="Comments" style="width: 10%;"><i class="fa-solid fa-comment"></i></th>
+                        <th title="Likes" style="width: 10%;"><i class="fa-solid fa-heart"></i></th>
+                        <th title="Categories" style="width: 10%;"><i class="fa-solid fa-grip"></i></th>
                         <th title="Action"><i class="fa-solid fa-pencil"></i></th>
                     </tr>
                 </thead>
@@ -374,7 +374,7 @@
 <script>
     let partner_facility_id = '<?=$partner_facility_id?>';
 </script>
-<script src="my-videos.js?v7"></script>
+<script src="my-videos.js?v8"></script>
 </html>
 
 <script>

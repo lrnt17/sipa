@@ -132,7 +132,7 @@
     <?php include('header.php') ?>
 
     <div class="container rounded-5" style="background: #D2E0F8;">
-        <div class="row mx-5 justify-content-center" style="text-align:center; padding: 4%;">
+        <div class="row justify-content-center" style="text-align:center; padding: 4%;">
         
             <div class="col-auto"><p style="font-size: 3.5rem;">Find the</p></div>
             <div class="col-auto"><p style="font-size: 3.5rem; font-weight:bolder;" >match for you</p></div>
@@ -402,8 +402,8 @@
                                 var healthFacilityDiv = document.createElement('div');
 
                                 // Set the class of healthFacilityDiv to "row"
-                                healthFacilityDiv.className = "row";
-                                healthFacilityDiv.classList.add("mx-5", "mt-5");
+                                healthFacilityDiv.className = "row", "flex-nowrap";
+                                healthFacilityDiv.classList.add("mx-3", "mt-5");
                                 healthFacilityDiv.style.justifyContent = "space-evenly";
 
                                 // Check if the health_facility is 'Others' or the user is not logged in

@@ -27,7 +27,7 @@
                         <a class="js-link" href="faqs.php">FAQs</a>
                     </div>
                     <div class="row my-2">
-                        <a class="js-link" href="right_for_me_1.php">Right for me</a>
+                        <a class="js-link" href="right_for_me_1.php">Match my Method</a>
                     </div>
                     <div class="row my-2">
                         <a class="js-link" href="gmap.php">Health care provider</a>

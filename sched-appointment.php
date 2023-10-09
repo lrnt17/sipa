@@ -9,7 +9,7 @@
         justify-content: space-between;
     }
     input{
-        width: 85%;
+        width: 75%;
         border: none;
         border-bottom: 2px solid #B9B9B9;
         padding: 1px 0px 0px 30px;
@@ -32,7 +32,7 @@
         font: inherit;
         line-height: 1.5em;
         padding: 0.5em 3.5em 0.5em 1em;
-        width: 85%;
+        width: 75%;
         /* reset */
 
         margin: 0;      
@@ -100,7 +100,7 @@
                     <h3>Schedule an Appointment</h3>
                 </center>
                 <br><br>
-                <div class="row container-row">
+                <div class="row container-row" style="padding-left: 36px;">
                     <div class="col" style="
                         min-width: 50%;
                     ">
@@ -208,7 +208,17 @@
 
             <!-- Page 2 -->
             <div class="page" id="page-2" style="display: none;">
-            <center><p style="margin: 10px 20px 0px 20px; color: #1b4ca1; text-wrap: wrap;">Please select your preferred appointment date.</p></center>
+                <div class="container" style="
+                    display: flex;
+                    padding-left: 20px;
+                    padding-right: 20px;
+                    justify-content: center;
+                    width: 90%;
+                ">
+                    <center>
+                        <p style="margin: 10px 20px 0px 20px; color: #1b4ca1; text-wrap: wrap; margin-top: 30px;">Please select your preferred appointment date.</p>
+                    </center>
+                </div>
                 <!-- Your form fields for page 2 here -->
                 <div class="container">
                     <div class="row">
@@ -257,8 +267,18 @@
             <!-- Page 3 (Final page) -->
             <div class="page" id="page-3" style="display: none;">
 
-                <center><p style="margin: 10px 20px 0px 20px; color: #1b4ca1; text-wrap: wrap;">
-                   Kindly pick a suitable time slot for your appointment from the available options below.</p></center>
+                <div class="container" style="
+                    display: flex;
+                    padding-left: 20px;
+                    padding-right: 20px;
+                    justify-content: center;
+                    width: 90%;
+                ">
+                    <center>
+                        <p style="color: #1b4ca1; text-wrap: wrap; margin-top: 30px;">
+                        Kindly pick a suitable time slot for your appointment from the available options below.</p>
+                    </center>
+                </div>
                 
                 <center>
                     <h1 class="js-selected-date"></h1>
@@ -271,7 +291,7 @@
                 align-items: center;"></div>
                 <div class="appointment_data_privacy" style="margin-top: 30px;">
                     <input type="checkbox" name="appointment_data_privacy" id="appointment_data_privacy" value="I agree" required style="width: 15px;">
-                    <label for="appointment_data_privacy" style="position:relative;font-size: 15px;font-weight: 500;">I have read and agree to the Privacy Policy in accordance with the Data Privacy Act of 2012.</label>  
+                    <label for="appointment_data_privacy" style="position:relative;font-size: 15px;font-weight: 500; display: inline;">I have read and agree to the Privacy Policy in accordance with the Data Privacy Act of 2012.</label>  
                 </div>
                 <!--<button type="button" onclick="sched_appointment.prevPage()">Previous</button>-->
                 <div class="btn-div"style="display: flex; justify-content: flex-end;">

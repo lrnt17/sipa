@@ -149,6 +149,26 @@
             font-size: 14px;
             background-color: transparent;
         }
+        
+        .js-username-reply{
+            font-weight:500;
+        }
+
+        @media (max-width: 768px) {
+            .profile-col{
+                padding-left: 0 !important;
+            }
+            .content-col, .edit-col, .js-action-buttons, .js-action-button {
+                padding:0 !important;
+            }
+            .profile-col-rep{
+                padding-left: 0 !important;
+                padding-right: 4px !important;
+            }
+            .icon-btn{
+                padding: 3px !important;
+            }
+        }
 	</style>
 </head>
 <body style="background: #F2F5FF;">
@@ -157,7 +177,7 @@
     <?php include('community-forum.php') ?>
 
     <div class="container">
-        <div class="row px-5">
+        <div class="row px-3">
             <div class="col-2 d-none d-lg-block">
                 <!-- sa column 'tong div -->
             </div>
@@ -348,7 +368,7 @@
      <!--3 cols (pic, reply, edit)-->
     <div class="row">
          <!--profile pic-->
-         <div class="col-auto">
+         <div class="col-auto profile-col">
             <!--<a href="#" class="js-profile-link class_45" style="text-decoration:none;">-->
             <div class="img-con" style="width:40px; height:40px; border-radius:50%; border-style: solid; position: relative; overflow: hidden; padding: 0;"> 
                 <img src="assets/images/57.png" class="js-photo class_47" style=" width: 100%; height: 100%; object-fit: cover;" >
@@ -357,7 +377,7 @@
         </div>
 		
         <!--reply--> <!--NAME, COMMENT, TIME, LIKE -->
-		<div class="col" >
+		<div class="col content-col" >
             <!--div for name, comment-->
             <div class="cont p-3 rounded-4" style="background-color:#f2f2f2;">
                 <div class="row">
@@ -402,7 +422,7 @@
 		</div>
 
         <!--edit,del-->
-        <div class="col-1">
+        <div class="col-auto edit-col">
             <!--div-->
             <div class="js-action-buttons class_51" >
 
@@ -452,7 +472,7 @@
 <script src="time.js?v1"></script>
 <script src="like-rating.js?v3"></script>
 <script src="community-topics.js?v8"></script>
-<script src="mycomment.js?v53"></script>
+<script src="mycomment.js?v54"></script>
 
 <script>
     // Call the updateTimestamps function initially when the page loads

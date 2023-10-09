@@ -58,6 +58,17 @@
             transition: transform 0.4s, opacity 0.1s;
             transition: transform 0.4s, opacity 0.1s, -webkit-transform 0.4s;
         }
+
+
+        @media (max-width: 540px) {
+            .newsCaption{
+                height: 95% !important;
+            }
+            .newsCaption-title{
+                margin-bottom: 26px !important;
+            }
+            
+        }
             
     </style>
     <!-- Add the slick-theme.css if you want default styling -->

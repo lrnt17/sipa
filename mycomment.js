@@ -397,7 +397,7 @@ var mycomment = {
 
                                 //<!--COL profile pic-->
                                 let col1 = document.createElement('div');
-                                col1.classList.add('col-auto');
+                                col1.classList.add('col-auto', 'profile-col-rep');
 
                                 //<!--div for image-->
                                 let imgcon = document.createElement('div');
@@ -426,11 +426,11 @@ var mycomment = {
 
                                 //<!--COL edit,del-->
                                 let col3 = document.createElement('div');
-                                col3.classList.add('js-action-button','col-1');
+                                col3.classList.add('js-action-button','col-auto');
                                 
                                 //<!--3 dot btn-->
                                 let aTagbtn = document.createElement('a');
-                                aTagbtn.classList.add('btn');
+                                aTagbtn.classList.add('btn','icon-btn');
                                 aTagbtn.setAttribute("data-toggle", "dropdown");
                                 aTagbtn.innerHTML = '<i class="fa-solid fa-ellipsis fs-4"></i>';
 
@@ -868,7 +868,7 @@ var mycomment = {
 
         // Add a Save button for submitting the edited reply
         let saveButton = document.createElement('button');
-        saveButton.classList.add('btn' , 'px-3', 'mr-3');
+        saveButton.classList.add('btn' , 'px-3', 'm-2');
         saveButton.innerHTML = 'Save';
 
         saveButton.style.backgroundColor = '#F2C1A7';
@@ -881,7 +881,7 @@ var mycomment = {
 
         // Add a Cancel button for canceling the edit
         let cancelButton = document.createElement('button');
-        cancelButton.classList.add('js-cancel-edit', 'btn', 'btn-outline-danger', 'm-3');
+        cancelButton.classList.add('js-cancel-edit', 'btn', 'btn-outline-danger', 'm-2');
         cancelButton.innerHTML = 'Cancel';
 
         // Attach event listener to the Cancel button
