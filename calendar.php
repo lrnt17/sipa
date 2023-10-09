@@ -2,6 +2,9 @@
     require("connect.php");
     require('functions.php');
 
+    // Turn off all error reporting
+error_reporting(0);
+
     function build_calendar($month, $year, $duration, $cleanup, $start, $end, $max_slots, $city_municipality, $health_facility_name){
 
         /*$query = "SELECT * FROM appointments WHERE MONTH(app_date) = $month AND YEAR(app_date) = $year";
