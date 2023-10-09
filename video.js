@@ -344,8 +344,9 @@ var single_video = {
         let ajax = new XMLHttpRequest();
         ajax.addEventListener('readystatechange', function() {
             if (ajax.readyState == 4 && ajax.status == 200) {
+                //console.log(ajax.responseText);
                 let data = JSON.parse(ajax.responseText);
-                
+                console.log(video_id);
                 if (data.success) {
                     // Get reference to reply button element
                     let replyButtonElement = document.querySelector('#video_' + video_id + ' .js-reply-link');
@@ -618,7 +619,7 @@ var single_video = {
 
                             // Create p element for anonymous checkbox
                             let anonymousP = document.createElement('p');
-                            anonymousP.setAttribute('for', 'anonymous');
+                            anonymousP.setAttribute('for', 'anonymous' + video_id);
                             anonymousP.textContent = 'Anonymous:';
                             anonymousP.style.color = '#5582da';
                             anonymousP.style.display = 'inline';
@@ -627,14 +628,14 @@ var single_video = {
                             // Create input element for anonymous checkbox
                             let anonymousInput = document.createElement('input');
                             anonymousInput.setAttribute('type', 'checkbox');
-                            anonymousInput.setAttribute('id', 'anonymous');
+                            anonymousInput.setAttribute('id', 'anonymous' + video_id);
                             anonymousInput.setAttribute('name', 'anonymous_reply');
                             anonymousInput.classList.add('js-anonymous-reply');
                             anonymousDiv.appendChild(anonymousInput);
 
                             // Create p element for anonymous checkbox
                             let anonymousLabel = document.createElement('label');
-                            anonymousLabel.setAttribute('for', 'anonymous');
+                            anonymousLabel.setAttribute('for', 'anonymous' + video_id);
                             anonymousLabel.textContent = 'Post anonymously:';
                             anonymousLabel.style.color = '#5582da';
                             anonymousDiv.appendChild(anonymousLabel);

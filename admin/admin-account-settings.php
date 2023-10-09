@@ -291,7 +291,7 @@
                 <div>
                     <label>
                         <div class="img-con" style="width:50px; height:50px; border-radius:50%; border-style: solid; position: ; overflow: hidden; padding: 0;"> 
-                            <img src="<?=get_admin_image($row['user_image'])?>"  class="js-image class_28"  style=" width: 100%; height: 100%; object-fit: cover; cursor: pointer;" >
+                            <img src="<?=get_admin_image($row['user_image'])?>"  class="js-admin-image class_28"  style=" width: 100%; height: 100%; object-fit: cover; cursor: pointer;" >
                         </div>
                         <input onchange="display_image(this.files[0])" type="file" name="image" style="display:none;">
 

@@ -664,7 +664,7 @@ var mycomment = {
 
                             // Create p element for anonymous checkbox
                             let anonymousP = document.createElement('p');
-                            anonymousP.setAttribute('for', 'anonymous');
+                            anonymousP.setAttribute('for', 'anonymous' + forum_id);
                             anonymousP.textContent = 'Anonymous:';
                             anonymousP.style.color = '#5582da';
                             anonymousP.style.display = 'inline';
@@ -673,14 +673,14 @@ var mycomment = {
                             // Create input element for anonymous checkbox
                             let anonymousInput = document.createElement('input');
                             anonymousInput.setAttribute('type', 'checkbox');
-                            anonymousInput.setAttribute('id', 'anonymous');
+                            anonymousInput.setAttribute('id', 'anonymous' + forum_id);
                             anonymousInput.setAttribute('name', 'anonymous_reply');
                             anonymousInput.classList.add('js-anonymous-reply');
                             anonymousDiv.appendChild(anonymousInput);
 
                             // Create p element for anonymous checkbox
                             let anonymousLabel = document.createElement('label');
-                            anonymousLabel.setAttribute('for', 'anonymous');
+                            anonymousLabel.setAttribute('for', 'anonymous' + forum_id);
                             anonymousLabel.textContent = 'Post anonymously:';
                             anonymousLabel.style.color = '#5582da';
                             anonymousDiv.appendChild(anonymousLabel);

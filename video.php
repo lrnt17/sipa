@@ -303,8 +303,8 @@
                                 <hr>
                                 <div class="row mx-1 my-2">
                                     <div class="col-auto me-auto">
-                                        <p for="anonymous" style="display:inline; color:#5582da;">Comment anonymously:</p>
-                                        <input type="checkbox" id="anonymous" name="anonymous" class="js-anonymous-comment"><label for="anonymous">anonymous</label>
+                                        <p for="anonymous_comment" style="display:inline; color:#5582da;">Comment anonymously:</p>
+                                        <input type="checkbox" id="anonymous_comment" name="anonymous_comment" class="js-anonymous-comment"><label for="anonymous_comment">anonymous</label>
                                     </div>
                                     <div class="class_45 col-auto" >
                                         <button class="class_46 btn">
@@ -444,7 +444,7 @@
 <script src="time.js?v1"></script>
 <script src="like-rating-video.js?v2"></script>
 <!--<script src="community-topics.js?v6"></script>-->
-<script src="video.js?v8"></script>
+<script src="video.js?v9"></script>
 
 <script>
     // Call the updateTimestamps function initially when the page loads
