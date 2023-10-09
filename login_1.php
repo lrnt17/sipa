@@ -330,7 +330,7 @@
                 <p class = "header2" style="font-size: 40px;
                 color:#FFFFFF;
                 margin-top: -29px;
-                font-weight: 400;">SiPa Siguradong Pagpaplano</p>
+                font-weight: 400;"><span translate="no">SiPa Siguradong Pagpaplano</span></p>
                 <p class = "info" style="font-size: 15px;
                 color:#FFFFFF;
                 margin-top: -16px;
