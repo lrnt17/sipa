@@ -417,10 +417,13 @@ function updateChart(filteredData) {
     if (document.getElementById("genderFilter").value === "All") {
         var noMethodSelectedIndex = labels.indexOf("No method selected yet");
 
-        // Check if "No method selected yet" is not present and add it
+        // Check if "No method selected yet" is not present and remove it
         if (noMethodSelectedIndex === -1) {
-            labels.push("No method selected yet");
-            count.push(0); // Add it with a count of 0
+            var noMethodSelectedIndex = labels.indexOf("No method selected yet");
+            if (noMethodSelectedIndex !== -1) {
+                labels.splice(noMethodSelectedIndex, 1);
+                count.splice(noMethodSelectedIndex, 1);
+            }
         }
     }
 
@@ -471,6 +474,7 @@ window.addEventListener('load', function () {
     // Trigger the initial chart update
     updateChart(data);
 });
+
 
 
 
