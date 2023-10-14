@@ -340,7 +340,7 @@
             <div class="row" style="align-items: center;">
                 <div class="col-auto" style="width:120px;">
                     <div class="rounded-3" style="cursor: pointer; position: relative; height:3.5rem; overflow: hidden; border: 4px solid #D2E0F8; padding: 0;">
-                        <video src="" class="js-video-display" style="width: 100%;  object-fit: cover;"></video>
+                        <video src="" class="js-video-display" style="width: 100%; height: inherit; object-fit: cover;"></video>
                     </div>
                 </div>
                 <div class="col">

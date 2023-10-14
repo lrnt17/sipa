@@ -51,8 +51,12 @@
 
 @media (max-width: 768px) {
     .content-modal{
-        width:90% !important;
+        width:90%;
     }
+}
+
+p {
+    white-space: initial;
 }
 </style>
 

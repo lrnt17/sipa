@@ -22,7 +22,7 @@
             opacity: 100;
             left: 0;
             width: 100%;
-            height: 80%;
+            height: 100%;
             margin:0px;
             background-color: #1F6CB5;
             padding: 15px;
@@ -67,9 +67,23 @@
             .newsCaption-title{
                 margin-bottom: 26px !important;
             }
-            
+            .newsCard{
+                margin-left: 0px !important;
+                margin-right: 0px !important;
+            }
+        }
+
+        @media (max-width: 450px) {
+            .newsCard{
+                margin-left: 0px !important;
+                margin-right: 0px !important;
+            }
         }
             
+        .slick-prev:before,
+        .slick-next:before {
+            color: black !important; 
+        }
     </style>
     <!-- Add the slick-theme.css if you want default styling -->
     <link
@@ -131,7 +145,7 @@
             </div>-->
 
         </div>
-        <div class="slider-std-1" id="stdCarouselContainer">
+        <div class="slider-std-1 mx-3" id="stdCarouselContainer">
             
         </div>
         <br><br><br>
@@ -146,7 +160,7 @@
                 </div>
                 <div class='newsCaption rounded-4 shadow-sm'>
                     <div style="display: flow;">
-                        <p class="js-std-name newsCaption-title pt-1 pb-2" style="text-align:center; font-size: 1rem; font-weight:600;">Herpes</p>
+                        <p class="js-std-name newsCaption-title pt-1 pb-3" style="text-align:center; font-size: 1rem; font-weight:600;">Herpes</p>
                         <div class="js-std-desc newsCaption-content px-1" style="font-size:1rem;overflow: hidden;margin-top: -3%;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 4;text-overflow: ellipsis;" >
                             is simply dummy text of the printing and typesetting industry. 
                             Lorem Ipsum has been the industry's standard dummy text ever 
@@ -196,7 +210,18 @@
                     breakpoint: 768,
                     settings: {
                         slidesToShow: 2,
-                        slidesToScroll: 2
+                        slidesToScroll: 2,
+                        infinite: true,
+                        dots: true
+                    }
+                    },
+                    {
+                    breakpoint: 450,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2,
+                        infinite: true,
+                        dots: true
                     }
                     }
                     // You can unslick at a given breakpoint now by adding:

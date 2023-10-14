@@ -126,10 +126,6 @@ header {
     padding-left: 70px;
 }
 
-p{
-    white-space: nowrap; 
-}
-
 .header-text{
     font-size: 50px;
     color:#FFFFFF;
@@ -568,18 +564,6 @@ h1{
 
 @media (max-width: 1225px) {
 
-    .header-text2{
-        text-align: center;
-        font-size: 35px;
-        margin-top: -37px;
-    }
-
-    .header-text{
-        margin-top: 0px;
-        text-align: center;
-        font-size: 30px;
-    }
-
     .info-text{
         text-align: center;
         font-size: 12px;
@@ -609,7 +593,7 @@ h1{
         top: 48%;
         left: 50%;
         transform: translate(-50%, -50%);
-        width: 360px;
+        width: 303px !important;
         min-height: auto;
     }
 

@@ -45,6 +45,40 @@
             }
         }
     </script>
+    
+        <style>
+         @media (max-width: 1225px) {
+        .reset-pass{
+        margin: 0;
+        position: absolute;
+        top: 43%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 303px !important;
+        min-height: auto;
+        }
+
+        .header-text2{
+            text-align: center;
+            font-size: 25px !important; 
+            margin-top: -23px !important;
+        }
+
+        .header-text{
+            margin-top: 0px !important;
+            text-align: center;
+            font-size: 22px !important;
+        }
+
+        .info-text{
+            display:none;
+        }
+        
+        .links{
+            width: 100% !important;
+        }
+}
+    </style>
 </head>
 <body>
 
@@ -71,8 +105,9 @@
                 <p class="text-rem">Strong password includes numbers, letters, and punctuation marks.</p><br>
                 <form action="forgot_pass_5_reset_success.php" method="post" onsubmit="return check(event);">
                     <div class="form">
-                        <div class="fonticon">
+                        <div class="fonticon" style="position: relative;">
                             <i class="fa-solid fa-lock" style="font-size:15px;"></i>
+                             <i class="fas fa-eye" style="font-size: 15px; cursor: pointer; color: gray; position: absolute; right: 10px; left: auto; top: 50%; transform: translateY(-50%);" id="togglePassword2"></i>
                             <label for="new_pass">New password</label>
                             <input type="password" name="new_pass" id="new_pass" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}" title="Must contain at least one number, one uppercase and lowercase letter, one special character, and at least 8 or more characters" required>
                         </div>
@@ -82,6 +117,7 @@
                             <i class="fa-solid fa-lock" style="font-size:15px;"></i>
                             <label for="con_pass">Confirm new password</label>
                             <input type="password" name="con_pass" id="con_pass" required>
+                            <i class="fas fa-eye" style="font-size: 15px; cursor: pointer; color: gray; position: absolute; right: 10px; left: auto; top: 50%; transform: translateY(-50%);" id="togglePassword3"></i>
                         </div>
                     </div>
                     <button type="submit" name="reset" class="class_60 log-btn">Verify Code</button>
@@ -96,6 +132,33 @@
         <?php include('languageprivacyterms.php') ?>
     </div>
 </body>
+    <script>
+                    const togglePassword2 = document.querySelector("#togglePassword2");
+                    const password2 = document.querySelector("#new_pass");
+
+                    togglePassword2.addEventListener("click", function () {
+                        this.classList.toggle("fa-eye-slash");
+                        // toggle the type attribute
+                        const type = password2.getAttribute("type") === "password" ? "text" : "password";
+                        password2.setAttribute("type", type);
+
+                        // toggle the icon
+                    });
+    </script>
+    
+    <script>
+                    const togglePassword3 = document.querySelector("#togglePassword3");
+                    const password3 = document.querySelector("#con_pass");
+
+                    togglePassword3.addEventListener("click", function () {
+                        this.classList.toggle("fa-eye-slash");
+                        // toggle the type attribute
+                        const type = password3.getAttribute("type") === "password" ? "text" : "password";
+                        password3.setAttribute("type", type);
+
+                        // toggle the icon
+                    });
+    </script>
 </html>
 
 

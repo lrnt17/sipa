@@ -75,7 +75,7 @@
         }
 
         .today{
-            color: #F0C2A9;
+            color: #F0C2A9 !important;
         }
 
         

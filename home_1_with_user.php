@@ -64,7 +64,7 @@
 
         .main {
         width: 100%;
-        max-height: 300px;
+        height: 300px;
         background-color: #1F6CB5;
         /*background-image: linear-gradient(to right, #1F6CB5, #70AFED);*/
         display: flex;
@@ -230,6 +230,17 @@
                 font-size: 1.1rem;
             }
             
+        }
+
+        @media (max-width: 450px) {
+            .main{
+                height: 350px !important;
+            }
+            
+        }
+
+        .mapboxgl-ctrl-logo, .mapboxgl-ctrl, .mapboxgl-ctrl-attrib, .mapboxgl-compact{
+            display:none !important;
         }
     </style>
   

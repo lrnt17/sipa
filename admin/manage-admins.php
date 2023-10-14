@@ -49,18 +49,6 @@
     color: #f1f1f1;
     }
 
-    /* Main content */
-    .main {
-    margin-left: 200px; /* Same as the width of the sidenav */
-    font-size: 13px; /* Increased text to enable scrolling */
-    padding: 0px 10px;
-    }
-
-    /* Add an active class to the active dropdown button */
-    .active {
-    background-color: green;
-    color: white;
-    }
 
     /* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
     .dropdown-container {
@@ -86,13 +74,36 @@
         display: none;
     }
 </style>
-<body>
+<body style="background: #F2F5FF;">
+
+<?php include('admin-header.php') ?>
     <section class="main">
-        <?php include('header.php') ?>
+
+        <div class="topbar" style="width:100%;">
+                <div class="toggle">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+        </div>
 
         <!-- List of admins -->
-        <div>
-            <h1>Administrators List</h1>
+        <div class="container"style="margin-top:85px;">
+                <div class="row flex-nowrap mb-3" style="align-items: center;">
+                    <div class="col-auto">
+                        <div class="vl" style="width: 10px;
+                        background-color: #1F6CB5;
+                        border-radius: 99px;
+                        height: 60px;
+                        display: -webkit-inline-box;"></div>
+                    </div>
+                    
+                    <div class="col-auto mt-1">
+                        <div class="row">
+                            <div class="col-auto">
+                                <h2 style="font-weight: 400;"><b>Administrators</b> List</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             <table border ="1" cellspacing="0" cellpadding="10" id="admin_table">
                 <thead>
                     <tr>
@@ -758,5 +769,16 @@
 
     manage_admins.load_admins();
     //manage_admins.load_partner_facilities();
+</script>
+
+<script>
+    let toggle = document.querySelector(".toggle");
+    let navigation = document.querySelector(".navigation");
+    let main = document.querySelector(".main");
+
+    toggle.onclick = function () {
+    navigation.classList.toggle("active");
+    main.classList.toggle("active");
+    };
 </script>
 </html>

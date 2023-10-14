@@ -29,6 +29,35 @@
             }
         }
     </script>
+        <style>
+         @media (max-width: 1225px) {
+        .reco-pass{
+        margin: 0;
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 303px !important;
+        min-height: auto;
+        }
+
+        .header-text2{
+            text-align: center;
+            font-size: 25px !important; 
+            margin-top: -23px !important;
+        }
+
+        .header-text{
+            margin-top: 0px !important;
+            text-align: center;
+            font-size: 22px !important;
+        }
+
+        .info-text{
+            display:none;
+        }
+}
+    </style>
 </head>
 <body>
 

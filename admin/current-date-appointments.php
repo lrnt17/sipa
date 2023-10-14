@@ -666,7 +666,7 @@
                 <a data-toggle="dropdown" class="btn"><i class="fa-solid fa-ellipsis" style="font-size:14px;"></i></i></a>
                     
                     <!--div edit,del-->
-                    <div class="container">
+                    <div class="container" style="padding: 0;">
                         
                         <!--ul element-->
                         <ul class="dropdown-menu dropdown-menu-right">

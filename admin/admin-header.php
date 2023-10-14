@@ -67,7 +67,6 @@ body {
     line-height: 60px;
     text-align: start;
     white-space: nowrap;
-    margin-top: 70px;
 }
 
 .admin{
@@ -81,7 +80,7 @@ body {
   background-color: #F2F5FF;
 }
 
-.navigation ul li:nth-child(1) {
+.li-1 {
   margin-bottom: 30px;
   pointer-events: none;
 }
@@ -199,7 +198,7 @@ body {
         <div class="cont">
         <div class="navigation">
             <ul>
-                <li>
+                <li class="li-1">
                     <div class="mt-4" style="display: flex; align-items: center;">
                         <div class="col-auto"><img class="rounded-circle" src="logo-colored.png" alt="SiPa" width="45" height="45" ></div>
                         <div class="col ms-4"><h3 class="title" style="margin: 0;">SiPa</h3></div>
@@ -249,7 +248,7 @@ body {
                     <li <?php if ($currentPage === 'appointment-list.php') echo 'class="active-link"'; ?>>
                         <a href="appointment-list.php">
                             <i class="fa-solid fa-clipboard-list me-3" style="margin-left: 21.5px;position: relative;margin-top: 20px;"></i>
-                            <span class="title">Appointment List</span>
+                            <span class="title">Appointment List</span> 
                         </a>
                     </li>
 
@@ -267,19 +266,48 @@ body {
                         </a>
                     </li>
                 <?php endif;?>
+
                 <?php if(check_head_admin($user_role)):?>
+                    <li <?php if ($currentPage === '#about') echo 'class="active-link"'; ?>>
+                        <a href="#about">
+                            <i class="fa-solid fa-clipboard-list me-3" style="margin-left: 21.5px;position: relative;margin-top: 20px;"></i>
+                            <span class="title">Head Administrators</span> 
+                        </a>
+                    </li>
+
                     <li <?php if ($currentPage === 'manage-admins.php') echo 'class="active-link"'; ?>>
                         <a href="manage-admins.php">
-                            <i class="fa-solid fa-clipboard-list me-3" style="margin-left: 21.5px;position: relative;margin-top: 20px;"></i>
+                            <i class="fa-solid fa-calendar-day me-3" style="margin-left: 20px;position: relative;margin-top: 22px;"></i>
                             <span class="title">Administrators</span>
                         </a>
                     </li>
 
-                    <li <?php if ($currentPage === 'schedule-settings.php') echo 'class="active-link"'; ?>>
-                        <a href="schedule-settings.php">
-                            <i class="fa-solid fa-calendar-day me-3" style="margin-left: 20px;position: relative;margin-top: 22px;"></i>
-                            <span class="title">Schedule Settings</span>
+                    <li <?php if ($currentPage === 'partner-facilities.php') echo 'class="active-link"'; ?>>
+                        <a href="partner-facilities.php">
+                            <i class="fa-solid fa-user-group me-3" style="margin-left: 20px;position: relative;margin-top: 22px;"></i>
+                            <span class="title">Partner Facilities</span>
                         </a>
+                    </li>
+
+                    <li class="dropdown" <?php if (in_array($currentPage, ['contraceptive-sidebyside.php', 'contraceptive-details.php', 'contraceptive-chart.php'])) {echo 'class="active-link"';} ?>>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="align-items: center;">
+                            <i class="fa-solid fa-clipboard-list me-3" style="margin-left: 21.5px;position: relative;"></i>
+                            <span class="title">Contraceptives</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#">Contraceptive Methods</a>
+                            </li>
+                            <li style="margin: 0px; cursor: pointer;">
+                                <a href="contraceptive-details.php">Contraceptive Details</a>
+                            </li>
+                            <li>
+                                <a href="contraceptive-chart.php">Contraceptive Chart</a>
+                            </li>
+                            <li>
+                                <a href="contraceptive-sidebyside.php">Contraceptive Side-by-Side</a>
+                            </li>
+                        </ul>
                     </li>
                 <?php endif;?>
                     
