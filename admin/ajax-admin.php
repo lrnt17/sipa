@@ -745,7 +745,7 @@
                     query($query);
                     
                     $appointment_moved = true;
-			        appointment_confirmation($contact, $fname, $municipality, $health_facility, $appointment_date, $appointment_timeslot, $appointment_moved);
+			        appointment_confirmation($contact, $fname, $city_municipality, $health_facility, $appointment_date, $appointment_timeslot, $appointment_moved);
 
                     $info['success'] = true;
                     $info['message'] = "Appointment has been moved successfully";

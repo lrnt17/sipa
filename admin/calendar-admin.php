@@ -88,7 +88,9 @@
             } elseif ($isWeekend) {
                 $calendar .= "<td class='weekend-dates' style='padding-top: 20px;'><h6>$currentDay</h6>";
             } else {
-                if ($new_appointment) {
+                //var_dump($new_appointment);
+                if ($new_appointment === 'true') {
+                    //echo $new_appointment;
                     $calendar.="<td class='$today new-dates' style='padding-top: 20px;' onclick='todays_appointment_list.selectDate(\"$date\")'><h6>$currentDay</h6>";
                 } else {
                     $calendar.="<td class='$today new-dates' style='padding-top: 20px;' onclick='appointment_list.selectDate(\"$date\")'><h6>$currentDay</h6>";
