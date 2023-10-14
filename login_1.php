@@ -113,11 +113,6 @@
             font-size:13px !important;
         }
 
-        .content-modal {
-            width: 80% !important;
-            
-        }
-
         .modal-content {
             width: 90% !important;
         }

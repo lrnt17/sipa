@@ -27,6 +27,69 @@
             }
         }
     </script>
+    <style>
+        h2{
+            font-size: 30px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-family: inherit;
+            font-weight: 500;
+            line-height: 1.1;
+            color: inherit;
+        }
+        h3{
+            font-size: 24px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-family: inherit;
+            font-weight: 500;
+            line-height: 1.1;
+            color: inherit;
+        }
+        .content-modal, .content-modal3{
+            max-height: 65vh !important;
+        }
+         @media (max-width: 1225px) {
+        .forgot_pass{
+        margin: 0;
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 303px !important;
+        min-height: auto;
+        }
+
+        .header-text2{
+            text-align: center;
+            font-size: 25px !important; 
+            margin-top: -23px !important;
+        }
+
+        .header-text{
+            margin-top: 0px !important;
+            text-align: center;
+            font-size: 22px !important;
+        }
+
+        .info-text{
+            display:none;
+        }
+}
+
+@media (max-width: 768px){
+.content-modal, .content-modal3 {
+    width: 75% !important;
+    max-height: 490px !important;
+}}
+
+@media (max-width: 450px){
+.content-modal, .content-modal3 {
+    left: -16px !important;
+    max-height: 76vh !important;
+    position: relative;
+}}
+    </style>
 </head>
 <body>
 

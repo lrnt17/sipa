@@ -20,7 +20,12 @@
     <script src="https://kit.fontawesome.com/324d76b648.js" crossorigin="anonymous"></script>
     <title>Password Changed | SiPa</title>
 
-<style>html{ height: 100%;}</style>
+<style>html{ height: 100%;}
+.box{
+            width: 350px !important;
+            padding:20px 20px !important;
+    }
+    </style>
 </head>
 <body>
 

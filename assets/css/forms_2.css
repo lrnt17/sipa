@@ -5,9 +5,7 @@
     body{
         top:0!important;
         background: linear-gradient(67deg,#70AFED ,#1F6CB5 25%);
-        font-family: 'Inter', sans-serif;
 	    scroll-behavior: smooth;
-        letter-spacing: 1px;
     }
 
     nav{
@@ -141,7 +139,7 @@
           
     .fonticon i{
         position: absolute;
-        left: 0px;
+        
         top: 39px;
         color: #575757;
     }

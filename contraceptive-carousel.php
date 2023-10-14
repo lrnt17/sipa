@@ -66,6 +66,10 @@
             .newsCaption-title{
                 margin-bottom: 26px !important;
             }
+            .newsCard{
+                margin-left: 0px !important;
+                margin-right: 0px !important;
+            }
             
         }
             
@@ -101,6 +105,17 @@
             cursor: pointer;
         }
 
+        @media (max-width: 450px) {
+            .newsCard{
+                margin-left: 0px !important;
+                margin-right: 0px !important;
+            }
+        }
+        
+        .slick-prev:before,
+        .slick-next:before {
+            color: black !important; 
+        }
     </style>   
 </head>
 
@@ -130,7 +145,7 @@
             </div>-->
 
         </div>
-        <div class="slider-method-1" id="methodCarouselContainer">
+        <div class="slider-method-1 mx-3" id="methodCarouselContainer">
             
         </div>
         <br><br><br>
@@ -193,6 +208,15 @@
                     },
                     {
                     breakpoint: 768,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2,
+                        infinite: true,
+                        dots: true
+                    }
+                    },
+                    {
+                    breakpoint: 450,
                     settings: {
                         slidesToShow: 2,
                         slidesToScroll: 2,

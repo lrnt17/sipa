@@ -39,6 +39,11 @@
         .js-forum-link{
             cursor: pointer;
         }
+
+        .slick-prev:before,
+        .slick-next:before {
+            color: black !important; 
+        }
     </style>
 </head>
         <div class="row mt-5">

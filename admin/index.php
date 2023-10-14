@@ -187,33 +187,98 @@
                     </div>
                 </a>
                 </div>
+                <?php if(check_admin($user_role)):?>
+                    <div class="col-auto">
+                        <a href="appointment-list.php" style="text-decoration: none;">
+                            <div class=" py-4 mt-3 rounded-4 shadow-sm dashboard" style="background: white; width: 200px;text-align: center;">
+                                <i class="fa-solid fa-clipboard-list mb-3" style="font-size: 30px;"></i></br>
+                                    <span class="title">Appointment List</span>
+                            </div>
+                        </a>
+                    </div>
 
-                <div class="col-auto">
-                    <a href="appointment-list.php" style="text-decoration: none;">
-                        <div class=" py-4 mt-3 rounded-4 shadow-sm dashboard" style="background: white; width: 200px;text-align: center;">
-                            <i class="fa-solid fa-clipboard-list mb-3" style="font-size: 30px;"></i></br>
-                                <span class="title">Appointment List</span>
-                        </div>
-                    </a>
-                </div>
+                    <div class="col-auto">
+                        <a href="schedule-settings.php" style="text-decoration: none;">
+                            <div class="py-4 mt-3 rounded-4 shadow-sm dashboard" style="background: white; width: 200px;text-align: center;">
+                                    <i class="fa-solid fa-calendar-day mb-3" style="font-size: 30px;"></i></br>
+                                    <span class="title">Schedule Settings</span>
+                            </div>
+                        </a>
+                    </div>
 
-                <div class="col-auto">
-                    <a href="schedule-settings.php" style="text-decoration: none;">
-                        <div class="py-4 mt-3 rounded-4 shadow-sm dashboard" style="background: white; width: 200px;text-align: center;">
-                                <i class="fa-solid fa-calendar-day mb-3" style="font-size: 30px;"></i></br>
-                                <span class="title">Schedule Settings</span>
-                        </div>
-                    </a>
-                </div>
+                    <div class="col-auto" <?php if ($currentPage === 'local-admins.php') echo 'class="active-link"';  ?>>
+                        <a href="local-admins.php" style="text-decoration: none;">
+                            <div class="py-4 mt-3 rounded-4 shadow-sm dashboard" style="background: white; width: 200px;text-align: center;">
+                                    <i class="fa-solid fa-user-group mb-3" style="font-size: 30px;"></i></br>
+                                    <span class="title">Admin List (<?=$facility_name?>)</span>
+                            </div>
+                        </a>
+                    </div>
+                <?php endif;?>
+                <?php if(check_head_admin($user_role)):?>
+                    <div class="col-auto">
+                        <a href="#" style="text-decoration: none;">
+                            <div class=" py-4 mt-3 rounded-4 shadow-sm dashboard" style="background: white; width: 200px;text-align: center;">
+                                <i class="fa-solid fa-clipboard-list mb-3" style="font-size: 30px;"></i></br>
+                                    <span class="title">Head Administrators</span>
+                            </div>
+                        </a>
+                    </div>
 
-                <div class="col-auto" <?php if ($currentPage === 'local-admins.php') echo 'class="active-link"';  ?>>
-                    <a href="local-admins.php" style="text-decoration: none;">
-                        <div class="py-4 mt-3 rounded-4 shadow-sm dashboard" style="background: white; width: 200px;text-align: center;">
-                                <i class="fa-solid fa-user-group mb-3" style="font-size: 30px;"></i></br>
-                                <span class="title">Admin List (<?=$facility_name?>)</span>
-                        </div>
-                    </a>
-                </div>
+                    <div class="col-auto">
+                        <a href="manage-admins.php" style="text-decoration: none;">
+                            <div class="py-4 mt-3 rounded-4 shadow-sm dashboard" style="background: white; width: 200px;text-align: center;">
+                                    <i class="fa-solid fa-calendar-day mb-3" style="font-size: 30px;"></i></br>
+                                    <span class="title">Administrators</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-auto">
+                        <a href="partner-facilities.php" style="text-decoration: none;">
+                            <div class="py-4 mt-3 rounded-4 shadow-sm dashboard" style="background: white; width: 200px;text-align: center;">
+                                    <i class="fa-solid fa-user-group mb-3" style="font-size: 30px;"></i></br>
+                                    <span class="title">Partner Facilities</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-auto">
+                        <a href="#" style="text-decoration: none;">
+                            <div class=" py-4 mt-3 rounded-4 shadow-sm dashboard" style="background: white; width: 200px;text-align: center;">
+                                <i class="fa-solid fa-clipboard-list mb-3" style="font-size: 30px;"></i></br>
+                                    <span class="title">Contraceptive Methods</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-auto">
+                        <a href="contraceptive-details.php" style="text-decoration: none;">
+                            <div class="py-4 mt-3 rounded-4 shadow-sm dashboard" style="background: white; width: 200px;text-align: center;">
+                                <i class="fa-solid fa-circle-info mb-3" style="font-size: 30px;"></i></br>
+                                    <span class="title">Contraceptive Details</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-auto">
+                        <a href="contraceptive-chart.php" style="text-decoration: none;">
+                            <div class="py-4 mt-3 rounded-4 shadow-sm dashboard" style="background: white; width: 200px;text-align: center;">
+                                <i class="fa-solid fa-chart-column mb-3" style="font-size: 30px;"></i></br>
+                                    <span class="title">Contraceptive Chart</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-auto">
+                        <a href="contraceptive-sidebyside.php" style="text-decoration: none;">
+                            <div class="py-4 mt-3 rounded-4 shadow-sm dashboard" style="background: white; width: 200px;text-align: center;">
+                                <i class="fa-solid fa-table-columns mb-3" style="font-size: 30px;"></i></br>
+                                    <span class="title">Contraceptive Side by Side</span>
+                            </div>
+                        </a>
+                    </div>
+                <?php endif;?>
             </div>
 
         </div>

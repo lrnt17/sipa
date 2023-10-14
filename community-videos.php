@@ -179,7 +179,7 @@
                     
                         <div class="container  js-video-link shadow-sm rounded-4" style="cursor: pointer; position: relative; height:10.5rem; overflow: hidden; border: 8px solid #D2E0F8; padding: 0;">
                             <!--<video src="uploads/<?//=$video['video_url']?>" controls></video>-->
-                            <video src=""class="js-video-display"style="width: 100%;  object-fit: cover;"></video>
+                            <video src=""class="js-video-display"style="width: 100%; height: inherit; object-fit: cover;"></video>
                         </div>
 
                     <div class="js-video-link-body" style="cursor: pointer;">

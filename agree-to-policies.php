@@ -16,9 +16,8 @@
 
 <section id="myModal" class="modal">
     <!-- Modal content -->
-    <div class="content-modal">
+    <div class="content-modal" style="margin-top: 70px;">
         <span class="close-policies" style="cursor: pointer;">&times;</span>
-        <br>
         <div class="scroll">
 
         <h2> <p>Terms and Conditions for SiPa</p> </h2>
