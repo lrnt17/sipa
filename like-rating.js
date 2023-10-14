@@ -45,7 +45,7 @@ var like_rating = {
             action = 'unlike';
         } else {
             //console.log('The button does not have either class');
-            alert('Please logged in to like this post');
+            alert('Please log in to like this post and contents');
         }
 
         let form = new FormData(); //new form within javascript

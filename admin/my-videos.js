@@ -270,6 +270,12 @@ var manage_my_videos = {
                             option.setAttribute("contraceptive-name", contraceptive.birth_control_name);
                             selectElement.appendChild(option);
                         });
+
+                        let famPlanOption = document.createElement("option");
+                        famPlanOption.value = "18";
+                        famPlanOption.text = "Family Planning";
+                        famPlanOption.setAttribute("contraceptive-name", "Family Planning");
+                        selectElement.appendChild(famPlanOption);
                     }
                 }
             }
@@ -306,6 +312,13 @@ var manage_my_videos = {
                             option.setAttribute("contraceptive-name", contraceptive.birth_control_name);
                             selectElement.appendChild(option);
                         });
+
+                        let famPlanOption = document.createElement("option");
+                        famPlanOption.value = "18";
+                        famPlanOption.text = "Family Planning";
+                        famPlanOption.setAttribute("contraceptive-name", "Family Planning");
+                        selectElement.appendChild(famPlanOption);
+
                         selectElement.value = method_id;
                     }
                 }

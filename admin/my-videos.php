@@ -374,7 +374,7 @@
 <script>
     let partner_facility_id = '<?=$partner_facility_id?>';
 </script>
-<script src="my-videos.js?v8"></script>
+<script src="my-videos.js?v9"></script>
 </html>
 
 <script>

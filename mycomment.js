@@ -121,15 +121,27 @@ var mycomment = {
 
                                 clone.setAttribute('row',row_data);
 
+                                let isUserActive = function() {
+                                    // Implement your logic here to check if the user is active
+                                    // Return true if the user is active; otherwise, return false
+                                    if (mycomment.userId) {
+                                        return true;
+                                    } else {
+                                        return false;
+                                    }
+                                };
+
                                 let likeButton = clone.querySelector(".js-like-button");
                                 //console.log(likeButton);
                                 like_rating.userLiked(obj.rows[i].forum_id, (function(likeButton) {
                                     return function(userlikes) {
                                         //console.log(userlikes);
-                                        if (userlikes) {
-                                            likeButton.classList.add('btn_selected');
-                                        } else {
-                                            likeButton.classList.add('btn');
+                                        if (isUserActive()) {
+                                            if (userlikes) {
+                                                likeButton.classList.add('btn_selected');
+                                            } else {
+                                                likeButton.classList.add('btn');
+                                            }
                                         }
                                     };
                                 })(likeButton));
@@ -559,16 +571,28 @@ var mycomment = {
                             // Update the timestamp dynamically
                             let timestampElement = clone.querySelector('.js-date');
                             time.updateTimestamps(timestampElement, data.rows[i].date);
+                            
+                            let isUserActive = function() {
+                                // Implement your logic here to check if the user is active
+                                // Return true if the user is active; otherwise, return false
+                                if (mycomment.userId) {
+                                    return true;
+                                } else {
+                                    return false;
+                                }
+                            };
 
                             let likeButton = clone.querySelector('.js-like-button');
                             // Apply like functionality to the like button
                             like_rating.userLiked(data.rows[i].forum_id, (function(likeButton) {
                                 return function(userLikes) {
-                                if (userLikes) {
-                                    likeButton.classList.add('btn_selected');
-                                } else {
-                                    likeButton.classList.add('btn');
-                                }
+                                    if (isUserActive()) {
+                                        if (userLikes) {
+                                            likeButton.classList.add('btn_selected');
+                                        } else {
+                                            likeButton.classList.add('btn');
+                                        }
+                                    }
                                 };
                             })(likeButton));
 
@@ -1062,6 +1086,17 @@ var mycomment = {
     },
 
     singlePost: function() {
+
+        let isUserActive = function() {
+            // Implement your logic here to check if the user is active
+            // Return true if the user is active; otherwise, return false
+            if (mycomment.userId) {
+                return true;
+            } else {
+                return false;
+            }
+        };
+
         // Get the like button and number of likes elements
         let likeButton = document.querySelector('.single-post.js-like-button');
         console.log(likeButton);
@@ -1070,10 +1105,12 @@ var mycomment = {
 
         // Check if the user has already liked the post
         like_rating.userLiked(forum_id, function(userlikes) {
-            if (userlikes) {
-                likeButton.classList.add('btn_selected');
-            } else {
-                likeButton.classList.add('btn');
+            if (isUserActive()) {
+                if (userlikes) {
+                    likeButton.classList.add('btn_selected');
+                } else {
+                    likeButton.classList.add('btn');
+                }
             }
         });
 

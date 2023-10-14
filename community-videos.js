@@ -389,6 +389,18 @@ var allvideos = {
                         all_button.setAttribute('onclick',`allvideos.sort_birth_control_id(0)`);
                         scrollMenu.appendChild(all_button);
 
+                        let fam_plan_button = document.createElement('button');
+                        fam_plan_button.classList.add('btn','shadow-sm','m-1');
+                        fam_plan_button.style.backgroundColor="white";
+
+                        let fam_plan_span = document.createElement('span');
+                        fam_plan_span.setAttribute('translate', 'no');
+                        fam_plan_span.textContent = "Family Planning";
+
+                        fam_plan_button.appendChild(fam_plan_span);
+                        fam_plan_button.setAttribute('onclick',`allvideos.sort_birth_control_id(18)`);
+                        scrollMenu.appendChild(fam_plan_button);
+
                         obj.rows.forEach(function(contraceptive) {
                             /*let option = document.createElement("option");
                             option.value = contraceptive.birth_control_id;

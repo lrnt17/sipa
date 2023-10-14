@@ -1460,6 +1460,16 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 				
 				if($birth_control_row){
 					$rows[$key]['birth_control']['name'] = $birth_control_row[0]['birth_control_name'];
+				} else {
+					// Manually add a custom name based on the birth_control_id value
+					switch ($birth_control_id) {
+						case 18:
+							$rows[$key]['birth_control']['name'] = 'Family Planning';
+							break;
+						// Add more cases as needed
+						default:
+							$rows[$key]['birth_control']['name'] = 'No name available';
+					}
 				}
 				/*$id = $row['user_id'];
 				$query = "select * from users where user_id = '$id' limit 1";
@@ -1909,6 +1919,16 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 				
 				if($birth_control_row){
 					$rows[$key]['birth_control']['name'] = $birth_control_row[0]['birth_control_name'];
+				} else {
+					// Manually add a custom name based on the birth_control_id value
+					switch ($birth_control_id) {
+						case 18:
+							$rows[$key]['birth_control']['name'] = 'Family Planning';
+							break;
+						// Add more cases as needed
+						default:
+							$rows[$key]['birth_control']['name'] = 'No name available';
+					}
 				}
 			}
 			$info['rows'] = $rows;
@@ -1987,6 +2007,16 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 				
 				if($birth_control_row){
 					$rows[$key]['birth_control']['name'] = $birth_control_row[0]['birth_control_name'];
+				} else {
+					// Manually add a custom name based on the birth_control_id value
+					switch ($birth_control_id) {
+						case 18:
+							$rows[$key]['birth_control']['name'] = 'Family Planning';
+							break;
+						// Add more cases as needed
+						default:
+							$rows[$key]['birth_control']['name'] = 'No name available';
+					}
 				}
 			}
 
@@ -2168,11 +2198,11 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 		$contact = (int)($_POST['contact_number']);
 		
 		// Check if contact number already exists
-		$checkQuery = "SELECT * FROM appointments WHERE app_pnum = '$contact'";
+		$checkQuery = "SELECT * FROM appointments WHERE app_pnum = '$contact' AND (status = 'Pending' OR status = 'Confirmed')";
 		$result = query($checkQuery);
 
 		if($result){
-			$info['message'] = "Your contact number already exists.";
+			$info['message'] = "Your contact number already exists. Its either your account is already 'Confirmed' or still at 'Pending' status.";
 			$info['success'] = true;
 		}
 

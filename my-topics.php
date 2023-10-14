@@ -250,7 +250,7 @@
     let start = 0;
     let limit = 5;
 </script>
-<script src="like-rating.js?v5"></script>
+<script src="like-rating.js?v6"></script>
 <script src="time.js?v1"></script>
 <script src="my-topics.js?v8"></script>
 

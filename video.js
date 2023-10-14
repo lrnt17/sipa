@@ -116,15 +116,27 @@ var single_video = {
 
                                 clone.setAttribute('row',row_data);
 
+                                let isUserActive = function() {
+                                    // Implement your logic here to check if the user is active
+                                    // Return true if the user is active; otherwise, return false
+                                    if (single_video.userId) {
+                                        return true;
+                                    } else {
+                                        return false;
+                                    }
+                                };
+
                                 let likeButton = clone.querySelector(".js-like-button");
                                 //console.log(likeButton);
                                 like_rating_video.userLiked(obj.rows[i].video_id, (function(likeButton) {
                                     return function(userlikes) {
                                         //console.log(userlikes);
-                                        if (userlikes) {
-                                            likeButton.classList.add('btn_selected');
-                                        } else {
-                                            likeButton.classList.add('btn');
+                                        if (isUserActive()) {
+                                            if (userlikes) {
+                                                likeButton.classList.add('btn_selected');
+                                            } else {
+                                                likeButton.classList.add('btn');
+                                            }
                                         }
                                     };
                                 })(likeButton));
@@ -514,15 +526,27 @@ var single_video = {
                             let timestampElement = clone.querySelector('.js-date');
                             time.updateTimestamps(timestampElement, data.rows[i].date);
 
+                            let isUserActive = function() {
+                                // Implement your logic here to check if the user is active
+                                // Return true if the user is active; otherwise, return false
+                                if (single_video.userId) {
+                                    return true;
+                                } else {
+                                    return false;
+                                }
+                            };
+
                             let likeButton = clone.querySelector('.js-like-button');
                             // Apply like functionality to the like button
                             like_rating_video.userLiked(data.rows[i].video_id, (function(likeButton) {
                                 return function(userLikes) {
-                                if (userLikes) {
-                                    likeButton.classList.add('btn_selected');
-                                } else {
-                                    likeButton.classList.add('btn');
-                                }
+                                    if (isUserActive()) {
+                                        if (userLikes) {
+                                            likeButton.classList.add('btn_selected');
+                                        } else {
+                                            likeButton.classList.add('btn');
+                                        }
+                                    }
                                 };
                             })(likeButton));
 
@@ -958,6 +982,16 @@ var single_video = {
     },
 
     check_rating_single_video: function() {
+
+        let isUserActive = function() {
+            // Implement your logic here to check if the user is active
+            // Return true if the user is active; otherwise, return false
+            if (single_video.userId) {
+                return true;
+            } else {
+                return false;
+            }
+        };
         // Get the like button and number of likes elements
         let likeButton = document.querySelector('.single-video.js-like-button');
         //console.log(likeButton);
@@ -966,10 +1000,12 @@ var single_video = {
 
         // Check if the user has already liked the post
         like_rating_video.userLiked(video_id, function(userlikes) {
-            if (userlikes) {
-                likeButton.classList.add('btn_selected');
-            } else {
-                likeButton.classList.add('btn');
+            if (isUserActive()) {
+                if (userlikes) {
+                    likeButton.classList.add('btn_selected');
+                } else {
+                    likeButton.classList.add('btn');
+                }
             }
         });
 

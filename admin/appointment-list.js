@@ -15,6 +15,7 @@ var appointment_list = {
     column: 'app_id',
     order: 'desc',
     searchQuery: null,
+    new_appointment: false,
 
     load_appointments: function(e){
 
@@ -299,9 +300,9 @@ var appointment_list = {
             appointment_list.appointmentDate = data.app_date;
             appointment_list.selectedTimeslot = data.app_timeslot;
             appointment_list.appointmentTimeslot = data.app_timeslot;
-            console.log(appointment_list.selectedDate, appointment_list.selectedTimeslot);
+            console.log(appointment_list.selectedDate, appointment_list.selectedTimeslot, appointment_list.new_appointment);
 
-            appointment_list.loadCalendar(appointment_list.month, appointment_list.year, appointment_list.location, appointment_list.health_facility);
+            appointment_list.loadCalendar(appointment_list.month, appointment_list.year, appointment_list.location, appointment_list.health_facility, appointment_list.new_appointment);
             appointment_list.loadTimeslots();
             //appointment_list.selectTimeslot(appointment_list.selectedTimeslot);
 
@@ -413,7 +414,7 @@ var appointment_list = {
         appointment_list.load_appointments();
     },
 
-    loadCalendar: function (month, year, location, health_facility) {
+    loadCalendar: function (month, year, location, health_facility, new_appointment) {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
             if (xhttp.readyState == 4 && xhttp.status == 200) {
@@ -433,7 +434,7 @@ var appointment_list = {
 
             }
         };
-        xhttp.open("GET", "calendar-admin.php?month=" + month + "&year=" + year + "&location=" + location + "&health_facility=" + health_facility, true);
+        xhttp.open("GET", "calendar-admin.php?month=" + month + "&year=" + year + "&location=" + location + "&health_facility=" + health_facility + "&new_appointment=" + new_appointment, true);
         xhttp.send();
     },
 
@@ -526,14 +527,14 @@ var appointment_list = {
         } else {
             appointment_list.month--;
         }
-        appointment_list.loadCalendar(appointment_list.month, appointment_list.year, appointment_list.location, appointment_list.health_facility);
+        appointment_list.loadCalendar(appointment_list.month, appointment_list.year, appointment_list.location, appointment_list.health_facility, appointment_list.new_appointment);
     },
 
     showThisMonth: function () {
         let dateNew = new Date();
         appointment_list.month = dateNew.getMonth() + 1; // JavaScript months are 0-based
         appointment_list.year = dateNew.getFullYear();
-        appointment_list.loadCalendar(appointment_list.month, appointment_list.year, appointment_list.location, appointment_list.health_facility);
+        appointment_list.loadCalendar(appointment_list.month, appointment_list.year, appointment_list.location, appointment_list.health_facility, appointment_list.new_appointment);
     },
 
     showNextMonth: function () {
@@ -544,7 +545,7 @@ var appointment_list = {
         } else {
             appointment_list.month++;
         }
-        appointment_list.loadCalendar(appointment_list.month, appointment_list.year, appointment_list.location, appointment_list.health_facility);
+        appointment_list.loadCalendar(appointment_list.month, appointment_list.year, appointment_list.location, appointment_list.health_facility, appointment_list.new_appointment);
     },
 
     selectDate: function (date){

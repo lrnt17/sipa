@@ -40,6 +40,16 @@
         
         if($birth_control_row){
             $rows['birth_control']['name'] = $birth_control_row[0]['birth_control_name'];
+        } else {
+            // Manually add a custom name based on the birth_control_id value
+            switch ($birth_control_id) {
+                case 18:
+                    $rows['birth_control']['name'] = 'Family Planning';
+                    break;
+                // Add more cases as needed
+                default:
+                    $rows['birth_control']['name'] = 'No name available';
+            }
         }
 	}
     //echo $rows['birth_control']['name'];
@@ -350,9 +360,9 @@
         <div class="row">
             <!--profile pic-->
             <div class="col-auto">
-                <a href="#" class="js-profile-link class_45" style="text-decoration:none;">
+                
                     <img src="assets/images/57.png" class="js-photo class_47" style="width:40px; height:40px; border-radius:50%; border-style: solid;"  >
-                </a>
+                
             </div>
             
             <!--reply--> <!--NAME, COMMENT, TIME, LIKE -->
@@ -361,11 +371,11 @@
                 <div class="cont p-1 rounded-4">
                     <div class="row">
                         <div class="col-auto me-auto">
-                            <a href="#" class="js-profile-link class_45" style="text-decoration:none;">
+                            
                                 <h2 class="js-username class_48" style="font-size:15px" >
                                     Jane Name
                                 </h2>
-                            </a>
+                            
                         </div>
 
                         <!--time-->
@@ -442,9 +452,9 @@
 <!--<script src="allposts.js?v1"></script>-->
 <!--<script src="mypost.js?v11"></script>-->
 <script src="time.js?v1"></script>
-<script src="like-rating-video.js?v2"></script>
+<script src="like-rating-video.js?v3"></script>
 <!--<script src="community-topics.js?v6"></script>-->
-<script src="video.js?v9"></script>
+<script src="video.js?v10"></script>
 
 <script>
     // Call the updateTimestamps function initially when the page loads

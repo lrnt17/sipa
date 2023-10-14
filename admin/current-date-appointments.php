@@ -122,7 +122,7 @@
         }
     </style>
     <style>
-        .js-view-appointment, .js-edit-appointment {
+        .js-view-appointment, .js-edit-appointment, .js-create-new-appointment {
             position: fixed; /* Stay in place */
             z-index: 1; /* Sit on top */
             padding-top: 40px; /* Location of the box */
@@ -136,7 +136,7 @@
         }
 
         /* Modal Content */
-        .view-container, .edit-container {
+        .view-container, .edit-container, .create-new-container {
             background-color: #fefefe;
             margin: auto;
             width: 50%;
@@ -223,6 +223,8 @@
                     
                 </div>
             </div>
+
+            <button type="button" onclick="todays_appointment_list.add_appointment()" class="">+ Create New</button>
         </div>
 
         <div class="container mt-1 mb-2">
@@ -295,6 +297,136 @@
                 <select id="current-page" style="width:60px;" onchange="todays_appointment_list.go_to_page(this.value)">
                     <!-- Add options for each page here -->
                 </select>
+            </div>
+        </div>
+
+        <!-- create new appointment modal -->
+        <div class="js-create-new-appointment hide">
+            <div class="create-new-container">
+                <div class="close-btn" style="float:right;cursor:pointer; margin: 10px;padding:5px;padding-left:10px;padding-right:10px;" onclick="todays_appointment_list.hide()">&times;</div>
+                <div class="row flex-nowrap mt-4" style="align-items: center;">
+                    <div class="col-auto">
+                        <div class="vl" style="width: 10px;
+                        background-color: #1F6CB5;
+                        border-radius: 99px;
+                        height: 60px;
+                        display: -webkit-inline-box;"></div>
+                    </div>
+                
+                    <div class="col-auto mt-1">
+                        <div class="row">
+                            <div class="col-auto">
+                                <h2 style="font-weight: 400;">Create New Appointment</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <form class="container ms-4 ps-4 pe-4 appointment-form"  style="width: 94%; display: flex; flex-wrap: wrap;" onsubmit="todays_appointment_list.create_new_appointment(event)" method="post">
+                    <input type="hidden" name="selected_municipality" class="js-city-municipality create-new-appointment" value="<?php echo $city; ?>">
+                    <input type="hidden" name="selected_health_facility" class="js-health-facility create-new-appointment" value="<?php echo $facility_name; ?>">
+                    <input type="hidden" name="appointment_data_privacy" class="js-appointment-data-privacy create-new-appointment" value="I agree">
+                    <div class="row" style="width: 100%;">
+                        <div class="col">
+                            <div class="form">
+                                <label for="fname" style="font-size: 15px;">First Name <span style="color:red;">*</span></label>
+                                <input type="text" name="fname" class="js-fname create-new-appointment" required>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form">
+                                <label for="lname" style="font-size: 15px;">Last Name <span style="color:red;">*</span></label>
+                                <input type="text" name="lname" class="js-lname create-new-appointment" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" style="width: 100%;">
+                        <div class="col">
+                            <div class="form">
+                                <label for="address" style="font-size: 15px;">Address <span style="color:red;">*</span></label>
+                                <input type="text" name="address" class="js-address create-new-appointment" required>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form">
+                                <label for="dob" style="font-size: 15px;">Date of Birth <span style="color:red;">*</span></label>
+                                <input type="date" name="dob" class="js-dob create-new-appointment" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" style="width: 100%;">
+                        <div class="col">
+                            <div class="form">
+                                <label for="email" style="font-size: 15px;">Email Address  <span style="color:red;">*</span></label>
+                                <input type="email" name="email" class="js-gmail create-new-appointment" required>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form">
+                                <label for="pnum" style="font-size: 15px;">Phone Number <span style="color:red;">*</span></label>
+                                <div style="display: flex; align-items: center;">
+                                    <p style="font-size: 15px; margin-right: 5px; margin-top: 7px;">+63</p>
+                                    <input type="text" name="contact" class="js-pnum create-new-appointment" required style="" maxlength="10" minlength="10">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" style="width: 100%;">
+                        <div class="col">
+                            <div class="form">
+                            <label for="gender" style="font-size: 15px;">Gender <span style="color:red;">*</span></label>
+                                <select name="selected_gender" id="gender" class="js-gender create-new-appointment" required>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form">
+                                <label for="new_barangay" style="font-size: 15px;">Barangay <span style="color:red;">*</span></label>
+                                <select name="selected_barangay" id="new_barangay" required class="class_33">
+                                    <!-- list of barangays -->
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="calendar-layout-container">
+                        <div class="row">
+                            <div class="month" style="
+                                display: flex;
+                                justify-content: space-between;
+                                padding: 10px 20px 0px 20px;
+                            ">
+                            <button class='btn' type="button"  onclick="todays_appointment_list.showPreviousMonthNewAppointment()" style="
+                                
+                                background: transparent;
+                                outline: none;
+                            "><i class="fa-solid fa-chevron-left" style="position: relative;
+                            margin-left: 0px; font-size: large;"></i></button>
+                            <button class='btn' type="button" onclick="todays_appointment_list.showNextMonthNewAppointment()" style="
+                                
+                                background: transparent;
+                                outline: none;
+                            "><i class="fa-solid fa-chevron-right" style="position: relative;
+                            margin-left: 0px; font-size: large;"></i></button>
+                            </div>
+                            <div class="col-md-12 calendar-layout-new">
+                                <!-- Calendar Layout display-->
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="timeslots-new hide"></div>
+
+                    <div  class="class_45 d-flex flex-row-reverse" style="width: 94%;">
+                        <button class=" btn px-5" style="background-color: #F2C1A7; color:#ffff;">Submit</button>
+                    </div>
+                    
+                </form>
             </div>
         </div>
 
@@ -555,6 +687,7 @@
 
 <script>
     var todays_appointments_list = true;
+    let partner_facility_id = '<?php echo $partner_facility_id; ?>';
     let city_municipality = '<?php echo $city; ?>';
     let health_facility = '<?php echo $facility_name; ?>';
     let current_page = 1;
@@ -563,7 +696,7 @@
     let month = dateComponents.getMonth() + 1; // JavaScript months are 0-based
     let year = dateComponents.getFullYear();
 </script>
-<script src="current-date-appointments.js?v0"></script>
+<script src="current-date-appointments.js?v5"></script>
 <script>
     let searchInput = document.getElementById('search-username');
     

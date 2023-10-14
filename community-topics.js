@@ -2,6 +2,7 @@ var allposts = {
 
     start: (typeof start == 'undefined') ? 0 : start,
     limit: (typeof limit == 'undefined') ? 5 : limit,
+    user_id: (typeof user_id == 'undefined') ? null : user_id,
 
     submit: function(e){
 
@@ -354,15 +355,29 @@ var allposts = {
             let rootElement = clone.querySelector(':first-child');
 
             //para mag iba iba kulay nung like button
+            let isUserActive = function() {
+                // Implement your logic here to check if the user is active
+                // Return true if the user is active; otherwise, return false
+                if (allposts.user_id) {
+                    return true;
+                } else {
+                    return false;
+                }
+            };
+            console.log(isUserActive());
+            console.log(allposts.user_id);
             //red kapaga nilike na, blue kpaag hindi pa
             let likeButton = clone.querySelector(".js-like-button");
             like_rating.userLiked(posts[i].forum_id, (function(likeButton) {
                 return function(userlikes) {
                     //console.log(userlikes);
-                    if (userlikes) {
-                        likeButton.classList.add('btn_selected');
-                    } else {
-                        likeButton.classList.add('btn');
+                    
+                    if (isUserActive()) {
+                        if (userlikes) {
+                            likeButton.classList.add('btn_selected');
+                        } else {
+                            likeButton.classList.add('btn');
+                        }
                     }
                 };
             })(likeButton));

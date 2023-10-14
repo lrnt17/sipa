@@ -1,6 +1,12 @@
 <?php
     require("connect.php");
     require("functions.php");
+
+    $user_id = null;
+    if (isset($_SESSION['USER']) && isset($_SESSION['USER']['user_id'])) {
+        $user_id = $_SESSION['USER']['user_id'];
+    }
+    //echo $user_id;
 ?>
 
 <!DOCTYPE html>
@@ -272,10 +278,11 @@
 	var all_topics_page = true;
     let start = 0;
     let limit = 5;
+    let user_id = '<?php echo $user_id; ?>';
 </script>
-<script src="like-rating.js?v4"></script>
+<script src="like-rating.js?v6"></script>
 <script src="time.js?v1"></script>
-<script src="community-topics.js?v13"></script>
+<script src="community-topics.js?v14"></script>
 
 
 <script>

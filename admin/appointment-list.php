@@ -900,7 +900,7 @@
 
     appointment_list.load_appointments();*/
 </script>
-<script src="appointment-list.js?v15"></script>
+<script src="appointment-list.js?v16"></script>
 <script>
     let searchInput = document.getElementById('search-username');
     

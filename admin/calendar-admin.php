@@ -2,7 +2,7 @@
     require('../connect.php');
     require('../functions.php');
 
-    function build_calendar($month, $year, $duration, $cleanup, $start, $end, $max_slots, $city_municipality, $health_facility_name){
+    function build_calendar($month, $year, $duration, $cleanup, $start, $end, $max_slots, $city_municipality, $health_facility_name, $new_appointment){
 
         //First, Create an array containing names of all days in a week
         //$daysOfWeek = array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
@@ -88,7 +88,11 @@
             } elseif ($isWeekend) {
                 $calendar .= "<td class='weekend-dates' style='padding-top: 20px;'><h6>$currentDay</h6>";
             } else {
-                $calendar.="<td class='$today new-dates' style='padding-top: 20px;' onclick='appointment_list.selectDate(\"$date\")'><h6>$currentDay</h6>";
+                if ($new_appointment) {
+                    $calendar.="<td class='$today new-dates' style='padding-top: 20px;' onclick='todays_appointment_list.selectDate(\"$date\")'><h6>$currentDay</h6>";
+                } else {
+                    $calendar.="<td class='$today new-dates' style='padding-top: 20px;' onclick='appointment_list.selectDate(\"$date\")'><h6>$currentDay</h6>";
+                }
             }
             
 
@@ -140,11 +144,12 @@
     }
 
     // Handling AJAX request to get calendar data
-    if (isset($_GET['month']) && isset($_GET['year']) && isset($_GET['location']) && isset($_GET['health_facility'])) {
+    if (isset($_GET['month']) && isset($_GET['year']) && isset($_GET['location']) && isset($_GET['health_facility']) && isset($_GET['new_appointment'])) {
         $month = $_GET['month'];
         $year = $_GET['year'];
         $location = $_GET['location'];
         $health_facility = $_GET['health_facility'];
+        $new_appointment = $_GET['new_appointment'];
 
         $query = "SELECT * FROM schedule_settings WHERE city_municipality = '$location' AND health_facility_name = '$health_facility' LIMIT 1";
         $result = query($query);
@@ -160,7 +165,7 @@
         }
         //include 'sched-appointment.php';
         // Generate and return the calendar HTML
-        $rows = build_calendar($month, $year, $duration, $cleanup, $start, $end, $max_slots, $city_municipality, $health_facility_name);
+        $rows = build_calendar($month, $year, $duration, $cleanup, $start, $end, $max_slots, $city_municipality, $health_facility_name, $new_appointment);
         echo $rows;
     }
 

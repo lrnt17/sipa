@@ -1,6 +1,7 @@
 var todays_appointment_list = {
 
     edit_id: '',
+    facility_id: (typeof partner_facility_id == 'undefined') ? 0 : partner_facility_id,
     location: (typeof city_municipality == 'undefined') ? null : city_municipality,
     health_facility: (typeof health_facility == 'undefined') ? null : health_facility,
     current_page: (typeof current_page == 'undefined') ? 1 : current_page,
@@ -15,6 +16,8 @@ var todays_appointment_list = {
     column: 'app_id',
     order: 'desc',
     searchQuery: null,
+    new_appointment: true,
+    load_appointments: null,
 
     load_todays_appointments: function(e){
 
@@ -140,6 +143,86 @@ var todays_appointment_list = {
         todays_appointment_list.load_todays_appointments();
     },
 
+    add_appointment: function(){
+        todays_appointment_list.load_appointments = false;
+        document.querySelector(".js-create-new-appointment").classList.remove('hide');
+        todays_appointment_list.selectedDate = null;
+        todays_appointment_list.selectedTimeslot = null;
+        todays_appointment_list.load_barangays();
+        todays_appointment_list.loadCalendarNewAppointment(todays_appointment_list.month, todays_appointment_list.year, todays_appointment_list.location, todays_appointment_list.health_facility, todays_appointment_list.new_appointment, '.calendar-layout-new');
+        todays_appointment_list.loadTimeslotsNewAppointment();
+    },
+
+    create_new_appointment: function(e){
+
+        e.preventDefault();
+
+        let inputs = document.querySelectorAll('.create-new-appointment');
+
+        let appointment_date = todays_appointment_list.selectedDate;
+        let appointment_timeslot = todays_appointment_list.selectedTimeslot;
+        let select_barangay = document.getElementById("new_barangay");
+        let selected_barangay = select_barangay.options[select_barangay.selectedIndex].value;
+
+        console.log(appointment_date, appointment_timeslot, selected_barangay);
+
+        if (appointment_date != null && appointment_timeslot != null) {
+
+            todays_appointment_list.validate_new_appointment_data().then(isValid => {
+                if (isValid) {
+                    // Continue with your form submission
+                    let form = new FormData();
+            
+                    for (var i = inputs.length - 1; i >= 0; i--) {
+                        form.append(inputs[i].name, inputs[i].value);
+                        console.log(inputs[i].name, inputs[i].value);
+                    }
+
+                    form.append('selected_barangay', selected_barangay);
+                    form.append('appointment_date', appointment_date);
+                    form.append('appointment_timeslot', appointment_timeslot);
+                    form.append('data_type', 'add_appointment');
+                    //return;
+                    //console.log(todays_appointment_list.edit_id,appointment_date,appointment_timeslot);return;
+                    var ajax = new XMLHttpRequest();
+
+                    ajax.addEventListener('readystatechange',function(){
+
+                        if(ajax.readyState == 4)
+                        {
+                            if(ajax.status == 200){
+
+                                console.log(ajax.responseText);
+                                let obj = JSON.parse(ajax.responseText);
+                                alert(obj.message);
+
+                                if(obj.success){
+                                    let table = document.querySelector("#appointment_table tbody");
+                                    table.innerHTML = "";
+                                    
+                                    todays_appointment_list.clear_new_appointment_inputs();
+                                    todays_appointment_list.load_todays_appointments();
+                                    todays_appointment_list.hide()
+                                }
+                            }else{
+                                alert("Please check your internet connection");
+                            }
+                        }
+                    });
+
+                    ajax.open('post','../ajax.php', true);
+                    ajax.send(form);
+
+                } else {
+                    console.log('Invalid data');
+                }
+            });
+        } else {
+            alert('Please select an appointment date and a timeslot');
+            return;
+        }
+    },
+
     view_appointment: function(id){
 
         document.querySelector(".js-view-appointment").classList.remove('hide');
@@ -177,7 +260,8 @@ var todays_appointment_list = {
     },
 
     edit_appointment: function(id){
-
+        
+        todays_appointment_list.load_appointments = true;
         document.querySelector(".js-edit-appointment").classList.remove('hide');
         todays_appointment_list.edit_id = id;
 
@@ -204,7 +288,7 @@ var todays_appointment_list = {
             todays_appointment_list.appointmentTimeslot = data.app_timeslot;
             console.log(todays_appointment_list.selectedDate, todays_appointment_list.selectedTimeslot);
 
-            todays_appointment_list.loadCalendar(todays_appointment_list.month, todays_appointment_list.year, todays_appointment_list.location, todays_appointment_list.health_facility);
+            todays_appointment_list.loadCalendar(todays_appointment_list.month, todays_appointment_list.year, todays_appointment_list.location, todays_appointment_list.health_facility, todays_appointment_list.new_appointment, '.calendar-layout');
             todays_appointment_list.loadTimeslots();
             //todays_appointment_list.selectTimeslot(todays_appointment_list.selectedTimeslot);
 
@@ -316,7 +400,10 @@ var todays_appointment_list = {
         todays_appointment_list.load_todays_appointments();
     },
 
-    loadCalendar: function (month, year, location, health_facility) {
+    loadCalendar: function (month, year, location, health_facility, new_appointment, parentSelector) {
+        
+        //todays_appointment_list.load_appointments = true;
+
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
             if (xhttp.readyState == 4 && xhttp.status == 200) {
@@ -325,7 +412,9 @@ var todays_appointment_list = {
                 // check if a date has been selected
                 if (todays_appointment_list.selectedDate !== null) {
                     // find the td element with the selected date
-                    const tds = document.querySelectorAll('.new-dates');
+                    //const tds = document.querySelectorAll('.new-dates');
+                    const parent = document.querySelector(parentSelector);
+                    const tds = parent.querySelectorAll('.new-dates');
                     for (let i = 0; i < tds.length; i++) {
                         if (tds[i].getAttribute('onclick').includes(todays_appointment_list.selectedDate)) {
                             tds[i].classList.add('selected');
@@ -336,7 +425,36 @@ var todays_appointment_list = {
 
             }
         };
-        xhttp.open("GET", "calendar-admin.php?month=" + month + "&year=" + year + "&location=" + location + "&health_facility=" + health_facility, true);
+        xhttp.open("GET", "calendar-admin.php?month=" + month + "&year=" + year + "&location=" + location + "&health_facility=" + health_facility + "&new_appointment=" + new_appointment, true);
+        xhttp.send();
+    },
+
+    loadCalendarNewAppointment: function (month, year, location, health_facility, new_appointment, parentSelector) {
+        
+        //todays_appointment_list.load_appointments = false;
+        
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (xhttp.readyState == 4 && xhttp.status == 200) {
+                document.querySelector(".calendar-layout-new").innerHTML = xhttp.responseText;
+
+                // check if a date has been selected
+                if (todays_appointment_list.selectedDate !== null) {
+                    // find the td element with the selected date
+                    //const tds = document.querySelectorAll('.new-dates');
+                    const parent = document.querySelector(parentSelector);
+                    const tds = parent.querySelectorAll('.new-dates');
+                    for (let i = 0; i < tds.length; i++) {
+                        if (tds[i].getAttribute('onclick').includes(todays_appointment_list.selectedDate)) {
+                            tds[i].classList.add('selected');
+                            break;
+                        }
+                    }
+                }
+
+            }
+        };
+        xhttp.open("GET", "calendar-admin.php?month=" + month + "&year=" + year + "&location=" + location + "&health_facility=" + health_facility + "&new_appointment=" + new_appointment, true);
         xhttp.send();
     },
 
@@ -421,6 +539,142 @@ var todays_appointment_list = {
         xhttp.send();
     },
 
+    loadTimeslotsNewAppointment: function () {
+
+        // Remove the 'selected-timeslot' class from all timeslots
+        let selectedTimeslots = document.querySelectorAll('.selected-timeslot');
+        for (let i = 0; i < selectedTimeslots.length; i++) {
+            selectedTimeslots[i].classList.remove('selected-timeslot');
+        }
+
+        // load the timeslots via AJAX
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (xhttp.readyState == 4 && xhttp.status == 200) {
+                // parse the response as JSON
+                var timeslots = JSON.parse(xhttp.responseText);
+                // display the timeslots in the modal
+                var timeslotsContainer = document.querySelector('.timeslots-new');
+                timeslotsContainer.innerHTML = '';
+
+                for (var i = 0; i < timeslots.length; i++) {
+                    var div_timeslot = document.createElement('div');
+                    div_timeslot.style.minWidth="210px";
+                    div_timeslot.style.marginBlockStart="10px";
+                    div_timeslot.style.marginInlineStart="20px";
+                    //div_timeslot.textContent = timeslots[i].time;
+
+                    // create a span element to display the time of the timeslot
+                    var span_time = document.createElement('span');
+                    span_time.classList.add("span_time");
+                    span_time.textContent = timeslots[i].time;
+                    timeslot_value = timeslots[i].time;
+
+                    // create a span element to display the number of available slots for the timeslot
+                    var span_slots = document.createElement('span');
+                    span_slots.classList.add("span_slots");
+                    span_slots.textContent = ' (' + timeslots[i].availableSlots + ' slots available)';
+                    
+                    // create a line break element
+                    var lineBreak = document.createElement('br');
+
+                    div_timeslot.className = 'btn btn-success'; 
+
+                    // check if the timeslot is booked
+                    if (timeslots[i].booked) {
+                        // add a class to the timeslot to indicate that it is booked
+                        div_timeslot.classList.add('booked');
+                        // add an onclick event to the timeslot to display an alert
+                        div_timeslot.onclick = function () {
+                            alert('This slot is already full.');
+                        };
+                    } else {
+                        // add an onclick event to the timeslot to allow it to be selected
+                        /*div_timeslot.onclick = function () {
+                            todays_appointment_list.selectTimeslot(timeslot_value);
+                        };*/
+                        (function (timeslot) {
+                            // add an onclick event to the timeslot to allow it to be selected
+                            div_timeslot.onclick = function () {
+                                console.log('test');
+                                todays_appointment_list.selectTimeslot(timeslot);
+                            };
+                        })(timeslots[i].time);
+                    }
+                    console.log(todays_appointment_list.selectedDate);
+                    // Add the 'selected-timeslot' class if this timeslot matches todays_appointment_list.selectedTimeslot
+                    /*if (timeslots[i].time === todays_appointment_list.appointmentTimeslot && timeslots[i].date === todays_appointment_list.appointmentDate) {
+                        div_timeslot.classList.add('selected-timeslot');
+                    }*/
+
+                    // append the span elements to the div_timeslot element
+                    div_timeslot.appendChild(span_time);
+                    div_timeslot.appendChild(lineBreak); 
+                    div_timeslot.appendChild(span_slots);
+                    timeslotsContainer.appendChild(div_timeslot);
+                }
+
+            }
+        };
+        xhttp.open("GET", "calendar-admin.php?timeslots=1&date=" + todays_appointment_list.selectedDate + "&location=" + todays_appointment_list.location + "&health_facility=" + todays_appointment_list.health_facility, true);
+        xhttp.send();
+    },
+
+    load_barangays: function(){
+            
+        let partner_facility_id = todays_appointment_list.facility_id;
+        //console.log(partner_facility_id);
+        let form = new FormData();
+
+        form.append('partner_facility_id', partner_facility_id);
+        form.append('data_type', 'load_user_barangay');
+        var ajax = new XMLHttpRequest();
+
+        ajax.addEventListener('readystatechange',function(){
+
+            if(ajax.readyState == 4)
+            {
+                if(ajax.status == 200){
+                    //console.log(ajax.responseText);
+                    let obj = JSON.parse(ajax.responseText);
+
+                    if(obj.success){
+                        
+                        let selectElement = document.getElementById("new_barangay");
+                        selectElement.innerHTML = "";
+
+                        let blankOption = document.createElement("option");
+                        blankOption.value = "";
+                        blankOption.text = "Select a Barangay";
+                        blankOption.disabled = true;
+                        blankOption.selected = true;
+                        selectElement.appendChild(blankOption);
+
+                        obj.rows.forEach(function(user_barangay) {
+                            user_barangay.barangay.forEach(function(barangay) {
+                                let option = document.createElement("option");
+                                option.value = barangay.barangay_name;
+                                option.text = barangay.barangay_name;
+                                option.setAttribute("user_barangay-name", barangay.barangay_name);
+
+                                // Set selected value
+                                /*if (option.value === "<?=$row['user_barangay']?>") {
+                                    option.selected = true;
+                                }*/
+
+                                selectElement.appendChild(option);
+                            });
+                        });
+
+                    }
+                }
+            }
+        });
+
+        ajax.open('post','../ajax.php', true);
+        ajax.send(form);
+    },
+
     showPreviousMonth: function () {
         
         if (todays_appointment_list.month === 1) {
@@ -429,14 +683,14 @@ var todays_appointment_list = {
         } else {
             todays_appointment_list.month--;
         }
-        todays_appointment_list.loadCalendar(todays_appointment_list.month, todays_appointment_list.year, todays_appointment_list.location, todays_appointment_list.health_facility);
+        todays_appointment_list.loadCalendar(todays_appointment_list.month, todays_appointment_list.year, todays_appointment_list.location, todays_appointment_list.health_facility, todays_appointment_list.new_appointment, '.calendar-layout');
     },
 
     showThisMonth: function () {
         let dateNew = new Date();
         todays_appointment_list.month = dateNew.getMonth() + 1; // JavaScript months are 0-based
         todays_appointment_list.year = dateNew.getFullYear();
-        todays_appointment_list.loadCalendar(todays_appointment_list.month, todays_appointment_list.year, todays_appointment_list.location, todays_appointment_list.health_facility);
+        todays_appointment_list.loadCalendar(todays_appointment_list.month, todays_appointment_list.year, todays_appointment_list.location, todays_appointment_list.health_facility, todays_appointment_list.new_appointment, '.calendar-layout');
     },
 
     showNextMonth: function () {
@@ -447,7 +701,29 @@ var todays_appointment_list = {
         } else {
             todays_appointment_list.month++;
         }
-        todays_appointment_list.loadCalendar(todays_appointment_list.month, todays_appointment_list.year, todays_appointment_list.location, todays_appointment_list.health_facility);
+        todays_appointment_list.loadCalendar(todays_appointment_list.month, todays_appointment_list.year, todays_appointment_list.location, todays_appointment_list.health_facility, todays_appointment_list.new_appointment, '.calendar-layout');
+    },
+
+    showPreviousMonthNewAppointment: function () {
+        
+        if (todays_appointment_list.month === 1) {
+            todays_appointment_list.month = 12;
+            todays_appointment_list.year--;
+        } else {
+            todays_appointment_list.month--;
+        }
+        todays_appointment_list.loadCalendarNewAppointment(todays_appointment_list.month, todays_appointment_list.year, todays_appointment_list.location, todays_appointment_list.health_facility, todays_appointment_list.new_appointment, '.calendar-layout-new');
+    },
+
+    showNextMonthNewAppointment: function () {
+        
+        if (todays_appointment_list.month === 12) {
+            todays_appointment_list.month = 1;
+            todays_appointment_list.year++;
+        } else {
+            todays_appointment_list.month++;
+        }
+        todays_appointment_list.loadCalendarNewAppointment(todays_appointment_list.month, todays_appointment_list.year, todays_appointment_list.location, todays_appointment_list.health_facility, todays_appointment_list.new_appointment, '.calendar-layout-new');
     },
 
     selectDate: function (date){
@@ -468,7 +744,13 @@ var todays_appointment_list = {
         todays_appointment_list.selectedDate = date;
         //document.querySelector('.js-selected-date').innerHTML = todays_appointment_list.selectedDate;
         console.log(todays_appointment_list.selectedDate);
-        todays_appointment_list.loadTimeslots();
+        //todays_appointment_list.loadTimeslots();
+        if (todays_appointment_list.load_appointments) {
+            todays_appointment_list.loadTimeslots();
+        } else {
+            document.querySelector(".timeslots-new").classList.remove('hide');
+            todays_appointment_list.loadTimeslotsNewAppointment();
+        }
     },
 
     selectTimeslot: function (timeslot) {
@@ -516,6 +798,24 @@ var todays_appointment_list = {
         //document.querySelector(".js-add-admin").classList.add('hide');
         document.querySelector(".js-edit-appointment").classList.add('hide');
         document.querySelector(".js-view-appointment").classList.add('hide');
+        document.querySelector(".js-create-new-appointment").classList.add('hide');
+
+        document.querySelector(".timeslots-new").classList.add('hide');
+        todays_appointment_list.clear_new_appointment_inputs();
+    },
+
+    clear_new_appointment_inputs: function(){
+                                            
+        let fields = document.querySelectorAll('.appointment-form input, .appointment-form select');
+        for (let field of fields) {
+            if (field.classList.contains('js-gender')) {
+                // If the field is a select element with the class 'gender', set the selected index to 0
+                field.selectedIndex = 0;
+            } else {
+                // For all other input fields, clear the value
+                field.value = '';
+            }
+        }
     },
 
     select_all_appointments: function(source){
@@ -532,6 +832,57 @@ var todays_appointment_list = {
         todays_appointment_list.showEntryNum = num_value;
         todays_appointment_list.current_page = 1;
         todays_appointment_list.load_todays_appointments();
+    },
+
+    validate_new_appointment_data: function() {
+        return new Promise((resolve, reject) => {
+            let fields = document.querySelectorAll('.appointment-form input');
+            //console.log(fields);
+            for (let field of fields) {
+                //console.log(field); // Log the current field
+                if (field.classList.contains('js-dob')) {
+                    //console.log(field.value);
+                    const selectedDate = new Date(field.value);
+                    const today = new Date();
+                    const age = today.getFullYear() - selectedDate.getFullYear();
+                    if (age < 18) {
+                        alert('You should be at least 18 years old to make an appointment.');
+                        resolve(false); // Resolve the promise with 'false'
+                        return; // Stop execution of the function
+                    }
+                }
+    
+                if (field.classList.contains('js-pnum')) {
+                    let form = new FormData();
+                    form.append('contact_number', field.value);
+                    form.append('data_type', 'check_contact_number');
+                    var ajax = new XMLHttpRequest();
+    
+                    ajax.addEventListener('readystatechange',function(){
+                        if(ajax.readyState == 4) {
+                            if(ajax.status == 200){
+                                let obj = JSON.parse(ajax.responseText);
+                                if(obj.success){
+                                    alert(obj.message);
+                                    resolve(false); // Resolve the promise with 'false'
+                                } else {
+                                    resolve(true); // Resolve the promise with 'true'
+                                }
+                            } else {
+                                alert("Please check your internet connection");
+                                resolve(false); // Resolve the promise with 'false'
+                            }
+                        }
+                    });
+    
+                    ajax.open('post','../ajax.php', true);
+                    ajax.send(form);
+    
+                    return; // Return here to prevent the function from immediately resolving the promise
+                }
+            }
+            resolve(true); // If no AJAX request was made, resolve the promise with 'true'
+        });
     },
 };
 
