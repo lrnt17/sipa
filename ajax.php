@@ -2116,6 +2116,16 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 				
 				if($birth_control_row){
 					$rows[$key]['birth_control']['name'] = $birth_control_row[0]['birth_control_name'];
+				} else {
+					// Manually add a custom name based on the birth_control_id value
+					switch ($birth_control_id) {
+						case 18:
+							$rows[$key]['birth_control']['name'] = 'Family Planning';
+							break;
+						// Add more cases as needed
+						default:
+							$rows[$key]['birth_control']['name'] = 'No name available';
+					}
 				}
 				
 			}
