@@ -1,6 +1,8 @@
 <?php
     require("connect.php");
     require("functions.php");
+
+    $mytopics = true;
 ?>
 
 <!DOCTYPE html>
@@ -249,10 +251,12 @@
 	var my_topics_page = true;
     let start = 0;
     let limit = 5;
+    let mytopics = '<?php echo $mytopics; ?>';
+    console.log(mytopics);
 </script>
 <script src="like-rating.js?v6"></script>
 <script src="time.js?v1"></script>
-<script src="my-topics.js?v8"></script>
+<script src="my-topics.js?v10"></script>
 
 
 <script>
@@ -270,7 +274,7 @@
     }
 
     // Get a reference to the input field
-    let searchInput = document.querySelector('.js-search-input');
+    let searchInput = document.querySelector('.js-search-my-input');
 
     // Check if there are any stored search results in sessionStorage
     let storedSearchResults = sessionStorage.getItem('searchResults');

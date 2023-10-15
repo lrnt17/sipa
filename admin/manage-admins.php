@@ -149,7 +149,7 @@
                     </select>
                 </div>
                 <div class="form">
-                    <label for="gmail">Gmail Address *</label>
+                    <label for="gmail">Email Address *</label>
                     <input type="email" name="gmail" id="gmail" required>
                 </div>
                 <div class="form">
@@ -250,7 +250,7 @@
                     </select>
                 </div>
                 <div class="form">
-                    <label for="edit_gmail">Gmail Address *</label>
+                    <label for="edit_gmail">Email Address *</label>
                     <input type="email" name="edit_gmail" class="js-edit-gmail edit-admin" required>
                 </div>
                 <div class="form">
@@ -476,8 +476,6 @@
 
         edit_admin: function(id){
 
-            manage_admins.load_partner_facilities_for_editing();
-
             document.querySelector(".js-edit-admin").classList.remove('hide');
             manage_admins.edit_id = id;
 
@@ -495,7 +493,8 @@
                 document.querySelector(".js-edit-gmail").value = data.user_email;
                 //document.querySelector(".js-edit-city-municipality").value = data.city_municipality;
                 //document.querySelector(".js-edit-health-facility").value = data.health_facility_name;
-                document.querySelector(".js-edit-partner-facility").value = data.partner_facility_id;
+                //document.querySelector(".js-edit-partner-facility").value = data.partner_facility_id;
+                manage_admins.load_partner_facilities_for_editing(data.partner_facility_id);
                 document.querySelector(".js-edit-specialization").value = data.specialization;
                 document.querySelector(".js-edit-pnum").value = data.user_pnum;
 
@@ -520,15 +519,24 @@
             //let selected_health_facility = getSelectedValue("edit_health_facility");
             let fileInput = document.querySelector('.js-image');
             let file = fileInput.files[0];
-            console.log(file);
+
             let form = new FormData();
+
+            if (file) {
+                // If a file is selected, you can proceed with further actions
+                console.log(file);
+                form.append('edit_image', file);
+            } else {
+                // Handle the case where no file is selected
+                console.log("No file selected");
+            }
+            console.log(fileInput);
 
             for (var i = inputs.length - 1; i >= 0; i--) {
                 form.append(inputs[i].name, inputs[i].value);
             }
 
             form.append('user_id', manage_admins.edit_id);
-            form.append('edit_image', file);
             form.append('selected_gender', selected_gender);
             form.append('selected_specialization', selected_specialization);
             form.append('selected_partner_facility', selected_partner_facility);
@@ -717,7 +725,7 @@
             ajax.send(form);
         },
 
-        load_partner_facilities_for_editing: function(){
+        load_partner_facilities_for_editing: function(partner_facility_id){
 
             let form = new FormData();
 
@@ -757,6 +765,8 @@
 
                                 selectElement.appendChild(option);
                             });
+
+                            selectElement.value = partner_facility_id;
                         }
                     }
                 }

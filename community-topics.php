@@ -7,6 +7,8 @@
         $user_id = $_SESSION['USER']['user_id'];
     }
     //echo $user_id;
+
+    $mytopics = false;
 ?>
 
 <!DOCTYPE html>
@@ -279,10 +281,12 @@
     let start = 0;
     let limit = 5;
     let user_id = '<?php echo $user_id; ?>';
+    let mytopics = '<?php echo $mytopics; ?>';
+    console.log(mytopics);
 </script>
 <script src="like-rating.js?v6"></script>
 <script src="time.js?v1"></script>
-<script src="community-topics.js?v14"></script>
+<script src="community-topics.js?v15"></script>
 
 
 <script>

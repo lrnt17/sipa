@@ -690,23 +690,25 @@
             let selected_health_facility = getSelectedValue("edit_health_facility");
             let fileInput = document.querySelector('.js-image');
             let file = fileInput.files[0];
+
+            let form = new FormData();
+
             if (file) {
                 // If a file is selected, you can proceed with further actions
                 console.log(file);
+                form.append('edit_image', file);
             } else {
                 // Handle the case where no file is selected
                 console.log("No file selected");
             }
             console.log(fileInput);
             //return;
-            let form = new FormData();
 
             for (var i = inputs.length - 1; i >= 0; i--) {
                 form.append(inputs[i].name, inputs[i].value);
             }
 
             form.append('user_id', bustos_admins.edit_id);
-            form.append('edit_image', file);
             form.append('selected_gender', selected_gender);
             form.append('selected_specialization', selected_specialization);
             form.append('selected_city_municipality', selected_city_municipality);

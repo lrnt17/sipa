@@ -2,6 +2,7 @@ var myposts = {
 
     start: (typeof start == 'undefined') ? 0 : start,
     limit: (typeof limit == 'undefined') ? 5 : limit,
+    my_topics: (typeof mytopics == 'undefined') ? null : mytopics,
     numDeleted: 0, // variable to keep track of the number of deleted posts
 
     submit: function(e){
@@ -217,7 +218,7 @@ var myposts = {
         }
 
         // Get the user's search query
-        let searchQuery = document.querySelector('.js-search-input').value;
+        let searchQuery = document.querySelector('.js-search-my-input').value;
 
         // Split the search query into individual words
         let searchWords = searchQuery.split(' ');
@@ -528,8 +529,9 @@ var myposts = {
 
         let form = new FormData();
         form.append('query', query);
+        form.append('my_topics', myposts.my_topics);
         form.append('data_type', 'search_posts');
-
+        console.log(myposts.my_topics);
         var ajax = new XMLHttpRequest();
     
         ajax.addEventListener('readystatechange', function() {

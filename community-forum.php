@@ -46,9 +46,15 @@
 
                 <div class="form" style="position: relative; top: -30px;">
                 <i class="fa-solid fa-magnifying-glass"></i>
-                  <input type="text" name="search" id="search"  class="js-search-input form-control form-input" placeholder="Search for topics..." style="height: 55px;
-                    text-indent: 33px;
-                    border-radius: 15px;">
+                    <?php if($mytopics):?>
+                        <input type="text" name="search" id="search"  class="js-search-my-input form-control form-input" placeholder="Search your topics..." style="height: 55px;
+                            text-indent: 33px;
+                            border-radius: 15px;">    
+                    <?php else:?>
+                        <input type="text" name="search" id="search"  class="js-search-input form-control form-input" placeholder="Search for topics..." style="height: 55px;
+                            text-indent: 33px;
+                            border-radius: 15px;">
+                    <?php endif;?>
                 </div>
                 
               </div>

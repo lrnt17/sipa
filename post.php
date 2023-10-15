@@ -3,6 +3,8 @@
 	require('connect.php');
 	require('functions.php');
 
+    $mytopics = false;
+
 	if (isset($_SESSION['USER']['user_id'])) {
         $user_id = $_SESSION['USER']['user_id'];
     } else {

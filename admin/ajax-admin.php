@@ -171,9 +171,11 @@
         }else
         if ($_POST['data_type'] == 'edit_admin')
         {
-            $image = $_FILES['edit_image'];
+            $image_string = "";
 
-            if ($image['name']) {
+            if (isset($_FILES['edit_image']) && !empty($_FILES['edit_image']['name'])) {
+                $image = $_FILES['edit_image'];
+        
                 $allowed = ['image/jpeg', 'image/png', 'image/webp'];
             
                 if (!in_array($image['type'], $allowed)) {
@@ -189,9 +191,8 @@
                     move_uploaded_file($image['tmp_name'], $targetPath);
             
                     $imageFilename = $targetPath;
+                    $image_string = ", user_image = '$imageFilename' ";
                 }
-            } else {
-                $imageFilename = '';
             }
 
             $fname = addslashes($_POST['edit_fname']);
@@ -211,11 +212,11 @@
             user_lname = '$lname',
             user_dob = '$dob',
             user_sex = '$gender',
-            user_image = '$imageFilename', 
             user_email = '$gmail',
             user_pnum = '$pnum',
             specialization = '$specialization',
-            partner_facility_id = '$partner_facility' 
+            partner_facility_id = '$partner_facility'
+            $image_string 
             where user_id = '$user_id' limit 1";
             query($query);
         
@@ -224,32 +225,28 @@
         }else
         if ($_POST['data_type'] == 'edit_local_admin')
         {
-            $image = $_FILES['edit_image'];
             $image_string = "";
 
-            if (!empty($image)) {
-
-                if ($image['name']) {
-                    $allowed = ['image/jpeg', 'image/png', 'image/webp'];
-                
-                    if (!in_array($image['type'], $allowed)) {
-                        $info['message'] = "Image type not supported";
-                    } else {
-                        $folder = "../uploads/";
-                
-                        if (!file_exists($folder)) {
-                            mkdir($folder, 0777, true);
-                        }
-                
-                        $targetPath = $folder . $image['name'];
-                        move_uploaded_file($image['tmp_name'], $targetPath);
-                
-                        $imageFilename = $targetPath;
-                        $image_string = ", user_image = '$imageFilename' ";
+            if (isset($_FILES['edit_image']) && !empty($_FILES['edit_image']['name'])) {
+                $image = $_FILES['edit_image'];
+        
+                $allowed = ['image/jpeg', 'image/png', 'image/webp'];
+            
+                if (!in_array($image['type'], $allowed)) {
+                    $info['message'] = "Image type not supported";
+                } else {
+                    $folder = "../uploads/";
+            
+                    if (!file_exists($folder)) {
+                        mkdir($folder, 0777, true);
                     }
-                } /*else {
-                    $imageFilename = '';
-                }*/
+            
+                    $targetPath = $folder . $image['name'];
+                    move_uploaded_file($image['tmp_name'], $targetPath);
+            
+                    $imageFilename = $targetPath;
+                    $image_string = ", user_image = '$imageFilename' ";
+                }
             }
 
             $fname = addslashes($_POST['edit_fname']);

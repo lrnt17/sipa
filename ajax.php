@@ -955,11 +955,16 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 	{
 		$user_id = $_SESSION['USER']['user_id'] ?? 0;
 		//$start = $_POST['start'];
-		//$limit = $_POST['limit'];
+		$my_topics = $_POST['my_topics'];
 		$query = $_POST['query'] ?? '';
 		$posts = [];
 		
-		$query = "SELECT * FROM forum WHERE (forum_title LIKE '%$query%' OR forum_desc LIKE '%$query%') AND comment_parent_id = 0 AND reply_parent_id = 0 ORDER BY forum_id DESC";
+		if ($my_topics) {
+			$query = "SELECT * FROM forum WHERE (forum_title LIKE '%$query%' OR forum_desc LIKE '%$query%') AND comment_parent_id = 0 AND reply_parent_id = 0 AND user_id = $user_id ORDER BY forum_id DESC";
+		} else {
+			$query = "SELECT * FROM forum WHERE (forum_title LIKE '%$query%' OR forum_desc LIKE '%$query%') AND comment_parent_id = 0 AND reply_parent_id = 0 ORDER BY forum_id DESC";
+		}
+		
 		$rows = query($query);
 		
 		if($rows){

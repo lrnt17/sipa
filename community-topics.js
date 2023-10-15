@@ -3,6 +3,7 @@ var allposts = {
     start: (typeof start == 'undefined') ? 0 : start,
     limit: (typeof limit == 'undefined') ? 5 : limit,
     user_id: (typeof user_id == 'undefined') ? null : user_id,
+    my_topics: (typeof mytopics == 'undefined') ? null : mytopics,
 
     submit: function(e){
 
@@ -651,8 +652,9 @@ var allposts = {
 
         let form = new FormData();
         form.append('query', query);
+        form.append('my_topics', allposts.my_topics);
         form.append('data_type', 'search_posts');
-
+        console.log(allposts.my_topics);
         var ajax = new XMLHttpRequest();
     
         ajax.addEventListener('readystatechange', function() {
