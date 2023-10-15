@@ -59,7 +59,7 @@
                 </div>
                 <div class="col-12 col-md-auto mx-auto text-center">
                     <div class="row">
-                        <h6 class="my-2">+63 912 345 6789</h6>
+                        <h6 class="my-2">+63 947 7452 541</h6>
                     </div>
                     
                     <div class="row my-2" id="references-div">
