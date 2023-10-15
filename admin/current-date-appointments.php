@@ -206,7 +206,7 @@
             <div class="col-auto mt-1">
                 <div class="row">
                     <div class="col-auto">
-                        <h2 style="font-weight: 400;"><b>Todays Appointments</b> List</h2>
+                        <h2 style="font-weight: 400;"><b>Today's Appointments</b> List</h2>
                     </div>
                 </div>
             </div>

@@ -144,6 +144,60 @@
         background: #D2E0F8 !important;
     }
 
+    .select1 {
+
+    /* styling */
+    background-color: white;
+    border: thin solid #B9B9B9;
+    border-radius: 4px;
+    display: inline-block;
+    font: inherit;
+    line-height: 1.5em;
+    padding: 0.5em 3.5em 0.5em 1em;
+    width: 23%;
+    /* reset */
+
+    margin: 0;      
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    }
+
+    .select1.minimal {
+    background-image:
+        linear-gradient(45deg, transparent 50%, gray 50%),
+        linear-gradient(135deg, gray 50%, transparent 50%),
+        linear-gradient(to right, #ccc, #ccc);
+    background-position:
+        calc(100% - 20px) calc(1em + 2px),
+        calc(100% - 15px) calc(1em + 2px),
+        calc(100% - 2.5em) 0.5em;
+    background-size:
+        5px 5px,
+        5px 5px,
+        1px 1.5em;
+    background-repeat: no-repeat;
+    }
+
+    select.minimal:focus {
+    background-image:
+        linear-gradient(45deg, blue 50%, transparent 50%),
+        linear-gradient(135deg, transparent 50%, blue 50%),
+        linear-gradient(to right, #ccc, #ccc);
+    background-position:
+        calc(100% - 15px) 1em,
+        calc(100% - 20px) 1em,
+        calc(100% - 2.5em) 0.5em;
+    background-size:
+        5px 5px,
+        5px 5px,
+        1px 1.5em;
+    background-repeat: no-repeat;
+    border-color: blue;
+    outline: 0;
+    }
 </style>
 <body style="background: #F2F5FF;">
 
@@ -296,7 +350,7 @@
                 <div class="row p-3 rounded-4 shadow-sm" style="background: white; align-items: center;">
                     <div class="col-auto">
                         <div class="p-3 " style="width: 600px;height: 500px;">
-                                <select id="genderFilter">
+                                <select id="genderFilter" class="select1 minimal">
                                     <option value="All">All</option>
                                     <option value="Female">Female</option>
                                     <option value="Male">Male</option>

@@ -534,7 +534,7 @@
                     <div class="timeslots"></div>
 
                     <div  class="class_45 d-flex flex-row-reverse">
-                        <button class=" btn px-5" style="background-color: #F2C1A7; color:#ffff;">Save</button>
+                        <button class=" btn px-5 mt-4" style="background-color: #F2C1A7; color:#ffff;">Save</button>
                     </div>
                     
                 </form>

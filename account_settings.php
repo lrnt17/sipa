@@ -458,7 +458,7 @@
                             <label class="class_32">
                                 New Password
                             </label>
-                            <input type="password" name="new_password" id="npass" class="class_33" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}" title="Must contain at least one number, one uppercase and lowercase letter, one special character, and at least 8 or more characters">
+                            <input type="password" placeholder="Leave empty to keep old password" name="new_password" id="npass" class="class_33" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}" title="Must contain at least one number, one uppercase and lowercase letter, one special character, and at least 8 or more characters">
                             <i class="fas fa-eye" style="font-size: 15px; cursor: pointer; color: gray; position: absolute; right: 10px; top: 50%; transform: translateY(-50%);" id="togglePassword2"></i>
                         </div>
                         </br>

@@ -52,7 +52,7 @@
                         <p>Our Partner</p>
                     </div>
                     <div class="row">
-                        <a href="">
+                        <a href="https://www.facebook.com/BustosRHU/">
                             <img class="rounded-circle mb-3" src="rhu_logo.png" alt="RHU" width="60" height="60" > 
                         </a>
                     </div>
