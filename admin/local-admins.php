@@ -593,7 +593,7 @@
                                 row_data = row_data.replaceAll('"','\\"');
                                 rootElement.setAttribute('row',row_data);
 
-                                let edit_button = clone.querySelector(".js-edit-btn");
+                                let edit_button = clone.querySelector(".js-admin-edit-btn");
                                 if(!data.rows[i].user_owns){
                                     edit_button.remove();
                                 }

@@ -370,6 +370,11 @@ var appointment_list = {
             return;
         }
 
+        // Add confirmation dialog
+        if (!confirm("Are you sure you want to delete the selected row(s)?")) {
+            return;
+        }
+
         let ids = [];
         selectedRows.forEach(function(row) {
             let id = row.getAttribute("app_id");
