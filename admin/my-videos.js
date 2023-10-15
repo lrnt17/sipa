@@ -168,71 +168,74 @@ var manage_my_videos = {
         }
     },
 
-    upload_video: function(e){
-
+    upload_video: function(e) {
         e.preventDefault();
+
+        // Gather video details and create a FormData object
         let video_title_input = document.querySelector(".js-video-title-input").value.trim();
         let video_desc_input = document.querySelector(".js-video-desc-input").value.trim();
-        //let anonymous = document.querySelector(".js-anonymous-video").checked;
-
         let select_method = document.querySelector('.js-select-contraceptive');
         let selected_method = select_method.options[select_method.selectedIndex].value;
-
         let fileInput = document.getElementById('video_to_upload');
         let file = fileInput.files[0];
 
+        if (!video_title_input || !video_desc_input || !selected_method || !file) {
+            alert("Please fill in all the required fields.");
+            return;
+        }
+        
         let form = new FormData();
-
         form.append('video_title_input', video_title_input);
         form.append('video_desc_input', video_desc_input);
         form.append('selected_method', selected_method);
         form.append('partner_facility_id', manage_my_videos.partner_facility_id);
-        //form.append('anonymous', anonymous);
         form.append('user_video', file);
         form.append('data_type', 'add_video');
 
         var ajax = new XMLHttpRequest();
 
-        ajax.addEventListener('readystatechange',function(){
+        // Track the upload progress
+        ajax.upload.addEventListener('progress', function(e) {
+            if (e.lengthComputable) {
+                var percentComplete = (e.loaded / e.total) * 100;
+                var progressBar = document.getElementById('upload-progress');
+                progressBar.value = Math.round(percentComplete);
+            }
+        });
 
-            if(ajax.readyState == 4)
-            {
-                if(ajax.status == 200){
-
+        ajax.addEventListener('readystatechange', function() {
+            if (ajax.readyState == 4) {
+                if (ajax.status == 200) {
                     console.log(ajax.responseText);
                     let obj = JSON.parse(ajax.responseText);
                     alert(obj.message);
 
-                    if(obj.success){
-
+                    if (obj.success) {
+                        // Reset the progress bar
+                        var progressBar = document.getElementById('upload-progress');
+                        progressBar.value = 0;
+                        // Clear input fields and refresh the video list
                         document.querySelector(".js-video-title-input").value = "";
                         document.querySelector(".js-video-desc-input").value = "";
                         document.getElementById("video_to_upload").value = null;
-                        //select_method.selectedIndex = 0;
-                        document.getElementById("file-name").innerHTML = "";
-                        //document.querySelector(".js-anonymous-video").checked = false;
-
                         let videoElement = document.querySelector(".js-display-video");
                         videoElement.removeAttribute("src");
                         videoElement.classList.add('hide');
                         videoElement.style.display = '';
                         videoElement.load();
-                        
-                        // Reset manage_my_videos.start and call manage_my_videos.loadMorevideos with clearExisting set to true
-                        //manage_my_videos.start = 0;
-                        //manage_my_videos.loadMoreVideos(null, true);
                         let table = document.querySelector("#video_table tbody");
                         table.innerHTML = "";
                         manage_my_videos.open_upload_video();
                         manage_my_videos.load_my_videos();
                     }
-                }else{
+                } else {
                     alert("Please check your internet connection");
                 }
             }
         });
 
-        ajax.open('post','../ajax.php', true);
+        // Open the connection and send the form data
+        ajax.open('post', '../ajax.php', true);
         ajax.send(form);
     },
 
@@ -465,3 +468,35 @@ var manage_my_videos = {
 };
 
 manage_my_videos.load_my_videos();
+
+// Select the progress bar, the "Post" button, and the form
+const uploadProgress = document.getElementById('upload-progress');
+const postButton = document.getElementById('post-button');
+const uploadForm = document.querySelector('form'); // Adjust the selector to match your form
+
+// Variable to keep track of whether the button has been clicked
+let postButtonClicked = false;
+
+// Function to hide the "Post" button
+function hidePostButton() {
+    postButton.style.display = 'none';
+}
+
+// Function to show the "Post" button
+function showPostButton() {
+    postButton.style.display = 'block';
+}
+
+// Add an event listener to the form's submit event
+uploadForm.addEventListener('submit', function (event) {
+    if (!postButtonClicked && uploadProgress.value > 0) {
+        hidePostButton();
+        postButtonClicked = true;
+    }
+    // You can also add your form validation logic here, and prevent the form from submitting if needed.
+    // For example, you can use event.preventDefault() to prevent the form submission.
+});
+
+
+// When the upload is complete (for example, when progress reaches 100%), you can call showPostButton() to make the "Post" button visible again.
+
