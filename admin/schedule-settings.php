@@ -127,6 +127,74 @@
             display: none;
         }
     </style>
+    <style>
+    .cbox{
+        width:auto;
+    }
+    .modal4 {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 150px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        .content-modal4 {
+    background-color: #fefefe;
+    margin: auto;
+    width: 60%; /* Reduce the width of the modal */
+    max-height: 80vh; /* Set maximum height for the modal */
+    overflow-y: auto; /* Enable vertical scrollbar if content exceeds the height */
+    border-radius: 40px;
+    box-shadow: 0 0 5px rgba(0,0,0,.3);
+    padding: 4%;
+    padding-right: 4%; /* Add padding to the right side */
+    overflow-y: auto;
+        }
+
+    .close-terms-con {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close-terms-con:hover,
+    .close-terms-con:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+        /* The close-terms-con Button */
+        .close-terms-con {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        }
+
+        .close-terms-con:hover,
+        .close-terms-con:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+        }
+
+    @media (max-width: 768px) {
+    .content-modal4{
+        width:90%;
+
+    }
+}
+</style>
+
 </head>
 <body style="background: #F2F5FF;">
     <?php include('admin-header.php') ?>
@@ -149,7 +217,7 @@
                         <div class="vl" style="width: 10px;
                         background-color: #1F6CB5;
                         border-radius: 99px;
-                        height: 60px;
+                        height: 80px;
                         display: -webkit-inline-box;"></div>
                     </div>
                 
@@ -157,20 +225,35 @@
                         <div class="row">
                             <div class="col-auto">
                                 <h2 style="font-weight: 400;"><b>Time</b> Schedule</h2>
+                                <p style="display: inline;">Customize RHU's appointment system business hours and the number of slots available per hour.</p><div id="myBtn4" style="background: transparent; color: white; border: none; margin-left:10px; display: inline;cursor: pointer;"><i class="fa-solid fa-circle-info"></i></div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <br>
+                <section id="myModal4" class="modal4">
+                    <!-- Modal content -->
+                    <div class="content-modal4">
+                        <span class="close-terms-con">&times;</span>
+                        <div class="scrollable-content">
+                        <h3 class="mt-4">Instructions</h3>
+                        <p align="justify" class="mb-4">
+                        <br>Set the opening and closing times by navigating to the “Business Hours” section. Click on the “Opening Time” field and select your desired opening time from the dropdown menu. Do the same for the “Closing Time” field.
+
+                            <br><br>Next, set the number of slots available each hour. Go to the “Slots Per Hour” section and click on the “Number of Slots” field. Enter your preferred number of slots per hour. Click on the “Save” button to apply these changes.
+                        </p>
+                    </div>
+                </section>
                 <br>
                 <div class="container" >
                     
                     <div class="con p-4 rounded-4 shadow-sm" style="background-color:white; width: 60%;     min-width: 258px;">
                         <!--<label for="startHourSelector">Select a start hour:</label>-->
                         
-
-                        <div class="row" style="justify-content:center;">
+                        <h4 class="pb-2">Business Hours</h4>
+                        <div class="row mt-4" style="justify-content:center;">
                             <div class="col-auto">
-                                <h4 style="text-align: center;"></h4>
+                                <h6 style="text-align: center; font-weight:400;">Opening time</h6>
                                 <select class="mb-2 rounded-4 shadow-sm" id="startHourSelector" name="start_at">
                                     <!-- Options for the start hour -->
                                 </select>
@@ -181,7 +264,7 @@
                                 justify-content: center;
                             "><h6 class="my-4" style="text-align: center;"></h6></div>
                             <div class="col-auto">
-                                <h4 style="text-align: center;"></h4>
+                                <h6 style="text-align: center; font-weight:400;">Closing time</h6>
                                 <select class="mb-2 rounded-4 shadow-sm" id="endHourSelector" name="end_at">
                                     <!-- Options for the end hour -->
                                 </select>
@@ -189,6 +272,7 @@
                         </div>
 
                         <br>
+                        <h4 class="pt-3">Slots Per Hour</h4>
                         <label for="max_slots">Maximum number of slots per Hour:</label>
                         <input type="number" name="max_slots" class="js-num-slots" min="0" value="<?=$row['max_slot']?>">
                         <br>
@@ -270,4 +354,30 @@
     main.classList.toggle("active");
     };
 </script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    var modal4 = document.getElementById("myModal4");
+    var btn4 = document.getElementById("myBtn4");
+    var span4 = document.getElementsByClassName("close-terms-con")[0];
+
+    // When the user clicks the button, open the modal
+    btn4.onclick = function() {
+        modal4.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span4.onclick = function() {
+        modal4.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal4) {
+            modal4.style.display = "none";
+        }
+    }
+});
+</script>
+
 </html>

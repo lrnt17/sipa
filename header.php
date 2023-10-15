@@ -105,7 +105,7 @@
               <li class="li">
               <?php if(logged_in()):?>
                 <div class="row mt-2" style="align-items: center;">
-                    <div class="col-auto">
+                    <div class="col-auto" style="max-height: 58px; height: 50px;">
                       <a class="js-link navbar-brand d-md-block d-lg-none" href="account_settings.php">
                           <div class="img-con" style="width:50px; height:50px; border-radius:50%; border-style: solid; position: relative; overflow: hidden; padding: 0;"> 
                               <img src="<?= get_image($_SESSION['USER']['user_image'])?>" title="SiPa" class="js-image class_28"  style=" width: 100%; height: 100%; object-fit: cover; cursor: pointer;" >

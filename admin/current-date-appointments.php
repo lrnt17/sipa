@@ -166,7 +166,7 @@
             display:none;
         }
 
-        .edit-appointment{
+        .edit-appointment, .create-new-appointment{
             width: 100%;
             padding: 0px 0px 2px 0px;
             border: none;
@@ -214,17 +214,21 @@
 
         <div class="container">
             <div class="row height d-flex justify-content-center align-items-center">
-
-                <div class="d-flex mt-2">
-                    <div class="form" style="position: relative;">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" id="search-username"  class="form-input rounded-pill shadow-sm" placeholder="Search by first name, last name, schedule, or status" style="height: 57px; text-indent: 52px;width: 455px; border: none;">
+                <div class="col me-col">
+                    <div class="d-flex mt-2">
+                        <div class="form" style="position: relative;">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="search-username"  class="form-input rounded-pill shadow-sm" placeholder="Search by first name, last name, schedule, or status" style="height: 57px; text-indent: 52px;width: 455px; border: none;">
+                        </div>
+                        
                     </div>
-                    
                 </div>
+                <div class="col-auto">
+                    <button type="button" class="btn text-start py-3 px-3 me-3 rounded-4" style="background: #F2C1A7;"  onclick="todays_appointment_list.add_appointment()" class=""><i class="fa-solid fa-plus"></i> &nbsp;  Create New</button> 
+                </div>
+                
             </div>
 
-            <button type="button" onclick="todays_appointment_list.add_appointment()" class="">+ Create New</button>
         </div>
 
         <div class="container mt-1 mb-2">
@@ -386,7 +390,7 @@
                         <div class="col">
                             <div class="form">
                                 <label for="new_barangay" style="font-size: 15px;">Barangay <span style="color:red;">*</span></label>
-                                <select name="selected_barangay" id="new_barangay" required class="class_33">
+                                <select name="selected_barangay" id="new_barangay" required class="class_33 create-new-appointment">
                                     <!-- list of barangays -->
                                 </select>
                             </div>
@@ -633,7 +637,7 @@
                     <div class="timeslots"></div>
 
                     <div  class="class_45 d-flex flex-row-reverse" style="width: 94%;">
-                        <button class=" btn px-5" style="background-color: #F2C1A7; color:#ffff;">Save</button>
+                        <button class=" btn px-5 mt-4" style="background-color: #F2C1A7; color:#ffff;">Save</button>
                     </div>
                     
                 </form>
