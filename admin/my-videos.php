@@ -269,7 +269,7 @@
                         <input type="checkbox" id="anonymous" name="anonymous" class="js-anonymous-video">
                     </div>-->
                     <div class="class_45 d-flex flex-row-reverse">
-                    <progress value="0" max="100" id="upload-progress"></progress>
+                    <progress value="0" max="100" id="upload-progress" style="display: none;"></progress>
                     </div>
                     <div class="class_46 d-flex flex-row-reverse">
                         <button id="post-button" class="btn"><b>Post</b></button>

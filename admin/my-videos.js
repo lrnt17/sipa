@@ -97,6 +97,9 @@ var manage_my_videos = {
 
     open_upload_video: function(){
 
+        // Show the "Post" button when the user clicks the "Upload Video" button.
+        showPostButton();
+
         let form = document.querySelector('.js-upload-video');
 
         if (form.classList.contains('hide')) {
@@ -170,6 +173,8 @@ var manage_my_videos = {
 
     upload_video: function(e) {
         e.preventDefault();
+        hidePostButton(); // Hide the "Post" button during upload.
+        showProgressBar();
 
         // Gather video details and create a FormData object
         let video_title_input = document.querySelector(".js-video-title-input").value.trim();
@@ -214,6 +219,7 @@ var manage_my_videos = {
                         // Reset the progress bar
                         var progressBar = document.getElementById('upload-progress');
                         progressBar.value = 0;
+                        hideProgressBar();
                         // Clear input fields and refresh the video list
                         document.querySelector(".js-video-title-input").value = "";
                         document.querySelector(".js-video-desc-input").value = "";
@@ -469,34 +475,28 @@ var manage_my_videos = {
 
 manage_my_videos.load_my_videos();
 
-// Select the progress bar, the "Post" button, and the form
-const uploadProgress = document.getElementById('upload-progress');
-const postButton = document.getElementById('post-button');
-const uploadForm = document.querySelector('form'); // Adjust the selector to match your form
-
-// Variable to keep track of whether the button has been clicked
-let postButtonClicked = false;
-
 // Function to hide the "Post" button
 function hidePostButton() {
+    const postButton = document.getElementById('post-button');
     postButton.style.display = 'none';
+    postButton.disabled = true; // Optionally, you can disable the button as well.
 }
 
 // Function to show the "Post" button
 function showPostButton() {
+    const postButton = document.getElementById('post-button');
     postButton.style.display = 'block';
+    postButton.disabled = false; // Enable the button.
 }
 
-// Add an event listener to the form's submit event
-uploadForm.addEventListener('submit', function (event) {
-    if (!postButtonClicked && uploadProgress.value > 0) {
-        hidePostButton();
-        postButtonClicked = true;
-    }
-    // You can also add your form validation logic here, and prevent the form from submitting if needed.
-    // For example, you can use event.preventDefault() to prevent the form submission.
-});
+// Function to show the progress bar
+function showProgressBar() {
+    const progressBar = document.getElementById('upload-progress');
+    progressBar.style.display = 'block';
+}
 
-
-// When the upload is complete (for example, when progress reaches 100%), you can call showPostButton() to make the "Post" button visible again.
-
+// Function to hide the progress bar
+function hideProgressBar() {
+    const progressBar = document.getElementById('upload-progress');
+    progressBar.style.display = 'none';
+}
