@@ -234,7 +234,7 @@
 
         @media (max-width: 450px) {
             .main{
-                height: 350px !important;
+                height: 400px !important;
             }
             
         }
@@ -425,7 +425,7 @@
                     </div>
                     <div class="col-auto">
                         <p style="color:#383838;">Phone Number</p>
-                        <h5>+63 912 345 6789</h5>   
+                        <h5>+63 947 7452 541</h5>   
                     </div>
                     <div class="col-auto">
                         <p style="color:#383838;">Email</p>

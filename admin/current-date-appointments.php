@@ -206,7 +206,7 @@
             <div class="col-auto mt-1">
                 <div class="row">
                     <div class="col-auto">
-                        <h2 style="font-weight: 400;"><b>Todays Appointments</b> List</h2>
+                        <h2 style="font-weight: 400;"><b>Today's Appointments</b> List</h2>
                     </div>
                 </div>
             </div>
@@ -427,7 +427,7 @@
                     <div class="timeslots-new hide"></div>
 
                     <div  class="class_45 d-flex flex-row-reverse" style="width: 94%;">
-                        <button class=" btn px-5" style="background-color: #F2C1A7; color:#ffff;">Submit</button>
+                        <button class=" btn px-5 mt-4" style="background-color: #F2C1A7; color:#ffff;">Submit</button>
                     </div>
                     
                 </form>
