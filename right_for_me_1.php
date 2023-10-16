@@ -179,7 +179,7 @@
         </div>
     </div>-->
     <div class="container mt-2"> <!-- mt-3-->
-        <div class="row" style="align-items: center;">
+        <div class="row flex-nowrap" style="align-items: center;">
             <div class="col-auto">
                 <div class="vl"></div>
             </div>
@@ -411,6 +411,7 @@
                                     // Create the main <div> element with class "row" and style attribute
                                     const mainDiv = document.createElement("div");
                                     mainDiv.className = "row";
+                                    mainDiv.classList.add("flex-nowrap");
                                     mainDiv.style.alignItems = "center";
 
                                     // Create the first <div> element with class "col-auto"

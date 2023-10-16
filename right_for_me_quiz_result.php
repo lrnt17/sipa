@@ -130,6 +130,16 @@ select {
   font-size:20px;
   }
 
+  .swipe{
+        display:none;
+    }
+
+    @media (max-width: 450px) {
+            .swipe{
+                display: flex;
+            }
+        }
+
    </style>
    
 
@@ -270,7 +280,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <p align="justify" class="mb-5 mt-3" style="font-weight:300; font-size:15px;"> 
         <b>Disclaimer</b> : Our recommendations are intended to inform you about potential contraception methods based on your provided information. This test is crafted with the guidance of qualified healthcare provider for personalized guidance on contraception choices. However, they do not replace professional medical advice. You are the one to make the final decision on the what you think is the most appropriate method for yourself. You are responsible for the accuracy of the information provided. We are not liable for any damages or losses resulting from website use or reliance on the recommendations.
 </p>
-
+<div class="swipe p-3  mb-4 ms-2 me-2 rounded-4" style="background: #F2C1A7;">
+<p align="justify" style="font-weight:500; margin:0;">Swipe left to view other recommended methods.</p>
+</div>
 
 <?php include('quiz-result-dss.php') ?>
 
