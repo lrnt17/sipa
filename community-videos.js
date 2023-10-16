@@ -266,13 +266,27 @@ var allvideos = {
                 videoTitle = videoTitle.substring(0, maxLength) + '...';
             }
 
-            for (let j = 0; j < searchWords.length; j++) {
+            /*for (let j = 0; j < searchWords.length; j++) {
                 let searchWord = searchWords[j];
                 let searchWordRegex = new RegExp(searchWord, 'gi');
                 videoTitle = videoTitle.replace(searchWordRegex, '<span class="highlight">$&</span>');
             }
     
-            videoCard.querySelector(".js-video-title-display").innerHTML = videoTitle;
+            videoCard.querySelector(".js-video-title-display").innerHTML = videoTitle;*/
+            // Create a temporary div element
+            let tempDiv = document.createElement('div');
+            // Set its innerHTML to the video title
+            tempDiv.innerHTML = videoTitle;
+            // Get the decoded text
+            let decodedVideoTitle = tempDiv.textContent || tempDiv.innerText || "";
+
+            for (let j = 0; j < searchWords.length; j++) {
+                let searchWord = searchWords[j];
+                let searchWordRegex = new RegExp(searchWord, 'gi');
+                decodedVideoTitle = decodedVideoTitle.replace(searchWordRegex, '<span class="highlight">$&</span>');
+            }
+
+            videoCard.querySelector(".js-video-title-display").innerHTML = decodedVideoTitle;
 
             videoCard.querySelector(".js-video-display").src = videos[i].video;
             let span = document.createElement('span');
