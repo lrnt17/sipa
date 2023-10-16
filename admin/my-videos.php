@@ -226,11 +226,11 @@
             <div class="upload-container">
                 <div class="close-btn" style="float:right;cursor:pointer;" onclick="manage_my_videos.open_upload_video()">&times;</div>
                 <form onsubmit="manage_my_videos.upload_video(event)" method="post" enctype="multipart/form-data">
-                    <div class="rounded-4 container my-4 p-4 shadow-sm" style="background: #F0F0F0;display: flex;justify-content: center; flex-wrap: wrap;">
+                    <div class="rounded-4 container my-4 p-4 shadow-sm" id="drop_zone" style="background: #F0F0F0;display: flex;justify-content: center; flex-wrap: wrap;">
                         <div class="row">
                             <div class="col-12">
                                 <center><i class="fa-brands fa-dropbox mt-4 mb-2" style="font-size: 2.3rem;"></i></center>
-                                <center><div id="drop_zone">Drag & drop video to upload</div></center>
+                                <center><div id="drop_zone_old">Drag & drop video to upload</div></center>
                                 <center><div id="accepted_files"><p style= "font-size:13px;">Allowed File Extensions: .mp4, .mov, .mkv, .webm, .avi, .flv (Max file size: 2048MB)</p></div></center>
                             </div>
                             <div class="col">
@@ -249,7 +249,7 @@
                         <input type="text" placeholder="Title" name="video_title" id="video_title" class="js-video-title-input fs-5 m-2" style="border: none; border-bottom: 1px solid gray;width: 98%;" maxlength="100" required>
                     </div>
                     <div class="">
-                        <textarea placeholder="Description" name="post" class="js-video-desc-input mx-2" rows="4" style="border: none; border-bottom: 1px solid gray;resize: none; width: 98%;" maxlength="500" required></textarea>
+                        <textarea placeholder="Description" name="post" class="js-video-desc-input mx-2" rows="4" style="border: none; border-bottom: 1px solid gray;resize: none; width: 98%;" maxlength="5000" required></textarea>
                     </div>
                     <div class="ms-2 mt-3">
                         <div class="row">
@@ -308,7 +308,7 @@
                     <div class="form mt-4">
                         <label for="edit_video_desc" style="font-size: 17px;color: #1F6CB5;">Video Description</label><br>
                         <!--<input type="text" name="edit_video_desc" class="js-edit-desc edit-video" required>-->
-                        <textarea name="edit_video_desc" id="edit_video_desc" class="js-edit-desc edit-video" cols="30" rows="5" style="border: none; border-bottom: 1px solid gray;resize: none; width: 98%;" maxlength="500" required></textarea>
+                        <textarea name="edit_video_desc" id="edit_video_desc" class="js-edit-desc edit-video" cols="30" rows="5" style="border: none; border-bottom: 1px solid gray;resize: none; width: 98%;" maxlength="5000" required></textarea>
                     </div>
                     <div class="form mt-3">
                         <div class="row">
