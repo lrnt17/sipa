@@ -50,7 +50,7 @@
     }
 
     .highlight {
-        background-color: yellow;
+        background-color: #D2E0F8;
     }
 
     /* scroll buttons sa may tabi ni upload video*/

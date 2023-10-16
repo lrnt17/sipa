@@ -211,7 +211,7 @@
                                     </div>
                                 </div>
 
-                                <div class="">       
+                                <div class="p-3 my-3 rounded-4" style="background: #eeecec; box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;">       
                                     <div class="description" style="text-align: justify;">
                                         <?php
                                         $videoDesc = htmlspecialchars($row['video_desc']);
@@ -229,7 +229,7 @@
                                             // Add "More" link without space
                                             echo nl2br($shortDesc);
                                             echo '<span class="more-content" style="display: none;">' . nl2br($remainingDesc) . '</span>';
-                                            echo '<a class="read-more" href="#"><b>...More</b></a>';
+                                            echo '<a class="read-more" href="#"><b>...more</b></a>';
                                         } else {
                                             echo nl2br($videoDesc);
                                         }
@@ -515,10 +515,10 @@
 
                 if (moreContent.style.display === 'none') {
                         moreContent.style.display = 'inline';
-                        this.innerHTML = '<b>   Show Less</b>';
+                        this.innerHTML = '<b>   show less</b>';
                 } else {
                         moreContent.style.display = 'none';
-                        this.innerHTML = '<b>...More</b>';
+                        this.innerHTML = '<b>...more</b>';
                     }
         });
 </script>
