@@ -230,7 +230,8 @@
                         <div class="row">
                             <div class="col-12">
                                 <center><i class="fa-brands fa-dropbox mt-4 mb-2" style="font-size: 2.3rem;"></i></center>
-                                <center><div id="drop_zone">Drop & drop video to upload</div></center>
+                                <center><div id="drop_zone">Drag & drop video to upload</div></center>
+                                <center><div id="accepted_files"><p style= "font-size:13px;">Allowed File Extensions: .mp4, .mov, .mkv, .webm, .avi, .flv (Max file size: 2048MB)</p></div></center>
                             </div>
                             <div class="col">
                                 <input type="file" name="video_to_upload" id="video_to_upload" class="hide" onchange="manage_my_videos.display_video_to_upload(event)" required>
