@@ -211,8 +211,30 @@
                                     </div>
                                 </div>
 
-                                <div class="">
-                                        <?=nl2br(htmlspecialchars($row['video_desc']))?>
+                                <div class="">       
+                                    <div class="description" style="text-align: justify;">
+                                        <?php
+                                        $videoDesc = htmlspecialchars($row['video_desc']);
+                                        $maxChars = 200; // Set your character limit here
+
+                                        // Check if the description is longer than the character limit
+                                        if (strlen($videoDesc) > $maxChars) {
+                                            $shortDesc = substr($videoDesc, 0, $maxChars);
+                                            $remainingDesc = substr($videoDesc, $maxChars);
+
+                                            // Trim any trailing whitespace from $shortDesc
+                                            $shortDesc = rtrim($shortDesc);
+                                            $remainingDesc = ltrim($remainingDesc); // Trim leading whitespace from $remainingDesc
+
+                                            // Add "More" link without space
+                                            echo nl2br($shortDesc);
+                                            echo '<span class="more-content" style="display: none;">' . nl2br($remainingDesc) . '</span>';
+                                            echo '<a class="read-more" href="#"><b>...More</b></a>';
+                                        } else {
+                                            echo nl2br($videoDesc);
+                                        }
+                                        ?>
+                                    </div>
                                 </div>
 
                                 
@@ -485,5 +507,19 @@
         });
     });
 </script>
+<script>
+        document.querySelector('.read-more').addEventListener('click', function (e) {
+            e.preventDefault();
+            const description = document.querySelector('.description');
+            const moreContent = document.querySelector('.more-content');
 
+                if (moreContent.style.display === 'none') {
+                        moreContent.style.display = 'inline';
+                        this.innerHTML = '<b>   Show Less</b>';
+                } else {
+                        moreContent.style.display = 'none';
+                        this.innerHTML = '<b>...More</b>';
+                    }
+        });
+</script>
 </html>
