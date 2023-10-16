@@ -1383,7 +1383,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 			//$info['message'] = $video_ex;
 			$video_ex_lc = strtolower($video_ex);
 	
-			$allowed_exs = array("mp4", 'webm', 'avi', 'flv');
+			$allowed_exs = array("mp4", 'webm', 'avi', 'flv', 'mov', 'mkv');
 	
 			if (in_array($video_ex_lc, $allowed_exs)) {
 				

@@ -35,7 +35,7 @@ var myposts = {
                     alert(obj.message);
 
                     if(obj.success){
-                        document.querySelector(".js-search-input").value = "";
+                        document.querySelector(".js-search-my-input").value = "";
                         document.querySelector(".js-post-input").value = "";
                         document.getElementById("post_title").value = "";
                         document.querySelector(".js-anonymous").checked = false;
@@ -262,7 +262,16 @@ var myposts = {
                 let searchWordRegex = new RegExp(searchWord, 'gi');
                 postText = postText.replace(searchWordRegex, '<span class="highlight">$&</span>');
             }
-            postCard.querySelector(".js-post").innerHTML = postText;
+
+            // Create a temporary div element
+            let tempDiv = document.createElement('div');
+            // Set its innerHTML to the post text
+            tempDiv.innerHTML = postText;
+            // Get the decoded text
+            let decodedText = tempDiv.textContent || tempDiv.innerText || "";
+
+            postCard.querySelector(".js-post").innerHTML = decodedText;
+            //postCard.querySelector(".js-post").innerHTML = postText;
 
             postCard.querySelector(".js-comment-link").setAttribute('onclick',`myposts.view_comments(${posts[i].forum_id})`);
             postCard.querySelector(".js-like-button").setAttribute('forum_id', posts[i].forum_id);

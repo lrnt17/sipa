@@ -256,7 +256,7 @@
 </script>
 <script src="like-rating.js?v6"></script>
 <script src="time.js?v1"></script>
-<script src="my-topics.js?v10"></script>
+<script src="my-topics.js?v12"></script>
 
 
 <script>
