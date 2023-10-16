@@ -636,7 +636,7 @@
                 document.querySelector(".js-view-dob").innerHTML = formattedDate;
                 document.querySelector(".js-view-gender").innerHTML = data.user_sex;
                 document.querySelector(".js-view-gmail").innerHTML = data.user_email;
-                document.querySelector(".js-view-city-municipality").innerHTML = data.partner_facility.location;;
+                document.querySelector(".js-view-city-municipality").innerHTML = data.partner_facility.location;
                 document.querySelector(".js-view-health-facility").innerHTML = data.partner_facility.name;
                 document.querySelector(".js-view-specialization").innerHTML = data.specialization;
                 document.querySelector(".js-view-pnum").innerHTML = data.user_pnum;
@@ -649,8 +649,8 @@
         edit_admin: function(id){
 
             document.querySelector(".js-edit-admin").classList.remove('hide');
-            bustos_admins.load_city_municipality_list();
-            bustos_admins.load_health_facility_list();
+            //bustos_admins.load_city_municipality_list();
+            //bustos_admins.load_health_facility_list();
             bustos_admins.edit_id = id;
 
             let data = document.querySelector("#admin_"+id).getAttribute("row");
@@ -665,8 +665,10 @@
                 document.querySelector(".js-edit-dob").value = data.user_dob;
                 document.querySelector(".js-edit-gender").value = data.user_sex;
                 document.querySelector(".js-edit-gmail").value = data.user_email;
-                document.querySelector(".js-edit-city-municipality").value = data.city_municipality;
-                document.querySelector(".js-edit-health-facility").value = data.health_facility_name;
+                //document.querySelector(".js-edit-city-municipality").value = data.partner_facility.location;
+                bustos_admins.load_city_municipality_list(data.partner_facility.location);
+                //document.querySelector(".js-edit-health-facility").value = data.partner_facility.name;
+                bustos_admins.load_health_facility_list(data.partner_facility.name);
                 document.querySelector(".js-edit-specialization").value = data.specialization;
                 document.querySelector(".js-edit-pnum").value = data.user_pnum;
 
@@ -751,7 +753,7 @@
             document.querySelector(".js-view-admin").classList.add('hide');
         },
 
-        load_city_municipality_list: function(){
+        load_city_municipality_list: function(city){
 
             let form = new FormData();
 
@@ -787,6 +789,8 @@
 
                                 selectElement.appendChild(option);
                             });
+
+                            selectElement.value = city;
                         }
                     }
                 }
@@ -796,7 +800,7 @@
             ajax.send(form);
         },
 
-        load_health_facility_list: function(){
+        load_health_facility_list: function(facility_name){
 
             let form = new FormData();
 
@@ -831,6 +835,8 @@
                                 
                                 selectElement.appendChild(option);
                             });
+
+                            selectElement.value = facility_name;
                         }
                     }
                 }
