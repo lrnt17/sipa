@@ -46,7 +46,11 @@ var allposts = {
                         document.querySelector(".js-post-input").value = "";
                         document.getElementById("post_title").value = "";
                         document.querySelector(".js-anonymous").checked = false;
-                        
+
+                        let icon = document.querySelector('.js-toggle-icon');
+                        icon.classList.remove('fa-minus');
+                        icon.classList.add('fa-plus');
+                        document.querySelector('.js-start-topic').classList.add('hide');
                         // Reset allposts.start and call allposts.loadMorePosts with clearExisting set to true
                         allposts.start = 0;
                         allposts.loadMorePosts(null, true);
@@ -318,7 +322,7 @@ var allposts = {
             postCard.querySelector(".js-title").innerHTML = postTitle;
             //postCard.querySelector(".js-post").textContent = posts[i].forum_desc;
             // Highlight matching words in the post text
-            let postText = posts[i].forum_desc;
+            /*let postText = posts[i].forum_desc;
             for (let j = 0; j < searchWords.length; j++) {
                 let searchWord = searchWords[j];
                 let searchWordRegex = new RegExp(searchWord, 'gi');
@@ -332,8 +336,21 @@ var allposts = {
             // Get the decoded text
             let decodedText = tempDiv.textContent || tempDiv.innerText || "";
 
-            postCard.querySelector(".js-post").innerHTML = decodedText;
-            //postCard.querySelector(".js-post").innerHTML = postText;
+            postCard.querySelector(".js-post").innerHTML = decodedText;*/
+            // Create a temporary div element
+            let tempDiv = document.createElement('div');
+            // Set its innerHTML to the post text
+            tempDiv.innerHTML = posts[i].forum_desc;
+            // Get the decoded text
+            let postText = tempDiv.textContent || tempDiv.innerText || "";
+
+            for (let j = 0; j < searchWords.length; j++) {
+                let searchWord = searchWords[j];
+                let searchWordRegex = new RegExp(searchWord, 'gi');
+                postText = postText.replace(searchWordRegex, '<span class="highlight">$&</span>');
+            }
+
+            postCard.querySelector(".js-post").innerHTML = postText;
 
             postCard.querySelector(".js-comment-link").setAttribute('onclick',`allposts.view_comments(${posts[i].forum_id})`);
             postCard.querySelector(".js-like-button").setAttribute('forum_id', posts[i].forum_id);
