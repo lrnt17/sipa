@@ -58,6 +58,16 @@ if (mysqli_num_rows($result) > 0) {
     input:disabled + label {
   color: lightgray;
     }
+
+    @media (max-width: 450px) {
+            .table-hover{
+                font-size: 13px !important;
+            }
+            .table-container{
+                padding:30px !important;
+            }
+            
+        }
    </style>
    
 
@@ -107,7 +117,7 @@ if (mysqli_num_rows($result) > 0) {
     
     <form id= "quiz_form" action="right_for_me_quiz_result.php" method="post" onsubmit="validateForm(event)">
 
-    <div class="container p-5 rounded-2 shadow-sm rounded" style="background:white;">
+    <div class="container rounded-2 shadow-sm rounded table-container" style="background:white; padding: 3rem">
         <div class="user-experience-container" id="user-experience-container">
             <table class="table table-hover">
                 <tr>

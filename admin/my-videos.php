@@ -104,6 +104,9 @@
     tr {
     border-bottom: 1px solid black !important;
     }
+  #upload-progress {
+    width: 100%; /* Adjust this value to set the desired width */
+  }
 </style>
 
 <style>
@@ -266,7 +269,10 @@
                         <input type="checkbox" id="anonymous" name="anonymous" class="js-anonymous-video">
                     </div>-->
                     <div class="class_45 d-flex flex-row-reverse">
-                        <button class="btn"><b>Post</b></button>
+                    <progress value="0" max="100" id="upload-progress" style="display: none;"></progress>
+                    </div>
+                    <div class="class_46 d-flex flex-row-reverse">
+                        <button id="post-button" class="btn"><b>Post</b></button>
                     </div>
                 </form>
             </div>
@@ -318,7 +324,7 @@
                     </div>
 
                     <div class="class_45 d-flex flex-row-reverse" >
-                        <button class="btn px-5 mt-3 me-3" style="background-color: #F2C1A7; color:#ffff;">
+                        <button class="btn px-5 mt-3 me-3" style="background-color: #F2C1A7; color:#ffff;" id="save-button">
                             Save
                         </button>
                     </div>

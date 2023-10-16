@@ -132,8 +132,8 @@
             .rotate{
                 display: flex;
             }
-            .vl-header{
-                height:143px !important;
+            .compare{
+                font-size: 1.4rem !important;
             }
         }
 </style>
@@ -173,12 +173,14 @@
             </div>
         
             <div class="col-auto">
-                <h3 style="font-weight:400;"><b>Compare</b> contraceptive methods</h3>
+                <h3 class="compare" style="font-weight:400;"><b>Compare</b> contraceptive methods</h3>
                 <p style="">Hover over the birth control icon to view its name.</p>
-                <p class="rotate">Rotate your phone to landscape mode for a better view.</p>
             </div>
         </div>
 
+        <div class="rotate p-3  my-4 ms-2 me-2 rounded-4" style="background: #F2C1A7;">
+            <p align="justify" style="font-weight:500; margin:0;">Rotate your phone to landscape mode for a better view.</p>
+        </div>
 
     <section class="js-comparison-chart">
         <?php include('compare-methods.php') ?>

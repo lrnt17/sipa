@@ -152,7 +152,7 @@ $conn->close();
                 </div>
                 <div class="col" style="display: flex;justify-content: center;">
                     <div id="map-container" style="display: flex;
-                justify-content: center; width:400px;">
+                justify-content: center; min-width:300px;">
                         <div id="map" class="rounded-5 shadow-sm"></div>
                     </div>
                     
@@ -239,7 +239,7 @@ $conn->close();
             // Create a new div element to display hospital details
             var hospitalDiv = document.createElement('div');
             hospitalDiv.classList.add('hospital-item');
-            hospitalDiv.style.minWidth="290px";
+            hospitalDiv.style.minWidth="200px";
 
             // Fill the div with hospital information
             hospitalDiv.innerHTML = `
