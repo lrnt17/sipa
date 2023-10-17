@@ -304,7 +304,7 @@
 
     <header>
         <div class="d-flex justify-content-center" style="text-align: center; padding:.6%;">
-            <a href="#"><img class="logo" style="height:85px;" src="logo1.png" alt="logo"></a>
+            <a href="home_1_with_user.php"><img class="logo" style="height:85px;" src="logo1.png" alt="logo"></a>
         </div>
     </header>
 

@@ -214,7 +214,7 @@
                                 <div class="p-3 my-3 rounded-4" style="background: #eeecec; box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;">       
                                     <div class="description" style="text-align: justify;">
                                         <?php
-                                        $videoDesc = htmlspecialchars($row['video_desc']);
+                                        $videoDesc = htmlspecialchars_decode($row['video_desc']);
                                         $maxChars = 200; // Set your character limit here
 
                                         // Check if the description is longer than the character limit
