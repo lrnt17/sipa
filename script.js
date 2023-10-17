@@ -1,47 +1,36 @@
 mapboxgl.accessToken = "pk.eyJ1IjoibGF1cmVudDE3IiwiYSI6ImNsaWx3YzNyOTAybXozZ21vbXZsYXl0MjYifQ.7AoDa2IW0t9B_JUYDIKLyg";
 
-navigator.geolocation.getCurrentPosition(successLocation, errorLocation, {
-  enableHighAccuracy: true
-});
-
 let selectedProfile = "driving"; // Default profile mode
-
-function successLocation(position) {
-  setupMap([position.coords.longitude, position.coords.latitude]);
-}
-
-function errorLocation() {
-  setupMap([120.91887015317525, 14.954060686064324]); // Default coordinates
-}
 
 function setupMap(center) {
   const map = new mapboxgl.Map({
     container: "map",
     style: "mapbox://styles/mapbox/streets-v11",
     center: center,
-    zoom: 13
+    zoom: 14
   });
-
-  // Add a blue marker at the specified coordinates
-  new mapboxgl.Marker({ color: "#0000FF" }) // Blue color
-    .setLngLat([120.913790, 14.9685412])
-    .addTo(map);
 
   map.on("load", function() {
     const marker1 = new mapboxgl.Marker({ color: "#FF0000" }) // Red color
       .setLngLat([120.918945, 14.9525580])
       .addTo(map);
-  });
 
-  map.on("load", function() {
-    const marker1 = new mapboxgl.Marker({ color: "#FF0000", size: "small" }) // Red color
-      .setLngLat([120.918200, 14.9538196])
+    // Create a Popup with your custom content
+    const popup = new mapboxgl.Popup({ closeButton: true, closeOnClick: false })
+      .setHTML("<center><h5>Bustos RHU</h5></center><p>SiPa Partnered Healthcare Facility.\nXW39+5RV, Domingo st., Bustos, Bulacan</p>")
       .addTo(map);
-  });
 
-  const marker2 = new mapboxgl.Marker({ color: "#FF0000" }) // Red color
-    .setLngLat([120.919221, 14.9535776])
-    .addTo(map);
+    // Associate the popup with the marker
+    marker1.setPopup(popup);
+
+    // Close the popup when the close button is clicked
+    popup.on("close", function() {
+      // Handle close event if needed
+    });
+  });
 
   map.addControl(directions, "top-left");
 }
+
+// Call the setupMap function with default coordinates
+setupMap([120.918945, 14.9525580]);
