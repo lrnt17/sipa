@@ -124,6 +124,14 @@
                 width: 20% !important;
             }
         }
+        @media (max-width: 450px) {
+            .header2 {
+                text-align: center;
+                font-size: 23px !important;
+                margin-top: -17px !important;
+            }
+        }
+
     </style>
     <style>
         /* The Modal (background) */

@@ -26,6 +26,17 @@
             width: 100px;
             height: 100px;
         }
+        @media (max-width: 550px) {
+            .method-name{
+                font-size:2.5rem !important;
+            }
+        }
+
+        @media (max-width: 450px) {
+            .method-name{
+                font-size:2.5rem !important;
+            }
+        }
     </style>
 </head>
 <body style="background: #F2F5FF;">
@@ -36,8 +47,16 @@
         <div class="container">
             <?php if(!empty($row)):?>
                 <div class="container rounded-4 justify-content-center" style="text-align: center; background: white; width: 85%; max-height: 300px; position: relative; overflow: hidden; border: 10px solid #F2F5FF; z-index: 1; padding: 0;">
-                    <img src="<?=get_image($row['birth_control_img'])?>" class="method-pic " style="width: 100%; height: auto; object-fit: cover;">
-                    <!--<h1 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size:3.5rem; padding: 10px; text-shadow: -1px -1px 0 #ffff, 1px -1px 0 #ffff, -1px 1px 0 #ffff, 1px 1px 0 #ffff;"><?=$row['birth_control_name']?></h1>-->
+                    <img src="<?=get_image($row['birth_control_img'])?>" class="method-pic " style="width: 100%; height: auto; object-fit: cover; filter: blur(5px);
+                    -webkit-filter: blur(5px);
+                    -moz-filter: blur(5px);
+                    -o-filter: blur(5px);
+                    -ms-filter: blur(5px);">
+                    <h4 class="method-name" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size:3.5rem;  color:#D2E0F8; text-shadow:
+                    -1px 0px 0px black,
+                    1px 0px 0px black,
+                    0px -1px 0px black,
+                    0px 1px 0px black;"><?=$row['birth_control_name']?></h4>
                 </div>
 
 

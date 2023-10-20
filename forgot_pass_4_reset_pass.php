@@ -78,6 +78,13 @@
             width: 100% !important;
         }
 }
+@media (max-width: 450px) {
+            .header-text2 {
+                text-align: center;
+                font-size: 23px !important;
+                margin-top: -22px !important;
+            }
+        }
     </style>
 </head>
 <body>
