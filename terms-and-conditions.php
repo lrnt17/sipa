@@ -171,10 +171,15 @@ appropriate for your specific website and jurisdiction.</p>
 document.addEventListener("DOMContentLoaded", function() {
     var modal3 = document.getElementById("myModal3");
     var btn3 = document.getElementById("myBtn3");
+    var terms = document.getElementById("terms");
     var span3 = document.getElementsByClassName("close-terms-con")[0];
 
     // When the user clicks the button, open the modal
     btn3.onclick = function() {
+        modal3.style.display = "block";
+    }
+
+    terms.onclick = function() {
         modal3.style.display = "block";
     }
 

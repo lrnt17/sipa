@@ -127,11 +127,16 @@ p {
     document.addEventListener("DOMContentLoaded", function() {
     var modal = document.getElementById("myModal2");
     var btn = document.getElementById("myBtn2");
+    var policy = document.getElementById("policy");
     var span = document.getElementsByClassName("close-privacy-policies")[0];
 
     // When the user clicks the button, open the modal 
     btn.onclick = function() {
     modal.style.display = "block";
+    }
+
+    policy.onclick = function() {
+        modal.style.display = "block";
     }
 
     // When the user clicks on <span> (x), close the modal
