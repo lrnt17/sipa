@@ -27,7 +27,21 @@
             }
         }
     </script>
-    <style>
+    <style> 
+        .header-text{
+        font-size: 35px;
+        color:#FFFFFF;
+        font-weight: 300;
+        margin-top: 25px;
+        }
+
+        .header-text2{
+            font-size: 35px;
+            color:#FFFFFF;
+            margin-top: -40px;
+            font-weight: 400;
+        }
+
         h2{
             font-size: 30px;
             margin-top: 20px;
@@ -89,6 +103,13 @@
     max-height: 76vh !important;
     position: relative;
 }}
+    @media (max-width: 450px) {
+            .header-text2 {
+                text-align: center;
+                font-size: 23px !important;
+                margin-top: -22px !important;
+            }
+        }
     </style>
 </head>
 <body>

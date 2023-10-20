@@ -30,6 +30,20 @@
         }
     </script>
         <style>
+        .header-text{
+        font-size: 35px;
+        color:#FFFFFF;
+        font-weight: 300;
+        margin-top: 25px;
+        }
+
+        .header-text2{
+            font-size: 35px;
+            color:#FFFFFF;
+            margin-top: -40px;
+            font-weight: 400;
+        }
+
          @media (max-width: 1225px) {
         .reco-pass{
         margin: 0;
@@ -57,6 +71,13 @@
             display:none;
         }
 }
+@media (max-width: 450px) {
+            .header-text2 {
+                text-align: center;
+                font-size: 23px !important;
+                margin-top: -22px !important;
+            }
+        }
     </style>
 </head>
 <body>

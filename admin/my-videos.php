@@ -216,7 +216,7 @@
             </table>
             <br>
             
-            <div onclick="manage_my_videos.delete_video()" style="cursor:pointer;color:red;" id="delete-admin">Delete</div>
+            <div onclick="manage_my_videos.delete_video()" style="cursor:pointer;color:red; width: fit-content;" id="delete-admin">Delete</div>
         </div>
         <br><br>
 
