@@ -205,7 +205,7 @@
                 </div>
                 <br>
 
-            <table cellspacing="0" cellpadding="10" id="admin_table">
+            <table cellspacing="0" cellpadding="10" id="admin_table" style="width: -webkit-fill-available;">
                 <thead style="border-bottom: 1px solid black;
                 font-size: 15px;">
                     <tr>
