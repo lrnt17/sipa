@@ -47,6 +47,20 @@
     </script>
     
         <style>
+        .header-text{
+        font-size: 35px;
+        color:#FFFFFF;
+        font-weight: 300;
+        margin-top: 25px;
+        }
+
+        .header-text2{
+            font-size: 37px;
+            color:#FFFFFF;
+            margin-top: -35px;
+            font-weight: 400;
+        }
+        
          @media (max-width: 1225px) {
         .reset-pass{
         margin: 0;

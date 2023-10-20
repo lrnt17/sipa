@@ -154,7 +154,7 @@
                             preggyImg.src = 'assets/images/preggy-1.png'; // Use the correct path for preggy image
                             preggyImg.style.height = "40px";
                             preggyImg.style.width = "20px";
-                            preggyImg.classList.add('mx-3', 'my-2');
+                            preggyImg.classList.add('mx-2', 'my-2');
                             
                             col.appendChild(preggyImg);
                             pregnantWomenContainer.appendChild(col);

@@ -249,7 +249,7 @@
             </table>
             <br>
             <!-- Delete button -->
-            <div onclick="appointment_list.delete_appointment()" class="ps-4" style="cursor:pointer;color:red;" id="delete-positive">Delete</div>
+            <div onclick="appointment_list.delete_appointment()" class="ps-4" style="cursor:pointer;color:red; width: fit-content;" id="delete-positive">Delete</div>
             <br>
             <div class="container" style="display:flex; justify-content:center;">
                 <div class="js-entry-range" style="color: #505050;font-size: 15px;"></div>

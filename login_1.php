@@ -326,13 +326,13 @@
             padding-left: 118px;
             z-index: -1;"><!-- background photo-->
             <div class = "text" style="padding-left: 64px;"><!-- texts -->
-                <p class = "header1" style="font-size: 40px;
+                <p class = "header1" style="font-size: 35px;
                 color:#FFFFFF;
                 font-weight: 300;
                 margin-top: 18px;">Welcome back to</p>
-                <p class = "header2" style="font-size: 40px;
+                <p class = "header2" style="font-size: 38px;
                 color:#FFFFFF;
-                margin-top: -29px;
+                margin-top: -25px;
                 font-weight: 400;"><span translate="no">SiPa Siguradong Pagpaplano</span></p>
                 <p class = "info" style="font-size: 15px;
                 color:#FFFFFF;
