@@ -349,6 +349,14 @@ var sched_appointment = {
                         div_timeslot.onclick = function () {
                             alert('This slot is already full.');
                         };
+                    } else if (timeslots[i].isPast) {
+                        console.log(timeslots[i].isPast);
+                        // add a class to the timeslot to indicate that it is booked
+                        div_timeslot.classList.add('timeslot_passed');
+                        // add an onclick event to the timeslot to display an alert
+                        div_timeslot.onclick = function () {
+                            alert('This slot has already passed.');
+                        };
                     } else {
                         // add an onclick event to the timeslot to allow it to be selected
                         /*div_timeslot.onclick = function () {

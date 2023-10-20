@@ -1896,10 +1896,15 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 	if($_POST['data_type'] == 'load_my_videos') 
 	{
 		//$user_id = $_SESSION['USER']['user_id'] ?? 0;
-		$partner_facility_id = $_POST['partner_facility_id'];
+		$partner_facility_id = (int)$_POST['partner_facility_id'];
 		//$partner_facility_id = $_SESSION['USER']['partner_facility_id'];
 		
-		$query = "select * from videos where partner_facility_id = $partner_facility_id && comment_parent_id = 0 && reply_parent_id = 0 order by video_id desc";
+		if ($partner_facility_id == 1) {
+			$query = "select * from videos where comment_parent_id = 0 && reply_parent_id = 0 order by video_id desc";
+		} else {
+			$query = "select * from videos where partner_facility_id = $partner_facility_id && comment_parent_id = 0 && reply_parent_id = 0 order by video_id desc";
+		}
+		
 		$rows = query($query);
 		
 		if($rows){

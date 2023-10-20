@@ -281,6 +281,16 @@
             color: white;
         }
 
+        .timeslot_passed{
+            background-color: #E5E4E2;
+            color: white;
+        }
+
+        .timeslot_passed:hover {
+            background-color: #E5E4E2 !important;
+            cursor: default;
+        }
+
         .booked:hover{
             background-color: #9E1E24 !important;
             color: white;

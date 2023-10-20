@@ -274,6 +274,15 @@ error_reporting(0);
                 $timeslot_object->booked = false;
             }
 
+            //$timeslot_object->isPast = (strtotime($selected_date . ' ' . $timeslot) < time());
+            // check if the timeslot has already passed
+            if (strtotime($selected_date . ' ' . explode('-', $timeslot)[0]) < time()) {
+                // set the isPast property to true
+                $timeslot_object->isPast = true;
+            } else {
+                // set the isPast property to false
+                $timeslot_object->isPast = false;
+            }
             // add the timeslot object to the array of timeslot objects
             $timeslot_objects[] = $timeslot_object;
         }
