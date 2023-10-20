@@ -38,9 +38,9 @@
         }
 
         .header-text2{
-            font-size: 37px;
+            font-size: 35px;
             color:#FFFFFF;
-            margin-top: -35px;
+            margin-top: -40px;
             font-weight: 400;
         }
 

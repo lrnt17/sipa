@@ -330,7 +330,7 @@
                 color:#FFFFFF;
                 font-weight: 300;
                 margin-top: 18px;">Welcome back to</p>
-                <p class = "header2" style="font-size: 38px;
+                <p class = "header2" style="font-size: 35px;
                 color:#FFFFFF;
                 margin-top: -25px;
                 font-weight: 400;"><span translate="no">SiPa Siguradong Pagpaplano</span></p>
