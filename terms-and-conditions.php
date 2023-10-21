@@ -179,10 +179,6 @@ document.addEventListener("DOMContentLoaded", function() {
         modal3.style.display = "block";
     }
 
-    terms.onclick = function() {
-        modal3.style.display = "block";
-    }
-
     // When the user clicks on <span> (x), close the modal
     span3.onclick = function() {
         modal3.style.display = "none";
@@ -193,6 +189,10 @@ document.addEventListener("DOMContentLoaded", function() {
         if (event.target == modal3) {
             modal3.style.display = "none";
         }
+    }
+    
+    terms.onclick = function() {
+        modal3.style.display = "block";
     }
 });
 </script>
