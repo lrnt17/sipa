@@ -135,6 +135,14 @@
             .compare{
                 font-size: 1.4rem !important;
             }
+            .nameDiv{
+                width: 107px !important;
+                margin-right: 0.5rem !important;
+                margin-left: 0.5rem !important;
+            }
+            .label{
+                text-align: center !important;
+            }
         }
 </style>
 <body style="background: #F2F5FF;">
@@ -484,9 +492,11 @@
                             if (data.length > 0) {
                                 // Create a div element to hold the stars
                                 let nameDiv = document.createElement("div");
-                                nameDiv.classList.add("nameDiv","px-1", "mx-4");
+                                nameDiv.classList.add("nameDiv","px-1");
                                 nameDiv.style.width="150px";
                                 nameDiv.style.height="530px";
+                                nameDiv.style.marginLeft="1.5rem";
+                                nameDiv.style.marginRight="1.5rem";
                                 for (var key in data[0]) {
                                     // Skip the birth_control_chart_id and birth_control_id columns
                                     if (key === 'birth control chart id' || key === 'birth control id' || key === 'birth control name') {

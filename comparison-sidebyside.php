@@ -178,6 +178,9 @@
             .compare{
                 font-size: 1.4rem !important;
             }
+            .label{
+                text-align: center !important;
+            }
         }
 </style>
 <body style="background: #F2F5FF;">

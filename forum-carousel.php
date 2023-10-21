@@ -44,6 +44,12 @@
         .slick-next:before {
             color: black !important; 
         }
+
+        @media (max-width: 450px) {
+            .js-forum-link{
+                width: 270px !important;
+            }
+        }
     </style>
 </head>
         <div class="row mt-5">

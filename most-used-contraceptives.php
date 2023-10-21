@@ -25,7 +25,18 @@
 
 .lines::before{
     right: 0;
-}</style>
+}
+    @media (max-width: 576px) {
+            .contraceptive-item{
+                width: 400px;
+            }
+        }
+    @media (max-width: 450px) {
+            .contraceptive-item{
+                width: 320px;
+            }
+        }
+</style>
 
 <section>
     <div>
@@ -47,7 +58,7 @@
         </div>
 
 
-        <h2 class="d-flex justify-content-center mb-3" style="color:#383838;">Top 3 Most Used Contraceptives</h2>
+        <h2 class="d-flex justify-content-center mb-3" style="color:#383838; text-align: center;">Top 3 Most Used Contraceptives</h2>
         <div class="row js-most-used-contraceptives" id="most-used-contraceptives" style="justify-content: center;">
 
         </div>
