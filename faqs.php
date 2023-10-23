@@ -237,6 +237,8 @@
 
         <div class="faq-container" id="FAQs-container">
             <!-- FAQS here -->
+            <p id="no-questions-found" style="display: none;">No question found.</p>
+
         </div>
 
         <?php include('forum-carousel.php') ?>
@@ -308,6 +310,7 @@
 
         //search function pag may nagmatch na word edi maffilter tas may paanimation para maangas
         const searchInput = document.getElementById('search');
+        const noQuestionsFound = document.getElementById('no-questions-found');
         let fadeIntervals = [];
 
         searchInput.addEventListener('input', function() {
@@ -341,6 +344,13 @@
                 
                 return true;
             });
+
+            // Show the "No questions found" message if there are no matches
+            if (filteredFAQs.length === 0 && searchText) {
+                noQuestionsFound.style.display = 'block';
+            } else {
+                noQuestionsFound.style.display = 'none';
+            }
 
             filteredFAQs.forEach((item, index) => {
                 const faqItem = document.querySelectorAll('.faq-item')[index];
