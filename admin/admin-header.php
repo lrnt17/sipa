@@ -244,13 +244,20 @@ body {
                     </a>
                 </li>
                 
+                <li <?php if ($currentPage === 'appointment-list.php') echo 'class="active-link"'; ?>>
+                    <a href="appointment-list.php">
+                        <i class="fa-solid fa-clipboard-list me-3" style="margin-left: 21.5px;position: relative;margin-top: 20px;"></i>
+                        <span class="title">Appointment List</span> 
+                    </a>
+                </li>
+
                 <?php if(check_admin($user_role)):?>
-                    <li <?php if ($currentPage === 'appointment-list.php') echo 'class="active-link"'; ?>>
+                    <!--<li <?php //if ($currentPage === 'appointment-list.php') echo 'class="active-link"'; ?>>
                         <a href="appointment-list.php">
                             <i class="fa-solid fa-clipboard-list me-3" style="margin-left: 21.5px;position: relative;margin-top: 20px;"></i>
                             <span class="title">Appointment List</span> 
                         </a>
-                    </li>
+                    </li>-->
 
                     <li <?php if ($currentPage === 'schedule-settings.php') echo 'class="active-link"'; ?>>
                         <a href="schedule-settings.php">
@@ -268,18 +275,33 @@ body {
                 <?php endif;?>
 
                 <?php if(check_head_admin($user_role)):?>
-                    <li <?php if ($currentPage === '#about') echo 'class="active-link"'; ?>>
+                    <!--<li <?php //if ($currentPage === '#about') echo 'class="active-link"'; ?>>
                         <a href="#about">
                             <i class="fa-solid fa-clipboard-list me-3" style="margin-left: 21.5px;position: relative;margin-top: 20px;"></i>
                             <span class="title">Head Administrators</span> 
                         </a>
                     </li>
 
-                    <li <?php if ($currentPage === 'manage-admins.php') echo 'class="active-link"'; ?>>
+                    <li <?php //if ($currentPage === 'manage-admins.php') echo 'class="active-link"'; ?>>
                         <a href="manage-admins.php">
                             <i class="fa-solid fa-calendar-day me-3" style="margin-left: 20px;position: relative;margin-top: 22px;"></i>
                             <span class="title">Administrators</span>
                         </a>
+                    </li>-->
+
+                    <li class="dropdown" <?php if (in_array($currentPage, ['#head-admin', 'manage-admins.php'])) {echo 'class="active-link"';} ?>>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="align-items: center;">
+                            <i class="fa-solid fa-clipboard-list me-3" style="margin-left: 21.5px;position: relative;"></i>
+                            <span class="title">Users</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#">Head Administrators</a>
+                            </li>
+                            <li style="margin: 0px; cursor: pointer;">
+                                <a href="manage-admins.php">Administrators</a>
+                            </li>
+                        </ul>
                     </li>
 
                     <li <?php if ($currentPage === 'partner-facilities.php') echo 'class="active-link"'; ?>>

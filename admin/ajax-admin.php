@@ -540,29 +540,59 @@
             //echo $_POST['search_query'];
             if ($_POST['search_query'] == 'null') {
 
-                $query = "SELECT COUNT(*) FROM appointments WHERE city_municipality = '$city_municipality' AND health_facility = '$health_facility'";
+                if ($city_municipality == 'SiPa' && $health_facility == 'SiPa') {
+                    $query = "SELECT COUNT(*) FROM appointments";
+                } else {
+                    $query = "SELECT COUNT(*) FROM appointments WHERE city_municipality = '$city_municipality' AND health_facility = '$health_facility'";
+                }
+                
+                //$query = "SELECT COUNT(*) FROM appointments WHERE city_municipality = '$city_municipality' AND health_facility = '$health_facility'";
                 $result = query($query);
                 $total_rows = $result[0]['COUNT(*)'];
                 $last_page = ceil($total_rows / $rows_per_page);
                 
                 //$query = "SELECT * FROM appointments WHERE city_municipality = '$city_municipality' AND health_facility = '$health_facility' ORDER BY app_id DESC LIMIT $rows_per_page OFFSET $offset";
-                $query = "SELECT * FROM appointments WHERE city_municipality = '$city_municipality' AND health_facility = '$health_facility' ORDER BY $column $order LIMIT $rows_per_page OFFSET $offset";
+                if ($city_municipality == 'SiPa' && $health_facility == 'SiPa') {
+                    $query = "SELECT * FROM appointments ORDER BY $column $order LIMIT $rows_per_page OFFSET $offset";
+                } else {
+                    $query = "SELECT * FROM appointments WHERE city_municipality = '$city_municipality' AND health_facility = '$health_facility' ORDER BY $column $order LIMIT $rows_per_page OFFSET $offset";
+                }
+                
+                //$query = "SELECT * FROM appointments WHERE city_municipality = '$city_municipality' AND health_facility = '$health_facility' ORDER BY $column $order LIMIT $rows_per_page OFFSET $offset";
                 $rows = query($query);
 
             } else {
 
                 $search_term = $_POST['search_query'];
 
-                $query = "SELECT COUNT(*) FROM appointments WHERE city_municipality = '$city_municipality' AND health_facility = '$health_facility'";
+                if ($city_municipality == 'SiPa' && $health_facility == 'SiPa') {
+                    $query = "SELECT COUNT(*) FROM appointments";
+                } else {
+                    $query = "SELECT COUNT(*) FROM appointments WHERE city_municipality = '$city_municipality' AND health_facility = '$health_facility'";
+                }
+                
+                //$query = "SELECT COUNT(*) FROM appointments WHERE city_municipality = '$city_municipality' AND health_facility = '$health_facility'";
                 $result = query($query);
                 $constant_total_rows = $result[0]['COUNT(*)'];
 
-                $query = "SELECT COUNT(*) FROM appointments WHERE (app_fname LIKE '%$search_term%' OR app_lname LIKE '%$search_term%' OR app_date LIKE '%$search_term%' OR status LIKE '%$search_term%') AND city_municipality = '$city_municipality' AND health_facility = '$health_facility'";
+                if ($city_municipality == 'SiPa' && $health_facility == 'SiPa') {
+                    $query = "SELECT COUNT(*) FROM appointments WHERE (app_fname LIKE '%$search_term%' OR app_lname LIKE '%$search_term%' OR app_date LIKE '%$search_term%' OR status LIKE '%$search_term%')";
+                } else {
+                    $query = "SELECT COUNT(*) FROM appointments WHERE (app_fname LIKE '%$search_term%' OR app_lname LIKE '%$search_term%' OR app_date LIKE '%$search_term%' OR status LIKE '%$search_term%') AND city_municipality = '$city_municipality' AND health_facility = '$health_facility'";
+                }
+                
+                //$query = "SELECT COUNT(*) FROM appointments WHERE (app_fname LIKE '%$search_term%' OR app_lname LIKE '%$search_term%' OR app_date LIKE '%$search_term%' OR status LIKE '%$search_term%') AND city_municipality = '$city_municipality' AND health_facility = '$health_facility'";
                 $result = query($query);
                 $total_rows = $result[0]['COUNT(*)'];
                 $last_page = ceil($total_rows / $rows_per_page);
 
-                $query = "SELECT * FROM appointments WHERE (app_fname LIKE '%$search_term%' OR app_lname LIKE '%$search_term%' OR app_date LIKE '%$search_term%' OR status LIKE '%$search_term%') AND city_municipality = '$city_municipality' AND health_facility = '$health_facility' ORDER BY $column $order LIMIT $rows_per_page OFFSET $offset";
+                if ($city_municipality == 'SiPa' && $health_facility == 'SiPa') {
+                    $query = "SELECT * FROM appointments WHERE (app_fname LIKE '%$search_term%' OR app_lname LIKE '%$search_term%' OR app_date LIKE '%$search_term%' OR status LIKE '%$search_term%') ORDER BY $column $order LIMIT $rows_per_page OFFSET $offset";
+                } else {
+                    $query = "SELECT * FROM appointments WHERE (app_fname LIKE '%$search_term%' OR app_lname LIKE '%$search_term%' OR app_date LIKE '%$search_term%' OR status LIKE '%$search_term%') AND city_municipality = '$city_municipality' AND health_facility = '$health_facility' ORDER BY $column $order LIMIT $rows_per_page OFFSET $offset";
+                }
+                
+                //$query = "SELECT * FROM appointments WHERE (app_fname LIKE '%$search_term%' OR app_lname LIKE '%$search_term%' OR app_date LIKE '%$search_term%' OR status LIKE '%$search_term%') AND city_municipality = '$city_municipality' AND health_facility = '$health_facility' ORDER BY $column $order LIMIT $rows_per_page OFFSET $offset";
                 $rows = query($query);
 
             }

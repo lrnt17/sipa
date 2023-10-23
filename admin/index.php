@@ -241,15 +241,23 @@
                     </div>
                 </a>
                 </div>
+                <div class="col-auto">
+                    <a href="appointment-list.php" style="text-decoration: none;">
+                        <div class=" py-4 mt-3 rounded-4 shadow-sm dashboard" style="background: white; width: 200px;text-align: center;">
+                            <i class="fa-solid fa-clipboard-list mb-3" style="font-size: 30px;"></i></br>
+                                <span class="title">Appointment List</span>
+                        </div>
+                    </a>
+                </div>
                 <?php if(check_admin($user_role)):?>
-                    <div class="col-auto">
+                    <!--<div class="col-auto">
                         <a href="appointment-list.php" style="text-decoration: none;">
                             <div class=" py-4 mt-3 rounded-4 shadow-sm dashboard" style="background: white; width: 200px;text-align: center;">
                                 <i class="fa-solid fa-clipboard-list mb-3" style="font-size: 30px;"></i></br>
                                     <span class="title">Appointment List</span>
                             </div>
                         </a>
-                    </div>
+                    </div>-->
 
                     <div class="col-auto">
                         <a href="schedule-settings.php" style="text-decoration: none;">
@@ -336,8 +344,10 @@
             </div>
 
         </div>
-            
+        
+        <?php if(check_admin($user_role)):?>
         <?php include('current-date-appointments.php') ?>
+        <?php endif;?>
 
         <div class ="sipa-logo-container" style="display:none;">
             <img class="rounded-circle" src="logo-colored.png" alt="SiPa" width="55" height="55" >
