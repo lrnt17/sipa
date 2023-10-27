@@ -14,8 +14,6 @@
         "Copper IUD",
         "Implant",
         "Injection",
-        "Hormonal Vaginal Ring",
-        "Hormonal Patch",
         "Mini Pill",
         "Combination Pill",
         "Diaphragm",
@@ -739,8 +737,6 @@ if (mysqli_num_rows($result) > 0) {
                 'copperiud',
                 'implant',
                 'injection',
-                'hormonalvaginalring',
-                'hormonalpatch',
                 'combinedpill',
                 'minipill',
                 'diaphragm',
@@ -792,8 +788,6 @@ if (mysqli_num_rows($result) > 0) {
             'condom',
             'combinedpill',
             'minipill',
-            'hormonalpatch',
-            'hormonalvaginalring',
             'diaphragm',
             'withdrawalmethod',
             'calendarmethod',
@@ -802,8 +796,6 @@ if (mysqli_num_rows($result) > 0) {
             var preventingPregnancyMethods = [
             'combinedpill',
             'minipill',
-            'hormonalvaginalring',
-            'hormonalpatch',
             'injection',
             'implant',
             'copperiud',
@@ -814,10 +806,8 @@ if (mysqli_num_rows($result) > 0) {
             var managingPeriodsMethods = [
             'combinedpill',
             'minipill',
-            'hormonalvaginalring',
             'implant',
             'hormonaliud',
-            'hormonalpatch',
             'injection'
             ];
             var gainingWeightMethods = [
@@ -882,18 +872,12 @@ if (mysqli_num_rows($result) > 0) {
             medHistConditions.forEach(function (condition) {
             if (condition === "acne" || condition === "pcos") {
                 methodScores["combinedpill"] += 2;
-                methodScores["hormonalpatch"] += 2;
-                methodScores["hormonalvaginalring"] += 2;
             } else if (condition === "depression") {
                 delete methodScores["combinedpill"];
-                delete methodScores["hormonalpatch"];
-                delete methodScores["hormonalvaginalring"];
                 delete methodScores["hormonaliud"];
                 delete methodScores["injection"];
             } else if (condition === "blood-clotting-disorder" || condition === "hypertension") {
                 delete methodScores["combinedpill"];
-                delete methodScores["hormonalpatch"];
-                delete methodScores["hormonalvaginalring"];
                 delete methodScores["tuballigation"];
                 delete methodScores["vasectomy"];
             } else if (condition === "treatment-for-sti") {
@@ -908,15 +892,15 @@ if (mysqli_num_rows($result) > 0) {
             //------------------WORKING SCORING SYSTEM CODE FOR ADDITIONAL FACTORS---------------------------
 
             // Define the methods associated with each question
-            var foreignObjectMethods = ['hormonaliud', 'copperiud', 'diaphragm', 'hormonalvaginalring'];
-            var hormoneLevelMethods = ['condom', 'withdrawalmethod', 'temperaturemethod', 'calendarmethod', 'diaphragm', 'spermicide', 'tuballigation', 'copperiud', 'implant', 'minipill', 'injection', 'hormonaliud', 'patch', 'combinedpill', 'hormonalvaginalring'];
-            var frequencyMethods = ['condom', 'diaphragm', 'spermicide', 'withdrawalmethod', 'calendarmethod', 'temperaturemethod', 'minipill', 'combinedpill', 'patch', 'injection', 'implant', 'copperiud', 'hormonaliud'];
+            var foreignObjectMethods = ['hormonaliud', 'copperiud', 'diaphragm'];
+            var hormoneLevelMethods = ['condom', 'withdrawalmethod', 'temperaturemethod', 'calendarmethod', 'diaphragm', 'spermicide', 'tuballigation', 'copperiud', 'implant', 'minipill', 'injection', 'hormonaliud', 'combinedpill'];
+            var frequencyMethods = ['condom', 'diaphragm', 'spermicide', 'withdrawalmethod', 'calendarmethod', 'temperaturemethod', 'minipill', 'combinedpill', 'injection', 'implant', 'copperiud', 'hormonaliud'];
             var permanentMethods = [ 'tuballigation'];
 
             // Define the relevant methods for each hormone level category
             var noHormonesMethods = ['condom', 'withdrawalmethod', 'temperaturemethod', 'calendarmethod', 'diaphragm', 'spermicide', 'tuballigation', 'copperiud'];
             var oneHormoneMethods = ['implant', 'minipill', 'injection', 'hormonaliud'];
-            var twoHormonesMethods = ['patch', 'combinedpill','hormonalvaginalring'];
+            var twoHormonesMethods = [ 'combinedpill'];
 
             var fertilityAwarenessMethods = ['temperaturemethod', 'calendarmethod'];
 
