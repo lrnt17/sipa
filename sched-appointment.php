@@ -254,7 +254,7 @@
                         
                     </div>
                 </div>
-                <!--<button type="button" onclick="sched_appointment.prevPage()">Previous</button>-->
+                <button type="button" onclick="sched_appointment.prevPage()">Previous</button>
                 <div class="btn-div"style="display: flex; justify-content: flex-end;">
                     <button type="button" onclick="sched_appointment.nextPage()" style="
                         display: block;
@@ -301,7 +301,7 @@
                     <input type="checkbox" name="appointment_data_privacy" id="appointment_data_privacy" value="I agree" required style="width: 15px;">
                     <label for="appointment_data_privacy" style="position:relative;font-size: 15px;font-weight: 400; display: inline;">I have read and agree to the <div id="terms" style="font-weight:700; cursor:pointer; display: inline;">Terms and Conditions</div> and the <div id="policy" style="font-weight:700; cursor:pointer; display: inline;">Privacy Policy</div> in accordance with the Data Privacy Act of 2012.</label>  
                 </div>
-                <!--<button type="button" onclick="sched_appointment.prevPage()">Previous</button>-->
+                <button type="button" onclick="sched_appointment.prevPage()">Previous</button>
                 <div class="btn-div"style="display: flex; justify-content: flex-end;">
                     <button style="
                         display: block;

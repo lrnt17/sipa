@@ -26,6 +26,7 @@
             $partner_facility_id = $user_row['partner_facility_id'];
             $city = $user_row['city_municipality'];
             $facility_name = $user_row['health_facility_name'];
+            $pin = $user_row['pin'];
         }
 	}
 ?>

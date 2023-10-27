@@ -204,11 +204,12 @@
                     </div>
                 </div>
                 <br>
-
+            <div onclick="bustos_admins.show_add_admin()" style="cursor:pointer;">Add New Administrator</div>
             <table cellspacing="0" cellpadding="10" id="admin_table" style="width: -webkit-fill-available;">
                 <thead style="border-bottom: 1px solid black;
                 font-size: 15px;">
                     <tr>
+                        <th><input type="checkbox" onclick="bustos_admins.select_all_admins(this);" /></th>
                         <th>Administrators</th>
                         <th>Email</th>
                         <th>Specialization</th>
@@ -219,6 +220,71 @@
                 <tbody></tbody>
             </table>
             <br>
+            <div onclick="bustos_admins.delete_admin()" style="cursor:pointer;color:red;" id="delete-admin">Delete</div>
+        </div>
+
+        <!-- Adding admin modal -->
+        <div class="js-add-admin hide">
+            <div class="class_39" style="float:right;cursor:pointer; margin: 10px;padding:5px;padding-left:10px;padding-right:10px;" onclick="bustos_admins.hide()">X</div>
+            <h1>Add New Administrator</h1>
+            <form onsubmit="bustos_admins.add_admin(event)" method="post">
+                <div class="form">
+                    <label for="fname">First Name *</label>
+                    <input type="text" name="fname" id="fname" required>
+                </div>
+                <div class="form">
+                    <label for="lname">Last Name *</label>
+                    <input type="text" name="lname" id="lname" required>
+                </div>
+                <div class="form">
+                    <label for="dob">Date of Birth</label>
+                    <input type="date" name="dob" id="dob">
+                </div>
+                <div class="form">
+                    <label for="gender">Gender</label>
+                    <select name="gender" id="gender" required>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+                <div class="form">
+                    <label for="gmail">Email Address *</label>
+                    <input type="email" name="gmail" id="gmail" required>
+                </div>
+                <div class="form">
+                    <label for="partner_facility">Partner Facility</label>
+                    <select name="partner_facility" id="partner_facility" disabled required>
+
+                    </select>
+                </div>
+                <div class="form">
+                    <label for="specialization">Specialization *</label>
+                    <select name="specialization" id="specialization" required>
+                        <option value="" disabled selected>Select Specialization</option>
+                        <option value="Obstetrician-Gynecologist (OB-GYN)">Obstetrician-Gynecologist (OB-GYN)</option>
+                        <option value="Obstetrician">Obstetrician</option>
+                        <option value="Gynecologist">Gynecologist</option>
+                        <option value="Family Medicine Physician">Family Medicine Physician</option>
+                        <option value="Nurse Practitioner">Nurse Practitioner</option>
+                        <option value="Nurse-Midwife">Nurse-Midwife</option>
+                        <option value="Sexual Health Specialist">Sexual Health Specialist</option>
+                        <option value="Urologist">Urologist</option>
+                        <option value="Adolescent Medicine Specialist">Adolescent Medicine Specialist</option>
+                        <option value="Planned Parenthood Clinician">Planned Parenthood Clinician</option>
+                        <option value="Reproductive Health Counselor">Reproductive Health Counselor</option>
+                    </select>
+                </div>
+                <div class="form">
+                    <label for="pnum">Phone Number *</label>
+                    <input type="number" name="pnum" id="pnum" required>
+                </div>
+
+                <div class="class_45" >
+                    <button class="class_46">
+                        Register
+                    </button>
+                </div>
+            </form>
         </div>
 
         <!-- View admin details modal -->
@@ -460,6 +526,12 @@
 
     <template id="row-template">
         <tr>
+            <td align="center" id="checkbox">
+                <label class="container">
+                    <input type="checkbox" class="js-select-admin" name="all_admins[]">
+                    <span class="checkmark"></span>
+                </label>
+            </td>
             <td>
                 <div class="row my-3" style="display: flex;align-items: center;">
                     <div class="col-auto">
@@ -471,7 +543,6 @@
                         <p class="js-admin-fullname" style="margin: 0px;"></p>
                     </div>
                 </div>
-                
             </td>
             <td class="js-admin-email"></td>
             <td class="js-specialization"></td>
@@ -575,6 +646,7 @@
                             // Generate table rows
                             for (let i = 0; i < data.rows.length; i++) {
                                 let row = document.importNode(template.content, true);
+                                row.querySelector(".js-select-admin").setAttribute('user_id', data.rows[i].user_id);
                                 row.querySelector(".js-admin-image").src = data.rows[i].user_image;
                                 row.querySelector(".js-admin-fullname").textContent = data.rows[i].user_fname + ' ' + data.rows[i].user_lname;
                                 row.querySelector(".js-admin-email").textContent = data.rows[i].user_email;
@@ -601,6 +673,66 @@
                                 table.appendChild(clone);
                             }
                         }
+                    }
+                }
+            });
+
+            ajax.open('post','ajax-admin.php', true);
+            ajax.send(form);
+        },
+
+        add_admin: function(e){
+            
+            e.preventDefault();
+            let inputs = e.currentTarget.querySelectorAll("input");
+
+            function getSelectedValue(selectId) {
+                let selectElement = document.getElementById(selectId);
+                return selectElement.options[selectElement.selectedIndex].value;
+            }
+
+            let selected_gender = getSelectedValue("gender");
+            let selected_specialization = getSelectedValue("specialization");
+            let selected_partner_facility = getSelectedValue("partner_facility");
+
+            let form = new FormData();
+            for (var i = inputs.length - 1; i >= 0; i--) {
+                form.append(inputs[i].name, inputs[i].value);
+                console.log(inputs[i].name, inputs[i].value);
+            }
+            form.append('selected_gender', selected_gender);
+            form.append('selected_specialization', selected_specialization);
+            form.append('selected_partner_facility', selected_partner_facility);
+            form.append('data_type', 'admin_registration');
+            console.log(selected_gender, selected_specialization, selected_partner_facility);
+            //return;
+
+            var ajax = new XMLHttpRequest();
+
+            ajax.addEventListener('readystatechange',function(){
+
+                if(ajax.readyState == 4)
+                {
+                    if(ajax.status == 200){
+
+                        console.log(ajax.responseText);
+                        let obj = JSON.parse(ajax.responseText);
+                        alert(obj.message);
+
+                        if(obj.success){
+                            inputs.forEach(input => input.value = "");
+                            document.getElementById("gender").selectedIndex = 0;
+                            document.getElementById("specialization").selectedIndex = 0;
+
+                            bustos_admins.hide();
+                            
+                            let table = document.querySelector("#admin_table tbody");
+                            table.innerHTML = "";
+                            
+                            bustos_admins.load_admins();
+                        }
+                    }else{
+                        alert("Please check your internet connection");
                     }
                 }
             });
@@ -747,8 +879,84 @@
 
         },
 
+        delete_admin: function(){
+
+            let partner_facility_pin = "<?=$pin?>";
+            let pin = prompt("Please enter PIN:");
+
+            if (pin != partner_facility_pin) {
+                if (pin == null || pin == "") {
+                    // User clicked 'Cancel' or entered an empty PIN
+                } else {
+                    alert("You entered wrong PIN");
+                }
+                return;  // Exit the function if the PIN is incorrect or empty
+            }
+            
+            let selectedRows = document.querySelectorAll("#admin_table .js-select-admin:checked");
+            if (selectedRows.length == 0) {
+                alert("Please select at least one row to delete");
+                return;
+            }
+
+            // Add confirmation dialog
+            if (!confirm("Are you sure you want to delete the selected row(s)?")) {
+                return;
+            }
+
+            let ids = [];
+            selectedRows.forEach(function(row) {
+                let id = row.getAttribute("user_id");
+                ids.push(id);
+            });
+
+            //console.log(JSON.stringify(ids));return;
+
+            let form = new FormData();
+            form.append('ids', JSON.stringify(ids));
+            form.append('data_type', 'delete_admin');
+
+            let ajax = new XMLHttpRequest();
+
+            ajax.addEventListener('readystatechange', function() {
+                if (ajax.readyState == 4) {
+                    if (ajax.status == 200) {
+                        let obj = JSON.parse(ajax.responseText);
+                        alert(obj.message);
+
+                        if (obj.success) {
+
+                            let table = document.querySelector("#admin_table tbody");
+                            table.innerHTML = "";
+                            
+                            bustos_admins.load_admins();
+                            bustos_admins.hide();
+                        }
+                    } else {
+                        alert("Please check your internet connection");
+                    }
+                }
+            });
+
+            ajax.open('post', 'ajax-admin.php', true);
+            ajax.send(form);
+        },
+
         hide: function(){
             //document.querySelector(".js-add-admin").classList.add('hide');
+            // Select the div with the class 'js-add-admin'
+            let div = document.querySelector('.js-add-admin');
+
+            // Select all input elements within this div
+            let inputs = div.querySelectorAll('input');
+            // Loop through each input element and clear its value
+            inputs.forEach(input => {
+                input.value = '';
+            });
+            document.getElementById("gender").selectedIndex = 0;
+            document.getElementById("specialization").selectedIndex = 0;
+
+            div.classList.add('hide');
             document.querySelector(".js-edit-admin").classList.add('hide');
             document.querySelector(".js-view-admin").classList.add('hide');
         },
@@ -844,6 +1052,75 @@
 
             ajax.open('post','ajax-admin.php', true);
             ajax.send(form);
+        },
+
+        show_add_admin: function(){
+
+            let partner_facility_pin = "<?=$pin?>";
+            //console.log(partner_facility_pin);
+            let pin = prompt("Please enter PIN:");
+            if (pin == partner_facility_pin) {
+                //console.log("goods");
+                document.querySelector(".js-add-admin").classList.remove('hide');
+                bustos_admins.load_partner_facilities();
+
+            } else if (pin == null || pin == "") {
+                
+            } else {
+                alert("You entered wrong PIN");
+            }
+            
+        },
+
+        load_partner_facilities: function(){
+
+            let form = new FormData();
+
+            form.append('data_type', 'load_partner_facilities');
+            var ajax = new XMLHttpRequest();
+
+            ajax.addEventListener('readystatechange',function(){
+
+                if(ajax.readyState == 4)
+                {
+                    if(ajax.status == 200){
+
+                        let obj = JSON.parse(ajax.responseText);
+
+                        if(obj.success){
+                            
+                            let selectElement = document.getElementById("partner_facility");
+                            selectElement.innerHTML = "";
+
+                            obj.rows.forEach(function(partner) {
+                                let option = document.createElement("option");
+                                //option.value = partner.partner_facility_id;
+                                option.value = partner.partner_facility_id;
+                                option.text = partner.city_municipality + " - " + partner.health_facility_name;
+                                //option.setAttribute("city-municipality-name", partner.city_municipality);
+                                
+                                // If the city/municipality matches the value from PHP, select this option
+                                if (partner.partner_facility_id == "<?=$partner_facility_id?>") {
+                                    option.selected = true;
+                                }
+
+                                selectElement.appendChild(option);
+                            });
+                        }
+                    }
+                }
+            });
+
+            ajax.open('post','ajax-admin.php', true);
+            ajax.send(form);
+        },
+
+        select_all_admins: function(source){
+            let checkboxes = document.getElementsByName('all_admins[]');
+            for (let i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i] != source)
+                    checkboxes[i].checked = source.checked;
+            }
         },
     };
 

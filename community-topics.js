@@ -264,6 +264,8 @@ var allposts = {
                             callback();
                         }
                     }
+                }else{
+                    alert("Please check your internet connection");
                 }
             }
         });
