@@ -1899,6 +1899,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 		$partner_facility_id = (int)$_POST['partner_facility_id'];
 		//$partner_facility_id = $_SESSION['USER']['partner_facility_id'];
 		
+		//$query = "select * from videos where partner_facility_id = $partner_facility_id && comment_parent_id = 0 && reply_parent_id = 0 order by video_id desc";
 		if ($partner_facility_id == 1) {
 			$query = "select * from videos where comment_parent_id = 0 && reply_parent_id = 0 order by video_id desc";
 		} else {
@@ -2445,6 +2446,28 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 								$rows[$key]['chart_data'] = $row;
 							}
 						}
+
+						// Fetch data from the rrl table
+						$query_rrl = "SELECT * FROM rrl WHERE birth_control_id = '$id'";
+						$rrl_data = query($query_rrl);
+
+						if ($rrl_data) {
+							/*foreach ($rrl_data as $key => $row) {
+								// Exclude unwanted columns
+								unset($row['rrl_id'], $row['birth_control_id'], $row['std_id']);
+								// Add remaining columns to $rows
+								$rows[$key]['sidebyside_data']['references'] = $row;
+							}*/
+							$references = array();
+							foreach ($rrl_data as $key => $row) {
+								// Exclude unwanted columns
+								unset($row['rrl_id'], $row['birth_control_id'], $row['std_id']);
+								// Add remaining columns to $references
+								$references[] = $row;
+							}
+							// Add references to sidebyside_data
+							$rows[0]['sidebyside_data']['references'] = $references;
+						}
 					}
 
 					$info['rows'][$method_id] = $rows;
@@ -2511,6 +2534,20 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 		}
 		
 		$info['success'] = true;
+	}else
+	if($_POST['data_type'] == 'load_method_references')
+	{
+		$method_id = (int)$_POST['method_id'];
+		
+		$query = "SELECT * FROM rrl WHERE birth_control_id = '$method_id'";
+		$rows = query($query);
+
+		if($rows){
+			
+			$info['rows'] = $rows;
+			$info['success'] = true;
+		}
+		
 	}
 }
 // kinoconvert to json string si "$info", nag ooutput to ng variable $info

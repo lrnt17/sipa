@@ -43,8 +43,9 @@
 
         <div class="d-flex justify-content-center mt-5" style="text-align: center;">  
             <p class="mt-4"style="font-size:14px; color:#5A5A5A; width: 400px;">
-            Discover the Top 3 Most Used Contraceptives! Explore the preferred methods 
-            chosen by our users on the 'SIPA' website to make informed decisions about birth control.
+            Tuklasin ang mga Madalas na Pinipiling Kontraseptibo! Suriin ang mga pamamaraan na pinili 
+            ng mga gumagamit sa aming web application na 'SiPa' na maaaring makatulong sa iyo sa 
+            pagpapasya tungkol sa birth control.
             </p>
         </div>
 
@@ -58,7 +59,16 @@
         </div>
 
 
-        <h2 class="d-flex justify-content-center mb-3" style="color:#383838; text-align: center;">Top 3 Most Used Contraceptives</h2>
+        <h2 class="d-flex justify-content-center mb-3" style="color:#383838; text-align: center;">Mga Kontraseptibo na Madalas Pinipili</h2>
+        <p align="justify" class="mb-5" style="font-weight:300;"> 
+            <b>Paalala</b> : Ang mga sumusunod ay ilan lamang sa mga pamamaraan ng 
+            kontraseptibo na madalas piliin ng mga gumagamit sa aming web application. Hindi 
+            ito nagpapakita ng mga ura ng paggamit ng mga pamamaraang ito sa anumang 
+            partikular na bayan o komunidad. Maraming iba't ibang mga 
+            pamamaraan ng kontraseptibo na magagamit, at ang pinakamahusay na 
+            pagpipilian ay nakadepende sa kalusugan, pamumuhay, at personal 
+            na mga kagustuhan ng isang indibidwal.
+        </p>
         <div class="row js-most-used-contraceptives" id="most-used-contraceptives" style="justify-content: center;">
 
         </div>
@@ -70,17 +80,17 @@
 
     <div class="col-lg-3 contraceptive-item my-3 mx-4 rounded-3 p-4 shadow-sm" style="background:white;">
         
-        <div style="text-align: center; position: relative;" class="container mb-4 mt-3">
+        <!--<div style="text-align: center; position: relative;" class="container mb-4 mt-3">
             <h3 class="js-contraceptive-rank" style="display: inline-block; vertical-align: middle; position: absolute; margin-left: 28px; margin-top: 21px;"></h3>
             <i class="fa-solid fa-award" style="font-size: 100px; display: inline-block; vertical-align: middle;"></i>
-        </div>
+        </div>-->
         <div class="contraceptive-icon p-3 rounded-3" style="display: flex;justify-content: center; background:white; box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
             <img src="" alt="" class="js-contraceptive-icon" width="60" height="60">
         </div>
         <center><h3 class="js-contraceptive-name p-3">Contraceptive Name</h3></center>
-        <div class="lines">
+        <!--<div class="lines">
             <p style="text-align: center;">Used by <span class="js-contraceptive-number-of-users">Number of users: ...</span></p>
-        </div>
+        </div>-->
         
         
         
@@ -116,7 +126,7 @@
                             for (var i = 0; i < obj.rows.length; i++) {
                                 let most_used_card = most_used_template.content.cloneNode(true);
                                 
-                                most_used_card.querySelector(".js-contraceptive-rank").innerHTML = "" + rank; // Set the rank
+                                /*most_used_card.querySelector(".js-contraceptive-rank").innerHTML = "" + rank; // Set the rank
 
                                 // Set the color of the <i> tag based on rank
                                 let iconElement = most_used_card.querySelector(".fa-award");
@@ -126,7 +136,7 @@
                                     iconElement.style.color = "#929292"; // Change color for rank 2
                                 } else if (rank === 3) {
                                     iconElement.style.color = "#CD7F32"; // Change color for rank 3
-                                }
+                                }*/
 
                                 if(typeof obj.rows[i].birth_control == 'object'){
                                     most_used_card.querySelector(".js-contraceptive-icon").src = obj.rows[i].birth_control.icon;
@@ -135,7 +145,7 @@
 
                                 most_used_card.querySelector(".js-contraceptive-name").innerHTML = obj.rows[i].birth_control_name;
                                 most_used_card.querySelector(".js-contraceptive-short-description").innerHTML = (typeof obj.rows[i].birth_control == 'object') ? obj.rows[i].birth_control.short_desc : 'No Data';
-                                most_used_card.querySelector(".js-contraceptive-number-of-users").innerHTML = obj.rows[i].usage_count;
+                                //most_used_card.querySelector(".js-contraceptive-number-of-users").innerHTML = obj.rows[i].usage_count;
                                 
                                 most_used_container.appendChild(most_used_card);
                                 rank++; // Increment the rank counter

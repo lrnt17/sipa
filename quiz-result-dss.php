@@ -97,6 +97,13 @@ table {
     </td>
 </template>
 
+<template class="js-rrl-template" id="rrl-template">
+    <div class="js-rrl-item pb-4">
+        <p class="js-rrl-title" style="margin-bottom:0px; font-weight:600;">Literature 1</p>
+        <p class="js-rrl-content" style="margin-bottom:0px; display:inline;">Content of literature 2...</p>
+        <a class="js-rrl-link" href="#" target="_blank" style="text-decoration:none;"></a>
+    </div>
+</template>
 
 <script>
 
@@ -191,13 +198,16 @@ table {
                                 for (let method_id in obj.rows) {
                                     
                                     let columnDataCell = document.importNode(tbodyTemplateColumnDataCell.content, true);
-                                    columnDataCell.querySelector(".js-column-data").textContent = obj.rows[method_id][0].sidebyside_data[column_name];
+                                    //columnDataCell.querySelector(".js-column-data").textContent = obj.rows[method_id][0].sidebyside_data[column_name];
+                                    if (column_name !== "references") {
+                                        columnDataCell.querySelector(".js-column-data").textContent = obj.rows[method_id][0].sidebyside_data[column_name];
+                                    } 
                                     //columnDataCell.querySelector(".js-column-data-rating").textContent = obj.rows[method_id][0].chart_data[column_name];
                                     //console.log(column_name);
 
                                     let ratingDiv = columnDataCell.querySelector(".js-column-data-rating");
 
-                                    if (column_name !== "birth_control_short_desc") {
+                                    if (column_name !== "birth_control_short_desc" && column_name !== "references") {
                                         
                                         // Create the star elements
                                         for (let j = 0; j < 3; j++) {
@@ -231,6 +241,20 @@ table {
                                             case 3:
                                                 rangeDiv.textContent = "Best";
                                                 break;
+                                        }
+                                    } else if (column_name === "references") {
+                                        // Output the data of the rll table based on your template here
+                                        let rrlTemplate = document.getElementById("rrl-template");
+                                        let references = obj.rows[method_id][0].sidebyside_data[column_name];
+                                        //console.log(references);
+                                        for (let i = 0; i < references.length; i++) {
+                                            let rrlItem = document.importNode(rrlTemplate.content, true);
+                                            rrlItem.querySelector(".js-rrl-title").textContent = references[i].rrl_title;
+                                            rrlItem.querySelector(".js-rrl-content").textContent = references[i].rrl_desc;
+                                            rrlItem.querySelector(".js-rrl-link").href = references[i].rrl_link;
+                                            rrlItem.querySelector(".js-rrl-link").innerHTML = "<i class='fa-solid fa-arrow-up-right-from-square' style='font-size: 12px;'></i>";
+                                            
+                                            columnDataCell.querySelector(".js-column-data").appendChild(rrlItem);
                                         }
                                     }
 

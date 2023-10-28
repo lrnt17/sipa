@@ -50,6 +50,10 @@
         <b>100</b> women will get pregnant in one year. </p>
     </div>
 
+    <div class="js-birth-control-rrl-container">
+        <!-- rrl will display here -->
+    </div>
+
     <div id="women-container" class="row justify-content-center">
         <!--<<div id="pregnant-women-container"></div>
         <div id="non-pregnant-women-container"></div>-->
@@ -61,6 +65,14 @@
     <span translate="no"><button  onclick="method_display.updateDisplay(event)" name="method" value="1" class="js-each-method-buttons btn mx-3 my-2 px-4 py-2 rounded-4 shadow-sm rounded" style="min-width:235px;">Patch</button></span>
 </template>
 <!-- end contraceptive method buttons template -->
+
+<template class="js-rrl-template" id="rrl-template">
+    <div class="js-rrl-item pb-4">
+        <p class="js-rrl-title" style="margin-bottom:0px; font-weight:600;">Literature 1</p>
+        <p class="js-rrl-content" style="margin-bottom:0px; display:inline;">Content of literature 2...</p>
+        <a class="js-rrl-link" href="#" style="text-decoration:none;"></a>
+    </div>
+</template>
 
 <script>
     var method_display = {
@@ -185,6 +197,58 @@
             ajax.send(form);
         },
 
+        loadMethodReferences: function () {
+            
+            let form = new FormData();
+        
+            form.append('method_id', method_display.selectedMethod);
+            form.append('data_type', 'load_method_references');
+
+            var ajax = new XMLHttpRequest();
+
+            ajax.addEventListener('readystatechange',function(){
+
+            if(ajax.readyState == 4)
+            {
+                if(ajax.status == 200){
+
+                    //console.log(ajax.responseText);
+                    let obj = JSON.parse(ajax.responseText);
+
+                    if(obj.success){
+
+                        let method_references_holder = document.querySelector(".js-birth-control-rrl-container");
+                        method_references_holder.innerHTML = "";
+
+                        let template = document.querySelector(".js-rrl-template");
+                        
+                        if(typeof obj.rows == 'object') {
+
+                            for (var i = 0; i < obj.rows.length; i++) {
+                                let rrl_card = template.content.cloneNode(true);
+                                
+                                rrl_card.querySelector(".js-rrl-title").innerHTML = obj.rows[i].rrl_title;
+                                //rrl_card.querySelector(".js-contraceptive-short-description").innerHTML = (typeof obj.rows[i].birth_control == 'object') ? obj.rows[i].birth_control.short_desc : 'No Data';
+                                rrl_card.querySelector(".js-rrl-content").innerHTML = obj.rows[i].rrl_desc;
+                                
+                                if (obj.rows[i].rrl_link) {
+                                    let linkElement = rrl_card.querySelector(".js-rrl-link");
+                                    linkElement.href = obj.rows[i].rrl_link;
+                                    linkElement.innerHTML = "<i class='fa-solid fa-arrow-up-right-from-square' style='font-size: 12px;'></i>";
+                                }
+                                
+                                method_references_holder.appendChild(rrl_card);
+                            }
+                        }
+                    }
+                }
+            }
+            });
+
+            ajax.open('post','ajax.php', true);
+            ajax.send(form);
+        },
+
         updateDisplay: function (e) {
             e.preventDefault();
 
@@ -195,9 +259,11 @@
             // Do something with the selected value (e.g., display it)
             //console.log("Selected Value:", method_display.selectedMethod);
             method_display.loadDisplay();
+            method_display.loadMethodReferences();
         },
     };
 
     method_display.loadMethodButtons();
     method_display.loadDisplay();
+    method_display.loadMethodReferences();
 </script>
