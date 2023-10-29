@@ -133,7 +133,25 @@
                         </div>
                     </div>
 
-                    <div class="js-std-rrl-container">
+                    <div class="row py-5">
+                        <div class="d-flex justify-content-center">
+                            <div style="width: 100%;
+                            background-color: #1F6CB5;
+                            border-radius: 99px;
+                            height: 5px;"></div>
+                        </div>
+                    </div>
+
+                    <div class="row mx-3">
+                        <div class="col-auto">
+                            <i class="fa-solid fa-list" style="font-size:24px; color:#5a5abb;"></i>
+                        </div>
+                        <div class="col">
+                            <h5 class="mb-3" style="font-weight:bold;">References</h5>
+                            <div class="js-std-rrl-container">
+
+                            </div>
+                        </div>
                         <!-- rrl will display here -->
                     </div>
 
