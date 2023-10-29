@@ -141,7 +141,10 @@
                         </div>
                     </div>
 
-                    
+                    <div class="js-std-rrl-container">
+                        <!-- rrl will display here -->
+                    </div>
+
                 </div>
             <?php else:?>
                 <div>
@@ -187,6 +190,14 @@
     <template id="preventions-info-template">
         <div class="js-preventions-info-list py-2" style="color:#383838;">
             is simply dummy text of the printing and typesetting industry.
+        </div>
+    </template>
+
+    <template class="js-rrl-template" id="rrl-template">
+        <div class="js-rrl-item pb-4">
+            <p class="js-rrl-title" style="margin-bottom:0px; font-weight:600;">Literature 1</p>
+            <p class="js-rrl-content" style="margin-bottom:0px; display:inline;">Content of literature 2...</p>
+            <a class="js-rrl-link" href="#" style="text-decoration:none;"></a>
         </div>
     </template>
 
@@ -272,8 +283,61 @@
             ajax.send(form);
         },
 
+        loadSTDReferences: function (id) {
+            
+            let form = new FormData();
+        
+            form.append('std_id', id);
+            form.append('data_type', 'load_std_references');
+
+            var ajax = new XMLHttpRequest();
+
+            ajax.addEventListener('readystatechange',function(){
+
+            if(ajax.readyState == 4)
+            {
+                if(ajax.status == 200){
+
+                    //console.log(ajax.responseText);
+                    let obj = JSON.parse(ajax.responseText);
+
+                    if(obj.success){
+
+                        let method_references_holder = document.querySelector(".js-std-rrl-container");
+                        method_references_holder.innerHTML = "";
+
+                        let template = document.querySelector(".js-rrl-template");
+                        
+                        if(typeof obj.rows == 'object') {
+
+                            for (var i = 0; i < obj.rows.length; i++) {
+                                let rrl_card = template.content.cloneNode(true);
+                                
+                                rrl_card.querySelector(".js-rrl-title").innerHTML = obj.rows[i].rrl_title;
+                                //rrl_card.querySelector(".js-contraceptive-short-description").innerHTML = (typeof obj.rows[i].birth_control == 'object') ? obj.rows[i].birth_control.short_desc : 'No Data';
+                                rrl_card.querySelector(".js-rrl-content").innerHTML = obj.rows[i].rrl_desc;
+                                
+                                if (obj.rows[i].rrl_link) {
+                                    let linkElement = rrl_card.querySelector(".js-rrl-link");
+                                    linkElement.href = obj.rows[i].rrl_link;
+                                    linkElement.innerHTML = "<i class='fa-solid fa-arrow-up-right-from-square' style='font-size: 12px;'></i>";
+                                }
+                                
+                                method_references_holder.appendChild(rrl_card);
+                            }
+                        }
+                    }
+                }
+            }
+            });
+
+            ajax.open('post','ajax.php', true);
+            ajax.send(form);
+        },
+
     };
 
     load_std_info.loadData(std_id);
+    load_std_info.loadSTDReferences(std_id);
 </script>
 </html>

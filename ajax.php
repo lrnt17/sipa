@@ -2598,6 +2598,20 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 			$info['success'] = true;
 		}
 		
+	}else
+	if($_POST['data_type'] == 'load_std_references')
+	{
+		$std_id = (int)$_POST['std_id'];
+		
+		$query = "SELECT * FROM rrl WHERE std_id = '$std_id'";
+		$rows = query($query);
+
+		if($rows){
+			
+			$info['rows'] = $rows;
+			$info['success'] = true;
+		}
+		
 	}
 }
 // kinoconvert to json string si "$info", nag ooutput to ng variable $info
