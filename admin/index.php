@@ -370,7 +370,7 @@
                     </div>
                     <div class="col">
                         <div id="result" class="p-3 rounded-4 shadow-sm" style="background-color:#D2E0F8;"></div>
-                        <div class ="printBtnContainer" ><button onclick="window.print()" class="btn px-5 my-3" style="background-color: #F2C1A7; color:#ffff;"> Print Result </button></div>
+                        <div class ="printBtnContainer" ><button onclick="window.print()" class="btn px-5 my-3" style="background-color: #e9a886; color:#ffff;"> Print Result </button></div>
 
                     </div>
                 </div>

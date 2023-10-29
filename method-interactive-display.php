@@ -12,7 +12,7 @@
     }
 
     .js-each-method-buttons:hover {
-        background-color: #F2C1A7; /* Change the background color on hover */
+        background-color: #e9a886; /* Change the background color on hover */
         color: white; /* Set text color to contrast with the new background */
     }
 

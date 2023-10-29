@@ -407,7 +407,8 @@ var myposts = {
         saveButton.classList.add('js-save-button', 'btn' , 'px-3', 'mr-3');
         saveButton.innerHTML = 'Save';
 
-        saveButton.style.backgroundColor = '#F2C1A7';
+        saveButton.style.backgroundColor = '#e9a886';
+        saveButton.style.color ='#ffff';
 
         // Add a Cancel button for canceling the edit
         let cancelButton = document.createElement('button');

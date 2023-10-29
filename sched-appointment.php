@@ -203,7 +203,7 @@
                     padding: 10px;
                     text-align: center;
                     border: none;
-                    background: #F2C1A7;
+                    background: #e9a886;
                     outline: none;
                     border-radius: 10px;
                     font-size: 1.4rem;
@@ -262,7 +262,7 @@
                         padding: 10px;
                         text-align: center;
                         border: none;
-                        background: #F2C1A7;
+                        background: #e9a886;
                         outline: none;
                         border-radius: 10px;
                         font-size: 1.4rem;
@@ -310,7 +310,7 @@
                         margin-top:15px;
                         text-align: center;
                         border: none;
-                        background: #F2C1A7;
+                        background: #e9a886;
                         outline: none;
                         border-radius: 10px;
                         font-size: 1.4rem;

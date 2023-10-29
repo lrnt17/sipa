@@ -14,7 +14,7 @@
     position: absolute;
     height: 2.5px;
     margin: auto;
-    background: #F2C1A7;
+    background: #e9a886;
     width: 25%;
     top: 45%;
 }

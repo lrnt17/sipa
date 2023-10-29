@@ -186,8 +186,19 @@
             </div>
         </div>
 
-        <div class="rotate p-3  my-4 ms-2 me-2 rounded-4" style="background: #F2C1A7;">
-            <p align="justify" style="font-weight:500; margin:0;">Rotate your phone to landscape mode for a better view.</p>
+        <div class="rotate p-3  my-4 ms-2 me-2 rounded-4" style="background: #e9a886;">
+            <div class="row" style="
+                display: flex;
+                align-items: center;
+                ">
+                <div class="col-1 me-3">
+                    <i class="fa-solid fa-rotate" style="font-size:25px;"></i>
+                </div>
+                <div class="col"> 
+                    <p align="justify" style="font-weight:500; margin:0;">Rotate your phone to landscape mode for a better view.</p>
+                </div>
+            </div>
+            
         </div>
 
     <section class="js-comparison-chart">
