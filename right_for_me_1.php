@@ -144,7 +144,7 @@
               <div class="col-md-6">
 
                 <div class="cap p-3 rounded-4 shadow-sm rounded" style="position: relative; top: -40px; background:#ffff; text-align:center;">
-                    Stop wondering, start knowing! Take the test to discover your perfect contraceptive match.               
+                    Itigil na ang pag-aalinlangan, simulan ang pagkakaroon ng kaalaman! Kumuha ng test upang tuklasin ang tamang kontraseptibong tugma para sa iyo.             
                 </div>
                 
               </div>
@@ -185,7 +185,7 @@
             </div>
         
             <div class="col-auto">
-                <h3>Pick what's important to you</h3>
+                <h3>Pumili ng mahalaga para saiyo</h3>
             </div>
         </div>
 
@@ -224,7 +224,7 @@
             </div>
         </div>
         <div class="row mt-4">
-            <center><p style="color:#525252;">Empower yourself with the freedom to choose: Use a contraceptive method</p></center>
+            <center><p style="color:#525252;">Bigyan ang iyong sarili ng kakayahan na pumili: Gumamit ng isang paraang contraceptive</p></center>
         </div>
         <div class="row">
             <h2 class="d-flex justify-content-center mb-4" style="color:#383838;">Contraceptive Methods</h2>

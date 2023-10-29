@@ -86,14 +86,15 @@ if (mysqli_num_rows($result) > 0) {
           <div class="col-md-6">
 
             <div class="cap p-3 rounded-4 shadow-sm rounded" style="position: relative; top: -40px; background:#ffff; text-align:center;">
-            Complete the test by providing your past experience, preferences, medical history, and other relevant factors to determine your top 3 recommended contraceptive methods.                </div>
+            Kumpletuhin ang pagsusulit sa pamamagitan ng pagbibigay ng iyong mga nakaraang preferences, preferences, medical history, at iba pang factor na mga kadahilanan upang matukoy ang iyong top 3 na inirerekomendang paraan ng kontrasepsyon.
+                </div>
 
             </div>
         </div>
     
     <div class="container mt-3">
     <p align="justify" class="mb-5" style="font-weight:300;"> 
-    <b>Disclaimer</b> : Our recommendations are intended to inform you about potential contraception methods based on your provided information. This test is crafted with the guidance of qualified healthcare provider for personalized guidance on contraception choices. However, they do not replace professional medical advice. You are the one to make the final decision on the what you think is the most appropriate method for yourself. You are responsible for the accuracy of the information provided. We are not liable for any damages or losses resulting from website use or reliance on the recommendations.
+    <b>Paalala</b> : Ang aming mga rekomendasyon ay layunin lamang na magbigay-kaalaman sa iyo tungkol sa mga potensyal na paraan ng kontrasepsyon batay sa iyong ibinigay na impormasyon. Ang pagsusulit na ito ay ginawa sa pamamagitan ng gabay ng isang kwalipikadong tagapagkalinga ng kalusugan para sa personalisadong gabay sa pagpili ng kontrasepsyon. Gayunpaman, hindi ito pumapalit sa propesyonal na payo medikal. Ikaw ang huling magdedesisyon kung alin sa tingin mo ang pinakatamang paraan para sa iyo. Ikaw ang responsable sa kahusayan ng impormasyong ibinigay. Hindi kami mananagot para sa anumang pinsala o kawalan dulot ng paggamit ng website o pagtitiwala sa mga rekomendasyon.
     </p>
         <div class="row flex-nowrap" style="align-items: center;">
             <div class="col-auto">
@@ -107,7 +108,7 @@ if (mysqli_num_rows($result) > 0) {
             
             <div class="col mt-3">
                 <h5>User Experiences</h5>
-                <p>Identify what methods you have past experience with.<span style="color: red;"> *</span></p>
+                <p>Piliin ang paraang contraceptive na mayroon kang dating karanasan.<span style="color: red;"> *</span></p>
             </div>
         </div>
     
@@ -163,7 +164,7 @@ if (mysqli_num_rows($result) > 0) {
         
             <div class="col-auto mt-3">
                 <h5>Personal Preferences</h5>
-                <p>Let us know which of the following factors means more to you.<span style="color: red;"> *</span></p>
+                <p>Alin sa mga sumusunod na kadahilanan ang mas mahalaga sa iyo.<span style="color: red;"> *</span></p>
             </div>
         </div>
 
