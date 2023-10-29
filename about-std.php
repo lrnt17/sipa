@@ -117,17 +117,21 @@
                     </div>
                 
                     <div class="col-auto">
-                            <div class="col-auto"><p style="font-size: 2rem;  font-weight:bolder;">About <span style="font-weight:normal;">STDs</span></p></div>
+                            <div class="col-auto"><p style="font-size: 2rem;  font-weight:bolder;">Tungkol sa <span style="font-weight:normal;">STDs</span></p></div>
                     </div>
                 </div>
 
 
                 <div class="std-desc-container mt-2">
-                    <p>STDs are infections that are spread from one person to another, usually during vaginal, anal, and oral sex. They’re really common, and lots of people who have them don’t have any symptoms. Without treatment, STDs can lead to serious health problems. But the good news is that getting tested is no big deal, and most STDs are easy to treat.</p>
+                    <p>
+                        Ang STDs o mga sexually transmitted diseases ay impeksiyon na kumakalat mula sa isang tao patungo sa isa pa, karaniwan sa pamamagitan ng vaginal, anal, at oral na pakikipagtalik. Ito ay talagang karaniwan, at maraming tao na mayroon nito ay walang anumang sintomas. Kung hindi gagamutin, ang STDs ay maaaring magdulot ng seryosong problema sa kalusugan. Ngunit ang magandang balita ay ang pagsusuri ay hindi malaking isyu, at karamihan sa mga STDs ay madaling gamutin.                    
+                    </p>
                 </div>
 
                 <div class="button-container" id="button-container">
-                    <button class="btn shadow-sm rounded-pill py-2 px-3 mb-5" style="background-color:#5887DE; color:white;" id="show-table-button">Compare different types of STDs</button>
+                    <button class="btn shadow-sm rounded-pill py-2 px-3 mb-5" style="background-color:#5887DE; color:white;" id="show-table-button">
+                        Ipagkumpara ang iba't ibang uri ng STDs
+                    </button>
                 </div>
                 
             </div>
@@ -151,7 +155,7 @@
                         <i class="fa-solid fa-arrows-left-right-to-line" style="font-size:25px;"></i>
                     </div>
                     <div class="col"> 
-                        <p align="justify" style="font-weight:500; margin:0;">Swipe left to view more, and click to access additional information.</p>
+                        <p align="justify" style="font-weight:500; margin:0;">I-swipe pakanan para makita ang higit pa, at i-click para makakuha ng karagdagang impormasyon.</p>
                     </div>
                 </div>
                 
@@ -161,11 +165,11 @@
             <table class="horizontal-scroll" cellpadding="15" id="mytable">
                 <thead>
                     <tr style="background-color:#D2E0F8; pointer-events:none; text-align: center;">
-                        <th>Type</th>
-                        <th>Symptoms</th>
-                        <th>Causes</th>
-                        <th>Treatments</th>
-                        <th>Treatment Cost</th>
+                        <th>Mga Uri</th>
+                        <th>Mga Sintomas</th>
+                        <th>Mga Sanhi</th>
+                        <th>Mga Lunas</th>
+                        <th>Gastos ng Paggamot</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
