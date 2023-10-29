@@ -43,7 +43,7 @@
 
         <div class="d-flex justify-content-center mt-5" style="text-align: center;">  
             <p class="mt-4"style="font-size:14px; color:#5A5A5A; width: 400px;">
-            Tuklasin ang mga Madalas na Pinipiling Kontraseptibo! Suriin ang mga pamamaraan na pinili 
+            Tuklasin ang mga Madalas na Pinipiling Contraceptive! Suriin ang mga pamamaraan na pinili 
             ng mga gumagamit sa aming web application na 'SiPa' na maaaring makatulong sa iyo sa 
             pagpapasya tungkol sa birth control.
             </p>
@@ -59,10 +59,10 @@
         </div>
 
 
-        <h2 class="d-flex justify-content-center mb-3" style="color:#383838; text-align: center;">Mga Kontraseptibo na Madalas Pinipili</h2>
-        <p align="justify" class="mb-5" style="font-weight:300;"> 
+        <h2 class="d-flex justify-content-center mb-4" style="color:#383838; text-align: center;">Mga Contraceptive na Madalas Pinipili</h2>
+        <p align="justify" class="mb-4" style="font-weight:300;"> 
             <b>Paalala</b> : Ang mga sumusunod ay ilan lamang sa mga pamamaraan ng 
-            kontraseptibo na madalas piliin ng mga gumagamit sa aming web application. Hindi 
+            contraceptive na madalas piliin ng mga gumagamit sa aming web application. Hindi 
             ito nagpapakita ng mga ura ng paggamit ng mga pamamaraang ito sa anumang 
             partikular na bayan o komunidad. Maraming iba't ibang mga 
             pamamaraan ng kontraseptibo na magagamit, at ang pinakamahusay na 

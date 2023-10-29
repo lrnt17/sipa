@@ -258,10 +258,9 @@
                     <br>
                 <h1 class="mt-3 mb-3"style="font-weight:500;"><span translate="no" style="font-weight:normal;">Siguradong Pagpaplano</span></h1>
                 <p style="font-size:1rem; font-weight:300;">
-                    Choosing the appropriate contraceptive method is essential for maintaining 
-                    reproductive health and preventing unwanted pregnancy.
+                    Mahalaga ang pagpili ng angkop na paraan ng kontraseptibo para mapanatili ang kalusugan ng reproduktibo at maiwasan ang hindi nais na pagbubuntis.
                 </p>
-                <a href="right_for_me_1.php" style="color:black;"><button class="btn rounded-pill shadow-sm mt-3 px-3 py-2" style="background-color:#ffff;">Find out more</button></a>
+                <a href="right_for_me_1.php" style="color:black;"><button class="btn rounded-pill shadow-sm mt-3 px-3 py-2" style="background-color:#ffff;">Alamin pa</button></a>
                 </div>
                 <div class="col-auto">
                     <img class="doctor" src="doctor.png" alt="" width="500px" style="">
@@ -288,9 +287,9 @@
         
         <div class="d-flex justify-content-center mt-5" style="text-align: center;">  
             <p class="mt-4"style="font-size:14px; color:#5A5A5A; width: 400px;">
-                There are many types of contraception available and none are perfect. The 
-                Siguradong Pagpaplano website provides honest information to help weigh 
-                up the pros and cons.
+            Maraming uri ng Contraceptive ang maaaring gamitin at walang perpektong paraan. 
+            Ang website ng Siguradong Pagpaplano ay nagbibigay ng tapat na impormasyon upang tulungan sa pagsusuri ng mga 
+            benepisyo at kahinaan nito.
             </p>
         </div>
 
@@ -306,7 +305,7 @@
         </div>
 
 
-        <h1 class="d-flex justify-content-center" style="color:#383838;">Other Contraceptive Methods</h1>
+        <h1 class="d-flex justify-content-center" style="color:#383838;">Iba pang Paraan ng Contraceptive</h1>
 
     </div>
 

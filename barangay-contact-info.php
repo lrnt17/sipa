@@ -27,7 +27,7 @@
             <div class="row" style="justify-content: center;">
                 <div class="col-auto contacts">
                     <div class="con px-4 py-3 rounded-4 shadow-sm" style="background:white; ">
-                        <h3 style="font-weight:600;">Contact your barangay health center!</h3>
+                        <h3 style="font-weight:600;">Tumawag sa inyong barangay health center!</h3>
                         <h4 style="font-weight:400;"> <i class="fa-solid fa-location-dot me-3" style="color:#5887DE;"></i>  Barangay <span class="js-barangay-name" style="font-weight:400;"></span></h4>
                         <h4 style="font-weight:400;"> <i class="fa-solid fa-phone me-3" style="color:#5887DE;"></i>  <span class="js-barangay-health-center-pnum" style="font-weight:400;"></span></h4>
                     </div>

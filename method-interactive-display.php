@@ -61,11 +61,11 @@
             </div>
         </div>
         <div class="row" class="my-1 custom-width-hidden" style="width:300px;">
-            <h2 style="color:#383838;">How effective is contraception?</h2>
+            <h2 style="color:#383838;">Gaano ka epektibo ang contraception?</h2>
         </div>
         
         <div class="row">
-            <p style="color:#383838;">Choose a method:</p>
+            <p style="color:#383838;">Pumili ng method:</p>
         </div>
 
     <form class="js-method-buttons centered-form">
@@ -75,9 +75,9 @@
     </form>
 
     <div class="my-4" style="display: flex; justify-content: center;"> 
-        <p class="text-center" style="color:#525252;">Using the <span translate="no"> <span class="js-method-name-display" id="js-method-name-display"></span></span>,
-        typically <span class="js-preggy"></span> in 
-        <b>100</b> women will get pregnant in one year. </p>
+        <p class="text-center" style="color:#525252;">Sa karaniwang paggamit ng <span translate="no"> <span class="js-method-name-display" id="js-method-name-display"></span></span>,
+        karaniwan <span class="js-preggy"></span> sa bawat 
+        <b>100</b> kababaihan ay mabubuntis sa loob ng isang taon. </p>
     </div>
 
     <div id="women-container" class="row justify-content-center">
@@ -96,8 +96,8 @@
         </div>
             
         <center><h3>References</h3></center>
-        <div class="d-flex justify-content-center mt-5" style="text-align: center;">
-            <p style="font-size:14px; color:#5A5A5A; width: 400px;">Here are the sources that provide information about the effectiveness of the chosen contraceptive method.</p>
+        <div class="d-flex justify-content-center mt-3" style="text-align: center;">
+            <p style="font-size:14px; color:#5A5A5A; width: 400px;">Narito ang mga link na nagbibigay ng impormasyon tungkol sa epekto ng napiling contraceptive method.</p>
         </div>
         
         <div class="row mt-5 js-birth-control-rrl-container">

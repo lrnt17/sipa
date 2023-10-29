@@ -62,7 +62,7 @@
         </div>
         <div class="row mt-3">
             <div class="d-flex justify-content-center mt-2" style="text-align: center;">
-                <p tyle="color:#525252;">Share your own experiences and ask questions on</p>
+                <p tyle="color:#525252;">Ibahagi ang iyong sariling karanasan at magtanong sa</p>
             </div>
         </div>
         <div class="row">
