@@ -698,8 +698,58 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 	{
 		
 		$user_id = $_SESSION['USER']['user_id'];
- 
-		//si limit 1 is parang pag may nakita na syang match sa data, iistop na sya
+		
+		// Get all comments and replies made by the user in the forum
+		$query = "SELECT * FROM forum WHERE user_id = '$user_id' AND (comment_parent_id != 0 OR reply_parent_id != 0)";
+		$comments_replies = query($query);
+		
+		// For each comment or reply, decrement the comment_count or reply_count of its parent post
+		foreach ($comments_replies as $item) {
+			if ($item['comment_parent_id'] != 0) {
+				// This is a comment, decrement the comment_count of its parent post
+				$query = "UPDATE forum SET comment_count = comment_count - 1 WHERE forum_id = '{$item['comment_parent_id']}'";
+				query($query);
+			} else if ($item['reply_parent_id'] != 0) {
+				// This is a reply, decrement the reply_count of its parent comment
+				$query = "UPDATE forum SET reply_count = reply_count - 1 WHERE forum_id = '{$item['reply_parent_id']}'";
+				query($query);
+			}
+		}
+
+		// Do the same for videos
+		// Get all comments and replies made by the user in the videos
+		$query = "SELECT * FROM videos WHERE user_id = '$user_id' AND (comment_parent_id != 0 OR reply_parent_id != 0)";
+		$comments_replies = query($query);
+		
+		// For each comment or reply, decrement the comment_count or reply_count of its parent post
+		foreach ($comments_replies as $item) {
+			if ($item['comment_parent_id'] != 0) {
+				// This is a comment, decrement the comment_count of its parent post
+				$query = "UPDATE videos SET comment_count = comment_count - 1 WHERE video_id = '{$item['comment_parent_id']}'";
+				query($query);
+			} else if ($item['reply_parent_id'] != 0) {
+				// This is a reply, decrement the reply_count of its parent comment
+				$query = "UPDATE videos SET reply_count = reply_count - 1 WHERE video_id = '{$item['reply_parent_id']}'";
+				query($query);
+			}
+		}
+
+		// Delete post, comments, replies from forum table
+		$query = "DELETE FROM forum WHERE user_id = '$user_id'";
+		query($query);
+
+		// Delete comments, replies from videos table
+		$query = "DELETE FROM videos WHERE user_id = '$user_id'";
+		query($query);
+
+		// Delete likes in forum post, comments, replies from rating_info table
+		$query = "DELETE FROM rating_info WHERE user_id = '$user_id'";
+		query($query);
+
+		// Delete likes in video post, comments, replies from rating_video table
+		$query = "DELETE FROM rating_video WHERE user_id = '$user_id'";
+		query($query);
+
 		//para rin tipid sa memory
 		$query = "delete from users where user_id = '$user_id' limit 1";
 		query($query);
