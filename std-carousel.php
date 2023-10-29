@@ -82,7 +82,7 @@
             
         .slick-prev:before,
         .slick-next:before {
-            color: black !important; 
+            color: #1F6CB5 !important; 
         }
     </style>
     <!-- Add the slick-theme.css if you want default styling -->

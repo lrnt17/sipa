@@ -211,7 +211,8 @@ var mycomment = {
         saveButton.classList.add('js-save-button', 'btn' , 'px-3', 'mr-3');
         saveButton.innerHTML = 'Save';
 
-        saveButton.style.backgroundColor = '#F2C1A7';
+        saveButton.style.backgroundColor = '#e9a886';
+        saveButton.style.color ='#ffff';
 
         // Add a Cancel button for canceling the edit
         let cancelButton = document.createElement('button');
@@ -895,7 +896,8 @@ var mycomment = {
         saveButton.classList.add('btn' , 'px-3', 'm-2');
         saveButton.innerHTML = 'Save';
 
-        saveButton.style.backgroundColor = '#F2C1A7';
+        saveButton.style.backgroundColor = '#e9a886';
+        saveButton.style.color ='#ffff';
 
         // Attach event listener to the Save button
         saveButton.addEventListener('click', mycomment.saveReply);

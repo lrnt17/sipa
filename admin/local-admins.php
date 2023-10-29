@@ -514,7 +514,7 @@
                         </div>
 
                         <div class="class_45 d-flex flex-row-reverse" >
-                            <button class="class_46 btn px-5" style="background-color: #F2C1A7; color:#ffff;">
+                            <button class="class_46 btn px-5" style="background-color: #e9a886; color:#ffff;">
                                 Save
                             </button>
                         </div>

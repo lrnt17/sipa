@@ -130,7 +130,25 @@
                         </div>
                     </div>
 
-                    <div class="js-birth-control-rrl-container">
+                    <div class="row py-5">
+                        <div class="d-flex justify-content-center">
+                            <div style="width: 100%;
+                            background-color: #1F6CB5;
+                            border-radius: 99px;
+                            height: 5px;"></div>
+                        </div>
+                    </div>
+
+                    <div class="row mx-3">
+                        <div class="col-auto">
+                            <i class="fa-solid fa-list" style="font-size:24px; color:#5a5abb;"></i>
+                        </div>
+                        <div class="col">
+                            <h5 class="mb-3" style="font-weight:bold;">References</h5>
+                            <div class="js-birth-control-rrl-container">
+
+                            </div>
+                        </div>
                         <!-- rrl will display here -->
                     </div>
 
@@ -190,7 +208,7 @@
     </template>
 
     <template class="js-rrl-template" id="rrl-template">
-        <div class="js-rrl-item pb-4">
+        <div class="js-rrl-item pb-3">
             <p class="js-rrl-title" style="margin-bottom:0px; font-weight:600;">Literature 1</p>
             <p class="js-rrl-content" style="margin-bottom:0px; display:inline;">Content of literature 2...</p>
             <a class="js-rrl-link" href="#" style="text-decoration:none;"></a>

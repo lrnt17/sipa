@@ -12,13 +12,43 @@
     }
 
     .js-each-method-buttons:hover {
-        background-color: #F2C1A7; /* Change the background color on hover */
+        background-color: #e9a886; /* Change the background color on hover */
         color: white; /* Set text color to contrast with the new background */
     }
 
     span{
         font-weight:bold;
     }
+
+    /* CSS for screens wider than 450px */
+    @media (min-width: 451px) {
+        .js-birth-control-rrl-container .row {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .rrl-col {
+            width: calc(33.33% - 20px); /* Adjust the width based on your layout */
+            margin-right: 20px;
+        }
+
+        .rrl-col:nth-child(3n) {
+            margin-right: 0;
+        }
+    }
+
+    /* CSS for screens 450px or less */
+    @media (max-width: 450px) {
+        .js-birth-control-rrl-container .row {
+            display: block;
+        }
+
+        .rrl-col {
+            width: 100%;
+            margin-right: 0;
+        }
+    }
+
 </style>
 
 <div>
@@ -50,13 +80,29 @@
         <b>100</b> women will get pregnant in one year. </p>
     </div>
 
-    <div class="js-birth-control-rrl-container">
-        <!-- rrl will display here -->
-    </div>
-
     <div id="women-container" class="row justify-content-center">
         <!--<<div id="pregnant-women-container"></div>
         <div id="non-pregnant-women-container"></div>-->
+    </div>
+
+    <div class="container">
+        <div class="row mt-4">
+            <div class="d-flex justify-content-center mt-2 mb-3">
+                <div style="width: 10%;
+                background-color: #1F6CB5;
+                border-radius: 99px;
+                height: 6px;"></div>
+            </div>
+        </div>
+            
+        <center><h3>References</h3></center>
+        <div class="d-flex justify-content-center mt-5" style="text-align: center;">
+            <p style="font-size:14px; color:#5A5A5A; width: 400px;">Here are the sources that provide information about the effectiveness of the chosen contraceptive method.</p>
+        </div>
+        
+        <div class="row mt-5 js-birth-control-rrl-container">
+                <!-- rrl will display here -->
+        </div>
     </div>
 </div>
 
@@ -66,8 +112,8 @@
 </template>
 <!-- end contraceptive method buttons template -->
 
-<template class="js-rrl-template" id="rrl-template">
-    <div class="js-rrl-item pb-4">
+<template class="js-rrl-template rrl-col" id="rrl-template">
+    <div class="col pb-4">
         <p class="js-rrl-title" style="margin-bottom:0px; font-weight:600;">Literature 1</p>
         <p class="js-rrl-content" style="margin-bottom:0px; display:inline;">Content of literature 2...</p>
         <a class="js-rrl-link" href="#" style="text-decoration:none;"></a>
@@ -198,54 +244,53 @@
         },
 
         loadMethodReferences: function () {
-            
             let form = new FormData();
-        
             form.append('method_id', method_display.selectedMethod);
             form.append('data_type', 'load_method_references');
 
             var ajax = new XMLHttpRequest();
 
-            ajax.addEventListener('readystatechange',function(){
+            ajax.addEventListener('readystatechange', function () {
+                if (ajax.readyState == 4) {
+                    if (ajax.status == 200) {
+                        let obj = JSON.parse(ajax.responseText);
 
-            if(ajax.readyState == 4)
-            {
-                if(ajax.status == 200){
+                        if (obj.success) {
+                            let method_references_holder = document.querySelector(".js-birth-control-rrl-container");
+                            method_references_holder.innerHTML = "";
 
-                    //console.log(ajax.responseText);
-                    let obj = JSON.parse(ajax.responseText);
+                            let template = document.querySelector(".js-rrl-template");
+                            let maxColumnsPerRow = 3; // Adjust this to your desired maximum columns per row
 
-                    if(obj.success){
+                            if (typeof obj.rows == 'object') {
+                                for (var i = 0; i < obj.rows.length; i++) {
+                                    if (i % maxColumnsPerRow === 0) {
+                                        // Start a new row when the column count reaches the maximum
+                                        var row = document.createElement('div');
+                                        row.className = 'row';
+                                        method_references_holder.appendChild(row);
+                                    }
 
-                        let method_references_holder = document.querySelector(".js-birth-control-rrl-container");
-                        method_references_holder.innerHTML = "";
+                                    let rrl_card = template.content.cloneNode(true);
+                                    rrl_card.querySelector(".js-rrl-title").innerHTML = obj.rows[i].rrl_title;
+                                    rrl_card.querySelector(".js-rrl-content").innerHTML = obj.rows[i].rrl_desc;
 
-                        let template = document.querySelector(".js-rrl-template");
-                        
-                        if(typeof obj.rows == 'object') {
+                                    if (obj.rows[i].rrl_link) {
+                                        let linkElement = rrl_card.querySelector(".js-rrl-link");
+                                        linkElement.href = obj.rows[i].rrl_link;
+                                        linkElement.innerHTML = "<i class='fa-solid fa-arrow-up-right-from-square' style='font-size: 12px;'></i>";
+                                    }
 
-                            for (var i = 0; i < obj.rows.length; i++) {
-                                let rrl_card = template.content.cloneNode(true);
-                                
-                                rrl_card.querySelector(".js-rrl-title").innerHTML = obj.rows[i].rrl_title;
-                                //rrl_card.querySelector(".js-contraceptive-short-description").innerHTML = (typeof obj.rows[i].birth_control == 'object') ? obj.rows[i].birth_control.short_desc : 'No Data';
-                                rrl_card.querySelector(".js-rrl-content").innerHTML = obj.rows[i].rrl_desc;
-                                
-                                if (obj.rows[i].rrl_link) {
-                                    let linkElement = rrl_card.querySelector(".js-rrl-link");
-                                    linkElement.href = obj.rows[i].rrl_link;
-                                    linkElement.innerHTML = "<i class='fa-solid fa-arrow-up-right-from-square' style='font-size: 12px;'></i>";
+                                    // Append the column to the current row
+                                    row.appendChild(rrl_card);
                                 }
-                                
-                                method_references_holder.appendChild(rrl_card);
                             }
                         }
                     }
                 }
-            }
             });
 
-            ajax.open('post','ajax.php', true);
+            ajax.open('post', 'ajax.php', true);
             ajax.send(form);
         },
 

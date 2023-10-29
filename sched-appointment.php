@@ -92,6 +92,15 @@
         }
     }
 
+    @media (max-width: 450px) {
+        .left{
+            width:30% !important;
+        }
+        .right{
+            width:30% !important;
+        }
+    }
+
 </style>
 <section class="js-sched-appointment-modal">
     <!-- Modal content -->
@@ -203,7 +212,7 @@
                     padding: 10px;
                     text-align: center;
                     border: none;
-                    background: #F2C1A7;
+                    background: #e9a886;
                     outline: none;
                     border-radius: 10px;
                     font-size: 1.4rem;
@@ -254,21 +263,38 @@
                         
                     </div>
                 </div>
-                <button type="button" onclick="sched_appointment.prevPage()">Previous</button>
-                <div class="btn-div"style="display: flex; justify-content: flex-end;">
-                    <button type="button" onclick="sched_appointment.nextPage()" style="
-                        display: block;
-                        width: 20%;
-                        padding: 10px;
-                        text-align: center;
-                        border: none;
-                        background: #F2C1A7;
-                        outline: none;
-                        border-radius: 10px;
-                        font-size: 1.4rem;
-                        color: #FFF;
-                        cursor: pointer;
-                        ">Next</button>
+                <div class="row">
+                    <div class="col left" style="float: left; width: 20%; margin-left: 30px;">
+                        <button type="button" onclick="sched_appointment.prevPage()" style="
+                            display: block;
+                            width: 80%;
+                            padding: 10px;
+                            text-align: center;
+                            border: none;
+                            background: #e9a886;
+                            outline: none;
+                            border-radius: 10px;
+                            font-size: 1.4rem;
+                            color: #FFF;
+                            cursor: pointer;
+                            ">Previous</button>
+                    </div>
+                    <div class="col right" style="float: right; width: 20%;">
+                        <button type="button" onclick="sched_appointment.nextPage()" style="
+                            display: block;
+                            width: 80%;
+                            padding: 10px;
+                            text-align: center;
+                            border: none;
+                            background: #e9a886;
+                            outline: none;
+                            border-radius: 10px;
+                            font-size: 1.4rem;
+                            color: #FFF;
+                            cursor: pointer;
+                            ">Next</button>
+
+                    </div>
                 </div>
             </div>
 
@@ -301,22 +327,38 @@
                     <input type="checkbox" name="appointment_data_privacy" id="appointment_data_privacy" value="I agree" required style="width: 15px;">
                     <label for="appointment_data_privacy" style="position:relative;font-size: 15px;font-weight: 400; display: inline;">I have read and agree to the <div id="terms" style="font-weight:700; cursor:pointer; display: inline;">Terms and Conditions</div> and the <div id="policy" style="font-weight:700; cursor:pointer; display: inline;">Privacy Policy</div> in accordance with the Data Privacy Act of 2012.</label>  
                 </div>
-                <button type="button" onclick="sched_appointment.prevPage()">Previous</button>
-                <div class="btn-div"style="display: flex; justify-content: flex-end;">
-                    <button style="
-                        display: block;
-                        width: 20%;
-                        padding: 10px;
-                        margin-top:15px;
-                        text-align: center;
-                        border: none;
-                        background: #F2C1A7;
-                        outline: none;
-                        border-radius: 10px;
-                        font-size: 1.4rem;
-                        color: #FFF;
-                        cursor: pointer;
-                        ">Submit</button>
+                <div class="row" style="margin-top:25px; margin-bottom:25px;">
+                    <div class="col left" style="float: left; width: 20%; margin-left: 30px;">
+                        <button type="button" onclick="sched_appointment.prevPage()" style="
+                            display: block;
+                            width: 80%;
+                            padding: 10px;
+                            text-align: center;
+                            border: none;
+                            background: #e9a886;
+                            outline: none;
+                            border-radius: 10px;
+                            font-size: 1.4rem;
+                            color: #FFF;
+                            cursor: pointer;
+                            ">Previous</button>
+                    </div>
+                    <div class="col right" style="float: right; width: 20%;">
+                        <button style="
+                            display: block;
+                            width: 80%;
+                            padding: 10px;
+                            text-align: center;
+                            border: none;
+                            background: #e9a886;
+                            outline: none;
+                            border-radius: 10px;
+                            font-size: 1.4rem;
+                            color: #FFF;
+                            cursor: pointer;
+                            ">Submit</button>
+
+                    </div>
                 </div>
             </div>
             

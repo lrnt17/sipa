@@ -476,7 +476,7 @@
 <script src="time.js?v1"></script>
 <script src="like-rating-video.js?v3"></script>
 <!--<script src="community-topics.js?v6"></script>-->
-<script src="video.js?v10"></script>
+<script src="video.js?v11"></script>
 
 <script>
     // Call the updateTimestamps function initially when the page loads

@@ -426,7 +426,7 @@
                             </div>
 
                             <div class="class_37 d-flex flex-row-reverse">
-                                <button class="class_38 btn" style="background-color: #F2C1A7; color:#ffff;" >
+                                <button class="class_38 btn" style="background-color: #e9a886; color:#ffff;" >
                                     Save
                                 </button>
                                 <!--<a href="profile.php">
@@ -477,7 +477,7 @@
                         
 
                         <div class="class_37 d-flex flex-row-reverse">
-                            <button class="class_38 btn" style="background-color: #F2C1A7; color:#ffff; margin-left: 10px; ">
+                            <button class="class_38 btn" style="background-color: #e9a886; color:#ffff; margin-left: 10px; ">
                                 Save
                             </button>
                             <a href="profile.php">

@@ -187,12 +187,12 @@
             max-height: 500px; 
             padding: 2rem;
             box-shadow: none;
-            background-color: #F2C1A7; 
+            background-color: #e9a886; 
             border-top: 1px solid #AC471A;
             animation: slideDownFadeIn 2s ease;
         }
         .show-answer .item-question {
-            background-color: #F2C1A7; 
+            background-color: #e9a886; 
         }
 
         .show-answer .close {

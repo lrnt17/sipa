@@ -83,6 +83,17 @@
                 white-space: normal;
             }
         }
+
+    .rotate{
+        display:none;
+    }
+
+    @media (max-width: 450px) {
+            .rotate.show{
+                display: block;
+            }
+        }
+</style>
     </style>
   
 </head>
@@ -93,7 +104,7 @@
 
 
     <div class="container">
-        <div class="row my-5">
+        <div class="row my-4">
             <div class="col">
                 <div class="row mt-3 mb-5" style="align-items: center;">
                     <div class="col-auto">
@@ -116,7 +127,7 @@
                 </div>
 
                 <div class="button-container" id="button-container">
-                    <button class="btn shadow-sm rounded-pill py-2 px-3" style="background-color:#5887DE; color:white;" id="show-table-button">Compare different types of STDs</button>
+                    <button class="btn shadow-sm rounded-pill py-2 px-3 mb-5" style="background-color:#5887DE; color:white;" id="show-table-button">Compare different types of STDs</button>
                 </div>
                 
             </div>
@@ -130,6 +141,22 @@
 
 
     <section class="js-about-std">
+        <div class="container">
+            <div class="rotate p-3  mb-5 ms-2 me-2 rounded-4" style="background: #e9a886;">
+                <div class="row" style="
+                    display: flex;
+                    align-items: center;
+                    ">
+                    <div class="col-1 me-3">
+                        <i class="fa-solid fa-arrows-left-right-to-line" style="font-size:25px;"></i>
+                    </div>
+                    <div class="col"> 
+                        <p align="justify" style="font-weight:500; margin:0;">Swipe left to view more, and click to access additional information.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
         <div class="container rounded-4 shadow-sm p-5 mb-5" id="table-container" style="display: none; background-color:#D2E0F8;">
             <table class="horizontal-scroll" cellpadding="15" id="mytable">
                 <thead>
@@ -178,6 +205,18 @@
 </body>
 
 <script>
+
+        //show instructions
+        document.getElementById("show-table-button").addEventListener("click", function () {
+            var rotateDiv = document.querySelector(".rotate");
+            
+            // Check if the viewport width is at or below 450px
+            if (window.innerWidth <= 450) {
+                // Toggle the 'show' class to display or hide the .rotate div
+                rotateDiv.classList.toggle("show");
+            }
+        });
+
         // Function to populate and append table rows
         function populateTable(data) {
             var template = document.getElementById("row-template");

@@ -224,7 +224,7 @@
                     </div>
                 </div>
                 <div class="col-auto">
-                    <button type="button" class="btn text-start py-3 px-3 me-3 rounded-4" style="background: #F2C1A7;"  onclick="todays_appointment_list.add_appointment()" class=""><i class="fa-solid fa-plus"></i> &nbsp;  Create New</button> 
+                    <button type="button" class="btn text-start py-3 px-3 me-3 rounded-4" style="background: #e9a886; color:white;"  onclick="todays_appointment_list.add_appointment()" class=""><i class="fa-solid fa-plus"></i> &nbsp;  Create New</button> 
                 </div>
                 
             </div>
@@ -427,7 +427,7 @@
                     <div class="timeslots-new hide"></div>
 
                     <div  class="class_45 d-flex flex-row-reverse" style="width: 94%;">
-                        <button class=" btn px-5 mt-4" style="background-color: #F2C1A7; color:#ffff;">Submit</button>
+                        <button class=" btn px-5 mt-4" style="background-color: #e9a886; color:#ffff;">Submit</button>
                     </div>
                     
                 </form>
@@ -637,7 +637,7 @@
                     <div class="timeslots"></div>
 
                     <div  class="class_45 d-flex flex-row-reverse" style="width: 94%;">
-                        <button class=" btn px-5 mt-4" style="background-color: #F2C1A7; color:#ffff;">Save</button>
+                        <button class=" btn px-5 mt-4" style="background-color: #e9a886; color:#ffff;">Save</button>
                     </div>
                     
                 </form>

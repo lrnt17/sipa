@@ -42,7 +42,7 @@
 
         .slick-prev:before,
         .slick-next:before {
-            color: black !important; 
+            color: #1F6CB5 !important; 
         }
 
         @media (max-width: 450px) {
@@ -93,7 +93,7 @@
             <div class="row">
                 <div class="d-flex justify-content-center mt-1 mb-3">
                     <div style="width: 100%;
-                    background-color: #F2C1A7;
+                    background-color: #e9a886;
                     border-radius: 99px;
                     height: 4px;"></div>
                 </div>

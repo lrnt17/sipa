@@ -134,7 +134,7 @@
                     <div class="js-personal-post ">
                         <?php if(logged_in()):?>
                             <div class="d-grid">
-                                <button onclick="allposts.new_topic()" class="btn text-start p-3 rounded-4" style="background: #F2C1A7;" id="btn"> <i class="fa-solid fa-plus js-toggle-icon"></i> &nbsp; Start New Topic</button>
+                                <button onclick="allposts.new_topic()" class="btn text-start p-3 rounded-4" style="background: #e9a886;" id="btn"> <i class="fa-solid fa-plus js-toggle-icon"></i> &nbsp; Start New Topic</button>
                             </div>
 
                             <form onsubmit="allposts.submit(event)" method="post" class="js-start-topic class_42 hide p-4 rounded-5 shadow-sm" style="background: #fff;" >
@@ -160,7 +160,7 @@
 
                         <?php else:?>
                             <div class="d-grid" >
-                                <p class="text-start p-3 rounded-4" style="background: #F2C1A7;" > <i class="fa-solid fa-circle-exclamation"> </i> You're not signed in. 
+                                <p class="text-start p-3 rounded-4" style="background: #e9a886;" > <i class="fa-solid fa-circle-exclamation"> </i> You're not signed in. 
                                 <a href="login_1.php" class="js-link" style="text-decoration:none;">Click here to sign in and post</a></p>
                             </div>
                         <?php endif;?>

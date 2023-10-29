@@ -199,8 +199,9 @@ var single_video = {
         saveButton.classList.add('js-save-button', 'btn' , 'px-3', 'mr-3');
         saveButton.innerHTML = 'Save';
 
-        saveButton.style.backgroundColor = '#F2C1A7';
+        saveButton.style.backgroundColor = '#e9a886';
         saveButton.style.fontSize="12px";
+        saveButton.style.color ='#ffff';
 
         // Add a Cancel button for canceling the edit
         let cancelButton = document.createElement('button');
@@ -813,8 +814,9 @@ var single_video = {
         saveButton.classList.add('js-save-edit','btn' , 'px-3', 'me-3','mt-1');
         saveButton.innerHTML = 'Save';
         
-        saveButton.style.backgroundColor = '#F2C1A7';
+        saveButton.style.backgroundColor = '#e9a886';
         saveButton.style.fontSize='14px';
+        saveButton.style.color ='#ffff';
 
         // Attach event listener to the Save button
         saveButton.addEventListener('click', single_video.save_edited_reply);
