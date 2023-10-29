@@ -394,7 +394,7 @@
                                         Date of Birth
                                     </label>
                                     <div class="class_312 mb-2" >
-                                        <input value="<?=$row['user_dob']?>" placeholder="Email" type="date" name="dob" class="class_33"  required="true">
+                                        <input value="<?=$row['user_dob']?>" placeholder="Email" type="date" name="dob" class="class_33"  disabled>
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
@@ -402,8 +402,8 @@
                                         Sex
                                     </label>
                                     <div class="class_312 mb-2">
-                                        <input type="radio" name="sex" value="Male" <?php if ($user_sex === "Male") echo "checked"; ?>>Male
-                                        <input type="radio" name="sex" value="Female" <?php if ($user_sex === "Female") echo "checked"; ?>>Female
+                                        <input type="radio" name="sex" value="Male" <?php if ($user_sex === "Male") echo "checked"; ?> onclick="return false;" style="pointer-events: none;">Male
+                                        <input type="radio" name="sex" value="Female" <?php if ($user_sex === "Female") echo "checked"; ?> onclick="return false;" style="pointer-events: none;">Female
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
