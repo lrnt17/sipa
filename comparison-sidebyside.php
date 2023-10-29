@@ -200,7 +200,7 @@
               <div class="col-md-6">
 
                 <div class="cap p-3 rounded-4 shadow-sm rounded" style="position: relative; top: -40px; background:#ffff; text-align:center;">
-                   Compare and contrast different contraceptive methods with just a glimpse!               
+                    Ihambing at ikumpara ang iba't ibang paraan ng Contraceptive.               
                 </div>
                 
               </div>
@@ -219,8 +219,7 @@
             </div>
         
             <div class="col-auto">
-                <h3 class="compare" style="font-weight:400;"><b>Compare</b> contraceptive methods</h3>
-                <p>Hover over the birth control icon to view its name.</p>
+                <h3 class="compare" style="font-weight:400;"><b>Ikumpara</b> ang paraang contraceptive</h3>
             </div>
         </div>
 
@@ -233,7 +232,7 @@
                     <i class="fa-solid fa-rotate" style="font-size:25px;"></i>
                 </div>
                 <div class="col"> 
-                    <p align="justify" style="font-weight:500; margin:0;">Rotate your phone to landscape mode for a better view.</p>
+                    <p align="justify" style="font-weight:500; margin:0;">I-rotate ang iyong cellphone sa landscape mode para sa mas maayos na view.</p>
                 </div>
             </div>
         </div>
