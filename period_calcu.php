@@ -95,7 +95,7 @@
               <div class="col-md-6">
 
                 <div class="cap p-3 rounded-4 shadow-sm rounded" style="position: relative; top: -40px; background:#ffff; text-align:center;">
-                    Wondering, “When will I get my period?” ALWAYS know! Our easy tracking tool helps map out your cycle for months.
+                    Nagtataka, 'Kailan ako magkakaroon ng period?' LAGING alamin! Ang aming tracking tool ay tumutulong na i-map out ng iyong cycle para sa mga susunod buwan.
                 </div>
                 
               </div>
@@ -113,8 +113,8 @@
         
             <div class="col-auto mt-3">
                 <div class="row">
-                    <div class="col-auto"><p style="font-size: 2rem;  font-weight:bolder;">Track</p></div>
-                    <div class="col-auto"><p style="font-size: 2rem;" >your periods</p></div>
+                    <div class="col-auto"><p style="font-size: 2rem;  font-weight:bolder;">Subaybayan</p></div>
+                    <div class="col-auto"><p style="font-size: 2rem;" >ang iyong period</p></div>
                 </div>
             </div>
         </div>
@@ -132,7 +132,7 @@
                     align-content: space-between;
                     justify-content: center;
                 ">
-                <label for="last-period" style="font-weight: bold; color:#5A5A5A;">First day of last period</label>
+                <label for="last-period" style="font-weight: bold; color:#5A5A5A;">Unang araw ng iyong period</label>
                     <div class="container p-3 rounded-4 shadow-sm rounded" style="background:#ffff;">
                     <input class="py-3" type="text" id="last-period" placeholder="Select date" style="border: none; outline: none; color:#5A5A5A; text-align: center;" required>
                     </div>
@@ -144,7 +144,7 @@
                     align-content: space-between;
                     justify-content: center;
                 ">
-                <label for="period-length" style="font-weight: bold; color:#5A5A5A;">Length of last <span translate="no"> period </span> (in days)</label>
+                <label for="period-length" style="font-weight: bold; color:#5A5A5A;">Haba ng nakaraang <span translate="no"> period </span> (sa mga araw)</label>
                     <div class="container p-3 rounded-4 shadow-sm rounded" style="background:#ffff;">
                         <input class="py-3" type="number" id="period-length" placeholder="ex. 7" min="1" max="10" value="5" style="border: none;
                         outline: none; color:#5A5A5A;" required>
@@ -157,7 +157,7 @@
                     align-content: space-between;
                     justify-content: center;
                 ">
-                <label for="cycle-length" style="font-weight: bold; color:#5A5A5A;">Length of menstrual cycle (in days)</label>
+                <label for="cycle-length" style="font-weight: bold; color:#5A5A5A;">Haba ng menstrual cycle (sa mga araw)</label>
                     <div class="container p-3 rounded-4 shadow-sm rounded" style="background:#ffff;">
                         <input class="py-3" type="number" id="cycle-length" placeholder="ex. 28" min="21" max="35" value="28" style="border: none;
                         outline: none; color:#5A5A5A;" required>
@@ -210,7 +210,7 @@
         <div class="js-period-calcu-buttons hide">
             <div class="row mt-2" style="justify-content: flex-end;">
                 <div class="col-auto">
-                    <p style="margin-top:10px;">Next 3 months </p>
+                    <p style="margin-top:10px;">Sa susunod na 3 buwan </p>
                 </div>
                 <div class="col-auto">
                     <button id="next-3-months" onclick="period_calcu.next3Months()" class="btn" style="font-size:20px; color:#1F6CB5; float:right;"><i class="fa-solid fa-circle-chevron-right"></i></button>
