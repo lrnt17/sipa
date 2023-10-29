@@ -60,7 +60,7 @@
                 height: 6px;"></div>
             </div>
         </div>
-        <div class="row" class="my-1 custom-width-hidden" style="width:300px;">
+        <div class="row" class="my-1 custom-width-hidden" style="width:350px;">
             <h2 style="color:#383838;">Gaano ka epektibo ang contraception?</h2>
         </div>
         
@@ -77,7 +77,7 @@
     <div class="my-4" style="display: flex; justify-content: center;"> 
         <p class="text-center" style="color:#525252;">Sa karaniwang paggamit ng <span translate="no"> <span class="js-method-name-display" id="js-method-name-display"></span></span>,
         karaniwan <span class="js-preggy"></span> sa bawat 
-        <b>100</b> kababaihan ay mabubuntis sa loob ng isang taon. </p>
+        <b>100</b> kababaihan ay mabubuntis sa loob ng isang taon.</p>
     </div>
 
     <div id="women-container" class="row justify-content-center">

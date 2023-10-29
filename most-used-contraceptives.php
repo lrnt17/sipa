@@ -60,7 +60,8 @@
 
 
         <h2 class="d-flex justify-content-center mb-4" style="color:#383838; text-align: center;">Mga Contraceptive na Madalas Pinipili</h2>
-        <p align="justify" class="mb-4" style="font-weight:300;"> 
+        <center>
+        <p align="justify" class="mb-4" style="font-weight:300; width:85%;"> 
             <b>Paalala</b> : Ang mga sumusunod ay ilan lamang sa mga pamamaraan ng 
             contraceptive na madalas piliin ng mga gumagamit sa aming web application. Hindi 
             ito nagpapakita ng mga ura ng paggamit ng mga pamamaraang ito sa anumang 
@@ -69,6 +70,7 @@
             pagpipilian ay nakadepende sa kalusugan, pamumuhay, at personal 
             na mga kagustuhan ng isang indibidwal.
         </p>
+        </center>
         <div class="row js-most-used-contraceptives" id="most-used-contraceptives" style="justify-content: center;">
 
         </div>
@@ -88,8 +90,14 @@
             <img src="" alt="" class="js-contraceptive-icon" width="60" height="60">
         </div>
         <center><h3 class="js-contraceptive-name p-3">Contraceptive Name</h3></center>
+        <div class="d-flex justify-content-center mt-2 mb-4">
+                <div style="width: 100%;
+                background-color: #e9a886;
+                border-radius: 99px;
+                height: 3px;"></div>
+            </div>
         <!--<div class="lines">
-            <p style="text-align: center;">Used by <span class="js-contraceptive-number-of-users">Number of users: ...</span></p>
+           <p style="text-align: center;">Used by <span class="js-contraceptive-number-of-users">Number of users: ...</span></p>
         </div>-->
         
         
