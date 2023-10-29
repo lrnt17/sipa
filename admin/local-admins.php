@@ -204,7 +204,9 @@
                     </div>
                 </div>
                 <br>
-            <div onclick="bustos_admins.show_add_admin()" style="cursor:pointer;">Add New Administrator</div>
+                <div style="display: flex; justify-content: flex-end;">
+                    <div class="btn text-start py-3 px-3 rounded-4 mb-5" style="background: #e9a886;" onclick="bustos_admins.show_add_admin()" style="cursor:pointer;"> <i class="fa-solid fa-plus"></i> &nbsp; Add New Administrator</div>
+                </div>
             <table cellspacing="0" cellpadding="10" id="admin_table" style="width: -webkit-fill-available;">
                 <thead style="border-bottom: 1px solid black;
                 font-size: 15px;">
@@ -223,68 +225,168 @@
             <div onclick="bustos_admins.delete_admin()" style="cursor:pointer;color:red;" id="delete-admin">Delete</div>
         </div>
 
+        <style>
+            .js-add-admin {
+                position: fixed; /* Stay in place */
+                z-index: 1; /* Sit on top */
+                padding-top: 70px; /* Location of the box */
+                left: 0;
+                top: 0;
+                width: 100%; /* Full width */
+                height: 100%; /* Full height */
+                overflow: auto; /* Enable scroll if needed */
+                background-color: rgb(0,0,0); /* Fallback color */
+                background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            }
+
+            /* Modal Content */
+            .add-admin-container {
+                background-color: #fefefe;
+                margin: auto;
+                width: 50%;
+                border-radius: 25px;
+                box-shadow: 0 0 5px rgba(0,0,0,.3);
+                padding: 3%;
+                max-height: 89vh; /* Set a maximum height for the container (adjust as needed) */
+                overflow-y: auto; 
+            }
+
+            /* The Close Button */
+            .close-btn {
+                color: black;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+            }
+
+            .create-new{
+            width: 100%;
+            padding: 0px 0px 2px 0px;
+            border: none;
+            border-bottom: 2.2px solid #B9B9B9;
+            font-size: 15px;
+            outline: none;
+            margin: 10px 30px 15px 0px;
+        }
+
+        @media (max-width: 850px){
+            .add-admin-container {
+            width: 90% !important;
+            
+            }
+        }
+        </style>
+
         <!-- Adding admin modal -->
         <div class="js-add-admin hide">
-            <div class="class_39" style="float:right;cursor:pointer; margin: 10px;padding:5px;padding-left:10px;padding-right:10px;" onclick="bustos_admins.hide()">X</div>
-            <h1>Add New Administrator</h1>
-            <form onsubmit="bustos_admins.add_admin(event)" method="post">
-                <div class="form">
-                    <label for="fname">First Name *</label>
-                    <input type="text" name="fname" id="fname" required>
+            <div class="add-admin-container">
+                <div class="close-btn" style="float:right;cursor:pointer; margin: 10px;padding:5px;padding-left:10px;padding-right:10px;" onclick="bustos_admins.hide()">&times;</div>
+                <div class="row flex-nowrap mt-4" style="align-items: center;">
+                    <div class="col-auto">
+                        <div class="vl" style="width: 10px;
+                        background-color: #1F6CB5;
+                        border-radius: 99px;
+                        height: 60px;
+                        display: -webkit-inline-box;"></div>
+                    </div>
+                
+                    <div class="col-auto mt-1">
+                        <div class="row">
+                            <div class="col-auto">
+                                <h2 style="font-weight: 400;">Add New Administrator</h2>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="form">
-                    <label for="lname">Last Name *</label>
-                    <input type="text" name="lname" id="lname" required>
-                </div>
-                <div class="form">
-                    <label for="dob">Date of Birth</label>
-                    <input type="date" name="dob" id="dob">
-                </div>
-                <div class="form">
-                    <label for="gender">Gender</label>
-                    <select name="gender" id="gender" required>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                    </select>
-                </div>
-                <div class="form">
-                    <label for="gmail">Email Address *</label>
-                    <input type="email" name="gmail" id="gmail" required>
-                </div>
-                <div class="form">
-                    <label for="partner_facility">Partner Facility</label>
-                    <select name="partner_facility" id="partner_facility" disabled required>
+                <form class="container ms-4 ps-4 pe-4 mt-4 appointment-form" style="width: 94%; display: flex; flex-wrap: wrap;" onsubmit="bustos_admins.add_admin(event)" method="post">
+                    <div class="row" style="width: 100%;">
+                        <div class="col">
+                            <div class="form">
+                                <label for="fname" style="font-size: 15px;">First Name <span style="color:red;">*</span></label>
+                                <input type="text" class="create-new" name="fname" id="fname" required>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form">
+                                <label for="lname" style="font-size: 15px;">Last Name <span style="color:red;">*</span></label>
+                                <input type="text" class="create-new" name="lname" id="lname" required>
+                            </div>
+                        </div>
+                    </div>
 
-                    </select>
-                </div>
-                <div class="form">
-                    <label for="specialization">Specialization *</label>
-                    <select name="specialization" id="specialization" required>
-                        <option value="" disabled selected>Select Specialization</option>
-                        <option value="Obstetrician-Gynecologist (OB-GYN)">Obstetrician-Gynecologist (OB-GYN)</option>
-                        <option value="Obstetrician">Obstetrician</option>
-                        <option value="Gynecologist">Gynecologist</option>
-                        <option value="Family Medicine Physician">Family Medicine Physician</option>
-                        <option value="Nurse Practitioner">Nurse Practitioner</option>
-                        <option value="Nurse-Midwife">Nurse-Midwife</option>
-                        <option value="Sexual Health Specialist">Sexual Health Specialist</option>
-                        <option value="Urologist">Urologist</option>
-                        <option value="Adolescent Medicine Specialist">Adolescent Medicine Specialist</option>
-                        <option value="Planned Parenthood Clinician">Planned Parenthood Clinician</option>
-                        <option value="Reproductive Health Counselor">Reproductive Health Counselor</option>
-                    </select>
-                </div>
-                <div class="form">
-                    <label for="pnum">Phone Number *</label>
-                    <input type="number" name="pnum" id="pnum" required>
-                </div>
+                    <div class="row" style="width: 100%;">
+                        <div class="col">
+                            <div class="form">
+                                <label for="dob" style="font-size: 15px;">Date of Birth</label>
+                                <input type="date" class="create-new" name="dob" id="dob">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form">
+                                <label for="gender" style="font-size: 15px;">Gender <span style="color:red;">*</span> </label>
+                                <select class="create-new" name="gender" id="gender" required>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
 
-                <div class="class_45" >
-                    <button class="class_46">
-                        Register
-                    </button>
-                </div>
-            </form>
+                    <div class="row" style="width: 100%;">
+                        <div class="col">
+                            <div class="form">
+                                <label for="gmail" style="font-size: 15px;">Email Address <span style="color:red;">*</span></label>
+                                <input type="email" class="create-new" name="gmail" id="gmail" required>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form">
+                                <label for="pnum" style="font-size: 15px;">Phone Number <span style="color:red;">*</span></label>
+                                <div style="display: flex; align-items: center;">
+                                    <p style="font-size: 15px; margin-right: 5px; margin-top: 7px;">+63</p>
+                                    <input class="create-new" type="number" name="pnum" id="pnum" required style="" maxlength="10" minlength="10">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" style="width: 100%;">
+                        <div class="col">
+                            <div class="form">
+                                <label for="specialization" style="font-size: 15px;">Specialization <span style="color:red;">*</span></label>
+                                <select class="create-new" name="specialization" id="specialization" required>
+                                    <option value="" disabled selected>Select Specialization</option>
+                                    <option value="Obstetrician-Gynecologist (OB-GYN)">Obstetrician-Gynecologist (OB-GYN)</option>
+                                    <option value="Obstetrician">Obstetrician</option>
+                                    <option value="Gynecologist">Gynecologist</option>
+                                    <option value="Family Medicine Physician">Family Medicine Physician</option>
+                                    <option value="Nurse Practitioner">Nurse Practitioner</option>
+                                    <option value="Nurse-Midwife">Nurse-Midwife</option>
+                                    <option value="Sexual Health Specialist">Sexual Health Specialist</option>
+                                    <option value="Urologist">Urologist</option>
+                                    <option value="Adolescent Medicine Specialist">Adolescent Medicine Specialist</option>
+                                    <option value="Planned Parenthood Clinician">Planned Parenthood Clinician</option>
+                                    <option value="Reproductive Health Counselor">Reproductive Health Counselor</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form">
+                                <label for="partner_facility" style="font-size: 15px;">Partner Facility</label>
+                                <select class="create-new" name="partner_facility" id="partner_facility" disabled required>
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="class_45 d-flex flex-row-reverse" style="width: 94%;">
+                        <button class="class_46 btn px-5 mt-4" style="background-color: #e9a886; color:#ffff;">
+                            Register
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
 
         <!-- View admin details modal -->

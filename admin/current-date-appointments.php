@@ -224,7 +224,7 @@
                     </div>
                 </div>
                 <div class="col-auto">
-                    <button type="button" class="btn text-start py-3 px-3 me-3 rounded-4" style="background: #e9a886; color:white;"  onclick="todays_appointment_list.add_appointment()" class=""><i class="fa-solid fa-plus"></i> &nbsp;  Create New</button> 
+                    <button type="button" class="btn text-start py-3 px-3 me-3 rounded-4" style="background: #e9a886;"  onclick="todays_appointment_list.add_appointment()" class=""><i class="fa-solid fa-plus"></i> &nbsp;  Create New</button> 
                 </div>
                 
             </div>
