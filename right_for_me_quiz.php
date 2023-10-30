@@ -121,8 +121,8 @@ if (mysqli_num_rows($result) > 0) {
             <table class="table table-hover">
                 <tr>
                     <th>Contraceptive Method</th>
-                    <th>How was your Experience?</th>
-                    <th>Would you consider using this again?</th>
+                    <th>Ano ang karanasan mo?</th>
+                    <th>Ikukunsidera mo bang gamitin ito ulit?</th>
                 </tr>
                 <?php
         $methods = ($userSex === "Male") ? $methodsForMale : $methodsForFemale;
@@ -146,7 +146,7 @@ if (mysqli_num_rows($result) > 0) {
         ?>
             </table>
             <br>
-            <input type="checkbox" id="user-experience-checkbox-none"> <label for="user-experience-checkbox-none">I have not used any of these methods</label>
+            <input type="checkbox" id="user-experience-checkbox-none"> <label for="user-experience-checkbox-none"> Hindi ko pa ginamit ang alinman sa mga method na ito</label>
 
         </div>
     </div>
@@ -173,7 +173,7 @@ if (mysqli_num_rows($result) > 0) {
     <div class="container p-5 rounded-2 shadow-sm rounded" style="background:white;">
         <div class ="personal-preferences-container" id="personal-preferences-container">
 
-                <span><b>Cost effectiveness</b></span>
+                <span><b>Epektibo ng gastos</b></span>
                 <br>
                 <div class="row m-3">
                     <div class="col-md">
@@ -194,7 +194,7 @@ if (mysqli_num_rows($result) > 0) {
                 </div>
                 <br>
                 <div name="female-specific-section">
-                    <span><b>Helps with managing periods and side effects</b></span>
+                    <span><b>Tumutulong sa pag-manage ng regla at mga epekto</b></span>
                     <br>
                     <div class="row m-3">
                         <div class="col-md">
@@ -215,7 +215,7 @@ if (mysqli_num_rows($result) > 0) {
                     </div>
                 </div>
                 <br>
-                <span><b>Effective at preventing pregnancy</b></span>
+                <span><b>Epektibo sa pagpigil ng pagbubuntis</b></span>
                 <br>
                 <div class="row m-3">
                     <div class="col-md">
@@ -237,7 +237,7 @@ if (mysqli_num_rows($result) > 0) {
 
                 <br>
                 <div name="female-specific-section">
-                    <span><b>Low possibility of gaining weight</b></span>
+                    <span><b>Mababang posibilidad ng pagtaba</b></span>
                     <br>
 
                     <div class="row m-3">
@@ -286,14 +286,14 @@ if (mysqli_num_rows($result) > 0) {
 
     <div class="cont p-5 rounded-2 shadow-sm rounded" style="background:white;">
         <div class ="medical-history-container" id="medical-history-container">
-            <p><b>Do you have a concern about any of the following conditions? (choose all that apply)<span style="color: red;"> *</span></b></p>
+            <p><b>Mayroon ka bang concern tungkol sa alinman sa mga sumusunod na kondisyon? (Pumili ng lahat na naaangkop)<span style="color: red;"> *</span></b></p>
             <input type="checkbox" name="med-hist-chckbx" id="depression"> <label style="display: inline !important;" for="depression"> Depression or anxiety</label><br>
             <input type="checkbox" name="med-hist-chckbx" id="acne"> <label style="display: inline !important;" for="acne"> Acne and breakouts</label><br>
             <input type="checkbox" name="med-hist-chckbx" id="blood-clotting-disorder"> <label style="display: inline !important;" for="blood-clotting-disorder"> Blood clotting disorder</label><br>
             <div id="pcosSection"><input type="checkbox" name="med-hist-chckbx" id="pcos"> <label style="display: inline !important;" for="pcos"> Polycystic Ovary Syndrome (PCOS) or Endometriosis</label><br></div>
             <input type="checkbox" name="med-hist-chckbx" id="hypertension"> <label style="display: inline !important;" for="hypertension"> Hypertension or highblood pressure</label><br>
             <input type="checkbox" name="med-hist-chckbx" id="treatment-for-sti"> <label style="display: inline !important;" for="treatment-for-sti"> Treatment for Sexual Transmitted Infection (STIs)</label><br><br>
-            <input type="checkbox"  id="none-of-the-above"> <label style="display: inline !important;" for="none-of-the-above"><b> None of the above</b></n></label>
+            <input type="checkbox"  id="none-of-the-above"> <label style="display: inline !important;" for="none-of-the-above"><b> Wala sa mga nabanggit</b></n></label>
             
         </div>
     </div>
@@ -320,7 +320,7 @@ if (mysqli_num_rows($result) > 0) {
     <div class="cont p-5 rounded-2 shadow-sm rounded" style="background:white;">
     <div class ="additional-factors-container" id="additional-factors-container-female">
             <div class = "number-1-additional-factor" id="number-1-additional-factor">
-                <p><b>1. How do you feel about the insertion of a foreign object into your vagina?<span style="color: red;"> *</span></b></p>
+                <p><b>1. Ano ang nararamdaman mo tungkol sa pagpapasok ng isang bagay sa iyong ari o vagina?<span style="color: red;"> *</span></b></p>
                 <label><input type="radio" class="additional-factors-radio" value= "veryComfortable" id="very-comfortable" name="answer1"> Very Comfortable</label><br>
                 <label><input type="radio" class="additional-factors-radio" value= "comfortable" id="comfortable" name="answer1"> Comfortable</label><br>
                 <label><input type="radio" class="additional-factors-radio" value= "neutral" id="neutral" name="answer1"> Neutral</label><br>
@@ -329,7 +329,7 @@ if (mysqli_num_rows($result) > 0) {
             </div>
             <br>
             <div class = "number-2-additional-factor" id="number-2-additional-factor">
-                <p><b>2. At what hormone level do you feel most comfortable?<span style="color: red;"> *</span></b></p>
+                <p><b>2. Sa anong hormone level ka pinakakumportable?<span style="color: red;"> *</span></b></p>
                 <label><input type="radio" class="additional-factors-radio" value="no-hormones" id="no-hormones" name="answer2"> No hormones</label><br>
                 <label><input type="radio" class="additional-factors-radio" value="one-hormone" id="one-hormone" name="answer2"> One hormone (progestin only methods)</label><br>
                 <label><input type="radio" class="additional-factors-radio" value="two-hormones" id="two-hormones" name="answer2"> Two hormones (progestin and estrogen methods)</label><br>
@@ -337,7 +337,7 @@ if (mysqli_num_rows($result) > 0) {
             </div>
             <br>
             <div class = "number-3-additional-factor" id="number-3-additional-factor">
-                <p><b>3. How often do you want to use your contraceptive method?<span style="color: red;"> *</span></b></p>
+                <p><b>3. Gaano kadalas mo gustong gamitin ang iyong contraceptive method?<span style="color: red;"> *</span></b></p>
                 <label><input type="radio" class="additional-factors-radio" value="daily" id="daily" name="answer3"> Daily</label><br>
                 <label><input type="radio" class="additional-factors-radio" value="weeklyl" id="weekly" name="answer3"> Weekly</label><br>
                 <label><input type="radio" class="additional-factors-radio" value="monthly" id="monthly" name="answer3"> Monthly</label><br>
@@ -346,14 +346,14 @@ if (mysqli_num_rows($result) > 0) {
             </div>
             <br>
             <div class = "number-4-additional-factor" id="number-4-additional-factor">
-            <p><b>4. Will you consider a permanent contraceptive method like the tubal ligation?<span style="color: red;"> *</span></b></p>
+            <p><b>4. Ikukunsidera mo ba ang permanenteng contraceptive method tulad ng tubal ligation?<span style="color: red;"> *</span></b></p>
                 <label><input type="radio" class="additional-factors-radio" value="yes" id="yes" name="answer4"> Yes</label><br>
                 <label><input type="radio" class="additional-factors-radio" value="no" id="no" name="answer4"> No</label><br>
                 <label><input type="radio" class="additional-factors-radio" value="dontknow3" id="dontknow3" name="answer4"> I don't know/ no preference</label>
             </div>
             <br>
             <div class = "number-5-additional-factor" id="number-5-additional-factor">
-                <p><b>5. How comfortable are you with methods that only require fertility awareness?<span style="color: red;"> *</span></b></p>
+                <p><b>5. Gaano ka kumportable sa mga paraang nangangailangan lamang ng fertility awareness?<span style="color: red;"> *</span></b></p>
                 <label><input type="radio" class="additional-factors-radio" value= "veryComfortable" id="very-comfortable" name="answer5"> Very Comfortable</label><br>
                 <label><input type="radio" class="additional-factors-radio" value= "comfortable" id="comfortable" name="answer5"> Comfortable</label><br>
                 <label><input type="radio" class="additional-factors-radio" value= "neutral" id="neutral" name="answer5"> Neutral</label><br>
@@ -364,7 +364,7 @@ if (mysqli_num_rows($result) > 0) {
 
         <div class="additional-factors-container" id="additional-factors-container-male" style="display:none;">
             <div class="number-1-additional-factor-male" id="number-1-additional-factor-male">
-                <p><b>1. How much does being unplanned matter in your choice of birth control?</b><span style="color: red;"> *</span></p>
+                <p><b>1. Gaano kahalaga para sa iyo ang pagiging hindi planado sa pagpili ng iyong birth control?</b><span style="color: red;"> *</span></p>
                 <label><input type="radio" class="additional-factors-radio" value="veryImportant" name="maleAnswer1"> Very Important</label><br>
                 <label><input type="radio" class="additional-factors-radio" value="important" name="maleAnswer1"> Important</label><br>
                 <label><input type="radio" class="additional-factors-radio" value="neutral" name="maleAnswer1"> Neutral</label><br>
@@ -373,7 +373,7 @@ if (mysqli_num_rows($result) > 0) {
             </div>
             <br>
             <div class="number-2-additional-factor-male" id="number-2-additional-factor-male">
-                <p><b>2. How important is ease of use for you?</b><span style="color: red;"> *</span></p>
+                <p><b>2. Gaano kahalaga ang kadalian ng paggamit para sa iyo?</b><span style="color: red;"> *</span></p>
                 <label><input type="radio" class="additional-factors-radio" value="veryImportant" name="maleAnswer2"> Very Important</label><br>
                 <label><input type="radio" class="additional-factors-radio" value="important" name="maleAnswer2"> Important</label><br>
                 <label><input type="radio" class="additional-factors-radio" value="neutral" name="maleAnswer2"> Neutral</label><br>
@@ -382,7 +382,7 @@ if (mysqli_num_rows($result) > 0) {
             </div>
             <br>
             <div class="number-3-additional-factor-male" id="number-3-additional-factor-male">
-                <p><b>3. How important is preventing sexually transmitted infections (STIs) for you?</b><span style="color: red;"> *</span></p>
+                <p><b>3. Gaano kahalaga sa iyo ang pag-iwas sa sexually transmitted infections (STIs)?</b><span style="color: red;"> *</span></p>
                 <label><input type="radio" class="additional-factors-radio" value="veryImportant" name="maleAnswer3"> Very Important</label><br>
                 <label><input type="radio" class="additional-factors-radio" value="important" name="maleAnswer3"> Important</label><br>
                 <label><input type="radio" class="additional-factors-radio" value="neutral" name="maleAnswer3"> Neutral</label><br>
@@ -391,7 +391,7 @@ if (mysqli_num_rows($result) > 0) {
             </div>
         <br>
         <div class="number-4-additional-factor-male" id="number-4-additional-factor-male">
-                <p><b>4. How important is long-term contraception for you?</b><span style="color: red;"> *</span></p>
+                <p><b>4. Gaano kahalaga sa iyo ang pangmatagalan na contraception?</b><span style="color: red;"> *</span></p>
                 <label><input type="radio" class="additional-factors-radio" value="veryImportant" name="maleAnswer4"> Very Important</label><br>
                 <label><input type="radio" class="additional-factors-radio" value="important" name="maleAnswer4"> Important</label><br>
                 <label><input type="radio" class="additional-factors-radio" value="neutral" name="maleAnswer4"> Neutral</label><br>
@@ -400,7 +400,7 @@ if (mysqli_num_rows($result) > 0) {
             </div>
             <br>
         <div class="number-5-additional-factor-male" id="number-5-additional-factor-male">
-                <p><b>5. How comfortable are you with the idea of a permanent contraceptive method?</b><span style="color: red;"> *</span></p>
+                <p><b>5. Gaano ka kumportable sa ideya ng isang permanenteng contraceptive method?</b><span style="color: red;"> *</span></p>
                 <label><input type="radio" class="additional-factors-radio" value="veryComfortable" name="maleAnswer5"> Very Comfortable</label><br>
                 <label><input type="radio" class="additional-factors-radio" value="comfortable" name="maleAnswer5"> Important</label><br>
                 <label><input type="radio" class="additional-factors-radio" value="neutral" name="maleAnswer5"> Neutral</label><br>

@@ -168,7 +168,7 @@ select {
         
             <div class="col mt-3">
                 <h5>Your recommendation</h5>
-                <p> Based on your answers, these are the top <span class="js-num-of-rank-methods"></span> methods to consider.</p>
+                <p> Batay sa iyong mga sagot, ito ang mga top <span class="js-num-of-rank-methods"></span> na mga method na maaari mong i-consider.</p>
             </div>
         </div>
 
@@ -242,7 +242,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo"<div class='row my-5' style='align-items: center;'>";
           echo"<div class='col-md-7 py-3 px-4 mb-4 ' style='background:;'>";
             echo"<center><h1><i class='fa-solid  fa-face-frown my-4' style='color:#4C5DA9; font-size:4rem;'></i></h1></center>";
-            echo "<h5 class='mb-4'>We're sorry but based on the result of your test, there is no method that we can recommend to you as of the moment. Consider consulting to a doctor to help you choose what is the best method for you.</h5>";
+            echo "<h5 class='mb-4'>Batay sa resulta ng iyong pagsusuri, wala kaming maire-rekomenda na method sa iyo sa ngayon. Ipinapayo na makipag-ugnayan sa isang doktor upang tulungan ka sa pagpili ng pinakamahusay paraan para sa iyo.</h5>";
           echo "</div>";
 
           echo"<div class='col'>";
@@ -278,7 +278,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
 <p align="justify" class="mb-5 mt-3" style="font-weight:300; font-size:15px;"> 
-        <b>Disclaimer</b> : Our recommendations are intended to inform you about potential contraception methods based on your provided information. This test is crafted with the guidance of qualified healthcare provider for personalized guidance on contraception choices. However, they do not replace professional medical advice. You are the one to make the final decision on the what you think is the most appropriate method for yourself. You are responsible for the accuracy of the information provided. We are not liable for any damages or losses resulting from website use or reliance on the recommendations.
+        <b>Paalala</b> : Ang aming mga rekomendasyon ay layunin lamang na magbigay-kaalaman sa iyo tungkol sa mga potensyal na paraan ng kontrasepsyon batay sa iyong ibinigay na impormasyon. Ang pagsusulit na ito ay ginawa sa pamamagitan ng gabay ng isang kwalipikadong tagapagkalinga ng kalusugan para sa personalisadong gabay sa pagpili ng kontrasepsyon. Gayunpaman, hindi ito pumapalit sa propesyonal na payo medikal. Ikaw ang huling magdedesisyon kung alin sa tingin mo ang pinakatamang paraan para sa iyo. Ikaw ang responsable sa kahusayan ng impormasyong ibinigay. Hindi kami mananagot para sa anumang pinsala o kawalan dulot ng paggamit ng website o pagtitiwala sa mga rekomendasyon.
 </p>
 <div class="swipe p-3  mb-4 ms-2 me-2 rounded-4" style="background: #e9a886;">
 <p align="justify" style="font-weight:500; margin:0;">Swipe left to view other recommended methods.</p>
@@ -315,8 +315,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         
             <div class="col">
-                <h5>Select a contraceptive method based on the result of your assessment.</h5>
-                <p>If unsure, you can click the skip button below.</p>
+                <h5>Pumili ng contraceptive method batay sa resulta ng iyong pagsusuri.</h5>
+                <p>Kung hindi sigurado, maaari kang mag-click ng skip button sa ibaba.</p>
             </div>
     </div>
   <!-- New Save Button -->
@@ -340,7 +340,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <p class="text-start" >
     <div style="text-align: center;">
     <i class="fa-solid fa-prescription mb-4" style="font-size:30px;"></i>
-    </div>Your selected method does not need SMS reminder as it is used every time you need it. Make sure to follow the directions on how to use it to ensure its effectiveness!</p>
+    </div>Ang iyong napiling method ay hindi nangangailangan ng SMS reminder sapagkat ito ay ginagamit tuwing kailangan mo ito. Siguruhing sundin ang mga directions kung paano ito gamitin upang mapanatili ang epektibong paggamit nito!</p>
   </div>
         <div class="col mt-3 d-flex justify-content-center">
             <a class="js-link" href="right_for_me_1.php" style=" text-decoration: none; color:black;">
@@ -361,7 +361,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           
               <div class="col mt-3">
                   <h5>SMS</h5>
-                  <p >Contraceptive method reminder via</p>
+                  <p>Contraceptive method sa pamamagitan ng SMS</p>
                   
               </div>
   </div>
@@ -376,7 +376,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
             <div class="col mt-2">
                 <div class="row">
-                    <div class="col-auto"><p style="color:#5A5A5A;">Would you like to receive SMS reminders to take your selected contraceptive method as recommended?</p></div>
+                    <div class="col-auto"><p style="color:#5A5A5A;">Nais mo bang tumanggap ng SMS reminders sa paggamit ng iyong napiling contraceptive method ayon sa rekomendasyon?</p></div>
                 </div>
             </div>
         </div>
@@ -414,12 +414,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         
             <div class="col mt-2">
-              <p style="color:#5A5A5A;">How many times would you like to use this  method?</p>
+              <p style="color:#5A5A5A;">Ilang beses mo nais gamitin ang method na ito?</p>
             </div>
 </div>
 
 <div class="row mx-5">
-    <p class="mx-2" style="font-size:12px; color:#5A5A5A;">(Ex.: 2 times, and Mini Pill is the selected method.  You will opt to receive SMS reminders for 2 months because you will take <b>2 packs of pills</b>.) </p>
+    <p class="mx-2" style="font-size:12px; color:#5A5A5A;">(Ex.: 2 times, at ang Mini Pill ay ang napiling method. Ikaw ay makakatanggap ng SMS reminders ng 2 buwan dahil ikaw ay kukuha ng <b>2 packs ng pills</b>.) </p>
 </div>
 
 <!--niliitan ko lang to kasi parang note lang sya ikaw na po bahala mag adjust -->
@@ -442,7 +442,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!-- Create a container for the Save button -->
 <div id="save_button_container_txt" class="my-4 custom-width-hidden" >
   <div class="d-flex justify-content-end" style="text-align: right;">  
-    <p style="font-size:14px; color:#5A5A5A;">Once your inputs have been saved, you will start receiving SMS reminders for taking your selected contraceptive method.</p>
+    <p style="font-size:14px; color:#5A5A5A;">Kapag na-save na ang iyong mga input, ikaw ay magsisimulang makatanggap ng SMS reminders para sa pag-inom o paggamit ng iyong napiling contraceptive method.</p>
   </div>
 </div>
 
@@ -622,7 +622,7 @@ function showDatePicker() {
   datePickerContainer.classList.add("m-4");
 
   const datePickerLabel = document.createElement("label");
-  datePickerLabel.textContent = "Select the date on when you want to begin your contraceptive method: ";
+  datePickerLabel.textContent = "Pumili ng petsa kung kailan mo nais simulan ang iyong contraceptive method: ";
 
    // Create and append the provided HTML content
    const additionalContent = document.createElement("div");
@@ -632,7 +632,7 @@ function showDatePicker() {
         <div class="vl" style="width: 20px; background-color: #e9a886; border-radius: 99px; height: 20px; display: -webkit-inline-box;"></div>
       </div>
       <div class="col mt-2">
-        <p style="color:#5A5A5A;">Select the date on when you want to begin your contraceptive method: </p>
+        <p style="color:#5A5A5A;">Pumili ng petsa kung kailan mo nais simulan ang iyong contraceptive method: </p>
       </div>
     </div>
   `;
