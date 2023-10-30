@@ -121,7 +121,7 @@
             display: none;
         }
 
-        .topbar, .dash, .todays-appointment-section{
+        .topbar, .dash, .todays-appointment-section, .table-not-included{
             display: none !important;
         }
 
@@ -373,6 +373,18 @@
                         <div class ="printBtnContainer" ><button onclick="window.print()" class="btn px-5 my-3" style="background-color: #e9a886; color:#ffff;"> Print Result </button></div>
 
                     </div>
+
+                    <div class="table-not-included">
+                    <hr style="color: #002C5F; background-color: #002C5F; height: 2px; border: none;">
+                        <div class="col-auto mt-4">
+                            <div class="row">
+                                <div class="col-auto">
+                                    <h2 style="font-weight: 600;">SiPa Users' Selected Method Table</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <?php include('tables.php') ?>
+                    </div>
                 </div>
             </div>
             
@@ -467,7 +479,7 @@
                 },
                 title: {
                     display: true,
-                    text: 'Users\' Selected Method Chart',
+                    text: 'Users\' Selected Method Pie Chart',
                     font: {
                         family: "'Lato', sans-serif"
                     },
