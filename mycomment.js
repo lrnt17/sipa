@@ -753,13 +753,13 @@ var mycomment = {
                         innerDiv.appendChild(iElement);
 
                         // Add text node to inner div
-                        let textNode = document.createTextNode(" You're not signed in. ");
+                        let textNode = document.createTextNode("  Hindi ka naka-sign in. ");
                         innerDiv.appendChild(textNode);
 
                         // Create the p element
                         let pElement = document.createElement('p');
                         pElement.setAttribute('style', 'color: blue;');
-                        pElement.textContent = 'Click here to sign in and reply';
+                        pElement.textContent = 'I-click dito para mag-sign in at mag-reply.';
                         innerDiv.appendChild(pElement);
 
                         // Append inner div to outer div
