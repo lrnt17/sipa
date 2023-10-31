@@ -78,6 +78,8 @@
                             <p class="mt-3" style="color:#383838;" align="justify"><?=$data = nl2br($row['birth_control_how_to_use'])?></p>
                             <h4>Gaano ang itinatagal ng <span><?=$row['birth_control_name']?></span>?</h4>
                             <p class="mt-3" style="color:#383838;" align="justify"><?=$data = nl2br($row['birth_control_duration'])?></p>
+                            <h4>Gaano ito kaepektibo?</h4>
+                            <p class="mt-3" style="color:#383838;" align="justify"><?=$data = nl2br($row['birth_control_effectivity_rate'])?></p>
                         </div>
                     </div>
 
