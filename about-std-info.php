@@ -207,7 +207,7 @@
         <div class="js-rrl-item pb-4">
             <p class="js-rrl-title" style="margin-bottom:0px; font-weight:600;">Literature 1</p>
             <p class="js-rrl-content" style="margin-bottom:0px; display:inline;">Content of literature 2...</p>
-            <a class="js-rrl-link" href="#" style="text-decoration:none;"></a>
+            <a class="js-rrl-link" href="#" style="text-decoration:none;" target="_blank"></a>
         </div>
     </template>
 
