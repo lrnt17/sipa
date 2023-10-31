@@ -408,7 +408,7 @@
         </div>
 
         <div class="con mt-4 rounded-3 shadow-sm px-4 py-3" style="background-color: white; max-width: max-content;">
-            <label for="estimatedTotalPrice">Ikaw ay gagastos</label>
+            <label for="estimatedTotalPrice">Ikaw ay gagastos ng</label>
             <span style="width: 4px;
                     background-color: #7B7777;
                     border-radius: 99px;
@@ -545,7 +545,7 @@
             const selectedMethodTextReco = document.getElementById('selected-method-text-reco');
             const selectedMethodReminder = document.getElementById('selectedMethodReminder');
             selectedMethodTextReco.textContent = selectedMethod;
-            selectedMethodReminder.textContent = "Ikaw ay gumagamit ng " + selectedMethod +". Iniihikayat ka namin na manatiling may kaalaman ukol dito sa pamamagitan ng pagbisita sa aming 'about contraceptive page'." ;
+            selectedMethodReminder.textContent = "Ikaw ay gagamit ng " + selectedMethod +". Hinihikayat ka namin na manatiling may alam ukol dito sa pamamagitan ng pagbisita sa aming 'about contraceptive page'." ;
 
             // Hide condom-related containers
             condomIfYesContainer.style.display = 'none';
