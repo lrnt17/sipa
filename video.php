@@ -348,8 +348,8 @@
                                 <?php else:?>
                                     <div class="">
                                         <div onclick="user.login()" class="" style="cursor:pointer;text-align: center;"  >
-                                            <i class="fa-solid fa-circle-exclamation"> </i> You're not signed in. 
-                                            <p style="color: blue;">Click here to sign in and comment</p>
+                                            <i class="fa-solid fa-circle-exclamation"> </i> Hindi ka naka-sign in.
+                                            <p style="color: blue;">I-click dito para mag-sign in at mag-comment.</p>
                                         </div>
                                     </div>
                                 <?php endif;?>
@@ -476,7 +476,7 @@
 <script src="time.js?v1"></script>
 <script src="like-rating-video.js?v3"></script>
 <!--<script src="community-topics.js?v6"></script>-->
-<script src="video.js?v11"></script>
+<script src="video.js?v12"></script>
 
 <script>
     // Call the updateTimestamps function initially when the page loads

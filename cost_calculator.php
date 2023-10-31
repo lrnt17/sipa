@@ -130,7 +130,7 @@
               <div class="col-md-6">
 
                 <div class="cap p-3 rounded-4 shadow-sm rounded" style="position: relative; top: -40px; background:#ffff; text-align:center; font-size:15px;">
-                This birth control calculator was designed to help you compare the costs and effectiveness of different contraceptive options.
+                    Ang birth control calculator na ito ay nilikha upang tulungan kang ihambing ang mga gastos at epektibo ng iba't ibang mga contraceptive.
                 </div>
                 
               </div>
@@ -147,12 +147,12 @@
             </div>
         
             <div class="col-auto mt-3">
-                    <div class="col-auto"><p style="font-size: 2rem;  font-weight:bolder;">Cost <span style="font-weight:normal;">calculator</span></p></div>
+                    <div class="col-auto"><p style="font-size: 2rem;  font-weight:bolder;">I-calculate ang<span style="font-weight:normal;"> Gastos</span></p></div>
             </div>
         </div>
 
         <div class="row mt-4 mb-3">
-            <h5 style="color:#383838;">Select a contraceptive method:</h5>
+            <h5 style="color:#383838;">Pumili ng contraceptive method:</h5>
         </div>
 
     <div class="cost-calculator-container" id="cost-calculator-container">
@@ -214,7 +214,7 @@
             <div class="col-auto">
                 <div class="longevity-input-container mx-5 mb-3 rounded-3 shadow-sm px-4 py-3" id="longevity-input-container" style="background-color: white; max-width: 330px; ">
                 <!--longevity ay nakaset na, so pag nagselect sa dropdown makikita kung ilang days, months, or weeks ittake yung selected method-->
-                    <label for="longevity">Longevity</label>
+                    <label for="longevity">Tagal</label>
                     <span style="width: 4px;
                     background-color: #7B7777;
                     border-radius: 99px;
@@ -233,8 +233,8 @@
 
             <div class="col-auto">
 
-                <div class="estimated-price-input-container mx-5 mb-3 rounded-3 shadow-sm px-4 py-3" id="estimated-price-input-container" style="background-color: #EFEFEF; max-width: 320px; display:none">
-                    <label class="pt-2" for="estimatePrice">Estimated Price</label>
+                <div class="estimated-price-input-container mx-5 mb-3 rounded-3 shadow-sm px-4 py-3" id="estimated-price-input-container" style="background-color: #EFEFEF; max-width: 345px; display:none">
+                    <label class="pt-2" for="estimatePrice">Tinatayang Presyo</label>
                     <span style="width: 4px;
                     background-color: #7B7777;
                     border-radius: 99px;
@@ -252,8 +252,8 @@
     </div>
 
 
-    <div class="condom-input-container mx-5 rounded-3 shadow-sm px-4 py-3" id="condom-input-container" style="background-color: white; max-width: 330px; display:none">
-        <label for="condom">Do you also buy condoms?</label>
+    <div class="condom-input-container mx-5 rounded-3 shadow-sm px-4 py-3" id="condom-input-container" style="background-color: white; max-width: 350px; display:none">
+        <label for="condom">Bumibili ka rin ba ng condom?</label>
         <span style="width: 4px;
                     background-color: #7B7777;
                     border-radius: 99px;
@@ -274,7 +274,7 @@
     <div class="condom-if-yes-container" id="condom-if-yes-container" style="display:none">
 
         <div class="amount-needed-input-container  mx-5 rounded-3 shadow-sm px-4 py-3" style="background-color: white; max-width: max-content;">
-            <label for="need">How many do you usually need?<span style="color: red;"> *</span></label>
+            <label for="need">Ilan ang karaniwang kailangan mo?<span style="color: red;"> *</span></label>
             <span style="width: 4px;
                     background-color: #7B7777;
                     border-radius: 99px;
@@ -295,7 +295,7 @@
         <div class="row">
             <div class="col-auto mt-4">
                 <div class="amount-package-input-container mx-5 rounded-3 shadow-sm px-4 py-3" style="background-color: #FFFFFF;max-width: 330px; ">
-                    <label for="amountPackage">Amount in Package</label>
+                    <label for="amountPackage">Bilang sa Pakete</label>
                     <span style="width: 4px;
                     background-color: #7B7777;
                     border-radius: 99px;
@@ -309,8 +309,8 @@
             </div>
 
             <div class="col-auto mt-4 mb-4">
-                <div class="estimated-condom-price-input-container mx-5 rounded-3 shadow-sm px-4 py-3" style="background-color: #EFEFEF; max-width: 380px; ">
-                    <label for="estimateCondomPrice">Estimated Price per Package</label>
+                <div class="estimated-condom-price-input-container mx-5 rounded-3 shadow-sm px-4 py-3" style="background-color: #EFEFEF; max-width: 450px; ">
+                    <label for="estimateCondomPrice">Tinatayang Presyo bawat Pakete</label>
                     <span style="width: 4px;
                     background-color: #7B7777;
                     border-radius: 99px;
@@ -340,12 +340,12 @@
                     </div>
                 
                     <div class="col-auto mt-2">
-                            <div class="col-auto"><h3>Recommended Brands</h3></div>
+                            <div class="col-auto"><h3>Inirerekomendang Brands</h3></div>
                     </div>
                 </div>
                 <!--name ng selected method malalagay dine -->
                 <h4 class="mt-4 mb-3" style="font-size:20px; color:#383838;"> <span id="selected-method-text-reco"></span></h4>
-                <p>Select a brand:</p>
+                <p>Pumili ng brand:</p>
 
                 <div class="method-brands-container" id="method-brands-container">
                     <!--selected method brands malalagay dito na nakabutton -->
@@ -356,7 +356,7 @@
          <!--nakahide muna to, magshow lang if yes sa do you buy condoms-->
             <div class="condom-if-yes-container" id="condom-brand" style="display:none" >
                 <h4 class="mt-3 mb-3" style="font-size:20px; color:#383838;">Condom</h4>
-                <p>Select condom brand:</p>
+                <p>Pumili ng condom brand:</p>
                 <!-- Generate buttons for condom brands -->
                 <?php
                 $query2 = "SELECT brand_name, brand_img, brand_price, brand_amount_package FROM birth_control_brand_price WHERE birth_control_id = 8";
@@ -385,10 +385,10 @@
 
 
     <div class="container cost_calculator_result p-5 my-5 rounded-4 shadow-sm " id="cost_calculator_result" style= "background: #D2E0F8; display:none">
-        <h3>Result</h3>
+        <h3>Resulta</h3>
 
         <div class="con mt-4 rounded-3 shadow-sm px-4 py-3" style="background-color: white; max-width: max-content;">
-            <label for="cost">How much will you spend over...</label>
+            <label for="cost">Magkano ang iyong gagastusin sa loob ng...</label>
                 <span style="width: 4px;
                     background-color: #7B7777;
                     border-radius: 99px;
@@ -408,7 +408,7 @@
         </div>
 
         <div class="con mt-4 rounded-3 shadow-sm px-4 py-3" style="background-color: white; max-width: max-content;">
-            <label for="estimatedTotalPrice">You will spend</label>
+            <label for="estimatedTotalPrice">Ikaw ay gagastos</label>
             <span style="width: 4px;
                     background-color: #7B7777;
                     border-radius: 99px;
@@ -422,8 +422,8 @@
 
         <br><br>
          <!--mag switch case dito para macheck ano yung selected method tas kuhanin sa db effectivetess rate, check din if nakayes sa condom para lumabas yung youre mixing two types of birth control note. nakaphp echo dat yung method na pinili-->
-         <p style="font-size:14px"><b>Your chosen type of birth control is <span id="effectiveness-rate"></span> effective.</b></p>
-         <p id ='mixingBirthControl' style ="display:none;">You’re mixing two types of birth control. This makes the efficacy higher that it would’ve been if you weren’t also using condoms.</p> 
+         <p style="font-size:14px"><b>Ang napiling uri ng birth control ay <span id="effectiveness-rate"></span> epektibo.</b></p>
+         <p id ='mixingBirthControl' style ="display:none;">Ipinagsasama mo ang dalawang uri ng birth control. Ito ay nagpapataas ng epekto kaysa sa hindi paggamit ng condom.</p> 
          <p id ="selectedMethodReminder"></p>
 
 
@@ -545,7 +545,7 @@
             const selectedMethodTextReco = document.getElementById('selected-method-text-reco');
             const selectedMethodReminder = document.getElementById('selectedMethodReminder');
             selectedMethodTextReco.textContent = selectedMethod;
-            selectedMethodReminder.textContent = "You’re using " + selectedMethod +". We encourage you to stay informed about it by visiting our about contraceptive page." ;
+            selectedMethodReminder.textContent = "Ikaw ay gumagamit ng " + selectedMethod +". Iniihikayat ka namin na manatiling may kaalaman ukol dito sa pamamagitan ng pagbisita sa aming 'about contraceptive page'." ;
 
             // Hide condom-related containers
             condomIfYesContainer.style.display = 'none';

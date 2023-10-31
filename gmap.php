@@ -61,7 +61,11 @@ $conn->close();
         width:600px;
     }
 
-
+    @media (max-width: 450px) {
+            #map-container {
+                min-width:300px !important;
+            }
+        }
 	
     textarea:focus, input:focus{
         outline: none;
@@ -88,7 +92,7 @@ $conn->close();
                 <div class="col-md-6">
 
                     <div class="cap p-3 rounded-4 shadow-sm rounded" style="position: relative; top: -40px; background:#ffff; text-align:center;">
-                       Access the care you need.
+                        Ma-access ang healthcare na kailangan mo.
                     </div>
                     
                 </div>
@@ -113,7 +117,7 @@ $conn->close();
                 </div>
             </div>
             <div class="row ms-1">
-                <p class="ps-4 ms-2">We will assist you in finding a nearby healthcare facility whether you require new birth control prescription, STI testing, or any other reproductive health service.</p>
+                <p class="ps-4 ms-2">Tutulungan ka namin na hanapin ang kalapit na healthcare facility , maging kailangan mo ng bagong reseta para sa birth control, pagsusuri para sa STI, o anumang iba pang reproductive health service.</p>
             </div>
 
 
@@ -152,7 +156,7 @@ $conn->close();
                 </div>
                 <div class="col" style="display: flex;justify-content: center;">
                     <div id="map-container" style="display: flex;
-                justify-content: center; min-width:300px;">
+                justify-content: center; width:400px;">
                         <div id="map" class="rounded-5 shadow-sm"></div>
                     </div>
                     

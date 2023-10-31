@@ -328,8 +328,8 @@
                             <div class="class_13" >
                                 
                                 <div onclick="user.login()" class="class_15" style="cursor:pointer;text-align: center;"  >
-                                    <i class="fa-solid fa-circle-exclamation"> </i> You're not signed in. 
-                                    <p style="color: blue;">Click here to sign in and comment</p>
+                                    <i class="fa-solid fa-circle-exclamation"> </i> Hindi ka naka-login. 
+                                    <p style="color: blue;">I-click dito para mag-login at mag-comment.</p>
                                 </div>
                             </div>
                         <?php endif;?>
@@ -471,10 +471,10 @@
 </script>
 <!--<script src="allposts.js?v1"></script>-->
 <!--<script src="mypost.js?v11"></script>-->
-<script src="time.js?v1"></script>
+<script src="time.js?v2"></script>
 <script src="like-rating.js?v6"></script>
 <script src="community-topics.js?v8"></script>
-<script src="mycomment.js?v56"></script>
+<script src="mycomment.js?v57"></script>
 
 <script>
     // Call the updateTimestamps function initially when the page loads
