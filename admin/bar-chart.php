@@ -5,7 +5,7 @@
 <section>
     <br><br>
     <div>
-        <h1>Registered Male and Female users of Contraceptive in <?=$facility_name ?></h1>
+        <b>Registerd Contraceptive Clients of (<?=$facility_name ?>) per Barangay</b>
         <canvas id="barChart"></canvas>
     </div>
 </section>

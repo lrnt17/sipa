@@ -112,9 +112,9 @@
             </div>
         
             <div class="col-auto mt-3">
-                <div class="row">
-                    <div class="col-auto"><p style="font-size: 2rem;  font-weight:bolder;">Subaybayan</p></div>
-                    <div class="col-auto"><p style="font-size: 2rem;" >ang iyong period</p></div>
+                <div class="row flex-nowrap">
+                    <div class="col-auto"><p style="font-size: 2rem;  font-weight:bolder;">I-track</p></div>
+                    <div class="col-auto"><p style="font-size: 2rem;" >ang period</p></div>
                 </div>
             </div>
         </div>
