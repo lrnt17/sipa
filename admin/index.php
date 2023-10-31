@@ -377,15 +377,17 @@
             </div>
             
         </div>
+        <?php include('pie-chart.php') ?>
+        <?php include('bar-chart.php') ?>
     </section>
     
 
 </body>
 
-<script type="text/javascript">
+<!--<script type="text/javascript">
     
    // Parse PHP array to JavaScript array
-    var data = <?php echo json_encode($data); ?>;
+    var data = <?php //echo json_encode($data); ?>;
 
     // Sort the data by count in descending order
     data.sort(function (a, b) {
@@ -607,7 +609,7 @@ window.addEventListener('load', function () {
 
 
 
-</script>
+</script>-->
 
 
 </html>

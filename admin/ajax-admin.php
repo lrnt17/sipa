@@ -996,6 +996,56 @@
                 $info['last_page'] = $last_page;
                 $info['success'] = true;
             }
+        }else
+        if($_POST['data_type'] == 'bar_chart')
+        {
+            // Get the city from the user's data
+            $city = $_POST['city_municipality'];
+
+            // Query to get all barangays in the specified city
+            $barangayQuery = "SELECT barangay_name FROM barangays WHERE city_municipality = '$city'";
+            $barangayResult = query($barangayQuery);
+
+            // Initialize an array to hold the data for each barangay
+            $rows = [];
+
+            // Loop through each barangay
+            foreach ($barangayResult as $row) {
+                $barangay = $row['barangay_name'];
+
+                // Query to count the number of male and female users in the current barangay
+                $userQuery = "SELECT user_sex, COUNT(*) as count FROM users WHERE user_barangay = '$barangay' GROUP BY user_sex";
+                $userResult = query($userQuery);
+
+                // If there are no users in this barangay, skip to the next iteration
+                if (empty($userResult)) {
+                    continue;
+                }
+
+                // Initialize counts for male and female users
+                $maleCount = 0;
+                $femaleCount = 0;
+
+                // Loop through the result and update the counts
+                foreach ($userResult as $userRow) {
+                    if ($userRow['user_sex'] == 'Male') {
+                        $maleCount = $userRow['count'];
+                    } else if ($userRow['user_sex'] == 'Female') {
+                        $femaleCount = $userRow['count'];
+                    }
+                }
+
+                // Add the data for the current barangay to the array
+                $rows[] = [
+                    'barangay' => $barangay,
+                    'male' => $maleCount,
+                    'female' => $femaleCount
+                ];
+            }
+
+            // Add rows to info array
+            $info['rows'] = $rows;
+            $info['success'] = true;
         }
     }
   
