@@ -132,21 +132,21 @@ if (mysqli_num_rows($result) > 0) {
             echo '<tr>';
             echo '<td><input type="checkbox" name="user-exp-chckbx" id="' . strtolower(str_replace(' ', '', $method)) . '" onchange="toggleRadioButtons(\'' . strtolower(str_replace(' ', '', $method)) . '\')"> <label style="display: inline !important;" for="' . strtolower(str_replace(' ', '', $method)) . '">' . $method . '</label></td>';
             echo '<td>';
-            echo '<label><input type="radio" class="user-exp-radio" id="' . strtolower(str_replace(' ', '', $method)) . 'Experience" name="' . strtolower(str_replace(' ', '', $method)) . 'Experience" value="good" disabled required> Good </label> ';
+            echo '<label><input type="radio" class="user-exp-radio" id="' . strtolower(str_replace(' ', '', $method)) . 'Experience" name="' . strtolower(str_replace(' ', '', $method)) . 'Experience" value="good" disabled required> Maganda </label> ';
             echo '<label><input type="radio" class="user-exp-radio" id="' . strtolower(str_replace(' ', '', $method)) . 'Experience" name="' . strtolower(str_replace(' ', '', $method)) . 'Experience" value="neutral" disabled required> Neutral </label> ';
-            echo '<label><input type="radio" class="user-exp-radio" id="' . strtolower(str_replace(' ', '', $method)) . 'Experience" name="' . strtolower(str_replace(' ', '', $method)) . 'Experience" value="bad" disabled required> Bad </label> ';
+            echo '<label><input type="radio" class="user-exp-radio" id="' . strtolower(str_replace(' ', '', $method)) . 'Experience" name="' . strtolower(str_replace(' ', '', $method)) . 'Experience" value="bad" disabled required> Hindi Maganda </label> ';
             echo '</td>';
             echo '<td>';
-            echo '<label><input type="radio" class="user-exp-radio" id="' . strtolower(str_replace(' ', '', $method)) . 'Consider" name="' . strtolower(str_replace(' ', '', $method)) . 'Consider" value="yes" disabled required> Yes </label> ';
-            echo '<label><input type="radio" class="user-exp-radio" id="' . strtolower(str_replace(' ', '', $method)) . 'Consider" name="' . strtolower(str_replace(' ', '', $method)) . 'Consider" value="no" disabled required> No </label> ';
-            echo '<label><input type="radio" class="user-exp-radio" id="' . strtolower(str_replace(' ', '', $method)) . 'Consider" name="' . strtolower(str_replace(' ', '', $method)) . 'Consider" value="dontKnow" disabled required> I don\'t know </label> ';
+            echo '<label><input type="radio" class="user-exp-radio" id="' . strtolower(str_replace(' ', '', $method)) . 'Consider" name="' . strtolower(str_replace(' ', '', $method)) . 'Consider" value="yes" disabled required> Oo </label> ';
+            echo '<label><input type="radio" class="user-exp-radio" id="' . strtolower(str_replace(' ', '', $method)) . 'Consider" name="' . strtolower(str_replace(' ', '', $method)) . 'Consider" value="no" disabled required> Hindi </label> ';
+            echo '<label><input type="radio" class="user-exp-radio" id="' . strtolower(str_replace(' ', '', $method)) . 'Consider" name="' . strtolower(str_replace(' ', '', $method)) . 'Consider" value="dontKnow" disabled required> Hindi ko alam </label> ';
             echo '</td>';
             echo '</tr>';
         }
         ?>
             </table>
             <br>
-            <input type="checkbox" id="user-experience-checkbox-none"> <label for="user-experience-checkbox-none"> Hindi ko pa ginamit ang alinman sa mga method na ito</label>
+            <input type="checkbox" id="user-experience-checkbox-none"> <label for="user-experience-checkbox-none"> Hindi ko pa nagamit ang alinman sa mga method na ito</label>
 
         </div>
     </div>
@@ -173,23 +173,23 @@ if (mysqli_num_rows($result) > 0) {
     <div class="container p-5 rounded-2 shadow-sm rounded" style="background:white;">
         <div class ="personal-preferences-container" id="personal-preferences-container">
 
-                <span><b>Epektibo ng gastos</b></span>
+                <span><b>Matipid</b></span>
                 <br>
                 <div class="row m-3">
                     <div class="col-md">
-                        <label><input type="radio" name="costEffectiveness" id="costEffectiveness1" value="veryImportant"> Very Important</label>
+                        <label><input type="radio" name="costEffectiveness" id="costEffectiveness1" value="veryImportant"> Napakaimportante</label>
                     </div>
                     <div class="col-md">
-                        <label><input type="radio" name="costEffectiveness" id="costEffectiveness2" value="important"> Important</label>
+                        <label><input type="radio" name="costEffectiveness" id="costEffectiveness2" value="important"> Importante</label>
                     </div>
                     <div class="col-md">
                         <label><input type="radio" name="costEffectiveness" id="costEffectiveness3" value="neutral"> Neutral</label>
                     </div>
                     <div class="col-md">
-                        <label><input type="radio" name="costEffectiveness" id="costEffectiveness4" value="unimportant"> Unimportant</label>
+                        <label><input type="radio" name="costEffectiveness" id="costEffectiveness4" value="unimportant"> Hindi Importante</label>
                     </div>
                     <div class="col-md">
-                        <label><input type="radio" name="costEffectiveness" id="costEffectiveness5" value="veryUnimportant"> Very Unimportant</label>
+                        <label><input type="radio" name="costEffectiveness" id="costEffectiveness5" value="veryUnimportant"> Napakahindi Importante</label>
                     </div>
                 </div>
                 <br>
@@ -198,19 +198,19 @@ if (mysqli_num_rows($result) > 0) {
                     <br>
                     <div class="row m-3">
                         <div class="col-md">
-                            <label><input type="radio" name="managingPeriods" id="managingPeriods1" value="veryImportant"> Very Important</label>
+                            <label><input type="radio" name="managingPeriods" id="managingPeriods1" value="veryImportant"> Napakaimportante</label>
                         </div>
                         <div class="col-md">
-                            <label><input type="radio" name="managingPeriods" id="managingPeriods2" value="important"> Important</label>
+                            <label><input type="radio" name="managingPeriods" id="managingPeriods2" value="important"> Importante</label>
                         </div>
                         <div class="col-md">
                             <label><input type="radio" name="managingPeriods" id="managingPeriods3" value="neutral"> Neutral</label>
                         </div>
                         <div class="col-md">
-                            <label><input type="radio" name="managingPeriods" id="managingPeriods4" value="unimportant"> Unimportant</label>
+                            <label><input type="radio" name="managingPeriods" id="managingPeriods4" value="unimportant"> Hindi Importante</label>
                         </div>
                         <div class="col-md">
-                            <label><input type="radio" name="managingPeriods" id="managingPeriods5" value="veryUnimportant"> Very Unimportant</label>
+                            <label><input type="radio" name="managingPeriods" id="managingPeriods5" value="veryUnimportant"> Napakahindi Importante</label>
                         </div>
                     </div>
                 </div>
@@ -219,19 +219,19 @@ if (mysqli_num_rows($result) > 0) {
                 <br>
                 <div class="row m-3">
                     <div class="col-md">
-                        <label><input type="radio" name="preventingPregnancy" id="preventingPregnancy1" value="veryImportant"> Very Important</label>
+                        <label><input type="radio" name="preventingPregnancy" id="preventingPregnancy1" value="veryImportant"> Napakaimportante</label>
                     </div>
                     <div class="col-md">
-                        <label><input type="radio" name="preventingPregnancy" id="preventingPregnancy2" value="important"> Important</label>
+                        <label><input type="radio" name="preventingPregnancy" id="preventingPregnancy2" value="important"> Importante</label>
                     </div>
                     <div class="col-md">
                         <label><input type="radio" name="preventingPregnancy" id="preventingPregnancy3" value="neutral"> Neutral</label>
                     </div>
                     <div class="col-md">
-                        <label><input type="radio" name="preventingPregnancy" id="preventingPregnancy4" value="unimportant"> Unimportant</label>
+                        <label><input type="radio" name="preventingPregnancy" id="preventingPregnancy4" value="unimportant"> Hindi Importante</label>
                     </div>
                     <div class="col-md">
-                        <label><input type="radio" name="preventingPregnancy" id="preventingPregnancy5" value="veryUnimportant"> Very Unimportant</label>
+                        <label><input type="radio" name="preventingPregnancy" id="preventingPregnancy5" value="veryUnimportant"> Napakahindi Importante</label>
                     </div>
                 </div>
 
@@ -242,19 +242,19 @@ if (mysqli_num_rows($result) > 0) {
 
                     <div class="row m-3">
                         <div class="col-md">
-                            <label><input type="radio" name="gainingWeight" id="gainingWeight1" value="veryImportant"> Very Important</label>
+                            <label><input type="radio" name="gainingWeight" id="gainingWeight1" value="veryImportant"> Napakaimportante</label>
                         </div>
                         <div class="col-md">
-                            <label><input type="radio" name="gainingWeight" id="gainingWeight2" value="important"> Important</label>
+                            <label><input type="radio" name="gainingWeight" id="gainingWeight2" value="important"> Importante</label>
                         </div>
                         <div class="col-md">
                             <label><input type="radio" name="gainingWeight" id="gainingWeight3" value="neutral"> Neutral</label>
                         </div>
                         <div class="col-md">
-                            <label><input type="radio" name="gainingWeight" id="gainingWeight4" value="unimportant"> Unimportant</label>
+                            <label><input type="radio" name="gainingWeight" id="gainingWeight4" value="unimportant"> Hindi Importante</label>
                         </div>
                         <div class="col-md">
-                            <label><input type="radio" name="gainingWeight" id="gainingWeight5" value="veryUnimportant"> Very Unimportant</label>
+                            <label><input type="radio" name="gainingWeight" id="gainingWeight5" value="veryUnimportant"> Napakahindi Importante</label>
                         </div>
                     </div>
                 </div>
@@ -321,91 +321,91 @@ if (mysqli_num_rows($result) > 0) {
     <div class ="additional-factors-container" id="additional-factors-container-female">
             <div class = "number-1-additional-factor" id="number-1-additional-factor">
                 <p><b>1. Ano ang nararamdaman mo tungkol sa pagpapasok ng isang bagay sa iyong ari o vagina?<span style="color: red;"> *</span></b></p>
-                <label><input type="radio" class="additional-factors-radio" value= "veryComfortable" id="very-comfortable" name="answer1"> Very Comfortable</label><br>
-                <label><input type="radio" class="additional-factors-radio" value= "comfortable" id="comfortable" name="answer1"> Comfortable</label><br>
+                <label><input type="radio" class="additional-factors-radio" value= "veryComfortable" id="very-comfortable" name="answer1"> Napakakumportable</label><br>
+                <label><input type="radio" class="additional-factors-radio" value= "comfortable" id="comfortable" name="answer1"> Kumportable</label><br>
                 <label><input type="radio" class="additional-factors-radio" value= "neutral" id="neutral" name="answer1"> Neutral</label><br>
-                <label><input type="radio" class="additional-factors-radio" value= "uncomfortable" id="uncomfortable" name="answer1"> Uncomfortable</label><br>
-                <label><input type="radio" class="additional-factors-radio" value= "veryUncomfortable" id="very-uncomfortable" name="answer1"> Very Uncomfortable</label>
+                <label><input type="radio" class="additional-factors-radio" value= "uncomfortable" id="uncomfortable" name="answer1"> Hindi Kumportable</label><br>
+                <label><input type="radio" class="additional-factors-radio" value= "veryUncomfortable" id="very-uncomfortable" name="answer1">Napakahindi Kumportable</label>
             </div>
             <br>
             <div class = "number-2-additional-factor" id="number-2-additional-factor">
                 <p><b>2. Sa anong hormone level ka pinakakumportable?<span style="color: red;"> *</span></b></p>
-                <label><input type="radio" class="additional-factors-radio" value="no-hormones" id="no-hormones" name="answer2"> No hormones</label><br>
-                <label><input type="radio" class="additional-factors-radio" value="one-hormone" id="one-hormone" name="answer2"> One hormone (progestin only methods)</label><br>
-                <label><input type="radio" class="additional-factors-radio" value="two-hormones" id="two-hormones" name="answer2"> Two hormones (progestin and estrogen methods)</label><br>
-                <label><input type="radio" class="additional-factors-radio" value="dontknow" id="dontknow" name="answer2"> I don't know/ no preference</label>
+                <label><input type="radio" class="additional-factors-radio" value="no-hormones" id="no-hormones" name="answer2"> Walang hormones</label><br>
+                <label><input type="radio" class="additional-factors-radio" value="one-hormone" id="one-hormone" name="answer2"> Isang hormone (progestin only methods)</label><br>
+                <label><input type="radio" class="additional-factors-radio" value="two-hormones" id="two-hormones" name="answer2"> Dalawang hormones (progestin and estrogen methods)</label><br>
+                <label><input type="radio" class="additional-factors-radio" value="dontknow" id="dontknow" name="answer2"> Hindi ko alam/ ala akong gusto</label>
             </div>
             <br>
             <div class = "number-3-additional-factor" id="number-3-additional-factor">
                 <p><b>3. Gaano kadalas mo gustong gamitin ang iyong contraceptive method?<span style="color: red;"> *</span></b></p>
-                <label><input type="radio" class="additional-factors-radio" value="daily" id="daily" name="answer3"> Daily</label><br>
-                <label><input type="radio" class="additional-factors-radio" value="weeklyl" id="weekly" name="answer3"> Weekly</label><br>
-                <label><input type="radio" class="additional-factors-radio" value="monthly" id="monthly" name="answer3"> Monthly</label><br>
-                <label><input type="radio" class="additional-factors-radio" value="yearly" id="yearly" name="answer3"> Yearly</label><br>
-                <label><input type="radio" class="additional-factors-radio" value="dontknow2" id="dontknow2" name="answer3"> I don't know/ no preference</label>
+                <label><input type="radio" class="additional-factors-radio" value="daily" id="daily" name="answer3"> Araw Araw</label><br>
+                <label><input type="radio" class="additional-factors-radio" value="weeklyl" id="weekly" name="answer3"> Lingguhan</label><br>
+                <label><input type="radio" class="additional-factors-radio" value="monthly" id="monthly" name="answer3"> Buwanan</label><br>
+                <label><input type="radio" class="additional-factors-radio" value="yearly" id="yearly" name="answer3"> Taunan</label><br>
+                <label><input type="radio" class="additional-factors-radio" value="dontknow2" id="dontknow2" name="answer3"> Hindi ko alam/ ala akong gusto</label>
             </div>
             <br>
             <div class = "number-4-additional-factor" id="number-4-additional-factor">
             <p><b>4. Ikukunsidera mo ba ang permanenteng contraceptive method tulad ng tubal ligation?<span style="color: red;"> *</span></b></p>
-                <label><input type="radio" class="additional-factors-radio" value="yes" id="yes" name="answer4"> Yes</label><br>
-                <label><input type="radio" class="additional-factors-radio" value="no" id="no" name="answer4"> No</label><br>
-                <label><input type="radio" class="additional-factors-radio" value="dontknow3" id="dontknow3" name="answer4"> I don't know/ no preference</label>
+                <label><input type="radio" class="additional-factors-radio" value="yes" id="yes" name="answer4"> Oo</label><br>
+                <label><input type="radio" class="additional-factors-radio" value="no" id="no" name="answer4"> Hindi</label><br>
+                <label><input type="radio" class="additional-factors-radio" value="dontknow3" id="dontknow3" name="answer4"> Hindi ko alam/ ala akong gusto</label>
             </div>
             <br>
             <div class = "number-5-additional-factor" id="number-5-additional-factor">
                 <p><b>5. Gaano ka kumportable sa mga paraang nangangailangan lamang ng fertility awareness?<span style="color: red;"> *</span></b></p>
-                <label><input type="radio" class="additional-factors-radio" value= "veryComfortable" id="very-comfortable" name="answer5"> Very Comfortable</label><br>
-                <label><input type="radio" class="additional-factors-radio" value= "comfortable" id="comfortable" name="answer5"> Comfortable</label><br>
+                <label><input type="radio" class="additional-factors-radio" value= "veryComfortable" id="very-comfortable" name="answer5"> Napakakumportable</label><br>
+                <label><input type="radio" class="additional-factors-radio" value= "comfortable" id="comfortable" name="answer5"> Kumportable</label><br>
                 <label><input type="radio" class="additional-factors-radio" value= "neutral" id="neutral" name="answer5"> Neutral</label><br>
-                <label><input type="radio" class="additional-factors-radio" value= "uncomfortable" id="uncomfortable" name="answer5"> Uncomfortable</label><br>
-                <label><input type="radio" class="additional-factors-radio" value= "veryUncomfortable" id="very-uncomfortable" name="answer5"> Very Uncomfortable</label>
+                <label><input type="radio" class="additional-factors-radio" value= "uncomfortable" id="uncomfortable" name="answer5"> Hindi Kumportable</label><br>
+                <label><input type="radio" class="additional-factors-radio" value= "veryUncomfortable" id="very-uncomfortable" name="answer5"> Napakahindi Kumportable</label>
             </div>
         </div>
 
         <div class="additional-factors-container" id="additional-factors-container-male" style="display:none;">
             <div class="number-1-additional-factor-male" id="number-1-additional-factor-male">
                 <p><b>1. Gaano kahalaga para sa iyo ang pagiging hindi planado sa pagpili ng iyong birth control?</b><span style="color: red;"> *</span></p>
-                <label><input type="radio" class="additional-factors-radio" value="veryImportant" name="maleAnswer1"> Very Important</label><br>
-                <label><input type="radio" class="additional-factors-radio" value="important" name="maleAnswer1"> Important</label><br>
+                <label><input type="radio" class="additional-factors-radio" value="veryImportant" name="maleAnswer1"> Napakaimportante</label><br>
+                <label><input type="radio" class="additional-factors-radio" value="important" name="maleAnswer1"> Importante</label><br>
                 <label><input type="radio" class="additional-factors-radio" value="neutral" name="maleAnswer1"> Neutral</label><br>
-                <label><input type="radio" class="additional-factors-radio" value="unimportant" name="maleAnswer1"> Unimportant</label><br>
-                <label><input type="radio" class="additional-factors-radio" value="veryUnimportant" name="maleAnswer1"> Very Unimportant</label>
+                <label><input type="radio" class="additional-factors-radio" value="unimportant" name="maleAnswer1"> Hindi Importante</label><br>
+                <label><input type="radio" class="additional-factors-radio" value="veryUnimportant" name="maleAnswer1"> Napakahindi Importante</label>
             </div>
             <br>
             <div class="number-2-additional-factor-male" id="number-2-additional-factor-male">
                 <p><b>2. Gaano kahalaga ang kadalian ng paggamit para sa iyo?</b><span style="color: red;"> *</span></p>
-                <label><input type="radio" class="additional-factors-radio" value="veryImportant" name="maleAnswer2"> Very Important</label><br>
-                <label><input type="radio" class="additional-factors-radio" value="important" name="maleAnswer2"> Important</label><br>
+                <label><input type="radio" class="additional-factors-radio" value="veryImportant" name="maleAnswer2"> Napakaimportante</label><br>
+                <label><input type="radio" class="additional-factors-radio" value="important" name="maleAnswer2"> Importante</label><br>
                 <label><input type="radio" class="additional-factors-radio" value="neutral" name="maleAnswer2"> Neutral</label><br>
-                <label><input type="radio" class="additional-factors-radio" value="unimportant" name="maleAnswer2"> Unimportant</label><br>
-                <label><input type="radio" class="additional-factors-radio" value="veryUnimportant" name="maleAnswer2"> Very Unimportant</label>
+                <label><input type="radio" class="additional-factors-radio" value="unimportant" name="maleAnswer2"> Hindi Importante</label><br>
+                <label><input type="radio" class="additional-factors-radio" value="veryUnimportant" name="maleAnswer2"> Napakahindi Importante</label>
             </div>
             <br>
             <div class="number-3-additional-factor-male" id="number-3-additional-factor-male">
                 <p><b>3. Gaano kahalaga sa iyo ang pag-iwas sa sexually transmitted infections (STIs)?</b><span style="color: red;"> *</span></p>
-                <label><input type="radio" class="additional-factors-radio" value="veryImportant" name="maleAnswer3"> Very Important</label><br>
-                <label><input type="radio" class="additional-factors-radio" value="important" name="maleAnswer3"> Important</label><br>
+                <label><input type="radio" class="additional-factors-radio" value="veryImportant" name="maleAnswer3"> Napakaimportante</label><br>
+                <label><input type="radio" class="additional-factors-radio" value="important" name="maleAnswer3"> Importante</label><br>
                 <label><input type="radio" class="additional-factors-radio" value="neutral" name="maleAnswer3"> Neutral</label><br>
-                <label><input type="radio" class="additional-factors-radio" value="unimportant" name="maleAnswer3"> Unimportant</label><br>
-                <label><input type="radio" class="additional-factors-radio" value="veryUnimportant" name="maleAnswer3"> Very Unimportant</label>
+                <label><input type="radio" class="additional-factors-radio" value="unimportant" name="maleAnswer3"> Hindi Importante</label><br>
+                <label><input type="radio" class="additional-factors-radio" value="veryUnimportant" name="maleAnswer3"> Napakahindi Importante</label>
             </div>
         <br>
         <div class="number-4-additional-factor-male" id="number-4-additional-factor-male">
                 <p><b>4. Gaano kahalaga sa iyo ang pangmatagalan na contraception?</b><span style="color: red;"> *</span></p>
-                <label><input type="radio" class="additional-factors-radio" value="veryImportant" name="maleAnswer4"> Very Important</label><br>
-                <label><input type="radio" class="additional-factors-radio" value="important" name="maleAnswer4"> Important</label><br>
+                <label><input type="radio" class="additional-factors-radio" value="veryImportant" name="maleAnswer4"> Napakaimportante</label><br>
+                <label><input type="radio" class="additional-factors-radio" value="important" name="maleAnswer4"> Importante</label><br>
                 <label><input type="radio" class="additional-factors-radio" value="neutral" name="maleAnswer4"> Neutral</label><br>
-                <label><input type="radio" class="additional-factors-radio" value="unimportant" name="maleAnswer4"> Unimportant</label><br>
-                <label><input type="radio" class="additional-factors-radio" value="veryUnimportant" name="maleAnswer4"> Very Unimportant</label>
+                <label><input type="radio" class="additional-factors-radio" value="unimportant" name="maleAnswer4"> Hindi Importante</label><br>
+                <label><input type="radio" class="additional-factors-radio" value="veryUnimportant" name="maleAnswer4"> Napakahindi Importante</label>
             </div>
             <br>
         <div class="number-5-additional-factor-male" id="number-5-additional-factor-male">
                 <p><b>5. Gaano ka kumportable sa ideya ng isang permanenteng contraceptive method?</b><span style="color: red;"> *</span></p>
-                <label><input type="radio" class="additional-factors-radio" value="veryComfortable" name="maleAnswer5"> Very Comfortable</label><br>
-                <label><input type="radio" class="additional-factors-radio" value="comfortable" name="maleAnswer5"> Important</label><br>
+                <label><input type="radio" class="additional-factors-radio" value="veryComfortable" name="maleAnswer5"> Napakakumportable</label><br>
+                <label><input type="radio" class="additional-factors-radio" value="comfortable" name="maleAnswer5"> Kumportable</label><br>
                 <label><input type="radio" class="additional-factors-radio" value="neutral" name="maleAnswer5"> Neutral</label><br>
-                <label><input type="radio" class="additional-factors-radio" value="uncomfortable" name="maleAnswer5"> Uncomfortable</label><br>
-                <label><input type="radio" class="additional-factors-radio" value="veryUncomfortable" name="maleAnswer5"> Very Uncomfortable</label>
+                <label><input type="radio" class="additional-factors-radio" value="uncomfortable" name="maleAnswer5"> Hindi Kumportable</label><br>
+                <label><input type="radio" class="additional-factors-radio" value="veryUncomfortable" name="maleAnswer5"> Napakahindi Kumportable</label>
             </div>
             <br>
         </div>
@@ -413,7 +413,7 @@ if (mysqli_num_rows($result) > 0) {
     </div>
     
     <input type="hidden" name="recommendations" id="recommendations_input" value="">
-    <input type="submit" value="Get Result" name="submit" class="btn my-4 px-5 py-3" style="background: #D2E0F8; float:right;">
+    <input type="submit" value="Kuhanin Ang Resulta" name="submit" class="btn my-4 px-5 py-3" style="background: #D2E0F8; float:right;">
     </form>
 
     <br><br><br>

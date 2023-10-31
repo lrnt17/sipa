@@ -65,15 +65,21 @@
                                     </div>
                                 
                                     <div class="col">
-                                        <h3>About</h3>
+                                        <h3>Mga Impormasyon tungkol sa <?=$row['birth_control_name']?> </h3>
                                     </div>
                         </div>
                     <div>
 
                     <div class="row mt-5 mb-4">
                         <div class="container rounded-4 shadow-sm p-4" style="background:#ffff;">
-                            <h4>What is <span><?=$row['birth_control_name']?></span>?</h4>
+                            <h4>Ano ang <span><?=$row['birth_control_name']?></span>?</h4>
                             <p class="mt-3" style="color:#383838;" align="justify"><?=$data = nl2br($row['birth_control_desc'])?></p>
+                            <h4>Paano ang paggamit o proseso ng <span><?=$row['birth_control_name']?></span>?</h4>
+                            <p class="mt-3" style="color:#383838;" align="justify"><?=$data = nl2br($row['birth_control_how_to_use'])?></p>
+                            <h4>Gaano ang itinatagal ng <span><?=$row['birth_control_name']?></span>?</h4>
+                            <p class="mt-3" style="color:#383838;" align="justify"><?=$data = nl2br($row['birth_control_duration'])?></p>
+                            <h4>Gaano ito kaepektibo?</h4>
+                            <p class="mt-3" style="color:#383838;" align="justify"><?=$data = nl2br($row['birth_control_effectivity_rate'])?></p>
                         </div>
                     </div>
 
@@ -85,7 +91,7 @@
                                         <i class="fa-regular fa-circle-check" style="font-size: 24px; color: #618858;"></i>
                                     </div>
                                     <div class="col">
-                                        <h5 style="font-weight: bold;">Positive</h5>
+                                        <h5 style="font-weight: bold;">Positibo</h5>
                                         <section class="js-contraceptive-positive-info">
                                             <div style="padding: 10px; text-align: center;">Loading Positive info....</div>
                                         </section>
@@ -98,7 +104,7 @@
                                         <i class="fa-regular fa-circle-xmark" style="font-size: 24px; color: #9D3737;"></i>
                                     </div>
                                     <div class="col">
-                                        <h5 style="font-weight: bold;">Negative</h5>
+                                        <h5 style="font-weight: bold;">Negatibo</h5>
                                         <section class="js-contraceptive-negative-info">
                                             <div style="padding: 10px; text-align: center;">Loading Negative info....</div>
                                         </section>
@@ -123,7 +129,7 @@
                             <i class="fa-regular fa-lightbulb" style="font-size:24px; color:#AFA966;"></i>
                         </div>
                         <div class="col">
-                            <h5 style="font-weight:bold;">Did you know?</h5>
+                            <h5 style="font-weight:bold;">Alam mo ba?</h5>
                             <section class="js-contraceptive-fyi-info">
                                 <div style="padding:10px;text-align:center;">Loading Did you know info....</div>
                             </section>
@@ -155,7 +161,7 @@
                     <div class="row" >
                         <div class="col d-flex justify-content-center align-items-center">
                             <div class="mt-5">
-                                <a href="comparison-chart.php" class="btn my-3 px-5 py-3 rounded-4 shadow-sm rounded" style="background: #ffff;">Compare contraceptive methods</a>
+                                <a href="comparison-chart.php" class="btn my-3 px-5 py-3 rounded-4 shadow-sm rounded" style="background: #ffff;">Pagkumparahin ang ibang mga contraceptive methods</a>
                             </div>
                         </div>
                     </div>
@@ -180,7 +186,7 @@
             </div>
         </div>
         <div class="row">
-            <h1 class="d-flex justify-content-center" style="color:#383838;">Other Contraceptive Methods</h1>
+            <h1 class="d-flex justify-content-center" style="color:#383838;">Iba pang mga Contraceptive Methods</h1>
         </div>
     </div>
 

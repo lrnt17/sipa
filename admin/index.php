@@ -390,7 +390,8 @@
             
         </div>
         <?php include('pie-chart.php') ?>
-        <?php include('bar-chart.php') ?>
+
+        <div class="table-not-included"><?php include('bar-chart.php') ?></div>
     </section>
     
 

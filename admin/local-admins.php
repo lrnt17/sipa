@@ -198,7 +198,7 @@
                     <div class="col-auto mt-1">
                         <div class="row">
                             <div class="col-auto">
-                                <h2 style="font-weight: 400;"><b><?= $city?></b> Administrators</h2>
+                                <h2 style="font-weight: 400;"><b><?= $city?></b> RHU Administrators</h2>
                             </div>
                         </div>
                     </div>

@@ -408,7 +408,7 @@
         </div>
 
         <div class="con mt-4 rounded-3 shadow-sm px-4 py-3" style="background-color: white; max-width: max-content;">
-            <label for="estimatedTotalPrice">Ikaw ay gagastos</label>
+            <label for="estimatedTotalPrice">Ikaw ay gagastos ng</label>
             <span style="width: 4px;
                     background-color: #7B7777;
                     border-radius: 99px;
@@ -422,7 +422,7 @@
 
         <br><br>
          <!--mag switch case dito para macheck ano yung selected method tas kuhanin sa db effectivetess rate, check din if nakayes sa condom para lumabas yung youre mixing two types of birth control note. nakaphp echo dat yung method na pinili-->
-         <p style="font-size:14px"><b>Ang napiling uri ng birth control ay <span id="effectiveness-rate"></span> epektibo.</b></p>
+         <p style="font-size:14px"><b>Ang napiling uri ng birth control ay <span id="effectiveness-rate"></span></b></p>
          <p id ='mixingBirthControl' style ="display:none;">Ipinagsasama mo ang dalawang uri ng birth control. Ito ay nagpapataas ng epekto kaysa sa hindi paggamit ng condom.</p> 
          <p id ="selectedMethodReminder"></p>
 
@@ -523,7 +523,7 @@
                     .then(data => {
                         // Update the HTML element with the retrieved effectiveness rate
                         const effectivenessRateElement = document.getElementById('effectiveness-rate');
-                        effectivenessRateElement.textContent = `${data.effectivenessRate}`;
+                        effectivenessRateElement.textContent = `${data.effectivenessRate}`.toLowerCase();
                     })
                     .catch(error => console.error('Error fetching effectiveness rate:', error));
 
@@ -545,7 +545,7 @@
             const selectedMethodTextReco = document.getElementById('selected-method-text-reco');
             const selectedMethodReminder = document.getElementById('selectedMethodReminder');
             selectedMethodTextReco.textContent = selectedMethod;
-            selectedMethodReminder.textContent = "Ikaw ay gumagamit ng " + selectedMethod +". Iniihikayat ka namin na manatiling may kaalaman ukol dito sa pamamagitan ng pagbisita sa aming 'about contraceptive page'." ;
+            selectedMethodReminder.textContent = "Ikaw ay gagamit ng " + selectedMethod +". Hinihikayat ka namin na manatiling may alam ukol dito sa pamamagitan ng pagbisita sa aming 'about contraceptive page'." ;
 
             // Hide condom-related containers
             condomIfYesContainer.style.display = 'none';
