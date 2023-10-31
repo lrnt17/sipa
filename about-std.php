@@ -185,16 +185,16 @@
             <img src="" alt="std" width="100" class="m-3"><br>
             <span style="font-weight:500; text-wrap: wrap;"></span>
         </td>
-        <td class="my-table-cell">
+        <td class="my-table-cell" style="vertical-align: top;">
             <p class="js-symptom"></p>
         </td>
-        <td class="my-table-cell">
+        <td class="my-table-cell" style="vertical-align: top;">
             <p class="js-cause"></p>
         </td>
-        <td class="my-table-cell">
+        <td class="my-table-cell" style="vertical-align: top;">
             <p class="js-treatment"></p>
         </td>
-        <td class="my-table-cell">
+        <td class="my-table-cell" style="vertical-align: top; width: 170px;">
             <p class="js-treatment-cost me-4"></p>
         </td>
     </tr>
@@ -236,7 +236,8 @@
                 clone.querySelector(".js-symptom").textContent = row.std_symptom;
                 clone.querySelector(".js-cause").textContent = row.std_cause;
                 clone.querySelector(".js-treatment").textContent = row.std_treatment;
-                clone.querySelector(".js-treatment-cost").textContent = row.std_treatment_cost;
+                const newlineText = row.std_treatment_cost.replace(/\\n/g, '\n'); // Assuming "\\n" represents a newline in your database
+                clone.querySelector(".js-treatment-cost").textContent = newlineText;
                 
                 // Add an event listener to the row for redirection
                 rowElement.addEventListener("click", function () {

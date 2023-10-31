@@ -22,7 +22,7 @@
     <div class="row">
         <div class="col mt-3 d-flex justify-content-center">
             <a class="js-link" href="community-videos.php" style=" text-decoration: none; color:black;">
-                <button class="btn my-3 px-4 py-2 rounded-3 shadow-sm rounded" style="background: #ffff;">View all videos</button>
+                <button class="btn my-3 px-4 py-2 rounded-3 shadow-sm rounded" style="background: #ffff;">Tignan lahat ng videos</button>
             </a>
         </div>
     </div>

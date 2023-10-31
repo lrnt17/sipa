@@ -167,7 +167,7 @@
                             since the 1500s, when an unknown printer took a galley of 
                             type and scrambled it to make a type specimen book.
                         </div>
-                        <p class="read px-2 mt-2"><a class='js-method-link' href='#' style="text-decoration: none; color: white; font-size:13px;"><i class="fa-solid fa-circle-info"> </i> READ MORE</a></p>   
+                        <p class="read px-2 mt-2"><a class='js-method-link' href='#' style="text-decoration: none; color: white; font-size:13px;"><i class="fa-solid fa-circle-info"> </i> MAGBASA PA</a></p>   
                     
                     </div>
                 </div>  

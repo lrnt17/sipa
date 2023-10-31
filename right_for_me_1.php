@@ -202,14 +202,14 @@
                 <a href="right_for_me_quiz.php" onclick="contra_method.check_saved_contraceptive(event)" style="
                 font-size: 24px;
                 text-decoration: none;
-                font-weight: 600; color:#383838;">Take the test</a>
+                font-weight: 600; color:#383838;">Magsulit</a>
             </div>
         <?php else:?>
             <div onclick="contra_method.take_quiz_prohibited()" class="circle d-flex justify-content-center">
                 <button class="btn" style="
                 font-size: 24px;
                 text-decoration: none;
-                font-weight: 600; color:#383838;">Take the test</button>
+                font-weight: 600; color:#383838;">Magsulit</button>
             </div>
         <?php endif;?>
 
@@ -227,7 +227,7 @@
             <center><p style="color:#525252;">Bigyan ang iyong sarili ng kakayahan na pumili: Gumamit ng isang paraang contraceptive</p></center>
         </div>
         <div class="row">
-            <h2 class="d-flex justify-content-center mb-4" style="color:#383838;">Contraceptive Methods</h2>
+            <h2 class="d-flex justify-content-center mb-4" style="color:#383838;">Mga Contraceptive Methods</h2>
         </div>
         
     </div>
@@ -336,7 +336,7 @@
                         since the 1500s, when an unknown printer took a galley of 
                         type and scrambled it to make a type specimen book.
                     </div>
-                <p class="read px-2 mt-2"><a class='js-method-link' href='#' style="text-decoration: none; color: white;"><i class="fa-solid fa-circle-info"> </i> READ MORE</a></p>   
+                <p class="read px-2 mt-2"><a class='js-method-link' href='#' style="text-decoration: none; color: white;"><i class="fa-solid fa-circle-info"> </i> MAGBASA PA</a></p>   
                 </div>  
         </div>
     </template>
@@ -432,9 +432,9 @@
 
                                     // Check if the health_facility is 'Others' or not
                                     if (health_facility !== 'Others') {
-                                        h3Element.textContent = "Available at " + health_facility + ": ";
+                                        h3Element.textContent = "Mayroon sa " + health_facility + ": ";
                                     } else {
-                                        h3Element.textContent = health_facility + ": ";
+                                        h3Element.textContent = "Iba pa: ";
                                     }
 
                                     // Append the <h3> element to the second <div>

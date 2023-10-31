@@ -64,7 +64,7 @@
 
         .main {
         width: 100%;
-        height: 300px;
+        height: 320px;
         background-color: #1F6CB5;
         /*background-image: linear-gradient(to right, #1F6CB5, #70AFED);*/
         display: flex;
@@ -207,21 +207,15 @@
         }
 
         .doctor{
-            transform: scaleX(-1);
             position: absolute;
             z-index: 1;
             right: 0;
-            margin-top: 2.5%;
+            margin-top: 4%;
         }
         
         @media (max-width: 1200px) {
             .doctor {
-            top: 4.05%; 
-            }
-        }
-        @media (max-width: 992px) {
-            .doctor {
-            display: none; 
+                display:none !important;
             }
         }
 
@@ -254,16 +248,16 @@
     <div class="main">
         <div class="container">
             <div class="row mt-5">
-                <div class="col-12 col-lg-5 me-auto">
+                <div class="col-12 col-xl-5 me-auto">
                     <br>
                 <h1 class="mt-3 mb-3"style="font-weight:500;"><span translate="no" style="font-weight:normal;">Siguradong Pagpaplano</span></h1>
                 <p style="font-size:1rem; font-weight:300;">
-                    Mahalaga ang pagpili ng angkop na paraan ng kontraseptibo para mapanatili ang kalusugan ng reproduktibo at maiwasan ang hindi nais na pagbubuntis.
+                    Mahalaga ang pagpili ng angkop na paraan ng kontraseptibo para mapanatili ang kalusugang pang reproduktibo at maiwasan ang hindi inaasahang pagbubuntis.
                 </p>
                 <a href="right_for_me_1.php" style="color:black;"><button class="btn rounded-pill shadow-sm mt-3 px-3 py-2" style="background-color:#ffff;">Alamin pa</button></a>
                 </div>
                 <div class="col-auto">
-                    <img class="doctor" src="doctor.png" alt="" width="500px" style="">
+                    <img class="doctor" src="doctora.png" alt="" width="750px" style="">
                 </div>
             </div>
         </div>
@@ -287,8 +281,8 @@
         
         <div class="d-flex justify-content-center mt-5" style="text-align: center;">  
             <p class="mt-4"style="font-size:14px; color:#5A5A5A; width: 400px;">
-            Maraming uri ng Contraceptive ang maaaring gamitin at walang perpektong paraan. 
-            Ang website ng Siguradong Pagpaplano ay nagbibigay ng tapat na impormasyon upang tulungan sa pagsusuri ng mga 
+            Maraming uri ng kontraseptibo ang maaaring gamitin ngunit walang perpektong paraan. 
+            Ang webapp na Siguradong Pagpaplano ay nagbibigay ng tapat na impormasyon upang tulungan sa pagsusuri ng mga 
             benepisyo at kahinaan nito.
             </p>
         </div>
@@ -305,7 +299,7 @@
         </div>
 
 
-        <h1 class="d-flex justify-content-center" style="color:#383838;">Iba pang Paraan ng Contraceptive</h1>
+        <h1 class="d-flex justify-content-center" style="color:#383838;">Iba pang mga Paraan ng Kontrasepsyon</h1>
 
     </div>
 
@@ -384,7 +378,7 @@
         <div class="row">
         <div class="col mt-3 d-flex justify-content-center">
             <a class="js-link" href="faqs.php" style=" text-decoration: none; color:black;">
-                <button class="btn my-3 px-4 py-2 rounded-3 shadow-sm rounded" style="background: #ffff;">View all FAQs</button>
+                <button class="btn my-3 px-4 py-2 rounded-3 shadow-sm rounded" style="background: #ffff;">Tignan lahat ng FAQs</button>
             </a>
         </div>
     </div>

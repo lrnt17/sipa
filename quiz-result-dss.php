@@ -79,7 +79,7 @@ table {
 </template>
 
 <template id="top-three-tbody-template-column-data-cell">
-    <td class="p-5">
+    <td class="p-5" style="vertical-align: top;">
         <p class="js-column-data"></p>
         <div class="row" style="align-items:center;">
             <div class="col-auto">
