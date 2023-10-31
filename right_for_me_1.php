@@ -336,7 +336,7 @@
                         since the 1500s, when an unknown printer took a galley of 
                         type and scrambled it to make a type specimen book.
                     </div>
-                <p class="read px-2 mt-2"><a class='js-method-link' href='#' style="text-decoration: none; color: white;"><i class="fa-solid fa-circle-info"> </i> READ MORE</a></p>   
+                <p class="read px-2 mt-2"><a class='js-method-link' href='#' style="text-decoration: none; color: white;"><i class="fa-solid fa-circle-info"> </i> MAGBASA PA</a></p>   
                 </div>  
         </div>
     </template>
@@ -431,10 +431,10 @@
                                     const h3Element = document.createElement("h3");
 
                                     // Check if the health_facility is 'Others' or not
-                                    if (health_facility !== 'Iba pa') {
+                                    if (health_facility !== 'Others') {
                                         h3Element.textContent = "Mayroon sa " + health_facility + ": ";
                                     } else {
-                                        h3Element.textContent = health_facility + ": ";
+                                        h3Element.textContent = "Iba pa: ";
                                     }
 
                                     // Append the <h3> element to the second <div>
