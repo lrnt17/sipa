@@ -64,7 +64,7 @@
 
         .main {
         width: 100%;
-        height: 300px;
+        height: 320px;
         background-color: #1F6CB5;
         /*background-image: linear-gradient(to right, #1F6CB5, #70AFED);*/
         display: flex;
@@ -207,21 +207,15 @@
         }
 
         .doctor{
-            transform: scaleX(-1);
             position: absolute;
             z-index: 1;
             right: 0;
-            margin-top: 2.5%;
+            margin-top: 4%;
         }
         
         @media (max-width: 1200px) {
             .doctor {
-            top: 4.05%; 
-            }
-        }
-        @media (max-width: 992px) {
-            .doctor {
-            display: none; 
+                display:none !important;
             }
         }
 
@@ -254,7 +248,7 @@
     <div class="main">
         <div class="container">
             <div class="row mt-5">
-                <div class="col-12 col-lg-5 me-auto">
+                <div class="col-12 col-xl-5 me-auto">
                     <br>
                 <h1 class="mt-3 mb-3"style="font-weight:500;"><span translate="no" style="font-weight:normal;">Siguradong Pagpaplano</span></h1>
                 <p style="font-size:1rem; font-weight:300;">
@@ -263,7 +257,7 @@
                 <a href="right_for_me_1.php" style="color:black;"><button class="btn rounded-pill shadow-sm mt-3 px-3 py-2" style="background-color:#ffff;">Alamin pa</button></a>
                 </div>
                 <div class="col-auto">
-                    <img class="doctor" src="doctor.png" alt="" width="500px" style="">
+                    <img class="doctor" src="doctora.png" alt="" width="750px" style="">
                 </div>
             </div>
         </div>
