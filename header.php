@@ -4,7 +4,7 @@
     function getLogoPath() {
       $currentPage = basename($_SERVER['REQUEST_URI']);
       if ($currentPage === 'home_1_with_user.php') {
-          return 'logo1.png';
+          return 'logo-colored.png';
       } else {
           return 'logo-colored.png';
       }
