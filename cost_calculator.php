@@ -422,7 +422,7 @@
 
         <br><br>
          <!--mag switch case dito para macheck ano yung selected method tas kuhanin sa db effectivetess rate, check din if nakayes sa condom para lumabas yung youre mixing two types of birth control note. nakaphp echo dat yung method na pinili-->
-         <p style="font-size:14px"><b>Ang napiling uri ng birth control ay <span id="effectiveness-rate"></span> epektibo.</b></p>
+         <p style="font-size:14px"><b>Ang napiling uri ng birth control ay <span id="effectiveness-rate"></span></b></p>
          <p id ='mixingBirthControl' style ="display:none;">Ipinagsasama mo ang dalawang uri ng birth control. Ito ay nagpapataas ng epekto kaysa sa hindi paggamit ng condom.</p> 
          <p id ="selectedMethodReminder"></p>
 
@@ -523,7 +523,7 @@
                     .then(data => {
                         // Update the HTML element with the retrieved effectiveness rate
                         const effectivenessRateElement = document.getElementById('effectiveness-rate');
-                        effectivenessRateElement.textContent = `${data.effectivenessRate}`;
+                        effectivenessRateElement.textContent = `${data.effectivenessRate}`.toLowerCase();
                     })
                     .catch(error => console.error('Error fetching effectiveness rate:', error));
 
