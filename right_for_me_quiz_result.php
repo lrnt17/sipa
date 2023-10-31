@@ -335,6 +335,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
 </form>
 
+<div id="how_to_use_div" style="display:none;">
+    <div class="d-grid p-3 px-3 rounded-4 my-4 mb-5" style="background: #fff;">
+        <p class="text-start"><b></b></p>
+        <p style="text-align: justify;"></p>
+    </div>
+</div>
+
 <div id="not_applicable_div" style="display:none;">
   <div class="d-grid  p-3  px-3 rounded-4 my-4 mb-5" style="background: #e9a886;" >
     <p class="text-start" >
@@ -567,6 +574,7 @@ function fetchMethodDetails(method, container) {
           const response = JSON.parse(xhr.responseText);
           if (response.success) {
             change_first_logged_in();
+            showHowToUse(selectedMethod);
             alert("Contraceptive method successfully saved!\n\n[Reminder]:\nYou should stick with your chosen contraceptive method until the end of its cycle.\n\nIf you ever plan to change methods, it is advisable to wait for a year if the previous method is a hormonal type. Thank you!");
           } else {
             alert("Error saving contraceptive method. Please try again.");
@@ -594,7 +602,7 @@ function fetchMethodDetails(method, container) {
             }
             else{
               const notApplicable = document.getElementById("not_applicable_div");
-  notApplicable.style.display = "block";
+              notApplicable.style.display = "block";
             }
             }
           });
@@ -608,7 +616,36 @@ function fetchMethodDetails(method, container) {
     xhr.send();
 }
 
+function showHowToUse(selectedMethod) {
+    // Set the selected method in the HTML content
+    const methodTitle = document.querySelector("#how_to_use_div b");
+    methodTitle.innerHTML = `<i class="fa-solid fa-lightbulb fa-bounce"></i> Narito ang tamang paggamit ng ${selectedMethod}:`;
 
+    // Fetch the how_to_use information for the selected method
+    const xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                const howToUse = xhr.responseText;
+                // Set the how_to_use content in the HTML
+                const howToUseContent = document.querySelector("#how_to_use_div p[style='text-align: justify;']");
+                //howToUseContent.textContent = howToUse;
+                // Use innerHTML to process newline characters as HTML line breaks
+                howToUseContent.innerHTML = howToUse.replace(/\n/g, '<br>');
+                // Add a line height to the content
+                howToUseContent.style.lineHeight = '1.5';
+                // Show the how_to_use_div
+                const howToUseDiv = document.getElementById("how_to_use_div");
+                howToUseDiv.style.display = "block";
+            } else {
+                console.error("Error fetching how_to_use information");
+            }
+        }
+    };
+
+    xhr.open("GET", `get_how_to_use.php?method_name=${encodeURIComponent(selectedMethod)}`, true);
+    xhr.send();
+}
 
   function showReminderButton() {
   const smsReminderBtn = document.getElementById("sms_reminder_btn");
