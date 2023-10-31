@@ -416,6 +416,91 @@ if (mysqli_num_rows($result) > 0) {
     <input type="submit" value="Get Result" name="submit" class="btn my-4 px-5 py-3" style="background: #D2E0F8; float:right;">
     </form>
 
+    <br><br><br>
+    <div>
+        <h3>Test References</h3>
+        <p>Redman, M., Brian, J. D., & Wang, D. (2021). Development of an online contraceptive decision aid for college women. PubMed, 2021, 1049–1058. 
+            <a href="https://europepmc.org/article/MED/35308945#r3-3576564" target="_blank">
+                <i class='fa-solid fa-arrow-up-right-from-square' style='font-size: 12px;'></i>
+            </a>
+        </p>
+        <p>Lafuma, A., Agostini, A., Linet, T., Robert, J., Lévy-Bachelot, L., & Godard, C. (2015). Cost-Effectiveness of Nexplanon® (Etonogestrel Implant) Compared to other Reimbursed Contraceptive Methods in France Based on Real Life Data. Value in Health. 
+            <a href="https://doi.org/10.1016/j.jval.2015.09.2818" target="_blank">
+                <i class='fa-solid fa-arrow-up-right-from-square' style='font-size: 12px;'></i>
+            </a>
+        </p>
+        <p>Ngacha, J. K., & Ayah, R. (2022). Assessing the cost-effectiveness of contraceptive methods from a health provider perspective: case study of Kiambu County Hospital, Kenya. Reproductive Health, 19(1). 
+            <a href="https://doi.org/10.1186/s12978-021-01308-3" target="_blank">
+                <i class='fa-solid fa-arrow-up-right-from-square' style='font-size: 12px;'></i>
+            </a>
+        </p>
+        <p>DeMaria, A. L., Sundstrom, B., Meier, S., & Wiseley, A. (2019). The myth of menstruation: how menstrual regulation and suppression impact contraceptive choice. BMC Women’s Health, 19(1). 
+            <a href="https://doi.org/10.1186/s12905-019-0827-x" target="_blank">
+                <i class='fa-solid fa-arrow-up-right-from-square' style='font-size: 12px;'></i>
+            </a>
+        </p>
+        <p>Daniel, A. K., Casmir, E., Oluoch, L., Micheni, M., Kiptinness, C., Wald, A., Mugo, N., Roxby, A. C., & Ngure, K. (2023). "I was just concerned about getting pregnant”: Attitudes toward pregnancy and contraceptive use among adolescent girls and young women in Thika, Kenya. BMC Pregnancy and Childbirth, 23(1). 
+            <a href="https://doi.org/10.1186/s12884-023-05802-3" target="_blank">
+                <i class='fa-solid fa-arrow-up-right-from-square' style='font-size: 12px;'></i>
+            </a>
+        </p>
+        <p>Ia, B., Wb, R., & Fa, V. A. (1974). Assessment of incremental dosage regimen of combined Oestrogen-Progestogen oral contraceptive. BMJ, 4(5945), 643–645. 
+            <a href="https://doi.org/10.1136/bmj.4.5945.643" target="_blank">
+                <i class='fa-solid fa-arrow-up-right-from-square' style='font-size: 12px;'></i>
+            </a>
+        </p>
+        <p>Scaccia, A. (2023, April 14). What’s the Best Birth Control for People with PCOS? Healthline. 
+            <a href="https://www.healthline.com/health/birth-control/best-birth-control-for-pcos" target="_blank">
+                <i class='fa-solid fa-arrow-up-right-from-square' style='font-size: 12px;'></i>
+            </a>
+        </p>
+        <p>PharmD, J. C. (2020, May 13). What to know about PCOS, acne, and acne treatment. 
+            <a href="https://www.medicalnewstoday.com/articles/pcos-acne" target="_blank">
+                <i class='fa-solid fa-arrow-up-right-from-square' style='font-size: 12px;'></i>
+            </a>
+        </p>
+        <p>Zacur, H. A. (1993). Contraceptive choices in women with coagulation disorders. American Journal of Obstetrics and Gynecology, 168(6), 1990–1993. 
+            <a href="https://doi.org/10.1016/s0002-9378(12)90940-0" target="_blank">
+                <i class='fa-solid fa-arrow-up-right-from-square' style='font-size: 12px;'></i>
+            </a>
+        </p>
+        <p>Villines, Z. (2023, August 23). What to know about birth control and blood clots.  
+            <a href="https://www.medicalnewstoday.com/articles/birth-control-and-blood-clots" target="_blank">
+                <i class='fa-solid fa-arrow-up-right-from-square' style='font-size: 12px;'></i>
+            </a>
+        </p>
+        <p>Mu, E., & Kulkarni, J. (2022). Hormonal contraception and mood disorders. Australian Prescriber, 45(3), 75–79. 
+            <a href="https://doi.org/10.18773/austprescr.2022.025" target="_blank">
+                <i class='fa-solid fa-arrow-up-right-from-square' style='font-size: 12px;'></i>
+            </a>
+        </p>
+        <p>Ehsanpour, S. (2012, April 1). The association of contraceptive methods and depression. PubMed Central (PMC). 
+            <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3696218/" target="_blank">
+                <i class='fa-solid fa-arrow-up-right-from-square' style='font-size: 12px;'></i>
+            </a>
+        </p>
+        <p>Shufelt, C., & LeVee, A. (2020). Hormonal contraception in women with hypertension. JAMA, 324(14), 1451. 
+            <a href="https://doi.org/10.1001/jama.2020.11935" target="_blank">
+                <i class='fa-solid fa-arrow-up-right-from-square' style='font-size: 12px;'></i>
+            </a>
+        </p>
+        <p>Contraception and STDs. (1991, October 1). PubMed. 
+            <a href="https://pubmed.ncbi.nlm.nih.gov/12284650/" target="_blank">
+                <i class='fa-solid fa-arrow-up-right-from-square' style='font-size: 12px;'></i>
+            </a>
+        </p>
+        <p>McGregor, J. A., & Hammill, H. A. (1993). Contraception and sexually transmitted diseases: Interactions and opportunities. American Journal of Obstetrics and Gynecology. 
+            <a href="https://doi.org/10.1016/s0002-9378(12)90946-1" target="_blank">
+                <i class='fa-solid fa-arrow-up-right-from-square' style='font-size: 12px;'></i>
+            </a>
+        </p>
+        <p>National Center for Chronic Disease Prevention and Health Promotion & Division of Reproductive Health. (2023, May 1). Contraception. Centers of Disease Control and Prevention. Retrieved September 1, 2023, from 
+            <a href="https://www.cdc.gov/reproductivehealth/contraception/index.htm" target="_blank">
+                <i class='fa-solid fa-arrow-up-right-from-square' style='font-size: 12px;'></i>
+            </a>
+        </p>
+    </div>
+
     </div>
     
     
