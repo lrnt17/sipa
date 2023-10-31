@@ -44,7 +44,7 @@
         <div class="d-flex justify-content-center mt-5" style="text-align: center;">  
             <p class="mt-4"style="font-size:14px; color:#5A5A5A; width: 400px;">
             Tuklasin ang mga Madalas na Pinipiling Contraceptive! Suriin ang mga pamamaraan na pinili 
-            ng mga gumagamit sa aming web application na 'SiPa' na maaaring makatulong sa iyo sa 
+            ng mga gumagamit ng aming web application na 'SiPa' na maaaring makatulong sa iyo sa 
             pagpapasya tungkol sa birth control.
             </p>
         </div>
@@ -63,8 +63,8 @@
         <center>
         <p align="justify" class="mb-4" style="font-weight:300; width:85%;"> 
             <b>Paalala</b> : Ang mga sumusunod ay ilan lamang sa mga pamamaraan ng 
-            contraceptive na madalas piliin ng mga gumagamit sa aming web application. Hindi 
-            ito nagpapakita ng mga ura ng paggamit ng mga pamamaraang ito sa anumang 
+            contraceptive na madalas piliin ng mga gumagamit ng aming web application. Hindi 
+            ito nagpapakita ng mga antas ng paggamit ng mga pamamaraang ito sa anumang 
             partikular na bayan o komunidad. Maraming iba't ibang mga 
             pamamaraan ng kontraseptibo na magagamit, at ang pinakamahusay na 
             pagpipilian ay nakadepende sa kalusugan, pamumuhay, at personal 
@@ -103,7 +103,7 @@
         
         
         <p class="js-contraceptive-short-description mt-3">Description of the contraceptive...</p>
-        <p class="read px-2 mt-2"><a class='js-contraceptive-link' href='#' style="text-decoration: none; color: #1F6CB5; font-size:13px;"><i class="fa-solid fa-circle-info"> </i> READ MORE</a></p>
+        <p class="read px-2 mt-2"><a class='js-contraceptive-link' href='#' style="text-decoration: none; color: #1F6CB5; font-size:13px;"><i class="fa-solid fa-circle-info"> </i> MAGBASA PA</a></p>
     </div>
 </template>
 

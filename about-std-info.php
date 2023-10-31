@@ -68,14 +68,14 @@
                                     </div>
                                 
                                     <div class="col">
-                                        <h3>About</h3>
+                                        <h3>Tungkol sa <span><?=$row['std_name']?></span></h3>
                                     </div>
                         </div>
                     <div>
 
                     <div class="row mt-5 mb-4">
                         <div class="container rounded-4 shadow-sm p-4" style="background:#ffff;">
-                            <h4>What is <span><?=$row['std_name']?></span>?</h4>
+                            <h4>Ano ang <span><?=$row['std_name']?></span>?</h4>
                             <p class="mt-3" style="color:#383838;" align="justify"><?=$data = nl2br($row['std_desc'])?></p>
                         </div>
                     </div>
@@ -88,7 +88,7 @@
                                         <i class="fa-regular fa-lightbulb" style="font-size:24px; color:#AFA966;"></i>
                                     </div>
                                     <div class="col">
-                                        <h5 style="font-weight: bold;">Symptoms</h5>
+                                        <h5 style="font-weight: bold;">Simptomas</h5>
                                         <section class="js-std-symptoms-info">
                                             <div style="padding: 10px; text-align: center;">Loading Symptoms info....</div>
                                         </section>
@@ -101,7 +101,7 @@
                                         <i class="fa-regular fa-circle-check" style="font-size: 24px; color: #618858;"></i>
                                     </div>
                                     <div class="col">
-                                        <h5 style="font-weight: bold;">Signs</h5>
+                                        <h5 style="font-weight: bold;">Senyales</h5>
                                         <section class="js-std-signs-info">
                                             <div style="padding: 10px; text-align: center;">Loading Signs info....</div>
                                         </section>
@@ -126,7 +126,7 @@
                             <i class="fa-regular fa-lightbulb" style="font-size:24px; color:#AFA966;"></i>
                         </div>
                         <div class="col">
-                            <h5 style="font-weight:bold;">How can I avoid getting <?=$row['std_name']?>?</h5>
+                            <h5 style="font-weight:bold;">Paano ako makakaiwas sa pagkakaroon ng <?=$row['std_name']?>?</h5>
                             <section class="js-std-preventions-info">
                                 <div style="padding:10px;text-align:center;">Loading Preventions info....</div>
                             </section>
@@ -176,7 +176,7 @@
             </div>
         </div>
         <div class="row">
-            <h1 class="d-flex justify-content-center" style="color:#383838;">Other Types of STDs</h1>
+            <h1 class="d-flex justify-content-center" style="color:#383838;">Iba pang uri ng STDs</h1>
         </div>
     </div>
 
