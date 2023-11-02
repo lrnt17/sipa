@@ -30,6 +30,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
     <title><?=$facility_name?> Administrator | SiPa</title>
 </head>
+<section id="print-style-element-container"></section>
 <style>
     body {
     font-family: "Lato", sans-serif;
@@ -100,7 +101,7 @@
     }
 
     /*sa pagprint para macrop */
-    @media print {
+    /*@media print {
         body * {
             visibility: hidden;
         }
@@ -138,7 +139,7 @@
         {
             display: none !important;
         }
-    }
+    }*/
 
     .dashboard:hover{
         background: #D2E0F8 !important;
@@ -370,7 +371,7 @@
                     </div>
                     <div class="col">
                         <div id="result" class="p-3 rounded-4 shadow-sm" style="background-color:#D2E0F8;"></div>
-                        <div class ="printBtnContainer" ><button onclick="window.print()" class="btn px-5 my-3" style="background-color: #e9a886; color:#ffff;"> Print Result </button></div>
+                        <div class ="printBtnContainer" ><button onclick="barangay_data.print_pie_chart()" class="btn px-5 my-3" style="background-color: #e9a886; color:#ffff;"> Print Result </button></div>
 
                     </div>
 

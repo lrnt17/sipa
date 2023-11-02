@@ -2,11 +2,20 @@
     defined('APP') or die('direct script access denied!');
 ?>
 
-<section>
+<section id="bar-chart-printable-area">
     <br><br>
     <div>
-        <b>Registerd Contraceptive Clients of (<?=$facility_name ?>) per Barangay</b>
+        <b class="bar-chart-data-title">Registerd Contraceptive Clients of (<?=$facility_name ?>) per Barangay</b>
+
+        <div class ="sipa-logo-container-bar-chart" style="display:none;">
+            <img class="rounded-circle" src="logo-colored.png" alt="SiPa" width="55" height="55" >
+            <center><h5><?=$facility_name ?> Contraceptive Clients per Barangay</h5><center>
+        </div>
+
         <canvas id="barChart"></canvas>
+        <div class ="printBtnContainer-bar-chart">
+            <button onclick="barangay_data.print_bar_chart()" class="btn px-5 my-3" style="background-color: #e9a886; color:#ffff;"> Print Result </button>
+        </div>
     </div>
 </section>
 
@@ -114,6 +123,157 @@
 
             ajax.open('post', 'ajax-admin.php', true);
             ajax.send(form);
+        },
+
+        print_bar_chart: function(){
+            barangay_data.add_BarChart_PrintStyles();
+
+            // Create a new style element
+            let style = document.createElement('style');
+
+            // Add a CSS rule to set the page size to landscape when printing
+            style.textContent = '@media print { @page { size: landscape; } }';
+
+            // Append the style element to the head of the document
+            document.head.appendChild(style);
+
+            window.print();
+
+            // Remove the style element after printing
+            document.head.removeChild(style);
+
+            barangay_data.removePrintStyles();
+        },
+
+        print_pie_chart: function(){
+            barangay_data.add_PieChart_PrintStyles();
+            window.print();
+            barangay_data.removePrintStyles();
+        },
+
+        add_PieChart_PrintStyles: function(){
+            // Create a new style element
+            let style = document.createElement('style');
+
+            // Add CSS rules to the style element
+            style.textContent = `
+                @media print {
+                    body * {
+                        visibility: hidden;
+                    }
+                    #printableArea, #printableArea * {
+                        visibility: visible;
+                    }
+                    #printableArea {
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                        right:0;
+                        width: 100%;
+                        height: 100%;
+                        justify-content: center;
+                        align-items: center;
+                    }
+                    .printBtnContainer {
+                        display: none;
+                    }
+                    .topbar, .dash, .todays-appointment-section, .table-not-included{
+                        display: none !important;
+                    }
+                    .sipa-logo-container{
+                        display: block !important;
+                    }
+                    #buttons, #genderFilter{
+                        display: none !important;
+                    }
+                    #current-date-appointment
+                    {
+                        display: none !important;
+                    }
+                }
+            `;
+
+            // Append the style element to the head of the document
+            //document.head.appendChild(style);
+            // Get the div element
+            let section = document.getElementById('print-style-element-container');
+
+            // Append the style element to the div
+            section.appendChild(style);
+        },
+
+        add_BarChart_PrintStyles: function(){
+            // Create a new style element
+            var style = document.createElement('style');
+
+            // Add CSS rules to the style element
+            style.textContent = `
+                @media print {
+                    body * {
+                        visibility: hidden;
+                    }
+                    #bar-chart-printable-area, #bar-chart-printable-area * {
+                        visibility: visible;
+                    }
+                    #bar-chart-printable-area {
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                        right:0;
+                        width: 100%;
+                        height: 100%;
+                        justify-content: center;
+                        align-items: center;
+                    }
+                    .printBtnContainer-bar-chart {
+                        display: none;
+                    }
+                    .bar-chart-data-title {
+                        display: none;
+                    }
+                    .sipa-logo-container-bar-chart{
+                        display: block !important;
+                    }
+                    /*.topbar, .dash, .todays-appointment-section, .table-not-included{
+                        display: none !important;
+                    }
+                    #buttons, #genderFilter{
+                        display: none !important;
+                    }
+                    #current-date-appointment
+                    {
+                        display: none !important;
+                    }*/
+                }
+            `;
+
+            // Append the style element to the head of the document
+            //document.head.appendChild(style);
+            // Get the div element
+            let section = document.getElementById('print-style-element-container');
+
+            // Append the style element to the div
+            section.appendChild(style);
+        },
+
+        removePrintStyles: function(){
+            // Get the style elements
+            /*var styles = document.getElementsByTagName('style');
+
+            // Loop through the style elements
+            for (var i = styles.length - 1; i >= 0; i--) {
+                var style = styles[i];
+                
+                // Remove the style element if it contains the print styles
+                if (style.textContent.includes('@media print')) {
+                    style.parentNode.removeChild(style);
+                }
+            }*/
+            // Get the div element
+            let section = document.getElementById('print-style-element-container');
+
+            // Remove the last child (the style element)
+            section.removeChild(section.lastChild);
         },
     };
 
