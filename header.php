@@ -69,7 +69,7 @@
             <?php endif;?>
           <?php else:?>
           <a class="navbar-brand" href="home_1_with_user.php">
-            <img class="rounded-circle" src="<?php echo getLogoPath(); ?>" alt="SiPa" width="55" height="55" >
+            <img class="sipa-logo" src="<?php echo getLogoPath(); ?>" alt="SiPa" width="55" height="55" >
           </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
