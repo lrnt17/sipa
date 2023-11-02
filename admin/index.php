@@ -350,7 +350,7 @@
         <?php endif;?>
 
         <div class ="sipa-logo-container" style="display:none;">
-            <img class="rounded-circle" src="logo-colored.png" alt="SiPa" width="55" height="55" >
+            <img class="rounded-circle" src="logo.png" alt="SiPa" width="55" height="55" >
             <center><h5>SiPa Users' Selected Contraceptive Method Report</h5><center>
         </div>
 

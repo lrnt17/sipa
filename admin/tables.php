@@ -32,9 +32,12 @@
 
          /* Change the PDF button color */
         .dt-buttons .buttons-pdf {
+            font-family: "Lato", sans-serif !important;
             background-color: #e9a886 !important; /* Change to your desired background color */
-            color: #ffff !important; /* Change to your desired text color */
-            padding: 10px 20px!important; /* Adjust padding as needed */
+            color: white !important; /* Change to your desired text color */
+            padding: 10px 40px!important; /* Adjust padding as needed */
+            border-radius: 10px !important;
+            border:none !important;
         }
 
     </style>
@@ -90,7 +93,7 @@
                         messageTop: 'Bustos RHU',
                         customize: function(doc) {
                         // Convert the image to a data URL
-                        var image = '<?php echo 'data:image/png;base64,' . base64_encode(file_get_contents('logo-colored.png')); ?>';
+                        var image = '<?php echo 'data:image/png;base64,' . base64_encode(file_get_contents('logo.png')); ?>';
 
                         // Add the logo to the PDF
                         doc.content.splice(0, 0, {
