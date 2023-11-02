@@ -28,7 +28,7 @@
       <nav class="navbar navbar-expand-lg navbar-light mx-5">
           <?php if(first_logged_in()):?>
           <a class="navbar-brand" href="#" style="cursor: context-menu;">
-            <img src="<?php echo getLogoPath(); ?>" alt="SiPa" style="width:60px;" >
+            <img class="sipa-logo" src="<?php echo getLogoPath(); ?>" alt="SiPa" width="55"  height="55" >
           </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -69,7 +69,7 @@
             <?php endif;?>
           <?php else:?>
           <a class="navbar-brand" href="home_1_with_user.php">
-            <img src="<?php echo getLogoPath(); ?>" alt="SiPa" width="60" height="60" >
+            <img class="rounded-circle" src="<?php echo getLogoPath(); ?>" alt="SiPa" width="55" height="55" >
           </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

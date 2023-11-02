@@ -20,6 +20,7 @@
         font-weight:bold;
     }
 
+    
     /* CSS for screens wider than 450px */
     @media (min-width: 451px) {
         .js-birth-control-rrl-container .row {
