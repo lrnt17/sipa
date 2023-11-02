@@ -983,6 +983,12 @@
 
         delete_admin: function(){
 
+            let selectedRows = document.querySelectorAll("#admin_table .js-select-admin:checked");
+            if (selectedRows.length == 0) {
+                alert("Please select at least one row to delete");
+                return;
+            }
+            
             let partner_facility_pin = "<?=$pin?>";
             let pin = prompt("Please enter PIN:");
 
@@ -993,12 +999,6 @@
                     alert("You entered wrong PIN");
                 }
                 return;  // Exit the function if the PIN is incorrect or empty
-            }
-            
-            let selectedRows = document.querySelectorAll("#admin_table .js-select-admin:checked");
-            if (selectedRows.length == 0) {
-                alert("Please select at least one row to delete");
-                return;
             }
 
             // Add confirmation dialog
