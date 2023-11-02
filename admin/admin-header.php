@@ -200,7 +200,7 @@ body {
             <ul>
                 <li class="li-1">
                     <div class="mt-4" style="display: flex; align-items: center;">
-                        <div class="col-auto"><img class="rounded-circle" src="logo-colored.png" alt="SiPa" width="45" height="45" ></div>
+                        <div class="col-auto"><img class="sipa-logo" src="sipa_logo.png" alt="SiPa" width="45" height="45" ></div>
                         <div class="col ms-4"><h3 class="title" style="margin: 0;">SiPa</h3></div>
                     </div>
                 </li>

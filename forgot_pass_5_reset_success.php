@@ -30,7 +30,7 @@
 <body>
 
     <header>
-        <a href="#"><img class="logo" src="logo-colored.png" alt="logo"></a>
+        <a href="#"><img class="logo" src="lsipa_logo.png" alt="logo"></a>
     </header>
 
     <div class="container-box">
