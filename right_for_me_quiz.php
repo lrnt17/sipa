@@ -44,6 +44,7 @@ if (mysqli_num_rows($result) > 0) {
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/324d76b648.js" crossorigin="anonymous"></script>
     <title>SiPa | Right for Me</title>
     <style>
    .skiptranslate iframe  {
@@ -418,7 +419,7 @@ if (mysqli_num_rows($result) > 0) {
 
     <br><br><br>
     <div>
-        <h3>Test References</h3>
+        <h3 class="pt-5">Test References</h3>
         <p>Redman, M., Brian, J. D., & Wang, D. (2021). Development of an online contraceptive decision aid for college women. PubMed, 2021, 1049–1058. 
             <a href="https://europepmc.org/article/MED/35308945#r3-3576564" target="_blank">
                 <i class='fa-solid fa-arrow-up-right-from-square' style='font-size: 12px;'></i>
