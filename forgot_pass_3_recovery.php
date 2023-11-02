@@ -83,7 +83,7 @@
 <body>
 
     <header>
-        <a href="#"><img class="logo" src="logo-colored.png" alt="logo"></a>
+        <a href="#"><img class="logo" src="logo-fill.png" alt="logo"></a>
     </header>
 
     <div class="parent">

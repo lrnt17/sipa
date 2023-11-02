@@ -619,7 +619,7 @@ function fetchMethodDetails(method, container) {
 function showHowToUse(selectedMethod) {
     // Set the selected method in the HTML content
     const methodTitle = document.querySelector("#how_to_use_div b");
-    methodTitle.innerHTML = `<i class="fa-solid fa-lightbulb fa-bounce"></i> Narito ang tamang paggamit ng ${selectedMethod}:`;
+    methodTitle.innerHTML = `<i class="fa-solid fa-lightbulb fa-bounce"></i> Narito ang tamang paggamit o proseso ng ${selectedMethod}:`;
 
     // Fetch the how_to_use information for the selected method
     const xhr = new XMLHttpRequest();

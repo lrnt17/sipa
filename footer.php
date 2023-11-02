@@ -16,7 +16,7 @@
             <div class="row mb-4 ps-3">
 
                 <div class="col-12 col-sm-auto mx-auto text-center">
-                    <img class="rounded-circle mb-3" src="logo-colored.png" alt="SiPa" width="55" height="55" >    
+                    <img src="logo.png" alt="SiPa" width="55" height="55" >    
                 </div>
 
                 <div class="col-12 col-md-auto mx-auto text-md-left text-center ">

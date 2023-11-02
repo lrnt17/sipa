@@ -88,7 +88,7 @@
                                         <i class="fa-regular fa-lightbulb" style="font-size:24px; color:#AFA966;"></i>
                                     </div>
                                     <div class="col">
-                                        <h5 style="font-weight: bold;">Simptomas</h5>
+                                        <h5 style="font-weight: bold;">Sintomas</h5>
                                         <section class="js-std-symptoms-info">
                                             <div style="padding: 10px; text-align: center;">Loading Symptoms info....</div>
                                         </section>
