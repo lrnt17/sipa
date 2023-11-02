@@ -77,8 +77,8 @@ if (mysqli_num_rows($result) > 0) {
     <div class="container rounded-5" style="background: #D2E0F8;">
     <div class="row mx-5 justify-content-center" style="text-align:center; padding: 4%;">
         
-        <div class="col-auto"><p style="font-size: 3.5rem;">Take the</p></div>
-        <div class="col-auto"><p style="font-size: 3.5rem; font-weight:bolder;" >Test</p></div>
+        <div class="col-auto"><p style="font-size: 3.5rem;">Kuhanin ang</p></div>
+        <div class="col-auto"><p style="font-size: 3.5rem; font-weight:bolder;" >Pagsusulit</p></div>
     </div>
 </div>
 <div class="row height d-flex justify-content-center align-items-center">
@@ -86,7 +86,7 @@ if (mysqli_num_rows($result) > 0) {
           <div class="col-md-6">
 
             <div class="cap p-3 rounded-4 shadow-sm rounded" style="position: relative; top: -40px; background:#ffff; text-align:center;">
-            Kumpletuhin ang pagsusulit sa pamamagitan ng pagbibigay ng iyong mga nakaraang preferences, preferences, medical history, at iba pang factor na mga kadahilanan upang matukoy ang iyong top 3 na inirerekomendang paraan ng kontrasepsyon.
+            Kumpletuhin ang pagsusulit sa pamamagitan ng pagbibigay ng iyong mga nakaraang experiences, preferences, medical history, at iba pang factor na mga kadahilanan upang matukoy ang iyong top 3 na inirerekomendang paraan ng kontrasepsyon.
                 </div>
 
             </div>
@@ -94,7 +94,7 @@ if (mysqli_num_rows($result) > 0) {
     
     <div class="container mt-3">
     <p align="justify" class="mb-5" style="font-weight:300;"> 
-    <b>Paalala</b> : Ang aming mga rekomendasyon ay layunin lamang na magbigay-kaalaman sa iyo tungkol sa mga potensyal na paraan ng kontrasepsyon batay sa iyong ibinigay na impormasyon. Ang pagsusulit na ito ay ginawa sa pamamagitan ng gabay ng isang kwalipikadong tagapagkalinga ng kalusugan para sa personalisadong gabay sa pagpili ng kontrasepsyon. Gayunpaman, hindi ito pumapalit sa propesyonal na payo medikal. Ikaw ang huling magdedesisyon kung alin sa tingin mo ang pinakatamang paraan para sa iyo. Ikaw ang responsable sa kahusayan ng impormasyong ibinigay. Hindi kami mananagot para sa anumang pinsala o kawalan dulot ng paggamit ng website o pagtitiwala sa mga rekomendasyon.
+    <b>Paalala</b> : Ang aming mga rekomendasyon ay layunin lamang na magbigay-kaalaman sa iyo tungkol sa mga potensyal na paraan ng kontrasepsyon batay sa iyong ibinigay na impormasyon. Ang pagsusulit na ito ay ginawa sa pamamagitan ng gabay ng isang kwalipikadong tagapagkalinga ng kalusugan para sa personalisadong gabay sa pagpili ng kontrasepsyon. Gayunpaman, hindi ito pumapalit sa propesyonal na payong medikal. Ikaw ang pinakahuling magdedesisyon kung alin sa tingin mo ang pinakatamang paraan para sa iyo. Ikaw ang responsable sa paggamit ng impormasyong ibinigay sayo. Hindi kami mananagot para sa anumang pinsala o kawalan dulot ng paggamit ng website o pagtitiwala sa mga rekomendasyon.
     </p>
         <div class="row flex-nowrap" style="align-items: center;">
             <div class="col-auto">
@@ -108,7 +108,7 @@ if (mysqli_num_rows($result) > 0) {
             
             <div class="col mt-3">
                 <h5>User Experiences</h5>
-                <p>Piliin ang paraang contraceptive na mayroon kang dating karanasan.<span style="color: red;"> *</span></p>
+                <p>Piliin ang contraceptive na mayroon ka nang dating karanasan sa paggamit.<span style="color: red;"> *</span></p>
             </div>
         </div>
     
