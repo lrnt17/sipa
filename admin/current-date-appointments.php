@@ -106,7 +106,7 @@
         }
 
         thead, tbody, tfoot, tr, td, th {
-            border-style: none !important;
+            border-style: none;
         }
 
         th{
