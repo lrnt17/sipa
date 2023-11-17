@@ -27,13 +27,12 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
     <title><?=$facility_name?> Administrator | SiPa</title>
 </head>
 <section id="print-style-element-container"></section>
 <style>
     body {
-    font-family: "Lato", sans-serif;
+        font-family: var(--bs-body-font-family) !important;
     }
 
     /* Fixed sidenav, full height */
@@ -351,7 +350,7 @@
         <?php endif;?>
 
         <div class ="sipa-logo-container" style="display:none;">
-            <img class="rounded-circle" src="logo.png" alt="SiPa" width="55" height="55" >
+            <img class="sipa-logo" src="logo.png" alt="SiPa" width="55" height="55" >
             <center><h5>SiPa Users' Selected Contraceptive Method Report</h5><center>
         </div>
 
@@ -375,16 +374,21 @@
 
                     </div>
 
-                    <div class="table-not-included">
+                    <div class="table-not-included mt-5">
                     <hr style="color: #002C5F; background-color: #002C5F; height: 2px; border: none;">
                         <div class="col-auto mt-4">
                             <div class="row">
                                 <div class="col-auto">
-                                    <h2 style="font-weight: 600;">SiPa Users' Selected Method Table</h2>
+                                    <h4 class="mb-4" style="font-weight: 500;">SiPa Users' Selected Method Table</h4>
                                 </div>
                             </div>
                         </div>
                         <?php include('tables.php') ?>
+                    </div>
+
+                    <div class="table-not-included mt-5">
+                        <hr style="color: #002C5F; background-color: #002C5F; height: 2px; border: none;">
+                        <?php include('bar-chart.php') ?>
                     </div>
                 </div>
             </div>
@@ -392,7 +396,7 @@
         </div>
         <?php include('pie-chart.php') ?>
 
-        <div class="table-not-included"><?php include('bar-chart.php') ?></div>
+        <!--<div class="table-not-included"><?php include('bar-chart.php') ?></div>-->
     </section>
     
 

@@ -3,12 +3,11 @@
 ?>
 
 <section id="bar-chart-printable-area">
-    <br><br>
     <div>
-        <b class="bar-chart-data-title">Registerd Contraceptive Clients of (<?=$facility_name ?>) per Barangay</b>
+        <h4 class="bar-chart-data-title mt-2 mb-3">Registerd Contraceptive Clients of (<?=$facility_name ?>) per Barangay</h4>
 
         <div class ="sipa-logo-container-bar-chart" style="display:none;">
-            <img class="rounded-circle" src="logo-colored.png" alt="SiPa" width="55" height="55" >
+            <img class="sipa-logo" src="logo.png" alt="SiPa" width="55" height="55" >
             <center><h5><?=$facility_name ?> Contraceptive Clients per Barangay</h5><center>
         </div>
 

@@ -40,17 +40,25 @@
             border:none !important;
         }
 
+        table.dataTable tbody tr{
+            border-bottom: 1px solid black;
+            height: 75px !important;
+        }
+
+        thead, tbody, tfoot, tr, td, th {
+            border-style: outset ;
+        }
     </style>
 </head>
 <body>
     <div class="table-container">
-        <table id="table" class="display nowrap" style="width:100%">
+        <table id="table" class="table nowrap pt-4" style="width:100%">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Selected Method</th>
-                    <th>Barangay</th>
-                    <th>Phone Number</th>
+                    <th style="text-align: center;">Name</th>
+                    <th style="text-align: center;">Selected Method</th>
+                    <th style="text-align: center;">Barangay</th>
+                    <th style="text-align: center;">Phone Number</th>
                 </tr>
             </thead>
             <tbody>
@@ -64,10 +72,10 @@
                 if ($result) {
                     while ($row = mysqli_fetch_assoc($result)) {
                         echo "<tr>";
-                        echo "<td>" . $row['name'] . "</td>";
-                        echo "<td>" . $row['birth_control_name'] . "</td>";
-                        echo "<td>" . $row['user_barangay'] . "</td>";
-                        echo "<td>" . $row['user_pnum'] . "</td>";
+                        echo "<td style='padding-top: 2.5%;'>" . $row['name'] . "</td>";
+                        echo "<td style='padding-top: 2.5%;'>" . $row['birth_control_name'] . "</td>";
+                        echo "<td style='padding-top: 2.5%;'>" . $row['user_barangay'] . "</td>";
+                        echo "<td style='padding-top: 2.5%;'>" . $row['user_pnum'] . "</td>";
                         echo "</tr>";
                     }
                 } else {
