@@ -192,14 +192,14 @@ var sched_appointment = {
                 }
             }
 
-            if (field.id === 'email') {
+            /*if (field.id === 'email') {
                 // Regular expression for email validation
                 let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
                 if (!emailRegex.test(field.value)) {
                     alert('Please enter a valid email address.');
                     return false; // Stop execution of the function
                 }
-            }
+            }*/
         }
 
         sched_appointment.get_selected_barangay();

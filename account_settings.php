@@ -93,10 +93,10 @@
             }
         }
 
-		if(!filter_var($email, FILTER_VALIDATE_EMAIL))
+		/*if(!filter_var($email, FILTER_VALIDATE_EMAIL))
 		{
 			$errors['email'] = "Email is not valid";
-		}
+		}*/
 
 
 		if(!preg_match("/^[a-zA-Z ]+$/", $userfname))
@@ -384,7 +384,7 @@
                             </div>
                             <div class="class_31" >
                                 <label >
-                                    Email
+                                    Email <i>(Put N/A if none)</i>
                                 </label><br>
                                 <input value="<?=$row['user_email']?>" placeholder="Email" type="text" name="email" class="class_33"  required="true">
                             </div>
@@ -394,7 +394,7 @@
                                         Date of Birth
                                     </label>
                                     <div class="class_312 mb-2" >
-                                        <input value="<?=$row['user_dob']?>" placeholder="Email" type="date" name="dob" class="class_33"  disabled>
+                                        <input value="<?=$row['user_dob']?>" placeholder="Email" type="date" name="dob" class="class_33">
                                     </div>
                                 </div>
                                 <div class="col-sm-4">

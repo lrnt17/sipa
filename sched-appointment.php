@@ -176,9 +176,9 @@
                         </div>
 
                         <div class="row">
-                            <label class="label-1" for="email">Email:</label><br>
+                            <label class="label-1" for="email">Email <i>(Put N/A if none)</i>:</label><br>
                             <i class="fa-solid fa-envelope" style="position: absolute; margin-left: 9px;"></i>
-                            <input type="email" id="email" name="email"><br>
+                            <input type="text" id="email" name="email"><br>
                         </div>
 
                         <div class="row">
@@ -383,7 +383,7 @@
         }
     }*/
 </script>
-<script src="sched-appointment.js?v15"></script>
+<script src="sched-appointment.js?v17"></script>
 
     <?php include('privacy-policy.php') ?>
     <?php include('terms-and-conditions.php') ?>

@@ -247,9 +247,9 @@ function period_calendar($startMonth, $startYear, $periodDays, $ovulationDays, $
 function appointment_confirmation($contact, $fname, $municipality, $health_facility, $appointment_date, $appointment_timeslot, $appointment_moved) 
 {
     if ($appointment_moved) {
-        $message = "Hi $fname, your appointment at $health_facility, $municipality has been moved on $appointment_date at $appointment_timeslot. Thanks, SiPa!";
+        $message = "Hi $fname, your appointment at $health_facility, $municipality has been moved on $appointment_date at $appointment_timeslot. Thanks, Siguradong Pagpaplano Team!";
     } else {
-        $message = "Hi $fname, your appointment at $health_facility, $municipality is set on $appointment_date at $appointment_timeslot. Thanks, SiPa!";
+        $message = "Hi $fname, your appointment at $health_facility, $municipality is set on $appointment_date at $appointment_timeslot. Thanks, Siguradong Pagpaplano Team!";
     }
     
     $ch = curl_init();
