@@ -89,7 +89,7 @@
     <div class="parent">
         <!-- 1st child div -->
         <div class = "container">
-            <img class="doctor" src="doctor.png" alt=""><!-- background photo-->
+            <img class="doctor" src="doctora.png" alt="" style="height: 400px; padding-left: 20px !important;"><!-- background photo-->
             <div class = "text"><!-- texts -->
                 <p class = "header-text">Welcome back to</p>
                 <p class = "header-text2">SiPa Siguradong Pagpaplano</p>
