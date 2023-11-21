@@ -12,9 +12,9 @@
         </div>
 
         <canvas id="barChart"></canvas>
-        <div class ="printBtnContainer-bar-chart">
+        <!--<div class ="printBtnContainer-bar-chart">
             <button onclick="barangay_data.print_bar_chart()" class="btn px-5 my-3" style="background-color: #e9a886; color:#ffff;"> Print Result </button>
-        </div>
+        </div>-->
     </div>
 </section>
 

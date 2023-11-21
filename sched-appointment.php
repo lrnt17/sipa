@@ -141,7 +141,7 @@
                         </div>
 
                         <div class="row">
-                            <label class="label-1" for="gender">Gender:</label><br>
+                            <label class="label-1" for="gender">Sex:</label><br>
                             <select id="gender" name="gender" class="minimal">
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>

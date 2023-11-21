@@ -362,8 +362,8 @@
                     <div class="row" style="width: 100%;">
                         <div class="col">
                             <div class="form">
-                                <label for="email" style="font-size: 15px;">Email Address  <span style="color:red;">*</span></label>
-                                <input type="email" name="email" class="js-gmail create-new-appointment" required>
+                                <label for="email" style="font-size: 15px;">Email Address <i>(Put N/A if None)</i> <span style="color:red;">*</span></label>
+                                <input type="text" name="email" class="js-gmail create-new-appointment" required>
                             </div>
                         </div>
                         <div class="col">
