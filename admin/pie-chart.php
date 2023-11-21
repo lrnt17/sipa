@@ -201,6 +201,37 @@ function updateChart(filteredData) {
     });
     document.getElementById('result').innerHTML = resultTitle + resultText;
 
+    //hide to lilitaw lang pag print
+    var resultText1 = '<h5>This table shows the summary of method, number of users, and percentage from ' + totalUsers + ' registered ' + selectedGender + ' users\nof SiPa Website. </h5>';
+    var resultTitle2 = '<h4>RESULT</h4>';
+    var resultText2 = 'Out of ' + totalUsers + ' registered ' + selectedGender + ' users, these are the number of people who chose these methods: ';
+
+    resultText2 += '<table class="resultTable">';
+    resultText2 += '<tr>';
+    resultText2 += '<th>Contraceptive Method</th>';
+    resultText2 += '<th>Number of Users</th>';
+    resultText2 += '<th>Percentage</th>';
+    resultText2 += '</tr>';
+
+    labels.forEach(function (label, index) {
+        var value = count[index];
+        var percentage = ((value / totalUsers) * 100).toFixed(2);
+
+        resultText2 += '<tr>';
+        resultText2 += '<td>' + label + '</td>';
+        resultText2 += '<td>' + value + '</td>';
+        resultText2 += '<td>' + percentage + '%</td>';
+        resultText2 += '</tr>';
+    });
+
+    resultText2 += '</table>';
+
+    document.getElementById('result2').innerHTML = resultTitle2 + resultText2 + resultText1;
+
+
+
+
+
     // Update datalabels plugin options
     chart.options.plugins.datalabels.formatter = function (value, context) {
         var dataIndex = context.dataIndex;
