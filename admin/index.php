@@ -27,6 +27,11 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"></script>
+    <script src="https://rawgit.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.15/jspdf.plugin.autotable.min.js"></script>
+
+
     <title><?=$facility_name?> Administrator | SiPa</title>
 </head>
 <section id="print-style-element-container"></section>
@@ -370,9 +375,12 @@
                     </div>
                     <div class="col">
                         <div id="result" class="p-3 rounded-4 shadow-sm" style="background-color:#D2E0F8;"></div>
-                        <div class ="printBtnContainer" ><button onclick="barangay_data.print_pie_chart()" class="btn px-5 my-3" style="background-color: #e9a886; color:#ffff;"> Print Result </button></div>
-
+                        <div class ="printBtnContainer" >
+                            <button onclick="barangay_data.print_pie_chart()" class="btn px-4 my-4" style="background-color: #e9a886; color:#ffff;"> Print Result </button>
+                            <button id="saveToPDFBtn" class="btn px-4 my-4" style="background-color: #e9a886; color:#ffff;"> Save to PDF </button>
+                        </div>
                     </div>
+                    <div id="result2" class="p-3 rounded-4 shadow-sm" style="background-color:#D2E0F8; display:none;"></div>
 
                     <div class="table-not-included mt-5">
                     <hr style="color: #002C5F; background-color: #002C5F; height: 2px; border: none;">
@@ -402,233 +410,94 @@
 
 </body>
 
-<!--<script type="text/javascript">
-    
-   // Parse PHP array to JavaScript array
-    var data = <?php //echo json_encode($data); ?>;
+<script>
+document.getElementById('saveToPDFBtn').addEventListener('click', function () {
+    var result2 = document.getElementById('result2');
+    var pdf = new jsPDF();
 
-    // Sort the data by count in descending order
-    data.sort(function (a, b) {
-        return b.count - a.count;
-    });
+    // Extract data from the HTML table
+    var table = result2.querySelector('table.resultTable');
+    var tableRows = [];
 
-    var ctx = document.getElementById('pieChart').getContext('2d');
-    var labels = data.map(function (e) {
-        return e.birth_control_name;
-    });
-    var count = data.map(function (e) {
-        return Number(e.count);
-    });
-
-    Chart.register(ChartDataLabels);
-    Chart.defaults.font.size = 14;
-
-    // Create the initial chart
-    var chart = new Chart(ctx, {
-        type: 'pie',
-        data: {
-            labels: labels,
-            datasets: [
-                {
-                    label: 'Demographics',
-                    data: count,
-                    backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)', //pwede ibahin ng hex code colors, 17 to kasi 17 yung method 
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)',
-                    'rgba(255, 99, 64, 0.2)',
-                    'rgba(255, 159, 132, 0.2)',
-                    'rgba(54, 162, 86, 0.2)',
-                    'rgba(75, 192, 255, 0.2)',
-                    'rgba(153, 102, 86, 0.2)',
-                    'rgba(255, 206, 132, 0.2)',
-                    'rgba(75, 192, 64, 0.2)',
-                    'rgba(153, 102, 235, 0.2)',
-                    'rgba(54, 162, 192, 0.2)',
-                    'rgba(255,99 ,206 ,0.2)',
-                    'rgba(75 ,192 ,235 ,0.2)'
-                    ],
-                    borderColor: [
-                    'rgba(255 ,99 ,132 ,1)',
-                    'rgba(54 ,162 ,235 ,1)',
-                    'rgba(255 ,206 ,86 ,1)',
-                    'rgba(75 ,192 ,192 ,1)',
-                    'rgba(153 ,102 ,255 ,1)',
-                    'rgba(255 ,159 ,64 ,1)',
-                    'rgba(255 ,99 ,64 ,1)',
-                    'rgba(255 ,159 ,132 ,1)',
-                    'rgba(54 ,162 ,86 ,1)',
-                    'rgba(75 ,192 ,255 ,1)',
-                    'rgba(153 ,102 ,86 ,1)',
-                    'rgba(255 ,206 ,132 ,1)',
-                    'rgba(75 ,192 ,64 ,1)',
-                    'rgba(153 ,102 ,235 ,1)',
-                    'rgba(54 ,162 ,192 ,1)',
-                    'rgba(255 ,99 ,206 ,1)',
-                    'rgba(75 ,192 ,235 ,1)'
-                    ],
-                    borderWidth: 1,
-                },
-            ],
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    position: 'right',
-                    align: 'center',
-                    font: {
-                        family: "'Lato', sans-serif"
-                    }
-                },
-                title: {
-                    display: true,
-                    text: 'Users\' Selected Method Pie Chart',
-                    font: {
-                        family: "'Lato', sans-serif"
-                    },
-                    position: 'top',
-                    align: 'center',
-                },
-                tooltip: {
-                    callbacks: {
-                        label: function (tooltipItem) {
-                            var total = count.reduce(function (a, b) {
-                                return a + b;
-                            }, 0);
-                            var value = count[tooltipItem.dataIndex];
-                            var percentage = ((value / total) * 100).toFixed(2);
-                            return labels[tooltipItem.dataIndex] + ': ' + percentage + '%';
-                        }
-                    }
-                },
-                datalabels: {
-                    display: true,
-                        formatter: function (value) {
-                            var total = count.reduce(function (a, b) {
-                                return a + b;
-                            }, 0);
-                            var percentage = ((value / total) * 100).toFixed(2);
-                            return percentage + '%';
-                        },
-                        color: 'black'
-                    }
-                }
-            },
-        });
-
-
-    // Add an event listener to the gender filter dropdown
-    document.getElementById("genderFilter").addEventListener("change", function () {
-        var selectedGender = this.value;
-        var filteredData = data.filter(function (item) {
-            if (selectedGender === "All") {
-                return true; // Show all data
-            } else if (selectedGender === "Female" && isFemaleMethod(item.birth_control_name, item.user_sex)) {
-                return true;
-            } else if (selectedGender === "Male" && isMaleMethod(item.birth_control_name, item.user_sex)) {
-                return true;
-            }
-            return false; // Hide the rest
-        });
-
-        // Update the chart data and redraw it
-        updateChart(filteredData);
-    });
-
-    // Function to check if a method is female-specific and matches the user's sex
-    function isFemaleMethod(method, sex) {
-        var femaleMethods = ["Hormonal IUD", "Copper IUD", "Implant", "Injection", "Hormonal Vaginal Ring", "Hormonal Patch", "Mini Pill", "Combined Pill", "Spermicide", "Diaphragm", "Calendar Method", "Temperature Method", "Tubal Ligation", "No method selected yet"];
-        return femaleMethods.includes(method) && sex === 'Female';
+    // Extract column headers
+    var columnHeaders = [];
+    for (var i = 0; i < table.rows[0].cells.length; i++) {
+        columnHeaders.push(table.rows[0].cells[i].textContent.trim());
     }
 
-    // Function to check if a method is male-specific and matches the user's sex
-    function isMaleMethod(method, sex) {
-        var maleMethods = ["Withdrawal Method", "Condom", "Vasectomy", "No method selected yet"];
-        return maleMethods.includes(method) && sex === 'Male';
+    // Extract data rows
+    for (var i = 1; i < table.rows.length; i++) {
+        var rowData = [];
+        for (var j = 0; j < table.rows[i].cells.length; j++) {
+            rowData.push(table.rows[i].cells[j].textContent.trim());
+        }
+        tableRows.push(rowData);
+    }
+    var resultText1 = result2.querySelector('h5').textContent.trim();
+
+    // Set column widths
+    var columnWidths = [60, 60, 60]; // Set your desired widths
+
+    // Set row heights
+    var rowHeight = 15; // Set your desired height
+
+    // Set border styling
+    var borderStyles = { lineWidth: 0.1, lineColor: [0, 0, 0] }; // Set line width and color
+
+    // Set left and right margin
+    var marginLeft = 15;
+
+    // Add logo to the PDF (adjust image path and dimensions)
+    var logoImagePath = '<?php echo 'data:image/png;base64,' . base64_encode(file_get_contents('logo.png')); ?>';
+    var logoWidth = 10;
+    var logoHeight = 10;
+    pdf.addImage(logoImagePath, 'PNG', marginLeft, 10, logoWidth, logoHeight);
+
+    // Add the table title
+    pdf.setFontSize(16);
+    pdf.setFontStyle('bold');
+    pdf.text('SiPa Users Selected Contraceptive Method Report', pdf.internal.pageSize.getWidth() / 2, 20, null, null, 'center');
+    pdf.setFontStyle('normal');
+
+    // Add resultText1
+    pdf.setFontSize(11);
+    pdf.text(marginLeft, 30, resultText1);
+
+    // Add the table to the PDF
+    pdf.setFontSize(12);
+
+    // Add headers first
+    for (var j = 0; j < columnHeaders.length; j++) {
+        pdf.rect(marginLeft + j * columnWidths[j], 40, columnWidths[j], rowHeight, 'S');
+        pdf.setFontStyle('bold'); // Set font style to bold
+        pdf.text(marginLeft + j * columnWidths[j] + columnWidths[j] / 2, 48, columnHeaders[j], null, null, 'center');
+        pdf.setFontStyle('normal'); // Reset font style to normal
     }
 
+    // Add data rows
+    for (var i = 0; i < tableRows.length; i++) {
+        for (var j = 0; j < tableRows[i].length; j++) {
+            // Add borders to each cell
+            pdf.rect(marginLeft + j * columnWidths[j], (i + 1) * rowHeight + 40, columnWidths[j], rowHeight, 'S');
 
-        // Function to update the chart data and redraw it
-function updateChart(filteredData) {
-    var labels = filteredData.map(function (e) {
-        return e.birth_control_name;
-    });
-    var count = filteredData.map(function (e) {
-        return Number(e.count);
-    });
-
-    // Check if "All" is selected
-    if (document.getElementById("genderFilter").value === "All") {
-        var noMethodSelectedIndex = labels.indexOf("No method selected yet");
-
-        // Check if "No method selected yet" is not present and remove it
-        if (noMethodSelectedIndex === -1) {
-            var noMethodSelectedIndex = labels.indexOf("No method selected yet");
-            if (noMethodSelectedIndex !== -1) {
-                labels.splice(noMethodSelectedIndex, 1);
-                count.splice(noMethodSelectedIndex, 1);
-            }
+            // Add text inside the cell with center alignment
+            pdf.text(
+                marginLeft + j * columnWidths[j] + columnWidths[j] / 2,
+                (i + 1) * rowHeight + 48 + rowHeight / 7, // Adjust the vertical position for centering
+                tableRows[i][j],
+                null,
+                null,
+                'center'
+            );
         }
     }
 
-    chart.data.labels = labels;
-    chart.data.datasets[0].data = count;
-    chart.update();
-
-    var totalUsers = count.reduce(function (a, b) {
-        return a + b;
-    }, 0);
-
-    // Determine the selected gender for the result text
-    var selectedGender = document.getElementById("genderFilter").value.toLowerCase();
-
-    // Display "" if "All" is chosen
-    if (selectedGender === "all") {
-        selectedGender = "";
-    }
-
-    var resultTitle = '<h4>RESULT</h4>';
-    var resultText = '<b>Out of ' + totalUsers + ' registered ' + selectedGender + ' users, these are the number of people who chose these methods:</b> ';
-    labels.forEach(function (label, index) {
-        var value = count[index];
-        var percentage = ((value / totalUsers) * 100).toFixed(2);
-        resultText += '<br>' + label + ': ' + value + ' (' + percentage + '%)';
-    });
-    document.getElementById('result').innerHTML = resultTitle + resultText;
-
-    // Update datalabels plugin options
-    chart.options.plugins.datalabels.formatter = function (value, context) {
-        var dataIndex = context.dataIndex;
-        var percentage = ((count[dataIndex] / totalUsers) * 100).toFixed(2);
-        return percentage + '%';
-    };
-    chart.update();
-    // Update tooltip
-    chart.options.plugins.tooltip.callbacks.label = function (tooltipItem) {
-        var dataIndex = tooltipItem.dataIndex;
-        var value = count[dataIndex];
-        var percentage = ((value / totalUsers) * 100).toFixed(2);
-        return labels[dataIndex] + ': ' + value + ' (' + percentage + '%)';
-    };
-    chart.update();
-}
-
-// Call the updateChart function on page load
-window.addEventListener('load', function () {
-    // Trigger the initial chart update
-    updateChart(data);
+    // Save or download the PDF
+    pdf.save('Users-Selected-Method-Report.pdf');
 });
 
 
-
-
-</script>-->
-
+</script>
 
 </html>
 

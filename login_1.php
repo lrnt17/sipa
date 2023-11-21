@@ -330,10 +330,10 @@
     <div class="parent">
         <!-- 1st child div -->
         <div class = "container">
-            <img class="doctor1" src="doctor.png" alt="" style="height: 450px;
+            <img class="doctor1" src="doctora.png" alt="" style="height: 400px;
             position: absolute;
             bottom: 0;
-            padding-left: 118px;
+            padding-left: 20px;
             z-index: -1;"><!-- background photo-->
             <div class = "text" style="padding-left: 64px;"><!-- texts -->
                 <p class = "header1" style="font-size: 35px;
