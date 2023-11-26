@@ -181,7 +181,11 @@
                         <div class="col-lg">
                             <div id="video_<?=$row['video_id']?>" row="<?=htmlspecialchars(json_encode($row))?>" class="video">
                                 <div>
-                                    <video src="<?=$row['video']?>" width="100%" controls id="video-display" class="js-video-display"></video>
+                                    <?php if(logged_in()):?>
+                                        <video src="<?=$row['video']?>" width="100%" controls id="video-display" class="js-video-display"></video>
+                                    <?php else:?>
+                                        <video src="<?=$row['video']?>" width="100%" controls id="video-display" class="js-video-display no-user"></video>
+                                    <?php endif;?>
                                 </div>
                                 <div class="row" style="display: flex; align-items: flex-end;">
                                     <div class="col me-auto">
@@ -477,6 +481,57 @@
 <script src="like-rating-video.js?v3"></script>
 <!--<script src="community-topics.js?v6"></script>-->
 <script src="video.js?v12"></script>
+
+<?php if(!logged_in()):?>
+    <script>
+        var ageVerified = false;
+        var video = document.querySelector('.no-user');
+        var previousTime = 0;
+        
+        video.addEventListener('play', function(e) {
+            if (!ageVerified) {
+                e.target.pause();
+                var birthdate = prompt("CONTENT WARNING\n\nThis video contains potentially sensitive or triggering content for children. Viewer discretion is advised.\n\nPlease enter your birthdate (mm/dd/yyyy):");
+                var birthdatePattern = /^(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])\/(19|20)\d\d$/;
+                
+                if (birthdate === null) {
+                    return;
+                } else if (!birthdatePattern.test(birthdate)) {
+                    alert("Invalid birthdate. Please enter in mm/dd/yyyy format.");
+                    return;
+                }
+
+                var birthdateObj = new Date(birthdate);
+                var currentDate = new Date();
+                var age = currentDate.getFullYear() - birthdateObj.getFullYear();
+                var m = currentDate.getMonth() - birthdateObj.getMonth();
+                
+                if (m < 0 || (m === 0 && currentDate.getDate() < birthdateObj.getDate())) {
+                    age--;
+                }
+                
+                if (age < 18) {
+                    alert("You must be at least 18 years old to watch this video.");
+                } else {
+                    ageVerified = true;
+                    e.target.play();
+                }
+            }
+        });
+
+        video.addEventListener('timeupdate', function(e) {
+            if (ageVerified) {
+                previousTime = e.target.currentTime;
+            }
+        });
+
+        video.addEventListener('seeking', function(e) {
+            if (!ageVerified) {
+                e.target.currentTime = previousTime;
+            }
+        });
+    </script>
+<?php endif; ?>
 
 <script>
     // Call the updateTimestamps function initially when the page loads
